@@ -3,7 +3,7 @@ layout: intro
 permalink: /
 title:
 image:
-   feature: church_with_cross_smaller.png
+   feature: church_with_cross.png
 ---
 
 #### Political writing by and for young evangelicals. Peer-reviewed and honest.
