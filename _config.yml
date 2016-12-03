@@ -15,13 +15,17 @@ sass:
   sass_dir: _sass
   style: compressed
 permalink: /:categories/:title/
+lsi: false
+safe: true
 kramdown:
   toc_levels: 1..2
+  math_engine: mathjax
 highlighter: rouge
 gems:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
+  - jekyll-github-metadata
 
 
 # Site owner
