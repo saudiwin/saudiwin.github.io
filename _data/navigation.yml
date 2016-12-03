@@ -1,6 +1,12 @@
 # Site navigation links
 
-- title:
-  url:
+- title: Meet the Editors
+  url: /about
   excerpt:
   image:
+
+- title: Submission Policy
+  url: /submissions
+
+- title: What Makes Us Different
+  url: /different

@@ -1,10 +1,12 @@
 ---
-layout: archive
+layout: intro
 permalink: /
 title:
+image:
+   feature: church_with_cross_big.png
 ---
 
-#### The first and only site devoted to political writing by young evangelicals and moderated by young evangelicals. 
+#### Political writing by and for young evangelicals. Peer-reviewed and honest.
 
 <div class="tiles">
 {% for post in site.posts %}
