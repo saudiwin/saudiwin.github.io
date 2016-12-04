@@ -3,4 +3,10 @@ title: What Makes Us Different
 layout: article
 ---
 
-A thorough explanation of our review policies.
+We started this project after the turbulent election season of 2016. The angry and thoughtless rhetoric polarizing our political system didn't seem to lead to any real reform. Furthermore, many Christians were left uncertain and confused about how to vote and what were the implications of choosing a particular candidate. To make matters worse, partisan bickering began seeping into churches, causing division and strain where people were formerly unified around the gospel.
+
+Second, it became obvious during this election season that there are generational differences within the American church. Younger Christians were much more likely to vote third parties than their elders. However, there was no outlet for these differences in opinion to be expressed outside of angry and sometimes thoughtless Facebook posts. Only rarely did these conversations serve to advance the gospel and bring clarity instead of further misinformation.
+
+For these reasons, we started a new site for political opinion and analysis. Unlike a conventional newspaper or personal blog, we do not simply let anyone write whatever opinion they choose. Rather, we recruited a board of reviewers from a range of political persuasions, Christian denominations, professions and ethnicity/race/gender to review everything we write. Each piece is assigned three reviewers, and each reviewer is instructed to thoughtfully critique each piece for its faithfulness to Scripture and for its substantive argument. Authors must respond to these critiques by editing their work before it is published. In this way, we stop the political echo chamber and learn how to speak the truth in love, even when we don't all agree on what the truth is for a particular issue.
+
+We encourage you to read and share our posts, comment with the same spirit of humility (we review all comments before they are posted), and consider contributing a piece of opinion or analysis if you feel led. We want this to be a space where we can fearlessly explore complex and controversial issues while keeping our faith central, both in how we think about politics and how we talk about politics. To that end, our mission is to make the gospel of Christ central in everything we say and do whether inside the church or without.
