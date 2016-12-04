@@ -6,7 +6,7 @@ image:
    feature: church_with_cross_tall.jpg
 ---
 
-#### Political writing by and for young evangelicals. Peer-reviewed and honest.
+#### Political writing and analysis by Christians. Peer-reviewed and honest.
 
 <div class="tiles">
 {% for post in site.posts %}
