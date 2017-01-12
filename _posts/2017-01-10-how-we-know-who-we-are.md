@@ -3,6 +3,12 @@ layout: article
 image:
   teaser: first_post_teaser.jpg
   feature: first_post_header.jpg
+comments: true
+author:
+  name: Robert Kubinec
+  bio: Robert Kubinec is a PhD candidate in Foreign Affairs at the University of Virginia. He is a member of Trinity Presbyterian Church in Charlottesville, VA.
+  twitter: "@rmkubinec"
+  avatar: BobKubinec-square-150x150.jpg
 ---
 
 
@@ -53,7 +59,7 @@ This plot should be interpreted with caution because it is using a limited numbe
 
 These differences reflect a more cultural understanding of faith than they do deep issues of doctrine.
 
-In addition to religious beliefs, these self-reported affiliations tend to differ along political lines as well. We see below that many of the same patterns from religious affiliation are reproduced--nones and evangelicals are on opposite sides of the spectrum--but other religious grousp have moved. Mainline protestants are much farther from evangelicals on the political spectrum than on the religious spectrum, while Muslim-Americans are closer to evangelicals in politics than in religion. This finding makes sense when we consider that Muslims may agree with evangelicals on certain divisive topics, such as the place of homosexuality in society and abortion.
+In addition to religious beliefs, these self-reported affiliations tend to differ along political lines as well. We see below that many of the same patterns from religious affiliation are reproduced--nones and evangelicals are on opposite sides of the spectrum--but the relationship is much weaker. While religious differences run the entire length of the scale for the religious dimension, from -2 to +2, political differences are only about one-tenth as large, ranging from -0.2 to +0.2.
 
 {::comment}
 ![plot of chunk relpol](figure/relpol-1.png)
@@ -61,7 +67,9 @@ In addition to religious beliefs, these self-reported affiliations tend to diffe
 
 {% include_relative figure/us_evan/Figure_3.html %}
 
-Next we look at demographic factors. First, do people of varying incomes tend to cluster in certain categories? The chart below shows that income does not vary much along religious beliefs (the horizontal dimension), but rather mostly along the vertical dimension, political opinion. Again, this finding is not surprising given that wealthier people in the United States tend to be more conservative. It should be noted too, that these lines are just estimates--it is most likely that people in these income categories will fall in between these lines, but you can find plenty of respondents on the plot that don't fall into these neat buckets. What it does tell us is that, regardless of religious belief, wealthier people are more conservative. On the other hand, we don't know whether a wealthy person is necessarily more or less conservative when it comes to religion: there are both conservative and liberal wealthy believers.
+Next we look at demographic factors. First, do people of varying incomes tend to cluster in certain categories? Answering this question is not straightforward, especially as we want to know how income clusters respondents along both dimensions, religion and politics. The best way is to plot each income category as a line on top of the respondents so that we can see how income divides our respondents along religion and politics.
+
+The chart below shows that the income lines do not divide the survey respondets along religious beliefs (the horizontal dimension), but rather mostly along the vertical dimension, political opinion. Again, this finding is not surprising given that wealthier people in the United States tend to be more conservative. It should be noted too, that these lines are just estimates--it is most likely that people in these income categories will fall in between these lines, but you can find plenty of respondents on the plot that don't fall into these neat buckets. What it does tell us is that, regardless of religious belief, wealthier people are more conservative. On the other hand, we don't know whether a wealthy person is necessarily more or less conservative when it comes to religion: there are both conservative and liberal wealthy believers.
 
 {::comment}
 ![plot of chunk regions](figure/regions-1.png)
@@ -69,7 +77,7 @@ Next we look at demographic factors. First, do people of varying incomes tend to
 
 {% include_relative figure/us_evan/Figure_4.html %}
 
-To see the uncertainy in these estimates, I'll show the points again, except that this time I'll color the points by whether or not the respondent makes more than $150,000. Darker colors indicate higher concentrations of wealthy respondents. We see in this chart that there is a clump of dark red in the upper-left corner corresponding to the liberal religion/liberal politics group, but that the clump in the bottom-right corner of conservative religion/conservative politics is much darker. In other words, there are wealthy respondents who are liberal politically, but there is a significantly larger group on the conservative end of the spectrum. This chart primarily serves to show how the lines reflect trends, not absolutes. Some people with high income will be politically liberal even if the majority of wealthy people are conservative.
+To see the uncertainty in these estimates, I'll show the points again, except that this time I'll color the points by whether or not the respondent makes more than $150,000. Darker colors indicate higher concentrations of wealthy respondents. We see in this chart that there is a clump of dark red in the upper-left corner corresponding to the liberal religion/liberal politics group, but that the clump in the bottom-right corner of conservative religion/conservative politics is much darker. In other words, there are wealthy respondents who are liberal politically, but there is a significantly larger group on the conservative end of the spectrum. This chart primarily serves to show how the lines reflect trends, not absolutes. Some people with high income will be politically liberal even if the majority of wealthy people are conservative.
 
 {::comment}
 ![plot of chunk income_points](figure/income_points-1.png)
@@ -103,7 +111,7 @@ Now we're going to dig deep into how people identify in terms of religion and wh
 
 {% include_relative figure/us_evan/Figure_8.html %}
 
-Another important part of faith is praying. The chart below shows the predicted lines for a question that asks respondents how often they pray. Again, we see that praying is a good indicator of whether someone is more conservative religiously. We also see the same, even slighter, leftward tilt, implying that regardless of belief, people who pray a lot will tilt (ever so slightly) liberal politically. One additional note is that the "Never" category is way out to the left on religious belief. This happened because there are only a few people who never pray in America--this survey estimates it at about 1 in 10 Americans--so the model pushed them way outside the normal boundaries. This is a case where the model isn't quite as accurate as it could be because of the small number of people in this particular category.
+Another important part of faith is praying. The chart below shows the predicted lines for a question that asks respondents how often they pray. Again, we see that praying is a good indicator of whether someone is more conservative religiously. We also see the same, even slighter, leftward tilt, implying that regardless of belief, people who pray a lot will tilt liberal politically. One additional note is that the "Never" category is way out to the left on religious belief. This happened because there are only a few people who never pray in America--this survey estimates it at about 1 in 10 Americans--so the model pushed them way outside the normal boundaries. This is a case where the model isn't quite as accurate as it could be because of the small number of people in this particular category.
 
 {::comment}
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
@@ -154,9 +162,10 @@ Next we'll examine environmental policy. This question asked respondents whether
 
 {% include_relative figure/us_evan/Figure_14.html %}
 
-Based on our analysis so far, we know that core political questions, such as welfare, environmental regulations, and homosexuality can all divide people on both religious and political grounds. The strongest divide is on homosexuality. However, we also find that there is a difference between religious belief and religious practice. People who are similarly conservative in religious belief differ in their political views depending on how much they practice their faith. Those who practice their faith more tend to be slightly more liberal politically as well.
+Based on our analysis so far, we know that core political questions, such as welfare, environmental regulations, and homosexuality can all divide people on both religious and political grounds. The strongest divide is on homosexuality. However, we also find that there is a difference between religious belief and religious practice. People who are similarly conservative in religious belief differ in their political views depending on how much they practice their faith. Those who practice their faith more tend to be more liberal politically as well.
 
-We'll put up one last question from our survey. We know from the polls during the election that there was a divide between younger and older evangelicals over political candidates--generally speaking, older evangelicals preferred Trump, while younger evangelicals were much more likely to prefer third-party candidates or Clinton. For this chart, we'll put up both the age categories and a vertical line that shows where evangelicals are on the religion spectrum. It does not show a pretty picture. People who are younger tend to be both more liberal politically and religiously. On the flip side, people who are evangelicals are very conservative in general in terms of their religious views, and even compared to people who share the same religious views but wouldn't choose the label evangelical, they are more conservative politically. In total, it seems that there is a looming split in the evangelical church between younger and older believers, with younger believers moving away from their older peers in both religious faith and political ideology.
+We'll put up one last question from our survey. We know from the polls during the election that there was a divide between younger and older evangelicals over political candidates--generally speaking, older evangelicals preferred Trump, while younger evangelicals were much more likely to prefer third-party candidates or Clinton. For this chart, we'll put up both the age categories and we will color respondents by whether or not they are evangelicals. It does not show a pretty picture. People who are younger tend to be both more liberal politically and religiously. On the flip side, people who are evangelicals are very conservative in general in terms of their religious views, and even compared to people who share the same religious views but wouldn't choose the label evangelical, they are more conservative politically. In total, it seems that there is a looming split in the evangelical church between younger and older believers, with younger believers moving away from their older peers in both religious faith and political ideology.
+
 
 {::comment}
 ![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png)
@@ -164,6 +173,6 @@ We'll put up one last question from our survey. We know from the polls during th
 
 {% include_relative figure/us_evan/Figure_15.html %}
 
-This was a preliminary analysis, and these conclusions aren't firm. But they do indicate the nature of politics and religion in America today, and the issues that divide us and unite us. Also, we shouldn't just think of religious identity as a list of questions but also as a list of practices. When we note that certain political issues tend to divide Americans on both religious and political grounds, we can't assume that all Americans are equally devoted to their religious traditions even if they believe them to be true. As is often the case, reality is more complicated than our limited perspectives allow it to be.
+This was an exploratory analysis, and these conclusions aren't firm. But they do indicate the nature of politics and religion in America today, and the issues that divide us and unite us. Also, we shouldn't just think of religious identity as a list of questions but also as a list of practices. When we note that certain political issues tend to divide Americans on both religious and political grounds, we can't assume that all Americans are equally devoted to their religious traditions even if they believe them to be true. As is often the case, reality is more complicated than our limited perspectives allow it to be.
 
-The potential conflict between younger and older evangelicals that our last chart illustrates is part of what motivates this web page. We want to offer a space for young evangelicals to hash out their political and religious differences in a setting that is non-confrontational, biblically-oriented, and open to any kind of controversial topic. In a sense, we don't want to just ask how Christians should vote, but rather we want to be Christians who do politics.
+The potential conflict between younger and older evangelicals that our last chart illustrates is part of what motivates this web page. We want to offer a space for young evangelicals to hash out their political and religious differences in a setting that is non-confrontational, biblically-oriented, and open to any kind of controversial topic. We don't want to limit ourselves to asking who to vote for every four years, but rather we want to be Christians who follow Christ in a political world.
