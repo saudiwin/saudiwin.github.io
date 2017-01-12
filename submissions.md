@@ -3,7 +3,7 @@ title: Submission Policy
 layout: article
 ---
 
-We accept submissions from young Christians from all walks of life. ("Young" is interpreted very liberally). We are looking for original work on policy and politics that is a blend of opinion and analysis. We also accept pieces that are descriptive (i.e., analytical) rather than prescriptive (i.e., opinion), and even some satire. All submissions should be no longer than 1500 words (shorter is fine) and in Microsoft Word or Latex/Markdown. Please send your work to (submitthistime@gmail.com).
+We accept submissions from young Christians from all walks of life. ("Young" is interpreted very liberally). We are looking for original work on policy and politics that is a blend of opinion and analysis. We also accept pieces that are descriptive (i.e., analytical) rather than prescriptive (i.e., opinion), and even some satire. All submissions should be no longer than 1500 words (shorter is fine) and in Microsoft Word or Latex/Markdown. Please send your work to <submitthistime@gmail.com>.
 
 Once we receive your submission, we will first decide whether it was written in the spirit of what we want to include on this site, namely, political writing in a Biblical framework with substantive depth. We will reject pieces that have primarily polarizing language or inflammatory arguments. It is not a question of the topic: we will publish on any political topic. What is important is the mindset you use to approach what you write. You should be trying to appeal to our readers and persuade them of your view instead of triumphantly presenting your thoughts as superior.
 
