@@ -344,10 +344,10 @@ Given these two differing effects of income and education, we can learn somethin
 
 
 ```{r,echo=FALSE,  message=FALSE, warning=FALSE,fig.width=10,fig.height=6}
- sample_scores %>% plot_ly(y=~F2,x=~F1,text=~data_labels,colors='Greens') %>% add_markers(hoverinfo='text',name='All Respondents',opacity=0.2,size=1,showlegend=FALSE) %>% 
+ sample_scores %>% plot_ly(y=~F2,x=~F1,text=~data_labels) %>% add_markers(hoverinfo='text',name='All Respondents',opacity=0.2,size=1,showlegend=FALSE) %>% 
   layout(annotations=a,xaxis=list(title="",showticklabels = FALSE),
          yaxis=list(title="",showticklabels = FALSE),
-         title='Both Education and Income') %>% add_lines(data=all_points_income,y=~ypoints,x=~xpoints,color=~categories,linetype=~categories,name='Income Categories',text=~categories,colors=I("Reds")) %>% add_lines(data=all_points_educ,y=~ypoints,x=~xpoints,color=~categories,inherit=FALSE,name='Education',
+         title='Both Education and Income') %>% add_lines(data=all_points_income,y=~ypoints,x=~xpoints,color=~categories,linetype=~categories,name='Income Categories',text=~categories,colors="Reds") %>% add_lines(data=all_points_educ,y=~ypoints,x=~xpoints,color=~categories,colors="Greens",name='Education',
                                                                              text=~categories) 
 ```
 
