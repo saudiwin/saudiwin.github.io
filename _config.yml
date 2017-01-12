@@ -33,13 +33,13 @@ gems:
 owner:
   name: Robert Kubinec
   email: rmk7xy@virginia.edu
-  twitter:
+  twitter: "@rmkubinec"
   google:
     ad-client:
     ad-slot:
   bio:
   avatar: bio-photo.jpg # 160x160 px image for author byline
-  disqus-shortname:
+  disqus-shortname: for-such-a-time-as-this
 
 
 include:
