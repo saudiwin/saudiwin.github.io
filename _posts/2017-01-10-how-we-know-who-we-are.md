@@ -4,11 +4,7 @@ image:
   teaser: first_post_teaser.jpg
   feature: first_post_header.jpg
 comments: true
-author:
-  name: Robert Kubinec
-  bio: Robert Kubinec is a PhD candidate in Foreign Affairs at the University of Virginia. He is a member of Trinity Presbyterian Church in Charlottesville, VA.
-  twitter: "@rmkubinec"
-  avatar: BobKubinec-square-150x150.jpg
+author: robert_kubinec
 ---
 
 
