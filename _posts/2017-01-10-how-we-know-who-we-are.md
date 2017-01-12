@@ -1,5 +1,8 @@
 ---
 layout: article
+image:
+  teaser: first_post_teaser.jpg
+  header: first_post_header.jpg
 ---
 
 
