@@ -1,6 +1,6 @@
 # Site navigation links
 
-- title: Meet the Editors
+- title: Editors
   url: /about
   excerpt:
   image:
@@ -8,8 +8,8 @@
 - title: Submissions
   url: /submissions
 
+- title: Posts
+  url: /all_posts
+
 - title: What Makes Us Different
   url: /different
-
-- title: Our Posts
-  url: /all_posts
