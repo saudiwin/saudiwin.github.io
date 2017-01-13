@@ -1,4 +1,10 @@
 # Footer navigation links
 
-- title:
-  url:
+- title: About Us
+  url: /about
+
+- title: Front Page
+  url: /
+
+- title: All Posts
+  url: /all_posts
