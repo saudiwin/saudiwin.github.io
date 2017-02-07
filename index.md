@@ -1,9 +1,9 @@
 ---
-layout: intro
+layout: home
 permalink: /
 title:
 image:
-   feature: church_with_cross_tall.jpg
+   feature: banner_tall.png
 ---
 
 #### Political writing and analysis by Christians. Peer-reviewed and honest.
