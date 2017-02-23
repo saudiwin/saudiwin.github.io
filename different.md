@@ -1,5 +1,5 @@
 ---
-title: What Makes Us Different
+title: We Don't Like Fake News or Fake Religion
 layout: article
 ---
 

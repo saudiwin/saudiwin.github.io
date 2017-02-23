@@ -160,8 +160,8 @@ The plot below shows respondents plotted along these dimensions. We can see from
 a <- list(
   x = c(rectangle_scores[['max_x']]+.5,rectangle_scores[['min_x']]-.5,0,-.25),
   y = c(0,0,rectangle_scores[['max_y']]+.6,rectangle_scores[['min_y']]-.6),
-  text = c('Conservative<br>Religion',
-           'Liberal<br>Religion',
+  text = c('Traditional<br>Religion',
+           'Progressive<br>Religion',
            'Liberal Politics',
            'Conservative Politics'),
   xref = 'x',
@@ -222,7 +222,7 @@ reltrad_data <- data_frame(dim1=reltrad_slope[[1]]*reltrad_coefs[reltrad_coefs!=
 # reltrad_data <- data_frame(dim1=dims[1,-1],
 #                            dim2=dims[2,-1],
 #                            labels=reltrad_labels)
-reltrad_data %>% plot_ly(type='bar',x=~dim1,y=~reorder(labels,dim1),orientation='h',text=~labels) %>% layout(xaxis=list(title='Religous Belief (Liberal to Conservative)'), yaxis=list(title=''),margin=list(l=100),title='Relative Position of Belief in Religious Communities')
+reltrad_data %>% plot_ly(type='bar',x=~dim1,y=~reorder(labels,dim1),orientation='h',text=~labels) %>% layout(xaxis=list(title='Religous Belief (Progressive to Traditional)'), yaxis=list(title=''),margin=list(l=100),title='Relative Position of Belief in Religious Communities')
 ```
 
 This plot should be interpreted with caution because it is using a limited number of questions to differentiate respondents along basic beliefs, such as belief in God and whether God's word is inspired. However, it is still interesting that Evangelical Protestants are closer to Muslims than they are to Mainline Protestants or even Jewish people. This graph does seem to capture some intuitive idea about how close and far different religious groups are, at least when it comes to belief in God and the relative proximity between religious groups. As the Catholic philosopher Peter Kreeft once joked,
@@ -238,37 +238,11 @@ nominal_coefs <- all_coefs[item_types=='nominal']
 reltrad_slope <-  nominal_coefs$RELTRAD[grepl(pattern='a[0-9]',x=attr(nominal_coefs$RELTRAD,'dimnames')[[2]])]
 reltrad_coefs <- nominal_coefs$RELTRAD[grepl(pattern='ak[0-9]+',x=attr(nominal_coefs$RELTRAD,'dimnames')[[2]])]
 reltrad_diff <- nominal_coefs$RELTRAD[grepl(pattern='d[0-9]+',x=attr(nominal_coefs$RELTRAD,'dimnames')[[2]])]/reltrad_coefs
-# there is no way to calculate this equiprobability directly, so we simulate it using random abilities
-# abil1 <- sample(seq(rectangle_scores['min_x'],rectangle_scores['max_x'],length.out=10000000),1000001)
-# abil2 <- sample(seq(rectangle_scores['min_y'],rectangle_scores['max_y'],length.out=10000000),1000001)
-# abil_matrix <- expand.grid(seq(-5,5,length.out=1000),seq(-5,5,length.out=1000))
-# exp_cum_sum <- exp(t(t(as.matrix(reltrad_slope)) %*% t(abil_matrix)) %*% t(as.matrix(reltrad_coefs)) + matrix(rep(reltrad_diff,nrow(abil_matrix)),nrow=nrow(abil_matrix),ncol=length(reltrad_diff),byrow=TRUE))
-# exp_cum_sum <- t(apply(exp_cum_sum,1,cumsum))
-# indiv_sum <- sapply(1:length(reltrad_coefs), function(x) {
-#   y <- exp(reltrad_coefs[x] * t(t(as.matrix(reltrad_slope)) %*% t(abil_matrix)) + reltrad_diff[x])
-# })
-# indiv_probs <- lapply(1:ncol(indiv_sum),function(x) {
-#   y <- indiv_sum[,x] / exp_cum_sum[,x]
-#   if(x==2 || x==ncol(indiv_sum)) {
-#     y <- 1-y
-#   }
-#   return(y)
-#   })
-# indiv_probs[[1]] <- NULL
-# max_probs <- sapply(indiv_probs,function(x) 
-#   which(x==max(x)))
-# max_vals <- abil_matrix[max_probs,]
-# reltrad_labels <- levels(data$RELTRAD)[2:length(levels(data$RELTRAD))]
-# dims <- sapply(1:length(reltrad_coefs), function(x) {
-#   (-reltrad_diff[x]*reltrad_slope)/(sqrt(sum((reltrad_slope)^2)))
-#   
-#   })
+
 reltrad_data <- data_frame(dim1=reltrad_slope[[1]]*reltrad_coefs[reltrad_coefs!=0],
                            dim2=reltrad_slope[[2]]*reltrad_coefs[reltrad_coefs!=0],
                         labels=reltrad_labels)
-# reltrad_data <- data_frame(dim1=dims[1,-1],
-#                            dim2=dims[2,-1],
-#                            labels=reltrad_labels)
+
 reltrad_data %>% plot_ly(type='bar',x=~dim2,y=~reorder(labels,dim2),orientation='h',text=~labels) %>% layout(xaxis=list(title='Political Ideology (Conservative to Liberal)'), yaxis=list(title=''),margin=list(l=100),title='Relative Position of Political Opinion for Religious Communities')
 ```
 
