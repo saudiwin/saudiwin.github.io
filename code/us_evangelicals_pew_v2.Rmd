@@ -1,6 +1,7 @@
 ---
 output:
-  html_document: default
+  html_document: 
+    self_contained: false
   html_notebook: default
 ---
 
@@ -49,12 +50,12 @@ weights <- Dataset_Pew$WEIGHT
 data %<>% select(qi2g,qi2d,qi2b,qi2a,qi1,qh2,qh1,qg7b,qg7,qg6,qg5,qg1c,qg3,qg1,qg1b,qf2,
                  attend,born,racethn,marital,qb31,qb30,qb22,qb21,qb20,
                  qb21,qb22,qb20,qb2a,qb2c,qb2b,qb2d,qb1c,qb1b,qb1a,qa1,qi3,qp3rec,educ,agerec,
-                 qm5a,qm5b,qm5d,qm5e,qm5f,qm5g,party,ideo,income,RELTRAD)
+                 qm5a,qm5b,qm5d,qm5e,qm5f,qm5g,party,ideo,income,RELTRAD,qf5)
 
 ordinal_vars <- c('qi2g','qi2d','qi2b','qi2a','qi1','qg1b','qf2','attend','qb22','qb21','qb1c',
                   'qb1b','qb1a','qa1','educ','agerec','ideo','income')
 binary_vars <- c('qh2','qh1','qg7','qg7b','qg6','qg5','qg1c','qg3','qg1','born','qb30','qb20',
-                 'qb2a','qb2c','qb2b','qb2d','qi3','qp3rec','qm5a','qm5b','qm5d','qm5e','qm5f','qm5g')
+                 'qb2a','qb2c','qb2b','qb2d','qi3','qp3rec','qm5a','qm5b','qm5d','qm5e','qm5f','qm5g','qf5')
 nominal_vars <- names(data)[!(names(data) %in% c(ordinal_vars,binary_vars))]
 
 all_vars <- c(ordinal_vars,binary_vars,nominal_vars)
@@ -141,6 +142,40 @@ This recent election season exposed deep divides within Christians from differen
 I wanted to look more concretely at the question of what an evangelical Christian is. Instead of defining the term by what an evangelical Christian should be, I examined the question from the perspective of what American say about themselves. The best data source for this question are the Pew surveys on religion and politics, the most recent of which was [just released](http://www.pewforum.org/religious-landscape-study/). Although the survey dates from 2014, it is the best available evidence because it used a very large sample--over 30,000 respondents--and contained a battery of questions concerning both religious and political views. For that reason, it is ideal for understanding what it means to be evangelical.
 
 There are different ways of slicing and dicing this survey. We could, for example, take the question from the survey that asks people if they are evangelical Christians, and then restrict our focus to only this group. However, the evangelical label has been stretched and challenged by so many people that it seems it can describe people with remarkably contrasting beliefs. 
+
+```{r,echo=FALSE, message=FALSE, warning=FALSE,results='as-is'}
+all_tables <- filter(`data`,`data`$RELTRAD %in% c('Evangelical<br>Protestant','None')) %>% 
+  mutate(attend=ifelse(attend %in% c('More than once a week','Once a week'),'Weekly','Less Than Weekly'),
+        qi1 = ifelse(qi1 %in% c('Several times a day','Once a day'),'Daily','Less Than Daily'),
+         qf2 = ifelse(qf2 %in% c('Very important','Somewhat important'),'Important','Unimportant'),
+        qg7 = ifelse(qg7 %in% c('[the Bible/the Torah/the Koran/the Holy Scripture] is the word of God, OR'),
+                     'Yes','No'),
+        qi2b=ifelse(qi2b %in% c('At least once a week','Once or twice a month'),'Monthly','Less Than Monthly')) %>% 
+  select(RELTRAD,attend,qi1,qf2,qf5,qg1,qg6,qg7,qi2b) 
+out_names <- data_frame(labels=c('RELTRAD','How often do you attend church?','How often do you pray?',
+                       'How important is religion in your life?','Are you a member of a church?',
+                       'Do you believe in God?','Do you think there is a hell?','Is the Bible the Word of God?',
+                       'How often do you read Scripture?'),
+                       orig_names=names(all_tables))
+all_tables <- all_tables %>% group_by(RELTRAD) %>% nest() %>% 
+  mutate(tables=purrr::map(data,function(x) {
+    all_tables <- lapply(x,function(y) as.data.frame(prop.table(table(y))))
+  }))
+
+table_out <- bind_rows(Evangelical=all_tables$tables[[2]],
+                       None=all_tables$tables[[1]],.id='id') %>% separate(id,c('Religion','Question')) %>% 
+  left_join(out_names,by=c('Question'='orig_names')) %>% mutate(Question=labels,
+                                                                Freq=paste(round(Freq*100,digits=0),"%",sep="")) %>% 
+  select(-labels) %>% 
+  arrange(Question,y,Religion) %>% rename(Answer=y,Percentage=Freq)
+
+filter(table_out,Question %in% c('How often do you attend church?',
+                                 'How often do you read Scripture?',
+                                 'Is the Bible the Word of God?',
+                                 'Do you believe in God?'),
+       Religion=='Evangelical') %>% knitr::kable()
+```
+
 
 Instead, I used a statistical model^[I used the R package mirt to estimate a 2PL item-response theory model. The full code is available in the code folder of our website's Github at (http://www.github.com/saudiwin/saudiwin.github.io). The model includes sampling weights to account for the sampling design.] to collapse the survey's questions down to two dimensions. I didn't know ahead of time what dimensions these would be, although I suspected that it would collapse to a left-right political scale and a conservative-liberal theology scale. The data analysis largely confirms my prior suspicions. The table below shows the four questions that best explained each of the two dimensions:
 
