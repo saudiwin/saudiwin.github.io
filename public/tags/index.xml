@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Robert Kubinec Personal Website</title>
+    <title>Tags on </title>
     <link>https://saudiwin.github.io/tags/</link>
-    <description>Recent content in Tags on Robert Kubinec Personal Website</description>
+    <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Robert Kubinec</copyright>
@@ -21,20 +21,20 @@
     </item>
     
     <item>
-      <title>Deep Learning</title>
-      <link>https://saudiwin.github.io/tags/deep-learning/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <title>Bayesian</title>
+      <link>https://saudiwin.github.io/tags/bayesian/</link>
+      <pubDate>Wed, 04 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://saudiwin.github.io/tags/deep-learning/</guid>
+      <guid>https://saudiwin.github.io/tags/bayesian/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Demo</title>
-      <link>https://saudiwin.github.io/tags/demo/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <title>Dissertation</title>
+      <link>https://saudiwin.github.io/tags/dissertation/</link>
+      <pubDate>Wed, 04 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://saudiwin.github.io/tags/demo/</guid>
+      <guid>https://saudiwin.github.io/tags/dissertation/</guid>
       <description></description>
     </item>
     
@@ -44,6 +44,15 @@
       <pubDate>Wed, 20 Apr 2016 12:00:00 +0000</pubDate>
       
       <guid>https://saudiwin.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Item Response Theory</title>
+      <link>https://saudiwin.github.io/tags/item-response-theory/</link>
+      <pubDate>Wed, 04 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://saudiwin.github.io/tags/item-response-theory/</guid>
       <description></description>
     </item>
     
@@ -80,6 +89,15 @@
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
       <guid>https://saudiwin.github.io/tags/regression/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rollcall</title>
+      <link>https://saudiwin.github.io/tags/rollcall/</link>
+      <pubDate>Wed, 04 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://saudiwin.github.io/tags/rollcall/</guid>
       <description></description>
     </item>
     
