@@ -10,7 +10,7 @@ subtitle = ""
 widget = "posts"
 
 # Order that this section will appear in.
-weight = 40
+weight = 2
 
 # Show posts that contain the following tags. Default to any tags.
 tags = ['to-publish']

@@ -1,5 +1,5 @@
-baseurl = "https://saudiwin.github.io/"
-title = "Robert Kubinec Personal Website"
+baseurl = "http://www.robertkubinec.com/"
+title = ""
 copyright = "&copy; 2017 Robert Kubinec"
 theme = "hugo-academic"
 enableEmoji = true
@@ -9,7 +9,7 @@ footnotereturnlinkcontents = "<sup>^</sup>"
 disqusShortname = ""
 
 # Enable analytics by entering your Google Analytics tracking ID
-googleAnalytics = ""
+googleAnalytics = "UA-67302886-1"
 
 # Default language to use (if you setup multilingual support)
 defaultContentLanguage = "en"
@@ -99,7 +99,7 @@ defaultContentLanguageInSubdir = false
     'Conference proceedings',  # 1
     'Journal',  # 2
     'Work in progress',  # 3
-    'Technical report',  # 4
+    'Op-ed',  # 4
     'Book',  # 5
     'Book chapter'  # 6
   ]
