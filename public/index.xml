@@ -46,6 +46,8 @@ confounders that are fixed over time or across cases, but at a cost: the coeffic
 temporal variance in a way that does not clearly describe how cases differ from one another or how these cases
 change over time. We urge researchers to avoid employing two-way FEs and instead to focus on choosing a
 model that directly speaks to the research question of interest.&lt;/p&gt;
+
+&lt;p&gt;Link to paper &lt;a href=&#34;https://virginia.box.com/shared/static/n8cdbwylfldn426gyalc8nfpc9lxf4vl.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -60,6 +62,8 @@ model that directly speaks to the research question of interest.&lt;/p&gt;
 &lt;p&gt;Based on my field research, I implemented an online survey targeted at businesspeople in Tunisia, Algeria and Egypt with a sample of nearly 2,500 business managers and employees. I use an embedded experiment to see how party appeals to businesses, such as for protection from expropriation or for perks from government licenses and contracts, stimulate businesspeople to offer support to parties, such as electoral funding or instructing their employees to vote for a candidate. I find that firm&amp;rsquo;s incentives to engage politically vary on the firm&amp;rsquo;s market position, size and relationship vis-a-vis government agencies, but that political-economic institutions, especially the Egyptian military, have a pronounced effect on increasing business political engagement in the aggregate.&lt;/p&gt;
 
 &lt;p&gt;My work sheds light on the processes through which powerful elite coalitions are built during the chaotic periods of revolutions and democratic transitions. By so doing, I advance the field by pinpointing the conditions under which anti-democratic coalitions are successful, and when they are likely to fail and let democracy survive.&lt;/p&gt;
+
+&lt;p&gt;Link to online survey paper &lt;a href=&#34;https://virginia.box.com/shared/static/715c8h7nwdvgpqszhknl6xq46xr2slhe.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; and appendix &lt;a href=&#34;https://virginia.box.com/shared/static/xq018i5613wgwwbeh4j7bongkrtluvsg.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -88,6 +92,8 @@ model that directly speaks to the research question of interest.&lt;/p&gt;
 &lt;p&gt;As a remedy for this situation, I put forward a Bayesian IRT model that can handle legislators absences as a separate category of data for determining legislator ideal points. The estimation uses the concept of a hurdle model to deflate the probabilities of legislator&amp;rsquo;s votes by the probability of absences. The model produces a single set of ideal points, but utilizes different parameters for bill absence points. Compared to DW-NOMINATE, this model tends to produce more moderate estimates of US Congresspeople&amp;rsquo;s ideal points because it can model roll-call votes where there are very few opposing votes. For parliamentary data, the model provides much more precise estimates, especially in legislatures with very high rates of absence. Additionally, the model can incorporate absentions as a middle category between yes and no votes for legislatures with high rates of abstentions.&lt;/p&gt;
 
 &lt;p&gt;An R package providing this model, along with other standard IRT ideal point models, is under development. Current source code is available from my &lt;a href=&#34;https://github.com/saudiwin/idealstan&#34; target=&#34;_blank&#34;&gt;Github page&lt;/a&gt;. The estimation is done via MCMC within the Stan modeling language.&lt;/p&gt;
+
+&lt;p&gt;Link to paper &lt;a href=&#34;https://github.com/saudiwin/idealstan/blob/develop/Kubinec%20-%20Absence%20Makes%20the%20Ideal%20Points%20Sharper.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
