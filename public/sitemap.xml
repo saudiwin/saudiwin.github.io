@@ -23,6 +23,42 @@
     
     <url>
     
+      <loc>http://www.robertkubinec.com/project/fixed-effects/</loc>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/project/dissertation/</loc>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/project/islam-sec/</loc>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/project/bayesian-irt/</loc>
+      <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>http://www.robertkubinec.com/tags/academic/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
     </url>
@@ -61,24 +97,6 @@
     
       <loc>http://www.robertkubinec.com/publication/tunisia-monkey-cage/</loc>
       <lastmod>2016-12-19T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/project/bayesian-irt/</loc>
-      <lastmod>2016-05-04T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/project/dissertation/</loc>
-      <lastmod>2016-05-04T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -161,7 +179,7 @@
     <url>
     
       <loc>http://www.robertkubinec.com/tags/bayesian/</loc>
-      <lastmod>2016-05-04T00:00:00+00:00</lastmod>
+      <lastmod>2017-08-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -180,7 +198,17 @@
     <url>
     
       <loc>http://www.robertkubinec.com/tags/dissertation/</loc>
-      <lastmod>2016-05-04T00:00:00+00:00</lastmod>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/tags/fixed-effects/</loc>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -200,7 +228,7 @@
     <url>
     
       <loc>http://www.robertkubinec.com/tags/item-response-theory/</loc>
-      <lastmod>2016-05-04T00:00:00+00:00</lastmod>
+      <lastmod>2017-08-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -211,6 +239,16 @@
     
       <loc>http://www.robertkubinec.com/tags/jekyll/</loc>
       <lastmod>2014-03-10T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/tags/methodology/</loc>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -230,7 +268,7 @@
     <url>
     
       <loc>http://www.robertkubinec.com/project/</loc>
-      <lastmod>2016-05-04T00:00:00+00:00</lastmod>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -280,7 +318,7 @@
     <url>
     
       <loc>http://www.robertkubinec.com/tags/rollcall/</loc>
-      <lastmod>2016-05-04T00:00:00+00:00</lastmod>
+      <lastmod>2017-08-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -299,8 +337,28 @@
     
     <url>
     
+      <loc>http://www.robertkubinec.com/tags/time-series-cross-section/</loc>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>http://www.robertkubinec.com/tags/to-publish/</loc>
       <lastmod>2016-04-20T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/tags/tscs/</loc>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
