@@ -29,26 +29,12 @@
     </item>
     
     <item>
-      <title>Analyzing Variation in the Cross-Section and Over Time: Harnessing Fixed Effects</title>
-      <link>http://www.robertkubinec.com/project/fixed-effects/</link>
-      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
+      <title>idealstan: A Package for Bayesian Ideal-Point Modeling with Stan</title>
+      <link>http://www.robertkubinec.com/talk/stancon2018/</link>
+      <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://www.robertkubinec.com/project/fixed-effects/</guid>
-      <description>
-
-&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
-
-&lt;p&gt;What do we compare when we run a fixed effects (FE) model on time-series cross-sectional data? If we place
-the FEs on the cases, then the coefficients compare one time point to another for the same case. If we place
-the FEs on the time points, then the coefficients compare one case to another at the same point in time. If we
-place the FEs on both the cases and time points in the same model — two-way FEs — then this model removes
-confounders that are fixed over time or across cases, but at a cost: the coefficients combine cross-sectional and
-temporal variance in a way that does not clearly describe how cases differ from one another or how these cases
-change over time. We urge researchers to avoid employing two-way FEs and instead to focus on choosing a
-model that directly speaks to the research question of interest.&lt;/p&gt;
-
-&lt;p&gt;Link to paper &lt;a href=&#34;https://virginia.box.com/shared/static/n8cdbwylfldn426gyalc8nfpc9lxf4vl.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-</description>
+      <guid>http://www.robertkubinec.com/talk/stancon2018/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -63,7 +49,7 @@ model that directly speaks to the research question of interest.&lt;/p&gt;
 
 &lt;p&gt;My work sheds light on the processes through which powerful elite coalitions are built during the chaotic periods of revolutions and democratic transitions. By so doing, I advance the field by pinpointing the conditions under which anti-democratic coalitions are successful, and when they are likely to fail and let democracy survive.&lt;/p&gt;
 
-&lt;p&gt;Link to online survey paper &lt;a href=&#34;https://virginia.box.com/shared/static/xq018i5613wgwwbeh4j7bongkrtluvsg.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; and appendix &lt;a href=&#34;https://virginia.box.com/shared/static/715c8h7nwdvgpqszhknl6xq46xr2slhe.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Link to online survey paper &lt;a href=&#34;https://virginia.box.com/shared/static/u1nj4njocoh3zav8p65xalyviubo9pjg.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; and appendix &lt;a href=&#34;https://virginia.box.com/shared/static/gzzcznq69mnejj3i245pt9qbeta5yhhv.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -82,6 +68,29 @@ model that directly speaks to the research question of interest.&lt;/p&gt;
     </item>
     
     <item>
+      <title>Rethinking Two-way Fixed Effects: A Generative Model and Simulation for Time-Series Cross-Section Data</title>
+      <link>http://www.robertkubinec.com/project/fixed-effects/</link>
+      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/project/fixed-effects/</guid>
+      <description>
+
+&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
+
+&lt;p&gt;What do we compare when we run a fixed effects (FE) model on time-series cross-sectional data? If we place
+the FEs on the cases, then the coefficients compare one time point to another for the same case. If we place
+the FEs on the time points, then the coefficients compare one case to another at the same point in time. If we
+place the FEs on both the cases and time points in the same model — two-way FEs — then this model removes
+confounders that are fixed over time or across cases, but at a cost: the coefficients combine cross-sectional and
+temporal variance in a way that does not clearly describe how cases differ from one another or how these cases
+change over time. We urge researchers to avoid employing two-way FEs and instead to focus on choosing a
+model that directly speaks to the research question of interest.&lt;/p&gt;
+
+&lt;p&gt;Link to paper &lt;a href=&#34;https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3062619&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Absence Makes the Ideal Points Sharper: An Ordinal IRT Model for Complete-Data Rollcall Vote Modeling</title>
       <link>http://www.robertkubinec.com/project/bayesian-irt/</link>
       <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
@@ -93,7 +102,7 @@ model that directly speaks to the research question of interest.&lt;/p&gt;
 
 &lt;p&gt;An R package providing this model, along with other standard IRT ideal point models, is under development. Current source code is available from my &lt;a href=&#34;https://github.com/saudiwin/idealstan&#34; target=&#34;_blank&#34;&gt;Github page&lt;/a&gt;. The estimation is done via MCMC within the Stan modeling language.&lt;/p&gt;
 
-&lt;p&gt;Link to paper &lt;a href=&#34;https://github.com/saudiwin/idealstan/blob/develop/Kubinec%20-%20Absence%20Makes%20the%20Ideal%20Points%20Sharper.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Link to paper &lt;a href=&#34;https://virginia.box.com/shared/static/lpot1njqfu7mlm1h5zjppn0xqhy8din6.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

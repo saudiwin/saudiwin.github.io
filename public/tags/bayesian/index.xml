@@ -22,7 +22,7 @@
 
 &lt;p&gt;An R package providing this model, along with other standard IRT ideal point models, is under development. Current source code is available from my &lt;a href=&#34;https://github.com/saudiwin/idealstan&#34; target=&#34;_blank&#34;&gt;Github page&lt;/a&gt;. The estimation is done via MCMC within the Stan modeling language.&lt;/p&gt;
 
-&lt;p&gt;Link to paper &lt;a href=&#34;https://github.com/saudiwin/idealstan/blob/develop/Kubinec%20-%20Absence%20Makes%20the%20Ideal%20Points%20Sharper.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Link to paper &lt;a href=&#34;https://virginia.box.com/shared/static/lpot1njqfu7mlm1h5zjppn0xqhy8din6.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
