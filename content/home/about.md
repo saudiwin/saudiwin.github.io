@@ -35,11 +35,9 @@ weight = 1
  
 +++
 
-I am a PhD Candidate in the Politics Department at the University of Virginia. My research explores the role of businesspeople during critical moments of countries undergoing transitions from dictatorship to democracy. During 2016, I undertook field research in Egypt and Tunisia, meeting with a range of businesses, parliamentarians, policy wonks, journalists, and civil society regarding the tumultuous political changes of the last five years.
+I am a PhD Candidate in the Politics Department at the University of Virginia. My research examines the influential role played by powerful businesspeople in emerging democracies. Through field research and surveys of businesspeople in North Africa, I show how businesspeople's engagement with emerging democracies is especially problematic when business is united against democracy. This outcome is much more likely to occur if a powerful state actor, such as the Egyptian military, is able to force businesspeople to work together to undermine democratization. You can access my CV from [this link](https://virginia.box.com/shared/static/yujb02uas3v721qtvru3xlh9bjo7oct1.pdf).
 
-This web site hosts information, data sets and code for my ongoing research projects in Middle East political economy.
-
-I also incorporate advanced quantitative techniques in my analysis, including Bayesian modeling, time-series econometrics and psychometric measurement models. For more information about my projects using the R statistical software package, including the Shiny interactive data visualization framework, please visit my [Github site](http://www.github.com/saudiwin).
+I also incorporate advanced quantitative techniques in my analysis, including Bayesian modeling, time-series econometrics and psychometric measurement models. For more information about my projects using the R statistical software package, including my forthcoming R package `idealstan`, please visit my [Github site](http://www.github.com/saudiwin).
 
 For a summary of my dissertation research, please view the presentation below that I gave as a finalist in the University of Virginia's 3-Minute Thesis competition:
 
