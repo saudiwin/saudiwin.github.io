@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Time Series Cross Section on </title>
+    <link>http://www.robertkubinec.com/tags/time-series-cross-section/</link>
+    <description>Recent content in Time Series Cross Section on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Robert Kubinec</copyright>
+    <lastBuildDate>Sat, 05 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.robertkubinec.com/tags/time-series-cross-section/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Islamist-Secularist Polarization during the Arab Uprisings</title>
+      <link>http://www.robertkubinec.com/project/islam-sec/</link>
+      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/project/islam-sec/</guid>
+      <description>Abstract Scholars continue to disagree as to how far contentious politics diffuses within and across states and by what mechanisms it does so. We use new data and empirical measures to test polarization during and after the Arab Uprisings of 2010-12. After authoritarian governments began to fall, populations in several states began to polarize between secularists and Islamists over what kind of regime was to replace the ousted one. We hypothesize that this Islamist-secularist polarization was triggered by catalytic events (such as Muslim Brotherhood electoral victory in Egypt) and diffused transnationally owing to social media and satellite television, dividing anti-status-quo actors throughout the region.</description>
+    </item>
+    
+    <item>
+      <title>Rethinking Two-way Fixed Effects: A Generative Model and Simulation for Time-Series Cross-Section Data</title>
+      <link>http://www.robertkubinec.com/project/fixed-effects/</link>
+      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/project/fixed-effects/</guid>
+      <description>Abstract What do we compare when we run a fixed effects (FE) model on time-series cross-sectional data? If we place the FEs on the cases, then the coefficients compare one time point to another for the same case. If we place the FEs on the time points, then the coefficients compare one case to another at the same point in time. If we place the FEs on both the cases and time points in the same model — two-way FEs — then this model removes confounders that are fixed over time or across cases, but at a cost: the coefficients combine cross-sectional and temporal variance in a way that does not clearly describe how cases differ from one another or how these cases change over time.</description>
+    </item>
+    
+  </channel>
+</rss>

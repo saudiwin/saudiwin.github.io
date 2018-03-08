@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on </title>
+    <link>http://www.robertkubinec.com/project/</link>
+    <description>Recent content in Projects on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Robert Kubinec</copyright>
+    <lastBuildDate>Sat, 05 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.robertkubinec.com/project/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Business Influence on Democratization</title>
+      <link>http://www.robertkubinec.com/project/dissertation/</link>
+      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/project/dissertation/</guid>
+      <description>In my dissertation, I theorize that pro-authoritarian coalitions are more successful at undermining transitional democracies when elites who make up the coalition are strongly unified around the goal of regime change as opposed to lesser political aims. In Tunisia, where I undertook field research for eight months, I found that there are plenty of elites who pine for a return to the days of the dictator Ben Ali, and that these elites even went so far as to form a political party, Nidaa Tounes, that obtained the greatest numbers of seats in Tunisia&amp;rsquo;s parliament in 2014.</description>
+    </item>
+    
+    <item>
+      <title>Islamist-Secularist Polarization during the Arab Uprisings</title>
+      <link>http://www.robertkubinec.com/project/islam-sec/</link>
+      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/project/islam-sec/</guid>
+      <description>Abstract Scholars continue to disagree as to how far contentious politics diffuses within and across states and by what mechanisms it does so. We use new data and empirical measures to test polarization during and after the Arab Uprisings of 2010-12. After authoritarian governments began to fall, populations in several states began to polarize between secularists and Islamists over what kind of regime was to replace the ousted one. We hypothesize that this Islamist-secularist polarization was triggered by catalytic events (such as Muslim Brotherhood electoral victory in Egypt) and diffused transnationally owing to social media and satellite television, dividing anti-status-quo actors throughout the region.</description>
+    </item>
+    
+    <item>
+      <title>Rethinking Two-way Fixed Effects: A Generative Model and Simulation for Time-Series Cross-Section Data</title>
+      <link>http://www.robertkubinec.com/project/fixed-effects/</link>
+      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/project/fixed-effects/</guid>
+      <description>Abstract What do we compare when we run a fixed effects (FE) model on time-series cross-sectional data? If we place the FEs on the cases, then the coefficients compare one time point to another for the same case. If we place the FEs on the time points, then the coefficients compare one case to another at the same point in time. If we place the FEs on both the cases and time points in the same model — two-way FEs — then this model removes confounders that are fixed over time or across cases, but at a cost: the coefficients combine cross-sectional and temporal variance in a way that does not clearly describe how cases differ from one another or how these cases change over time.</description>
+    </item>
+    
+    <item>
+      <title>Absence Makes the Ideal Points Sharper: An Ordinal IRT Model for Complete-Data Rollcall Vote Modeling</title>
+      <link>http://www.robertkubinec.com/project/bayesian-irt/</link>
+      <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/project/bayesian-irt/</guid>
+      <description>Estimating legislator ideal points from roll-call voting data has become a powerful tool for understanding legislative behavior and polarization within legislatures over time. However, the dominant approaches in the field tend to ignore both absences and abstentions in roll-call votes even though it is very likely that absences and abstentions represent a form of strategic behavior. In emerging democracies like Tunisia, this lacuna is particularly problematic because legislator absence may occur very frequently, and resulting estimates that exclude absences are either very imprecise or significantly biased.</description>
+    </item>
+    
+  </channel>
+</rss>
