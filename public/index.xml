@@ -117,849 +117,305 @@ model that directly speaks to the research question of interest.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Getting started with the Academic framework for Hugo</title>
-      <link>http://www.robertkubinec.com/post/getting-started/</link>
-      <pubDate>Wed, 20 Apr 2016 12:00:00 +0000</pubDate>
+      <title>idealstan: an R Package for Ideal Point Modeling with Stan</title>
+      <link>http://www.robertkubinec.com/post/stancon2018_paper/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://www.robertkubinec.com/post/getting-started/</guid>
-      <description>
+      <guid>http://www.robertkubinec.com/post/stancon2018_paper/</guid>
+      <description>&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/datatables-binding/datatables.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/dt-core/css/jquery.dataTables.min.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/dt-core/css/jquery.dataTables.extra.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/dt-core/js/jquery.dataTables.min.js&#34;&gt;&lt;/script&gt;
 
-&lt;p&gt;The Academic framework enables you to easily create a beautifully simple personal or academic website using the &lt;a href=&#34;https://gohugo.io&#34; target=&#34;_blank&#34;&gt;Hugo&lt;/a&gt; static site generator.&lt;/p&gt;
 
-&lt;p&gt;Key features:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Easily manage your homepage, blog posts, publications, talks, and projects&lt;/li&gt;
-&lt;li&gt;Configurable widgets available for Biography, Publications, Projects, News/Blog, Talks, and Contact&lt;/li&gt;
-&lt;li&gt;Need a different section? Just use the Custom widget!&lt;/li&gt;
-&lt;li&gt;Write in &lt;a href=&#34;http://www.robertkubinec.com/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;Markdown&lt;/a&gt; for easy formatting and code highlighting, with &lt;a href=&#34;https://en.wikibooks.org/wiki/LaTeX/Mathematics&#34; target=&#34;_blank&#34;&gt;LaTeX&lt;/a&gt; for mathematical expressions&lt;/li&gt;
-&lt;li&gt;Social/academic network linking, &lt;a href=&#34;https://analytics.google.com&#34; target=&#34;_blank&#34;&gt;Google Analytics&lt;/a&gt;, and &lt;a href=&#34;https://disqus.com&#34; target=&#34;_blank&#34;&gt;Disqus&lt;/a&gt; comments&lt;/li&gt;
-&lt;li&gt;Responsive and mobile friendly&lt;/li&gt;
-&lt;li&gt;Simple and refreshing one page design&lt;/li&gt;
-&lt;li&gt;Easy to customize&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://georgecushen.com/create-your-website-with-hugo/#installing-hugo&#34; target=&#34;_blank&#34;&gt;Install Hugo&lt;/a&gt; and create a new website by typing the following commands in your &lt;em&gt;Terminal&lt;/em&gt; or &lt;em&gt;Command Prompt&lt;/em&gt; app:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hugo new site my_website
-cd my_website
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Install Academic with &lt;a href=&#34;https://help.github.com/articles/set-up-git/&#34; target=&#34;_blank&#34;&gt;git&lt;/a&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/gcushen/hugo-academic.git themes/academic
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Or alternatively, &lt;a href=&#34;https://github.com/gcushen/hugo-academic/archive/master.zip&#34; target=&#34;_blank&#34;&gt;download Academic&lt;/a&gt; and extract it into a &lt;code&gt;themes/academic&lt;/code&gt; folder within your Hugo website.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;If you are creating a new website, copy the contents of the &lt;code&gt;exampleSite&lt;/code&gt; folder to your website root folder, overwriting existing files if necessary. The &lt;code&gt;exampleSite&lt;/code&gt; folder contains an example config file and content to help you get started.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cp -av themes/academic/exampleSite/* .
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Start the Hugo server from your website root folder:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hugo server --watch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now you can go to &lt;a href=&#34;http://localhost:1313&#34; target=&#34;_blank&#34;&gt;localhost:1313&lt;/a&gt; and your new Academic powered website should appear.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Customize your website - refer to the &lt;em&gt;Getting Started&lt;/em&gt; section below&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Build your site by running the &lt;code&gt;hugo&lt;/code&gt; command. Then &lt;a href=&#34;https://georgecushen.com/create-your-website-with-hugo/&#34; target=&#34;_blank&#34;&gt;host it for free using Github Pages&lt;/a&gt;. Or alternatively, copy the generated &lt;code&gt;public/&lt;/code&gt; directory (by FTP, Rsync, etc.) to your production web server (such as your university&amp;rsquo;s hosting service).&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;&lt;em&gt;This is a paper that was presented at the &lt;a href=&#34;http://mc-stan.org/events/stancon2018/&#34;&gt;StanCon2018 conference&lt;/a&gt; on Bayesian inference with the Stan Hamiltonian Markov Chain Monte Carlo (MCMC) method. Video of my talk is available &lt;a href=&#34;https://www.youtube.com/watch?v=0ZjrLOosXwk&amp;amp;t=4s&#34;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This notebook introduces &lt;a href=&#34;https://cran.r-project.org/package=idealstan&#34;&gt;&lt;code&gt;idealstan&lt;/code&gt;&lt;/a&gt;, a new R package front-end to &lt;a href=&#34;http://www.mc-stan.org&#34;&gt;&lt;code&gt;Stan&lt;/code&gt;&lt;/a&gt; that allows for flexible modeling of a class of latent variable models known as ideal point models. Ideal point modeling is a form of dimension reduction, and shares similarities with multi-dimensional scaling, factor analysis and item-response theory. While the parameterization employed by &lt;code&gt;idealstan&lt;/code&gt; is a derivation based on item-response theory, it is important to note that several other parameterizations are possible &lt;a name=cite-carroll2013&gt;&lt;/a&gt;&lt;a name=cite-armstrong2014&gt;&lt;/a&gt;(&lt;a href=&#34;#bib-carroll2013&#34;&gt;Carroll, Lewis, Lo, Poole, and Rosenthal, 2013&lt;/a&gt;; &lt;a href=&#34;#bib-armstrong2014&#34;&gt;Armstrong, Bakker, Carroll, Hare, Poole, and Rosenthal, 2014&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;What distinguishes ideal point modeling from other latent space models is that the latent factor is bi-directional: in other words, the unobserved latent construct that underlies the data could increase or decrease as the observed stimuli either increase or decrease. This type of latent variable is very useful when the aim is to cluster units around a polarizing dimension, such as the left-right axis in politics or the &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-value debate in statistics. While many of the applications of ideal point models are in political science and economics, it certainly can be applied more broadly, especially as the approach is related to latent space models more generally, such as in &lt;a name=cite-hoff2002&gt;&lt;/a&gt;&lt;a href=&#34;#bib-hoff2002&#34;&gt;Hoff, Raftery, and Hancock (2002)&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are well-established frequentist (&lt;a href=&#34;https://cran.r-project.org/web/packages/emIRT/index.html&#34;&gt;&lt;code&gt;emIRT&lt;/code&gt;&lt;/a&gt;) and Bayesian (&lt;a href=&#34;https://cran.r-project.org/web/packages/pscl/pscl.pdf&#34;&gt;&lt;code&gt;pscl&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://cran.r-project.org/web/packages/MCMCpack/index.html&#34;&gt;&lt;code&gt;MCMCpack&lt;/code&gt;&lt;/a&gt;) packages for ideal point inference with R. However, these packages offer standard models that are limited in scope to particular problems, especially when it comes to including predictors in the latent space. The R package &lt;code&gt;idealstan&lt;/code&gt; has three features that set it apart from existing approaches:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Stan offers significant flexibility compared to existing approaches in using non-conjugate priors and a clearer programming interface. This flexibility allows for more options for end users in ideal point modeling that can be used to test new theories and hypotheses instead of being limited in the range and type of models available. In particular, Stan makes it easier to add hierarchical and time-series priors on to parameters, which opens the door to further analysis of dynamic and time-varying social phenomena.&lt;/li&gt;
+&lt;li&gt;Stan scales well with the number of parameters, which is an attribute of most dimension reduction methods. Advances in Hamiltonian Monte Carlo estimation, including the use of variational inference and soon parallel computing within chains, promise to make full Bayesian inference of these models practical even with very large datasets.&lt;/li&gt;
+&lt;li&gt;Increasingly, Stan is being married to helpful and powerful diagnostic packages, including &lt;a href=&#34;https://cran.r-project.org/web/packages/bayesplot/index.html&#34;&gt;&lt;code&gt;bayesplot&lt;/code&gt;&lt;/a&gt;, &lt;a href=&#34;https://cran.r-project.org/web/packages/shinystan/index.html&#34;&gt;&lt;code&gt;shinystan&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://cran.r-project.org/web/packages/loo/index.html&#34;&gt;&lt;code&gt;loo&lt;/code&gt;&lt;/a&gt;, which extends the ability of &lt;code&gt;idealstan&lt;/code&gt; to provide not only cutting-edge Bayesian inference but also increasingly sophisticated tools for graphical analysis of resulting estimates. Given the complex nature of latent variable models, diagonistics are extremely important for determining when the model is behaving as it should (and what the model should be doing in the first place).&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;h2 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h2&gt;
-
-&lt;p&gt;Assuming you created a new website with the example content following the installation steps above, this section explores just a few more steps in order to customize it.&lt;/p&gt;
-
-&lt;h3 id=&#34;core-parameters&#34;&gt;Core parameters&lt;/h3&gt;
-
-&lt;p&gt;The core parameters for the website can be edited in the &lt;code&gt;config.toml&lt;/code&gt; configuration file:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Set &lt;code&gt;baseurl&lt;/code&gt; to your website URL (we recommend &lt;a href=&#34;https://georgecushen.com/create-your-website-with-hugo/&#34; target=&#34;_blank&#34;&gt;GitHub Pages&lt;/a&gt; for free hosting)&lt;/li&gt;
-&lt;li&gt;Set &lt;code&gt;title&lt;/code&gt; to your desired website title such as your name&lt;/li&gt;
-&lt;li&gt;The example Disqus commenting variable should be cleared (e.g. &lt;code&gt;disqusShortname = &amp;quot;&amp;quot;&lt;/code&gt;) or set to your own &lt;a href=&#34;https://disqus.com/&#34; target=&#34;_blank&#34;&gt;Disqus&lt;/a&gt; shortname to enable commenting&lt;/li&gt;
-&lt;li&gt;Edit your details under &lt;code&gt;[params]&lt;/code&gt;; these will be displayed mainly in the homepage &lt;em&gt;about&lt;/em&gt; and &lt;em&gt;contact&lt;/em&gt; widgets (if used). To disable a contact field, simply clear the value to &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Place a square cropped portrait photo named &lt;code&gt;portrait.jpg&lt;/code&gt; into the &lt;code&gt;static/img/&lt;/code&gt; folder, overwriting any defaults. Alternatively, you can edit the &lt;code&gt;avatar&lt;/code&gt; filepath to point to a different image name or clear the value to disable the avatar feature.&lt;/li&gt;
-&lt;li&gt;To enable LaTeX math for your site, set &lt;code&gt;math = true&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Social/academic networking links are defined as multiples of &lt;code&gt;[[params.social]]&lt;/code&gt;. They can be created or deleted as necessary.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;introduce-yourself&#34;&gt;Introduce yourself&lt;/h3&gt;
-
-&lt;p&gt;Edit your biography in the &lt;em&gt;about&lt;/em&gt; widget &lt;code&gt;content/home/about.md&lt;/code&gt; that you copied across from the &lt;code&gt;themes/academic/exampleSite/&lt;/code&gt; folder. The research interests and qualifications are stored as &lt;code&gt;interests&lt;/code&gt; and &lt;code&gt;education&lt;/code&gt; variables. The academic qualifications are defined as multiples of &lt;code&gt;[[education.courses]]&lt;/code&gt; and can be created or deleted as necessary. It&amp;rsquo;s possible to completely hide the interests and education lists by deleting their respective variables.&lt;/p&gt;
-
-&lt;h3 id=&#34;customize-the-homepage&#34;&gt;Customize the homepage&lt;/h3&gt;
-
-&lt;p&gt;Refer to our guide on using &lt;a href=&#34;http://www.robertkubinec.com/post/widgets/&#34; target=&#34;_blank&#34;&gt;widgets&lt;/a&gt; to customize your homepage.&lt;/p&gt;
-
-&lt;h3 id=&#34;add-your-content&#34;&gt;Add your content&lt;/h3&gt;
-
-&lt;p&gt;Refer to our guide on &lt;a href=&#34;http://www.robertkubinec.com/post/managing-content/&#34; target=&#34;_blank&#34;&gt;managing content&lt;/a&gt; to create your own publications, blog posts, talks, and projects.&lt;/p&gt;
-
-&lt;h3 id=&#34;remove-unused-widgets-and-pages&#34;&gt;Remove unused widgets and pages&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.robertkubinec.com/post/managing-content/#removing-content&#34; target=&#34;_blank&#34;&gt;How to remove unused widgets and content pages&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;customization-upgrading&#34;&gt;Customization &amp;amp; Upgrading&lt;/h3&gt;
-
-&lt;p&gt;Continue reading below for advanced customization tips and instructions for keeping the framework up-to-date with any improvements that become available.&lt;/p&gt;
-
-&lt;h2 id=&#34;advanced-customization&#34;&gt;Advanced customization&lt;/h2&gt;
-
-&lt;p&gt;It is possible to carry out many customizations without touching any files in &lt;code&gt;themes/academic&lt;/code&gt;, making it easier to upgrade the framework in the future.&lt;/p&gt;
-
-&lt;h3 id=&#34;navigation-menu&#34;&gt;Navigation menu&lt;/h3&gt;
-
-&lt;p&gt;The &lt;code&gt;[[menu.main]]&lt;/code&gt; entries towards the bottom of &lt;code&gt;config.toml&lt;/code&gt; define the navigation links at the top of the website. They can be added or removed as desired.&lt;/p&gt;
-
-&lt;p&gt;To create a dropdown sub-menu, add &lt;code&gt;identifier = &amp;quot;something&amp;quot;&lt;/code&gt; to the parent item and &lt;code&gt;parent = &amp;quot;something&amp;quot;&lt;/code&gt; to the child item.&lt;/p&gt;
-
-&lt;h3 id=&#34;website-icon&#34;&gt;Website icon&lt;/h3&gt;
-
-&lt;p&gt;Save your main icon and mobile icon as square PNG images named &lt;code&gt;icon.png&lt;/code&gt; and &lt;code&gt;apple-touch-icon.png&lt;/code&gt;, respectively. Place them in your root &lt;code&gt;static/img/&lt;/code&gt; folder.&lt;/p&gt;
-
-&lt;h3 id=&#34;theme-color-css&#34;&gt;Theme color (CSS)&lt;/h3&gt;
-
-&lt;p&gt;You can link custom CSS assets (relative to your root &lt;code&gt;static/css&lt;/code&gt;) from your &lt;code&gt;config.toml&lt;/code&gt; using &lt;code&gt;custom_css = [&amp;quot;custom.css&amp;quot;]&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;For example, lets make a green theme. First, define &lt;code&gt;custom_css = [&amp;quot;green.css&amp;quot;]&lt;/code&gt; in &lt;code&gt;config.toml&lt;/code&gt;. Then we can download the example &lt;a href=&#34;https://gist.github.com/gcushen/d5525a4506b9ccf83f2bce592a895495&#34; target=&#34;_blank&#34;&gt;green theme&lt;/a&gt; and save it as &lt;code&gt;static/css/green.css&lt;/code&gt;, relative to your website root (i.e. &lt;strong&gt;not&lt;/strong&gt; in the &lt;code&gt;themes&lt;/code&gt; directory).&lt;/p&gt;
-
-&lt;h3 id=&#34;analytics&#34;&gt;Analytics&lt;/h3&gt;
-
-&lt;p&gt;To enable &lt;a href=&#34;http://www.google.com/analytics&#34; target=&#34;_blank&#34;&gt;Google Analytics&lt;/a&gt;, add your tracking code in &lt;code&gt;config.toml&lt;/code&gt; similarly to &lt;code&gt;googleAnalytics = &amp;quot;UA-12345678-9&amp;quot;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;third-party-and-local-scripts-js&#34;&gt;Third party and local scripts (JS)&lt;/h3&gt;
-
-&lt;p&gt;To add a third party script, create a file named &lt;code&gt;head_custom.html&lt;/code&gt; in a &lt;code&gt;layouts/partials/&lt;/code&gt; folder at the root of your website (not in the &lt;code&gt;themes&lt;/code&gt; folder). Any HTML code added to this file will be included within your website&amp;rsquo;s &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt;. Therefore, it&amp;rsquo;s suitable for adding custom metadata or third party scripts specified with the &lt;em&gt;async&lt;/em&gt; attribute.&lt;/p&gt;
-
-&lt;p&gt;Whereas for your own local scripts, you can link your local JS assets (relative to your root &lt;code&gt;static/js&lt;/code&gt;) from your &lt;code&gt;config.toml&lt;/code&gt; using &lt;code&gt;custom_js  = [&amp;quot;custom.js&amp;quot;]&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;language-and-translation&#34;&gt;Language and translation&lt;/h3&gt;
-
-&lt;p&gt;The interface text (e.g. buttons) is stored in language files which are collected from Academic&amp;rsquo;s &lt;code&gt;themes/academic/i18n/&lt;/code&gt; folder, as well as an &lt;code&gt;i18n/&lt;/code&gt; folder at the root of your project.&lt;/p&gt;
-
-&lt;p&gt;To edit the interface text, copy &lt;code&gt;themes/academic/i18n/en.yaml&lt;/code&gt; to &lt;code&gt;i18n/en.yaml&lt;/code&gt; (relative to the root of your website). Open the new file and make any desired changes to the text appearing after &lt;code&gt;translation:&lt;/code&gt;. Note that the language files are formatted in YAML syntax.&lt;/p&gt;
-
-&lt;p&gt;To translate the interface text to another language, follow the above instructions, but name the new file in the form &lt;code&gt;i18n/X.yaml&lt;/code&gt; where &lt;code&gt;X&lt;/code&gt; is the appropriate &lt;a href=&#34;http://www.w3schools.com/tags/ref_language_codes.asp&#34; target=&#34;_blank&#34;&gt;ISO/RFC5646 language identifier&lt;/a&gt; for the translation. Then follow the brief instructions in the &lt;em&gt;Language&lt;/em&gt; section at the bottom of your &lt;code&gt;config.toml&lt;/code&gt;. To change the default language used by Academic, set &lt;code&gt;defaultContentLanguage&lt;/code&gt; to the desired language identifier in your configuration file.&lt;/p&gt;
-
-&lt;p&gt;To translate the navigation bar, you can edit the default &lt;code&gt;[[menu.main]]&lt;/code&gt; instances in &lt;code&gt;config.toml&lt;/code&gt;. However, for a multilingual site, you will need to duplicate all of the &lt;code&gt;[[menu.main]]&lt;/code&gt; instances and rename the new instances from &lt;code&gt;[[menu.main]]&lt;/code&gt; to &lt;code&gt;[[languages.X.menu.main]]&lt;/code&gt;, where &lt;code&gt;X&lt;/code&gt; is the language identifier (e.g. &lt;code&gt;[[languages.zh.menu.main]]&lt;/code&gt; for Simplified Chinese). Thus, the navigation bar can be displayed in multiple languages.&lt;/p&gt;
-
-&lt;p&gt;To translate a content file in your &lt;code&gt;content/&lt;/code&gt; folder into another language, copy the file to &lt;code&gt;filename.X.md&lt;/code&gt; where &lt;code&gt;filename&lt;/code&gt; is your existing filename and &lt;code&gt;X&lt;/code&gt; is the appropriate &lt;a href=&#34;http://www.w3schools.com/tags/ref_language_codes.asp&#34; target=&#34;_blank&#34;&gt;ISO/RFC5646 language identifier&lt;/a&gt; for the translation. Then translate the content in the new file to the specified language.&lt;/p&gt;
-
-&lt;p&gt;For further details on Hugo&amp;rsquo;s internationalization and multilingual features, refer to the &lt;a href=&#34;https://gohugo.io/content/multilingual/&#34; target=&#34;_blank&#34;&gt;associated Hugo documentation&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;permalinks&#34;&gt;Permalinks&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;Permalinks&lt;/em&gt;, or &lt;em&gt;permanent links&lt;/em&gt;, are URLs to individual pages and posts on your website. They are permanent web addresses which can be used to link to your content. Using Hugo&amp;rsquo;s &lt;em&gt;permalinks&lt;/em&gt; option these can be easily customized. For example, the blog post URL can be changed to the form &lt;em&gt;yourURL/2016/05/01/my-post-slug&lt;/em&gt; by adding the following near the top of your &lt;code&gt;config.toml&lt;/code&gt; (before &lt;code&gt;[params]&lt;/code&gt; settings):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[permalinks]
-    post = &amp;quot;/:year/:month/:day/:slug&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Where &lt;code&gt;:slug&lt;/code&gt; defaults to the filename of the post, excluding the file extension. However, slug may be overridden on a per post basis if desired, simply by setting &lt;code&gt;slug = &amp;quot;my-short-post-title&amp;quot;&lt;/code&gt; in your post preamble.&lt;/p&gt;
-
-&lt;h2 id=&#34;upgrading&#34;&gt;Upgrading&lt;/h2&gt;
-
-&lt;p&gt;Feel free to &lt;em&gt;star&lt;/em&gt; the project on &lt;a href=&#34;https://github.com/gcushen/hugo-academic/&#34; target=&#34;_blank&#34;&gt;Github&lt;/a&gt; and monitor the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/commits/master&#34; target=&#34;_blank&#34;&gt;commits&lt;/a&gt; for updates.&lt;/p&gt;
-
-&lt;p&gt;Before upgrading the framework, it is recommended to make a backup of your entire website directory, or at least your &lt;code&gt;themes/academic&lt;/code&gt; directory. You can also read about the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/releases&#34; target=&#34;_blank&#34;&gt;most recent milestones&lt;/a&gt; (but this doesn&amp;rsquo;t necessarily reflect the latest &lt;em&gt;master&lt;/em&gt; release).&lt;/p&gt;
-
-&lt;p&gt;Before upgrading for the first time, the remote &lt;em&gt;origin&lt;/em&gt; repository should be renamed to &lt;em&gt;upstream&lt;/em&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cd themes/academic
-$ git remote rename origin upstream
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To list available updates:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cd themes/academic
-$ git fetch upstream
-$ git log --pretty=oneline --abbrev-commit --decorate HEAD..upstream/master
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then, upgrade by running:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git pull upstream
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you have modified files in &lt;code&gt;themes/academic&lt;/code&gt;, git will attempt to auto-merge changes. If conflicts are reported, you will need to manually edit the files with conflicts and add them back (&lt;code&gt;git add &amp;lt;filename&amp;gt;&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;If there are any issues after upgrading, you may wish to compare your site with the latest &lt;a href=&#34;https://github.com/gcushen/hugo-academic/tree/master/exampleSite&#34; target=&#34;_blank&#34;&gt;example site&lt;/a&gt; to check if any settings changed.&lt;/p&gt;
-
-&lt;h2 id=&#34;feedback-contributing&#34;&gt;Feedback &amp;amp; Contributing&lt;/h2&gt;
-
-&lt;p&gt;Please use the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/issues&#34; target=&#34;_blank&#34;&gt;issue tracker&lt;/a&gt; to let me know about any bugs or feature requests, or alternatively make a pull request.&lt;/p&gt;
-
-&lt;p&gt;For general questions about Hugo, there is a &lt;a href=&#34;http://discuss.gohugo.io&#34; target=&#34;_blank&#34;&gt;Hugo discussion forum&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;license&#34;&gt;License&lt;/h2&gt;
-
-&lt;p&gt;Copyright 2016 &lt;a href=&#34;https://georgecushen.com&#34; target=&#34;_blank&#34;&gt;George Cushen&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Released under the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/blob/master/LICENSE.md&#34; target=&#34;_blank&#34;&gt;MIT&lt;/a&gt; license.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Customizing the homepage with widgets</title>
-      <link>http://www.robertkubinec.com/post/widgets/</link>
-      <pubDate>Wed, 20 Apr 2016 11:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/post/widgets/</guid>
-      <description>
-
-&lt;p&gt;Homepage widgets display as sections on the homepage. They can be enabled/disabled and configured as desired. Academic has the following widgets available to use:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;About/biography&lt;/li&gt;
-&lt;li&gt;Selected publications&lt;/li&gt;
-&lt;li&gt;Recent publications&lt;/li&gt;
-&lt;li&gt;Recent news/blog posts&lt;/li&gt;
-&lt;li&gt;Projects&lt;/li&gt;
-&lt;li&gt;Selected talks&lt;/li&gt;
-&lt;li&gt;Recent talks&lt;/li&gt;
-&lt;li&gt;Contact&lt;/li&gt;
-&lt;li&gt;Custom widget (demonstrated with the &lt;em&gt;teaching&lt;/em&gt; example)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The example site that you copied to create your site uses all the different types of widget (except talks), so you can generally just delete the widgets you don&amp;rsquo;t need and customize the parameters of the widgets you wish to keep.&lt;/p&gt;
-
-&lt;p&gt;The parameters for each widget vary. They can be found in the preamble/frontmatter (between the pair of &lt;code&gt;+++&lt;/code&gt;) for each widget installed in the &lt;code&gt;content/home/&lt;/code&gt; folder.&lt;/p&gt;
-
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;p&gt;By default, publications will be displayed in a simple list. If you prefer a more detailed list with abstract and image, you can enable the detailed publication list on the homepage by setting &lt;code&gt;detailed_list = true&lt;/code&gt; in &lt;code&gt;content/home/publications.md&lt;/code&gt;.&lt;/p&gt;
-
+&lt;p&gt;&lt;a href=&#34;https://github.com/saudiwin/idealstan&#34;&gt;&lt;code&gt;idealstan&lt;/code&gt;&lt;/a&gt; is an effort to build on prior efforts but also to offer new models that satisfy the increasing variety of applications to which ideal point models are being put. Both &lt;code&gt;pscl&lt;/code&gt; and &lt;code&gt;MCMCpack&lt;/code&gt; were designed for ideal point modeling of binary (logit) data from legislatures in which the outcome is made up of yes and no votes cast by legislators &lt;a name=cite-jackman2004&gt;&lt;/a&gt;&lt;a name=cite-quinn2002&gt;&lt;/a&gt;(&lt;a href=&#34;#bib-jackman2004&#34;&gt;Clinton, Jackman, and Rivers, 2004&lt;/a&gt;; &lt;a href=&#34;#bib-quinn2002&#34;&gt;Martin and Quinn, 2002&lt;/a&gt;). More recently scholars have begun applying ideal point models to Twitter data &lt;a name=cite-barbera2015&gt;&lt;/a&gt;(&lt;a href=&#34;#bib-barbera2015&#34;&gt;Barberá, 2015&lt;/a&gt;), massive campaign finance datasets &lt;a name=cite-bonica2014&gt;&lt;/a&gt;(&lt;a href=&#34;#bib-bonica2014&#34;&gt;Bonica, 2014&lt;/a&gt;) and party campaign manifestos &lt;a name=cite-slapin2008&gt;&lt;/a&gt;(&lt;a href=&#34;#bib-slapin2008&#34;&gt;Slapin and Proksch, 2008&lt;/a&gt;). This package offers both the traditional forms of ideal point models along with new extensions, including a version of ideal points that can take into account certain forms of missing data.&lt;/p&gt;
+&lt;p&gt;In this notebook I first introduce ideal-point models and contrast them with “traditional” item response theory (IRT), and then I demonstrate the &lt;code&gt;idealstan&lt;/code&gt; package through simulations. I then perform two empirical analyses, the first of coffee product ratings from Amazon and the second with voting data taken from the 114th Senate. In the second example, I also show how &lt;code&gt;idealstan&lt;/code&gt; enables new estimation of strategic legislator absence, a type of data that is usually coded as missing in vote datasets.&lt;/p&gt;
 &lt;/div&gt;
-
-
-&lt;h2 id=&#34;add-a-widget-to-the-homepage&#34;&gt;Add a widget to the homepage&lt;/h2&gt;
-
-&lt;p&gt;To add a widget manually, copy the relevant widget from &lt;code&gt;themes/academic/exampleSite/content/home/&lt;/code&gt; to your &lt;code&gt;content/home/&lt;/code&gt; folder.&lt;/p&gt;
-
-&lt;p&gt;Widget identifiers are set to their respective filenames, so a &lt;code&gt;content/home/about.md&lt;/code&gt; widget can be linked from the navigation bar by setting the relevant URL as &lt;code&gt;&amp;quot;#about&amp;quot;&lt;/code&gt; in &lt;code&gt;config.toml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;This means that if you want to use multiple instances of a widget, each widget will be assigned a unique ID based on the filename that you set. You can then use that ID for linking, like in the above example.&lt;/p&gt;
-
-&lt;h2 id=&#34;using-the-custom-widget&#34;&gt;Using the custom widget&lt;/h2&gt;
-
-&lt;p&gt;You can use the custom widget to create your own home page sections.&lt;/p&gt;
-
-&lt;p&gt;Simply duplicate (copy/paste) and rename the example &lt;em&gt;teaching&lt;/em&gt; file at &lt;code&gt;content/home/teaching.md&lt;/code&gt;. Then edit the section title, weight (refer to &lt;em&gt;Ordering sections&lt;/em&gt; below), and content as desired.&lt;/p&gt;
-
-&lt;p&gt;You may also wish to add a navigation link to the top of the page that points to the new section. This can be achieved by adding something similar to the following lines to your &lt;code&gt;config.toml&lt;/code&gt;, where the URL will consist of the first title word in lowercase:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[[menu.main]]
-    name = &amp;quot;Research&amp;quot;
-    url = &amp;quot;#research&amp;quot;
-    weight = 10
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;remove-a-widget-from-the-homepage&#34;&gt;Remove a widget from the homepage&lt;/h2&gt;
-
-&lt;p&gt;If you do not require a particular widget, you can simply delete any associated files from the &lt;code&gt;content/home/&lt;/code&gt; folder.&lt;/p&gt;
-
-&lt;p&gt;To remove a navigation link from the top of the page, remove the associated &lt;code&gt;[[menu.main]]&lt;/code&gt; entry in &lt;code&gt;config.toml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;ordering-widgets&#34;&gt;Ordering widgets&lt;/h2&gt;
-
-&lt;p&gt;The order that the homepage widgets are displayed in is defined by the &lt;code&gt;weight&lt;/code&gt; parameter in each of the files in the &lt;code&gt;content/home/&lt;/code&gt; directory. The widgets are displayed in ascending order of their &lt;code&gt;weight&lt;/code&gt;, so you can simply edit the &lt;code&gt;weight&lt;/code&gt; parameters as desired.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Managing content</title>
-      <link>http://www.robertkubinec.com/post/managing-content/</link>
-      <pubDate>Wed, 20 Apr 2016 11:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/post/managing-content/</guid>
-      <description>&lt;p&gt;This is a brief guide to managing content with the Academic framework. Content can include publications, projects, talks, and news/blog articles. After you have read this guide about creating and managing content, you may also be interested to learn about &lt;a href=&#34;http://www.robertkubinec.com/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;writing content with Markdown, LaTeX, and Shortcodes&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;To enable LaTeX math rendering for a page, you should include &lt;code&gt;math = true&lt;/code&gt; in the page&amp;rsquo;s &lt;code&gt;+++&lt;/code&gt; preamble, as demonstrated in the included example site. Otherwise, to enable math on the homepage or for all pages, you must globally set &lt;code&gt;math = true&lt;/code&gt; in &lt;code&gt;config.toml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;To disable source code highlighting by default for all pages, set &lt;code&gt;highlight = false&lt;/code&gt; in &lt;code&gt;config.toml&lt;/code&gt;. You can then enable source code highlighting only on pages that need it by setting &lt;code&gt;highlight = true&lt;/code&gt; in that page&amp;rsquo;s preamble. See the &lt;a href=&#34;http://www.robertkubinec.com/post/writing-markdown-latex/#code-highlighting&#34; target=&#34;_blank&#34;&gt;code-highlighting docs&lt;/a&gt; for more details.&lt;/p&gt;
-
-&lt;p&gt;To display a featured image in content page headers, the parameters below can be inserted towards the end of a page&amp;rsquo;s &lt;code&gt;+++&lt;/code&gt; preamble. It is assumed that the image is located in your &lt;code&gt;static/img/&lt;/code&gt; folder, so the full path in the example below will be &lt;code&gt;static/img/headers/getting-started.png&lt;/code&gt;. The &lt;code&gt;caption&lt;/code&gt; parameter can be used to write an image caption or credit.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[header]
-image = &amp;quot;headers/getting-started.png&amp;quot;
-caption = &amp;quot;Image credit: [**Academic**](https://github.com/gcushen/hugo-academic/)&amp;quot;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;p&gt;If you wish to prevent a featured image automatically being used for a post&amp;rsquo;s thumbnail on the homepage, the &lt;code&gt;preview = false&lt;/code&gt; parameter can be added to &lt;code&gt;[header]&lt;/code&gt;.&lt;/p&gt;
-
+&lt;div id=&#34;ideal-point-models-as-a-subset-of-statistical-measurement&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Ideal Point Models as a Subset of Statistical Measurement&lt;/h2&gt;
+&lt;p&gt;Measurement error models have a long history in applied statistics and are increasingly in demand as the amount of noisy observational data grows with the digital revolution. Canonical statistical models, particularly linear regression, assume that the predictors are measured without error, but in many situations in social science, the variable of interest cannot in fact be measured. Rather, proxies or indicators are used to stand in for the latent construct. Measurement models offer a way to match the indicators with the latent construct while making appropriate assumptions about the relationship.&lt;/p&gt;
+&lt;p&gt;In other words, we suppose that the regression predictor matrix &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; is itself a function of certain indicators &lt;span class=&#34;math inline&#34;&gt;\(I_c \in \{1 ... C\}\)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ 
+X = f(\forall I_c \in \{1 ... C\})
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Different latent variable, latent space and measurement models can be distinguished in terms of the function &lt;span class=&#34;math inline&#34;&gt;\(f(\cdot)\)&lt;/span&gt;. Fundamentally, &lt;span class=&#34;math inline&#34;&gt;\(f(\cdot)\)&lt;/span&gt; has to stipulate how &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; will change as the indicators change. It is possible to make very precise conditions for this relationship, which is the method applied in confirmatory factor analysis and structural equation modeling. It is also possible to let &lt;span class=&#34;math inline&#34;&gt;\(f(\cdot)\)&lt;/span&gt; make only minimal assumptions about this relationship, which is the method adopted by exploratory factor analysis and item-response theory (IRT), in addition to the other latent space models in the literature. It is also possible, of course, to have models that fall somewhere in between truly exploratory and truly confirmatory models.&lt;/p&gt;
+&lt;p&gt;While much has been written about the different kids of &lt;span class=&#34;math inline&#34;&gt;\(f(\cdot)\)&lt;/span&gt; that can be used in measurement models, in this paper I focus on a metric relevant to ideal point models: as the values of &lt;span class=&#34;math inline&#34;&gt;\(I_c\)&lt;/span&gt; increase, does &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; also increase so that &lt;span class=&#34;math inline&#34;&gt;\(f(\cdot)\)&lt;/span&gt; must be always non-decreasing? If that is the case, then the model can be thought of as falling into the domain of item-response theory and traditional factor analysis (in fact, IRT is itself a non-linear version of factor analysis per &lt;a name=cite-takane1986&gt;&lt;/a&gt;&lt;a href=&#34;#bib-takane1986&#34;&gt;Takane and de Leeuw (1986)&lt;/a&gt;). By contrast, ideal point models are based on a different set of assumptions in which &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; could increase or decrease as the indicators &lt;span class=&#34;math inline&#34;&gt;\(I_c\)&lt;/span&gt; increase or decrease; in other words, the relationship is bi-polar instead of uni-polar.&lt;/p&gt;
+&lt;p&gt;Ideal point modeling originated from analysis of a common situation in policy research in which different legislators select from among competing policy alternatives based on the utility offered by each policy &lt;a name=cite-enelow198&gt;&lt;/a&gt;&lt;a name=cite-poole2008&gt;&lt;/a&gt;(&lt;a href=&#34;#bib-enelow198&#34;&gt;Enelow and Hinich, 1984&lt;/a&gt;; &lt;a href=&#34;https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1276082&#34;&gt;Poole, Lewis, Lo, and Carroll, 2008&lt;/a&gt;). Supposing that the policies are evaluated on a uni-dimensional space, if the utility of the “Yes” position on the policy is greater than the utility of the “No” position to a particular legislator, then that legislator will choose that policy. While very simple, this model has a requirement that is different from much of traditional IRT estimation: the policy outcomes can have different meanings based on their position relative to the legislator in the policy space. For example, if a legislator is very liberal (has a high value on the latent construct), then that legislator is likely to vote yes on bills that are also liberal, such as single-payer health care. But if the bill is conservative, such as national defense, then that legislator is more likely to vote no. In other words, the meaning of the positions of the bills in the latent space depends on the ideal point of the legislator, and thus the mapping to the latent space &lt;span class=&#34;math inline&#34;&gt;\(f(\cdot)\)&lt;/span&gt; cannot be always non-decreasing. For some votes, a yes position may mean a high value of the latent space, while for others it may mean a lower value.&lt;/p&gt;
+&lt;p&gt;By comparison, in traditional IRT, responses to stimuli (the indicators &lt;span class=&#34;math inline&#34;&gt;\(I_c\)&lt;/span&gt;) reflect correct or incorrect answers, such as a student taking a test. Correct answers, which in the legislative context mean yes votes, always equal greater ability, while incorrect answers, which would be no votes, are always a sign of less ability. In this situation, &lt;span class=&#34;math inline&#34;&gt;\(f(\cdot)\)&lt;/span&gt; is always non-decreasing. Thus while ideal point models share much in common with IRT, they require different assumptions.&lt;/p&gt;
+&lt;p&gt;A brief review of the mathematical notation will make the difference clear. The 2-PL IRT model takes the following form:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+Y_{ij} = \alpha_j x_i - \beta_j
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(Y_{ij}\)&lt;/span&gt; can be an outcome of any type (binary, ordinal, Poisson, etc.) that includes the correct or incorrect responses of &lt;span class=&#34;math inline&#34;&gt;\(I\)&lt;/span&gt; test takers to &lt;span class=&#34;math inline&#34;&gt;\(J\)&lt;/span&gt; test items, &lt;span class=&#34;math inline&#34;&gt;\(\alpha_j\)&lt;/span&gt; are the discrimination parameters that control the narrowness, hence discrimination, of each item &lt;span class=&#34;math inline&#34;&gt;\(j\)&lt;/span&gt; on the test in the latent space, &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; are the test-taker ability parameters that reflect the ability of a person to answer an item correctly, and &lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt; are the difficulty or average probability/value of a correct response (the intercept). In the traditional IRT format, the &lt;span class=&#34;math inline&#34;&gt;\(\alpha_j\)&lt;/span&gt; discrimination parameters are always positive because a higher value (a correct answer) is always associated with higher ability &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt;, while a lower value (an incorrect answer) is associated with less ability.&lt;/p&gt;
+&lt;p&gt;However, if the requirement that the discrimination parameters &lt;span class=&#34;math inline&#34;&gt;\(\alpha_j\)&lt;/span&gt; are positive is removed, then this model can also be used for ideal point modeling. For most applications, ideal-point modeling using IRT is built on the standard 2-PL model &lt;a name=cite-gelman2005&gt;&lt;/a&gt;(&lt;a href=&#34;#bib-jackman2004&#34;&gt;Clinton, Jackman, and Rivers, 2004&lt;/a&gt;; &lt;a href=&#34;#bib-gelman2005&#34;&gt;Bafumi, Gelman, Park, and Kaplan, 2005&lt;/a&gt;), with one notable exception: the discrimination parameters must be un-constrained, while in traditional IRT the discrimination parameters are constrained to all be either positive or negative. Constraining discrimination parameters to be positive is also the approach taken in the &lt;a href=&#34;https://cran.r-project.org/web/packages/edstan/vignettes/briefmanual.html&#34;&gt;&lt;code&gt;edstan&lt;/code&gt;&lt;/a&gt; package, which offers the full range of standard IRT models using Stan.&lt;/p&gt;
+&lt;p&gt;Leaving the discrimination parameters un-consrained ensures that a higher or lower value of &lt;span class=&#34;math inline&#34;&gt;\(Y_{ij}\)&lt;/span&gt; could be associated with either a “correct” or “incorrect” answer as is necessary in an ideal point model. This happens because the latent space in an ideal point model is fundamentally a Euclidean distance that is rotation-invariant. The following figure makes this clear by showing a version of an ideal point model in which the ideal point (ability parameter) &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; is represented by a Normal distribution while the Yes and No points of a proposed policy are vertical lines.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;If &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; is to the right of the Indifference line, the legislator will vote Yes on the proposal, whereas if she is to the left, she will vote No. However, a different policy (item) could have the Yes and No positions switched so that a Yes vote would correspond to -2.5 and vice versa for the No vote. Thus the binary outcomes do not have the same interpretation as the standard IRT model because the relationship between the outcomes and the ability points is contingent.&lt;/p&gt;
+&lt;p&gt;If the discrimination parameters are unconstrained, &lt;a href=&#34;#bib-jackman2004&#34;&gt;Clinton, Jackman, and Rivers (2004)&lt;/a&gt; showed that the midpoint of the policy/item parameter, which is labeled on the plot as the indifference line, is identified as &lt;span class=&#34;math inline&#34;&gt;\(-\frac{\alpha_j}{\beta_j}\)&lt;/span&gt; in the original IRT model. This midpoint is important because it represents the point in the latent space in which an actor is indifferent, or has a 50% chance of voting yes or no. Unfortunately, the IRT paramerization of the ideal point model does not return the actual Yes or No positions of a bill/item, but these midpoints are sufficient to characterize the position of the items in the latent space.&lt;/p&gt;
+&lt;p&gt;While this difference between ideal point models and standard IRT may seem trivial, it has serious consequences for modeling. The basic issue is the non-identifiability of the IRT model, which the switching polarity of the discrimination parameters only makes more difficult. Ultimately, it becomes necessary to constrain the polarity of some of the ability or discrimination parameters to identify the model. However, it is necessary to choose parameters which would avoid “splitting the likelihood”, such as constraining a legislator whose true ideal point is near zero (&lt;a href=&#34;#bib-gelman2005&#34;&gt;Bafumi, Gelman, Park, et al., 2005&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;idealstan&lt;/code&gt; exploits variational Bayesian (VB) inference &lt;a name=cite-NIPS2015_5758&gt;&lt;/a&gt;(&lt;a href=&#34;http://papers.nips.cc/paper/5758-automatic-variational-inference-in-stan.pdf&#34;&gt;Kucukelbir, Ranganath, Gelman, and Blei, 2015&lt;/a&gt;) to assist with finding parameters for identification. &lt;code&gt;idealstan&lt;/code&gt; first estimates an IRT model with rotation-unidentified parameters, which is not a problem for a single VB run. Then &lt;code&gt;idealstan&lt;/code&gt; can select those parameters which show the highest or lowest values, and these parameters are then constrained in terms of their polarity. This approach can quickly speed up the sometimes painful process of identifying a particular IRT ideal point model, although it is also possible to constrain parameters before estimation based on prior information.&lt;/p&gt;
 &lt;/div&gt;
-
-
-&lt;h2 id=&#34;create-a-publication&#34;&gt;Create a publication&lt;/h2&gt;
-
-&lt;p&gt;To create a new publication:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hugo new publication/my-paper-name.md
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then edit the default variables at the top of &lt;code&gt;content/publication/my-paper-name.md&lt;/code&gt; to include the details of your publication. The &lt;code&gt;url_&lt;/code&gt; variables are used to generate links associated with your publication, such as for viewing PDFs of papers. Here is an example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;+++
-abstract = &amp;quot;An abstract...&amp;quot;
-authors = [&amp;quot;First author&#39;s name&amp;quot;, &amp;quot;Second author&#39;s name&amp;quot;]
-date = &amp;quot;2013-07-01&amp;quot;
-image = &amp;quot;&amp;quot;
-image_preview = &amp;quot;&amp;quot;
-math = false
-publication = &amp;quot;The publishing part of the citation goes here. You may use *Markdown* for italics etc.&amp;quot;
-title = &amp;quot;A publication title, such as title of a paper&amp;quot;
-url_code = &amp;quot;&amp;quot;
-url_dataset = &amp;quot;&amp;quot;
-url_pdf = &amp;quot;pdf/my-paper-name.pdf&amp;quot;
-url_project = &amp;quot;&amp;quot;
-url_slides = &amp;quot;&amp;quot;
-url_video = &amp;quot;&amp;quot;
-+++
-
-Further details on your publication can be written here using *Markdown* for formatting. This text will be displayed on the Publication Detail page.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;url_&lt;/code&gt; links can either point to local or web content. Associated local publication content, such as PDFs, may be copied to a &lt;code&gt;static/pdf/&lt;/code&gt; folder and referenced like &lt;code&gt;url_pdf = &amp;quot;pdf/my-paper-name.pdf&amp;quot;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;You can also associate custom link buttons with the publication by adding the following block(s) within the variable preamble above, which is denoted by &lt;code&gt;+++&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[[url_custom]]
-    name = &amp;quot;Custom Link&amp;quot;
-    url = &amp;quot;http://www.example.org&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you enabled &lt;code&gt;detailed_list&lt;/code&gt; for publications in &lt;code&gt;config.toml&lt;/code&gt;, then there are a few more optional variables that you can include in the publication page preamble. You may use &lt;code&gt;abstract_short = &amp;quot;friendly summary of abstract&amp;quot;&lt;/code&gt; and &lt;code&gt;publication_short = &amp;quot;abbreviated publication details&amp;quot;&lt;/code&gt; to display a friendly summary of the abstract and abbreviate the publication details, respectively. Furthermore, there is the option to display a different image on the homepage to the publication detail page by setting &lt;code&gt;image_preview = &amp;quot;my-image.jpg&amp;quot;&lt;/code&gt;. This can be useful if you wish to scale down the image for the homepage or simply if you just wish to show a different image for the preview.&lt;/p&gt;
-
-&lt;div class=&#34;alert alert-warning&#34;&gt;
-  &lt;p&gt;Any double quotes (&lt;code&gt;&amp;quot;&lt;/code&gt;) or backslashes (e.g. LaTeX &lt;code&gt;\times&lt;/code&gt;) occurring within the value of any frontmatter parameter (such as the &lt;em&gt;abstract&lt;/em&gt;) should be escaped with a backslash (&lt;code&gt;\&lt;/code&gt;). For example, the symbol &lt;code&gt;&amp;quot;&lt;/code&gt; and LaTeX text &lt;code&gt;\times&lt;/code&gt; become &lt;code&gt;\&amp;quot;&lt;/code&gt; and &lt;code&gt;\\times&lt;/code&gt;, respectively. Refer to the &lt;a href=&#34;https://github.com/toml-lang/toml#user-content-string&#34; target=&#34;_blank&#34;&gt;TOML documentation&lt;/a&gt; for more info.&lt;/p&gt;
-
+&lt;div id=&#34;missing-data-in-ideal-point-models&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Missing Data in Ideal Point Models&lt;/h2&gt;
+&lt;p&gt;Because of the flexibility of Stan,&lt;code&gt;idealstan&lt;/code&gt; is not limited to implementing the standard IRT ideal point model. One of the modifications it offers is a model that can account for one-way censoring in the data, or what is called an absence-inflated ideal point model &lt;a name=cite-kubinec2017&gt;&lt;/a&gt;(&lt;a href=&#34;#bib-kubinec2017&#34;&gt;Kubinec, 2017a&lt;/a&gt;). This model was motivated by the application of ideal point models to legislatures in which legislator actions are more diverse than simply Yes or No votes. Legislators can also be absent on votes and in parliamentary systems as in Europe, abstentions are also common. Abstentions occur when a legislator votes on a policy but refuses to either vote Yes or No, resulting in a vote record of abstention that conventional models will treat as missing data. However, if these two additional vote outcomes–absent and abstention–are removed from the estimation by encoding them as missing data, then the additional information about legislator behavior present in this data is lost.&lt;/p&gt;
+&lt;p&gt;As a solution for abstentions, I proposed in &lt;a href=&#34;#bib-kubinec2017&#34;&gt;Kubinec (2017a)&lt;/a&gt; to model abstentions as a middle category between yes and no votes by treating &lt;span class=&#34;math inline&#34;&gt;\(Y_{ij}\)&lt;/span&gt; as an ordered logistic outcome &lt;span class=&#34;math inline&#34;&gt;\(Y_{ijk}\)&lt;/span&gt; for &lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt; in three possible vote choices: &lt;span class=&#34;math inline&#34;&gt;\(\{1,2,3\}\)&lt;/span&gt; (no, abstain, yes).&lt;/p&gt;
+&lt;p&gt;While switching from a logit to an ordered logistic model is straightforward, modeling the censoring implied by legislator absences requires the estimation of additional parameters. To do so, I model absence as a binary outcome in a separate equation as a hurdle model. Intuitively, legislators only show up to vote if they are able to overcome the hurdle of being present. Because in an ideal point model we only want to estimate a single set of person parameters (ideal points), I include an additional set of item (bill) parameters in the hurdle component that signify the way in which being absent on a policy proposal is related to the ideological value of the legislation.&lt;/p&gt;
+&lt;p&gt;The result is a two-stage model that inflates the ideal points by the probability that a legislator is absent on a particular bill. To create this model, I first start again with the essential 2-PL IRT model except that it now allows for cutpoints &lt;span class=&#34;math inline&#34;&gt;\(c_k\)&lt;/span&gt; for the &lt;span class=&#34;math inline&#34;&gt;\(K-1\)&lt;/span&gt; vote outcomes (yes, abstain, no) with &lt;span class=&#34;math inline&#34;&gt;\(\zeta(\cdot)\)&lt;/span&gt; representing the logit function:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+    L(\beta,\alpha,x|Y_{ijk}) = \prod_{i-1}^{I} \prod_{j=1}^{J}
+    \begin{cases} 
+    1 -  \zeta(x_{i}&amp;#39;\beta_j - \alpha_j - c_1) &amp;amp; \text{if } K = 0 \\
+    \zeta(x_{i}&amp;#39;\beta_j - \alpha_j - c_{k-1}) - \zeta(x_{i}&amp;#39;\beta_j - \alpha_j - c_{k})       &amp;amp; \text{if } 0 &amp;lt; k &amp;lt; K, \text{ and} \\
+    \zeta(x_{i}&amp;#39;\beta_j - \alpha_j - c_{k-1}) - 0 &amp;amp; \text{if } k=K
+    \end{cases}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Except for the addition of the vote cutpoints, this model is identical to the standard 2-PL IRT form, with ability parameters &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt;, discriminations &lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt;, and difficulties &lt;span class=&#34;math inline&#34;&gt;\(a_j\)&lt;/span&gt;. The cutpoints carve up the latent space so that as ability rises or falls, the legislator becomes more likely to vote yes or no with abstention falling in between these two categories.&lt;/p&gt;
+&lt;p&gt;This ordered logit has to be embedded in the hurdle model to account for one-way censoring. Suppose that each legislator has a choice &lt;span class=&#34;math inline&#34;&gt;\(r \in \{0,1\}\)&lt;/span&gt; in which &lt;span class=&#34;math inline&#34;&gt;\(r=1\)&lt;/span&gt; if a legislator is absent and &lt;span class=&#34;math inline&#34;&gt;\(r=0\)&lt;/span&gt; otherwise. With this notation, the likelihood of the hurdle model takes the following form:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+    L(\beta,\alpha,X,Q,\gamma,\omega|Y_{k},Y_{r}) = 
+    \prod_{I}^{i=1} \prod_{J}^{j=1}
+    \begin{cases}
+    \zeta(x_{i}&amp;#39;\gamma_j - \omega_j ) &amp;amp; \text{if } r=0, \text{ and} \\
+    (1-\zeta({x_{i}&amp;#39;\gamma_j - \omega_j}))L(\beta,\alpha,X|Y_{k1}) &amp;amp; \text{if } r=1
+    \end{cases}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;For the hurdle model to be able to affect the legislator ideal points, a separate IRT 2-PL model is included to predict the binary outcome of absence or presence. In this secondary model, the &lt;span class=&#34;math inline&#34;&gt;\(\gamma_j\)&lt;/span&gt; discrimination and &lt;span class=&#34;math inline&#34;&gt;\(\omega_j\)&lt;/span&gt; difficulty parameters represent the salience of a particular piece of legislation to an individual legislator &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt;. Only if a bill clears the hurdle of salience will the legislator choose to vote on the legislation, i.e., reach the vote outcome model &lt;span class=&#34;math inline&#34;&gt;\(L(\beta,\alpha,X)\)&lt;/span&gt;. This device allows for the ideal points &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; to adjust for the fact that the decision of a legislator to show up to vote on a particular bill may be strategic instead of random. In addition, this model is more widely applicable to situations in which an ideal point model is employed and missing data may be a function of the persons’ ideal points.&lt;/p&gt;
 &lt;/div&gt;
-
-
-&lt;h2 id=&#34;post-an-article&#34;&gt;Post an article&lt;/h2&gt;
-
-&lt;p&gt;To create a blog/news article:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hugo new post/my-article-name.md
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then edit the newly created file &lt;code&gt;content/post/my-article-name.md&lt;/code&gt; with your full title and content.&lt;/p&gt;
-
-&lt;p&gt;Hugo will automatically generate summaries of posts that appear on the homepage. If you are dissatisfied with an automated summary, you can either limit the summary length by appropriately placing &lt;code&gt;&amp;#60;&amp;#33;&amp;#45;&amp;#45;more&amp;#45;&amp;#45;&amp;#62;&lt;/code&gt; in the article body, or completely override the automated summary by adding a &lt;code&gt;summary&lt;/code&gt; parameter to the &lt;code&gt;+++&lt;/code&gt; preamble such that:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;summary = &amp;quot;Summary of my post.&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To disable commenting for a specific post, you can add &lt;code&gt;disable_comments = true&lt;/code&gt; to the post &lt;code&gt;+++&lt;/code&gt; preamble. Or to disable commenting for all posts, you can either set &lt;code&gt;disqusShortname = &amp;quot;&amp;quot;&lt;/code&gt; or &lt;code&gt;disable_comments = true&lt;/code&gt; in &lt;code&gt;config.toml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;create-a-project&#34;&gt;Create a project&lt;/h2&gt;
-
-&lt;p&gt;To create a project:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hugo new project/my-project-name.md
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then edit the newly created file &lt;code&gt;content/project/my-project-name.md&lt;/code&gt;. Either you can link the project to an external project website by setting the &lt;code&gt;external_link = &amp;quot;http://external-project.com&amp;quot;&lt;/code&gt; variable at the top of the file, or you can add content (below the final &lt;code&gt;+++&lt;/code&gt;) in order to render a project page on your website.&lt;/p&gt;
-
-&lt;h2 id=&#34;create-a-talk&#34;&gt;Create a talk&lt;/h2&gt;
-
-&lt;p&gt;To create a talk:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hugo new talk/my-talk-name.md
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then edit the newly created file &lt;code&gt;content/talk/my-talk-name.md&lt;/code&gt; with your full talk title and details. Note that many of the talk parameters are similar to the publication parameters.&lt;/p&gt;
-
-&lt;h2 id=&#34;manage-node-index-pages&#34;&gt;Manage node index pages&lt;/h2&gt;
-
-&lt;p&gt;The node index pages (e.g. &lt;code&gt;/post/&lt;/code&gt;) are the special pages which list all of your content. They can exist for blog posts, publications, and talks. The homepage widgets will automatically link to the node index pages when you have more items of content than can be displayed in the widget. Therefore, if you don&amp;rsquo;t have much content, you may not see the automatic links yet - but you can also manually link to them using a normal Markdown formatted link in your content.&lt;/p&gt;
-
-&lt;p&gt;You can edit the title and add your own content, such as an introduction, by creating and editing the following content files for the node indexes:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hugo new post/_index.md
-hugo new publication/_index.md
-hugo new talk/_index.md
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then remove all parameters except for &lt;code&gt;title&lt;/code&gt;, &lt;code&gt;math&lt;/code&gt;, &lt;code&gt;highlight&lt;/code&gt;, and &lt;code&gt;date&lt;/code&gt;. Edit the &lt;code&gt;title&lt;/code&gt; parameter as desired and add any content after the &lt;code&gt;+++&lt;/code&gt; preamble/frontmatter ends. For example, you should have something similar to:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;+++
-title = &amp;quot;List of my posts&amp;quot;
-date = &amp;quot;2017-01-01T00:00:00Z&amp;quot;
-math = false
-highlight = false
-+++
-
-Below is an automatically generated list of all my blog posts!
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;removing-content&#34;&gt;Removing content&lt;/h2&gt;
-
-&lt;p&gt;Generally, to remove content, simply delete the relevant file from your &lt;code&gt;content/post&lt;/code&gt;, &lt;code&gt;content/publication&lt;/code&gt;, &lt;code&gt;content/project&lt;/code&gt;, or &lt;code&gt;content/talk&lt;/code&gt; folder.&lt;/p&gt;
-
-&lt;h2 id=&#34;view-your-updated-site&#34;&gt;View your updated site&lt;/h2&gt;
-
-&lt;p&gt;After you have made changes to your site, you can view it by running the &lt;code&gt;hugo server --watch&lt;/code&gt; command and then opening &lt;a href=&#34;http://localhost:1313&#34; target=&#34;_blank&#34;&gt;localhost:1313&lt;/a&gt; in your web browser.&lt;/p&gt;
-
-&lt;h2 id=&#34;deploy-your-site&#34;&gt;Deploy your site&lt;/h2&gt;
-
-&lt;p&gt;Finally, you can build the static website to a &lt;code&gt;public/&lt;/code&gt; folder ready for deployment using the &lt;code&gt;hugo&lt;/code&gt; command.&lt;/p&gt;
-
-&lt;p&gt;You may then deploy your site by copying the &lt;code&gt;public/&lt;/code&gt; directory (by FTP, SFTP, WebDAV, Rsync, git push, etc.) to your production web server.&lt;/p&gt;
-
-&lt;p&gt;Note that running &lt;code&gt;hugo&lt;/code&gt; does not remove any previously generated files before building. Therefore, it&amp;rsquo;s best practice to delete your &lt;code&gt;public/&lt;/code&gt; directory prior to running &lt;code&gt;hugo&lt;/code&gt; to ensure no old or interim files are deployed to your server.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Writing content with Markdown, LaTeX, and Shortcodes</title>
-      <link>http://www.robertkubinec.com/post/writing-markdown-latex/</link>
-      <pubDate>Wed, 20 Apr 2016 10:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/post/writing-markdown-latex/</guid>
-      <description>&lt;p&gt;Content can be written using &lt;a href=&#34;https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet&#34; target=&#34;_blank&#34;&gt;Markdown&lt;/a&gt;, &lt;a href=&#34;https://en.wikibooks.org/wiki/LaTeX/Mathematics&#34; target=&#34;_blank&#34;&gt;LaTeX math&lt;/a&gt;, and &lt;a href=&#34;http://gohugo.io/extras/shortcodes/&#34; target=&#34;_blank&#34;&gt;Hugo Shortcodes&lt;/a&gt;. Additionally, HTML may be used for advanced formatting. This article gives an overview of the most common formatting options.&lt;/p&gt;
-
-&lt;h2 id=&#34;sub-headings&#34;&gt;Sub-headings&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;## Heading 2
-### Heading 3
-#### Heading 4
-##### Heading 5
-###### Heading 6
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;emphasis&#34;&gt;Emphasis&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;Italics with *asterisks* or _underscores_.
-
-Bold with **asterisks** or __underscores__.
-
-Combined emphasis with **asterisks and _underscores_**.
-
-Strikethrough with ~~two tildes~~.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;ordered-lists&#34;&gt;Ordered lists&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;1. First item
-2. Another item
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;unordered-lists&#34;&gt;Unordered lists&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;* First item
-* Another item
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;images&#34;&gt;Images&lt;/h2&gt;
-
-&lt;p&gt;Images may be added to a page by placing them in your &lt;code&gt;static/img/&lt;/code&gt; folder and referencing them using one of the following two notations:&lt;/p&gt;
-
-&lt;p&gt;A general image:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;![alternative text for search engines](/img/screenshot.png)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A numbered figure with caption:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;{{&amp;lt; figure src=&amp;quot;/img/screenshot.png&amp;quot; title=&amp;quot;Figure Caption&amp;quot; &amp;gt;}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;[I&#39;m a link](https://www.google.com)
-[A post]({{&amp;lt; ref &amp;quot;post/hi.md&amp;quot; &amp;gt;}})
-[A publication]({{&amp;lt; ref &amp;quot;publication/hi.md&amp;quot; &amp;gt;}})
-[A project]({{&amp;lt; ref &amp;quot;project/hi.md&amp;quot; &amp;gt;}})
-[Another section]({{&amp;lt; relref &amp;quot;hi.md#who&amp;quot; &amp;gt;}})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;emojis&#34;&gt;Emojis&lt;/h2&gt;
-
-&lt;p&gt;See the &lt;a href=&#34;http://www.webpagefx.com/tools/emoji-cheat-sheet/&#34; target=&#34;_blank&#34;&gt;Emoji cheat sheet&lt;/a&gt; for available emoticons. The following serves as an example, but you should remove the spaces between each emoji name and pair of semicolons:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;I : heart : Academic : smile :
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I ❤️ Academic 😄&lt;/p&gt;
-
-&lt;h2 id=&#34;blockquote&#34;&gt;Blockquote&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; This is a blockquote.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;This is a blockquote.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;footnotes&#34;&gt;Footnotes&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;I have more [^1] to say.
-
-[^1]: Footnote example.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I have more &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; to say.&lt;/p&gt;
-
-&lt;h2 id=&#34;code-highlighting&#34;&gt;Code highlighting&lt;/h2&gt;
-
-&lt;p&gt;Pass the &lt;em&gt;language&lt;/em&gt; of the code, such as &lt;code&gt;python&lt;/code&gt;, as a parameter after three backticks:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;```python
-# Example of code highlighting
-input_string_var = input(&amp;quot;Enter some data: &amp;quot;)
-print(&amp;quot;You entered: {}&amp;quot;.format(input_string_var))
-```
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Result:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Example of code highlighting
-input_string_var = input(&amp;quot;Enter some data: &amp;quot;)
-print(&amp;quot;You entered: {}&amp;quot;.format(input_string_var))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;highlighting-options&#34;&gt;Highlighting options&lt;/h3&gt;
-
-&lt;p&gt;The Academic theme uses &lt;a href=&#34;https://highlightjs.org&#34; target=&#34;_blank&#34;&gt;highlight.js&lt;/a&gt; for source code highlighting, and highlighting is enabled by default for all pages. However, several configuration options are supported that allow finer-grained control over highlight.js.&lt;/p&gt;
-
-&lt;p&gt;The following table lists the supported options for configuring highlight.js, along with their expected type and a short description. A &amp;ldquo;yes&amp;rdquo; in the &lt;strong&gt;config.toml&lt;/strong&gt; column means the value can be set globally in &lt;code&gt;config.toml&lt;/code&gt;, and a &amp;ldquo;yes&amp;rdquo; in the &lt;strong&gt;preamble&lt;/strong&gt; column means that the value can be set locally in a particular page&amp;rsquo;s preamble.&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;option&lt;/th&gt;
-&lt;th&gt;type&lt;/th&gt;
-&lt;th&gt;description&lt;/th&gt;
-&lt;th&gt;config.toml&lt;/th&gt;
-&lt;th&gt;preamble&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;highlight&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;boolean&lt;/td&gt;
-&lt;td&gt;enable/disable highlighting&lt;/td&gt;
-&lt;td&gt;yes&lt;/td&gt;
-&lt;td&gt;yes&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;highlight_languages&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;slice&lt;/td&gt;
-&lt;td&gt;choose additional languages&lt;/td&gt;
-&lt;td&gt;yes&lt;/td&gt;
-&lt;td&gt;yes&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;highlight_style&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;string&lt;/td&gt;
-&lt;td&gt;choose a highlighting style&lt;/td&gt;
-&lt;td&gt;yes&lt;/td&gt;
-&lt;td&gt;no&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;highlight_version&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;string&lt;/td&gt;
-&lt;td&gt;choose the highlight.js version&lt;/td&gt;
-&lt;td&gt;yes&lt;/td&gt;
-&lt;td&gt;no&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h4 id=&#34;option-highlight&#34;&gt;Option &lt;code&gt;highlight&lt;/code&gt;&lt;/h4&gt;
-
-&lt;p&gt;The &lt;code&gt;highlight&lt;/code&gt; option allows enabling or disabling the inclusion of highlight.js, either globally or for a particular page. If the option is unset, it has the same effect as if you had specified &lt;code&gt;highlight = true&lt;/code&gt;. That is, the highlight.js javascript and css files will be included in every page. If you&amp;rsquo;d like to only include highlight.js files on pages that actually require source code highlighting, you can set &lt;code&gt;highlight = false&lt;/code&gt; in &lt;code&gt;config.toml&lt;/code&gt;, and then override it by setting &lt;code&gt;highlight = true&lt;/code&gt; in the preamble of any pages that require source code highlighting. Conversely, you could enable highlighting globally, and disable it locally for pages that do not require it. Here is a table that shows whether highlighting will be enabled for a page, based on the values of &lt;code&gt;highlight&lt;/code&gt; set in &lt;code&gt;config.toml&lt;/code&gt; and/or the page&amp;rsquo;s preamble.&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;config.toml&lt;/th&gt;
-&lt;th&gt;page preamble&lt;/th&gt;
-&lt;th&gt;highlighting enabled for page?&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;unset or true&lt;/td&gt;
-&lt;td&gt;unset or true&lt;/td&gt;
-&lt;td&gt;yes&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;unset or true&lt;/td&gt;
-&lt;td&gt;false&lt;/td&gt;
-&lt;td&gt;no&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;false&lt;/td&gt;
-&lt;td&gt;unset or false&lt;/td&gt;
-&lt;td&gt;no&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;false&lt;/td&gt;
-&lt;td&gt;true&lt;/td&gt;
-&lt;td&gt;yes&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h4 id=&#34;option-highlight-languages&#34;&gt;Option &lt;code&gt;highlight_languages&lt;/code&gt;&lt;/h4&gt;
-
-&lt;p&gt;The &lt;code&gt;highlight_languages&lt;/code&gt; option allows you to specify additional languages that are supported by highlight.js, but are not considered &amp;ldquo;common&amp;rdquo; and therefore are not supported by default. For example, if you want source code highlighting for Go and clojure in all pages, set &lt;code&gt;highlight_languages = [&amp;quot;go&amp;quot;, &amp;quot;clojure&amp;quot;]&lt;/code&gt; in &lt;code&gt;config.toml&lt;/code&gt;. If, on the other hand, you want to enable a language only for a specific page, you can set &lt;code&gt;highlight_languages&lt;/code&gt; in that page&amp;rsquo;s preamble.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code&gt;highlight_languages&lt;/code&gt; options specified in &lt;code&gt;config.toml&lt;/code&gt; and in a page&amp;rsquo;s preamble are additive. That is, if &lt;code&gt;config.toml&lt;/code&gt; contains, &lt;code&gt;highlight_languages = [&amp;quot;go&amp;quot;]&lt;/code&gt; and the page&amp;rsquo;s preamble contains &lt;code&gt;highlight_languages = [&amp;quot;ocaml&amp;quot;]&lt;/code&gt;, then javascript files for &lt;em&gt;both&lt;/em&gt; go and ocaml will be included for that page.&lt;/p&gt;
-
-&lt;p&gt;If the &lt;code&gt;highlight_languages&lt;/code&gt; option is set, then the corresponding javascript files will be served from the &lt;a href=&#34;https://cdnjs.com/libraries/highlight.js/&#34; target=&#34;_blank&#34;&gt;cdnjs server&lt;/a&gt;. To see a list of available languages, visit the &lt;a href=&#34;https://cdnjs.com/libraries/highlight.js/&#34; target=&#34;_blank&#34;&gt;cdnjs page&lt;/a&gt; and search for links with the word &amp;ldquo;languages&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code&gt;highlight_languages&lt;/code&gt; option provides an easy and convenient way to include support for additional languages to be severed from a CDN. If serving unmodified files from cdnjs doesn&amp;rsquo;t meet your needs, you can include javascript files for additional language support via one of the methods described in the &lt;a href=&#34;http://www.robertkubinec.com/post/getting-started/#third-party-and-local-scripts-js&#34; target=&#34;_blank&#34;&gt;getting started guide&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h4 id=&#34;option-highlight-style&#34;&gt;Option &lt;code&gt;highlight_style&lt;/code&gt;&lt;/h4&gt;
-
-&lt;p&gt;The &lt;code&gt;highlight_style&lt;/code&gt; option allows you to select an alternate css style for highlighted code. For example, if you wanted to use the solarized-dark style, you could set &lt;code&gt;highlight_style = &amp;quot;solarized-dark&amp;quot;&lt;/code&gt; in &lt;code&gt;config.toml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;If the &lt;code&gt;highlight_style&lt;/code&gt; option is unset, the default is to use the file &lt;code&gt;/css/highlight.min.css&lt;/code&gt;, either the one provided by the Academic theme, or else the one in your local &lt;code&gt;static&lt;/code&gt; directory.  The &lt;code&gt;/css/highlight.min.css&lt;/code&gt; file provided by Academic is equivalent to the &lt;code&gt;github&lt;/code&gt; style from highlight.js.&lt;/p&gt;
-
-&lt;p&gt;If the &lt;code&gt;highlight_style&lt;/code&gt; option &lt;em&gt;is&lt;/em&gt; set, then &lt;code&gt;/css/highlight.min.css&lt;/code&gt; is ignored, and the corresponding css file will be served from the &lt;a href=&#34;https://cdnjs.com/libraries/highlight.js/&#34; target=&#34;_blank&#34;&gt;cdnjs server&lt;/a&gt;. To see a list of available styles, visit the &lt;a href=&#34;https://cdnjs.com/libraries/highlight.js/&#34; target=&#34;_blank&#34;&gt;cdnjs page&lt;/a&gt; and search for links with the word &amp;ldquo;styles&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;See the &lt;a href=&#34;https://highlightjs.org/static/demo/&#34; target=&#34;_blank&#34;&gt;highlight.js demo page&lt;/a&gt; for examples of available styles.&lt;/p&gt;
-
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;p&gt;Not all styles listed on the &lt;a href=&#34;https://highlightjs.org/static/demo/&#34; target=&#34;_blank&#34;&gt;highlight.js demo page&lt;/a&gt; are available from the &lt;a href=&#34;https://cdnjs.com/libraries/highlight.js/&#34; target=&#34;_blank&#34;&gt;cdnjs server&lt;/a&gt;. If you want to use a style that is not served by cdnjs, just leave &lt;code&gt;highlight_style&lt;/code&gt; unset, and place the corresponding css file in &lt;code&gt;/static/css/highlight.min.css&lt;/code&gt;.&lt;/p&gt;
-
+&lt;div id=&#34;model-simulation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Model Simulation&lt;/h2&gt;
+&lt;p&gt;To identify the model, I placed &lt;span class=&#34;math inline&#34;&gt;\(N(0,1)\)&lt;/span&gt; parameters on the &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; ideal points and additional polarity constraints on either the ideal points &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; or the discrimination parameters &lt;span class=&#34;math inline&#34;&gt;\(\gamma_j\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\alpha_j\)&lt;/span&gt;. As a further restriction, I constrain one of the &lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt; to equal zero. These are the standard set of restrictions included in &lt;code&gt;idealstan&lt;/code&gt;, although the scales of parameters can be modified. The full set of priors is as follows:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+        c_k - c_{k-1} \sim N(0,5)\\
+        \gamma_j \sim N(0,2)\\
+        \omega_j \sim N(0,5)\\
+        \beta_j \sim N(0,2)\\
+        \alpha_j \sim N(0,5)\\
+        x_i \sim N(0,1)
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;span class=&#34;math inline&#34;&gt;\(c_k\)&lt;/span&gt; parameters are the cutpoints for the &lt;span class=&#34;math inline&#34;&gt;\(K-1\)&lt;/span&gt; ordinal outcomes. They are given a weakly informative prior on the differences between the cutpoints (see the prior help file in the Stan Development Github site). The rest of the priors are arbitrary as the scale of the latent variables is fixed only in the priors themselves.&lt;/p&gt;
+&lt;p&gt;To demonstrate the package, I first generate data from this data-generating process using a function &lt;code&gt;id_sim_gen()&lt;/code&gt; built into &lt;code&gt;idealstan&lt;/code&gt;:&lt;/p&gt;
+&lt;div id=&#34;htmlwidget-1&#34; style=&#34;width:100%;height:auto;&#34; class=&#34;datatables html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-1&#34;&gt;{&#34;x&#34;:{&#34;filter&#34;:&#34;none&#34;,&#34;data&#34;:[[&#34;1&#34;,&#34;2&#34;,&#34;3&#34;,&#34;4&#34;,&#34;5&#34;,&#34;6&#34;],[4,1,1,4,4,3],[4,1,1,4,2,3],[4,1,4,3,1,4],[4,4,4,1,4,3],[3,3,1,4,4,2],[3,4,3,1,1,3],[3,3,3,2,4,3],[3,4,4,1,2,1],[1,1,1,4,4,3],[3,3,4,3,1,3]],&#34;container&#34;:&#34;&lt;table class=\&#34;display\&#34;&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt; &lt;\/th&gt;\n      &lt;th&gt;1&lt;\/th&gt;\n      &lt;th&gt;2&lt;\/th&gt;\n      &lt;th&gt;3&lt;\/th&gt;\n      &lt;th&gt;4&lt;\/th&gt;\n      &lt;th&gt;5&lt;\/th&gt;\n      &lt;th&gt;6&lt;\/th&gt;\n      &lt;th&gt;7&lt;\/th&gt;\n      &lt;th&gt;8&lt;\/th&gt;\n      &lt;th&gt;9&lt;\/th&gt;\n      &lt;th&gt;10&lt;\/th&gt;\n    &lt;\/tr&gt;\n  &lt;\/thead&gt;\n&lt;\/table&gt;&#34;,&#34;options&#34;:{&#34;columnDefs&#34;:[{&#34;className&#34;:&#34;dt-right&#34;,&#34;targets&#34;:[1,2,3,4,5,6,7,8,9,10]},{&#34;orderable&#34;:false,&#34;targets&#34;:0}],&#34;order&#34;:[],&#34;autoWidth&#34;:false,&#34;orderClasses&#34;:false},&#34;selection&#34;:{&#34;mode&#34;:&#34;multiple&#34;,&#34;selected&#34;:null,&#34;target&#34;:&#34;row&#34;}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;p&gt;In this matrix, the legislators (persons) are represented by the rows and the bills (items) by the columns. The ordinal vote outcomes are numbered 1 to 3 (1=No,2=Abstain,3=Yes) and 4 represents absence.&lt;/p&gt;
+&lt;p&gt;I can then take this simulated data and put it into the &lt;code&gt;id_estimate&lt;/code&gt; function. I also use the true values of the legislator ideal points &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; for polarity constraints in order to be able to return the “true” latent variables. The &lt;code&gt;id_estimate&lt;/code&gt; function loads pre-compiled stan code a la &lt;a href=&#34;https://cran.r-project.org/web/packages/rstantools/index.html&#34;&gt;&lt;code&gt;rstantools&lt;/code&gt;&lt;/a&gt; and then returns an R object containing a compiled stan model.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;true_legis &amp;lt;- ord_ideal_sim@simul_data$true_person
+high_leg &amp;lt;- sort(true_legis,decreasing = T,index.return=T)
+low_leg &amp;lt;- sort(true_legis,index.return=T)
+
+ord_ideal_est &amp;lt;- id_estimate(idealdata=ord_ideal_sim,
+                             model_type=4,
+                             fixtype=&amp;#39;constrained&amp;#39;,
+                             restrict_type=&amp;#39;constrain_twoway&amp;#39;,
+                             restrict_ind_high = high_leg$ix[1:2],
+                             restrict_ind_low=low_leg$ix[1:2],
+                             refresh=500)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For testing simulation results, the package contains a residual plot for looking at differences between true and estimated values which are stored in the R object:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/check_true-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The recovery of the true parameters is not perfect, but generally the errors sum to zero across the parameters. Recovering the true parameters is not usually of great interest in a latent variable model as the scale and rotation of the true values is rather arbitrary. However, this exercise is a basic test of the Stan model’s correspondence with the simulated data.&lt;/p&gt;
 &lt;/div&gt;
-
-
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;p&gt;If you don&amp;rsquo;t want to change the default style that ships with Academic but you do want the style file served from the &lt;a href=&#34;https://cdnjs.com/libraries/highlight.js/&#34; target=&#34;_blank&#34;&gt;cdnjs server&lt;/a&gt;, set &lt;code&gt;highlight_style = &amp;quot;github&amp;quot;&lt;/code&gt; in &lt;code&gt;config.toml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;/div&gt;
-
-
-&lt;p&gt;The &lt;code&gt;highlight_style&lt;/code&gt; option is only recognized when set in &lt;code&gt;config.toml&lt;/code&gt;. Setting &lt;code&gt;highlight_style&lt;/code&gt; in your page&amp;rsquo;s preamble has no effect.&lt;/p&gt;
-
-&lt;h4 id=&#34;option-highlight-version&#34;&gt;Option &lt;code&gt;highlight_version&lt;/code&gt;&lt;/h4&gt;
-
-&lt;p&gt;The &lt;code&gt;highlight_version&lt;/code&gt; option, as the name implies, allows you to select the version of highlight.js you want to use. The default value is &amp;ldquo;9.9.0&amp;rdquo;. The &lt;code&gt;highlight_version&lt;/code&gt; option is only recognized when set in &lt;code&gt;config.toml&lt;/code&gt;. Setting &lt;code&gt;highlight_version&lt;/code&gt; in your page&amp;rsquo;s preamble has no effect.&lt;/p&gt;
-
-&lt;h2 id=&#34;twitter-tweet&#34;&gt;Twitter tweet&lt;/h2&gt;
-
-&lt;p&gt;To include a single tweet, pass the tweet’s ID from the tweet&amp;rsquo;s URL as parameter to the shortcode:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;{{&amp;lt; tweet 666616452582129664 &amp;gt;}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;youtube&#34;&gt;Youtube&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;{{&amp;lt; youtube w7Ft2ymGmfc &amp;gt;}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;vimeo&#34;&gt;Vimeo&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;{{&amp;lt; vimeo 146022717 &amp;gt;}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;github-gist&#34;&gt;GitHub gist&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;{{&amp;lt; gist USERNAME GIST-ID  &amp;gt;}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;speaker-deck&#34;&gt;Speaker Deck&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;{{&amp;lt; speakerdeck 4e8126e72d853c0060001f97 &amp;gt;}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;rm-latex-math&#34;&gt;$\rm \LaTeX$ math&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-TeX&#34;&gt;$$\left [ – \frac{\hbar^2}{2 m} \frac{\partial^2}{\partial x^2} + V \right ] \Psi = i \hbar \frac{\partial}{\partial t} \Psi$$
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;$$\left [ – \frac{\hbar^2}{2 m} \frac{\partial^2}{\partial x^2} + V \right ] \Psi = i \hbar \frac{\partial}{\partial t} \Psi$$&lt;/p&gt;
-
-&lt;p&gt;Alternatively, inline math can be written by wrapping the formula with only a single &lt;code&gt;$&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;This is inline: $\mathbf{y} = \mathbf{X}\boldsymbol\beta + \boldsymbol\varepsilon$
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is inline: $\mathbf{y} = \mathbf{X}\boldsymbol\beta + \boldsymbol\varepsilon$&lt;/p&gt;
-
-&lt;h2 id=&#34;table&#34;&gt;Table&lt;/h2&gt;
-
-&lt;p&gt;Code:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-Markdown&#34;&gt;| Command           | Description                    |
-| ------------------| ------------------------------ |
-| `hugo`            | Build your website.            |
-| `hugo serve -w`   | View your website.             |
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Result:&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Command&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;hugo&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Build your website.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;hugo serve -w&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;View your website.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&#34;alerts&#34;&gt;Alerts&lt;/h2&gt;
-
-&lt;p&gt;Alerts are a useful feature that add side content such as tips, notes, or warnings to your articles. They are especially handy when writing educational tutorial-style articles. Use the corresponding shortcodes to enable alerts inside your content:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;{{% alert note %}}
-Here&#39;s a tip or note...
-{{% /alert %}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This will display the following &lt;em&gt;note&lt;/em&gt; block:&lt;/p&gt;
-
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;p&gt;Here&amp;rsquo;s a tip or note&amp;hellip;&lt;/p&gt;
-
-&lt;/div&gt;
-
-
-&lt;pre&gt;&lt;code&gt;{{% alert warning %}}
-Here&#39;s some important information...
-{{% /alert %}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This will display the following &lt;em&gt;warning&lt;/em&gt; block:&lt;/p&gt;
-
-&lt;div class=&#34;alert alert-warning&#34;&gt;
-  &lt;p&gt;Here&amp;rsquo;s some important information&amp;hellip;&lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;Footnote example.
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>http://www.robertkubinec.com/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>http://www.robertkubinec.com/post/2015-07-23-r-rmarkdown/</guid>
-      <description>&lt;div id=&#34;r-markdown&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;R Markdown&lt;/h1&gt;
-&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can embed an R code chunk like this:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(cars)
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-fit &amp;lt;- lm(dist ~ speed, data = cars)
-fit
+&lt;div id=&#34;empirical-example-the-polarization-of-coffee&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Empirical Example: The Polarization of Coffee&lt;/h2&gt;
+&lt;p&gt;To demonstrate the model’s functionality, I first use a dataset of ordinal rankings draw from Amazon food product reviews. &lt;a name=cite-mcauley2013&gt;&lt;/a&gt;&lt;a href=&#34;#bib-mcauley2013&#34;&gt;McAuley and Leskovec (2013)&lt;/a&gt; collected over 500,000 Amazon food reviews from 1999 to 2012 which are all coded on the 1 to 5 ranking scale that users can post on each product. I focus on a subset of this data by collecting all the reviews that mention the word “coffee” at least a handful of times.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;just_coffee &amp;lt;- readRDS(&amp;#39;just_coffee.rds&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ideal point models use variation between products and users in reviews to identify the latent space. For these reasons, little information is contributed by products and/or users that have very few reviews, and we can remove them from the data first to reduce the dimensionality of the data. Because &lt;code&gt;idealstan&lt;/code&gt; is a full Bayesian model, these users and products do not cause any statistical problems, but they will slow estimation considerably as a large number of users only review one or two products.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;coffee_count_prod &amp;lt;- group_by(just_coffee,ProductId) %&amp;gt;% summarize(tot_unique=length(unique(UserId))) %&amp;gt;% 
+  filter(tot_unique&amp;lt;30)
+coffee_count_user &amp;lt;- group_by(just_coffee,UserId) %&amp;gt;% summarize(tot_unique=length(unique(ProductId))) %&amp;gt;% 
+  filter(tot_unique&amp;lt;3)
+just_coffee &amp;lt;- anti_join(just_coffee,coffee_count_prod,by=&amp;#39;ProductId&amp;#39;) %&amp;gt;% 
+  anti_join(coffee_count_user,by=&amp;#39;UserId&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The data is currently in long format. To bring the data into &lt;code&gt;idealstan&lt;/code&gt;, it first must be translated to wide format in which each item (product) is a column and each person (user) is a row. For this model, we will drop missing data as we will focus solely on the model’s ordinal rankings without accounting for the fact that users do not have reviews for all products.&lt;/p&gt;
+&lt;p&gt;Even with inactive users removed from the data, this model is quite large with 11269 users and 429 products. However, we can take advantage of variational inference in Stan to obtain approximate posterior estimates in a reasonable amount of time. We will also take advantage of &lt;code&gt;idealstan&lt;/code&gt;’s use of variational inference for automatic model identification by running a non-identified (i.e., no constraints) model first, determining which of the users has a very high ideal point, and then constraining that ideal point in the final fitted model.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;coffee_model &amp;lt;- id_estimate(idealdata=coffee_data,
+                            model_type=3,
+                            fixtype=&amp;#39;vb&amp;#39;,
+                            restrict_ind_high = 1,
+                            restrict_params=&amp;#39;person&amp;#39;,
+                            auto_id = F,
+                            use_vb=T)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## ------------------------------------------------------------
+## EXPERIMENTAL ALGORITHM:
+##   This procedure has not been thoroughly tested and may be unstable
+##   or buggy. The interface is subject to change.
+## ------------------------------------------------------------
 ## 
-## Call:
-## lm(formula = dist ~ speed, data = cars)
 ## 
-## Coefficients:
-## (Intercept)        speed  
-##     -17.579        3.932&lt;/code&gt;&lt;/pre&gt;
+## 
+## Gradient evaluation took 0.065 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 650 seconds.
+## Adjust your expectations accordingly!
+## 
+## 
+## Begin eta adaptation.
+## Iteration:   1 / 250 [  0%]  (Adaptation)
+## Iteration:  50 / 250 [ 20%]  (Adaptation)
+## Iteration: 100 / 250 [ 40%]  (Adaptation)
+## Iteration: 150 / 250 [ 60%]  (Adaptation)
+## Iteration: 200 / 250 [ 80%]  (Adaptation)
+## Success! Found best value [eta = 1] earlier than expected.
+## 
+## Begin stochastic gradient ascent.
+##   iter       ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
+##    100    -5e+004             1.000            1.000
+##    200    -5e+004             0.514            1.000
+##    300    -5e+004             0.358            0.047
+##    400    -5e+004             0.270            0.047
+##    500    -5e+004             0.217            0.029
+##    600    -5e+004             0.182            0.029
+##    700    -5e+004             0.157            0.007   MEDIAN ELBO CONVERGED
+## 
+## Drawing a sample of size 1000 from the approximate posterior... 
+## COMPLETED.
+## ------------------------------------------------------------
+## EXPERIMENTAL ALGORITHM:
+##   This procedure has not been thoroughly tested and may be unstable
+##   or buggy. The interface is subject to change.
+## ------------------------------------------------------------
+## 
+## 
+## 
+## Gradient evaluation took 0.04 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 400 seconds.
+## Adjust your expectations accordingly!
+## 
+## 
+## Begin eta adaptation.
+## Iteration:   1 / 250 [  0%]  (Adaptation)
+## Iteration:  50 / 250 [ 20%]  (Adaptation)
+## Iteration: 100 / 250 [ 40%]  (Adaptation)
+## Iteration: 150 / 250 [ 60%]  (Adaptation)
+## Iteration: 200 / 250 [ 80%]  (Adaptation)
+## Success! Found best value [eta = 1] earlier than expected.
+## 
+## Begin stochastic gradient ascent.
+##   iter       ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
+##    100    -4e+005             1.000            1.000
+##    200    -5e+004             4.393            7.786
+##    300    -5e+004             2.930            1.000
+##    400    -5e+004             2.208            1.000
+##    500    -5e+004             1.767            0.042
+##    600    -5e+004             1.476            0.042
+##    700    -5e+004             1.265            0.017
+##    800    -5e+004             1.108            0.017
+##    900    -5e+004             0.985            0.006   MEDIAN ELBO CONVERGED
+## 
+## Drawing a sample of size 1000 from the approximate posterior... 
+## COMPLETED.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What is of primary interest in this model are the discrimination parameters for the products. The discriminations will tell us which coffee products tend to divide the users most strongly into two poles as the model is one-dimensional. We can first look at the distribution of discriminations via a histogram:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;id_plot_all_hist(coffee_model,params = &amp;#39;regular_discrim&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/plot_discrim-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;To gain a sense of how polarizing these products, we can plot the product mid-point, or the point at which a user is indifferent between one rating score and a higher rating score, over the ideal point distribution. I color the user points by their actual ratings:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;id_plot_legis(coffee_model,group_color=F,group_overlap = T,
+              person_labels=F,person_ci_alpha = .05,
+              item_plot=429,
+              group_labels=F,
+              point_size=2,
+              show_score = c(&amp;#39;1&amp;#39;,&amp;#39;2&amp;#39;,&amp;#39;3&amp;#39;,&amp;#39;4&amp;#39;,&amp;#39;5&amp;#39;),
+              text_size_group = 4)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/high_pos_discrim-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As can be seen, the product midpoints nearly perfectly segment the user base. We also a large number of 1s and 5s in the observed ratings. This distribution shows that users tend to be very divided on this product, and also that their disagreement over the product is itself a reflection of an underlying dimension, their ideal points.&lt;/p&gt;
+&lt;p&gt;Finally, I include here the top 10 most polarizing (highly discriminative) products from each end of the ideal point spectrum.&lt;/p&gt;
+&lt;p&gt;First, the top 10 most positive discrimination:&lt;/p&gt;
+&lt;div id=&#34;htmlwidget-2&#34; style=&#34;width:100%;height:auto;&#34; class=&#34;datatables html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-2&#34;&gt;{&#34;x&#34;:{&#34;filter&#34;:&#34;none&#34;,&#34;data&#34;:[[&#34;1&#34;,&#34;2&#34;,&#34;3&#34;,&#34;4&#34;,&#34;5&#34;,&#34;6&#34;,&#34;7&#34;,&#34;8&#34;,&#34;9&#34;,&#34;10&#34;],[&#34;Kicking Horse Coffee 454 Horse Power Dark, Whole Bean&#34;,&#34;Amazing Grass Green Superfood Organic Powder&#34;,&#34;Starbucks Via Ready Brew Instant Coffee&#34;,&#34;Stephen&#39;s Gourmet Hot Cocoa, Candycane Cocoa&#34;,&#34;Prince of Peace Organic Tea, Oolong&#34;,&#34;NOW Foods Erythritol Natural Sweetener&#34;,&#34;illy Cappucino, 12 pack&#34;,&#34;Nestle Hot Cocoa Mix&#34;,&#34;Better than Milk Vegan Soy Powder&#34;,&#34;Ghirardelli Chocolate Sweet Ground Chocolate &amp;amp; Cocoa&#34;],[7.87259,7.864585,7.80567,7.805575,7.770375,7.770345,7.727985,7.33822,7.33797,7.28447]],&#34;container&#34;:&#34;&lt;table class=\&#34;display\&#34;&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt; &lt;\/th&gt;\n      &lt;th&gt;Product Description&lt;\/th&gt;\n      &lt;th&gt;Discrimination&lt;\/th&gt;\n    &lt;\/tr&gt;\n  &lt;\/thead&gt;\n&lt;\/table&gt;&#34;,&#34;options&#34;:{&#34;columnDefs&#34;:[{&#34;className&#34;:&#34;dt-right&#34;,&#34;targets&#34;:2},{&#34;orderable&#34;:false,&#34;targets&#34;:0}],&#34;order&#34;:[],&#34;autoWidth&#34;:false,&#34;orderClasses&#34;:false},&#34;selection&#34;:{&#34;mode&#34;:&#34;multiple&#34;,&#34;selected&#34;:null,&#34;target&#34;:&#34;row&#34;}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;p&gt;Second, the top 10 least positive negative discrimination:&lt;/p&gt;
+&lt;div id=&#34;htmlwidget-3&#34; style=&#34;width:100%;height:auto;&#34; class=&#34;datatables html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-3&#34;&gt;{&#34;x&#34;:{&#34;filter&#34;:&#34;none&#34;,&#34;data&#34;:[[&#34;1&#34;,&#34;2&#34;,&#34;3&#34;,&#34;4&#34;,&#34;5&#34;,&#34;6&#34;,&#34;7&#34;,&#34;8&#34;,&#34;9&#34;,&#34;10&#34;],[&#34;Melitta Cafe de Europa Gourmet Coffee&#34;,&#34;McCann&#39;s Steel Cut Irish Oatmeal&#34;,&#34;Stash Tea Gunpowder Green Loose Leaf Tea&#34;,&#34;Nutiva Organic Coconut Oil&#34;,&#34;Stash Tea Company English Breakfast&#34;,&#34;Equal Exchange Organic Coffee, Mind Body Soul, Whole Bean&#34;,&#34;Ghirardelli Premium Hot Beverage Mix, White Mocha, 19-Ounce Cans&#34;,&#34;Victorian Inn Instant Hot Cappucino, French Vanilla&#34;,&#34;Medaglia Doro Instant Espresso&#34;,&#34;Yogi Tea, Green Tea Super Antioxidant&#34;],[-9.79306,-9.785615,-9.70132,-9.616965,-7.77101,-7.75944,-7.74106,-7.73298,-7.17082,-7.13721]],&#34;container&#34;:&#34;&lt;table class=\&#34;display\&#34;&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt; &lt;\/th&gt;\n      &lt;th&gt;Product Description&lt;\/th&gt;\n      &lt;th&gt;Discrimination&lt;\/th&gt;\n    &lt;\/tr&gt;\n  &lt;\/thead&gt;\n&lt;\/table&gt;&#34;,&#34;options&#34;:{&#34;columnDefs&#34;:[{&#34;className&#34;:&#34;dt-right&#34;,&#34;targets&#34;:2},{&#34;orderable&#34;:false,&#34;targets&#34;:0}],&#34;order&#34;:[],&#34;autoWidth&#34;:false,&#34;orderClasses&#34;:false},&#34;selection&#34;:{&#34;mode&#34;:&#34;multiple&#34;,&#34;selected&#34;:null,&#34;target&#34;:&#34;row&#34;}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;p&gt;While a full interpretation of these results would require significant work at examining the full range of products and their relevant discrimination scores, what is clear is that positive discrimination tends to have more large brands of coffee, including Starbucks and Illy, while the negative discrimination products tend to b esmaller brands, such as Melitta Cafe and Equal Exchange Organic Coffee. The most interesting finding in this analysis is that Ghirardelli products are at both ends of the scale: one type of Ghirardelli powdered drink, Ghirardelli Chocolate, has high positive discrimination, while Ghirardelli White Mocha has high negative discrimination. Intuitivelly, these products are appealing to different reviewers with very diverging preferences.&lt;/p&gt;
+&lt;p&gt;In the next section, I apply the ideal point model to a more traditional domain–the U.S. Congress–and also examine the role of including missing data via inflation.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;including-plots&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Including Plots&lt;/h1&gt;
-&lt;p&gt;You can also embed plots. See Figure &lt;a href=&#34;#fig:pie&#34;&gt;1&lt;/a&gt; for example:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c(&amp;#39;Sky&amp;#39;, &amp;#39;Sunny side of pyramid&amp;#39;, &amp;#39;Shady side of pyramid&amp;#39;),
-  col = c(&amp;#39;#0292D8&amp;#39;, &amp;#39;#F7EA39&amp;#39;, &amp;#39;#C4B632&amp;#39;),
-  init.angle = -50, border = NA
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;http://www.robertkubinec.com/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;
-Figure 1: A fancy pie chart.
-&lt;/p&gt;
+&lt;div id=&#34;empirical-example-114th-senate&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Empirical Example: 114th Senate&lt;/h2&gt;
+&lt;p&gt;As an empirical example of the model, I use data from the &lt;a href=&#34;http://www.voteview.com&#34; class=&#34;uri&#34;&gt;http://www.voteview.com&lt;/a&gt; website on the voting record of the 114th US Senate. This dataset comes with the &lt;code&gt;idealstan&lt;/code&gt; package, and I then recode the data to correspond to a standard R matrix. However, because abstentions rarely happen in the US Congress, I do not include abstentions in this model and instead estimate a standard binary IRT 2-PL with inflation for missing data (absences). I then pass the matrix of vote records to the &lt;code&gt;id_make&lt;/code&gt; function to create an object suitable for running the model.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/use_senate-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Given a suitable object from &lt;code&gt;id_make&lt;/code&gt;, the &lt;code&gt;id_estimate&lt;/code&gt; function can estimate a variety of IRT ideal point models, including 2-PL, ordinal, hierarchical and dynamic IRT (using random-walk priors). For this run we set the &lt;code&gt;model_type&lt;/code&gt; parameter to &lt;code&gt;2&lt;/code&gt;, which represents a 2-PL model with absence inflation. Because this dataset is of a significant size, I use variational inference instead of the full sampler to demonstrate its use. I do not, however, use the automatic identification option &lt;code&gt;auto_id&lt;/code&gt; because it is relatively easy to constrain particular legislator ideal points for the Senate. In this case, I constrain Ben Sasse, Marco Rubio, Berni Sanders, Ted Cruz, Harry Reid and Elizabeth Warren, all senators with pronounced ideological views.&lt;/p&gt;
+&lt;p&gt;After estimating the model, I can look at a graphical display of the ideal points with the &lt;code&gt;id_plot&lt;/code&gt; function. The &lt;code&gt;id_plot&lt;/code&gt; function produces a &lt;code&gt;ggplot2&lt;/code&gt; object which can be further modified. The legislators are given colors based on their party affiliation. The general shape of the ideal point distribution reflects the nature of polarization in the US Congress, with relatively few moderates near the center of the distribution.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## ------------------------------------------------------------
+## EXPERIMENTAL ALGORITHM:
+##   This procedure has not been thoroughly tested and may be unstable
+##   or buggy. The interface is subject to change.
+## ------------------------------------------------------------
+## 
+## 
+## 
+## Gradient evaluation took 0.029 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 290 seconds.
+## Adjust your expectations accordingly!
+## 
+## 
+## Begin eta adaptation.
+## Iteration:   1 / 250 [  0%]  (Adaptation)
+## Iteration:  50 / 250 [ 20%]  (Adaptation)
+## Iteration: 100 / 250 [ 40%]  (Adaptation)
+## Iteration: 150 / 250 [ 60%]  (Adaptation)
+## Iteration: 200 / 250 [ 80%]  (Adaptation)
+## Success! Found best value [eta = 1] earlier than expected.
+## 
+## Begin stochastic gradient ascent.
+##   iter       ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
+##    100    -2e+004             1.000            1.000
+##    200    -2e+004             0.506            1.000
+##    300    -2e+004             0.338            0.012
+##    400    -2e+004             0.254            0.012
+##    500    -2e+004             0.203            0.003   MEDIAN ELBO CONVERGED
+## 
+## Drawing a sample of size 1000 from the approximate posterior... 
+## COMPLETED.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/run_114_model-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We can also plot the bill (item) midpoints as a line of indifference that we overlay on top of the ideal points.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;id_plot(sen_est,person_ci_alpha=.1,item_plot=205,
+        group_labels=T,
+        abs_and_reg=&amp;#39;Vote Points&amp;#39;) + scale_colour_brewer(type=&amp;#39;qual&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/bill_plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;For this particular piece of legislation, the midpoint is right in the middle of the ideal point distribution, showing that the bill has very high discrimination. Also, the rug lines at the bottom of the plot, which show the HPD for the midpoint, indicate that the model is uncertain about the votes of only a handful of Senators on this bill.&lt;/p&gt;
+&lt;p&gt;We can similarly examine the absence midpoint for the same bill, which signifies the place on the ideal point spectrum at which a legislator is indifferent from showing up to vote. In this case, only very conservative Republicans chose not to show up to vote.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/abs_bill_plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We can use the bill absence parameters to also see which bills showed the highest discrimination in terms of absences, or in other words, for which bills did the absence of legislators signify that they intentionally did not show up? To do this, I sort the discrimination parameters from the underlying Stan object and then merge them with the bill labels from voteview.org.&lt;/p&gt;
+&lt;p&gt;First we can look at the top 10 bills with liberal/Democrat absence discrimination:&lt;/p&gt;
+&lt;div id=&#34;htmlwidget-4&#34; style=&#34;width:100%;height:auto;&#34; class=&#34;datatables html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-4&#34;&gt;{&#34;x&#34;:{&#34;filter&#34;:&#34;none&#34;,&#34;data&#34;:[[&#34;1&#34;,&#34;2&#34;,&#34;3&#34;,&#34;4&#34;,&#34;5&#34;,&#34;6&#34;,&#34;7&#34;,&#34;8&#34;,&#34;9&#34;,&#34;10&#34;],[&#34;To limit the availability of amounts authorized to be appropriated for overseas contingency operations pending relief from the spending limits under the Budget Control Act of 2011.&#34;,&#34;To strengthen the Justice for Victims of Trafficking Act by incorporating additional bipartisan amendments.&#34;,&#34;To protect information that is reasonably believed to be personal information or information that identifies a specific person.&#34;,&#34;To strike the FOIA exemption.&#34;,&#34;To improve the bill.&#34;,&#34;To improve the requirements relating to removal of personal information from cyber threat indicators before sharing.&#34;,&#34;An original bill to improve cybersecurity in the United States through enhanced sharing of information about cybersecurity threats, and for other purposes.&#34;,&#34;To exempt from the capability and process within the Department of Homeland Security communication between a private entity and the Federal Bureau of Investigation or the United States Secret Service regarding cybersecurity threats.&#34;,&#34;To improve the definitions of cybersecurity threat and cyber threat indicator.&#34;,&#34;To modify section105 to require DHS to review all cyber threat indicators and countermeasures in order to remove certain personal information.&#34;],[3.95683,3.6066,3.58815,3.560535,3.50081,3.49607,3.06222,3.007515,2.90706,2.897515]],&#34;container&#34;:&#34;&lt;table class=\&#34;display\&#34;&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt; &lt;\/th&gt;\n      &lt;th&gt;Bill Description&lt;\/th&gt;\n      &lt;th&gt;Absence Discrimination&lt;\/th&gt;\n    &lt;\/tr&gt;\n  &lt;\/thead&gt;\n&lt;\/table&gt;&#34;,&#34;options&#34;:{&#34;columnDefs&#34;:[{&#34;className&#34;:&#34;dt-right&#34;,&#34;targets&#34;:2},{&#34;orderable&#34;:false,&#34;targets&#34;:0}],&#34;order&#34;:[],&#34;autoWidth&#34;:false,&#34;orderClasses&#34;:false},&#34;selection&#34;:{&#34;mode&#34;:&#34;multiple&#34;,&#34;selected&#34;:null,&#34;target&#34;:&#34;row&#34;}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;p&gt;Interestingly, Democrats appeared to be strategically absent most often on bills about climate change and the Keystone XL pipeline.&lt;/p&gt;
+&lt;p&gt;For conseratives the bills are as follows:&lt;/p&gt;
+&lt;div id=&#34;htmlwidget-5&#34; style=&#34;width:100%;height:auto;&#34; class=&#34;datatables html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-5&#34;&gt;{&#34;x&#34;:{&#34;filter&#34;:&#34;none&#34;,&#34;data&#34;:[[&#34;1&#34;,&#34;2&#34;,&#34;3&#34;,&#34;4&#34;,&#34;5&#34;,&#34;6&#34;,&#34;7&#34;,&#34;8&#34;,&#34;9&#34;,&#34;10&#34;],[&#34;To provide limits on the designation of new federally protected land.&#34;,&#34;To ensure that oil transported through the Keystone XL pipeline into the United States is used to reduce United States dependence on Middle Eastern oil.&#34;,&#34;To express the sense of Congress regarding climate change.&#34;,&#34;To express the sense of the Senate that climate change is real and not a hoax.&#34;,&#34;To express the sense of Congress regarding federally protected land.&#34;,&#34;To express the sense of Congress regarding climate change.&#34;,&#34;To promote energy efficiency.&#34;,&#34;To continue cleaning up fields and streams while protecting neighborhoods, generating affordable energy, and creating jobs.&#34;,&#34;To conform citizen suits under the Endangered Species Act of 1973.&#34;,&#34;To require the use of iron, steel, and manufactured goods produced in the United States in the construction of the Keystone XL Pipeline and facilities.&#34;],[-1.744565,-1.730235,-1.50419,-1.503705,-1.489765,-1.485045,-1.483415,-1.47444,-1.46497,-1.435395]],&#34;container&#34;:&#34;&lt;table class=\&#34;display\&#34;&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt; &lt;\/th&gt;\n      &lt;th&gt;Bill Description&lt;\/th&gt;\n      &lt;th&gt;Absence Discrimination&lt;\/th&gt;\n    &lt;\/tr&gt;\n  &lt;\/thead&gt;\n&lt;\/table&gt;&#34;,&#34;options&#34;:{&#34;columnDefs&#34;:[{&#34;className&#34;:&#34;dt-right&#34;,&#34;targets&#34;:2},{&#34;orderable&#34;:false,&#34;targets&#34;:0}],&#34;order&#34;:[],&#34;autoWidth&#34;:false,&#34;orderClasses&#34;:false},&#34;selection&#34;:{&#34;mode&#34;:&#34;multiple&#34;,&#34;selected&#34;:null,&#34;target&#34;:&#34;row&#34;}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;p&gt;For Republicans, on the other hand, it appears that cybersecurity and inter-departmental information sharing were the laws in which they chose not to show up for ideological (or political) reasons. This could be due to concerns among the conservative base regarding government over-reach and collecting information.&lt;/p&gt;
 &lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;idealstan&lt;/code&gt; is an effort to put state-of-the-art ideal point models along with the power of full Bayesian analysis in the hands of applied researchers in the social sciences. While the empirical examples presented were from the US Congress, the model can be used in any situation in which the assumptions of the ideal point model (unconstrained ideal point space) apply, i.e., situations in which the latent space is fundamentally polarizing between people. While similar in function and form to the &lt;code&gt;edstan&lt;/code&gt; package, the &lt;code&gt;idealstan&lt;/code&gt; package has to use more complicated forms of identification because of the difficulty of leaving discrimination parameters unconstrained.&lt;/p&gt;
+&lt;p&gt;Moving forward, I intend to add in more functionality to smoothly operate with &lt;code&gt;shinystan&lt;/code&gt; and &lt;code&gt;bayesplot&lt;/code&gt;, as well as add further types of explanatory IRT models. The intention is to have a package on which applied researchers can run different ideal point models and then examine how different modeling choices affect the results. In addition, I will continue to build more visualization options so that the results are easily digestable and publishable.&lt;/p&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Migrate from Jekyll to Hugo</title>
-      <link>http://www.robertkubinec.com/post/migrate-from-jekyll/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/post/migrate-from-jekyll/</guid>
-      <description>
-
-&lt;p&gt;Here are a few tips for migrating an existing website from Jekyll to Hugo. These tips can be applied in conjunction with following Hugo Academic&amp;rsquo;s &lt;a href=&#34;http://www.robertkubinec.com/post/getting-started/&#34; target=&#34;_blank&#34;&gt;getting started guide&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;move-static-content-to-static&#34;&gt;Move static content to &lt;code&gt;static&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;Jekyll has a rule that any directory not starting with &lt;code&gt;_&lt;/code&gt; will be copied as-is to the &lt;code&gt;_site&lt;/code&gt; output. Hugo keeps all static content under &lt;code&gt;static&lt;/code&gt;. You should therefore move it all there.
-With Jekyll, something that looked like&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;▾ &amp;lt;root&amp;gt;/
-    ▾ images/
-        logo.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;should become&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;▾ &amp;lt;root&amp;gt;/
-    ▾ static/
-        ▾ images/
-            logo.png
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as &lt;code&gt;CNAME&lt;/code&gt;) to be moved to &lt;code&gt;static&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;fix-content&#34;&gt;Fix content&lt;/h2&gt;
-
-&lt;p&gt;Depending on the amount of customization that was done for each post in Jekyll, this step will require more or less effort. There are no hard and fast rules here except that &lt;code&gt;hugo server --watch&lt;/code&gt; and the Hugo Academic example site are your friends. Test your changes and fix errors as needed.&lt;/p&gt;
-
-&lt;h2 id=&#34;publish&#34;&gt;Publish&lt;/h2&gt;
-
-&lt;p&gt;The default is for Jekyll to publish the website to a &lt;code&gt;_site&lt;/code&gt; directory, whereas Hugo publishes to a &lt;code&gt;public&lt;/code&gt; directory.&lt;/p&gt;
-
-&lt;h2 id=&#34;a-practical-example&#34;&gt;A practical example&lt;/h2&gt;
-
-&lt;p&gt;Alexandre Normand migrated his website from Jekyll to Hugo in less than a day. You can see all his changes by looking at this GitHub &lt;a href=&#34;https://github.com/alexandre-normand/alexandre-normand/compare/869d69435bd2665c3fbf5b5c78d4c22759d7613a...b7f6605b1265e83b4b81495423294208cc74d610&#34; target=&#34;_blank&#34;&gt;diff&lt;/a&gt;. However, bear in mind that this example is &lt;strong&gt;not specific to the Academic theme nor does it use the latest version of Hugo&lt;/strong&gt;.&lt;/p&gt;
+&lt;div id=&#34;references&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;p&gt;’ &lt;a name=bib-enelow198&gt;&lt;/a&gt;&lt;a href=&#34;#cite-enelow198&#34;&gt;[1]&lt;/a&gt; J. M. Enelow and M. J. Hinich. &lt;em&gt;The Spatial Theory of Voting: An Introduction&lt;/em&gt;. Cambridge University Press, 1984.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-takane1986&gt;&lt;/a&gt;&lt;a href=&#34;#cite-takane1986&#34;&gt;[2]&lt;/a&gt; Y. Takane and J. de Leeuw. “On the Relationship Between Item Response Theory and Factor Analysis of Discretized Variables”. In: &lt;em&gt;Psychometrika&lt;/em&gt; 52.3 (1986), pp. 393-408.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-hoff2002&gt;&lt;/a&gt;&lt;a href=&#34;#cite-hoff2002&#34;&gt;[3]&lt;/a&gt; P. D. Hoff, A. E. Raftery and M. S. Hancock. “Latent Space Approaches to Social Network Analysis”. In: &lt;em&gt;Journal of the American Statistical Association&lt;/em&gt; 97.460 (2002), pp. 1090-1098.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-quinn2002&gt;&lt;/a&gt;&lt;a href=&#34;#cite-quinn2002&#34;&gt;[4]&lt;/a&gt; A. D. Martin and K. M. Quinn. “Dynamic Ideal Point Estimation via Markov Chain Monte Carlo for the U.S. Supreme Court, 1953-1999”. In: &lt;em&gt;Political Analysis&lt;/em&gt; 10.2 (2002), pp. 134-153.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-jackman2004&gt;&lt;/a&gt;&lt;a href=&#34;#cite-jackman2004&#34;&gt;[5]&lt;/a&gt; J. Clinton, S. Jackman and D. Rivers. “The Statistical Analysis of Rollcall Data”. In: &lt;em&gt;American Political Science Review&lt;/em&gt; 98.2 (2004), pp. 355-370.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-gelman2005&gt;&lt;/a&gt;&lt;a href=&#34;#cite-gelman2005&#34;&gt;[6]&lt;/a&gt; J. Bafumi, A. Gelman, D. K. Park, et al. “Practical Issues in Implementing and Understanding Bayesian Ideal Point Estimation”. In: &lt;em&gt;Political Analysis&lt;/em&gt; 13.2 (2005), pp. 171-187.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-poole2008&gt;&lt;/a&gt;&lt;a href=&#34;#cite-poole2008&#34;&gt;[7]&lt;/a&gt; K. T. Poole, J. B. Lewis, J. Lo, et al. &lt;em&gt;Scaling Roll Call Votes with W-NOMINATE in R&lt;/em&gt;. Working Paper. Social Science Research Network, Oct. 06, 2008. URL: &lt;a href=&#34;https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1276082&#34; class=&#34;uri&#34;&gt;https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1276082&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-slapin2008&gt;&lt;/a&gt;&lt;a href=&#34;#cite-slapin2008&#34;&gt;[8]&lt;/a&gt; J. B. Slapin and S. Proksch. “A Scaling Model for Estimating Time-Series Party Positions from Texts”. In: &lt;em&gt;American Journal of Political Science&lt;/em&gt; 52.3 (2008), pp. 705-722.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-carroll2013&gt;&lt;/a&gt;&lt;a href=&#34;#cite-carroll2013&#34;&gt;[9]&lt;/a&gt; R. Carroll, J. B. Lewis, J. Lo, et al. “The Structure of Utility in Spatial Models of Voting”. In: &lt;em&gt;American Journal of Political Science&lt;/em&gt; 57.4 (2013), pp. 1008-1028.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-mcauley2013&gt;&lt;/a&gt;&lt;a href=&#34;#cite-mcauley2013&#34;&gt;[10]&lt;/a&gt; J. McAuley and J. Leskovec. “From Amateurs to Connoisseurs: Modeling the Evolution of User Expertise through Online Reviews”. In: &lt;em&gt;WWW&lt;/em&gt; (2013).&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-armstrong2014&gt;&lt;/a&gt;&lt;a href=&#34;#cite-armstrong2014&#34;&gt;[11]&lt;/a&gt; D. A. Armstrong, R. Bakker, R. Carroll, et al. &lt;em&gt;Analyzing Spatial Models of Choice and Judgment with R&lt;/em&gt;. CRC Press, 2014.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-bonica2014&gt;&lt;/a&gt;&lt;a href=&#34;#cite-bonica2014&#34;&gt;[12]&lt;/a&gt; A. Bonica. “Mapping the Ideological Marketplace”. In: &lt;em&gt;American Journal of Political Science&lt;/em&gt; 58.2 (2014), pp. 367-386.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-barbera2015&gt;&lt;/a&gt;&lt;a href=&#34;#cite-barbera2015&#34;&gt;[13]&lt;/a&gt; P. BarberÃ¡. “Birds of the Same Feather Tweet Together: Bayesian Ideal Point Estimation Using Twitter Data”. In: &lt;em&gt;Political Analysis&lt;/em&gt; 23 (2015), pp. 76-91.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-NIPS2015_5758&gt;&lt;/a&gt;&lt;a href=&#34;#cite-NIPS2015_5758&#34;&gt;[14]&lt;/a&gt; A. Kucukelbir, R. Ranganath, A. Gelman, et al. “Automatic Variational Inference in Stan”. In: &lt;em&gt;Advances in Neural Information Processing Systems 28&lt;/em&gt;. Ed. by C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama and R. Garnett. Curran Associates, Inc., 2015, pp. 568-576. URL: &lt;a href=&#34;http://papers.nips.cc/paper/5758-automatic-variational-inference-in-stan.pdf&#34; class=&#34;uri&#34;&gt;http://papers.nips.cc/paper/5758-automatic-variational-inference-in-stan.pdf&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a name=bib-kubinec2017&gt;&lt;/a&gt;&lt;a href=&#34;#cite-kubinec2017&#34;&gt;[15]&lt;/a&gt; R. Kubinec. &lt;em&gt;Absence Makes the Ideal Points Sharper&lt;/em&gt;. Poster. Political Methodology Society, 2017.&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
