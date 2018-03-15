@@ -2,9 +2,13 @@
 title: 'idealstan: an R Package for Ideal Point Modeling with Stan'
 author: "Robert Kubinec"
 date: "February 12, 2018"
-summary: "Paper presented at the StanCon2018 conference on Bayesian modeling."
 output:
   blogdown::html_page
+header:
+  title: "idealstan: an R Package for Ideal Point Modeling with Stan"
+  summary: "Paper presented at the StanCon2018 conference on Bayesian modeling."
+  image: "headers/markov_chain.png"
+  date: "2018-03-14T00:00:00"
 ---
 
 ```{r setup, include=FALSE}

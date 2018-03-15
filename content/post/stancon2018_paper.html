@@ -1,9 +1,22 @@
-<script src="stancon2018_paper_files/htmlwidgets-0.8/htmlwidgets.js"></script>
-<script src="stancon2018_paper_files/jquery-1.12.4/jquery.min.js"></script>
-<script src="stancon2018_paper_files/datatables-binding-0.2/datatables.js"></script>
-<link href="stancon2018_paper_files/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="stancon2018_paper_files/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="stancon2018_paper_files/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+---
+title: 'idealstan: an R Package for Ideal Point Modeling with Stan'
+author: "Robert Kubinec"
+date: "February 12, 2018"
+output:
+  blogdown::html_page
+header:
+  title: "idealstan: an R Package for Ideal Point Modeling with Stan"
+  summary: "Paper presented at the StanCon2018 conference on Bayesian modeling."
+  image: "headers/markov_chain.png"
+  date: "2018-03-14T00:00:00"
+---
+
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<script src="/rmarkdown-libs/datatables-binding/datatables.js"></script>
+<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/dt-core/js/jquery.dataTables.min.js"></script>
 
 
 <p><em>This is a paper that was presented at the <a href="http://mc-stan.org/events/stancon2018/">StanCon2018 conference</a> on Bayesian inference with the Stan Hamiltonian Markov Chain Monte Carlo (MCMC) method. Video of my talk is available <a href="https://www.youtube.com/watch?v=0ZjrLOosXwk&amp;t=4s">here</a>.</em></p>
@@ -38,7 +51,7 @@ Y_{ij} = \alpha_j x_i - \beta_j
 <p>where <span class="math inline">\(Y_{ij}\)</span> can be an outcome of any type (binary, ordinal, Poisson, etc.) that includes the correct or incorrect responses of <span class="math inline">\(I\)</span> test takers to <span class="math inline">\(J\)</span> test items, <span class="math inline">\(\alpha_j\)</span> are the discrimination parameters that control the narrowness, hence discrimination, of each item <span class="math inline">\(j\)</span> on the test in the latent space, <span class="math inline">\(x_i\)</span> are the test-taker ability parameters that reflect the ability of a person to answer an item correctly, and <span class="math inline">\(\beta_j\)</span> are the difficulty or average probability/value of a correct response (the intercept). In the traditional IRT format, the <span class="math inline">\(\alpha_j\)</span> discrimination parameters are always positive because a higher value (a correct answer) is always associated with higher ability <span class="math inline">\(x_i\)</span>, while a lower value (an incorrect answer) is associated with less ability.</p>
 <p>However, if the requirement that the discrimination parameters <span class="math inline">\(\alpha_j\)</span> are positive is removed, then this model can also be used for ideal point modeling. For most applications, ideal-point modeling using IRT is built on the standard 2-PL model <a name=cite-gelman2005></a>(<a href="#bib-jackman2004">Clinton, Jackman, and Rivers, 2004</a>; <a href="#bib-gelman2005">Bafumi, Gelman, Park, and Kaplan, 2005</a>), with one notable exception: the discrimination parameters must be un-constrained, while in traditional IRT the discrimination parameters are constrained to all be either positive or negative. Constraining discrimination parameters to be positive is also the approach taken in the <a href="https://cran.r-project.org/web/packages/edstan/vignettes/briefmanual.html"><code>edstan</code></a> package, which offers the full range of standard IRT models using Stan.</p>
 <p>Leaving the discrimination parameters un-consrained ensures that a higher or lower value of <span class="math inline">\(Y_{ij}\)</span> could be associated with either a “correct” or “incorrect” answer as is necessary in an ideal point model. This happens because the latent space in an ideal point model is fundamentally a Euclidean distance that is rotation-invariant. The following figure makes this clear by showing a version of an ideal point model in which the ideal point (ability parameter) <span class="math inline">\(x_i\)</span> is represented by a Normal distribution while the Yes and No points of a proposed policy are vertical lines.</p>
-<p><img src="stancon2018_paper_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="/post/stancon2018_paper_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>If <span class="math inline">\(x_i\)</span> is to the right of the Indifference line, the legislator will vote Yes on the proposal, whereas if she is to the left, she will vote No. However, a different policy (item) could have the Yes and No positions switched so that a Yes vote would correspond to -2.5 and vice versa for the No vote. Thus the binary outcomes do not have the same interpretation as the standard IRT model because the relationship between the outcomes and the ability points is contingent.</p>
 <p>If the discrimination parameters are unconstrained, <a href="#bib-jackman2004">Clinton, Jackman, and Rivers (2004)</a> showed that the midpoint of the policy/item parameter, which is labeled on the plot as the indifference line, is identified as <span class="math inline">\(-\frac{\alpha_j}{\beta_j}\)</span> in the original IRT model. This midpoint is important because it represents the point in the latent space in which an actor is indifferent, or has a 50% chance of voting yes or no. Unfortunately, the IRT paramerization of the ideal point model does not return the actual Yes or No positions of a bill/item, but these midpoints are sufficient to characterize the position of the items in the latent space.</p>
 <p>While this difference between ideal point models and standard IRT may seem trivial, it has serious consequences for modeling. The basic issue is the non-identifiability of the IRT model, which the switching polarity of the discrimination parameters only makes more difficult. Ultimately, it becomes necessary to constrain the polarity of some of the ability or discrimination parameters to identify the model. However, it is necessary to choose parameters which would avoid “splitting the likelihood”, such as constraining a legislator whose true ideal point is near zero (<a href="#bib-gelman2005">Bafumi, Gelman, Park, et al., 2005</a>).</p>
@@ -83,8 +96,8 @@ Y_{ij} = \alpha_j x_i - \beta_j
 \]</span></p>
 <p>The <span class="math inline">\(c_k\)</span> parameters are the cutpoints for the <span class="math inline">\(K-1\)</span> ordinal outcomes. They are given a weakly informative prior on the differences between the cutpoints (see the prior help file in the Stan Development Github site). The rest of the priors are arbitrary as the scale of the latent variables is fixed only in the priors themselves.</p>
 <p>To demonstrate the package, I first generate data from this data-generating process using a function <code>id_sim_gen()</code> built into <code>idealstan</code>:</p>
-<div id="htmlwidget-d5450be19d07044f6b1b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d5450be19d07044f6b1b">{"x":{"filter":"none","data":[["1","2","3","4","5","6"],[1,3,4,3,3,3],[4,4,4,4,3,2],[1,4,4,1,1,1],[4,4,3,4,4,4],[4,2,3,2,3,1],[3,1,4,3,3,3],[4,4,3,4,4,4],[1,2,3,3,3,3],[1,2,4,4,4,3],[3,4,3,2,3,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>1<\/th>\n      <th>2<\/th>\n      <th>3<\/th>\n      <th>4<\/th>\n      <th>5<\/th>\n      <th>6<\/th>\n      <th>7<\/th>\n      <th>8<\/th>\n      <th>9<\/th>\n      <th>10<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[["1","2","3","4","5","6"],[4,1,1,4,4,3],[4,1,1,4,2,3],[4,1,4,3,1,4],[4,4,4,1,4,3],[3,3,1,4,4,2],[3,4,3,1,1,3],[3,3,3,2,4,3],[3,4,4,1,2,1],[1,1,1,4,4,3],[3,3,4,3,1,3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>1<\/th>\n      <th>2<\/th>\n      <th>3<\/th>\n      <th>4<\/th>\n      <th>5<\/th>\n      <th>6<\/th>\n      <th>7<\/th>\n      <th>8<\/th>\n      <th>9<\/th>\n      <th>10<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p>In this matrix, the legislators (persons) are represented by the rows and the bills (items) by the columns. The ordinal vote outcomes are numbered 1 to 3 (1=No,2=Abstain,3=Yes) and 4 represents absence.</p>
 <p>I can then take this simulated data and put it into the <code>id_estimate</code> function. I also use the true values of the legislator ideal points <span class="math inline">\(x_i\)</span> for polarity constraints in order to be able to return the “true” latent variables. The <code>id_estimate</code> function loads pre-compiled stan code a la <a href="https://cran.r-project.org/web/packages/rstantools/index.html"><code>rstantools</code></a> and then returns an R object containing a compiled stan model.</p>
 <pre class="r"><code>true_legis &lt;- ord_ideal_sim@simul_data$true_person
@@ -99,7 +112,7 @@ ord_ideal_est &lt;- id_estimate(idealdata=ord_ideal_sim,
                              restrict_ind_low=low_leg$ix[1:2],
                              refresh=500)</code></pre>
 <p>For testing simulation results, the package contains a residual plot for looking at differences between true and estimated values which are stored in the R object:</p>
-<p><img src="stancon2018_paper_files/figure-html/check_true-1.png" width="672" /></p>
+<p><img src="/post/stancon2018_paper_files/figure-html/check_true-1.png" width="672" /></p>
 <p>The recovery of the true parameters is not perfect, but generally the errors sum to zero across the parameters. Recovering the true parameters is not usually of great interest in a latent variable model as the scale and rotation of the true values is rather arbitrary. However, this exercise is a basic test of the Stan model’s correspondence with the simulated data.</p>
 </div>
 <div id="empirical-example-the-polarization-of-coffee" class="section level2">
@@ -130,8 +143,8 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## 
 ## 
 ## 
-## Gradient evaluation took 0.044 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 440 seconds.
+## Gradient evaluation took 0.065 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 650 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
@@ -146,12 +159,12 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## Begin stochastic gradient ascent.
 ##   iter       ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
 ##    100    -5e+004             1.000            1.000
-##    200    -5e+004             0.538            1.000
-##    300    -5e+004             0.366            0.076
-##    400    -5e+004             0.276            0.076
-##    500    -5e+004             0.222            0.021
-##    600    -5e+004             0.185            0.021
-##    700    -5e+004             0.159            0.009   MEDIAN ELBO CONVERGED
+##    200    -5e+004             0.514            1.000
+##    300    -5e+004             0.358            0.047
+##    400    -5e+004             0.270            0.047
+##    500    -5e+004             0.217            0.029
+##    600    -5e+004             0.182            0.029
+##    700    -5e+004             0.157            0.007   MEDIAN ELBO CONVERGED
 ## 
 ## Drawing a sample of size 1000 from the approximate posterior... 
 ## COMPLETED.
@@ -163,8 +176,8 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## 
 ## 
 ## 
-## Gradient evaluation took 0.034 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 340 seconds.
+## Gradient evaluation took 0.04 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 400 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
@@ -178,19 +191,21 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## 
 ## Begin stochastic gradient ascent.
 ##   iter       ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
-##    100    -5e+004             1.000            1.000
-##    200    -5e+004             0.524            1.000
-##    300    -5e+004             0.358            0.049
-##    400    -5e+004             0.270            0.049
-##    500    -5e+004             0.217            0.026
-##    600    -5e+004             0.181            0.026
-##    700    -5e+004             0.156            0.006   MEDIAN ELBO CONVERGED
+##    100    -4e+005             1.000            1.000
+##    200    -5e+004             4.393            7.786
+##    300    -5e+004             2.930            1.000
+##    400    -5e+004             2.208            1.000
+##    500    -5e+004             1.767            0.042
+##    600    -5e+004             1.476            0.042
+##    700    -5e+004             1.265            0.017
+##    800    -5e+004             1.108            0.017
+##    900    -5e+004             0.985            0.006   MEDIAN ELBO CONVERGED
 ## 
 ## Drawing a sample of size 1000 from the approximate posterior... 
 ## COMPLETED.</code></pre>
 <p>What is of primary interest in this model are the discrimination parameters for the products. The discriminations will tell us which coffee products tend to divide the users most strongly into two poles as the model is one-dimensional. We can first look at the distribution of discriminations via a histogram:</p>
 <pre class="r"><code>id_plot_all_hist(coffee_model,params = &#39;regular_discrim&#39;)</code></pre>
-<p><img src="stancon2018_paper_files/figure-html/plot_discrim-1.png" width="672" /></p>
+<p><img src="/post/stancon2018_paper_files/figure-html/plot_discrim-1.png" width="672" /></p>
 <p>To gain a sense of how polarizing these products, we can plot the product mid-point, or the point at which a user is indifferent between one rating score and a higher rating score, over the ideal point distribution. I color the user points by their actual ratings:</p>
 <pre class="r"><code>id_plot_legis(coffee_model,group_color=F,group_overlap = T,
               person_labels=F,person_ci_alpha = .05,
@@ -199,22 +214,22 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
               point_size=2,
               show_score = c(&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;,&#39;5&#39;),
               text_size_group = 4)</code></pre>
-<p><img src="stancon2018_paper_files/figure-html/high_pos_discrim-1.png" width="672" /></p>
+<p><img src="/post/stancon2018_paper_files/figure-html/high_pos_discrim-1.png" width="672" /></p>
 <p>As can be seen, the product midpoints nearly perfectly segment the user base. We also a large number of 1s and 5s in the observed ratings. This distribution shows that users tend to be very divided on this product, and also that their disagreement over the product is itself a reflection of an underlying dimension, their ideal points.</p>
 <p>Finally, I include here the top 10 most polarizing (highly discriminative) products from each end of the ideal point spectrum.</p>
 <p>First, the top 10 most positive discrimination:</p>
-<div id="htmlwidget-b28a1f6cea1148597e1c" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b28a1f6cea1148597e1c">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["Kicking Horse Coffee 454 Horse Power Dark, Whole Bean","Amazing Grass Green Superfood Organic Powder","Starbucks Via Ready Brew Instant Coffee","Stephen's Gourmet Hot Cocoa, Candycane Cocoa","Prince of Peace Organic Tea, Oolong","NOW Foods Erythritol Natural Sweetener","illy Cappucino, 12 pack","Nestle Hot Cocoa Mix","Better than Milk Vegan Soy Powder","Ghirardelli Chocolate Sweet Ground Chocolate &amp; Cocoa"],[7.87259,7.864585,7.80567,7.805575,7.770375,7.770345,7.727985,7.33822,7.33797,7.28447]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Product Description<\/th>\n      <th>Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["Kicking Horse Coffee 454 Horse Power Dark, Whole Bean","Amazing Grass Green Superfood Organic Powder","Starbucks Via Ready Brew Instant Coffee","Stephen's Gourmet Hot Cocoa, Candycane Cocoa","Prince of Peace Organic Tea, Oolong","NOW Foods Erythritol Natural Sweetener","illy Cappucino, 12 pack","Nestle Hot Cocoa Mix","Better than Milk Vegan Soy Powder","Ghirardelli Chocolate Sweet Ground Chocolate &amp; Cocoa"],[7.87259,7.864585,7.80567,7.805575,7.770375,7.770345,7.727985,7.33822,7.33797,7.28447]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Product Description<\/th>\n      <th>Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p>Second, the top 10 least positive negative discrimination:</p>
-<div id="htmlwidget-e19c8faf9ef5f7a25b6e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e19c8faf9ef5f7a25b6e">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["Melitta Cafe de Europa Gourmet Coffee","McCann's Steel Cut Irish Oatmeal","Stash Tea Gunpowder Green Loose Leaf Tea","Nutiva Organic Coconut Oil","Stash Tea Company English Breakfast","Equal Exchange Organic Coffee, Mind Body Soul, Whole Bean","Ghirardelli Premium Hot Beverage Mix, White Mocha, 19-Ounce Cans","Victorian Inn Instant Hot Cappucino, French Vanilla","Medaglia Doro Instant Espresso","Yogi Tea, Green Tea Super Antioxidant"],[-9.79306,-9.785615,-9.70132,-9.616965,-7.77101,-7.75944,-7.74106,-7.73298,-7.17082,-7.13721]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Product Description<\/th>\n      <th>Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-3" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["Melitta Cafe de Europa Gourmet Coffee","McCann's Steel Cut Irish Oatmeal","Stash Tea Gunpowder Green Loose Leaf Tea","Nutiva Organic Coconut Oil","Stash Tea Company English Breakfast","Equal Exchange Organic Coffee, Mind Body Soul, Whole Bean","Ghirardelli Premium Hot Beverage Mix, White Mocha, 19-Ounce Cans","Victorian Inn Instant Hot Cappucino, French Vanilla","Medaglia Doro Instant Espresso","Yogi Tea, Green Tea Super Antioxidant"],[-9.79306,-9.785615,-9.70132,-9.616965,-7.77101,-7.75944,-7.74106,-7.73298,-7.17082,-7.13721]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Product Description<\/th>\n      <th>Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p>While a full interpretation of these results would require significant work at examining the full range of products and their relevant discrimination scores, what is clear is that positive discrimination tends to have more large brands of coffee, including Starbucks and Illy, while the negative discrimination products tend to b esmaller brands, such as Melitta Cafe and Equal Exchange Organic Coffee. The most interesting finding in this analysis is that Ghirardelli products are at both ends of the scale: one type of Ghirardelli powdered drink, Ghirardelli Chocolate, has high positive discrimination, while Ghirardelli White Mocha has high negative discrimination. Intuitivelly, these products are appealing to different reviewers with very diverging preferences.</p>
 <p>In the next section, I apply the ideal point model to a more traditional domain–the U.S. Congress–and also examine the role of including missing data via inflation.</p>
 </div>
 <div id="empirical-example-114th-senate" class="section level2">
 <h2>Empirical Example: 114th Senate</h2>
 <p>As an empirical example of the model, I use data from the <a href="http://www.voteview.com" class="uri">http://www.voteview.com</a> website on the voting record of the 114th US Senate. This dataset comes with the <code>idealstan</code> package, and I then recode the data to correspond to a standard R matrix. However, because abstentions rarely happen in the US Congress, I do not include abstentions in this model and instead estimate a standard binary IRT 2-PL with inflation for missing data (absences). I then pass the matrix of vote records to the <code>id_make</code> function to create an object suitable for running the model.</p>
-<p><img src="stancon2018_paper_files/figure-html/use_senate-1.png" width="672" /></p>
+<p><img src="/post/stancon2018_paper_files/figure-html/use_senate-1.png" width="672" /></p>
 <p>Given a suitable object from <code>id_make</code>, the <code>id_estimate</code> function can estimate a variety of IRT ideal point models, including 2-PL, ordinal, hierarchical and dynamic IRT (using random-walk priors). For this run we set the <code>model_type</code> parameter to <code>2</code>, which represents a 2-PL model with absence inflation. Because this dataset is of a significant size, I use variational inference instead of the full sampler to demonstrate its use. I do not, however, use the automatic identification option <code>auto_id</code> because it is relatively easy to constrain particular legislator ideal points for the Senate. In this case, I constrain Ben Sasse, Marco Rubio, Berni Sanders, Ted Cruz, Harry Reid and Elizabeth Warren, all senators with pronounced ideological views.</p>
 <p>After estimating the model, I can look at a graphical display of the ideal points with the <code>id_plot</code> function. The <code>id_plot</code> function produces a <code>ggplot2</code> object which can be further modified. The legislators are given colors based on their party affiliation. The general shape of the ideal point distribution reflects the nature of polarization in the US Congress, with relatively few moderates near the center of the distribution.</p>
 <pre><code>## ------------------------------------------------------------
@@ -225,8 +240,8 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## 
 ## 
 ## 
-## Gradient evaluation took 0.043 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 430 seconds.
+## Gradient evaluation took 0.029 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 290 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
@@ -248,23 +263,23 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## 
 ## Drawing a sample of size 1000 from the approximate posterior... 
 ## COMPLETED.</code></pre>
-<p><img src="stancon2018_paper_files/figure-html/run_114_model-1.png" width="672" /></p>
+<p><img src="/post/stancon2018_paper_files/figure-html/run_114_model-1.png" width="672" /></p>
 <p>We can also plot the bill (item) midpoints as a line of indifference that we overlay on top of the ideal points.</p>
 <pre class="r"><code>id_plot(sen_est,person_ci_alpha=.1,item_plot=205,
         group_labels=T,
         abs_and_reg=&#39;Vote Points&#39;) + scale_colour_brewer(type=&#39;qual&#39;)</code></pre>
-<p><img src="stancon2018_paper_files/figure-html/bill_plot-1.png" width="672" /></p>
+<p><img src="/post/stancon2018_paper_files/figure-html/bill_plot-1.png" width="672" /></p>
 <p>For this particular piece of legislation, the midpoint is right in the middle of the ideal point distribution, showing that the bill has very high discrimination. Also, the rug lines at the bottom of the plot, which show the HPD for the midpoint, indicate that the model is uncertain about the votes of only a handful of Senators on this bill.</p>
 <p>We can similarly examine the absence midpoint for the same bill, which signifies the place on the ideal point spectrum at which a legislator is indifferent from showing up to vote. In this case, only very conservative Republicans chose not to show up to vote.</p>
-<p><img src="stancon2018_paper_files/figure-html/abs_bill_plot-1.png" width="672" /></p>
+<p><img src="/post/stancon2018_paper_files/figure-html/abs_bill_plot-1.png" width="672" /></p>
 <p>We can use the bill absence parameters to also see which bills showed the highest discrimination in terms of absences, or in other words, for which bills did the absence of legislators signify that they intentionally did not show up? To do this, I sort the discrimination parameters from the underlying Stan object and then merge them with the bill labels from voteview.org.</p>
 <p>First we can look at the top 10 bills with liberal/Democrat absence discrimination:</p>
-<div id="htmlwidget-369b12af27142355f6af" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-369b12af27142355f6af">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["To limit the availability of amounts authorized to be appropriated for overseas contingency operations pending relief from the spending limits under the Budget Control Act of 2011.","To improve the bill.","To strike the FOIA exemption.","To protect information that is reasonably believed to be personal information or information that identifies a specific person.","To strengthen the Justice for Victims of Trafficking Act by incorporating additional bipartisan amendments.","To improve the requirements relating to removal of personal information from cyber threat indicators before sharing.","An original bill to improve cybersecurity in the United States through enhanced sharing of information about cybersecurity threats, and for other purposes.","To modify section105 to require DHS to review all cyber threat indicators and countermeasures in order to remove certain personal information.","To exempt from the capability and process within the Department of Homeland Security communication between a private entity and the Federal Bureau of Investigation or the United States Secret Service regarding cybersecurity threats.","An original concurrent resolution setting forth the congressional budget for the United States Government for fiscal year 2016 and setting forth the appropriate budgetary levels for fiscal years 2017 through 2025."],[3.92023,3.63825,3.605395,3.50184,3.457055,3.433575,3.139275,3.10212,3.04597,2.91783]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Bill Description<\/th>\n      <th>Absence Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["To limit the availability of amounts authorized to be appropriated for overseas contingency operations pending relief from the spending limits under the Budget Control Act of 2011.","To strengthen the Justice for Victims of Trafficking Act by incorporating additional bipartisan amendments.","To protect information that is reasonably believed to be personal information or information that identifies a specific person.","To strike the FOIA exemption.","To improve the bill.","To improve the requirements relating to removal of personal information from cyber threat indicators before sharing.","An original bill to improve cybersecurity in the United States through enhanced sharing of information about cybersecurity threats, and for other purposes.","To exempt from the capability and process within the Department of Homeland Security communication between a private entity and the Federal Bureau of Investigation or the United States Secret Service regarding cybersecurity threats.","To improve the definitions of cybersecurity threat and cyber threat indicator.","To modify section105 to require DHS to review all cyber threat indicators and countermeasures in order to remove certain personal information."],[3.95683,3.6066,3.58815,3.560535,3.50081,3.49607,3.06222,3.007515,2.90706,2.897515]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Bill Description<\/th>\n      <th>Absence Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p>Interestingly, Democrats appeared to be strategically absent most often on bills about climate change and the Keystone XL pipeline.</p>
 <p>For conseratives the bills are as follows:</p>
-<div id="htmlwidget-6f3c0edc9c9b89340c81" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6f3c0edc9c9b89340c81">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["To promote energy efficiency.","To ensure that the storage and transportation of petroleum coke is regulated in a manner that ensures the protection of public and ecological health.","To express the sense of Congress regarding federally protected land.","To express the sense of Congress regarding climate change.","To provide limits on the designation of new federally protected land.","To require the use of iron, steel, and manufactured goods produced in the United States in the construction of the Keystone XL Pipeline and facilities.","To ensure that oil transported through the Keystone XL pipeline into the United States is used to reduce United States dependence on Middle Eastern oil.","To express the sense of the Senate that climate change is real and not a hoax.","To express the sense of Congress regarding climate change.","To continue cleaning up fields and streams while protecting neighborhoods, generating affordable energy, and creating jobs."],[-1.69249,-1.679635,-1.6643,-1.60165,-1.59143,-1.591085,-1.54454,-1.54446,-1.506345,-1.46663]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Bill Description<\/th>\n      <th>Absence Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["To provide limits on the designation of new federally protected land.","To ensure that oil transported through the Keystone XL pipeline into the United States is used to reduce United States dependence on Middle Eastern oil.","To express the sense of Congress regarding climate change.","To express the sense of the Senate that climate change is real and not a hoax.","To express the sense of Congress regarding federally protected land.","To express the sense of Congress regarding climate change.","To promote energy efficiency.","To continue cleaning up fields and streams while protecting neighborhoods, generating affordable energy, and creating jobs.","To conform citizen suits under the Endangered Species Act of 1973.","To require the use of iron, steel, and manufactured goods produced in the United States in the construction of the Keystone XL Pipeline and facilities."],[-1.744565,-1.730235,-1.50419,-1.503705,-1.489765,-1.485045,-1.483415,-1.47444,-1.46497,-1.435395]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Bill Description<\/th>\n      <th>Absence Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p>For Republicans, on the other hand, it appears that cybersecurity and inter-departmental information sharing were the laws in which they chose not to show up for ideological (or political) reasons. This could be due to concerns among the conservative base regarding government over-reach and collecting information.</p>
 </div>
 <div id="conclusion" class="section level2">
