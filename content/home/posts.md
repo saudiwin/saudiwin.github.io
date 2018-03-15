@@ -13,7 +13,7 @@ widget = "posts"
 weight = 2
 
 # Show posts that contain the following tags. Default to any tags.
-tags = ['to-publish']
+#tags = ['to-publish']
 
 # Number of posts to list.
 count = 5
