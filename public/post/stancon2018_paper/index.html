@@ -149,8 +149,8 @@
 <div class="article-metadata">
 
   <span class="article-date">
-    <time datetime="0001-01-01 00:00:00 &#43;0000 UTC" itemprop="datePublished">
-      Mon, Jan 1, 0001
+    <time datetime="2018-03-14 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+      Wed, Mar 14, 2018
     </time>
   </span>
 
@@ -291,7 +291,7 @@ Y_{ij} = \alpha_j x_i - \beta_j
 <p>The <span class="math inline">\(c_k\)</span> parameters are the cutpoints for the <span class="math inline">\(K-1\)</span> ordinal outcomes. They are given a weakly informative prior on the differences between the cutpoints (see the prior help file in the Stan Development Github site). The rest of the priors are arbitrary as the scale of the latent variables is fixed only in the priors themselves.</p>
 <p>To demonstrate the package, I first generate data from this data-generating process using a function <code>id_sim_gen()</code> built into <code>idealstan</code>:</p>
 <div id="htmlwidget-1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[["1","2","3","4","5","6"],[4,3,3,3,3,3],[3,1,1,1,1,1],[3,4,2,4,2,4],[4,4,4,4,4,4],[4,4,2,3,3,1],[4,3,4,1,4,4],[1,3,1,1,1,1],[2,4,4,1,3,1],[4,3,2,1,4,4],[4,4,4,1,4,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>1<\/th>\n      <th>2<\/th>\n      <th>3<\/th>\n      <th>4<\/th>\n      <th>5<\/th>\n      <th>6<\/th>\n      <th>7<\/th>\n      <th>8<\/th>\n      <th>9<\/th>\n      <th>10<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[["1","2","3","4","5","6"],[1,4,4,4,1,3],[1,4,1,1,4,3],[1,3,4,1,1,2],[1,3,3,3,3,4],[4,3,3,4,4,4],[1,4,2,4,3,4],[1,1,4,3,1,1],[1,4,1,3,3,4],[4,4,3,3,3,4],[3,3,4,1,3,3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>1<\/th>\n      <th>2<\/th>\n      <th>3<\/th>\n      <th>4<\/th>\n      <th>5<\/th>\n      <th>6<\/th>\n      <th>7<\/th>\n      <th>8<\/th>\n      <th>9<\/th>\n      <th>10<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p>In this matrix, the legislators (persons) are represented by the rows and the bills (items) by the columns. The ordinal vote outcomes are numbered 1 to 3 (1=No,2=Abstain,3=Yes) and 4 represents absence.</p>
 <p>I can then take this simulated data and put it into the <code>id_estimate</code> function. I also use the true values of the legislator ideal points <span class="math inline">\(x_i\)</span> for polarity constraints in order to be able to return the “true” latent variables. The <code>id_estimate</code> function loads pre-compiled stan code a la <a href="https://cran.r-project.org/web/packages/rstantools/index.html"><code>rstantools</code></a> and then returns an R object containing a compiled stan model.</p>
 <pre class="r"><code>true_legis &lt;- ord_ideal_sim@simul_data$true_person
@@ -337,49 +337,8 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## 
 ## 
 ## 
-## Gradient evaluation took 0.044 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 440 seconds.
-## Adjust your expectations accordingly!
-## 
-## 
-## Begin eta adaptation.
-## Iteration:   1 / 250 [  0%]  (Adaptation)
-## Iteration:  50 / 250 [ 20%]  (Adaptation)
-## Iteration: 100 / 250 [ 40%]  (Adaptation)
-## Iteration: 150 / 250 [ 60%]  (Adaptation)
-## Iteration: 200 / 250 [ 80%]  (Adaptation)
-## Success! Found best value [eta = 1] earlier than expected.
-## 
-## Begin stochastic gradient ascent.
-##   iter       ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
-##    100    -7e+004             1.000            1.000
-##    200    -7e+004             0.559            1.000
-##    300    -5e+004             0.514            0.424
-##    400    -8e+004             0.487            0.424
-##    500    -5e+004             0.529            0.424
-##    600    -5e+004             0.442            0.424
-##    700    -5e+004             0.379            0.405
-##    800    -7e+004             0.373            0.405
-##    900    -5e+004             0.381            0.405
-##   1000    -5e+004             0.345            0.405
-##   1100    -5e+004             0.250            0.325
-##   1200    -5e+004             0.238            0.325
-##   1300    -5e+004             0.196            0.047
-##   1400    -5e+004             0.155            0.018
-##   1500    -5e+004             0.086            0.009   MEDIAN ELBO CONVERGED
-## 
-## Drawing a sample of size 1000 from the approximate posterior... 
-## COMPLETED.
-## ------------------------------------------------------------
-## EXPERIMENTAL ALGORITHM:
-##   This procedure has not been thoroughly tested and may be unstable
-##   or buggy. The interface is subject to change.
-## ------------------------------------------------------------
-## 
-## 
-## 
-## Gradient evaluation took 0.035 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 350 seconds.
+## Gradient evaluation took 0.047 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 470 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
@@ -394,14 +353,64 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## Begin stochastic gradient ascent.
 ##   iter       ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
 ##    100    -5e+004             1.000            1.000
-##    200    -5e+004             0.541            1.000
-##    300    -5e+004             0.371            0.082
-##    400    -5e+004             0.281            0.082
-##    500    -5e+004             0.226            0.031
-##    600    -5e+004             0.189            0.031
-##    700    -5e+004             0.162            0.010
-##    800    -5e+004             0.142            0.010
-##    900    -5e+004             0.126            0.007   MEDIAN ELBO CONVERGED
+##    200    -5e+004             0.531            1.000
+##    300    -5e+004             0.359            0.062
+##    400    -5e+004             0.270            0.062
+##    500    -5e+004             0.223            0.036
+##    600    -5e+004             0.195            0.055
+##    700    -5e+004             0.167            0.036
+##    800    -5e+004             0.147            0.036
+##    900    -5e+004             0.131            0.014
+##   1000    -5e+004             0.118            0.014
+##   1100    -5e+004             0.018            0.006   MEDIAN ELBO CONVERGED
+## 
+## Drawing a sample of size 1000 from the approximate posterior... 
+## COMPLETED.
+## ------------------------------------------------------------
+## EXPERIMENTAL ALGORITHM:
+##   This procedure has not been thoroughly tested and may be unstable
+##   or buggy. The interface is subject to change.
+## ------------------------------------------------------------
+## 
+## 
+## 
+## Gradient evaluation took 0.04 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 400 seconds.
+## Adjust your expectations accordingly!
+## 
+## 
+## Begin eta adaptation.
+## Iteration:   1 / 250 [  0%]  (Adaptation)
+## Iteration:  50 / 250 [ 20%]  (Adaptation)
+## Iteration: 100 / 250 [ 40%]  (Adaptation)
+## Iteration: 150 / 250 [ 60%]  (Adaptation)
+## Iteration: 200 / 250 [ 80%]  (Adaptation)
+## Iteration: 250 / 250 [100%]  (Adaptation)
+## Success! Found best value [eta = 0.1].
+## 
+## Begin stochastic gradient ascent.
+##   iter       ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
+##    100    -1e+005             1.000            1.000
+##    200    -8e+004             0.624            1.000
+##    300    -7e+004             0.450            0.248
+##    400    -7e+004             0.359            0.248
+##    500    -6e+004             0.301            0.103
+##    600    -6e+004             0.260            0.103
+##    700    -6e+004             0.227            0.087
+##    800    -6e+004             0.203            0.087
+##    900    -6e+004             0.184            0.067
+##   1000    -5e+004             0.168            0.067
+##   1100    -5e+004             0.070            0.053
+##   1200    -5e+004             0.046            0.034
+##   1300    -5e+004             0.037            0.033
+##   1400    -5e+004             0.030            0.030
+##   1500    -5e+004             0.024            0.021
+##   1600    -5e+004             0.020            0.020
+##   1700    -5e+004             0.017            0.015
+##   1800    -5e+004             0.014            0.013
+##   1900    -5e+004             0.012            0.011
+##   2000    -5e+004             0.011            0.010
+##   2100    -5e+004             0.009            0.010   MEAN ELBO CONVERGED   MEDIAN ELBO CONVERGED
 ## 
 ## Drawing a sample of size 1000 from the approximate posterior... 
 ## COMPLETED.</code></pre>
@@ -442,8 +451,8 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## 
 ## 
 ## 
-## Gradient evaluation took 0.029 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 290 seconds.
+## Gradient evaluation took 0.026 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 260 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
@@ -459,7 +468,7 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ##   iter       ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
 ##    100    -2e+004             1.000            1.000
 ##    200    -2e+004             0.506            1.000
-##    300    -2e+004             0.338            0.013
+##    300    -2e+004             0.339            0.013
 ##    400    -2e+004             0.254            0.013
 ##    500    -2e+004             0.203            0.003   MEDIAN ELBO CONVERGED
 ## 
@@ -477,11 +486,11 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 <p>We can use the bill absence parameters to also see which bills showed the highest discrimination in terms of absences, or in other words, for which bills did the absence of legislators signify that they intentionally did not show up? To do this, I sort the discrimination parameters from the underlying Stan object and then merge them with the bill labels from voteview.org.</p>
 <p>First we can look at the top 10 bills with liberal/Democrat absence discrimination:</p>
 <div id="htmlwidget-4" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["To limit the availability of amounts authorized to be appropriated for overseas contingency operations pending relief from the spending limits under the Budget Control Act of 2011.","To strengthen the Justice for Victims of Trafficking Act by incorporating additional bipartisan amendments.","To improve the bill.","To strike the FOIA exemption.","To protect information that is reasonably believed to be personal information or information that identifies a specific person.","To improve the requirements relating to removal of personal information from cyber threat indicators before sharing.","To improve the definitions of cybersecurity threat and cyber threat indicator.","To modify section105 to require DHS to review all cyber threat indicators and countermeasures in order to remove certain personal information.","An original bill to improve cybersecurity in the United States through enhanced sharing of information about cybersecurity threats, and for other purposes.","To exempt from the capability and process within the Department of Homeland Security communication between a private entity and the Federal Bureau of Investigation or the United States Secret Service regarding cybersecurity threats."],[3.98949,3.56904,3.55934,3.549835,3.483885,3.48049,3.12438,3.099875,3.097675,2.92355]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Bill Description<\/th>\n      <th>Absence Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-4">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["To require the use of iron, steel, and manufactured goods produced in the United States in the construction of the Keystone XL Pipeline and facilities.","To express the sense of Congress regarding climate change.","To ensure that the storage and transportation of petroleum coke is regulated in a manner that ensures the protection of public and ecological health.","To continue cleaning up fields and streams while protecting neighborhoods, generating affordable energy, and creating jobs.","To express the sense of Congress regarding federally protected land.","To promote energy efficiency.","To express the sense of Congress regarding climate change.","To ensure that oil transported through the Keystone XL pipeline into the United States is used to reduce United States dependence on Middle Eastern oil.","To conform citizen suits under the Endangered Species Act of 1973.","To express the sense of Congress regarding climate change."],[1.79357,1.738195,1.731685,1.71645,1.692175,1.682385,1.66285,1.617115,1.60393,1.574955]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Bill Description<\/th>\n      <th>Absence Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p>Interestingly, Democrats appeared to be strategically absent most often on bills about climate change and the Keystone XL pipeline.</p>
 <p>For conseratives the bills are as follows:</p>
 <div id="htmlwidget-5" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["To promote energy efficiency.","To ensure that oil transported through the Keystone XL pipeline into the United States is used to reduce United States dependence on Middle Eastern oil.","To express the sense of Congress regarding climate change.","To continue cleaning up fields and streams while protecting neighborhoods, generating affordable energy, and creating jobs.","To express the sense of Congress regarding climate change.","To express the sense of Congress regarding climate change.","To express the sense of Congress regarding federally protected land.","To express the sense of the Senate that climate change is real and not a hoax.","To provide limits on the designation of new federally protected land.","To ensure that the storage and transportation of petroleum coke is regulated in a manner that ensures the protection of public and ecological health."],[-1.716095,-1.621305,-1.618865,-1.594885,-1.58984,-1.57347,-1.568495,-1.56646,-1.53168,-1.50682]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Bill Description<\/th>\n      <th>Absence Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-5">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["To limit the availability of amounts authorized to be appropriated for overseas contingency operations pending relief from the spending limits under the Budget Control Act of 2011.","To strike the FOIA exemption.","To improve the requirements relating to removal of personal information from cyber threat indicators before sharing.","To improve the bill.","To strengthen the Justice for Victims of Trafficking Act by incorporating additional bipartisan amendments.","To protect information that is reasonably believed to be personal information or information that identifies a specific person.","To exempt from the capability and process within the Department of Homeland Security communication between a private entity and the Federal Bureau of Investigation or the United States Secret Service regarding cybersecurity threats.","To modify section105 to require DHS to review all cyber threat indicators and countermeasures in order to remove certain personal information.","An original concurrent resolution setting forth the congressional budget for the United States Government for fiscal year 2016 and setting forth the appropriate budgetary levels for fiscal years 2017 through 2025.","To improve the definitions of cybersecurity threat and cyber threat indicator."],[-3.838615,-3.676075,-3.574335,-3.548985,-3.52815,-3.419825,-3.24186,-3.141775,-3.063325,-3.039245]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Bill Description<\/th>\n      <th>Absence Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p>For Republicans, on the other hand, it appears that cybersecurity and inter-departmental information sharing were the laws in which they chose not to show up for ideological (or political) reasons. This could be due to concerns among the conservative base regarding government over-reach and collecting information.</p>
 </div>
 <div id="conclusion" class="section level2">
