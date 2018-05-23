@@ -57,31 +57,31 @@ In this notebook I first introduce ideal-point models and contrast them with "tr
 
 Measurement error models have a long history in applied statistics and are increasingly in demand as the amount of noisy observational data grows with the digital revolution. Canonical statistical models, particularly linear regression, assume that the predictors are measured without error, but in many situations in social science, the variable of interest cannot in fact be measured. Rather, proxies or indicators are used to stand in for the latent construct. Measurement models offer a way to match the indicators with the latent construct while making appropriate assumptions about the relationship. 
 
-In other words, we suppose that the regression predictor matrix $X$ is itself a function of certain indicators $I_c \in \{1 ... C\}$:
+In other words, we suppose that the regression predictor matrix $X$ is itself a function of certain indicators $I\_c \in \{1 ... C\}$:
 
 $$ 
-X = f(\forall I_c \in \{1 ... C\})
+X = f(\forall I\_c \in \{1 ... C\})
 $$
 
 Different latent variable, latent space and measurement models can be distinguished in terms of the function $f(\cdot)$. Fundamentally, $f(\cdot)$ has to stipulate how $X$ will change as the indicators change. It is possible to make very precise conditions for this relationship, which is the method applied in confirmatory factor analysis and structural equation modeling. It is also possible to let $f(\cdot)$ make only minimal assumptions about this relationship, which is the method adopted by exploratory factor analysis and item-response theory (IRT), in addition to the other latent space models in the literature. It is also possible, of course, to have models that fall somewhere in between truly exploratory and truly confirmatory models.
 
-While much has been written about the different kids of $f(\cdot)$ that can be used in measurement models, in this paper I focus on a metric relevant to ideal point models: as the values of $I_c$ increase, does $X$ also increase so that $f(\cdot)$ must be always non-decreasing? If that is the case, then the model can be thought of as falling into the domain of item-response theory and traditional factor analysis (in fact, IRT is itself a non-linear version of factor analysis per `r Citet(bib,'takane1986')`). By contrast, ideal point models are based on a different set of assumptions in which $X$ could increase or decrease as the indicators $I_c$ increase or decrease; in other words, the relationship is bi-polar instead of uni-polar. 
+While much has been written about the different kids of $f(\cdot)$ that can be used in measurement models, in this paper I focus on a metric relevant to ideal point models: as the values of $I\_c$ increase, does $X$ also increase so that $f(\cdot)$ must be always non-decreasing? If that is the case, then the model can be thought of as falling into the domain of item-response theory and traditional factor analysis (in fact, IRT is itself a non-linear version of factor analysis per `r Citet(bib,'takane1986')`). By contrast, ideal point models are based on a different set of assumptions in which $X$ could increase or decrease as the indicators $I\_c$ increase or decrease; in other words, the relationship is bi-polar instead of uni-polar. 
 
 Ideal point modeling originated from analysis of a common situation in policy research in which different legislators select from among competing policy alternatives based on the utility offered by each policy `r AutoCite(bib,c('enelow198','poole2008'))`. Supposing that the policies are evaluated on a uni-dimensional space, if the utility of the "Yes" position on the policy is greater than the utility of the "No" position to a particular legislator, then that legislator will choose that policy. While very simple, this model has a requirement that is different from much of traditional IRT estimation: the policy outcomes can have different meanings based on their position relative to the legislator in the policy space. For example, if a legislator is very liberal (has a high value on the latent construct), then that legislator is likely to vote yes on bills that are also liberal, such as single-payer health care. But if the bill is conservative, such as national defense, then that legislator is more likely to vote no. In other words, the meaning of the positions of the bills in the latent space depends on the ideal point of the legislator, and thus the mapping to the latent space $f(\cdot)$ cannot be always non-decreasing. For some votes, a yes position may mean a high value of the latent space, while for others it may mean a lower value.
 
-By comparison, in traditional IRT, responses to stimuli (the indicators $I_c$) reflect correct or incorrect answers, such as a student taking a test. Correct answers, which in the legislative context mean yes votes, always equal greater ability, while incorrect answers, which would be no votes, are always a sign of less ability. In this situation, $f(\cdot)$ is always non-decreasing. Thus while ideal point models share much in common with IRT, they require different assumptions.
+By comparison, in traditional IRT, responses to stimuli (the indicators $I\_c$) reflect correct or incorrect answers, such as a student taking a test. Correct answers, which in the legislative context mean yes votes, always equal greater ability, while incorrect answers, which would be no votes, are always a sign of less ability. In this situation, $f(\cdot)$ is always non-decreasing. Thus while ideal point models share much in common with IRT, they require different assumptions.
 
 A brief review of the mathematical notation will make the difference clear. The 2-PL IRT model takes the following form:
 
 $$
-Y_{ij} = \alpha_j x_i - \beta_j
+Y\_{ij} = \alpha\_j x\_i - \beta\_j
 $$
 
-where $Y_{ij}$ can be an outcome of any type (binary, ordinal, Poisson, etc.) that includes the correct or incorrect responses of $I$ test takers to $J$ test items, $\alpha_j$ are the discrimination parameters that control the narrowness, hence discrimination, of each item $j$ on the test in the latent space, $x_i$ are the test-taker ability parameters that reflect the ability of a person to answer an item correctly, and $\beta_j$ are the difficulty or average probability/value of a correct response (the intercept). In the traditional IRT format, the $\alpha_j$ discrimination parameters are always positive because a higher value (a correct answer) is always associated with higher ability $x_i$, while a lower value (an incorrect answer) is associated with less ability.
+where $Y\_{ij}$ can be an outcome of any type (binary, ordinal, Poisson, etc.) that includes the correct or incorrect responses of $I$ test takers to $J$ test items, $\alpha\_j$ are the discrimination parameters that control the narrowness, hence discrimination, of each item $j$ on the test in the latent space, $x\_i$ are the test-taker ability parameters that reflect the ability of a person to answer an item correctly, and $\beta\_j$ are the difficulty or average probability/value of a correct response (the intercept). In the traditional IRT format, the $\alpha\_j$ discrimination parameters are always positive because a higher value (a correct answer) is always associated with higher ability $x\_i$, while a lower value (an incorrect answer) is associated with less ability.
 
-However, if the requirement that the discrimination parameters $\alpha_j$ are positive is removed, then this model can also be used for ideal point modeling. For most applications, ideal-point modeling using IRT is built on the standard 2-PL model `r AutoCite(bib,c('jackman2004','gelman2005'))`, with one notable exception: the discrimination parameters must be un-constrained, while in traditional IRT the discrimination parameters are constrained to all be either positive or negative. Constraining discrimination parameters to be positive is also the approach taken in the [`edstan`](https://cran.r-project.org/web/packages/edstan/vignettes/briefmanual.html) package, which offers the full range of standard IRT models using Stan. 
+However, if the requirement that the discrimination parameters $\alpha\_j$ are positive is removed, then this model can also be used for ideal point modeling. For most applications, ideal-point modeling using IRT is built on the standard 2-PL model `r AutoCite(bib,c('jackman2004','gelman2005'))`, with one notable exception: the discrimination parameters must be un-constrained, while in traditional IRT the discrimination parameters are constrained to all be either positive or negative. Constraining discrimination parameters to be positive is also the approach taken in the [`edstan`](https://cran.r-project.org/web/packages/edstan/vignettes/briefmanual.html) package, which offers the full range of standard IRT models using Stan. 
 
-Leaving the discrimination parameters un-consrained ensures that a higher or lower value of $Y_{ij}$ could be associated with either a "correct" or "incorrect" answer as is necessary in an ideal point model. This happens because the latent space in an ideal point model is fundamentally a Euclidean distance that is rotation-invariant. The following figure makes this clear by showing a version of an ideal point model in which the ideal point (ability parameter) $x_i$ is represented by a Normal distribution while the Yes and No points of a proposed policy are vertical lines.
+Leaving the discrimination parameters un-consrained ensures that a higher or lower value of $Y\_{ij}$ could be associated with either a "correct" or "incorrect" answer as is necessary in an ideal point model. This happens because the latent space in an ideal point model is fundamentally a Euclidean distance that is rotation-invariant. The following figure makes this clear by showing a version of an ideal point model in which the ideal point (ability parameter) $x\_i$ is represented by a Normal distribution while the Yes and No points of a proposed policy are vertical lines.
 
 ```{r, echo=F}
 data_frame(x=c(-5,5)) %>% 
@@ -105,9 +105,9 @@ data_frame(x=c(-5,5)) %>%
            parse=T)
 ```
 
-If $x_i$ is to the right of the Indifference line, the legislator will vote Yes on the proposal, whereas if she is to the left, she will vote No. However, a different policy (item) could have the Yes and No positions switched so that a Yes vote would correspond to -2.5 and vice versa for the No vote. Thus the binary outcomes do not have the same interpretation as the standard IRT model because the relationship between the outcomes and the ability points is contingent.
+If $x\_i$ is to the right of the Indifference line, the legislator will vote Yes on the proposal, whereas if she is to the left, she will vote No. However, a different policy (item) could have the Yes and No positions switched so that a Yes vote would correspond to -2.5 and vice versa for the No vote. Thus the binary outcomes do not have the same interpretation as the standard IRT model because the relationship between the outcomes and the ability points is contingent.
 
-If the discrimination parameters are unconstrained, `r Citet(bib,'jackman2004')` showed that the midpoint of the policy/item parameter, which is labeled on the plot as the indifference line, is identified as $-\frac{\alpha_j}{\beta_j}$ in the original IRT model. This midpoint is important because it represents the point in the latent space in which an actor is indifferent, or has a 50% chance of voting yes or no. Unfortunately, the IRT paramerization of the ideal point model does not return the actual Yes or No positions of a bill/item, but these midpoints are sufficient to characterize the position of the items in the latent space.
+If the discrimination parameters are unconstrained, `r Citet(bib,'jackman2004')` showed that the midpoint of the policy/item parameter, which is labeled on the plot as the indifference line, is identified as $-\frac{\alpha\_j}{\beta\_j}$ in the original IRT model. This midpoint is important because it represents the point in the latent space in which an actor is indifferent, or has a 50% chance of voting yes or no. Unfortunately, the IRT paramerization of the ideal point model does not return the actual Yes or No positions of a bill/item, but these midpoints are sufficient to characterize the position of the items in the latent space.
 
 While this difference between ideal point models and standard IRT may seem trivial, it has serious consequences for modeling. The basic issue is the non-identifiability of the IRT model, which the switching polarity of the discrimination parameters only makes more difficult. Ultimately, it becomes necessary to constrain the polarity of some of the ability or discrimination parameters to identify the model. However, it is necessary to choose parameters which would avoid "splitting the likelihood", such as constraining a legislator whose true ideal point is near zero `r AutoCite(bib,'gelman2005')`. 
 
@@ -117,50 +117,50 @@ While this difference between ideal point models and standard IRT may seem trivi
 
 Because of the flexibility of Stan,`idealstan` is not limited to implementing the standard IRT ideal point model. One of the modifications it offers is a model that can account for one-way censoring in the data, or what is called an absence-inflated ideal point model `r AutoCite(bib,'kubinec2017')`. This model was motivated by the application of ideal point models to legislatures in which legislator actions are more diverse than simply Yes or No votes. Legislators can also be absent on votes and in parliamentary systems as in Europe, abstentions are also common. Abstentions occur when a legislator votes on a policy but refuses to either vote Yes or No, resulting in a vote record of abstention that conventional models will treat as missing data. However, if these two additional vote outcomes--absent and abstention--are removed from the estimation by encoding them as missing data, then the additional information about legislator behavior present in this data is lost. 
 
-As a solution for abstentions, I proposed in `r Citet(bib,'kubinec2017')` to model abstentions as a middle category between yes and no votes by treating $Y_{ij}$ as an ordered logistic outcome $Y_{ijk}$ for $k$ in three possible vote choices: $\{1,2,3\}$ (no, abstain, yes). 
+As a solution for abstentions, I proposed in `r Citet(bib,'kubinec2017')` to model abstentions as a middle category between yes and no votes by treating $Y\_{ij}$ as an ordered logistic outcome $Y\_{ijk}$ for $k$ in three possible vote choices: $\{1,2,3\}$ (no, abstain, yes). 
 
 While switching from a logit to an ordered logistic model is straightforward, modeling the censoring implied by legislator absences requires the estimation of additional parameters. To do so, I model absence as a binary outcome in a separate equation as a hurdle model. Intuitively, legislators only show up to vote if they are able to overcome the hurdle of being present. Because in an ideal point model we only want to estimate a single set of person parameters (ideal points), I include an additional set of item (bill) parameters in the hurdle component that signify the way in which being absent on a policy proposal is related to the ideological value of the legislation.
 
-The result is a two-stage model that inflates the ideal points by the probability that a legislator is absent on a particular bill. To create this model, I first start again with the essential 2-PL IRT model except that it now allows for cutpoints $c_k$ for the $K-1$ vote outcomes (yes, abstain, no) with $\zeta(\cdot)$ representing the logit function:
+The result is a two-stage model that inflates the ideal points by the probability that a legislator is absent on a particular bill. To create this model, I first start again with the essential 2-PL IRT model except that it now allows for cutpoints $c\_k$ for the $K-1$ vote outcomes (yes, abstain, no) with $\zeta(\cdot)$ representing the logit function:
 
 $$
-	L(\beta,\alpha,x|Y_{ijk}) = \prod_{i-1}^{I} \prod_{j=1}^{J}
+	L(\beta,\alpha,x|Y\_{ijk}) = \prod\_{i-1}^{I} \prod\_{j=1}^{J}
 	\begin{cases} 
-	1 -  \zeta(x_{i}'\beta_j - \alpha_j - c_1) & \text{if } K = 0 \\
-	\zeta(x_{i}'\beta_j - \alpha_j - c_{k-1}) - \zeta(x_{i}'\beta_j - \alpha_j - c_{k})       & \text{if } 0 < k < K, \text{ and} \\
-	\zeta(x_{i}'\beta_j - \alpha_j - c_{k-1}) - 0 & \text{if } k=K
+	1 -  \zeta(x\_{i}'\beta\_j - \alpha\_j - c\_1) & \text{if } K = 0 \\\\\\
+	\zeta(x\_{i}'\beta\_j - \alpha\_j - c\_{k-1}) - \zeta(x\_{i}'\beta\_j - \alpha\_j - c\_{k})       & \text{if } 0 < k < K, \text{ and} \\\\\\
+	\zeta(x\_{i}'\beta\_j - \alpha\_j - c\_{k-1}) - 0 & \text{if } k=K
 	\end{cases}
 $$
 
-Except for the addition of the vote cutpoints, this model is identical to the standard 2-PL IRT form, with ability parameters $x_i$, discriminations $\beta_j$, and difficulties $a_j$. The cutpoints carve up the latent space so that as ability rises or falls, the legislator becomes more likely to vote yes or no with abstention falling in between these two categories.
+Except for the addition of the vote cutpoints, this model is identical to the standard 2-PL IRT form, with ability parameters $x\_i$, discriminations $\beta\_j$, and difficulties $a\_j$. The cutpoints carve up the latent space so that as ability rises or falls, the legislator becomes more likely to vote yes or no with abstention falling in between these two categories.
 
 This ordered logit has to be embedded in the hurdle model to account for one-way censoring. Suppose that each legislator has a choice $r \in \{0,1\}$ in which $r=1$ if a legislator is absent and $r=0$ otherwise. With this notation, the likelihood of the hurdle model takes the following form:
 
 $$
-	L(\beta,\alpha,X,Q,\gamma,\omega|Y_{k},Y_{r}) = 
-	\prod_{I}^{i=1} \prod_{J}^{j=1}
+	L(\beta,\alpha,X,Q,\gamma,\omega|Y\_{k},Y\_{r}) = 
+	\prod\_{I}^{i=1} \prod\_{J}^{j=1}
 	\begin{cases}
-	\zeta(x_{i}'\gamma_j - \omega_j ) & \text{if } r=0, \text{ and} \\
-	(1-\zeta({x_{i}'\gamma_j - \omega_j}))L(\beta,\alpha,X|Y_{k1}) & \text{if } r=1
+	\zeta(x\_{i}'\gamma\_j - \omega\_j ) & \text{if } r=0, \text{ and} \\\\\\
+	(1-\zeta({x\_{i}'\gamma\_j - \omega\_j}))L(\beta,\alpha,X|Y\_{k1}) & \text{if } r=1
 	\end{cases}
 $$
 
-For the hurdle model to be able to affect the legislator ideal points, a separate IRT 2-PL model is included to predict the binary outcome of absence or presence. In this secondary model, the $\gamma_j$ discrimination and $\omega_j$ difficulty parameters represent the salience of a particular piece of legislation to an individual legislator $x_i$. Only if a bill clears the hurdle of salience will the legislator choose to vote on the legislation, i.e., reach the vote outcome model $L(\beta,\alpha,X)$. This device allows for the ideal points $x_i$ to adjust for the fact that the decision of a legislator to show up to vote on a particular bill may be strategic instead of random. In addition, this model is more widely applicable to situations in which an ideal point model is employed and missing data may be a function of the persons' ideal points.
+For the hurdle model to be able to affect the legislator ideal points, a separate IRT 2-PL model is included to predict the binary outcome of absence or presence. In this secondary model, the $\gamma\_j$ discrimination and $\omega\_j$ difficulty parameters represent the salience of a particular piece of legislation to an individual legislator $x\_i$. Only if a bill clears the hurdle of salience will the legislator choose to vote on the legislation, i.e., reach the vote outcome model $L(\beta,\alpha,X)$. This device allows for the ideal points $x\_i$ to adjust for the fact that the decision of a legislator to show up to vote on a particular bill may be strategic instead of random. In addition, this model is more widely applicable to situations in which an ideal point model is employed and missing data may be a function of the persons' ideal points.
 
 ## Model Simulation
 
-To identify the model, I placed $N(0,1)$ parameters on the $x_i$ ideal points and additional polarity constraints on either the ideal points $x_i$ or the discrimination parameters $\gamma_j$ and $\alpha_j$. As a further restriction, I constrain one of the $\beta_j$ to equal zero. These are the standard set of restrictions included in `idealstan`, although the scales of parameters can be  modified. The full set of priors is as follows:
+To identify the model, I placed $N(0,1)$ parameters on the $x\_i$ ideal points and additional polarity constraints on either the ideal points $x\_i$ or the discrimination parameters $\gamma\_j$ and $\alpha\_j$. As a further restriction, I constrain one of the $\beta\_j$ to equal zero. These are the standard set of restrictions included in `idealstan`, although the scales of parameters can be  modified. The full set of priors is as follows:
 
 $$
-		c_k - c_{k-1} \sim N(0,5)\\
-		\gamma_j \sim N(0,2)\\
-		\omega_j \sim N(0,5)\\
-		\beta_j \sim N(0,2)\\
-		\alpha_j \sim N(0,5)\\
-		x_i \sim N(0,1)
+		c\_k - c\_{k-1} \sim N(0,5)\\\\\\
+		\gamma\_j \sim N(0,2)\\\\\\
+		\omega\_j \sim N(0,5)\\\\\\
+		\beta\_j \sim N(0,2)\\\\\\
+		\alpha\_j \sim N(0,5)\\\\\\
+		x\_i \sim N(0,1)
 $$
 
-The $c_k$ parameters are the cutpoints for the $K-1$ ordinal outcomes. They are given a weakly informative prior on the differences between the cutpoints (see the prior help file in the Stan Development Github site). The rest of the priors are arbitrary as the scale of the latent variables is fixed only in the priors themselves. 
+The $c\_k$ parameters are the cutpoints for the $K-1$ ordinal outcomes. They are given a weakly informative prior on the differences between the cutpoints (see the prior help file in the Stan Development Github site). The rest of the priors are arbitrary as the scale of the latent variables is fixed only in the priors themselves. 
 
 To demonstrate the package, I first generate data from this data-generating process using a function `id_sim_gen()` built into `idealstan`:
 
@@ -172,7 +172,7 @@ DT::datatable(as_data_frame(head(ord_ideal_sim@score_matrix[,1:10])))
 
 In this matrix, the legislators (persons) are represented by the rows and the bills (items) by the columns. The ordinal vote outcomes are numbered 1 to 3 (1=No,2=Abstain,3=Yes) and 4 represents absence. 
 
-I can then take this simulated data and put it into the `id_estimate` function. I also use the true values of the legislator ideal points $x_i$ for polarity constraints in order to be able to return the "true" latent variables. The `id_estimate` function loads pre-compiled stan code a la [`rstantools`](https://cran.r-project.org/web/packages/rstantools/index.html) and then returns an R object containing a compiled stan model. 
+I can then take this simulated data and put it into the `id_estimate` function. I also use the true values of the legislator ideal points $x\_i$ for polarity constraints in order to be able to return the "true" latent variables. The `id_estimate` function loads pre-compiled stan code a la [`rstantools`](https://cran.r-project.org/web/packages/rstantools/index.html) and then returns an R object containing a compiled stan model. 
 
 ```{r constrain_sim}
 true_legis <- ord_ideal_sim@simul_data$true_person

@@ -230,70 +230,70 @@
 <div id="ideal-point-models-as-a-subset-of-statistical-measurement" class="section level2">
 <h2>Ideal Point Models as a Subset of Statistical Measurement</h2>
 <p>Measurement error models have a long history in applied statistics and are increasingly in demand as the amount of noisy observational data grows with the digital revolution. Canonical statistical models, particularly linear regression, assume that the predictors are measured without error, but in many situations in social science, the variable of interest cannot in fact be measured. Rather, proxies or indicators are used to stand in for the latent construct. Measurement models offer a way to match the indicators with the latent construct while making appropriate assumptions about the relationship.</p>
-<p>In other words, we suppose that the regression predictor matrix <span class="math inline">\(X\)</span> is itself a function of certain indicators <span class="math inline">\(I_c \in \{1 ... C\}\)</span>:</p>
+<p>In other words, we suppose that the regression predictor matrix <span class="math inline">\(X\)</span> is itself a function of certain indicators <span class="math inline">\(I\_c \in \{1 ... C\}\)</span>:</p>
 <p><span class="math display">\[ 
-X = f(\forall I_c \in \{1 ... C\})
+X = f(\forall I\_c \in \{1 ... C\})
 \]</span></p>
 <p>Different latent variable, latent space and measurement models can be distinguished in terms of the function <span class="math inline">\(f(\cdot)\)</span>. Fundamentally, <span class="math inline">\(f(\cdot)\)</span> has to stipulate how <span class="math inline">\(X\)</span> will change as the indicators change. It is possible to make very precise conditions for this relationship, which is the method applied in confirmatory factor analysis and structural equation modeling. It is also possible to let <span class="math inline">\(f(\cdot)\)</span> make only minimal assumptions about this relationship, which is the method adopted by exploratory factor analysis and item-response theory (IRT), in addition to the other latent space models in the literature. It is also possible, of course, to have models that fall somewhere in between truly exploratory and truly confirmatory models.</p>
-<p>While much has been written about the different kids of <span class="math inline">\(f(\cdot)\)</span> that can be used in measurement models, in this paper I focus on a metric relevant to ideal point models: as the values of <span class="math inline">\(I_c\)</span> increase, does <span class="math inline">\(X\)</span> also increase so that <span class="math inline">\(f(\cdot)\)</span> must be always non-decreasing? If that is the case, then the model can be thought of as falling into the domain of item-response theory and traditional factor analysis (in fact, IRT is itself a non-linear version of factor analysis per <a name=cite-takane1986></a><a href="#bib-takane1986">Takane and de Leeuw (1986)</a>). By contrast, ideal point models are based on a different set of assumptions in which <span class="math inline">\(X\)</span> could increase or decrease as the indicators <span class="math inline">\(I_c\)</span> increase or decrease; in other words, the relationship is bi-polar instead of uni-polar.</p>
+<p>While much has been written about the different kids of <span class="math inline">\(f(\cdot)\)</span> that can be used in measurement models, in this paper I focus on a metric relevant to ideal point models: as the values of <span class="math inline">\(I\_c\)</span> increase, does <span class="math inline">\(X\)</span> also increase so that <span class="math inline">\(f(\cdot)\)</span> must be always non-decreasing? If that is the case, then the model can be thought of as falling into the domain of item-response theory and traditional factor analysis (in fact, IRT is itself a non-linear version of factor analysis per <a name=cite-takane1986></a><a href="#bib-takane1986">Takane and de Leeuw (1986)</a>). By contrast, ideal point models are based on a different set of assumptions in which <span class="math inline">\(X\)</span> could increase or decrease as the indicators <span class="math inline">\(I\_c\)</span> increase or decrease; in other words, the relationship is bi-polar instead of uni-polar.</p>
 <p>Ideal point modeling originated from analysis of a common situation in policy research in which different legislators select from among competing policy alternatives based on the utility offered by each policy <a name=cite-enelow198></a><a name=cite-poole2008></a>(<a href="#bib-enelow198">Enelow and Hinich, 1984</a>; <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1276082">Poole, Lewis, Lo, and Carroll, 2008</a>). Supposing that the policies are evaluated on a uni-dimensional space, if the utility of the “Yes” position on the policy is greater than the utility of the “No” position to a particular legislator, then that legislator will choose that policy. While very simple, this model has a requirement that is different from much of traditional IRT estimation: the policy outcomes can have different meanings based on their position relative to the legislator in the policy space. For example, if a legislator is very liberal (has a high value on the latent construct), then that legislator is likely to vote yes on bills that are also liberal, such as single-payer health care. But if the bill is conservative, such as national defense, then that legislator is more likely to vote no. In other words, the meaning of the positions of the bills in the latent space depends on the ideal point of the legislator, and thus the mapping to the latent space <span class="math inline">\(f(\cdot)\)</span> cannot be always non-decreasing. For some votes, a yes position may mean a high value of the latent space, while for others it may mean a lower value.</p>
-<p>By comparison, in traditional IRT, responses to stimuli (the indicators <span class="math inline">\(I_c\)</span>) reflect correct or incorrect answers, such as a student taking a test. Correct answers, which in the legislative context mean yes votes, always equal greater ability, while incorrect answers, which would be no votes, are always a sign of less ability. In this situation, <span class="math inline">\(f(\cdot)\)</span> is always non-decreasing. Thus while ideal point models share much in common with IRT, they require different assumptions.</p>
+<p>By comparison, in traditional IRT, responses to stimuli (the indicators <span class="math inline">\(I\_c\)</span>) reflect correct or incorrect answers, such as a student taking a test. Correct answers, which in the legislative context mean yes votes, always equal greater ability, while incorrect answers, which would be no votes, are always a sign of less ability. In this situation, <span class="math inline">\(f(\cdot)\)</span> is always non-decreasing. Thus while ideal point models share much in common with IRT, they require different assumptions.</p>
 <p>A brief review of the mathematical notation will make the difference clear. The 2-PL IRT model takes the following form:</p>
 <p><span class="math display">\[
-Y_{ij} = \alpha_j x_i - \beta_j
+Y\_{ij} = \alpha\_j x\_i - \beta\_j
 \]</span></p>
-<p>where <span class="math inline">\(Y_{ij}\)</span> can be an outcome of any type (binary, ordinal, Poisson, etc.) that includes the correct or incorrect responses of <span class="math inline">\(I\)</span> test takers to <span class="math inline">\(J\)</span> test items, <span class="math inline">\(\alpha_j\)</span> are the discrimination parameters that control the narrowness, hence discrimination, of each item <span class="math inline">\(j\)</span> on the test in the latent space, <span class="math inline">\(x_i\)</span> are the test-taker ability parameters that reflect the ability of a person to answer an item correctly, and <span class="math inline">\(\beta_j\)</span> are the difficulty or average probability/value of a correct response (the intercept). In the traditional IRT format, the <span class="math inline">\(\alpha_j\)</span> discrimination parameters are always positive because a higher value (a correct answer) is always associated with higher ability <span class="math inline">\(x_i\)</span>, while a lower value (an incorrect answer) is associated with less ability.</p>
-<p>However, if the requirement that the discrimination parameters <span class="math inline">\(\alpha_j\)</span> are positive is removed, then this model can also be used for ideal point modeling. For most applications, ideal-point modeling using IRT is built on the standard 2-PL model <a name=cite-gelman2005></a>(<a href="#bib-jackman2004">Clinton, Jackman, and Rivers, 2004</a>; <a href="#bib-gelman2005">Bafumi, Gelman, Park, and Kaplan, 2005</a>), with one notable exception: the discrimination parameters must be un-constrained, while in traditional IRT the discrimination parameters are constrained to all be either positive or negative. Constraining discrimination parameters to be positive is also the approach taken in the <a href="https://cran.r-project.org/web/packages/edstan/vignettes/briefmanual.html"><code>edstan</code></a> package, which offers the full range of standard IRT models using Stan.</p>
-<p>Leaving the discrimination parameters un-consrained ensures that a higher or lower value of <span class="math inline">\(Y_{ij}\)</span> could be associated with either a “correct” or “incorrect” answer as is necessary in an ideal point model. This happens because the latent space in an ideal point model is fundamentally a Euclidean distance that is rotation-invariant. The following figure makes this clear by showing a version of an ideal point model in which the ideal point (ability parameter) <span class="math inline">\(x_i\)</span> is represented by a Normal distribution while the Yes and No points of a proposed policy are vertical lines.</p>
+<p>where <span class="math inline">\(Y\_{ij}\)</span> can be an outcome of any type (binary, ordinal, Poisson, etc.) that includes the correct or incorrect responses of <span class="math inline">\(I\)</span> test takers to <span class="math inline">\(J\)</span> test items, <span class="math inline">\(\alpha\_j\)</span> are the discrimination parameters that control the narrowness, hence discrimination, of each item <span class="math inline">\(j\)</span> on the test in the latent space, <span class="math inline">\(x\_i\)</span> are the test-taker ability parameters that reflect the ability of a person to answer an item correctly, and <span class="math inline">\(\beta\_j\)</span> are the difficulty or average probability/value of a correct response (the intercept). In the traditional IRT format, the <span class="math inline">\(\alpha\_j\)</span> discrimination parameters are always positive because a higher value (a correct answer) is always associated with higher ability <span class="math inline">\(x\_i\)</span>, while a lower value (an incorrect answer) is associated with less ability.</p>
+<p>However, if the requirement that the discrimination parameters <span class="math inline">\(\alpha\_j\)</span> are positive is removed, then this model can also be used for ideal point modeling. For most applications, ideal-point modeling using IRT is built on the standard 2-PL model <a name=cite-gelman2005></a>(<a href="#bib-jackman2004">Clinton, Jackman, and Rivers, 2004</a>; <a href="#bib-gelman2005">Bafumi, Gelman, Park, and Kaplan, 2005</a>), with one notable exception: the discrimination parameters must be un-constrained, while in traditional IRT the discrimination parameters are constrained to all be either positive or negative. Constraining discrimination parameters to be positive is also the approach taken in the <a href="https://cran.r-project.org/web/packages/edstan/vignettes/briefmanual.html"><code>edstan</code></a> package, which offers the full range of standard IRT models using Stan.</p>
+<p>Leaving the discrimination parameters un-consrained ensures that a higher or lower value of <span class="math inline">\(Y\_{ij}\)</span> could be associated with either a “correct” or “incorrect” answer as is necessary in an ideal point model. This happens because the latent space in an ideal point model is fundamentally a Euclidean distance that is rotation-invariant. The following figure makes this clear by showing a version of an ideal point model in which the ideal point (ability parameter) <span class="math inline">\(x\_i\)</span> is represented by a Normal distribution while the Yes and No points of a proposed policy are vertical lines.</p>
 <p><img src="/post/stancon2018_paper_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>If <span class="math inline">\(x_i\)</span> is to the right of the Indifference line, the legislator will vote Yes on the proposal, whereas if she is to the left, she will vote No. However, a different policy (item) could have the Yes and No positions switched so that a Yes vote would correspond to -2.5 and vice versa for the No vote. Thus the binary outcomes do not have the same interpretation as the standard IRT model because the relationship between the outcomes and the ability points is contingent.</p>
-<p>If the discrimination parameters are unconstrained, <a href="#bib-jackman2004">Clinton, Jackman, and Rivers (2004)</a> showed that the midpoint of the policy/item parameter, which is labeled on the plot as the indifference line, is identified as <span class="math inline">\(-\frac{\alpha_j}{\beta_j}\)</span> in the original IRT model. This midpoint is important because it represents the point in the latent space in which an actor is indifferent, or has a 50% chance of voting yes or no. Unfortunately, the IRT paramerization of the ideal point model does not return the actual Yes or No positions of a bill/item, but these midpoints are sufficient to characterize the position of the items in the latent space.</p>
+<p>If <span class="math inline">\(x\_i\)</span> is to the right of the Indifference line, the legislator will vote Yes on the proposal, whereas if she is to the left, she will vote No. However, a different policy (item) could have the Yes and No positions switched so that a Yes vote would correspond to -2.5 and vice versa for the No vote. Thus the binary outcomes do not have the same interpretation as the standard IRT model because the relationship between the outcomes and the ability points is contingent.</p>
+<p>If the discrimination parameters are unconstrained, <a href="#bib-jackman2004">Clinton, Jackman, and Rivers (2004)</a> showed that the midpoint of the policy/item parameter, which is labeled on the plot as the indifference line, is identified as <span class="math inline">\(-\frac{\alpha\_j}{\beta\_j}\)</span> in the original IRT model. This midpoint is important because it represents the point in the latent space in which an actor is indifferent, or has a 50% chance of voting yes or no. Unfortunately, the IRT paramerization of the ideal point model does not return the actual Yes or No positions of a bill/item, but these midpoints are sufficient to characterize the position of the items in the latent space.</p>
 <p>While this difference between ideal point models and standard IRT may seem trivial, it has serious consequences for modeling. The basic issue is the non-identifiability of the IRT model, which the switching polarity of the discrimination parameters only makes more difficult. Ultimately, it becomes necessary to constrain the polarity of some of the ability or discrimination parameters to identify the model. However, it is necessary to choose parameters which would avoid “splitting the likelihood”, such as constraining a legislator whose true ideal point is near zero (<a href="#bib-gelman2005">Bafumi, Gelman, Park, et al., 2005</a>).</p>
 <p><code>idealstan</code> exploits variational Bayesian (VB) inference <a name=cite-NIPS2015_5758></a>(<a href="http://papers.nips.cc/paper/5758-automatic-variational-inference-in-stan.pdf">Kucukelbir, Ranganath, Gelman, and Blei, 2015</a>) to assist with finding parameters for identification. <code>idealstan</code> first estimates an IRT model with rotation-unidentified parameters, which is not a problem for a single VB run. Then <code>idealstan</code> can select those parameters which show the highest or lowest values, and these parameters are then constrained in terms of their polarity. This approach can quickly speed up the sometimes painful process of identifying a particular IRT ideal point model, although it is also possible to constrain parameters before estimation based on prior information.</p>
 </div>
 <div id="missing-data-in-ideal-point-models" class="section level2">
 <h2>Missing Data in Ideal Point Models</h2>
 <p>Because of the flexibility of Stan,<code>idealstan</code> is not limited to implementing the standard IRT ideal point model. One of the modifications it offers is a model that can account for one-way censoring in the data, or what is called an absence-inflated ideal point model <a name=cite-kubinec2017></a>(<a href="#bib-kubinec2017">Kubinec, 2017a</a>). This model was motivated by the application of ideal point models to legislatures in which legislator actions are more diverse than simply Yes or No votes. Legislators can also be absent on votes and in parliamentary systems as in Europe, abstentions are also common. Abstentions occur when a legislator votes on a policy but refuses to either vote Yes or No, resulting in a vote record of abstention that conventional models will treat as missing data. However, if these two additional vote outcomes–absent and abstention–are removed from the estimation by encoding them as missing data, then the additional information about legislator behavior present in this data is lost.</p>
-<p>As a solution for abstentions, I proposed in <a href="#bib-kubinec2017">Kubinec (2017a)</a> to model abstentions as a middle category between yes and no votes by treating <span class="math inline">\(Y_{ij}\)</span> as an ordered logistic outcome <span class="math inline">\(Y_{ijk}\)</span> for <span class="math inline">\(k\)</span> in three possible vote choices: <span class="math inline">\(\{1,2,3\}\)</span> (no, abstain, yes).</p>
+<p>As a solution for abstentions, I proposed in <a href="#bib-kubinec2017">Kubinec (2017a)</a> to model abstentions as a middle category between yes and no votes by treating <span class="math inline">\(Y\_{ij}\)</span> as an ordered logistic outcome <span class="math inline">\(Y\_{ijk}\)</span> for <span class="math inline">\(k\)</span> in three possible vote choices: <span class="math inline">\(\{1,2,3\}\)</span> (no, abstain, yes).</p>
 <p>While switching from a logit to an ordered logistic model is straightforward, modeling the censoring implied by legislator absences requires the estimation of additional parameters. To do so, I model absence as a binary outcome in a separate equation as a hurdle model. Intuitively, legislators only show up to vote if they are able to overcome the hurdle of being present. Because in an ideal point model we only want to estimate a single set of person parameters (ideal points), I include an additional set of item (bill) parameters in the hurdle component that signify the way in which being absent on a policy proposal is related to the ideological value of the legislation.</p>
-<p>The result is a two-stage model that inflates the ideal points by the probability that a legislator is absent on a particular bill. To create this model, I first start again with the essential 2-PL IRT model except that it now allows for cutpoints <span class="math inline">\(c_k\)</span> for the <span class="math inline">\(K-1\)</span> vote outcomes (yes, abstain, no) with <span class="math inline">\(\zeta(\cdot)\)</span> representing the logit function:</p>
+<p>The result is a two-stage model that inflates the ideal points by the probability that a legislator is absent on a particular bill. To create this model, I first start again with the essential 2-PL IRT model except that it now allows for cutpoints <span class="math inline">\(c\_k\)</span> for the <span class="math inline">\(K-1\)</span> vote outcomes (yes, abstain, no) with <span class="math inline">\(\zeta(\cdot)\)</span> representing the logit function:</p>
 <p><span class="math display">\[
-    L(\beta,\alpha,x|Y_{ijk}) = \prod_{i-1}^{I} \prod_{j=1}^{J}
+    L(\beta,\alpha,x|Y\_{ijk}) = \prod\_{i-1}^{I} \prod\_{j=1}^{J}
     \begin{cases} 
-    1 -  \zeta(x_{i}&#39;\beta_j - \alpha_j - c_1) &amp; \text{if } K = 0 \\
-    \zeta(x_{i}&#39;\beta_j - \alpha_j - c_{k-1}) - \zeta(x_{i}&#39;\beta_j - \alpha_j - c_{k})       &amp; \text{if } 0 &lt; k &lt; K, \text{ and} \\
-    \zeta(x_{i}&#39;\beta_j - \alpha_j - c_{k-1}) - 0 &amp; \text{if } k=K
+    1 -  \zeta(x\_{i}&#39;\beta\_j - \alpha\_j - c\_1) &amp; \text{if } K = 0 \\
+    \zeta(x\_{i}&#39;\beta\_j - \alpha\_j - c\_{k-1}) - \zeta(x\_{i}&#39;\beta\_j - \alpha\_j - c\_{k})       &amp; \text{if } 0 &lt; k &lt; K, \text{ and} \\
+    \zeta(x\_{i}&#39;\beta\_j - \alpha\_j - c\_{k-1}) - 0 &amp; \text{if } k=K
     \end{cases}
 \]</span></p>
-<p>Except for the addition of the vote cutpoints, this model is identical to the standard 2-PL IRT form, with ability parameters <span class="math inline">\(x_i\)</span>, discriminations <span class="math inline">\(\beta_j\)</span>, and difficulties <span class="math inline">\(a_j\)</span>. The cutpoints carve up the latent space so that as ability rises or falls, the legislator becomes more likely to vote yes or no with abstention falling in between these two categories.</p>
+<p>Except for the addition of the vote cutpoints, this model is identical to the standard 2-PL IRT form, with ability parameters <span class="math inline">\(x\_i\)</span>, discriminations <span class="math inline">\(\beta\_j\)</span>, and difficulties <span class="math inline">\(a\_j\)</span>. The cutpoints carve up the latent space so that as ability rises or falls, the legislator becomes more likely to vote yes or no with abstention falling in between these two categories.</p>
 <p>This ordered logit has to be embedded in the hurdle model to account for one-way censoring. Suppose that each legislator has a choice <span class="math inline">\(r \in \{0,1\}\)</span> in which <span class="math inline">\(r=1\)</span> if a legislator is absent and <span class="math inline">\(r=0\)</span> otherwise. With this notation, the likelihood of the hurdle model takes the following form:</p>
 <p><span class="math display">\[
-    L(\beta,\alpha,X,Q,\gamma,\omega|Y_{k},Y_{r}) = 
-    \prod_{I}^{i=1} \prod_{J}^{j=1}
+    L(\beta,\alpha,X,Q,\gamma,\omega|Y\_{k},Y\_{r}) = 
+    \prod\_{I}^{i=1} \prod\_{J}^{j=1}
     \begin{cases}
-    \zeta(x_{i}&#39;\gamma_j - \omega_j ) &amp; \text{if } r=0, \text{ and} \\
-    (1-\zeta({x_{i}&#39;\gamma_j - \omega_j}))L(\beta,\alpha,X|Y_{k1}) &amp; \text{if } r=1
+    \zeta(x\_{i}&#39;\gamma\_j - \omega\_j ) &amp; \text{if } r=0, \text{ and} \\
+    (1-\zeta({x\_{i}&#39;\gamma\_j - \omega\_j}))L(\beta,\alpha,X|Y\_{k1}) &amp; \text{if } r=1
     \end{cases}
 \]</span></p>
-<p>For the hurdle model to be able to affect the legislator ideal points, a separate IRT 2-PL model is included to predict the binary outcome of absence or presence. In this secondary model, the <span class="math inline">\(\gamma_j\)</span> discrimination and <span class="math inline">\(\omega_j\)</span> difficulty parameters represent the salience of a particular piece of legislation to an individual legislator <span class="math inline">\(x_i\)</span>. Only if a bill clears the hurdle of salience will the legislator choose to vote on the legislation, i.e., reach the vote outcome model <span class="math inline">\(L(\beta,\alpha,X)\)</span>. This device allows for the ideal points <span class="math inline">\(x_i\)</span> to adjust for the fact that the decision of a legislator to show up to vote on a particular bill may be strategic instead of random. In addition, this model is more widely applicable to situations in which an ideal point model is employed and missing data may be a function of the persons’ ideal points.</p>
+<p>For the hurdle model to be able to affect the legislator ideal points, a separate IRT 2-PL model is included to predict the binary outcome of absence or presence. In this secondary model, the <span class="math inline">\(\gamma\_j\)</span> discrimination and <span class="math inline">\(\omega\_j\)</span> difficulty parameters represent the salience of a particular piece of legislation to an individual legislator <span class="math inline">\(x\_i\)</span>. Only if a bill clears the hurdle of salience will the legislator choose to vote on the legislation, i.e., reach the vote outcome model <span class="math inline">\(L(\beta,\alpha,X)\)</span>. This device allows for the ideal points <span class="math inline">\(x\_i\)</span> to adjust for the fact that the decision of a legislator to show up to vote on a particular bill may be strategic instead of random. In addition, this model is more widely applicable to situations in which an ideal point model is employed and missing data may be a function of the persons’ ideal points.</p>
 </div>
 <div id="model-simulation" class="section level2">
 <h2>Model Simulation</h2>
-<p>To identify the model, I placed <span class="math inline">\(N(0,1)\)</span> parameters on the <span class="math inline">\(x_i\)</span> ideal points and additional polarity constraints on either the ideal points <span class="math inline">\(x_i\)</span> or the discrimination parameters <span class="math inline">\(\gamma_j\)</span> and <span class="math inline">\(\alpha_j\)</span>. As a further restriction, I constrain one of the <span class="math inline">\(\beta_j\)</span> to equal zero. These are the standard set of restrictions included in <code>idealstan</code>, although the scales of parameters can be modified. The full set of priors is as follows:</p>
+<p>To identify the model, I placed <span class="math inline">\(N(0,1)\)</span> parameters on the <span class="math inline">\(x\_i\)</span> ideal points and additional polarity constraints on either the ideal points <span class="math inline">\(x\_i\)</span> or the discrimination parameters <span class="math inline">\(\gamma\_j\)</span> and <span class="math inline">\(\alpha\_j\)</span>. As a further restriction, I constrain one of the <span class="math inline">\(\beta\_j\)</span> to equal zero. These are the standard set of restrictions included in <code>idealstan</code>, although the scales of parameters can be modified. The full set of priors is as follows:</p>
 <p><span class="math display">\[
-        c_k - c_{k-1} \sim N(0,5)\\
-        \gamma_j \sim N(0,2)\\
-        \omega_j \sim N(0,5)\\
-        \beta_j \sim N(0,2)\\
-        \alpha_j \sim N(0,5)\\
-        x_i \sim N(0,1)
+        c\_k - c\_{k-1} \sim N(0,5)\\
+        \gamma\_j \sim N(0,2)\\
+        \omega\_j \sim N(0,5)\\
+        \beta\_j \sim N(0,2)\\
+        \alpha\_j \sim N(0,5)\\
+        x\_i \sim N(0,1)
 \]</span></p>
-<p>The <span class="math inline">\(c_k\)</span> parameters are the cutpoints for the <span class="math inline">\(K-1\)</span> ordinal outcomes. They are given a weakly informative prior on the differences between the cutpoints (see the prior help file in the Stan Development Github site). The rest of the priors are arbitrary as the scale of the latent variables is fixed only in the priors themselves.</p>
+<p>The <span class="math inline">\(c\_k\)</span> parameters are the cutpoints for the <span class="math inline">\(K-1\)</span> ordinal outcomes. They are given a weakly informative prior on the differences between the cutpoints (see the prior help file in the Stan Development Github site). The rest of the priors are arbitrary as the scale of the latent variables is fixed only in the priors themselves.</p>
 <p>To demonstrate the package, I first generate data from this data-generating process using a function <code>id_sim_gen()</code> built into <code>idealstan</code>:</p>
 <div id="htmlwidget-1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[["1","2","3","4","5","6"],[3,1,3,4,3,4],[3,1,4,1,4,4],[1,3,4,3,1,3],[1,4,1,1,2,3],[3,3,1,4,1,3],[4,2,4,3,4,4],[2,4,3,2,3,3],[4,3,4,4,4,4],[4,4,1,4,4,2],[4,3,4,3,4,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>1<\/th>\n      <th>2<\/th>\n      <th>3<\/th>\n      <th>4<\/th>\n      <th>5<\/th>\n      <th>6<\/th>\n      <th>7<\/th>\n      <th>8<\/th>\n      <th>9<\/th>\n      <th>10<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[["1","2","3","4","5","6"],[1,3,4,4,4,3],[4,1,1,1,4,4],[4,2,3,1,3,4],[1,4,4,4,4,1],[1,4,3,4,4,4],[4,2,3,2,3,2],[1,4,4,4,4,2],[2,4,4,4,4,4],[4,1,1,1,3,4],[4,3,3,3,4,3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>1<\/th>\n      <th>2<\/th>\n      <th>3<\/th>\n      <th>4<\/th>\n      <th>5<\/th>\n      <th>6<\/th>\n      <th>7<\/th>\n      <th>8<\/th>\n      <th>9<\/th>\n      <th>10<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p>In this matrix, the legislators (persons) are represented by the rows and the bills (items) by the columns. The ordinal vote outcomes are numbered 1 to 3 (1=No,2=Abstain,3=Yes) and 4 represents absence.</p>
-<p>I can then take this simulated data and put it into the <code>id_estimate</code> function. I also use the true values of the legislator ideal points <span class="math inline">\(x_i\)</span> for polarity constraints in order to be able to return the “true” latent variables. The <code>id_estimate</code> function loads pre-compiled stan code a la <a href="https://cran.r-project.org/web/packages/rstantools/index.html"><code>rstantools</code></a> and then returns an R object containing a compiled stan model.</p>
+<p>I can then take this simulated data and put it into the <code>id_estimate</code> function. I also use the true values of the legislator ideal points <span class="math inline">\(x\_i\)</span> for polarity constraints in order to be able to return the “true” latent variables. The <code>id_estimate</code> function loads pre-compiled stan code a la <a href="https://cran.r-project.org/web/packages/rstantools/index.html"><code>rstantools</code></a> and then returns an R object containing a compiled stan model.</p>
 <pre class="r"><code>true_legis &lt;- ord_ideal_sim@simul_data$true_person
 high_leg &lt;- sort(true_legis,decreasing = T,index.return=T)
 low_leg &lt;- sort(true_legis,index.return=T)
@@ -348,33 +348,21 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## Iteration: 100 / 250 [ 40%]  (Adaptation)
 ## Iteration: 150 / 250 [ 60%]  (Adaptation)
 ## Iteration: 200 / 250 [ 80%]  (Adaptation)
-## Iteration: 250 / 250 [100%]  (Adaptation)
-## Success! Found best value [eta = 0.1].
+## Success! Found best value [eta = 1] earlier than expected.
 ## 
 ## Begin stochastic gradient ascent.
 ##   iter       ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
-##    100    -9e+004             1.000            1.000
-##    200    -8e+004             0.570            1.000
-##    300    -8e+004             0.414            0.140
-##    400    -7e+004             0.329            0.140
-##    500    -7e+004             0.275            0.102
-##    600    -6e+004             0.237            0.102
-##    700    -6e+004             0.209            0.073
-##    800    -6e+004             0.188            0.073
-##    900    -6e+004             0.171            0.059
-##   1000    -5e+004             0.156            0.059
-##   1100    -5e+004             0.059            0.050
-##   1200    -5e+004             0.047            0.042
-##   1300    -5e+004             0.038            0.040
-##   1400    -5e+004             0.032            0.031
-##   1500    -5e+004             0.027            0.025
-##   1600    -5e+004             0.023            0.025
-##   1700    -5e+004             0.020            0.019
-##   1800    -5e+004             0.017            0.017
-##   1900    -5e+004             0.015            0.013
-##   2000    -5e+004             0.012            0.012
-##   2100    -5e+004             0.011            0.011
-##   2200    -5e+004             0.009            0.010   MEAN ELBO CONVERGED   MEDIAN ELBO CONVERGED
+##    100    -6e+004             1.000            1.000
+##    200    -5e+004             0.642            1.000
+##    300    -5e+004             0.441            0.284
+##    400    -5e+004             0.346            0.284
+##    500    -5e+004             0.277            0.059
+##    600    -5e+004             0.234            0.059
+##    700    -5e+004             0.200            0.040
+##    800    -5e+004             0.176            0.040
+##    900    -5e+004             0.157            0.014
+##   1000    -5e+004             0.142            0.014
+##   1100    -5e+004             0.042            0.006   MEDIAN ELBO CONVERGED
 ## 
 ## Drawing a sample of size 1000 from the approximate posterior... 
 ## COMPLETED.
@@ -386,8 +374,8 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## 
 ## 
 ## 
-## Gradient evaluation took 0.032 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 320 seconds.
+## Gradient evaluation took 0.035 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 350 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
@@ -401,15 +389,22 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## 
 ## Begin stochastic gradient ascent.
 ##   iter       ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
-##    100    -6e+004             1.000            1.000
-##    200    -5e+004             0.641            1.000
-##    300    -5e+004             0.433            0.283
-##    400    -5e+004             0.335            0.283
-##    500    -5e+004             0.268            0.040
-##    600    -5e+004             0.225            0.040
-##    700    -5e+004             0.193            0.017
-##    800    -5e+004             0.169            0.017
-##    900    -5e+004             0.150            0.009   MEDIAN ELBO CONVERGED
+##    100    -5e+009             1.000            1.000
+##    200    -1e+008            22.582           44.164
+##    300    -9e+010            15.388            1.000
+##    400    -4e+009            17.796           25.020
+##    500    -2e+007            58.526           25.020
+##    600    -2e+006            49.788           25.020
+##    700    -1e+006            42.834            6.097
+##    800    -5e+004            40.303           22.581
+##    900    -5e+004            35.826            6.097
+##   1000    -5e+004            32.244            6.097
+##   1100    -5e+004            32.146            6.097   MAY BE DIVERGING... INSPECT ELBO
+##   1200    -5e+004            27.730            1.114   MAY BE DIVERGING... INSPECT ELBO
+##   1300    -5e+004            27.630            1.114   MAY BE DIVERGING... INSPECT ELBO
+##   1400    -5e+004            25.128            0.016   MAY BE DIVERGING... INSPECT ELBO
+##   1500    -5e+004             2.984            0.015   MAY BE DIVERGING... INSPECT ELBO
+##   1600    -5e+004             2.374            0.005   MEDIAN ELBO CONVERGED   MAY BE DIVERGING... INSPECT ELBO
 ## 
 ## Drawing a sample of size 1000 from the approximate posterior... 
 ## COMPLETED.</code></pre>
@@ -450,8 +445,8 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## 
 ## 
 ## 
-## Gradient evaluation took 0.025 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 250 seconds.
+## Gradient evaluation took 0.026 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 260 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
@@ -466,10 +461,10 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 ## Begin stochastic gradient ascent.
 ##   iter       ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
 ##    100    -2e+004             1.000            1.000
-##    200    -2e+004             0.508            1.000
-##    300    -2e+004             0.340            0.017
-##    400    -2e+004             0.255            0.017
-##    500    -2e+004             0.204            0.003   MEDIAN ELBO CONVERGED
+##    200    -2e+004             0.509            1.000
+##    300    -2e+004             0.341            0.018
+##    400    -2e+004             0.256            0.018
+##    500    -2e+004             0.205            0.003   MEDIAN ELBO CONVERGED
 ## 
 ## Drawing a sample of size 1000 from the approximate posterior... 
 ## COMPLETED.</code></pre>
@@ -485,11 +480,11 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
 <p>We can use the bill absence parameters to also see which bills showed the highest discrimination in terms of absences, or in other words, for which bills did the absence of legislators signify that they intentionally did not show up? To do this, I sort the discrimination parameters from the underlying Stan object and then merge them with the bill labels from voteview.org.</p>
 <p>First we can look at the top 10 bills with liberal/Democrat absence discrimination:</p>
 <div id="htmlwidget-4" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["To limit the availability of amounts authorized to be appropriated for overseas contingency operations pending relief from the spending limits under the Budget Control Act of 2011.","To protect information that is reasonably believed to be personal information or information that identifies a specific person.","To strike the FOIA exemption.","To improve the bill.","To strengthen the Justice for Victims of Trafficking Act by incorporating additional bipartisan amendments.","To improve the requirements relating to removal of personal information from cyber threat indicators before sharing.","An original bill to improve cybersecurity in the United States through enhanced sharing of information about cybersecurity threats, and for other purposes.","To improve the definitions of cybersecurity threat and cyber threat indicator.","To exempt from the capability and process within the Department of Homeland Security communication between a private entity and the Federal Bureau of Investigation or the United States Secret Service regarding cybersecurity threats.","An original concurrent resolution setting forth the congressional budget for the United States Government for fiscal year 2016 and setting forth the appropriate budgetary levels for fiscal years 2017 through 2025."],[3.836495,3.495785,3.408815,3.407665,3.385145,3.374115,3.027115,3.019245,2.95833,2.86309]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Bill Description<\/th>\n      <th>Absence Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-4">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["To ensure that the storage and transportation of petroleum coke is regulated in a manner that ensures the protection of public and ecological health.","To continue cleaning up fields and streams while protecting neighborhoods, generating affordable energy, and creating jobs.","To express the sense of the Senate that climate change is real and not a hoax.","To require the use of iron, steel, and manufactured goods produced in the United States in the construction of the Keystone XL Pipeline and facilities.","To express the sense of Congress regarding federally protected land.","To promote energy efficiency.","To provide limits on the designation of new federally protected land.","To express the sense of Congress regarding climate change.","To conform citizen suits under the Endangered Species Act of 1973.","To ensure that oil transported through the Keystone XL pipeline into the United States is used to reduce United States dependence on Middle Eastern oil."],[1.819605,1.688775,1.67506,1.66709,1.643,1.549565,1.52296,1.499735,1.483755,1.453105]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Bill Description<\/th>\n      <th>Absence Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p>Interestingly, Democrats appeared to be strategically absent most often on bills about climate change and the Keystone XL pipeline.</p>
 <p>For conseratives the bills are as follows:</p>
 <div id="htmlwidget-5" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["To promote energy efficiency.","To express the sense of Congress regarding climate change.","To express the sense of Congress regarding climate change.","To conform citizen suits under the Endangered Species Act of 1973.","To express the sense of the Senate that climate change is real and not a hoax.","To require the use of iron, steel, and manufactured goods produced in the United States in the construction of the Keystone XL Pipeline and facilities.","To ensure that the storage and transportation of petroleum coke is regulated in a manner that ensures the protection of public and ecological health.","To continue cleaning up fields and streams while protecting neighborhoods, generating affordable energy, and creating jobs.","To provide limits on the designation of new federally protected land.","To ensure that oil transported through the Keystone XL pipeline into the United States is used to reduce United States dependence on Middle Eastern oil."],[-1.665895,-1.66547,-1.649755,-1.604555,-1.603655,-1.558645,-1.540015,-1.519035,-1.456185,-1.438225]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Bill Description<\/th>\n      <th>Absence Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-5">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["To limit the availability of amounts authorized to be appropriated for overseas contingency operations pending relief from the spending limits under the Budget Control Act of 2011.","To strike the FOIA exemption.","To improve the bill.","To improve the requirements relating to removal of personal information from cyber threat indicators before sharing.","To strengthen the Justice for Victims of Trafficking Act by incorporating additional bipartisan amendments.","To protect information that is reasonably believed to be personal information or information that identifies a specific person.","To improve the definitions of cybersecurity threat and cyber threat indicator.","To exempt from the capability and process within the Department of Homeland Security communication between a private entity and the Federal Bureau of Investigation or the United States Secret Service regarding cybersecurity threats.","An original bill to improve cybersecurity in the United States through enhanced sharing of information about cybersecurity threats, and for other purposes.","To modify section105 to require DHS to review all cyber threat indicators and countermeasures in order to remove certain personal information."],[-3.956115,-3.639605,-3.63636,-3.57792,-3.516255,-3.42238,-3.15867,-3.12428,-3.075425,-2.992295]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Bill Description<\/th>\n      <th>Absence Discrimination<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p>For Republicans, on the other hand, it appears that cybersecurity and inter-departmental information sharing were the laws in which they chose not to show up for ideological (or political) reasons. This could be due to concerns among the conservative base regarding government over-reach and collecting information.</p>
 </div>
 <div id="conclusion" class="section level2">
@@ -602,6 +597,11 @@ just_coffee &lt;- anti_join(just_coffee,coffee_count_prod,by=&#39;ProductId&#39;
     
 
     
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+    </script>
+    <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
     
 
   </body>

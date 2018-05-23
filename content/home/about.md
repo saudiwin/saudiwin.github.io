@@ -19,7 +19,7 @@ weight = 1
 
 # List your qualifications (such as academic degrees).
 [[education.courses]]
-  course = "PhD in Foreign Affairs (In Progress)"
+  course = "PhD in Foreign Affairs"
   institution = "University of Virginia"
   year = 2018
   
@@ -35,10 +35,10 @@ weight = 1
  
 +++
 
-I am a PhD Candidate in the Politics Department at the University of Virginia. My research examines the influential role played by powerful businesspeople in emerging democracies. Through field research and surveys of businesspeople in North Africa, I show how businesspeople's engagement with emerging democracies is especially problematic when business is united against democracy. This outcome is much more likely to occur if a powerful state actor, such as the Egyptian military, is able to force businesspeople to work together to undermine democratization. You can access my CV from [this link](https://virginia.box.com/shared/static/yujb02uas3v721qtvru3xlh9bjo7oct1.pdf).
+For the 2018 - 2019 academic year I will be a postdoctoral researcher at the Niehaus Center for Globalization and Governance at Princeton University. Starting in 2019, I will be an assistant professor of political science at New York University in Abu Dhabi. 
 
-I also incorporate advanced quantitative techniques in my analysis, including Bayesian modeling, time-series econometrics and psychometric measurement models. For more information about my projects using the R statistical software package, including my forthcoming R package `idealstan`, please visit my [Github site](http://www.github.com/saudiwin).
+My main line of empirical research examines the influential role played by powerful businesspeople during political instability. Through field research and surveys of businesspeople in North Africa, I show how businesspeople's engagement with emerging democracies is especially problematic when business is united against democracy. This outcome is much more likely to occur if a powerful state actor, such as the Egyptian military, is able to force businesspeople to work together to undermine democratization. You can access my CV from [this link](https://virginia.box.com/shared/static/yujb02uas3v721qtvru3xlh9bjo7oct1.pdf).
 
-For a summary of my dissertation research, please view the presentation below that I gave as a finalist in the University of Virginia's 3-Minute Thesis competition:
+I also have ongoing projects in Bayesian modeling, time-series econometrics and psychometric measurement models that are aimed at advancing the ability of social scientists to handle noisy observational data. To that end, I am the author of an R package [idealstan](https://cran.r-project.org/web/packages/idealstan/index.html) that implements new forms of the ideal point model (latent variable model) that is particularly applicable to studying public opinion, legislative activity and social media.
 
-{{< youtube I8xcc7B_Uds >}}
+
