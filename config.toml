@@ -1,6 +1,6 @@
 baseurl = "http://www.robertkubinec.com/"
 title = ""
-copyright = "&copy; 2017 Robert Kubinec"
+copyright = "&copy; 2018 Robert Kubinec"
 theme = "hugo-academic"
 enableEmoji = true
 footnotereturnlinkcontents = "<sup>^</sup>"
@@ -22,11 +22,11 @@ defaultContentLanguageInSubdir = false
 
 [params]
   name = "Robert Kubinec"
-  role = "PhD Candidate"
-  organization = "University of Virginia"
-  organization_url = "http://politics.virginia.edu"
+  role = "Postdoctoral Researcher"
+  organization = "Princeton University"
+  organization_url = "https://ncgg-new.princeton.edu/"
   avatar = "portrait.jpg"
-  email = "rmk7xy@virginia.edu"
+  email = "rmk7@nyu.edu"
   address = ""
   office_hours = ""
   phone = ""
@@ -127,7 +127,7 @@ defaultContentLanguageInSubdir = false
   [[params.social]]
     icon = "envelope"
     icon_pack = "fa"
-    link = "mailto:rmk7xy@virginia.edu"
+    link = "mailto:rmk7@nyu.edu"
 
   [[params.social]]
     icon = "twitter"
