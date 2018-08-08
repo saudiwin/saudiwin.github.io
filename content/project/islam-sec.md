@@ -1,19 +1,19 @@
 +++
 # Date this page was created.
-date = "2017-08-05"
+date = "2018-08-08"
 
 # Project title.
-title = "Islamist-Secularist Polarization during the Arab Uprisings"
+title = "When Groups Fall Apart: Measuring Transnational Polarization with Twitter from the Arab Uprisings"
 
 # Project summary to display on homepage.
-summary = "The Arab Uprisings set off lingering resentment between secularists and Islamists. We show how to measure and better understand this phenomenon using IRT modeling and cross-national Twitter datasets."
+summary = "Employing a massive dataset of Tweets from 2013 and a new cross-national and dynamic IRT ideal point model, we identify the distinction between polarization happening within a country's borders and polarization influenced by events in other countries."
 
 # Optional image to display on homepage (relative to `static/img/` folder).
 image_preview = "is_sec_sq.jpg"
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["machine-learning", "deep-learning"]`
-tags = ["fixed effects",'methodology','time series cross section','TSCS']
+tags = ["twitter","methodology","IRT-VAR","IRT"]
 
 # Optional external URL for project (replaces project detail page).
 external_link = ""
@@ -30,4 +30,6 @@ caption = "An Islamic Conference on Violence and Extremism in Beirut"
 
 # Abstract
 
-Scholars continue to disagree as to how far contentious politics diffuses within and across states and by what mechanisms it does so. We use new data and empirical measures to test polarization during and after the Arab Uprisings of 2010-12. After authoritarian governments began to fall, populations in several states began to polarize between secularists and Islamists over what kind of regime was to replace the ousted one. We hypothesize that this Islamist-secularist polarization was triggered by catalytic events (such as Muslim Brotherhood electoral victory in Egypt) and diffused transnationally owing to social media and satellite television, dividing anti-status-quo actors throughout the region. To examine polarization over time, we collect a comprehensive dataset on elite and citizen Twitter accounts across Arab countries after the Arab Spring. Using item-response models, we model polarization as the difference in latent ideological position between elites, and we show how polarization within countries changes over time in response to exogenous political shocks. By doing so we are the first to offer compelling statistical evidence of the endogenous process of polarization across competing ideological groups and states.
+Scholars continue to disagree as to what extent international social connections act as a conduit to influence contentious politics within states. To answer this question, we provide the first rigorous and real-time measure of transnational ideological diffusion across sectarian groups by employing a novel statistical method and new data to capture the transnational dynamics of polarization after the Arab Uprisings of 2011. As authoritarian governments fell, populations in several states polarized between secularists and Islamists over what kind of regime was to replace the ousted one. To examine these endogenous processes, we collected a comprehensive dataset on elite and citizen Twitter accounts in Cairo and Alexandria (Egypt) and Tunis (Tunisia) for a ten-month period during the critical year of 2013. Given the difficulty in directly measuring polarization, we also developed a new model, item response theory-vector autoregression (IRT-VAR), that allows us to incorporate measurement uncertainty while providing over-time estimates of transnational polarization. We show through our model that following catalytic events like regime ousters (such as the military coup against the Muslim Brotherhood in Egypt), we can separate the direct effects of these events on group polarization within a country from indirect transnational feedback happening through the channel of social media. 
+
+*Paper link*: [https://osf.io/preprints/socarxiv/wykmj/]
