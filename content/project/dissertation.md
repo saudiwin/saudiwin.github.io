@@ -34,4 +34,4 @@ Based on my field research, I implemented an online survey targeted at businessp
 
 My work sheds light on the processes through which powerful elite coalitions are built during the chaotic periods of revolutions and democratic transitions. By so doing, I advance the field by pinpointing the conditions under which anti-democratic coalitions are successful, and when they are likely to fail and let democracy survive.
 
-Link to online survey paper [here](https://virginia.box.com/shared/static/u1nj4njocoh3zav8p65xalyviubo9pjg.pdf) and appendix [here](https://virginia.box.com/shared/static/gzzcznq69mnejj3i245pt9qbeta5yhhv.pdf).
+Link to online survey paper [here](https://osf.io/preprints/socarxiv/mrfcu/).
