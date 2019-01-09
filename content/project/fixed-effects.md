@@ -3,7 +3,7 @@
 date = "2017-08-05"
 
 # Project title.
-title = "Rethinking Two-way Fixed Effects: A Generative Model and Simulation for Time-Series Cross-Section Data"
+title = "Why the Two-Way Fixed Effects Model Is Difficult to Interpret, and What to Do About It"
 
 # Project summary to display on homepage.
 summary = "Despite their popularity, linear fixed effects models can be a painful experience for applied researchers. Our paper shows that some of these problems stem from the wide application of the two-way fixed effects model as opposed to the simpler and easier to interpret one-way fixed effects models."
@@ -30,13 +30,6 @@ caption = "The ideal-typical scientist"
 
 # Abstract
 
-What do we compare when we run a fixed effects (FE) model on time-series cross-sectional data? If we place
-the FEs on the cases, then the coefficients compare one time point to another for the same case. If we place
-the FEs on the time points, then the coefficients compare one case to another at the same point in time. If we
-place the FEs on both the cases and time points in the same model — two-way FEs — then this model removes
-confounders that are fixed over time or across cases, but at a cost: the coefficients combine cross-sectional and
-temporal variance in a way that does not clearly describe how cases differ from one another or how these cases
-change over time. We urge researchers to avoid employing two-way FEs and instead to focus on choosing a
-model that directly speaks to the research question of interest.
+The two-way fixed effects (FE) model, an increasingly popular method for modeling time-series cross-section (TSCS) data, is substantively difficult to interpret because the model's estimates are a complex amalgamation of variation in the over-time and cross-sectional effects. We demonstrate this complexity in the two-way FE estimate through mathematical exposition. As an illustration, we develop a novel simulation that enables us to generate TSCS data with varying over-time and cross-sectional effects and examine the behavior of the two-way FE model as these effects change. We demonstrate that the two-way FE model makes specific assumptions about TSCS datasets, and if these assumptions are not met, the model may be unidentified even if substantial variation exists along both dimensions. Because of the difficulty in interpretation, we do not recommend that applied researchers rely on the two-way FE model except for situations in which the assumptions are well-understood, such as the canonical difference-in-difference design.
 
 Link to paper [here](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3062619).
