@@ -6,8 +6,8 @@
     <description>Recent content in Homes on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2017 Robert Kubinec</copyright>
-    <lastBuildDate>Sun, 01 May 2016 00:00:00 +0000</lastBuildDate>
+    <copyright>&amp;copy; 2018 Robert Kubinec</copyright>
+    <lastBuildDate>Wed, 01 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://www.robertkubinec.com/home/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,11 +15,29 @@
     <item>
       <title></title>
       <link>http://www.robertkubinec.com/home/about/</link>
-      <pubDate>Sun, 01 May 2016 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>http://www.robertkubinec.com/home/about/</guid>
       <description>For the 2018 - 2019 academic year I will be a postdoctoral researcher at the Niehaus Center for Globalization and Governance at Princeton University. Starting in 2019, I will be an assistant professor of political science at New York University in Abu Dhabi.
 My main line of empirical research examines the influential role played by powerful businesspeople during political instability. Through field research and surveys of businesspeople in North Africa, I show how businesspeople&amp;rsquo;s engagement with emerging democracies is especially problematic when business is united against democracy.</description>
+    </item>
+    
+    <item>
+      <title>Recent &amp; Upcoming Talks</title>
+      <link>http://www.robertkubinec.com/home/talks/</link>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/home/talks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>http://www.robertkubinec.com/home/projects/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/home/projects/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -37,24 +55,6 @@ My main line of empirical research examines the influential role played by power
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>http://www.robertkubinec.com/home/publications_selected/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Projects</title>
-      <link>http://www.robertkubinec.com/home/projects/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/home/projects/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Recent &amp; Upcoming Talks</title>
-      <link>http://www.robertkubinec.com/home/talks/</link>
-      <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/home/talks/</guid>
       <description></description>
     </item>
     
