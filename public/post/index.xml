@@ -13,6 +13,15 @@
     
     
     <item>
+      <title>Simulating Conjoint Survey Experiments</title>
+      <link>http://www.robertkubinec.com/post/conjoint_power_simulation/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/post/conjoint_power_simulation/</guid>
+      <description>BackgroundConjoint survey experiments have become more popular in political science since the publication of Hainmueller, Hopkins and Yamamoto (2014). However, analysis of the statistical of power of conjoint experiments is difficult using standard parametric techniques because of the use of multiple treatments, interaction effects and paired vignettes. To that end, I have conducted the following simulation experiment to demonstrate the statistical properties of the conjoint experiment for my online survey experiment “North Africa Business Engagement Survey” (see attached pre-analysis plan).</description>
+    </item>
+    
+    <item>
       <title>idealstan: an R Package for Ideal Point Modeling with Stan</title>
       <link>http://www.robertkubinec.com/post/stancon2018_paper/</link>
       <pubDate>Wed, 14 Mar 2018 00:00:00 +0000</pubDate>
