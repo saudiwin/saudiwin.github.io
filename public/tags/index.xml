@@ -6,7 +6,7 @@
     <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2017 Robert Kubinec</copyright>
+    <copyright>&amp;copy; 2018 Robert Kubinec</copyright>
     <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://www.robertkubinec.com/tags/index.xml" rel="self" type="application/rss+xml" />
@@ -49,6 +49,24 @@
     </item>
     
     <item>
+      <title>Irt</title>
+      <link>http://www.robertkubinec.com/tags/irt/</link>
+      <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/tags/irt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Irt Var</title>
+      <link>http://www.robertkubinec.com/tags/irt-var/</link>
+      <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/tags/irt-var/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Item Response Theory</title>
       <link>http://www.robertkubinec.com/tags/item-response-theory/</link>
       <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
@@ -60,7 +78,7 @@
     <item>
       <title>Methodology</title>
       <link>http://www.robertkubinec.com/tags/methodology/</link>
-      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>http://www.robertkubinec.com/tags/methodology/</guid>
       <description></description>
@@ -90,6 +108,15 @@
       <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.robertkubinec.com/tags/tscs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Twitter</title>
+      <link>http://www.robertkubinec.com/tags/twitter/</link>
+      <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/tags/twitter/</guid>
       <description></description>
     </item>
     
