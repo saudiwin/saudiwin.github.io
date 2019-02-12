@@ -17,6 +17,7 @@
       
       <guid>http://www.robertkubinec.com/post/conjoint_power_simulation/</guid>
       <description>
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;background&#34; class=&#34;section level2&#34;&gt;
@@ -30,6 +31,7 @@ require(tidyr)
 require(multiwayvcov)
 require(lmtest)
 require(stringr)
+require(kableExtra)
 
 # package MASS also used but not loaded
 
@@ -290,136 +292,165 @@ long_data %&amp;gt;% ungroup %&amp;gt;%
   slice(1:10) %&amp;gt;% 
   select(-estimation) %&amp;gt;% 
   mutate(estimate=str_replace(estimate,&amp;quot;\\n&amp;quot;,&amp;quot; &amp;quot;)) %&amp;gt;% 
-  knitr::kable(.)&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
+  knitr::kable(.) %&amp;gt;% 
+  kable_styling(font_size = 8)&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;font-size: 8px; margin-left: auto; margin-right: auto;&#34;&gt;
 &lt;thead&gt;
-&lt;tr class=&#34;header&#34;&gt;
-&lt;th align=&#34;right&#34;&gt;sample_size&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;iter&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;estimate&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;result&lt;/th&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+sample_size
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+iter
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+estimate
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+result
+&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;1334.783&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Mean Significant&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1334.783
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Mean Significant Effect
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.6298429
+&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;Effect 0.62&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;98429&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1334.783
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Mean Significant Effect
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.3874088
+&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;1334.783&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Mean Significant&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1334.783
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Mean Significant Effect
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;Effect 0.38&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;74088&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1334.783
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Mean Significant Effect
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.1438379
+&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;1334.783&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Mean Significant&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1334.783
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Mean Significant Effect
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.5653086
+&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;Effect&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;NA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1334.783
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Mean Significant Effect
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.2689594
+&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;1334.783&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Mean Significant&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1334.783
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Mean Significant Effect
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;Effect 1.14&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;38379&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1334.783
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Mean Significant Effect
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;1334.783&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Mean Significant&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1334.783
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Mean Significant Effect
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;Effect 0.56&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;53086&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;1334.783&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Mean Significant&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;Effect 1.26&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;89594&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;1334.783&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Mean Significant&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;Effect&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;NA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;1334.783&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;8&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Mean Significant&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;Effect&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;NA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;1334.783&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;9&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Mean Significant&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;Effect&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;NA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;1334.783&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Mean Significant&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;right&#34;&gt;Effect&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;NA&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;&lt;/td&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1334.783
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Mean Significant Effect
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+NA
+&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
