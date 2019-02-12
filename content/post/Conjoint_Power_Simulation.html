@@ -24,6 +24,7 @@ require(dplyr)
 require(tidyr)
 require(multiwayvcov)
 require(lmtest)
+require(stringr)
 
 # package MASS also used but not loaded
 
@@ -69,7 +70,7 @@ print(head(grid_pair))</code></pre>
 </div>
 <div id="simulation" class="section level2">
 <h2>Simulation</h2>
-<p>To simulate the data, I first sample 14 coefficients <span class="math inline">\(\beta_j\)</span> (one for each treatment <span class="math inline">\(J\)</span>) from a normal distribution with mean zero and standard deviation one. I then randomly sample from two profile combinations for each of the <span class="math inline">\(I\)</span> respondents in accordance with simple random sampling. Two profile combinations, for a total of four tasks <span class="math inline">\(T\)</span>, are selected to reflect the fact that paired vignettes will be shown to each respondent as in the study design. I also sample a pre-treatment covariate <span class="math inline">\(Z_I\)</span> that is a random binomial vector with probability of 0.2 (thus 20% of respondents will fall into this cell). A treatment interaction effect <span class="math inline">\(\beta_z\)</span> is sampled from a normal distribution with mean 0.5 and standard deviation of 0.3 to provide a sampling distribution for the true effect that has a probability 0.048 of being zero or less than zero, or essentially <span class="math inline">\(p&lt;0.05\)</span>. Adding a distribution for <span class="math inline">\(beta_j\)</span> reflects additional uncertainty beyond standard sampling distribution uncertainty. In this case, it represents additional measurement error between the true concept and the indicators used in the survey design.</p>
+<p>To simulate the data, I first sample 14 coefficients <span class="math inline">\(\beta_j\)</span> (one for each treatment <span class="math inline">\(J\)</span>) from a normal distribution with mean zero and standard deviation one. I then randomly sample from two profile combinations for each of the <span class="math inline">\(I\)</span> respondents in accordance with simple random sampling. Two profile combinations, for a total of four tasks <span class="math inline">\(T\)</span>, are selected to reflect the fact that paired vignettes will be shown to each respondent as in the study design. I also sample a pre-treatment covariate <span class="math inline">\(Z_I\)</span> that is a random binomial vector with probability of 0.2 (thus 20% of respondents will fall into this cell). A treatment interaction effect <span class="math inline">\(\beta_z\)</span> is sampled from a normal distribution with mean 0.5 and standard deviation of 0.3 to provide a sampling distribution for the true effect, instead of assuming that the true effect is a fixed population value. Adding a distribution for <span class="math inline">\(\beta_j\)</span> reflects additional uncertainty beyond standard sampling distribution uncertainty. In this case, it represents additional measurement error between the true concept and the indicators used in the survey design.</p>
 <p>I also post-stratify some estimates with a pre-treatment covariate <span class="math inline">\(Q_I\)</span> from a binomial distribution of probability .5 that has a constant effect on <span class="math inline">\(Y_{it}\)</span> of <span class="math inline">\(+1\)</span> (representing a fixed effect).</p>
 <p>I then randomly sample a pair of outcomes, for a total of four tasks <span class="math inline">\(T\)</span>, for <span class="math inline">\(Y_{it}\)</span> in the range of <span class="math inline">\([1,10]\)</span> by drawing a number from a multivariate normal distribution. The mean <span class="math inline">\(\mu_{it}\)</span> of this normal distribution is equal to a linear model with an intercept of 5, the 14 dummy variables for treatment indicators <span class="math inline">\(X_j\)</span> with associated coefficients <span class="math inline">\(\beta_j\)</span>, the interaction <span class="math inline">\(\beta_z\)</span> between the pre-treatment covariate <span class="math inline">\(Z_i\)</span> and <span class="math inline">\(X_{ij}\)</span>, and a post-stratification covariate <span class="math inline">\(Q_i\)</span>. To simplify matters, <span class="math inline">\(Z_i\)</span> is not given its own constituent term as I am not interested in the unconditional effect of <span class="math inline">\(Z_i\)</span> on <span class="math inline">\(Y_{it}\)</span>, only the effect of <span class="math inline">\(X_{ijt}\)</span> on <span class="math inline">\(Y_{it}\)</span> given <span class="math inline">\(Z_{i}\)</span>. Finally, I draw correlated errors from a multivariate normal distribution with mean of zero and length of 4 (equal to the number of tasks per respondent) to produce a <span class="math inline">\(4 \times 4\)</span> variance matrix <span class="math inline">\(\varSigma_i\)</span> with a diagonal of 4 and intra-respondent covariation of 1 (correlation of 0.5).</p>
 <p><span class="math display">\[
@@ -280,7 +281,11 @@ mutate(effect_type=factor(effect_type,levels=c(&#39;total_sig_adj&#39;,
 
 # Plot a sample of the data (too big to display all of it)
 
-knitr::kable(slice(ungroup(long_data),1:10))</code></pre>
+long_data %&gt;% ungroup %&gt;% 
+  slice(1:10) %&gt;% 
+  mutate(estimate=str_replace(estimate,&quot;\\n&quot;,&quot; &quot;),
+                     estimation=str_replace(estimation,&quot;\\n&quot;, &quot; &quot;)) %&gt;% 
+  knitr::kable(.)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -295,281 +300,141 @@ knitr::kable(slice(ungroup(long_data),1:10))</code></pre>
 <tr class="odd">
 <td align="right">1334.783</td>
 <td align="right">1</td>
-<td align="left">Mean</td>
+<td align="left">Mean Significant</td>
 <td align="left"></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
-<td align="right">Significant</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
 <td align="right">Effect No Po</td>
 <td align="right">st-Stra</td>
-<td align="left">tification</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Un-clustered E</td>
-<td align="right">rrors</td>
-<td align="left">0.6298429</td>
-<td align="left"></td>
+<td align="left">tification Un-clustered Er</td>
+<td align="left">rors 0.6298429</td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">1334.783</td>
 <td align="right">2</td>
-<td align="left">Mean</td>
+<td align="left">Mean Significant</td>
 <td align="left"></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
-<td align="right">Significant</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
 <td align="right">Effect No Po</td>
 <td align="right">st-Stra</td>
-<td align="left">tification</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Un-clustered E</td>
-<td align="right">rrors</td>
-<td align="left">0.3874088</td>
-<td align="left"></td>
+<td align="left">tification Un-clustered Er</td>
+<td align="left">rors 0.3874088</td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">1334.783</td>
 <td align="right">3</td>
-<td align="left">Mean</td>
+<td align="left">Mean Significant</td>
 <td align="left"></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
-<td align="right">Significant</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
 <td align="right">Effect No Po</td>
 <td align="right">st-Stra</td>
-<td align="left">tification</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Un-clustered E</td>
-<td align="right">rrors</td>
-<td align="left">NA</td>
-<td align="left"></td>
+<td align="left">tification Un-clustered Er</td>
+<td align="left">rors NA</td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">1334.783</td>
 <td align="right">4</td>
-<td align="left">Mean</td>
+<td align="left">Mean Significant</td>
 <td align="left"></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
-<td align="right">Significant</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
 <td align="right">Effect No Po</td>
 <td align="right">st-Stra</td>
-<td align="left">tification</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Un-clustered E</td>
-<td align="right">rrors</td>
-<td align="left">1.1438379</td>
-<td align="left"></td>
+<td align="left">tification Un-clustered Er</td>
+<td align="left">rors 1.1438379</td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">1334.783</td>
 <td align="right">5</td>
-<td align="left">Mean</td>
+<td align="left">Mean Significant</td>
 <td align="left"></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
-<td align="right">Significant</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
 <td align="right">Effect No Po</td>
 <td align="right">st-Stra</td>
-<td align="left">tification</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Un-clustered E</td>
-<td align="right">rrors</td>
-<td align="left">0.5653086</td>
-<td align="left"></td>
+<td align="left">tification Un-clustered Er</td>
+<td align="left">rors 0.5653086</td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">1334.783</td>
 <td align="right">6</td>
-<td align="left">Mean</td>
+<td align="left">Mean Significant</td>
 <td align="left"></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
-<td align="right">Significant</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
 <td align="right">Effect No Po</td>
 <td align="right">st-Stra</td>
-<td align="left">tification</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Un-clustered E</td>
-<td align="right">rrors</td>
-<td align="left">1.2689594</td>
-<td align="left"></td>
+<td align="left">tification Un-clustered Er</td>
+<td align="left">rors 1.2689594</td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">1334.783</td>
 <td align="right">7</td>
-<td align="left">Mean</td>
+<td align="left">Mean Significant</td>
 <td align="left"></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
-<td align="right">Significant</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
 <td align="right">Effect No Po</td>
 <td align="right">st-Stra</td>
-<td align="left">tification</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Un-clustered E</td>
-<td align="right">rrors</td>
-<td align="left">NA</td>
-<td align="left"></td>
+<td align="left">tification Un-clustered Er</td>
+<td align="left">rors NA</td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">1334.783</td>
 <td align="right">8</td>
-<td align="left">Mean</td>
+<td align="left">Mean Significant</td>
 <td align="left"></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
-<td align="right">Significant</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
 <td align="right">Effect No Po</td>
 <td align="right">st-Stra</td>
-<td align="left">tification</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Un-clustered E</td>
-<td align="right">rrors</td>
-<td align="left">NA</td>
-<td align="left"></td>
+<td align="left">tification Un-clustered Er</td>
+<td align="left">rors NA</td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">1334.783</td>
 <td align="right">9</td>
-<td align="left">Mean</td>
+<td align="left">Mean Significant</td>
 <td align="left"></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
-<td align="right">Significant</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
 <td align="right">Effect No Po</td>
 <td align="right">st-Stra</td>
-<td align="left">tification</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Un-clustered E</td>
-<td align="right">rrors</td>
-<td align="left">NA</td>
-<td align="left"></td>
+<td align="left">tification Un-clustered Er</td>
+<td align="left">rors NA</td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">1334.783</td>
 <td align="right">10</td>
-<td align="left">Mean</td>
+<td align="left">Mean Significant</td>
 <td align="left"></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
-<td align="right">Significant</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
 <td align="right">Effect No Po</td>
 <td align="right">st-Stra</td>
-<td align="left">tification</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Un-clustered E</td>
-<td align="right">rrors</td>
-<td align="left">NA</td>
-<td align="left"></td>
+<td align="left">tification Un-clustered Er</td>
+<td align="left">rors NA</td>
 <td align="right"></td>
 </tr>
 </tbody>

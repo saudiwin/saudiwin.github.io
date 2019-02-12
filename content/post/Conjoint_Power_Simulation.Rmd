@@ -29,6 +29,7 @@ require(dplyr)
 require(tidyr)
 require(multiwayvcov)
 require(lmtest)
+require(stringr)
 
 # package MASS also used but not loaded
 
@@ -83,7 +84,7 @@ print(head(grid_pair))
 
 ## Simulation
 
-To simulate the data, I first sample 14 coefficients $\beta_j$ (one for each treatment $J$) from a normal distribution with mean zero and standard deviation one. I then randomly sample from two profile combinations for each of the $I$ respondents in accordance with simple random sampling. Two profile combinations, for a total of four tasks $T$, are selected to reflect the fact that paired vignettes will be shown to each respondent as in the study design. I also sample a pre-treatment covariate $Z_I$ that is a random binomial vector with probability of 0.2 (thus 20% of respondents will fall into this cell). A treatment interaction effect $\beta_z$ is sampled from a normal distribution with mean 0.5 and standard deviation of 0.3 to provide a sampling distribution for the true effect that has a probability `r round(pnorm(0,mean=0.5,sd=0.3),3)` of being zero or less than zero, or essentially $p<0.05$. Adding a distribution for $beta_j$ reflects additional uncertainty beyond standard sampling distribution uncertainty. In this case, it represents additional measurement error between the true concept and the indicators used in the survey design. 
+To simulate the data, I first sample 14 coefficients $\beta_j$ (one for each treatment $J$) from a normal distribution with mean zero and standard deviation one. I then randomly sample from two profile combinations for each of the $I$ respondents in accordance with simple random sampling. Two profile combinations, for a total of four tasks $T$, are selected to reflect the fact that paired vignettes will be shown to each respondent as in the study design. I also sample a pre-treatment covariate $Z_I$ that is a random binomial vector with probability of 0.2 (thus 20% of respondents will fall into this cell). A treatment interaction effect $\beta_z$ is sampled from a normal distribution with mean 0.5 and standard deviation of 0.3 to provide a sampling distribution for the true effect, instead of assuming that the true effect is a fixed population value. Adding a distribution for $\beta_j$ reflects additional uncertainty beyond standard sampling distribution uncertainty. In this case, it represents additional measurement error between the true concept and the indicators used in the survey design. 
 
 I also post-stratify some estimates with a pre-treatment covariate $Q_I$ from a binomial distribution of probability .5 that has a constant effect on $Y_{it}$ of $+1$ (representing a fixed effect).
 
@@ -314,7 +315,11 @@ mutate(effect_type=factor(effect_type,levels=c('total_sig_adj',
 
 # Plot a sample of the data (too big to display all of it)
 
-knitr::kable(slice(ungroup(long_data),1:10))
+long_data %>% ungroup %>% 
+  slice(1:10) %>% 
+  mutate(estimate=str_replace(estimate,"\\n"," "),
+                     estimation=str_replace(estimation,"\\n", " ")) %>% 
+  knitr::kable(.)
 
 
 ```
