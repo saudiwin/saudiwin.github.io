@@ -319,7 +319,7 @@ long_data %>% ungroup %>%
   slice(1:10) %>% 
   mutate(estimate=str_replace(estimate,"\\n"," "),
                      estimation=str_replace(estimation,"\\n", " ")) %>% 
-  knitr::kable(.)
+  DT::datatable(.)
 
 
 ```
