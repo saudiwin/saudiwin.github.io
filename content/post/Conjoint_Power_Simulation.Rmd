@@ -317,8 +317,8 @@ mutate(effect_type=factor(effect_type,levels=c('total_sig_adj',
 
 long_data %>% ungroup %>% 
   slice(1:10) %>% 
-  mutate(estimate=str_replace(estimate,"\\n"," "),
-                     estimation=str_replace(estimation,"\\n", " ")) %>% 
+  select(-estimation) %>% 
+  mutate(estimate=str_replace(estimate,"\\n"," ")) %>% 
   DT::datatable(.)
 
 
