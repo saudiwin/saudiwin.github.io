@@ -12,6 +12,15 @@ header:
   date: "2019-02-11T00:00:00"
 ---
 
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="/rmarkdown-libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/datatables-binding/datatables.js"></script>
+<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/dt-core/js/jquery.dataTables.min.js"></script>
+<link href="/rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
 
 
 <div id="background" class="section level2">
@@ -285,160 +294,9 @@ long_data %&gt;% ungroup %&gt;%
   slice(1:10) %&gt;% 
   mutate(estimate=str_replace(estimate,&quot;\\n&quot;,&quot; &quot;),
                      estimation=str_replace(estimation,&quot;\\n&quot;, &quot; &quot;)) %&gt;% 
-  knitr::kable(.)</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="right">sample_size</th>
-<th align="right">iter</th>
-<th align="left">estimate</th>
-<th align="left">estimation</th>
-<th align="right">result</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">1</td>
-<td align="left">Mean Significant</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect No Po</td>
-<td align="right">st-Stra</td>
-<td align="left">tification Un-clustered Er</td>
-<td align="left">rors 0.6298429</td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">2</td>
-<td align="left">Mean Significant</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect No Po</td>
-<td align="right">st-Stra</td>
-<td align="left">tification Un-clustered Er</td>
-<td align="left">rors 0.3874088</td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">3</td>
-<td align="left">Mean Significant</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect No Po</td>
-<td align="right">st-Stra</td>
-<td align="left">tification Un-clustered Er</td>
-<td align="left">rors NA</td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">4</td>
-<td align="left">Mean Significant</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect No Po</td>
-<td align="right">st-Stra</td>
-<td align="left">tification Un-clustered Er</td>
-<td align="left">rors 1.1438379</td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">5</td>
-<td align="left">Mean Significant</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect No Po</td>
-<td align="right">st-Stra</td>
-<td align="left">tification Un-clustered Er</td>
-<td align="left">rors 0.5653086</td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">6</td>
-<td align="left">Mean Significant</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect No Po</td>
-<td align="right">st-Stra</td>
-<td align="left">tification Un-clustered Er</td>
-<td align="left">rors 1.2689594</td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">7</td>
-<td align="left">Mean Significant</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect No Po</td>
-<td align="right">st-Stra</td>
-<td align="left">tification Un-clustered Er</td>
-<td align="left">rors NA</td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">8</td>
-<td align="left">Mean Significant</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect No Po</td>
-<td align="right">st-Stra</td>
-<td align="left">tification Un-clustered Er</td>
-<td align="left">rors NA</td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">9</td>
-<td align="left">Mean Significant</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect No Po</td>
-<td align="right">st-Stra</td>
-<td align="left">tification Un-clustered Er</td>
-<td align="left">rors NA</td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">10</td>
-<td align="left">Mean Significant</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect No Po</td>
-<td align="right">st-Stra</td>
-<td align="left">tification Un-clustered Er</td>
-<td align="left">rors NA</td>
-<td align="right"></td>
-</tr>
-</tbody>
-</table>
+  DT::datatable(.)</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565],[1,2,3,4,5,6,7,8,9,10],["Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect"],["No Post-Stratification Un-clustered Errors\n","No Post-Stratification Un-clustered Errors\n","No Post-Stratification Un-clustered Errors\n","No Post-Stratification Un-clustered Errors\n","No Post-Stratification Un-clustered Errors\n","No Post-Stratification Un-clustered Errors\n","No Post-Stratification Un-clustered Errors\n","No Post-Stratification Un-clustered Errors\n","No Post-Stratification Un-clustered Errors\n","No Post-Stratification Un-clustered Errors\n"],[0.629842925165533,0.387408765931579,null,1.14383793043487,0.565308620709327,1.26895936590683,null,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>sample_size<\/th>\n      <th>iter<\/th>\n      <th>estimate<\/th>\n      <th>estimation<\/th>\n      <th>result<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="plotting" class="section level2">
 <h2>Plotting</h2>
