@@ -313,11 +313,9 @@ mutate(effect_type=factor(effect_type,levels=c('total_sig_adj',
 
 
 # Plot a sample of the data (too big to display all of it)
-if(nrow(long_data)>20000) {
-  DT::datatable(sample_n(ungroup(long_data),10000),rownames=FALSE)
-} else {
-  DT::datatable(long_data,rownames=FALSE)  
-}
+
+knitr::kable(slice(ungroup(long_data),1:10))
+
 
 ```
 
@@ -373,7 +371,7 @@ filter(long_data,!grepl('Un-clustered',estimation)) %>% ggplot(aes(y=result,x=sa
 ggsave('post_clust_err.png',units='in',width=6)
 ```
 
-Finally, I also report average numbers of significant coefficients for the 14 treatments. Given that the 14 treatments were sampled from a normal distribution with mean zero, in expectation 95% of estimates should be statisticall significant. While that upper limit is reached only in high sample numbers, it looks like the ratio for treatment effects reaches an acceptable level of 70 percent at about 500 sample respondents. Also, post-stratifying un-clustered models results in effects that are reported as significant at much higher rates, as would follow from the previous results about post-stratification.
+Finally, I also report average numbers of significant coefficients for the 14 treatments. Given that the 14 treatments were sampled from a normal distribution with prior density in the positive values with a meaan of 0.5, in expectation 95% of estimates should be statisticall significant. While that upper limit is reached only in high sample numbers, it looks like the ratio for treatment effects reaches an acceptable level of 70 percent at about 500 sample respondents. Also, post-stratifying un-clustered models results in effects that are reported as significant at much higher rates, as would follow from the previous results about post-stratification.
 
 ```{r, message=FALSE, warning=FALSE,fig.height=7}
 g_title <- guide_legend(title='')
