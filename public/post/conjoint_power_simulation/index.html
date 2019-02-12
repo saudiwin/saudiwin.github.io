@@ -206,15 +206,6 @@
 
     <div class="article-style" itemprop="articleBody">
       
-<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
-<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
-<link href="/rmarkdown-libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/datatables-binding/datatables.js"></script>
-<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/dt-core/js/jquery.dataTables.min.js"></script>
-<link href="/rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
 
 
 <div id="background" class="section level2">
@@ -488,9 +479,139 @@ long_data %&gt;% ungroup %&gt;%
   slice(1:10) %&gt;% 
   select(-estimation) %&gt;% 
   mutate(estimate=str_replace(estimate,&quot;\\n&quot;,&quot; &quot;)) %&gt;% 
-  DT::datatable(.)</code></pre>
-<div id="htmlwidget-1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565,1334.78260869565],[1,2,3,4,5,6,7,8,9,10],["Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect","Mean Significant\nEffect"],[0.629842925165533,0.387408765931579,null,1.14383793043487,0.565308620709327,1.26895936590683,null,null,null,null]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>sample_size<\/th>\n      <th>iter<\/th>\n      <th>estimate<\/th>\n      <th>result<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+  knitr::kable(.)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">sample_size</th>
+<th align="right">iter</th>
+<th align="left">estimate</th>
+<th align="right">result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1334.783</td>
+<td align="right">1</td>
+<td align="left">Mean Significant</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="right">Effect 0.62</td>
+<td align="right">98429</td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="right">1334.783</td>
+<td align="right">2</td>
+<td align="left">Mean Significant</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="right">Effect 0.38</td>
+<td align="right">74088</td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="right">1334.783</td>
+<td align="right">3</td>
+<td align="left">Mean Significant</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="right">Effect</td>
+<td align="right">NA</td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="right">1334.783</td>
+<td align="right">4</td>
+<td align="left">Mean Significant</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="right">Effect 1.14</td>
+<td align="right">38379</td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="right">1334.783</td>
+<td align="right">5</td>
+<td align="left">Mean Significant</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="right">Effect 0.56</td>
+<td align="right">53086</td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="right">1334.783</td>
+<td align="right">6</td>
+<td align="left">Mean Significant</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="right">Effect 1.26</td>
+<td align="right">89594</td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="right">1334.783</td>
+<td align="right">7</td>
+<td align="left">Mean Significant</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="right">Effect</td>
+<td align="right">NA</td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="right">1334.783</td>
+<td align="right">8</td>
+<td align="left">Mean Significant</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="right">Effect</td>
+<td align="right">NA</td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="right">1334.783</td>
+<td align="right">9</td>
+<td align="left">Mean Significant</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="right">Effect</td>
+<td align="right">NA</td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="right">1334.783</td>
+<td align="right">10</td>
+<td align="left">Mean Significant</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="right">Effect</td>
+<td align="right">NA</td>
+<td align="left"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="plotting" class="section level2">
 <h2>Plotting</h2>
