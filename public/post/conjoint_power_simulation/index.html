@@ -206,6 +206,7 @@
 
     <div class="article-style" itemprop="articleBody">
       
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
 
 
 <div id="background" class="section level2">
@@ -219,6 +220,7 @@ require(tidyr)
 require(multiwayvcov)
 require(lmtest)
 require(stringr)
+require(kableExtra)
 
 # package MASS also used but not loaded
 
@@ -479,136 +481,165 @@ long_data %&gt;% ungroup %&gt;%
   slice(1:10) %&gt;% 
   select(-estimation) %&gt;% 
   mutate(estimate=str_replace(estimate,&quot;\\n&quot;,&quot; &quot;)) %&gt;% 
-  knitr::kable(.)</code></pre>
-<table>
+  knitr::kable(.) %&gt;% 
+  kable_styling(font_size = 8)</code></pre>
+<table class="table" style="font-size: 8px; margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="right">sample_size</th>
-<th align="right">iter</th>
-<th align="left">estimate</th>
-<th align="right">result</th>
+<tr>
+<th style="text-align:right;">
+sample_size
+</th>
+<th style="text-align:right;">
+iter
+</th>
+<th style="text-align:left;">
+estimate
+</th>
+<th style="text-align:right;">
+result
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">1</td>
-<td align="left">Mean Significant</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+1334.783
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Mean Significant Effect
+</td>
+<td style="text-align:right;">
+0.6298429
+</td>
 </tr>
-<tr class="even">
-<td align="right">Effect 0.62</td>
-<td align="right">98429</td>
-<td align="left"></td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+1334.783
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Mean Significant Effect
+</td>
+<td style="text-align:right;">
+0.3874088
+</td>
 </tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">2</td>
-<td align="left">Mean Significant</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+1334.783
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Mean Significant Effect
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="right">Effect 0.38</td>
-<td align="right">74088</td>
-<td align="left"></td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+1334.783
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Mean Significant Effect
+</td>
+<td style="text-align:right;">
+1.1438379
+</td>
 </tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">3</td>
-<td align="left">Mean Significant</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+1334.783
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+Mean Significant Effect
+</td>
+<td style="text-align:right;">
+0.5653086
+</td>
 </tr>
-<tr class="even">
-<td align="right">Effect</td>
-<td align="right">NA</td>
-<td align="left"></td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+1334.783
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+Mean Significant Effect
+</td>
+<td style="text-align:right;">
+1.2689594
+</td>
 </tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">4</td>
-<td align="left">Mean Significant</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+1334.783
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+Mean Significant Effect
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="right">Effect 1.14</td>
-<td align="right">38379</td>
-<td align="left"></td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+1334.783
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+Mean Significant Effect
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">5</td>
-<td align="left">Mean Significant</td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+1334.783
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+Mean Significant Effect
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="right">Effect 0.56</td>
-<td align="right">53086</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">6</td>
-<td align="left">Mean Significant</td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect 1.26</td>
-<td align="right">89594</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">7</td>
-<td align="left">Mean Significant</td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect</td>
-<td align="right">NA</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">8</td>
-<td align="left">Mean Significant</td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect</td>
-<td align="right">NA</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">9</td>
-<td align="left">Mean Significant</td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect</td>
-<td align="right">NA</td>
-<td align="left"></td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">1334.783</td>
-<td align="right">10</td>
-<td align="left">Mean Significant</td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">Effect</td>
-<td align="right">NA</td>
-<td align="left"></td>
-<td align="right"></td>
+<tr>
+<td style="text-align:right;">
+1334.783
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+Mean Significant Effect
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
 </tbody>
 </table>

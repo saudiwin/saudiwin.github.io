@@ -30,6 +30,7 @@ require(tidyr)
 require(multiwayvcov)
 require(lmtest)
 require(stringr)
+require(kableExtra)
 
 # package MASS also used but not loaded
 
@@ -319,7 +320,8 @@ long_data %>% ungroup %>%
   slice(1:10) %>% 
   select(-estimation) %>% 
   mutate(estimate=str_replace(estimate,"\\n"," ")) %>% 
-  knitr::kable(.)
+  knitr::kable(.) %>% 
+  kable_styling(font_size = 8)
 
 
 ```
