@@ -13,8 +13,9 @@ header:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
+
 
 ```{r, message=FALSE, warning=FALSE}
 #Required packages
@@ -43,6 +44,7 @@ if(.Platform$OS.type=='windows') {
 
 ```
 
+
 ## Background
 
 Conjoint survey experiments have become more popular in political science since the publication of [Hainmueller, Hopkins and Yamamoto (2014)](http://hdl.handle.net/1721.1/84064). However, analysis of the statistical of power of conjoint experiments is difficult using standard parametric techniques because of the use of multiple treatments, interaction effects and paired vignettes. To that end, I have conducted the following simulation experiment to demonstrate the statistical properties of the conjoint experiment for my online survey experiment "North Africa Business Engagement Survey" (see attached pre-analysis plan). I employ both traditional power measures and newer statistics from [Gelman and Carlin (2014)](http://journals.sagepub.com/doi/abs/10.1177/1745691614551642) reflecting inferential errors that are particularly apt for experiments in the social sciences.
@@ -61,7 +63,7 @@ num_resp <- 2700
 # Number of iterations (breaks in sample size)
 num_breaks <- 300
 # Number of simulations to run per iteration
-n_sims <- 500
+n_sims <- 1000
 
 ```
 
@@ -355,7 +357,7 @@ filter(long_data,grepl('Un-clustered',estimation)) %>% ggplot(aes(y=result,x=sam
 ggsave('post_unclust_err.png',units='in',width=6)
 ```
 
-Post-stratification appears to have a similar effect on clustered error estimations, although the differences are smaller. In smaller samples, post-stratified estimates do have smaller S-errors.
+Post-stratification appears to have a similar effect on clustered error estimations, although the differences are smaller. In smaller samples, post-stratified estimates do have smaller M-errors.
 
 ```{r unclustered_plot, message=FALSE, warning=FALSE,fig.height=7}
 g_title <- guide_legend(title='')
