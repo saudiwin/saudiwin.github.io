@@ -13,6 +13,18 @@
     
     
     <item>
+      <title>idealstan Vignette: Time-Varying Ideal Points</title>
+      <link>http://www.robertkubinec.com/post/time_series/</link>
+      <pubDate>Wed, 20 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/post/time_series/</guid>
+      <description>Note: To report bugs with the package, please file an issue on the Github page.
+If you use this package, please cite the following:
+Kubinec, Robert. “Generalized Ideal Point Models for Time-Varying and Missing-Data Inference”. Working Paper.
+This package implements to kinds of time-varying ideal point models. Because these time-varying models are independent of the specific outcome used, time-varying ideal point models can be fit with any outcome/response supported by the package, including binary, ordinal, counts, continuous and positive-continuous data, in addition to the latent space model for binary data.</description>
+    </item>
+    
+    <item>
       <title>Simulating Conjoint Survey Experiments</title>
       <link>http://www.robertkubinec.com/post/conjoint_power_simulation/</link>
       <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
