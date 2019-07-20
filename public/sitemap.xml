@@ -1,5 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/</loc>
+      <lastmod>2019-02-20T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
   
     
     
@@ -41,8 +50,68 @@
     
     <url>
     
+      <loc>http://www.robertkubinec.com/tags/irt/</loc>
+      <lastmod>2018-08-08T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/tags/irt-var/</loc>
+      <lastmod>2018-08-08T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/project/</loc>
+      <lastmod>2018-08-08T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/tags/</loc>
+      <lastmod>2018-08-08T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>http://www.robertkubinec.com/project/islam-sec/</loc>
       <lastmod>2018-08-08T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/tags/methodology/</loc>
+      <lastmod>2018-08-08T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/tags/twitter/</loc>
+      <lastmod>2018-08-08T00:00:00+00:00</lastmod>
+      <priority>0</priority>
     </url>
     
   
@@ -104,6 +173,16 @@
     
     <url>
     
+      <loc>http://www.robertkubinec.com/tags/tscs/</loc>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>http://www.robertkubinec.com/project/fixed-effects/</loc>
       <lastmod>2017-08-05T00:00:00+00:00</lastmod>
     </url>
@@ -113,8 +192,68 @@
     
     <url>
     
+      <loc>http://www.robertkubinec.com/tags/dissertation/</loc>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/tags/fixed-effects/</loc>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/tags/time-series-cross-section/</loc>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>http://www.robertkubinec.com/project/bayesian-irt/</loc>
       <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/tags/bayesian/</loc>
+      <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/tags/item-response-theory/</loc>
+      <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://www.robertkubinec.com/tags/rollcall/</loc>
+      <lastmod>2017-08-04T00:00:00+00:00</lastmod>
+      <priority>0</priority>
     </url>
     
   
@@ -149,25 +288,6 @@
     
     <url>
     
-      <loc>http://www.robertkubinec.com/publication/tunisia-monkey-cage/</loc>
-      <lastmod>2016-12-19T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/</loc>
-      <lastmod>2018-08-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
       <loc>http://www.robertkubinec.com/publication_types/4/</loc>
       <lastmod>2016-12-19T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -178,88 +298,8 @@
     
     <url>
     
-      <loc>http://www.robertkubinec.com/tags/bayesian/</loc>
-      <lastmod>2017-08-04T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/categories/</loc>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/tags/dissertation/</loc>
-      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/tags/fixed-effects/</loc>
-      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/tags/irt/</loc>
-      <lastmod>2018-08-08T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/tags/irt-var/</loc>
-      <lastmod>2018-08-08T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/tags/item-response-theory/</loc>
-      <lastmod>2017-08-04T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/tags/methodology/</loc>
-      <lastmod>2018-08-08T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/project/</loc>
-      <lastmod>2018-08-08T00:00:00+00:00</lastmod>
-      <priority>0</priority>
+      <loc>http://www.robertkubinec.com/publication/tunisia-monkey-cage/</loc>
+      <lastmod>2016-12-19T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -277,48 +317,7 @@
     
     <url>
     
-      <loc>http://www.robertkubinec.com/tags/rollcall/</loc>
-      <lastmod>2017-08-04T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/tags/</loc>
-      <lastmod>2017-01-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/tags/time-series-cross-section/</loc>
-      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/tags/tscs/</loc>
-      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://www.robertkubinec.com/tags/twitter/</loc>
-      <lastmod>2018-08-08T00:00:00+00:00</lastmod>
+      <loc>http://www.robertkubinec.com/categories/</loc>
       <priority>0</priority>
     </url>
     

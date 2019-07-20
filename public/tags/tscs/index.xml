@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tscs on </title>
+    <title>TSCS on </title>
     <link>http://www.robertkubinec.com/tags/tscs/</link>
-    <description>Recent content in Tscs on </description>
+    <description>Recent content in TSCS on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018 Robert Kubinec</copyright>
@@ -18,7 +18,7 @@
       <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.robertkubinec.com/project/fixed-effects/</guid>
-      <description>Abstract The two-way fixed effects (FE) model, an increasingly popular method for modeling time-series cross-section (TSCS) data, is substantively difficult to interpret because the model&amp;rsquo;s estimates are a complex amalgamation of variation in the over-time and cross-sectional effects. We demonstrate this complexity in the two-way FE estimate through mathematical exposition. As an illustration, we develop a novel simulation that enables us to generate TSCS data with varying over-time and cross-sectional effects and examine the behavior of the two-way FE model as these effects change.</description>
+      <description>Despite their popularity, linear fixed effects models can be a painful experience for applied researchers. Our paper shows that some of these problems stem from the wide application of the two-way fixed effects model as opposed to the simpler and easier to interpret one-way fixed effects models.</description>
     </item>
     
   </channel>

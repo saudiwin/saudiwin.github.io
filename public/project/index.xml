@@ -18,7 +18,7 @@
       <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>http://www.robertkubinec.com/project/islam-sec/</guid>
-      <description>Abstract Scholars continue to disagree as to what extent international social connections act as a conduit to influence contentious politics within states. To answer this question, we provide the first rigorous and real-time measure of transnational ideological diffusion across sectarian groups by employing a novel statistical method and new data to capture the transnational dynamics of polarization after the Arab Uprisings of 2011. As authoritarian governments fell, populations in several states polarized between secularists and Islamists over what kind of regime was to replace the ousted one.</description>
+      <description>Employing a massive dataset of Tweets from 2013 and a new cross-national and dynamic IRT ideal point model, we identify the distinction between polarization happening within a country&amp;rsquo;s borders and polarization influenced by events in other countries.</description>
     </item>
     
     <item>
@@ -27,7 +27,7 @@
       <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.robertkubinec.com/project/dissertation/</guid>
-      <description>In my dissertation, I theorize that pro-authoritarian coalitions are more successful at undermining transitional democracies when elites who make up the coalition are strongly unified around the goal of regime change as opposed to lesser political aims. In Tunisia, where I undertook field research for eight months, I found that there are plenty of elites who pine for a return to the days of the dictator Ben Ali, and that these elites even went so far as to form a political party, Nidaa Tounes, that obtained the greatest numbers of seats in Tunisia&amp;rsquo;s parliament in 2014.</description>
+      <description>My dissertation is a comprehensive evaluation of how businesses build coalitions for and against democratization in North Africa. I mix intensive field research with online survey experiments to gain new insights into how businesspeople influence politics in emerging democracies.</description>
     </item>
     
     <item>
@@ -36,7 +36,7 @@
       <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.robertkubinec.com/project/fixed-effects/</guid>
-      <description>Abstract The two-way fixed effects (FE) model, an increasingly popular method for modeling time-series cross-section (TSCS) data, is substantively difficult to interpret because the model&amp;rsquo;s estimates are a complex amalgamation of variation in the over-time and cross-sectional effects. We demonstrate this complexity in the two-way FE estimate through mathematical exposition. As an illustration, we develop a novel simulation that enables us to generate TSCS data with varying over-time and cross-sectional effects and examine the behavior of the two-way FE model as these effects change.</description>
+      <description>Despite their popularity, linear fixed effects models can be a painful experience for applied researchers. Our paper shows that some of these problems stem from the wide application of the two-way fixed effects model as opposed to the simpler and easier to interpret one-way fixed effects models.</description>
     </item>
     
     <item>
@@ -45,7 +45,7 @@
       <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.robertkubinec.com/project/bayesian-irt/</guid>
-      <description>Estimating legislator ideal points from roll-call voting data has become a powerful tool for understanding legislative behavior and polarization within legislatures over time. However, the dominant approaches in the field tend to ignore both absences and abstentions in roll-call votes even though it is very likely that absences and abstentions represent a form of strategic behavior. In emerging democracies like Tunisia, this lacuna is particularly problematic because legislator absence may occur very frequently, and resulting estimates that exclude absences are either very imprecise or significantly biased.</description>
+      <description>I put forward a Bayesian IRT model that is capable of handling legislator absence as a form of data that can increase the precision of ideal point estimates.</description>
     </item>
     
   </channel>

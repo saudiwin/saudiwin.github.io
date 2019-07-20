@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rollcall on </title>
+    <title>rollcall on </title>
     <link>http://www.robertkubinec.com/tags/rollcall/</link>
-    <description>Recent content in Rollcall on </description>
+    <description>Recent content in rollcall on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018 Robert Kubinec</copyright>
@@ -18,7 +18,7 @@
       <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>http://www.robertkubinec.com/project/bayesian-irt/</guid>
-      <description>Estimating legislator ideal points from roll-call voting data has become a powerful tool for understanding legislative behavior and polarization within legislatures over time. However, the dominant approaches in the field tend to ignore both absences and abstentions in roll-call votes even though it is very likely that absences and abstentions represent a form of strategic behavior. In emerging democracies like Tunisia, this lacuna is particularly problematic because legislator absence may occur very frequently, and resulting estimates that exclude absences are either very imprecise or significantly biased.</description>
+      <description>I put forward a Bayesian IRT model that is capable of handling legislator absence as a form of data that can increase the precision of ideal point estimates.</description>
     </item>
     
   </channel>

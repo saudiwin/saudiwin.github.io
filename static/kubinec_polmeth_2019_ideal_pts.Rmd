@@ -1,0 +1,195 @@
+---
+title: "Generalized Ideal Point Models for Time-Varying and Missing-data Inference"
+author: Robert Kubinec<br>New York University Abu Dhabi
+date: "July 20, 2019"
+output: 
+  revealjs::revealjs_presentation:
+    incremental: true
+
+---
+
+```{r setup, include=FALSE}
+
+# please install this version of idealstan on github to ensure compatibility with this document
+
+# devtools::install_github('saudiwin/idealstan',
+#                           ref='cf3cb51fb620fa48d49fb602ad6a747782e964af')
+
+require(dplyr)
+require(ggplot2)
+require(forcats)
+require(tidyr)
+require(readr)
+require(idealstan)
+require(sf)
+knitr::opts_chunk$set(echo = FALSE,fig.align = 'center',fig.width=8,fig.height=5,warn=FALSE,message=F)
+```
+
+## Broad Overview
+
+- Ideal point models are widely used but generally for only a single empirical application: ideology.
+- It can be difficult to use ideal point models outside of their original domain of scaling rollcall matrices.
+- The growth in the number and size of datasets amenable to scaling creates a demand for better software.
+    
+    
+## Required Meme
+
+![](cowbell.jpg)
+
+## Ideal Point Models
+
+- Ideal point models are based on a very simple social choice model: pick A if A is closer to your ideal point than B. 
+- Particular formulations vary, including DW-NOMINATE, latent space model, and the CJR item-response theory formulation:
+
+$$
+Y_{ij} = \alpha_i\gamma_j - \beta_j
+$$
+
+For $i$ rows and $j$ columns where $i$ are the "persons" and $j$ are the items, such as bills.
+
+## Advantages of Ideal Point Models
+
+- Ideal point models compress data down to a uni- or multi-dimensional representation of the social choice process.
+- Widely applicable when people choose based on some latent construct.
+- Interpreted as ideology in the legislature, but could be anything: think of it as a way of estimating social preferences.
+- Two pieces of information: 
+    - value of $\alpha_i$ is the person's score on the latent scale
+    - value of $\gamma_j$ is the discrimination, or relative predictive power, of the item vis-a-vis the latent scale
+    
+## Extension 1: Missing Data
+
+People can either be absent $r=0$ or show up to vote $r=1$:
+
+
+
+\begin{equation}
+\scriptstyle
+
+	L(Y_{ijr}|\alpha_i,\gamma_j,\beta_j,\nu_j,\omega_j) = 
+	\prod^{I}_{i=1} \prod^{J}_{j=1}
+	\begin{cases}
+	\scriptstyle
+	\zeta(\alpha_{i}'\nu_j - \omega_j ) & \text{if } r=0, \text{ and} \\
+	(1-\zeta({\alpha_{i}'\nu_j - \omega_j}))L(Y_{ij}|\alpha_i,\gamma_j,\beta_j) & \text{if } r=1
+	\end{cases}
+
+\end{equation}
+
+where $Pr(r=0)=\zeta(\alpha_{i}'\nu_j - \omega_j )$
+
+## Extension 2: Random Walk
+
+Standard random walk model:
+
+$$
+\alpha_{it} \sim N(\alpha_{it-1},\sigma_i)
+$$
+
+## Extension 2: AR(1)
+
+Auto-regressive (AR(1)) model:
+
+$$
+\alpha_{it} \sim N(\psi_i\alpha_{it-1},\sigma_i)
+$$
+
+## Extension 3: Gaussian Processes
+
+Gaussian process model:
+
+$$
+\alpha_{it} \sim N(0,k_t(\alpha_{it},\alpha_{it'}))
+$$
+Where $k(\cdot)$ is the squared exponential kernel:
+
+$$
+k_t(\alpha_{it},\alpha_{it'}) = \large \sigma^2_{if}  e^{\displaystyle -\frac{(\alpha_{it} - \alpha_{it'})^2}{ 2l_i^2}} + \sigma^2_{\alpha}  
+$$
+
+## Variance Issues with Time Series
+
+![](boromir.jpg)
+
+## Extension 4: Joint Distributions
+
+- We can allow different likelihoods $L_m$ for any of the following distributions $M$:
+  - Ordinal (graded response)
+  - Ordinal (rating scale)
+  - Count (poisson)
+  - Continuous (Normal)
+  - Positive-continuous (Log-Normal)
+- Important for fitting "index" models with mixed data from surveys or panel data (VDEM, etc)
+
+## Bayesian Estimation
+
+![](batman_robin.jpg)
+
+## Idealstan
+
+- Package exploits Stan to expand range of ideal point models that exist.
+- Markov Chain Monte Carlo inference on all models
+- Probalistic programming (graphical models) permits easy extension + flexibility
+- Wide range of posterior-predictive checks and plotting functions
+
+
+
+## Extension 4: Big Data
+
+- All models can be estimated with black-box variational inference
+  - Generally accurate if strict thresholds are used for convergence
+  - Understates posterior uncertainty, lacks as strong diagnostics
+- Alternative: parallelize likelihood within an MCMC chain
+  - Very powerful as can speed up computation per cores
+  - All models can be implemented in this parallelization scheme (coming soon)
+    
+## Empirical Example
+
+- I collected county-level monthly unemployment data from the Bureau of Labor Statistics.
+- Aggregated to the Congressional district level with spatial joins.
+- Assign rollcall votes to each month's unemployment. 
+- Fit the following ideal-point regression (hierarchical covariates):
+
+$$
+\alpha_{it} \sim N(\psi_i\alpha_{it-1} + X_t\phi',\sigma_i)
+$$
+
+## Unemployment Data
+
+```{r, out.width = "700px"}
+knitr::include_graphics("month_unemp.png")
+```
+
+## Ideal Point Distribution
+
+![](overall_dist.png)
+
+## How to Interpret Covariates
+
+For each posterior draw $s \in S$ and item $j \in J$, average the value of covariate over distribution of positive or negative discrimination scores $\gamma_j$ and convert to probabilities:
+
+$$
+\frac{\partial \phi}{\partial Pr(Y_{ijrt}=1|\gamma_j>0)} = \frac{ \sum_{j=1}^J \Theta(X\phi_s' \gamma_{js})-0.5}{J}
+$$
+$$
+\frac{\partial \phi}{\partial Pr(Y_{ijrt}=1|\gamma_j<0)} = \frac{ \sum_{j=1}^J \Theta(X\phi_s' \gamma_{js})-0.5}{J}
+$$
+
+
+## Overall Results
+
+![](overall_eff_ar1.png)
+
+## Impulse Response Functions
+
+![](irf_rep.png)
+
+## China X Unemployment Interaction
+
+![](china_int_plot.png)
+
+## Future Research 
+
+- Likelihood parallelization will permit true scalable Bayesian inference.
+- More empirical applications are possible (Twitter data & selection model, index creation with joint likelihoods).
+- Possible to further extend ideal point models in new directions, including latent space parameterization.
+    
