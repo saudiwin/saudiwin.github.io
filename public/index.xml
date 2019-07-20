@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
@@ -7,7 +6,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018 Robert Kubinec</copyright>
-    <lastBuildDate>Wed, 01 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 20 Feb 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
@@ -117,7 +116,7 @@ knitr::kable(slice(delaware,1:10))&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The third model is known as a Gaussian process. Fully explaining how Gaussian processes work is beyond the scope of this vignette, but I refer readers to &lt;a href=&#34;https://betanalpha.github.io/assets/case_studies/gp_part1/part1.html&#34;&gt;this case study&lt;/a&gt; as a very helpful introduction. A Gaussian process is similar to a random walk in that it can in principle move in any direction. Unlike a random walk, the prior position of the time series doesn’t necessarily constrain the position of the time series in the present position. Rather, a Gaussian process is a generalized smoother: it will find a smooth path between the points, but can take any shape in principle.&lt;/p&gt;
 &lt;p&gt;One major advantage of the Gaussian process is that it is a so-called continuous time series model. In practice this means that the time series does not have to be sequential. For example, if legislators only vote at irregular intervals, and the fact that some bills are separated than more time than others is important, then a Gaussian process will take into account the actual length of time between each vote. Random walks and stationary models, on the other hand, consider each time point to be sequential to the previous time point, effectively ignoring any big gaps.&lt;/p&gt;
 &lt;p&gt;The main disadvantage of the Gaussian process is that the power and flexbility require &lt;em&gt;a lot&lt;/em&gt; more data. It is not a useful model unless you have considerable numbers of bills/items. The model can handle additional time-varying covariates although their meaning is not as precise as the stationary model.&lt;/p&gt;
-&lt;p&gt;The stationary model, by contrast, assumes that ideal points have a single long-term average. The ideal points may receive “shocks” that force them away from the long-term mean, but they will inevitably return. While this is a more specific set of assumptions than the random walk or Gaussian process, stationary models have the significant advantage of allowing us to fit covariates that have a more meaningful interpretation: the estimates of covariates represent shocks to the ideal points away from their long-term average. We can even measure the time it takes for an ideal point process to return to its long-term average after experiencing the shock.&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The stationary model, by contrast, assumes that ideal points have a single long-term average. The ideal points may receive “shocks” that force them away from the long-term mean, but they will inevitably return. While this is a more specific set of assumptions than the random walk or Gaussian process, stationary models have the significant advantage of allowing us to fit covariates that have a more meaningful interpretation: the estimates of covariates represent shocks to the ideal points away from their long-term average. We can even measure the time it takes for an ideal point process to return to its long-term average after experiencing the shock.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;To show what these models look like, we will fit each model to the &lt;code&gt;delaware&lt;/code&gt; data in turn. We use the &lt;code&gt;vb&lt;/code&gt; option to produce variational estimates of the true posterior; these approximations are much faster to fit than the full model but usually have some distortions. For finished analysis we would want to use the full sampler (&lt;code&gt;use_vb=FALSE&lt;/code&gt;), unless we have so much data that processing time for the full model is infeasible.&lt;/p&gt;
 &lt;div id=&#34;random-walk-model&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Random-Walk Model&lt;/h2&gt;
@@ -138,6 +137,8 @@ knitr::kable(slice(delaware,1:10))&lt;/code&gt;&lt;/pre&gt;
                  restrict_ind_low=&amp;quot;Blakey, Donald 9&amp;quot;,
             seed=84520,
             refresh=0)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;(First Step): Estimating model with variational inference to identify modes to constrain.&amp;quot;
+## [1] &amp;quot;Estimating model with variational inference (approximation of true posterior).&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Given the fitted model, we can now plot the ideal points. We will turn off the option for showing the uncertainty interval as there are a lot of lines, one for each legislator:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;id_plot_legis_dyn(del_est,use_ci = F) +
   scale_color_manual(values=c(R=&amp;#39;red&amp;#39;,
@@ -155,9 +156,10 @@ knitr::kable(slice(delaware,1:10))&lt;/code&gt;&lt;/pre&gt;
                  restrict_ind_high = &amp;quot;Brady, David 13&amp;quot;,
                  restrict_ind_low=&amp;quot;Blakey, Donald 9&amp;quot;,
             seed=84520,
-            refresh=0)
-
-id_plot_legis_dyn(del_est_rw2,use_ci = F) + ggtitle(&amp;#39;Time-Varying Ideal Points of Delaware State Legislature&amp;#39;,subtitle=&amp;#39;Ideal Points Vary with Random-Walk Process&amp;#39;) +
+            refresh=0)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;(First Step): Estimating model with variational inference to identify modes to constrain.&amp;quot;
+## [1] &amp;quot;Estimating model with variational inference (approximation of true posterior).&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;id_plot_legis_dyn(del_est_rw2,use_ci = F) + ggtitle(&amp;#39;Time-Varying Ideal Points of Delaware State Legislature&amp;#39;,subtitle=&amp;#39;Ideal Points Vary with Random-Walk Process&amp;#39;) +
   scale_color_manual(values=c(R=&amp;#39;red&amp;#39;,
                               D=&amp;#39;blue&amp;#39;,
                               X=&amp;#39;green&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
@@ -187,56 +189,56 @@ knitr::kable(head(out_d$plot_data))&lt;/code&gt;&lt;/pre&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;time_var_restrict[1]&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.0188078&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.2354400&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.0774120&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0563104&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.1686936&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.1043640&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Adams, Thurman Jr. 113&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Adams, Thurman Jr. 113&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;D&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;time_var_restrict[10]&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.0060303&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.1859794&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.0406554&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0046418&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.1066785&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0242820&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Bennett, E. 7&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;D&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;time_var_restrict[100]&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.0081976&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.1906862&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.0505226&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0051201&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2018274&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0337960&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;100&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Plant, Hazel 77&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;D&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;time_var_restrict[101]&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.0908241&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.3585927&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.2109740&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0071927&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.2114494&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0475031&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;101&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Poore, Nicole 138&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;D&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;time_var_restrict[102]&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.0059942&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.2258100&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.0497944&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0053917&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.1576389&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0352737&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;102&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Postles, Charles S. 78&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;R&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;time_var_restrict[103]&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.0088015&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.2496016&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.0611890&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0069633&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.1549683&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0403867&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;103&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Potter, Charles Jr. 79&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Potter, Charles Jr. 79&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;D&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -255,235 +257,8 @@ knitr::kable(head(out_d$plot_data))&lt;/code&gt;&lt;/pre&gt;
                  restrict_ind_high = &amp;quot;Brady, David 13&amp;quot;,
                  restrict_ind_low=&amp;quot;Blakey, Donald 9&amp;quot;,
             seed=84520)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Chain 1: ------------------------------------------------------------
-## Chain 1: EXPERIMENTAL ALGORITHM:
-## Chain 1:   This procedure has not been thoroughly tested and may be unstable
-## Chain 1:   or buggy. The interface is subject to change.
-## Chain 1: ------------------------------------------------------------
-## Chain 1: 
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Gradient evaluation took 0.011 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 110 seconds.
-## Chain 1: Adjust your expectations accordingly!
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Begin eta adaptation.
-## Chain 1: Iteration:   1 / 250 [  0%]  (Adaptation)
-## Chain 1: Iteration:  50 / 250 [ 20%]  (Adaptation)
-## Chain 1: Iteration: 100 / 250 [ 40%]  (Adaptation)
-## Chain 1: Iteration: 150 / 250 [ 60%]  (Adaptation)
-## Chain 1: Iteration: 200 / 250 [ 80%]  (Adaptation)
-## Chain 1: Iteration: 250 / 250 [100%]  (Adaptation)
-## Chain 1: Success! Found best value [eta = 0.1].
-## Chain 1: 
-## Chain 1: Begin stochastic gradient ascent.
-## Chain 1:   iter             ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
-## Chain 1:    100       -48183.741             1.000            1.000
-## Chain 1:    200       -37787.028             0.638            1.000
-## Chain 1:    300       -33920.457             0.463            0.275
-## Chain 1:    400       -32018.392             0.362            0.275
-## Chain 1:    500       -31049.985             0.296            0.114
-## Chain 1:    600       -30539.150             0.249            0.114
-## Chain 1:    700       -30255.471             0.215            0.059
-## Chain 1:    800       -30078.856             0.189            0.059
-## Chain 1:    900       -29963.679             0.168            0.031
-## Chain 1:   1000       -29885.896             0.152            0.031
-## Chain 1:   1100       -29844.970             0.138            0.017
-## Chain 1:   1200       -29813.140             0.127            0.017
-## Chain 1:   1300       -29775.411             0.117            0.009
-## Chain 1:   1400       -29750.232             0.109            0.009
-## Chain 1:   1500       -29736.669             0.102            0.006
-## Chain 1:   1600       -29703.923             0.095            0.006
-## Chain 1:   1700       -29688.122             0.090            0.004
-## Chain 1:   1800       -29682.554             0.085            0.004
-## Chain 1:   1900       -29659.169             0.080            0.003
-## Chain 1:   2000       -29653.636             0.076            0.003
-## Chain 1:   2100       -29631.742             0.026            0.001
-## Chain 1:   2200       -29648.245             0.013            0.001
-## Chain 1:   2300       -29641.365             0.007            0.001
-## Chain 1:   2400       -29626.957             0.004            0.001
-## Chain 1:   2500       -29622.464             0.002            0.001
-## Chain 1:   2600       -29624.156             0.002            0.001
-## Chain 1:   2700       -29619.608             0.001            0.001
-## Chain 1:   2800       -29612.852             0.001            0.001
-## Chain 1:   2900       -29605.088             0.001            0.001
-## Chain 1:   3000       -29591.568             0.001            0.000
-## Chain 1:   3100       -29589.321             0.000            0.000
-## Chain 1:   3200       -29606.779             0.000            0.000
-## Chain 1:   3300       -29585.188             0.000            0.000
-## Chain 1:   3400       -29578.899             0.000            0.000
-## Chain 1:   3500       -29589.313             0.000            0.000
-## Chain 1:   3600       -29583.928             0.000            0.000
-## Chain 1:   3700       -29584.561             0.000            0.000
-## Chain 1:   3800       -29576.700             0.000            0.000
-## Chain 1:   3900       -29562.229             0.000            0.000
-## Chain 1:   4000       -29571.346             0.000            0.000
-## Chain 1:   4100       -29566.988             0.000            0.000
-## Chain 1:   4200       -29569.339             0.000            0.000
-## Chain 1:   4300       -29553.219             0.000            0.000
-## Chain 1:   4400       -29556.885             0.000            0.000
-## Chain 1:   4500       -29568.414             0.000            0.000
-## Chain 1:   4600       -29552.321             0.000            0.000
-## Chain 1:   4700       -29553.701             0.000            0.000
-## Chain 1:   4800       -29534.613             0.000            0.000
-## Chain 1:   4900       -29566.776             0.000            0.000
-## Chain 1:   5000       -29545.501             0.000            0.000
-## Chain 1:   5100       -29545.123             0.000            0.000
-## Chain 1:   5200       -29543.037             0.000            0.000
-## Chain 1:   5300       -29542.104             0.000            0.000
-## Chain 1:   5400       -29545.956             0.000            0.000
-## Chain 1:   5500       -29536.127             0.000            0.000
-## Chain 1:   5600       -29552.638             0.000            0.000
-## Chain 1:   5700       -29553.743             0.000            0.000
-## Chain 1:   5800       -29542.600             0.000            0.000
-## Chain 1:   5900       -29551.033             0.000            0.000
-## Chain 1:   6000       -29544.900             0.000            0.000
-## Chain 1:   6100       -29543.025             0.000            0.000
-## Chain 1:   6200       -29558.073             0.000            0.000
-## Chain 1:   6300       -29539.640             0.000            0.000
-## Chain 1:   6400       -29520.316             0.000            0.000
-## Chain 1:   6500       -29519.052             0.000            0.000
-## Chain 1:   6600       -29536.195             0.000            0.000
-## Chain 1:   6700       -29516.718             0.000            0.000
-## Chain 1:   6800       -29512.379             0.000            0.000
-## Chain 1:   6900       -29528.702             0.000            0.000
-## Chain 1:   7000       -29537.065             0.000            0.000
-## Chain 1:   7100       -29545.159             0.000            0.000
-## Chain 1:   7200       -29520.462             0.000            0.000
-## Chain 1:   7300       -29515.842             0.000            0.000
-## Chain 1:   7400       -29534.523             0.000            0.000
-## Chain 1:   7500       -29523.843             0.000            0.000
-## Chain 1:   7600       -29517.633             0.000            0.000
-## Chain 1:   7700       -29518.182             0.000            0.000
-## Chain 1:   7800       -29523.754             0.000            0.000
-## Chain 1:   7900       -29529.949             0.000            0.000
-## Chain 1:   8000       -29517.329             0.000            0.000
-## Chain 1:   8100       -29527.550             0.000            0.000
-## Chain 1:   8200       -29515.025             0.000            0.000
-## Chain 1:   8300       -29533.075             0.000            0.000
-## Chain 1:   8400       -29517.548             0.000            0.000
-## Chain 1:   8500       -29521.642             0.000            0.000
-## Chain 1:   8600       -29538.412             0.000            0.000
-## Chain 1:   8700       -29516.891             0.000            0.000
-## Chain 1:   8800       -29522.746             0.000            0.000
-## Chain 1:   8900       -29523.749             0.000            0.000
-## Chain 1:   9000       -29517.389             0.000            0.000
-## Chain 1:   9100       -29524.299             0.000            0.000
-## Chain 1:   9200       -29509.135             0.000            0.000
-## Chain 1:   9300       -29505.334             0.000            0.000
-## Chain 1:   9400       -29519.273             0.000            0.000
-## Chain 1:   9500       -29516.994             0.000            0.000
-## Chain 1:   9600       -29507.503             0.000            0.000
-## Chain 1:   9700       -29510.013             0.000            0.000
-## Chain 1:   9800       -29514.711             0.000            0.000
-## Chain 1:   9900       -29514.461             0.000            0.000
-## Chain 1:   10000       -29501.926             0.000            0.000
-## Chain 1:   10100       -29500.617             0.000            0.000
-## Chain 1:   10200       -29518.666             0.000            0.000
-## Chain 1:   10300       -29498.389             0.000            0.000
-## Chain 1:   10400       -29515.645             0.000            0.000
-## Chain 1:   10500       -29503.168             0.000            0.000
-## Chain 1:   10600       -29512.006             0.000            0.000
-## Chain 1:   10700       -29499.568             0.000            0.000
-## Chain 1:   10800       -29501.279             0.000            0.000
-## Chain 1:   10900       -29486.968             0.000            0.000
-## Chain 1:   11000       -29506.212             0.000            0.000
-## Chain 1:   11100       -29496.516             0.000            0.000
-## Chain 1:   11200       -29502.912             0.000            0.000
-## Chain 1:   11300       -29495.837             0.000            0.000
-## Chain 1:   11400       -29497.001             0.000            0.000
-## Chain 1:   11500       -29498.716             0.000            0.000
-## Chain 1:   11600       -29502.049             0.000            0.000
-## Chain 1:   11700       -29506.724             0.000            0.000
-## Chain 1:   11800       -29493.078             0.000            0.000
-## Chain 1:   11900       -29509.189             0.000            0.000
-## Chain 1:   12000       -29497.664             0.000            0.000
-## Chain 1:   12100       -29515.279             0.000            0.000
-## Chain 1:   12200       -29507.872             0.000            0.000
-## Chain 1:   12300       -29504.915             0.000            0.000
-## Chain 1:   12400       -29500.495             0.000            0.000
-## Chain 1:   12500       -29514.351             0.000            0.000
-## Chain 1:   12600       -29486.397             0.000            0.000
-## Chain 1:   12700       -29502.008             0.000            0.000
-## Chain 1:   12800       -29485.411             0.000            0.000
-## Chain 1:   12900       -29495.497             0.000            0.000
-## Chain 1:   13000       -29497.081             0.000            0.000
-## Chain 1:   13100       -29495.475             0.000            0.000
-## Chain 1:   13200       -29489.905             0.000            0.000
-## Chain 1:   13300       -29511.904             0.000            0.000
-## Chain 1:   13400       -29495.364             0.000            0.000
-## Chain 1:   13500       -29489.610             0.000            0.000
-## Chain 1:   13600       -29497.392             0.000            0.000
-## Chain 1:   13700       -29493.423             0.000            0.000
-## Chain 1:   13800       -29483.785             0.000            0.000
-## Chain 1:   13900       -29480.553             0.000            0.000
-## Chain 1:   14000       -29472.651             0.000            0.000
-## Chain 1:   14100       -29513.662             0.000            0.000
-## Chain 1:   14200       -29491.323             0.000            0.000
-## Chain 1:   14300       -29502.804             0.000            0.000
-## Chain 1:   14400       -29504.835             0.000            0.000
-## Chain 1:   14500       -29484.004             0.000            0.000
-## Chain 1:   14600       -29493.765             0.000            0.000
-## Chain 1:   14700       -29486.752             0.000            0.000
-## Chain 1:   14800       -29508.250             0.000            0.000
-## Chain 1:   14900       -29504.548             0.000            0.000
-## Chain 1:   15000       -29501.379             0.000            0.000
-## Chain 1:   15100       -29493.602             0.000            0.000
-## Chain 1:   15200       -29516.926             0.000            0.000
-## Chain 1:   15300       -29492.022             0.000            0.000
-## Chain 1:   15400       -29483.829             0.000            0.000
-## Chain 1:   15500       -29499.996             0.000            0.000
-## Chain 1:   15600       -29508.249             0.000            0.000
-## Chain 1:   15700       -29488.343             0.000            0.000
-## Chain 1:   15800       -29488.354             0.000            0.000
-## Chain 1:   15900       -29502.768             0.000            0.000
-## Chain 1:   16000       -29500.562             0.000            0.000
-## Chain 1:   16100       -29506.384             0.000            0.000
-## Chain 1:   16200       -29491.529             0.000            0.000
-## Chain 1:   16300       -29496.184             0.000            0.000
-## Chain 1:   16400       -29488.131             0.000            0.000
-## Chain 1:   16500       -29481.007             0.000            0.000
-## Chain 1:   16600       -29486.580             0.000            0.000
-## Chain 1:   16700       -29500.955             0.000            0.000
-## Chain 1:   16800       -29487.044             0.000            0.000
-## Chain 1:   16900       -29488.955             0.000            0.000
-## Chain 1:   17000       -29516.595             0.000            0.000
-## Chain 1:   17100       -29487.480             0.000            0.000
-## Chain 1:   17200       -29476.657             0.000            0.000
-## Chain 1:   17300       -29510.686             0.000            0.000
-## Chain 1:   17400       -29485.847             0.000            0.000
-## Chain 1:   17500       -29502.130             0.000            0.000
-## Chain 1:   17600       -29494.418             0.000            0.000
-## Chain 1:   17700       -29501.547             0.000            0.000
-## Chain 1:   17800       -29485.522             0.000            0.000
-## Chain 1:   17900       -29490.063             0.000            0.000
-## Chain 1:   18000       -29496.208             0.000            0.000
-## Chain 1:   18100       -29486.851             0.000            0.000
-## Chain 1:   18200       -29501.961             0.000            0.000
-## Chain 1:   18300       -29477.489             0.000            0.000
-## Chain 1:   18400       -29485.276             0.000            0.000
-## Chain 1:   18500       -29481.542             0.000            0.000
-## Chain 1:   18600       -29474.810             0.000            0.000
-## Chain 1:   18700       -29479.013             0.000            0.000
-## Chain 1:   18800       -29490.588             0.000            0.000
-## Chain 1:   18900       -29487.388             0.000            0.000
-## Chain 1:   19000       -29492.016             0.000            0.000
-## Chain 1:   19100       -29506.302             0.000            0.000
-## Chain 1:   19200       -29488.112             0.000            0.000
-## Chain 1:   19300       -29496.393             0.000            0.000
-## Chain 1:   19400       -29495.766             0.000            0.000
-## Chain 1:   19500       -29471.677             0.000            0.000
-## Chain 1:   19600       -29482.190             0.000            0.000
-## Chain 1:   19700       -29494.035             0.000            0.000
-## Chain 1:   19800       -29497.125             0.000            0.000
-## Chain 1:   19900       -29491.016             0.000            0.000
-## Chain 1:   20000       -29486.008             0.000            0.000
-## Chain 1: Informational Message: The maximum number of iterations is reached! The algorithm may not have converged.
-## Chain 1: This variational approximation is not guaranteed to be meaningful.
-## Chain 1: 
-## Chain 1: Drawing a sample of size 1000 from the approximate posterior... 
-## Chain 1: COMPLETED.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;(First Step): Estimating model with variational inference to identify modes to constrain.&amp;quot;
+## [1] &amp;quot;Estimating model with variational inference (approximation of true posterior).&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;id_plot_legis_dyn(del_est_ar1,use_ci = F) +
   scale_color_manual(values=c(R=&amp;#39;red&amp;#39;,
                               D=&amp;#39;blue&amp;#39;,
@@ -508,57 +283,57 @@ knitr::kable(head(out_d$plot_data))&lt;/code&gt;&lt;/pre&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Adams, Thurman Jr. 113&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Adams, Thurman Jr. 113&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;D&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;1995-01-01&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.283311&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.507530&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.7436420&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-0.6010976&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-0.5037095&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-0.3992761&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;L_tp1[1,1]&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Bennett, E. 7&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;D&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;1995-01-01&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.104370&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.480680&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.8686430&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-0.5388430&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0137203&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.5282750&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;L_tp1[1,10]&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Plant, Hazel 77&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;D&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;1995-01-01&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.160098&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.530215&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.8746655&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.1501490&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.3603555&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.5700290&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;L_tp1[1,100]&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Poore, Nicole 138&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;D&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;1995-01-01&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.149818&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.501750&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.8532020&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-0.7493792&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.1804895&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.1042400&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;L_tp1[1,101]&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;Postles, Charles S. 78&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;R&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;1995-01-01&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;-1.913669&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;-1.277445&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;-0.6450675&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.3594140&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.8873990&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.4488095&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;L_tp1[1,102]&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Potter, Charles Jr. 79&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Potter, Charles Jr. 79&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;D&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;1995-01-01&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.036874&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.403665&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.7838425&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-0.6642952&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.1206875&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.9451120&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;L_tp1[1,103]&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -580,77 +355,8 @@ knitr::kable(head(out_d$plot_data))&lt;/code&gt;&lt;/pre&gt;
                  restrict_ind_high = &amp;quot;D&amp;quot;,
                  restrict_ind_low=&amp;quot;R&amp;quot;,
             seed=84520)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Chain 1: ------------------------------------------------------------
-## Chain 1: EXPERIMENTAL ALGORITHM:
-## Chain 1:   This procedure has not been thoroughly tested and may be unstable
-## Chain 1:   or buggy. The interface is subject to change.
-## Chain 1: ------------------------------------------------------------
-## Chain 1: 
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Gradient evaluation took 0.011 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 110 seconds.
-## Chain 1: Adjust your expectations accordingly!
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Begin eta adaptation.
-## Chain 1: Iteration:   1 / 250 [  0%]  (Adaptation)
-## Chain 1: Iteration:  50 / 250 [ 20%]  (Adaptation)
-## Chain 1: Iteration: 100 / 250 [ 40%]  (Adaptation)
-## Chain 1: Iteration: 150 / 250 [ 60%]  (Adaptation)
-## Chain 1: Iteration: 200 / 250 [ 80%]  (Adaptation)
-## Chain 1: Success! Found best value [eta = 1] earlier than expected.
-## Chain 1: 
-## Chain 1: Begin stochastic gradient ascent.
-## Chain 1:   iter             ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
-## Chain 1:    100       -76982.554             1.000            1.000
-## Chain 1:    200       -76437.183             0.504            1.000
-## Chain 1:    300       -76264.767             0.336            0.007
-## Chain 1:    400       -76095.977             0.253            0.007
-## Chain 1:    500       -76035.921             0.202            0.002
-## Chain 1:    600       -75979.524             0.169            0.002
-## Chain 1:    700       -75943.735             0.145            0.002
-## Chain 1:    800       -75924.850             0.127            0.002
-## Chain 1:    900       -75908.908             0.113            0.001
-## Chain 1:   1000       -75878.978             0.101            0.001
-## Chain 1:   1100       -75837.341             0.092            0.001
-## Chain 1:   1200       -75823.056             0.085            0.001
-## Chain 1:   1300       -75848.798             0.078            0.001
-## Chain 1:   1400       -75815.924             0.073            0.001
-## Chain 1:   1500       -75798.534             0.068            0.000
-## Chain 1:   1600       -75780.631             0.064            0.000
-## Chain 1:   1700       -75824.625             0.060            0.000
-## Chain 1:   1800       -75787.133             0.057            0.000
-## Chain 1:   1900       -75779.346             0.054            0.000
-## Chain 1:   2000       -75769.142             0.051            0.000
-## Chain 1:   2100       -75766.350             0.001            0.000
-## Chain 1:   2200       -75776.520             0.001            0.000
-## Chain 1:   2300       -75758.045             0.000            0.000
-## Chain 1:   2400       -75764.225             0.000            0.000
-## Chain 1:   2500       -75748.626             0.000            0.000
-## Chain 1:   2600       -75742.094             0.000            0.000
-## Chain 1:   2700       -75749.869             0.000            0.000
-## Chain 1:   2800       -75750.151             0.000            0.000
-## Chain 1:   2900       -75760.362             0.000            0.000
-## Chain 1:   3000       -75731.380             0.000            0.000
-## Chain 1:   3100       -75740.340             0.000            0.000
-## Chain 1:   3200       -75746.765             0.000            0.000
-## Chain 1:   3300       -75736.843             0.000            0.000
-## Chain 1:   3400       -75732.492             0.000            0.000
-## Chain 1:   3500       -75740.606             0.000            0.000
-## Chain 1:   3600       -75718.534             0.000            0.000
-## Chain 1:   3700       -75751.297             0.000            0.000
-## Chain 1:   3800       -75727.455             0.000            0.000
-## Chain 1:   3900       -75725.270             0.000            0.000
-## Chain 1:   4000       -75730.271             0.000            0.000
-## Chain 1:   4100       -75723.341             0.000            0.000
-## Chain 1:   4200       -75728.637             0.000            0.000
-## Chain 1:   4300       -75723.571             0.000            0.000
-## Chain 1:   4400       -75729.011             0.000            0.000
-## Chain 1:   4500       -75726.846             0.000            0.000   MEDIAN ELBO CONVERGED
-## Chain 1: 
-## Chain 1: Drawing a sample of size 1000 from the approximate posterior... 
-## Chain 1: COMPLETED.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;(First Step): Estimating model with variational inference to identify modes to constrain.&amp;quot;
+## [1] &amp;quot;Estimating model with variational inference (approximation of true posterior).&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;id_plot_legis_dyn(del_est_rw3,
                   include=c(&amp;#39;D&amp;#39;,&amp;#39;R&amp;#39;)) + scale_colour_manual(values=c(R=&amp;#39;red&amp;#39;,
                                                           D=&amp;#39;blue&amp;#39;,
@@ -684,234 +390,8 @@ knitr::kable(head(out_d$plot_data))&lt;/code&gt;&lt;/pre&gt;
                  restrict_ind_high = &amp;quot;D&amp;quot;,
                  restrict_ind_low=&amp;quot;R&amp;quot;,
             seed=84520)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Chain 1: ------------------------------------------------------------
-## Chain 1: EXPERIMENTAL ALGORITHM:
-## Chain 1:   This procedure has not been thoroughly tested and may be unstable
-## Chain 1:   or buggy. The interface is subject to change.
-## Chain 1: ------------------------------------------------------------
-## Chain 1: 
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Gradient evaluation took 0.011 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 110 seconds.
-## Chain 1: Adjust your expectations accordingly!
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Begin eta adaptation.
-## Chain 1: Iteration:   1 / 250 [  0%]  (Adaptation)
-## Chain 1: Iteration:  50 / 250 [ 20%]  (Adaptation)
-## Chain 1: Iteration: 100 / 250 [ 40%]  (Adaptation)
-## Chain 1: Iteration: 150 / 250 [ 60%]  (Adaptation)
-## Chain 1: Iteration: 200 / 250 [ 80%]  (Adaptation)
-## Chain 1: Success! Found best value [eta = 1] earlier than expected.
-## Chain 1: 
-## Chain 1: Begin stochastic gradient ascent.
-## Chain 1:   iter             ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
-## Chain 1:    100       -30149.866             1.000            1.000
-## Chain 1:    200       -29836.895             0.505            1.000
-## Chain 1:    300       -29762.299             0.338            0.010
-## Chain 1:    400       -29713.424             0.254            0.010
-## Chain 1:    500       -29693.876             0.203            0.003
-## Chain 1:    600       -29669.868             0.169            0.003
-## Chain 1:    700       -29679.070             0.145            0.002
-## Chain 1:    800       -29684.109             0.127            0.002
-## Chain 1:    900       -29630.277             0.113            0.002
-## Chain 1:   1000       -29621.153             0.102            0.002
-## Chain 1:   1100       -29606.684             0.093            0.001
-## Chain 1:   1200       -29600.046             0.085            0.001
-## Chain 1:   1300       -29613.163             0.078            0.001
-## Chain 1:   1400       -29599.019             0.073            0.001
-## Chain 1:   1500       -29586.074             0.068            0.000
-## Chain 1:   1600       -29568.490             0.064            0.001
-## Chain 1:   1700       -29552.141             0.060            0.001
-## Chain 1:   1800       -29586.664             0.057            0.001
-## Chain 1:   1900       -29573.367             0.054            0.001
-## Chain 1:   2000       -29558.048             0.051            0.001
-## Chain 1:   2100       -29561.164             0.001            0.001
-## Chain 1:   2200       -29559.348             0.001            0.000
-## Chain 1:   2300       -29570.166             0.001            0.000
-## Chain 1:   2400       -29579.341             0.001            0.000
-## Chain 1:   2500       -29553.670             0.001            0.000
-## Chain 1:   2600       -29547.005             0.000            0.000
-## Chain 1:   2700       -29556.460             0.000            0.000
-## Chain 1:   2800       -29545.536             0.001            0.000
-## Chain 1:   2900       -29549.433             0.000            0.000
-## Chain 1:   3000       -29539.794             0.000            0.000
-## Chain 1:   3100       -29546.344             0.000            0.000
-## Chain 1:   3200       -29542.059             0.000            0.000
-## Chain 1:   3300       -29530.047             0.000            0.000
-## Chain 1:   3400       -29528.722             0.000            0.000
-## Chain 1:   3500       -29539.556             0.000            0.000
-## Chain 1:   3600       -29526.786             0.000            0.000
-## Chain 1:   3700       -29538.712             0.000            0.000
-## Chain 1:   3800       -29531.398             0.000            0.000
-## Chain 1:   3900       -29541.907             0.000            0.000
-## Chain 1:   4000       -29526.209             0.000            0.000
-## Chain 1:   4100       -29528.879             0.000            0.000
-## Chain 1:   4200       -29519.846             0.000            0.000
-## Chain 1:   4300       -29531.457             0.000            0.000
-## Chain 1:   4400       -29520.414             0.000            0.000
-## Chain 1:   4500       -29521.594             0.000            0.000
-## Chain 1:   4600       -29521.714             0.000            0.000
-## Chain 1:   4700       -29519.389             0.000            0.000
-## Chain 1:   4800       -29522.214             0.000            0.000
-## Chain 1:   4900       -29519.735             0.000            0.000
-## Chain 1:   5000       -29507.465             0.000            0.000
-## Chain 1:   5100       -29521.328             0.000            0.000
-## Chain 1:   5200       -29512.146             0.000            0.000
-## Chain 1:   5300       -29542.612             0.000            0.000
-## Chain 1:   5400       -29516.019             0.000            0.000
-## Chain 1:   5500       -29522.272             0.000            0.000
-## Chain 1:   5600       -29517.737             0.000            0.000
-## Chain 1:   5700       -29513.701             0.000            0.000
-## Chain 1:   5800       -29512.665             0.000            0.000
-## Chain 1:   5900       -29508.489             0.000            0.000
-## Chain 1:   6000       -29510.899             0.000            0.000
-## Chain 1:   6100       -29510.038             0.000            0.000
-## Chain 1:   6200       -29518.481             0.000            0.000
-## Chain 1:   6300       -29507.113             0.000            0.000
-## Chain 1:   6400       -29508.178             0.000            0.000
-## Chain 1:   6500       -29499.759             0.000            0.000
-## Chain 1:   6600       -29496.607             0.000            0.000
-## Chain 1:   6700       -29504.669             0.000            0.000
-## Chain 1:   6800       -29509.476             0.000            0.000
-## Chain 1:   6900       -29511.629             0.000            0.000
-## Chain 1:   7000       -29501.483             0.000            0.000
-## Chain 1:   7100       -29496.896             0.000            0.000
-## Chain 1:   7200       -29507.130             0.000            0.000
-## Chain 1:   7300       -29507.343             0.000            0.000
-## Chain 1:   7400       -29511.002             0.000            0.000
-## Chain 1:   7500       -29492.190             0.000            0.000
-## Chain 1:   7600       -29496.672             0.000            0.000
-## Chain 1:   7700       -29504.455             0.000            0.000
-## Chain 1:   7800       -29492.290             0.000            0.000
-## Chain 1:   7900       -29517.293             0.000            0.000
-## Chain 1:   8000       -29512.350             0.000            0.000
-## Chain 1:   8100       -29502.434             0.000            0.000
-## Chain 1:   8200       -29485.079             0.000            0.000
-## Chain 1:   8300       -29504.212             0.000            0.000
-## Chain 1:   8400       -29501.386             0.000            0.000
-## Chain 1:   8500       -29500.136             0.000            0.000
-## Chain 1:   8600       -29499.941             0.000            0.000
-## Chain 1:   8700       -29495.532             0.000            0.000
-## Chain 1:   8800       -29497.346             0.000            0.000
-## Chain 1:   8900       -29507.671             0.000            0.000
-## Chain 1:   9000       -29487.153             0.000            0.000
-## Chain 1:   9100       -29504.107             0.000            0.000
-## Chain 1:   9200       -29506.952             0.000            0.000
-## Chain 1:   9300       -29483.281             0.000            0.000
-## Chain 1:   9400       -29507.215             0.000            0.000
-## Chain 1:   9500       -29507.739             0.000            0.000
-## Chain 1:   9600       -29497.631             0.000            0.000
-## Chain 1:   9700       -29499.924             0.000            0.000
-## Chain 1:   9800       -29502.960             0.000            0.000
-## Chain 1:   9900       -29483.932             0.000            0.000
-## Chain 1:   10000       -29512.219             0.000            0.000
-## Chain 1:   10100       -29493.376             0.000            0.000
-## Chain 1:   10200       -29499.825             0.000            0.000
-## Chain 1:   10300       -29498.173             0.000            0.000
-## Chain 1:   10400       -29497.088             0.000            0.000
-## Chain 1:   10500       -29482.510             0.000            0.000
-## Chain 1:   10600       -29494.030             0.000            0.000
-## Chain 1:   10700       -29482.191             0.000            0.000
-## Chain 1:   10800       -29494.381             0.000            0.000
-## Chain 1:   10900       -29492.055             0.000            0.000
-## Chain 1:   11000       -29501.922             0.000            0.000
-## Chain 1:   11100       -29510.930             0.000            0.000
-## Chain 1:   11200       -29499.430             0.000            0.000
-## Chain 1:   11300       -29497.879             0.000            0.000
-## Chain 1:   11400       -29492.030             0.000            0.000
-## Chain 1:   11500       -29479.635             0.000            0.000
-## Chain 1:   11600       -29502.251             0.000            0.000
-## Chain 1:   11700       -29488.106             0.000            0.000
-## Chain 1:   11800       -29489.104             0.000            0.000
-## Chain 1:   11900       -29487.339             0.000            0.000
-## Chain 1:   12000       -29496.874             0.000            0.000
-## Chain 1:   12100       -29495.565             0.000            0.000
-## Chain 1:   12200       -29483.638             0.000            0.000
-## Chain 1:   12300       -29498.526             0.000            0.000
-## Chain 1:   12400       -29491.305             0.000            0.000
-## Chain 1:   12500       -29495.202             0.000            0.000
-## Chain 1:   12600       -29494.428             0.000            0.000
-## Chain 1:   12700       -29490.940             0.000            0.000
-## Chain 1:   12800       -29493.420             0.000            0.000
-## Chain 1:   12900       -29486.928             0.000            0.000
-## Chain 1:   13000       -29492.358             0.000            0.000
-## Chain 1:   13100       -29493.466             0.000            0.000
-## Chain 1:   13200       -29485.395             0.000            0.000
-## Chain 1:   13300       -29507.190             0.000            0.000
-## Chain 1:   13400       -29477.035             0.000            0.000
-## Chain 1:   13500       -29497.757             0.000            0.000
-## Chain 1:   13600       -29478.932             0.000            0.000
-## Chain 1:   13700       -29492.790             0.000            0.000
-## Chain 1:   13800       -29498.555             0.000            0.000
-## Chain 1:   13900       -29491.009             0.000            0.000
-## Chain 1:   14000       -29471.730             0.000            0.000
-## Chain 1:   14100       -29484.021             0.000            0.000
-## Chain 1:   14200       -29475.802             0.000            0.000
-## Chain 1:   14300       -29488.001             0.000            0.000
-## Chain 1:   14400       -29483.016             0.000            0.000
-## Chain 1:   14500       -29480.766             0.000            0.000
-## Chain 1:   14600       -29480.429             0.000            0.000
-## Chain 1:   14700       -29493.578             0.000            0.000
-## Chain 1:   14800       -29482.203             0.000            0.000
-## Chain 1:   14900       -29477.933             0.000            0.000
-## Chain 1:   15000       -29483.362             0.000            0.000
-## Chain 1:   15100       -29496.306             0.000            0.000
-## Chain 1:   15200       -29493.616             0.000            0.000
-## Chain 1:   15300       -29491.651             0.000            0.000
-## Chain 1:   15400       -29506.876             0.000            0.000
-## Chain 1:   15500       -29488.223             0.000            0.000
-## Chain 1:   15600       -29493.966             0.000            0.000
-## Chain 1:   15700       -29484.366             0.000            0.000
-## Chain 1:   15800       -29486.475             0.000            0.000
-## Chain 1:   15900       -29486.342             0.000            0.000
-## Chain 1:   16000       -29491.577             0.000            0.000
-## Chain 1:   16100       -29490.506             0.000            0.000
-## Chain 1:   16200       -29487.604             0.000            0.000
-## Chain 1:   16300       -29480.673             0.000            0.000
-## Chain 1:   16400       -29493.374             0.000            0.000
-## Chain 1:   16500       -29481.995             0.000            0.000
-## Chain 1:   16600       -29484.847             0.000            0.000
-## Chain 1:   16700       -29476.910             0.000            0.000
-## Chain 1:   16800       -29482.364             0.000            0.000
-## Chain 1:   16900       -29482.320             0.000            0.000
-## Chain 1:   17000       -29492.254             0.000            0.000
-## Chain 1:   17100       -29481.689             0.000            0.000
-## Chain 1:   17200       -29480.946             0.000            0.000
-## Chain 1:   17300       -29486.079             0.000            0.000
-## Chain 1:   17400       -29471.588             0.000            0.000
-## Chain 1:   17500       -29477.781             0.000            0.000
-## Chain 1:   17600       -29493.119             0.000            0.000
-## Chain 1:   17700       -29479.387             0.000            0.000
-## Chain 1:   17800       -29488.799             0.000            0.000
-## Chain 1:   17900       -29480.429             0.000            0.000
-## Chain 1:   18000       -29482.286             0.000            0.000
-## Chain 1:   18100       -29499.377             0.000            0.000
-## Chain 1:   18200       -29481.808             0.000            0.000
-## Chain 1:   18300       -29489.742             0.000            0.000
-## Chain 1:   18400       -29499.288             0.000            0.000
-## Chain 1:   18500       -29483.237             0.000            0.000
-## Chain 1:   18600       -29485.837             0.000            0.000
-## Chain 1:   18700       -29486.339             0.000            0.000
-## Chain 1:   18800       -29481.478             0.000            0.000
-## Chain 1:   18900       -29489.440             0.000            0.000
-## Chain 1:   19000       -29498.715             0.000            0.000
-## Chain 1:   19100       -29482.132             0.000            0.000
-## Chain 1:   19200       -29478.789             0.000            0.000
-## Chain 1:   19300       -29477.871             0.000            0.000
-## Chain 1:   19400       -29477.461             0.000            0.000
-## Chain 1:   19500       -29481.682             0.000            0.000
-## Chain 1:   19600       -29482.110             0.000            0.000
-## Chain 1:   19700       -29484.493             0.000            0.000
-## Chain 1:   19800       -29486.450             0.000            0.000
-## Chain 1:   19900       -29496.255             0.000            0.000
-## Chain 1:   20000       -29485.451             0.000            0.000
-## Chain 1: Informational Message: The maximum number of iterations is reached! The algorithm may not have converged.
-## Chain 1: This variational approximation is not guaranteed to be meaningful.
-## Chain 1: 
-## Chain 1: Drawing a sample of size 1000 from the approximate posterior... 
-## Chain 1: COMPLETED.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;(First Step): Estimating model with variational inference to identify modes to constrain.&amp;quot;
+## [1] &amp;quot;Estimating model with variational inference (approximation of true posterior).&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;del_est_gp1 &amp;lt;- id_estimate(delaware_data,
                            model_type = 2,
                            use_vb = T,
@@ -926,43 +406,8 @@ knitr::kable(head(out_d$plot_data))&lt;/code&gt;&lt;/pre&gt;
                            restrict_ind_high = &amp;quot;D&amp;quot;,
                            restrict_ind_low=&amp;quot;R&amp;quot;,
                             seed=84520)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Chain 1: ------------------------------------------------------------
-## Chain 1: EXPERIMENTAL ALGORITHM:
-## Chain 1:   This procedure has not been thoroughly tested and may be unstable
-## Chain 1:   or buggy. The interface is subject to change.
-## Chain 1: ------------------------------------------------------------
-## Chain 1: 
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Gradient evaluation took 0.01 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 100 seconds.
-## Chain 1: Adjust your expectations accordingly!
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Begin eta adaptation.
-## Chain 1: Iteration:   1 / 250 [  0%]  (Adaptation)
-## Chain 1: Iteration:  50 / 250 [ 20%]  (Adaptation)
-## Chain 1: Iteration: 100 / 250 [ 40%]  (Adaptation)
-## Chain 1: Iteration: 150 / 250 [ 60%]  (Adaptation)
-## Chain 1: Iteration: 200 / 250 [ 80%]  (Adaptation)
-## Chain 1: Success! Found best value [eta = 1] earlier than expected.
-## Chain 1: 
-## Chain 1: Begin stochastic gradient ascent.
-## Chain 1:   iter             ELBO   delta_ELBO_mean   delta_ELBO_med   notes 
-## Chain 1:    200       -30497.757             1.000            1.000
-## Chain 1:    400       -30357.173             0.502            1.000
-## Chain 1:    600       -30311.158             0.335            0.005
-## Chain 1:    800       -30261.071             0.252            0.005
-## Chain 1:   1000       -30267.802             0.202            0.002
-## Chain 1:   1200       -30264.078             0.168            0.002
-## Chain 1:   1400       -30237.364             0.144            0.002
-## Chain 1:   1600       -30251.306             0.126            0.002
-## Chain 1:   1800       -30238.626             0.112            0.001
-## Chain 1:   2000       -30230.216             0.101            0.001
-## Chain 1:   2200       -30235.146             0.001            0.000   MEDIAN ELBO CONVERGED
-## Chain 1: 
-## Chain 1: Drawing a sample of size 1000 from the approximate posterior... 
-## Chain 1: COMPLETED.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;(First Step): Estimating model with variational inference to identify modes to constrain.&amp;quot;
+## [1] &amp;quot;Estimating model with variational inference (approximation of true posterior).&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can the use an option in the &lt;code&gt;id_plot_legis_dyn&lt;/code&gt; function to pass in all three models as a list to see how they compare to each other over the same groups:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;id_plot_legis_dyn(list(RW=del_est_rw3,
                        AR1=del_est_ar2,
@@ -987,15 +432,37 @@ knitr::kable(head(out_d$plot_data))&lt;/code&gt;&lt;/pre&gt;
 &lt;tbody&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;center&#34;&gt;&lt;code&gt;gp_sd_par&lt;/code&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;This parameter represents residual variation in the series that the GP does not account for. As such, its default is a very low value, as increasing it will generally increase oscillation in the series.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;This parameter represents residual variation in the series that the GP does not
+account for. As such, its default is a very low value, as increasing it will
+generally increase oscillation in the series.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;center&#34;&gt;&lt;code&gt;gp_num_diff&lt;/code&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;This parameter is a multiplier that is used to set the prior for the length-scale of the GP. Loosely speaking, the length-scale determines the number of times that the time-series can cross zero, and so lowering this parameter will decrease the length-scale and subsequently increase the number of times the series can cross zero. The length-scale is given a prior equal to the difference between the maximum and minimum length of the time series in whatever units it is recorded in (days, weeks, etc) times the parameter &lt;code&gt;gp_num_diff&lt;/code&gt;. The second numeric value of this parameter represents the standard deviation of the log-normal prior of the length scale. Increasing the standard deviation will put more weight on the data in determining the amount of flexibility in the time series.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;This parameter is a multiplier that is used to set the prior for the length-scale
+of the GP. Loosely speaking, the length-scale determines the number of times
+that the time-series can cross zero, and so lowering this parameter will
+decrease the length-scale and subsequently increase the number of times the series
+can cross zero. The length-scale is given a prior equal to the difference
+between the maximum and minimum length of the
+time series in whatever units it is recorded in (days, weeks, etc) times the
+parameter &lt;code&gt;gp_num_diff&lt;/code&gt;. The second numeric value of this parameter represents
+the standard deviation of the log-normal prior of the length scale. Increasing the
+standard deviation will put more weight on the data in determining the amount of
+flexibility in the time series.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;center&#34;&gt;&lt;code&gt;gp_m_sd_par&lt;/code&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;This parameter has two values that set the GP’s marginal standard deviation. This parameter loosely represents the amount of time-series variation in the series. The first numeric value represents the hard upper limit for this parameter to prevent the series oscillating. The second numeric value is equal to the shape of an inverse-gamma prior defined over the interval between 0 and the first numeric value (the hard upper limit). It is a weakly informative prior that pulls values away from zero to prevent divergences. Increasing the first numeric value (the upper limit) will increase marginal standard deviation, while the second numeric value can increase marginal standard deviation by decreasing its value, resulting in a flatter inverse-gamma prior.&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;This parameter has two values that set the GP’s marginal standard deviation.
+This parameter loosely represents the amount of time-series variation in the
+series. The first numeric value represents the hard upper limit for this
+parameter to prevent the series oscillating. The second numeric value is equal
+to the shape of an inverse-gamma prior defined over the interval between
+0 and the first numeric value (the hard upper limit). It is a weakly
+informative prior that pulls values away from zero to prevent divergences.
+Increasing the first numeric value (the upper limit) will increase marginal
+standard deviation, while the second numeric value can increase marginal
+standard deviation by decreasing its value, resulting in a flatter
+inverse-gamma prior.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -1003,7 +470,7 @@ knitr::kable(head(out_d$plot_data))&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
 &lt;hr /&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;This is known as calculating the impulse response function. While these can be readily calculated from the raw model output of an &lt;code&gt;idealstan&lt;/code&gt; object, they are not currently implemented as functions in the package.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;This is known as calculating the impulse response function. While these can be readily calculated from the raw model output of an &lt;code&gt;idealstan&lt;/code&gt; object, they are not currently implemented as functions in the package.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -1320,7 +787,8 @@ result
 1
 &lt;/td&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
-Mean Significant Effect
+Mean Significant
+Effect
 &lt;/td&gt;
 &lt;td style=&#34;text-align:right;&#34;&gt;
 0.6298429
@@ -1334,7 +802,8 @@ Mean Significant Effect
 2
 &lt;/td&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
-Mean Significant Effect
+Mean Significant
+Effect
 &lt;/td&gt;
 &lt;td style=&#34;text-align:right;&#34;&gt;
 0.3874088
@@ -1348,7 +817,8 @@ Mean Significant Effect
 3
 &lt;/td&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
-Mean Significant Effect
+Mean Significant
+Effect
 &lt;/td&gt;
 &lt;td style=&#34;text-align:right;&#34;&gt;
 NA
@@ -1362,7 +832,8 @@ NA
 4
 &lt;/td&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
-Mean Significant Effect
+Mean Significant
+Effect
 &lt;/td&gt;
 &lt;td style=&#34;text-align:right;&#34;&gt;
 1.1438379
@@ -1376,7 +847,8 @@ Mean Significant Effect
 5
 &lt;/td&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
-Mean Significant Effect
+Mean Significant
+Effect
 &lt;/td&gt;
 &lt;td style=&#34;text-align:right;&#34;&gt;
 0.5653086
@@ -1390,7 +862,8 @@ Mean Significant Effect
 6
 &lt;/td&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
-Mean Significant Effect
+Mean Significant
+Effect
 &lt;/td&gt;
 &lt;td style=&#34;text-align:right;&#34;&gt;
 1.2689594
@@ -1404,7 +877,8 @@ Mean Significant Effect
 7
 &lt;/td&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
-Mean Significant Effect
+Mean Significant
+Effect
 &lt;/td&gt;
 &lt;td style=&#34;text-align:right;&#34;&gt;
 NA
@@ -1418,7 +892,8 @@ NA
 8
 &lt;/td&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
-Mean Significant Effect
+Mean Significant
+Effect
 &lt;/td&gt;
 &lt;td style=&#34;text-align:right;&#34;&gt;
 NA
@@ -1432,7 +907,8 @@ NA
 9
 &lt;/td&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
-Mean Significant Effect
+Mean Significant
+Effect
 &lt;/td&gt;
 &lt;td style=&#34;text-align:right;&#34;&gt;
 NA
@@ -1446,7 +922,8 @@ NA
 10
 &lt;/td&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
-Mean Significant Effect
+Mean Significant
+Effect
 &lt;/td&gt;
 &lt;td style=&#34;text-align:right;&#34;&gt;
 NA

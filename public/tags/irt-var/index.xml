@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Irt Var on </title>
+    <title>IRT-VAR on </title>
     <link>http://www.robertkubinec.com/tags/irt-var/</link>
-    <description>Recent content in Irt Var on </description>
+    <description>Recent content in IRT-VAR on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018 Robert Kubinec</copyright>
@@ -18,7 +18,7 @@
       <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>http://www.robertkubinec.com/project/islam-sec/</guid>
-      <description>Abstract Scholars continue to disagree as to what extent international social connections act as a conduit to influence contentious politics within states. To answer this question, we provide the first rigorous and real-time measure of transnational ideological diffusion across sectarian groups by employing a novel statistical method and new data to capture the transnational dynamics of polarization after the Arab Uprisings of 2011. As authoritarian governments fell, populations in several states polarized between secularists and Islamists over what kind of regime was to replace the ousted one.</description>
+      <description>Employing a massive dataset of Tweets from 2013 and a new cross-national and dynamic IRT ideal point model, we identify the distinction between polarization happening within a country&amp;rsquo;s borders and polarization influenced by events in other countries.</description>
     </item>
     
   </channel>
