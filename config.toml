@@ -22,9 +22,9 @@ defaultContentLanguageInSubdir = false
 
 [params]
   name = "Robert Kubinec"
-  role = "Postdoctoral Researcher"
-  organization = "Princeton University"
-  organization_url = "https://ncgg-new.princeton.edu/"
+  role = "Assistant Professor of Political Science"
+  organization = "New York University Abu Dhabi"
+  organization_url = "https://nyuad.nyu.edu/en/"
   avatar = "portrait.jpg"
   email = "rmk7@nyu.edu"
   address = ""
