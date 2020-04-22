@@ -13,21 +13,21 @@
     
     
     <item>
+      <title>What Panel Data Is Really All About</title>
+      <link>http://www.robertkubinec.com/post/fixed_effects/</link>
+      <pubDate>Wed, 22 Apr 2020 15:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/post/fixed_effects/</guid>
+      <description>We’ve all been in that seminar where the author puts up a slide containing regression coefficients, and buried in the bottom line of the table we can see little Ys and Ns indicating the kind of panel data model employed. Quite often, these brief descriptions of models are taken as a mere statistical ritual, believed to be efficacious at appeasing the mercurial statistical deities, but rarely if ever investigated more thoroughly.</description>
+    </item>
+    
+    <item>
       <title>A Proposed Model for Partial Identification of SARS-CoV2 Infection Rates Given Observed Tests and Cases</title>
       <link>http://www.robertkubinec.com/post/kubinec_model_draft/</link>
       <pubDate>Sat, 28 Mar 2020 15:00:00 +0000</pubDate>
       
       <guid>http://www.robertkubinec.com/post/kubinec_model_draft/</guid>
       <description>Introduction In recent days as more and more data is available on observed case counts of the SARS-CoV2 coronavirus there are also increasing attempts to infer infection rates from these case counts. Furthermore, policy makers like Deborah Bix have begun to question whether the predictions of epidemiological models are far worse than the observed data.1 By contrast, in this paper I show that it is impossible to infer the true number of infected people from observed tests and cases alone, although it is possible to infer the effect of suppression policies on the relative rates of infectious growth.</description>
-    </item>
-    
-    <item>
-      <title>What Panel Data Is Really All About</title>
-      <link>http://www.robertkubinec.com/post/fixed_effects/</link>
-      <pubDate>Sat, 28 Mar 2020 15:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/post/fixed_effects/</guid>
-      <description>We’ve all been in that seminar where the author puts up a slide containing regression coefficients, and buried in the bottom line of the table we can see little Ys and Ns indicating the kind of panel data model employed. Quite often, these brief descriptions of models are taken as a mere statistical ritual, believed to be efficacious at appeasing the mercurial statistical deities, but rarely if ever investigated more thoroughly.</description>
     </item>
     
     <item>
