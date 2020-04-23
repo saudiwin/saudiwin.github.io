@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homes on </title>
+    <link>http://www.robertkubinec.com/home/</link>
+    <description>Recent content in Homes on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018 Robert Kubinec</copyright>
+    <lastBuildDate>Wed, 01 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.robertkubinec.com/home/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>http://www.robertkubinec.com/home/about/</link>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/home/about/</guid>
+      <description>For the 2018 - 2019 academic year I will be a postdoctoral researcher at the Niehaus Center for Globalization and Governance at Princeton University. Starting in 2019, I will be an assistant professor of political science at New York University in Abu Dhabi.
+My main line of empirical research examines the influential role played by powerful businesspeople during political instability. Through field research and surveys of businesspeople in North Africa, I show how businesspeople&amp;rsquo;s engagement with emerging democracies is especially problematic when business is united against democracy.</description>
+    </item>
+    
+    <item>
+      <title>Recent Posts</title>
+      <link>http://www.robertkubinec.com/home/posts/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/home/posts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Recent &amp; Upcoming Talks</title>
+      <link>http://www.robertkubinec.com/home/talks/</link>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/home/talks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>http://www.robertkubinec.com/home/projects/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/home/projects/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Selected Publications</title>
+      <link>http://www.robertkubinec.com/home/publications_selected/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/home/publications_selected/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>http://www.robertkubinec.com/home/contact/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/home/contact/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

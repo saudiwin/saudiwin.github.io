@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on </title>
+    <link>http://www.robertkubinec.com/project/</link>
+    <description>Recent content in Projects on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018 Robert Kubinec</copyright>
+    <lastBuildDate>Wed, 08 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://www.robertkubinec.com/project/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>When Groups Fall Apart: Measuring Transnational Polarization with Twitter from the Arab Uprisings</title>
+      <link>http://www.robertkubinec.com/project/islam-sec/</link>
+      <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/project/islam-sec/</guid>
+      <description>Employing a massive dataset of Tweets from 2013 and a new cross-national and dynamic IRT ideal point model, we identify the distinction between polarization happening within a country&amp;rsquo;s borders and polarization influenced by events in other countries.</description>
+    </item>
+    
+    <item>
+      <title>Business Influence on Democratization</title>
+      <link>http://www.robertkubinec.com/project/dissertation/</link>
+      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/project/dissertation/</guid>
+      <description>My dissertation is a comprehensive evaluation of how businesses build coalitions for and against democratization in North Africa. I mix intensive field research with online survey experiments to gain new insights into how businesspeople influence politics in emerging democracies.</description>
+    </item>
+    
+    <item>
+      <title>Why the Two-Way Fixed Effects Model Is Difficult to Interpret, and What to Do About It</title>
+      <link>http://www.robertkubinec.com/project/fixed-effects/</link>
+      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/project/fixed-effects/</guid>
+      <description>Despite their popularity, linear fixed effects models can be a painful experience for applied researchers. Our paper shows that some of these problems stem from the wide application of the two-way fixed effects model as opposed to the simpler and easier to interpret one-way fixed effects models.</description>
+    </item>
+    
+    <item>
+      <title>Absence Makes the Ideal Points Sharper: An Ordinal IRT Model for Complete-Data Rollcall Vote Modeling</title>
+      <link>http://www.robertkubinec.com/project/bayesian-irt/</link>
+      <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://www.robertkubinec.com/project/bayesian-irt/</guid>
+      <description>I put forward a Bayesian IRT model that is capable of handling legislator absence as a form of data that can increase the precision of ideal point estimates.</description>
+    </item>
+    
+  </channel>
+</rss>
