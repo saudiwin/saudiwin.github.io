@@ -1,124 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on </title>
-    <link>http://www.robertkubinec.com/tags/</link>
-    <description>Recent content in Tags on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2018 Robert Kubinec</copyright>
-    <lastBuildDate>Wed, 08 Aug 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://www.robertkubinec.com/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>IRT</title>
-      <link>http://www.robertkubinec.com/tags/irt/</link>
-      <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/tags/irt/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>IRT-VAR</title>
-      <link>http://www.robertkubinec.com/tags/irt-var/</link>
-      <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/tags/irt-var/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>methodology</title>
-      <link>http://www.robertkubinec.com/tags/methodology/</link>
-      <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/tags/methodology/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>twitter</title>
-      <link>http://www.robertkubinec.com/tags/twitter/</link>
-      <pubDate>Wed, 08 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/tags/twitter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>dissertation</title>
-      <link>http://www.robertkubinec.com/tags/dissertation/</link>
-      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/tags/dissertation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>fixed effects</title>
-      <link>http://www.robertkubinec.com/tags/fixed-effects/</link>
-      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/tags/fixed-effects/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>time series cross section</title>
-      <link>http://www.robertkubinec.com/tags/time-series-cross-section/</link>
-      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/tags/time-series-cross-section/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>TSCS</title>
-      <link>http://www.robertkubinec.com/tags/tscs/</link>
-      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/tags/tscs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>bayesian</title>
-      <link>http://www.robertkubinec.com/tags/bayesian/</link>
-      <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/tags/bayesian/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>item response theory</title>
-      <link>http://www.robertkubinec.com/tags/item-response-theory/</link>
-      <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/tags/item-response-theory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>rollcall</title>
-      <link>http://www.robertkubinec.com/tags/rollcall/</link>
-      <pubDate>Fri, 04 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/tags/rollcall/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Content tagged as &#39;Academic&#39;</title>
-      <link>http://www.robertkubinec.com/tags/academic/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>http://www.robertkubinec.com/tags/academic/</guid>
-      <description>Here is a list of all the content that has been tagged as academic.</description>
-    </item>
+    <title>Tags | Academic</title>
+    <link>/tags/</link>
+      <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <description>Tags</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Robert Kubinec</copyright>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Tags</title>
+      <link>/tags/</link>
+    </image>
     
   </channel>
 </rss>
