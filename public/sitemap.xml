@@ -3,99 +3,89 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/</loc>
+    <loc>http://www.robertkubinec.com/</loc>
     <lastmod>2020-04-22T15:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/fixed_effects/</loc>
+    <loc>http://www.robertkubinec.com/post/</loc>
     <lastmod>2020-04-22T15:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/kubinec_model_draft/</loc>
+    <loc>http://www.robertkubinec.com/post/fixed_effects/</loc>
+    <lastmod>2020-04-22T15:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.robertkubinec.com/post/kubinec_model_draft/</loc>
     <lastmod>2020-03-28T15:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/conjoint_power_simulation/</loc>
+    <loc>http://www.robertkubinec.com/post/conjoint_power_simulation/</loc>
     <lastmod>2019-02-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/talk/apsa_2018_tunisia/</loc>
+    <loc>http://www.robertkubinec.com/talk/apsa_2018_tunisia/</loc>
     <lastmod>2018-08-31T16:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/talk/</loc>
+    <loc>http://www.robertkubinec.com/talk/</loc>
     <lastmod>2018-08-31T16:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/talk/preconf_2018/</loc>
+    <loc>http://www.robertkubinec.com/talk/preconf_2018/</loc>
     <lastmod>2018-08-29T12:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/privacy/</loc>
-    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/terms/</loc>
-    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/stancon2018_paper/</loc>
+    <loc>http://www.robertkubinec.com/post/stancon2018_paper/</loc>
     <lastmod>2018-03-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/talk/stancon2018/</loc>
+    <loc>http://www.robertkubinec.com/talk/stancon2018/</loc>
     <lastmod>2018-01-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/talk/apsa_twitter/</loc>
+    <loc>http://www.robertkubinec.com/talk/apsa_twitter/</loc>
     <lastmod>2017-09-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/talk/apsa_tunisia/</loc>
+    <loc>http://www.robertkubinec.com/talk/apsa_tunisia/</loc>
     <lastmod>2017-09-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tag/content-tagged-as-academic/</loc>
+    <loc>http://www.robertkubinec.com/tag/content-tagged-as-academic/</loc>
     <lastmod>2017-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>http://www.robertkubinec.com/tags/</loc>
     <lastmod>2017-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/authors/</loc>
+    <loc>http://www.robertkubinec.com/authors/</loc>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>http://www.robertkubinec.com/categories/</loc>
   </url>
   
   <url>
-    <loc>/publication_types/</loc>
+    <loc>http://www.robertkubinec.com/publication_types/</loc>
   </url>
   
   <url>
-    <loc>/author/robert-kubinec/</loc>
+    <loc>http://www.robertkubinec.com/author/robert-kubinec/</loc>
   </url>
   
 </urlset>
