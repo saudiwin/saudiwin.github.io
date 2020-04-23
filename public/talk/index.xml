@@ -1,40 +1,21 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Recent &amp; Upcoming Talks | Academic</title>
-    <link>/talk/</link>
-      <atom:link href="/talk/index.xml" rel="self" type="application/rss+xml" />
-    <description>Recent &amp; Upcoming Talks</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Robert Kubinec</copyright>
-    <image>
-      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
-      <title>Recent &amp; Upcoming Talks</title>
-      <link>/talk/</link>
-    </image>
-    
-  </channel>
-</rss>
-=======
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Recent &amp; Upcoming Talks on </title>
     <link>http://www.robertkubinec.com/talk/</link>
-    <description>Recent content in Recent &amp; Upcoming Talks on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2018 Robert Kubinec</copyright>
-    <lastBuildDate>Wed, 01 Aug 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://www.robertkubinec.com/talk/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="http://www.robertkubinec.com/talk/index.xml" rel="self" type="application/rss+xml" />
+    <description>Recent &amp; Upcoming Talks</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Robert Kubinec</copyright><lastBuildDate>Fri, 31 Aug 2018 16:00:00 +0000</lastBuildDate>
+    <image>
+      <url>http://www.robertkubinec.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Recent &amp; Upcoming Talks</title>
+      <link>http://www.robertkubinec.com/talk/</link>
+    </image>
     
     <item>
       <title>Fragmentation of Autocratic Successor Parties: The Case of Tunisia</title>
       <link>http://www.robertkubinec.com/talk/apsa_2018_tunisia/</link>
       <pubDate>Fri, 31 Aug 2018 16:00:00 +0000</pubDate>
-      
       <guid>http://www.robertkubinec.com/talk/apsa_2018_tunisia/</guid>
       <description></description>
     </item>
@@ -43,7 +24,6 @@
       <title>When Groups Fall Apart: Measuring Transnational Polarization during the Arab Uprisings</title>
       <link>http://www.robertkubinec.com/talk/preconf_2018/</link>
       <pubDate>Wed, 29 Aug 2018 12:00:00 +0000</pubDate>
-      
       <guid>http://www.robertkubinec.com/talk/preconf_2018/</guid>
       <description></description>
     </item>
@@ -52,7 +32,6 @@
       <title>idealstan: A Package for Bayesian Ideal-Point Modeling with Stan</title>
       <link>http://www.robertkubinec.com/talk/stancon2018/</link>
       <pubDate>Thu, 11 Jan 2018 00:00:00 +0000</pubDate>
-      
       <guid>http://www.robertkubinec.com/talk/stancon2018/</guid>
       <description></description>
     </item>
@@ -61,7 +40,6 @@
       <title>Islamist-Secularist Polarization during the Arab Uprisings</title>
       <link>http://www.robertkubinec.com/talk/apsa_twitter/</link>
       <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
-      
       <guid>http://www.robertkubinec.com/talk/apsa_twitter/</guid>
       <description></description>
     </item>
@@ -70,11 +48,9 @@
       <title>Making Democracy Safe for Business: Business Collective Action in Algeria, Egypt and Tunisia</title>
       <link>http://www.robertkubinec.com/talk/apsa_tunisia/</link>
       <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
-      
       <guid>http://www.robertkubinec.com/talk/apsa_tunisia/</guid>
       <description></description>
     </item>
     
   </channel>
 </rss>
->>>>>>> c0a1a62d0b1ba6f556632cd7420f82e5e2b47913
