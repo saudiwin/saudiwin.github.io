@@ -27,10 +27,10 @@
   
     
   
-  <meta name="description" content="Robert Kubinec academic website.">
+  <meta name="description" content="At StanCon 2018 I will present my new R package for ideal-point modeling with the [Stan Markov Chain Monte Carlo sampler for Bayesian inference](http://mc-stan.org/). This package allows for clustering of data around polarized axes to understand how and why people polarize themselves, whether in terms of political opinions or market products. I illustrate the package with applications drawn from the U.S. Senate and from Amazon product reviews of coffee products. I show how ideal point models can help us understand who the most polarized Senators and coffee products are, and also how the Bayesian version of the model adds powerful new features, including censoring for missing data.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/publication_types/">
+  <link rel="alternate" hreflang="en-us" href="/talk/stancon2018/">
 
   
 
@@ -253,14 +253,12 @@
   
 
   
-  <link rel="alternate" href="/publication_types/index.xml" type="application/rss+xml" title="Academic">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/publication_types/">
+  <link rel="canonical" href="/talk/stancon2018/">
 
   
   
@@ -279,18 +277,54 @@
   <meta property="twitter:creator" content="@rmkubinec">
   
   <meta property="og:site_name" content="Academic">
-  <meta property="og:url" content="/publication_types/">
-  <meta property="og:title" content="Publication_types | Academic">
-  <meta property="og:description" content="Robert Kubinec academic website."><meta property="og:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="og:url" content="/talk/stancon2018/">
+  <meta property="og:title" content="idealstan: A Package for Bayesian Ideal-Point Modeling with Stan | Academic">
+  <meta property="og:description" content="At StanCon 2018 I will present my new R package for ideal-point modeling with the [Stan Markov Chain Monte Carlo sampler for Bayesian inference](http://mc-stan.org/). This package allows for clustering of data around polarized axes to understand how and why people polarize themselves, whether in terms of political opinions or market products. I illustrate the package with applications drawn from the U.S. Senate and from Amazon product reviews of coffee products. I show how ideal point models can help us understand who the most polarized Senators and coffee products are, and also how the Bayesian version of the model adds powerful new features, including censoring for missing data."><meta property="og:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2016-12-19T00:00:00&#43;00:00">
+    
+      <meta property="article:published_time" content="2018-01-11T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2018-01-11T00:00:00&#43;00:00">
   
 
   
 
 
 
+  
+    
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/talk/stancon2018/"
+  },
+  "name": "idealstan: A Package for Bayesian Ideal-Point Modeling with Stan",
+  
+  "location": {
+    "@type": "Place",
+    "name": "Asilomar Conference Center"
+  },
+  
+  
+  "startDate": "2018-01-11T00:00:00Z",
+  
+  
+  "performer": {
+    "@type": "Person",
+    "name": "Robert Kubinec"
+  },
+  
+  "description": "At StanCon 2018 I will present my new R package for ideal-point modeling with the [Stan Markov Chain Monte Carlo sampler for Bayesian inference](http://mc-stan.org/). This package allows for clustering of data around polarized axes to understand how and why people polarize themselves, whether in terms of political opinions or market products. I illustrate the package with applications drawn from the U.S. Senate and from Amazon product reviews of coffee products. I show how ideal point models can help us understand who the most polarized Senators and coffee products are, and also how the Bayesian version of the model adds powerful new features, including censoring for missing data."
+}
+</script>
 
   
 
@@ -298,10 +332,13 @@
   
 
 
+  
 
 
 
-  <title>Publication_types | Academic</title>
+
+
+  <title>idealstan: A Package for Bayesian Ideal-Point Modeling with Stan | Academic</title>
 
 </head>
 
@@ -562,54 +599,369 @@
 </nav>
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
+  <div class="pub">
 
   
 
+
+
+
+
+
+
+
+
+
+
+
+  
+
   
   
+  
+<div class="article-container pt-3">
+  <h1>idealstan: A Package for Bayesian Ideal-Point Modeling with Stan</h1>
+
+  
+
   
     
-  
-<div class="universal-wrapper pt-3">
-  <h1>Publication_types</h1>
+
+
+<div class="article-metadata">
 
   
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 </div>
 
 
 
-<div class="universal-wrapper">
-  
+  <div class="article-container">
+
+    
+      <h3>Abstract</h3>
+      <p class="pub-abstract">At StanCon 2018 I will present my new R package for ideal-point modeling with the <a href="http://mc-stan.org/">Stan Markov Chain Monte Carlo sampler for Bayesian inference</a>. This package allows for clustering of data around polarized axes to understand how and why people polarize themselves, whether in terms of political opinions or market products. I illustrate the package with applications drawn from the U.S. Senate and from Amazon product reviews of coffee products. I show how ideal point models can help us understand who the most polarized Senators and coffee products are, and also how the Bayesian version of the model adds powerful new features, including censoring for missing data.</p>
+    
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-12 col-md-3 pub-row-heading">Date</div>
+          <div class="col-12 col-md-9">
+            Jan 11, 2018 12:00 AM
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="d-md-none space-below"></div>
+
+    
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-12 col-md-3 pub-row-heading">Event</div>
+          <div class="col-12 col-md-9">
+            <a href="http://mc-stan.org/events/stancon2018/" target="_blank" rel="noopener">
+            StanCon 2018 Conference
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="d-md-none space-below"></div>
+    
+
+    
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-12 col-md-3 pub-row-heading">Location</div>
+          <div class="col-12 col-md-9">Asilomar Conference Center</div>
+          
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="d-md-none space-below"></div>
+    
+
+    <div class="space-below"></div>
+
+    <div class="article-style">
+      
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/talk/stancon2018/&amp;text=idealstan:%20A%20Package%20for%20Bayesian%20Ideal-Point%20Modeling%20with%20Stan" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/talk/stancon2018/&amp;t=idealstan:%20A%20Package%20for%20Bayesian%20Ideal-Point%20Modeling%20with%20Stan" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=idealstan:%20A%20Package%20for%20Bayesian%20Ideal-Point%20Modeling%20with%20Stan&amp;body=/talk/stancon2018/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/talk/stancon2018/&amp;title=idealstan:%20A%20Package%20for%20Bayesian%20Ideal-Point%20Modeling%20with%20Stan" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=idealstan:%20A%20Package%20for%20Bayesian%20Ideal-Point%20Modeling%20with%20Stan%20/talk/stancon2018/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/talk/stancon2018/&amp;title=idealstan:%20A%20Package%20for%20Bayesian%20Ideal-Point%20Modeling%20with%20Stan" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
   
   
+
+
+
+
+
+  
     
     
     
-    <div>
-      <h2><a href="/publication-type/4/" >4</a></h2>
-      <div class="article-style">
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
         
+        <img class="avatar mr-3 avatar-circle" src="/author/robert-kubinec/avatar_hudd5d7efb917a26e45c39c19ab8d853e6_36248_270x270_fill_q90_lanczos_center.jpg" alt="Robert Kubinec">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="/">Robert Kubinec</a></h5>
+        <h6 class="card-subtitle">Assistant Professor of Political Science</h6>
+        <p class="card-text">My research centers on political-economic issues such as corruption, economic development, and business-state relations in developing countries, and in particular the Middle East and North Africa. I am also involved in the development of Bayesian statistical models with Stan for hard-to-study subjects like corruption, polarization, and other latent social constructs.</p>
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/rmkubinec" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=1tI8usUAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/saudiwin" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/kubinec_cv_march2020.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
       </div>
     </div>
   
 
+
+
+
+
+
+
+
+
+
+
+
+  
   
 
+
+
+  </div>
 </div>
 
       

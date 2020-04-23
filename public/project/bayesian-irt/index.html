@@ -27,10 +27,10 @@
   
     
   
-  <meta name="description" content="Robert Kubinec academic website.">
+  <meta name="description" content="I put forward a Bayesian IRT model that is capable of handling legislator absence as a form of data that can increase the precision of ideal point estimates.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/publication_types/">
+  <link rel="alternate" hreflang="en-us" href="/project/bayesian-irt/">
 
   
 
@@ -253,14 +253,12 @@
   
 
   
-  <link rel="alternate" href="/publication_types/index.xml" type="application/rss+xml" title="Academic">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/publication_types/">
+  <link rel="canonical" href="/project/bayesian-irt/">
 
   
   
@@ -270,38 +268,83 @@
   
   
     
-    
   
   
-  <meta property="twitter:card" content="summary">
+  <meta property="twitter:card" content="summary_large_image">
   
   <meta property="twitter:site" content="@rmkubinec">
   <meta property="twitter:creator" content="@rmkubinec">
   
   <meta property="og:site_name" content="Academic">
-  <meta property="og:url" content="/publication_types/">
-  <meta property="og:title" content="Publication_types | Academic">
-  <meta property="og:description" content="Robert Kubinec academic website."><meta property="og:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
-  <meta property="twitter:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  <meta property="og:url" content="/project/bayesian-irt/">
+  <meta property="og:title" content="Absence Makes the Ideal Points Sharper: An Ordinal IRT Model for Complete-Data Rollcall Vote Modeling | Academic">
+  <meta property="og:description" content="I put forward a Bayesian IRT model that is capable of handling legislator absence as a form of data that can increase the precision of ideal point estimates."><meta property="og:image" content="/img/headers/irt_header.jpg">
+  <meta property="twitter:image" content="/img/headers/irt_header.jpg"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2016-12-19T00:00:00&#43;00:00">
+    
+      <meta property="article:published_time" content="2017-08-04T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2017-08-04T00:00:00&#43;00:00">
   
-
-  
-
-
-
 
   
 
 
+    
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/project/bayesian-irt/"
+  },
+  "headline": "Absence Makes the Ideal Points Sharper: An Ordinal IRT Model for Complete-Data Rollcall Vote Modeling",
+  
+  "datePublished": "2017-08-04T00:00:00Z",
+  "dateModified": "2017-08-04T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Robert Kubinec"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Academic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "I put forward a Bayesian IRT model that is capable of handling legislator absence as a form of data that can increase the precision of ideal point estimates."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
   
 
 
 
 
 
-  <title>Publication_types | Academic</title>
+  <title>Absence Makes the Ideal Points Sharper: An Ordinal IRT Model for Complete-Data Rollcall Vote Modeling | Academic</title>
 
 </head>
 
@@ -562,55 +605,365 @@
 </nav>
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
+  <article class="article article-project">
 
   
 
+
+
+
+
+
+
+
+
+<div class="article-header">
   
   
+  <img src="/img/headers/irt_header.jpg" class="article-banner" alt="">
+  
+
+  <span class="article-header-caption">The US Capitol building in Washington, DC</span>
+</div>
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Absence Makes the Ideal Points Sharper: An Ordinal IRT Model for Complete-Data Rollcall Vote Modeling</h1>
+
+  
+
   
     
-  
-<div class="universal-wrapper pt-3">
-  <h1>Publication_types</h1>
+
+
+<div class="article-metadata">
 
   
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Aug 4, 2017
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 </div>
 
 
 
-<div class="universal-wrapper">
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Estimating legislator ideal points from roll-call voting data has become a powerful tool for understanding legislative behavior and polarization within legislatures over time. However, the dominant approaches in the field tend to ignore both absences and abstentions in roll-call votes even though it is very likely that absences and abstentions represent a form of strategic behavior. In emerging democracies like Tunisia, this lacuna is particularly problematic because legislator absence may occur very frequently, and resulting estimates that exclude absences are either very imprecise or significantly biased.</p>
+<p>As a remedy for this situation, I put forward a Bayesian IRT model that can handle legislators absences as a separate category of data for determining legislator ideal points. The estimation uses the concept of a hurdle model to deflate the probabilities of legislator&rsquo;s votes by the probability of absences. The model produces a single set of ideal points, but utilizes different parameters for bill absence points. Compared to DW-NOMINATE, this model tends to produce more moderate estimates of US Congresspeople&rsquo;s ideal points because it can model roll-call votes where there are very few opposing votes. For parliamentary data, the model provides much more precise estimates, especially in legislatures with very high rates of absence. Additionally, the model can incorporate absentions as a middle category between yes and no votes for legislatures with high rates of abstentions.</p>
+<p>An R package providing this model, along with other standard IRT ideal point models, is under development. Current source code is available from my 
+<a href="https://github.com/saudiwin/idealstan" target="_blank" rel="noopener">Github page</a>. The estimation is done via MCMC within the Stan modeling language.</p>
+<p>Link to paper 
+<a href="https://virginia.box.com/shared/static/lpot1njqfu7mlm1h5zjppn0xqhy8din6.pdf" target="_blank" rel="noopener">here</a>.</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
   
+  <a class="badge badge-light" href="/tag/bayesian/">bayesian</a>
+  
+  <a class="badge badge-light" href="/tag/item-response-theory/">item response theory</a>
+  
+  <a class="badge badge-light" href="/tag/rollcall/">rollcall</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/project/bayesian-irt/&amp;text=Absence%20Makes%20the%20Ideal%20Points%20Sharper:%20An%20Ordinal%20IRT%20Model%20for%20Complete-Data%20Rollcall%20Vote%20Modeling" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/project/bayesian-irt/&amp;t=Absence%20Makes%20the%20Ideal%20Points%20Sharper:%20An%20Ordinal%20IRT%20Model%20for%20Complete-Data%20Rollcall%20Vote%20Modeling" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Absence%20Makes%20the%20Ideal%20Points%20Sharper:%20An%20Ordinal%20IRT%20Model%20for%20Complete-Data%20Rollcall%20Vote%20Modeling&amp;body=/project/bayesian-irt/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/project/bayesian-irt/&amp;title=Absence%20Makes%20the%20Ideal%20Points%20Sharper:%20An%20Ordinal%20IRT%20Model%20for%20Complete-Data%20Rollcall%20Vote%20Modeling" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Absence%20Makes%20the%20Ideal%20Points%20Sharper:%20An%20Ordinal%20IRT%20Model%20for%20Complete-Data%20Rollcall%20Vote%20Modeling%20/project/bayesian-irt/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/project/bayesian-irt/&amp;title=Absence%20Makes%20the%20Ideal%20Points%20Sharper:%20An%20Ordinal%20IRT%20Model%20for%20Complete-Data%20Rollcall%20Vote%20Modeling" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
   
   
+
+
+
+
+
+  
     
     
     
-    <div>
-      <h2><a href="/publication-type/4/" >4</a></h2>
-      <div class="article-style">
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
         
+        <img class="avatar mr-3 avatar-circle" src="/author/robert-kubinec/avatar_hudd5d7efb917a26e45c39c19ab8d853e6_36248_270x270_fill_q90_lanczos_center.jpg" alt="Robert Kubinec">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="/">Robert Kubinec</a></h5>
+        <h6 class="card-subtitle">Assistant Professor of Political Science</h6>
+        <p class="card-text">My research centers on political-economic issues such as corruption, economic development, and business-state relations in developing countries, and in particular the Middle East and North Africa. I am also involved in the development of Bayesian statistical models with Stan for hard-to-study subjects like corruption, polarization, and other latent social constructs.</p>
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/rmkubinec" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=1tI8usUAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/saudiwin" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/kubinec_cv_march2020.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
       </div>
     </div>
   
 
+
+
+
+
+
+
+
+
+
+
+
+  
   
 
-</div>
+
+
+    <div class="project-related-pages content-widget-hr">
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+    </div>
+  </div>
+</article>
 
       
 
