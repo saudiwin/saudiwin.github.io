@@ -17,6 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 require(dplyr)
 require(tidyr)
 require(ggplot2)
+require(panelsim)
 
 
 set.seed(662817)
