@@ -37,6 +37,8 @@ In this post I explain why you shouldn't buy into the company's marketing about 
   - For women under 30, even if they get a **positive** result from the MaterniT 21 test, it's still more likely that the fetus **does not** have Down's syndrome.
   - Only for women over 40 does the test provide reasonably conclusive results.
   - The misleading statistics put out by LabCorp might convince some women to do dangerous, invasive follow-on testing (or even an abortion) based on misplaced confidence in the test.
+  
+## Investigating LabCorp
 
 LabCorp (under its subsidiary Integrated Genetics) offers a [brochure for the test on its website](https://www.integratedgenetics.com/sites/default/files/2020-04/rep-1039-v6-1119.pdf). This brochure mentions how accurate the test is in only one place:
 
