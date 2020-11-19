@@ -583,23 +583,6 @@
       
 
       
-      <li class="nav-item dropdown theme-dropdown">
-        <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
-          <i class="fas fa-palette" aria-hidden="true"></i>
-        </a>
-        <div class="dropdown-menu">
-          <a href="#" class="dropdown-item js-set-theme-light">
-            <span>Light</span>
-          </a>
-          <a href="#" class="dropdown-item js-set-theme-dark">
-            <span>Dark</span>
-          </a>
-          <a href="#" class="dropdown-item js-set-theme-auto">
-            <span>Automatic</span>
-          </a>
-        </div>
-      </li>
-      
 
       
 
@@ -775,7 +758,7 @@ stan_data &lt;- list(n=n,r_c=r_c,r_t=r_t,
 ## Chain 1 Iteration:    501 / 100500 [  0%]  (Sampling) 
 ## Chain 1 Iteration:  50500 / 100500 [ 50%]  (Sampling) 
 ## Chain 1 Iteration: 100500 / 100500 [100%]  (Sampling) 
-## Chain 1 finished in 3.2 seconds.</code></pre>
+## Chain 1 finished in 2.1 seconds.</code></pre>
 <pre class="r"><code>draws &lt;- pfizer_est$draws() %&gt;% as_draws_df</code></pre>
 <p>Here’s a plot of the VE as reported in the press release with the dotted line as the average estimate:</p>
 <pre class="r"><code>mean_ve &lt;- mean(draws$VE)

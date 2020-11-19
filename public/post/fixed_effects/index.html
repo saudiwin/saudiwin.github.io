@@ -30,7 +30,7 @@
   <meta name="description" content="We’ve all been in that seminar where the author puts up a slide containing regression coefficients, and buried in the bottom line of the table we can see little Ys and Ns indicating the kind of panel data model employed.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/fixed_effects/">
+  <link rel="alternate" hreflang="en-us" href="http://www.robertkubinec.com/post/fixed_effects/">
 
   
 
@@ -258,7 +258,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/post/fixed_effects/">
+  <link rel="canonical" href="http://www.robertkubinec.com/post/fixed_effects/">
 
   
   
@@ -276,10 +276,10 @@
   <meta property="twitter:creator" content="@rmkubinec">
   
   <meta property="og:site_name" content="Academic">
-  <meta property="og:url" content="/post/fixed_effects/">
+  <meta property="og:url" content="http://www.robertkubinec.com/post/fixed_effects/">
   <meta property="og:title" content="What Panel Data Is Really All About | Academic">
-  <meta property="og:description" content="We’ve all been in that seminar where the author puts up a slide containing regression coefficients, and buried in the bottom line of the table we can see little Ys and Ns indicating the kind of panel data model employed."><meta property="og:image" content="/img/headers/ft_header.png">
-  <meta property="twitter:image" content="/img/headers/ft_header.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="We’ve all been in that seminar where the author puts up a slide containing regression coefficients, and buried in the bottom line of the table we can see little Ys and Ns indicating the kind of panel data model employed."><meta property="og:image" content="http://www.robertkubinec.com/img/headers/ft_header.png">
+  <meta property="twitter:image" content="http://www.robertkubinec.com/img/headers/ft_header.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2020-04-22T15:00:00&#43;00:00">
@@ -308,7 +308,7 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "/post/fixed_effects/"
+    "@id": "http://www.robertkubinec.com/post/fixed_effects/"
   },
   "headline": "What Panel Data Is Really All About",
   
@@ -325,7 +325,7 @@
     "name": "Academic",
     "logo": {
       "@type": "ImageObject",
-      "url": "/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+      "url": "http://www.robertkubinec.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
   "description": "We’ve all been in that seminar where the author puts up a slide containing regression coefficients, and buried in the bottom line of the table we can see little Ys and Ns indicating the kind of panel data model employed."
@@ -688,6 +688,8 @@
     <div class="article-style">
       
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>We’ve all been in that seminar where the author puts up a slide containing regression coefficients, and buried in the bottom line of the table we can see little Ys and Ns indicating the kind of panel data model employed. Quite often, these brief descriptions of models are taken as a mere statistical ritual, believed to be efficacious at appeasing the mercurial statistical deities, but rarely if ever investigated more thoroughly. Furthermore, no one wants to be in the difficult position of discussing panel data models, which inevitably boils down to a conversation laced with econometric terms generating more heat than light.</p>
@@ -1157,87 +1159,87 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
 ## lm(formula = y ~ x + factor(case) + factor(time), data = gen_data$data)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -3.00701 -0.66389  0.00133  0.63782  3.10656 
+##     Min      1Q  Median      3Q     Max 
+## -3.5458 -0.7073  0.0026  0.6446  3.1709 
 ## 
-## Coefficients: (1 not defined because of singularities)
-##                Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)     0.04730    0.20353   0.232 0.816274    
-## x               2.25815    0.52911   4.268 2.18e-05 ***
-## factor(case)2   0.02855    0.19972   0.143 0.886355    
-## factor(case)3  -1.50002    0.33618  -4.462 9.11e-06 ***
-## factor(case)4   1.49273    0.28826   5.178 2.74e-07 ***
-## factor(case)5   1.48285    0.27200   5.452 6.39e-08 ***
-## factor(case)6  -0.15484    0.20309  -0.762 0.446008    
-## factor(case)7  -1.55094    0.32407  -4.786 1.98e-06 ***
-## factor(case)8   1.49648    0.30548   4.899 1.14e-06 ***
-## factor(case)9   0.20613    0.19390   1.063 0.288010    
-## factor(case)10 -0.16469    0.19957  -0.825 0.409466    
-## factor(case)11 -0.86470    0.25649  -3.371 0.000779 ***
-## factor(case)12 -0.05720    0.19402  -0.295 0.768205    
-## factor(case)13  0.96576    0.23009   4.197 2.96e-05 ***
-## factor(case)14  1.82950    0.33261   5.500 4.89e-08 ***
-## factor(case)15  0.36507    0.19387   1.883 0.060002 .  
-## factor(case)16 -2.38364    0.44358  -5.374 9.75e-08 ***
-## factor(case)17 -0.75104    0.26464  -2.838 0.004638 ** 
-## factor(case)18  1.22585    0.25425   4.821 1.66e-06 ***
-## factor(case)19  1.08890    0.22072   4.933 9.57e-07 ***
-## factor(case)20  0.72560    0.20966   3.461 0.000563 ***
-## factor(time)2  -0.10838    0.27233  -0.398 0.690733    
-## factor(time)3  -0.08698    0.31037  -0.280 0.779342    
-## factor(time)4   0.11700    0.28380   0.412 0.680236    
-## factor(time)5   0.15409    0.29358   0.525 0.599801    
-## factor(time)6   0.22296    0.26809   0.832 0.405828    
-## factor(time)7   0.26361    0.31998   0.824 0.410254    
-## factor(time)8   0.29181    0.27490   1.062 0.288725    
-## factor(time)9  -0.02611    0.26907  -0.097 0.922722    
-## factor(time)10  0.45526    0.36554   1.245 0.213283    
-## factor(time)11  0.29391    0.44557   0.660 0.509662    
-## factor(time)12  0.16617    0.26550   0.626 0.531542    
-## factor(time)13  0.42420    0.44419   0.955 0.339832    
-## factor(time)14 -0.04405    0.26721  -0.165 0.869099    
-## factor(time)15 -0.24274    0.28502  -0.852 0.394616    
-## factor(time)16  0.78202    0.41181   1.899 0.057874 .  
-## factor(time)17  0.43916    0.31994   1.373 0.170200    
-## factor(time)18  0.44816    0.34327   1.306 0.192024    
-## factor(time)19  0.03360    0.42276   0.079 0.936674    
-## factor(time)20  0.23293    0.29674   0.785 0.432678    
-## factor(time)21  0.63165    0.28613   2.208 0.027519 *  
-## factor(time)22  0.16396    0.27324   0.600 0.548607    
-## factor(time)23 -0.28082    0.27938  -1.005 0.315084    
-## factor(time)24  0.62679    0.50273   1.247 0.212792    
-## factor(time)25 -0.07319    0.26772  -0.273 0.784609    
-## factor(time)26  0.05009    0.28947   0.173 0.862669    
-## factor(time)27  0.30873    0.38612   0.800 0.424162    
-## factor(time)28 -0.08292    0.28611  -0.290 0.772021    
-## factor(time)29  0.28113    0.28901   0.973 0.330934    
-## factor(time)30  0.41912    0.28335   1.479 0.139433    
-## factor(time)31  0.59049    0.59785   0.988 0.323567    
-## factor(time)32  0.09649    0.27324   0.353 0.724081    
-## factor(time)33  0.32573    0.27438   1.187 0.235471    
-## factor(time)34 -0.02994    0.26618  -0.112 0.910465    
-## factor(time)35  0.09598    0.31750   0.302 0.762496    
-## factor(time)36  0.34256    0.30065   1.139 0.254823    
-## factor(time)37  0.63306    0.26543   2.385 0.017277 *  
-## factor(time)38  0.53330    0.47254   1.129 0.259363    
-## factor(time)39 -0.47720    0.43452  -1.098 0.272385    
-## factor(time)40 -0.12787    0.27804  -0.460 0.645687    
-## factor(time)41 -0.01848    0.31200  -0.059 0.952775    
-## factor(time)42  0.17223    0.44301   0.389 0.697527    
-## factor(time)43 -0.28794    0.28957  -0.994 0.320285    
-## factor(time)44  0.21985    0.34151   0.644 0.519884    
-## factor(time)45 -0.17936    0.29675  -0.604 0.545712    
-## factor(time)46 -0.02279    0.26567  -0.086 0.931654    
-## factor(time)47  0.35779    0.38107   0.939 0.348020    
-## factor(time)48 -0.13600    0.33360  -0.408 0.683607    
-## factor(time)49  0.20430    0.26739   0.764 0.445026    
-## factor(time)50       NA         NA      NA       NA    
+## Coefficients:
+##                 Estimate Std. Error  t value Pr(&gt;|t|)    
+## (Intercept)    -0.673576   0.264996   -2.542 0.011188 *  
+## x              -0.812224   0.005523 -147.067  &lt; 2e-16 ***
+## factor(case)2   0.431969   0.201817    2.140 0.032582 *  
+## factor(case)3   0.169660   0.201920    0.840 0.400994    
+## factor(case)4   0.216513   0.201806    1.073 0.283604    
+## factor(case)5   0.377437   0.201835    1.870 0.061794 .  
+## factor(case)6   0.233856   0.201762    1.159 0.246726    
+## factor(case)7   0.291743   0.202146    1.443 0.149292    
+## factor(case)8   0.040054   0.201779    0.199 0.842696    
+## factor(case)9   0.182815   0.201763    0.906 0.365123    
+## factor(case)10  0.197116   0.201782    0.977 0.328886    
+## factor(case)11  0.264956   0.201782    1.313 0.189480    
+## factor(case)12  0.075685   0.201799    0.375 0.707708    
+## factor(case)13  0.249261   0.201795    1.235 0.217062    
+## factor(case)14  0.118726   0.201765    0.588 0.556382    
+## factor(case)15  0.494571   0.201828    2.450 0.014451 *  
+## factor(case)16 -0.085249   0.203634   -0.419 0.675579    
+## factor(case)17  0.383878   0.201766    1.903 0.057403 .  
+## factor(case)18  0.290350   0.201837    1.439 0.150619    
+## factor(case)19  0.483656   0.201790    2.397 0.016734 *  
+## factor(case)20  0.287368   0.201792    1.424 0.154759    
+## factor(time)2   0.596679   0.319058    1.870 0.061780 .  
+## factor(time)3   1.407443   0.319158    4.410 1.16e-05 ***
+## factor(time)4  -0.328379   0.320361   -1.025 0.305616    
+## factor(time)5  -0.119690   0.319047   -0.375 0.707634    
+## factor(time)6   1.539948   0.319015    4.827 1.62e-06 ***
+## factor(time)7   0.338443   0.319042    1.061 0.289052    
+## factor(time)8   0.528072   0.319048    1.655 0.098232 .  
+## factor(time)9  -0.032228   0.319030   -0.101 0.919556    
+## factor(time)10  0.765270   0.319056    2.399 0.016657 *  
+## factor(time)11  0.789097   0.319058    2.473 0.013568 *  
+## factor(time)12  2.149822   0.319199    6.735 2.87e-11 ***
+## factor(time)13  0.118301   0.319032    0.371 0.710862    
+## factor(time)14 -0.734958   0.319015   -2.304 0.021452 *  
+## factor(time)15  0.888259   0.319109    2.784 0.005486 ** 
+## factor(time)16  0.553245   0.319027    1.734 0.083221 .  
+## factor(time)17  0.652004   0.319030    2.044 0.041264 *  
+## factor(time)18  1.351653   0.319104    4.236 2.50e-05 ***
+## factor(time)19  0.260828   0.319061    0.817 0.413860    
+## factor(time)20 -0.662932   0.319060   -2.078 0.038005 *  
+## factor(time)21  1.509116   0.319095    4.729 2.60e-06 ***
+## factor(time)22 -0.014879   0.319029   -0.047 0.962810    
+## factor(time)23 -0.538377   0.319023   -1.688 0.091827 .  
+## factor(time)24  0.493220   0.319046    1.546 0.122464    
+## factor(time)25 -1.820174   0.319100   -5.704 1.57e-08 ***
+## factor(time)26 -0.571426   0.319015   -1.791 0.073583 .  
+## factor(time)27  0.093017   0.319026    0.292 0.770683    
+## factor(time)28 -1.328269   0.319035   -4.163 3.43e-05 ***
+## factor(time)29  0.342019   0.319038    1.072 0.283983    
+## factor(time)30 -0.774338   0.319014   -2.427 0.015401 *  
+## factor(time)31  0.461852   0.319026    1.448 0.148040    
+## factor(time)32  0.308478   0.319046    0.967 0.333858    
+## factor(time)33  1.343319   0.319094    4.210 2.80e-05 ***
+## factor(time)34  1.989206   0.319258    6.231 7.03e-10 ***
+## factor(time)35 -0.422407   0.319019   -1.324 0.185801    
+## factor(time)36  0.614837   0.319085    1.927 0.054299 .  
+## factor(time)37 -0.416240   0.319061   -1.305 0.192359    
+## factor(time)38  0.779448   0.319089    2.443 0.014762 *  
+## factor(time)39 -0.847622   0.319015   -2.657 0.008019 ** 
+## factor(time)40  3.245566   0.319204   10.168  &lt; 2e-16 ***
+## factor(time)41 -0.589393   0.319031   -1.847 0.064999 .  
+## factor(time)42  0.509922   0.319178    1.598 0.110469    
+## factor(time)43 -0.815928   0.319029   -2.558 0.010699 *  
+## factor(time)44  1.200743   0.320664    3.745 0.000192 ***
+## factor(time)45 -0.677540   0.319015   -2.124 0.033946 *  
+## factor(time)46  0.329598   0.319049    1.033 0.301842    
+## factor(time)47  0.254068   0.319037    0.796 0.426027    
+## factor(time)48  0.728453   0.319070    2.283 0.022652 *  
+## factor(time)49  2.376336   0.319302    7.442 2.25e-13 ***
+## factor(time)50  0.525069   0.319064    1.646 0.100172    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.9692 on 931 degrees of freedom
-## Multiple R-squared:  0.3911, Adjusted R-squared:  0.3466 
-## F-statistic: 8.795 on 68 and 931 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 1.009 on 930 degrees of freedom
+## Multiple R-squared:  0.9625, Adjusted R-squared:  0.9598 
+## F-statistic: 346.3 on 69 and 930 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Bada bing bada boom. Now there are no missing coefficients. However, the coefficient on <span class="math inline">\(x\)</span> isn’t any easier to interpret, and in fact it is in even less transparent as it involves taking averages of averages of coefficients in the cross-section and within-case variation (say that five times fast). It is also peculiar that the model can only be fit with this kind of variation in the <em>slopes</em>, as opposed to the intercepts, as might appear more logical. The models with fixed effects only for cases or time points do not have this problem at all.</p>
 <p>What makes this lack of identification particularly malicious is that it is virtually impossible to identify unless someone takes the trouble as we did to generate data from scratch. Visually, the dataset with single coefficients for cross-sectional/within-case variation appears pristine. It is only deep under the hood that the problem appears. The fact that R (and Stata has similar behavior) can magically make the problem go away by changing the data only makes it less likely that the problem will ever be identified. We simply do not know how many papers in the literature have been affected by this problem (or by similar situations where the regression slopes are almost fixed across cases or time points).</p>
 <p>There is one important caveat to this post. The two-way fixed effects model <em>can</em> be a difference-in -differences model, but <em>only</em> if there are exactly two (2) time points. It is not possible to run a two-way FE model with many time points and call it difference-in-difference as there are the same difficulties in interpretation. We discuss this more in the paper.</p>
@@ -1247,7 +1249,7 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
 <p>In summary, fixed effects models are very useful for panel data as they help isolate dimensions of variation that matter for research questions. They are not magical tools for causal inference, but rather frameworks for understanding data. It is important to think about which dimension (cross-section or within-case) is more relevant, and then go with that dimension. All other concerns, including modeling spatial or time autocorrelation, omitted variables and endogeneity are all secondary to this first and most important point, which is what comparisons can be drawn from the data?</p>
 <p>One important area that this can be applied to is allowing people to fit more models with fixed effects on <em>time points</em> rather than cases. There are many questions that can be best understood by comparing cases to each other rather than cases to themselves over time. Studying long-run institutions like electoral systems, for example, can only be understood in terms of cross-sectional variation. There is nothing unique or special about the within-case model.</p>
 <p>Some claim that within-case variation is better because cases have less heterogeneity than the cross-section. However, there is no way this can be true a priori. If minimizing heterogeneity is the aim, then it is important to consider the time frame and how units change over time. For example, if we have a very long time series, say 200 years, and we are comparing the U.S. and Canada, then we might believe that the comparison of the U.S. of 1800 to the Canada of 1800 (the cross-section) has less noise than a comparison of the U.S. of 1800 to the U.S. of 2020 (within-case variation). We need to think more about our data and what it represents rather than taking the short-cut of employing the same model everyone else uses.</p>
-<p>While we did not discuss random effects/hierarchical models in this post, the same principles apply even if “partial pooling” is used rather than “no pooling”. Intercepts are designed to draw comparisons, and however the intercepts are modeled, it is important to think about what they are saying about the data, and whether that statement makes any sense.</p>
+<p>While we did not discuss random effects/hierarchical models in this post, the same principles apply even if “partial pooling” is used rather than “no pooling.” Intercepts are designed to draw comparisons, and however the intercepts are modeled, it is important to think about what they are saying about the data, and whether that statement makes any sense.</p>
 <p>So if you don’t want to eat that cheeseburger… we release you. Go enjoy your tofu-based meat alternative with relish.</p>
 </div>
 
@@ -1272,7 +1274,7 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/fixed_effects/&amp;text=What%20Panel%20Data%20Is%20Really%20All%20About" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=http://www.robertkubinec.com/post/fixed_effects/&amp;text=What%20Panel%20Data%20Is%20Really%20All%20About" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -1285,7 +1287,7 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/fixed_effects/&amp;t=What%20Panel%20Data%20Is%20Really%20All%20About" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=http://www.robertkubinec.com/post/fixed_effects/&amp;t=What%20Panel%20Data%20Is%20Really%20All%20About" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -1298,7 +1300,7 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
       
       
       <li>
-        <a href="mailto:?subject=What%20Panel%20Data%20Is%20Really%20All%20About&amp;body=/post/fixed_effects/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=What%20Panel%20Data%20Is%20Really%20All%20About&amp;body=http://www.robertkubinec.com/post/fixed_effects/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -1311,7 +1313,7 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/fixed_effects/&amp;title=What%20Panel%20Data%20Is%20Really%20All%20About" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=http://www.robertkubinec.com/post/fixed_effects/&amp;title=What%20Panel%20Data%20Is%20Really%20All%20About" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -1324,7 +1326,7 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=What%20Panel%20Data%20Is%20Really%20All%20About%20/post/fixed_effects/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=What%20Panel%20Data%20Is%20Really%20All%20About%20http://www.robertkubinec.com/post/fixed_effects/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1337,7 +1339,7 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/fixed_effects/&amp;title=What%20Panel%20Data%20Is%20Really%20All%20About" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=http://www.robertkubinec.com/post/fixed_effects/&amp;title=What%20Panel%20Data%20Is%20Really%20All%20About" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1378,7 +1380,7 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
       
 
       <div class="media-body">
-        <h5 class="card-title"><a href="/">Robert Kubinec</a></h5>
+        <h5 class="card-title"><a href="http://www.robertkubinec.com/">Robert Kubinec</a></h5>
         <h6 class="card-subtitle">Assistant Professor of Political Science</h6>
         <p class="card-text">My research centers on political-economic issues such as corruption, economic development, and business-state relations in developing countries, and in particular the Middle East and North Africa. I am also involved in the development of Bayesian statistical models with Stan for hard-to-study subjects like corruption, polarization, and other latent social constructs.</p>
         <ul class="network-icon" aria-hidden="true">
@@ -1604,16 +1606,6 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
   
   <div class="container">
     <footer class="site-footer">
-  
-  <p class="powered-by">
-    
-      <a href="/privacy/">Privacy Policy</a>
-    
-    
-       &middot; 
-      <a href="/terms/">Terms</a>
-    
-  </p>
   
 
   <p class="powered-by">

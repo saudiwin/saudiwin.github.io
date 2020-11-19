@@ -2,23 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Academic</title>
-    <link>/</link>
-      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <link>http://www.robertkubinec.com/</link>
+      <atom:link href="http://www.robertkubinec.com/index.xml" rel="self" type="application/rss+xml" />
     <description>Academic</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Robert Kubinec</copyright><lastBuildDate>Thu, 28 Jun 2018 00:00:00 +0100</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Robert Kubinec</copyright><lastBuildDate>Sun, 13 Sep 2020 15:00:00 +0000</lastBuildDate>
     <image>
-      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <url>http://www.robertkubinec.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Academic</title>
-      <link>/</link>
+      <link>http://www.robertkubinec.com/</link>
     </image>
     
     <item>
       <title>Why You Should Be Careful About the MaterniT 21 Test</title>
-      <link>/post/maternity21/</link>
+      <link>http://www.robertkubinec.com/post/maternity21/</link>
       <pubDate>Sun, 13 Sep 2020 15:00:00 +0000</pubDate>
-      <guid>/post/maternity21/</guid>
+      <guid>http://www.robertkubinec.com/post/maternity21/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;My wife and I have been faced with a decision in our pregnancies that has always caused me some consternation: should we take the MaterniT 21 test to see if our baby might have Down’s syndrome (trisomy 21) or other genetic abnormalities? This test, marketed by the company LabCorp, offers a way to analyze the blood of a pregnant woman for DNA markers that could indicate genetic problems. While non-invasive, it isn’t cheap (at least in the United States), and if it returns a positive result, it could be used for more invasive procedures like amniocentesis that could be harmful to the fetus.&lt;/p&gt;
@@ -32,21 +34,21 @@
 &lt;div id=&#34;investigating-labcorp&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Investigating LabCorp&lt;/h2&gt;
 &lt;p&gt;LabCorp (under its subsidiary Integrated Genetics) offers a &lt;a href=&#34;https://www.integratedgenetics.com/sites/default/files/2020-04/rep-1039-v6-1119.pdf&#34;&gt;brochure for the test on its website&lt;/a&gt;. This brochure mentions how accurate the test is in only one place:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/img/brochure.png&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/img/brochure.png&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
 While they don’t define what the technical terms are in the parentheses, 97.9% does sound pretty good. In another part of the brochure, the company says that “the test delivers clear positive or negative results.” I take this as enough evidence to say that LabCorp wants women to believe that the test will determine whether the fetus has Down’s syndrome with reasonable confidence, such as a greater than 90% probability.&lt;/p&gt;
 &lt;p&gt;Now for the fun part–I’m going to break down what is meant by the number cited in the brochure above and trace it back to the original research to see what it actually means. You may have noticed the footnote in the image above–that is a reference to &lt;a href=&#34;https://pubmed.ncbi.nlm.nih.gov/24657131/&#34;&gt;an article published in 2014 that evaluated tests like MaterniT 21, known as cell-free DNA tests&lt;/a&gt;. A scan of the article’s results shows that LabCorp did indeed get the number right–97.9% for trisomy 21. They did not, of course, mention that the article found much lower rates of detection for other trisomies and genetic conditions, but for now we’ll ignore that oversight. The test is marketed as a way to detect Down’s syndrome, so let’s focus on just that as the test’s selling point.&lt;/p&gt;
 &lt;p&gt;As I was doing research, I found a &lt;a href=&#34;https://obgyn.onlinelibrary.wiley.com/doi/full/10.1002/uog.14791&#34;&gt;more recent paper that did a meta-analysis&lt;/a&gt;, which is a compilation of the results of all previous research, in this case on tests like MaterniT 21. This paper is quite useful for evaluating the test as it aggregates information from many different researchers, lowering the concern that any one study was a fluke. It turns out that this meta-analysis has a number very close to what the brochure article cited – 99.2%, i.e., even higher.&lt;/p&gt;
-&lt;p&gt;At this point you may think, “your concerns about this test seem unfounded.” Ah, but we have not yet discussed what these numbers &lt;em&gt;actually mean&lt;/em&gt;, which if you notice, the brochure did not provide any more information about. All it said was 97.9% positive-predictive value for a “high-risk cohort”.&lt;/p&gt;
+&lt;p&gt;At this point you may think, “your concerns about this test seem unfounded.” Ah, but we have not yet discussed what these numbers &lt;em&gt;actually mean&lt;/em&gt;, which if you notice, the brochure did not provide any more information about. All it said was 97.9% positive-predictive value for a “high-risk cohort.”&lt;/p&gt;
 &lt;p&gt;My intuition is that relatively few readers of the brochure would have any idea what that refers to. Most people just want to know how accurate the test is, and 97.9% sounds really high, so it must be good. In reality, it is much harder to know how well a test works, because the usefulness of a test &lt;em&gt;depends on how hard it is to find what the test detects.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Explaining this point is difficult, so I’ll use as an example that is easier to relate to. I’m sure you’ve come across the hand-held metal detectors of the kind that people like to use for treasure hunting on beaches (see picture below). Suppose you are a person who has taken up an interest in treasure hunting and you want to know how useful these metal detector will be in helping you find Blackbeard’s long-lost hoard.&lt;/p&gt;
 &lt;p&gt;What you really want to know is, if the thing beeps, does it mean you’ve found treasure? The answer to this question just so happens to be the same calculation as the “positive-predictive value” that the test company put in their brochure.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/img/detect.png&#34; height=&#34;50%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/img/detect.png&#34; height=&#34;50%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The detector can easily go wrong if it beeps when it comes across a worthless piece of scrap metal. On the other hand, the detector could also fail if it didn’t beep because a treasure hoard was buried too deep. The first case is called a &lt;em&gt;false positive&lt;/em&gt;: the machine beeped but you didn’t find any treasure. The second case is called a &lt;em&gt;false negative&lt;/em&gt;: you were standing on treasure and the machine didn’t help you out one bit.&lt;/p&gt;
 &lt;p&gt;So let’s get back to the brochure. The &lt;em&gt;positive predictive value&lt;/em&gt; is equal to the chance that your metal detector’s beep means you hit pay dirt. But if you ask a metal detector salesperson what the chance is that you find treasure if the machine beeps, you might get some evasive answers/sarcastic smirks. He or she certainly won’t be able to tell you how likely it is that you find treasure, unless… the salesperson actually knows how much treasure there is in the sand (in which case you might wonder why they are still a salesperson). The point is, you can only calculate a positive predictive value for your detector if you know how likely it is you’ll be standing on treasure at any point along the beach. If treasure is impossibly rare–which it probably is, I hate to break it to you–you’ll be digging up a lot of empty sand or rusty beer cans even if the machine’s sensors are working fine.&lt;/p&gt;
 &lt;p&gt;The point of this whole analogy is that knowing what you should do if the machine beeps &lt;em&gt;depends on how much treasure is in the sand.&lt;/em&gt; If you knew that you were standing right next to a sunken pirate ship, you would probably want to dig up every beep you hear. If you’re on the Jersey shore and the sand is littered with old Dr. Pepper cans and fish hooks, you might not want to dig up anything unless you need the exercise.&lt;/p&gt;
 &lt;p&gt;Now I can finally explain the test company’s deception. They provided a positive predictive value, which is what you want to know: what’s the chance the fetus has Down’s syndrome if the test comes back positive? But LabCorp pulled this number from &lt;em&gt;a high-risk cohort&lt;/em&gt;. Doing so is no different than selling you a metal detector and telling you it’ll detect treasure 97% percent of the time so long as you’re standing on Blackbeard’s grave.&lt;/p&gt;
 &lt;p&gt;So where did this high-risk cohort come from? What is very important to know (and completely ignored by the test brochure) is the fact that the risk of Down’s syndrome increases dramatically with age. The chart below is from the CDC, and you can see that the rate of a live birth with Down’s syndrome increases very rapidly once a woman reaches 40 years of age.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/img/downs.png&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/img/downs.png&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now let’s go back to the papers they cited as proof of the positive predictive value. I’ll only focus on the meta-analysis as it represents a lot of combined research. Unfortunately, and to me somewhat surprisingly, the paper does not report the median age of women in the study. However, because we know the actual number of women who had children with Down’s syndrome from the paper, we can figure out how old the women were by calculating the percentage who ended up having babies with Down’s. I calculate this in the code below based on a table of data in the article. The code is shown for transparency’s sake, and I include the full table at the end of this blog post as a reference.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;journal_data &amp;lt;- readxl::read_xlsx(&amp;quot;downs_table.xlsx&amp;quot;)
 print(paste0(&amp;quot;Percentage of live births with Down&amp;#39;s Syndrome in the meta-analysis study is: &amp;quot;,round(sum(journal_data$positives)/(sum(journal_data$positives) + sum(journal_data$negatives)),3)*100,&amp;quot;%&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
@@ -85,9 +87,9 @@ age_trends %&amp;gt;%
   ylab(&amp;quot;Chance of Fetus with Down&amp;#39;s Syndrome&amp;quot;) +
   xlab(&amp;quot;Age of Mother&amp;quot;) +
   annotate(&amp;quot;text&amp;quot;,x=c(20,42),y=c(.52,.99),label=c(&amp;quot;50%&amp;quot;,&amp;quot;LabCorp Brochure: 97.9%&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/maternity21_files/figure-html/ppv-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/maternity21_files/figure-html/ppv-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As can be seen, the chance that a fetus has Down’s Syndrome if the test comes back positive–the positive predictive value–does not start to rise sharply until a woman is in her late 30s and 40s. Even in her early 30s, a positive test result only means there is a 50 percent chance that the fetus has Down’s Syndrome. I calculated these numbers from the meta-analysis that showed the test was pretty accurate, so the numbers could even be lower with the results of a different, less optimistic study.&lt;/p&gt;
-&lt;p&gt;You can see now that the test company’s positive predictive value of 97.9% only applies to women at the far end of the curve–around age 42 or 43 and higher. For the vast majority of women in child-bearing years, &lt;em&gt;this number is simply inaccurate&lt;/em&gt;. Technically, the test company can claim they included the proviso “in a high-risk cohort”, but it seems very unlikely anyone would go as far as I did to know what that means. And it turns out, it means &lt;em&gt;a lot&lt;/em&gt;. For women under 30, it’s still more likely than not that their fetus is free of Down’s even if the test comes back positive. If women and their partners were told, “even if the test comes back positive, there’s still only a 40 percent chance the fetus has Down’s Syndrome”, I do wonder how many people would still choose to take it.&lt;/p&gt;
+&lt;p&gt;You can see now that the test company’s positive predictive value of 97.9% only applies to women at the far end of the curve–around age 42 or 43 and higher. For the vast majority of women in child-bearing years, &lt;em&gt;this number is simply inaccurate&lt;/em&gt;. Technically, the test company can claim they included the proviso “in a high-risk cohort,” but it seems very unlikely anyone would go as far as I did to know what that means. And it turns out, it means &lt;em&gt;a lot&lt;/em&gt;. For women under 30, it’s still more likely than not that their fetus is free of Down’s even if the test comes back positive. If women and their partners were told, “even if the test comes back positive, there’s still only a 40 percent chance the fetus has Down’s Syndrome,” I do wonder how many people would still choose to take it.&lt;/p&gt;
 &lt;p&gt;The real punch, though, is that this non-invasive test can be used as a reason to do a more dangerous, invasive test. One potential test a doctor might recommend next, amniocentesis, &lt;a href=&#34;https://pubmed.ncbi.nlm.nih.gov/16946222/#:~:text=The%20overall%20loss%20rates%20were,rate%20for%20amniocentesis%20over%20time.&#34;&gt;has a risk of miscarriage as high as 1 percent&lt;/a&gt;. Let’s suppose that a million women under 30 take this test. According to my analysis above, there would probably be 832 false positive results (test results that came back positive but the fetus does not have Down’s Syndrome). If everyone went on to do amniocentesis to confirm the diagnosis, that would result in 8 miscarriages of otherwise healthy pregnancies. Considering that there are about 4 million live births per year in the United States, and the average age of a woman giving birth is 27, these disturbing numbers are quite plausible.&lt;/p&gt;
 &lt;p&gt;While it would seem that most people (and their doctors) would choose more invasive testing to confirm Down’s before reaching conclusions, it still strikes me as entirely plausible that someone would consider aborting the fetus based on the first, non-invasive positive result. That particular possibility frightens me, that someone might take the first relatively inaccurate test as a reason to terminate a pregnancy.&lt;/p&gt;
 &lt;p&gt;For all these reasons, do share this research with others. It’s important to know what tests really do, and also to pressure Congress and regulators to force test providers to release clear and non-misleading statistics. It should be as easy for them to compile a chart like the one I did above. In fact, these kinds of plots should be included in all scholarly research on tests to avoid people mis-characterizing results.&lt;/p&gt;
@@ -331,12 +333,117 @@ age_trends %&amp;gt;%
     </item>
     
     <item>
-      <title>What Panel Data Is Really All About</title>
-      <link>/post/fixed_effects/</link>
+      <title>A More Realistic P-Value for the Pfizer Vaccine Report</title>
+      <link>http://www.robertkubinec.com/post/vaccinepval/</link>
       <pubDate>Wed, 22 Apr 2020 15:00:00 +0000</pubDate>
-      <guid>/post/fixed_effects/</guid>
+      <guid>http://www.robertkubinec.com/post/vaccinepval/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;I start with &lt;a href=&#34;https://rpubs.com/ericnovik/692460&#34;&gt;Eric Novik’s excellent blog post&lt;/a&gt; on how to calculate the relevant statistics for the vaccine, i.e. vaccine efficacy (VE). This is defined as:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+VE = 1 - \frac{p_t}{p_c}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Where &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; is the proportion of cases in the treatment (vaccinated) group with COVID-19 and &lt;span class=&#34;math inline&#34;&gt;\(p_c\)&lt;/span&gt; is the proportion of cases in the control (un-vaccinated) group). This is kind of an odd statistic as it would seem to make more sense to simply report the ratio rather than one minus the ratio, although subtracting one means a null ratio (difference of 1) equals zero. I am not sure a general audience is very aware of the distinction and what VE in fact means. In essence, if we assume the vaccinated group will have no more cases than the control group, this statistic will converge to 1 as &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; goes to zero, so VE of 100% would be a case in which there are no cases in the treatment group.&lt;/p&gt;
+&lt;p&gt;As Eric Novik shows, the VE is actually a calculated quantity and isn’t modeled directly. The &lt;a href=&#34;https://pfe-pfizercom-d8-prod.s3.amazonaws.com/2020-09/C4591001_Clinical_Protocol.pdf&#34;&gt;clinical pre-registration&lt;/a&gt; says they will use a beta-binomial model. The put a prior on a transformation of the VE (vaccine efficacy) of &lt;span class=&#34;math inline&#34;&gt;\(Beta(0.700102, 1)\)&lt;/span&gt;. We can get an idea of what that looks like by examining the distribution of these values:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;prior_VE &amp;lt;- rbeta(10000,.700102,1)
+
+round(quantile((2*prior_VE - 1)/(prior_VE - 1),probs=seq(0,1,by=.05)),5)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##          0%          5%         10%         15%         20%         25% 
+## -4994.45563   -12.93514    -5.62962    -3.11045    -1.86012    -1.15668 
+##         30%         35%         40%         45%         50%         55% 
+##    -0.63120    -0.28035    -0.00591     0.19966     0.36281     0.50447 
+##         60%         65%         70%         75%         80%         85% 
+##     0.61128     0.69638     0.76767     0.83150     0.88354     0.92454 
+##         90%         95%        100% 
+##     0.95870     0.98584     1.00000&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This prior puts significant mass at negative VEs which would suggest that the vaccine actually makes things worse for the treatment group than for the control group. While this would seem unrealistic, it also suggests that very high VEs, such as above 90%, are relatively unlikely. We can see that the prior suggests it is about as likely that the VE is negative (the vaccine causes the virus) as it is likely that the VE is greater than 80%.&lt;/p&gt;
+&lt;p&gt;Given this conservative but weakly informative prior, we can then calculate a p-value for what they pre-register in their study, which is the probability that the VE (vaccine efficacy) is greater than 30%. We can then fit a Bayesian beta-binomial model with these priors by modifying Eric Novik’s original code:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# from Eric Novik, changed the prior per pre-reg
+
+vac_model &amp;lt;- &amp;quot;data {
+  int&amp;lt;lower=1&amp;gt; r_c; // num events, control
+  int&amp;lt;lower=1&amp;gt; r_t; // num events, treatment
+  int&amp;lt;lower=1&amp;gt; n_c; // num cases, control
+  int&amp;lt;lower=1&amp;gt; n_t; // num cases, treatment
+  real a[2];   // prior values for treatment effect
+  
+}
+parameters {
+  real&amp;lt;lower=0, upper=1&amp;gt; p_c; // binomial p for control
+  real&amp;lt;lower=0, upper=1&amp;gt; p_t; // binomial p for treatment 
+}
+transformed parameters {
+  real VE       = 1 - p_t / p_c;  // vaccine effectiveness
+}
+model {
+  (VE - 1)/(VE - 2) ~ beta(a[1], a[2]); // prior for treatment effect
+  r_c ~ binomial(n_c, p_c); // likelihood for control
+  r_t ~ binomial(n_t, p_t); // likelihood for treatment
+}
+generated quantities {
+  real effect   = p_t - p_c;      // treatment effect
+  real log_odds = log(p_t / (1 - p_t)) -
+                  log(p_c / (1 - p_c));
+}&amp;quot;
+
+to_stan &amp;lt;- cmdstan_model(write_stan_file(vac_model))
+
+n &amp;lt;- 4.4e4  # number of volunteers
+r_c &amp;lt;- 162  # number of events in control
+r_t &amp;lt;- 8    # number of events in vaccine group
+
+stan_data &amp;lt;- list(n=n,r_c=r_c,r_t=r_t,
+                  n_c=n/2,n_t=n/2,
+                  a=c(.700102,1))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we can sample and plot the results. We’ll draw a lot of samples so we can get good estimates in the tails (i.e. very low p-values).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pfizer_est &amp;lt;- to_stan$sample(data=stan_data,chains=1,iter_warmup=500,iter_sampling=100000,refresh=50000,show_messages=F)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:      1 / 100500 [  0%]  (Warmup) 
+## Chain 1 Iteration:    501 / 100500 [  0%]  (Sampling) 
+## Chain 1 Iteration:  50500 / 100500 [ 50%]  (Sampling) 
+## Chain 1 Iteration: 100500 / 100500 [100%]  (Sampling) 
+## Chain 1 finished in 2.1 seconds.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;draws &amp;lt;- pfizer_est$draws() %&amp;gt;% as_draws_df&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here’s a plot of the VE as reported in the press release with the dotted line as the average estimate:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean_ve &amp;lt;- mean(draws$VE)
+
+draws %&amp;gt;% 
+  ggplot(aes(x=VE)) +
+  geom_density(fill=&amp;quot;blue&amp;quot;,alpha=0.5)+
+  theme_tufte() +
+  ylab(&amp;quot;&amp;quot;) +
+  scale_x_continuous(labels=scales::percent_format(accuracy = 1)) +
+  geom_vline(aes(xintercept=mean(VE)),linetype=2) +
+  annotate(&amp;quot;text&amp;quot;,x=mean_ve,y=12,label=paste0(&amp;quot;  VE = &amp;quot;,round(mean_ve*100,1),&amp;quot;%&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/vaccinepval_files/figure-html/veplot-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This estimate matches the press release. So let’s calculate the p-value:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean(1 - as.numeric(draws$VE&amp;gt;.3))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Virtually nil.&lt;/p&gt;
+&lt;p&gt;However, we can also test some other thresholds, such as the FDA value of 50% VE:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean(1 - as.numeric(draws$VE&amp;gt;.5))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Still vanishingly small. We can try something a bit closer, such as whether VE exceeds 90%:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean(1 - as.numeric(draws$VE&amp;gt;.9))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.01913&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This p-value is at least reportable at 0.02. As this is a Bayesian model, this can be interpreted directly that the probability that the vaccine efficacy is less than 90% is quite small, less than a 2% chance.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>What Panel Data Is Really All About</title>
+      <link>http://www.robertkubinec.com/post/fixed_effects/</link>
+      <pubDate>Wed, 22 Apr 2020 15:00:00 +0000</pubDate>
+      <guid>http://www.robertkubinec.com/post/fixed_effects/</guid>
+      <description>
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;We’ve all been in that seminar where the author puts up a slide containing regression coefficients, and buried in the bottom line of the table we can see little Ys and Ns indicating the kind of panel data model employed. Quite often, these brief descriptions of models are taken as a mere statistical ritual, believed to be efficacious at appeasing the mercurial statistical deities, but rarely if ever investigated more thoroughly. Furthermore, no one wants to be in the difficult position of discussing panel data models, which inevitably boils down to a conversation laced with econometric terms generating more heat than light.&lt;/p&gt;
@@ -391,7 +498,7 @@ gen_data &amp;lt;- tw_data(N=50,
            stat_smooth(method=&amp;quot;lm&amp;quot;) +
            facet_wrap(~case,scales=&amp;quot;free&amp;quot;) +
   theme_minimal()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/fixed_effects_files/figure-html/case_out-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/fixed_effects_files/figure-html/case_out-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As can be seen, there is a consistent positive relationship of approximately +1 between &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; within cases. We can also examine the relationship for the cross-section by subsetting the data to each time point and plotting the cases for five of the time points:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;gen_data$data %&amp;gt;%
   filter(time&amp;lt;5) %&amp;gt;% 
@@ -400,7 +507,7 @@ gen_data &amp;lt;- tw_data(N=50,
            stat_smooth(method=&amp;quot;lm&amp;quot;) +
            facet_wrap(~time,scales=&amp;quot;free&amp;quot;) +
   theme_minimal()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/fixed_effects_files/figure-html/time_out-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/fixed_effects_files/figure-html/time_out-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;There is a separate and quite distinct relationship in the cross section between &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;. Both components are present in the outcome. To find the actual coefficient, we can simply fit linear regression models on the generated data, first with intercepts/dummies for cases:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(lm(y ~ x + factor(case),data=gen_data$data))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## 
@@ -806,87 +913,87 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))&lt;/code&gt;&l
 ## lm(formula = y ~ x + factor(case) + factor(time), data = gen_data$data)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -3.00701 -0.66389  0.00133  0.63782  3.10656 
+##     Min      1Q  Median      3Q     Max 
+## -3.5458 -0.7073  0.0026  0.6446  3.1709 
 ## 
-## Coefficients: (1 not defined because of singularities)
-##                Estimate Std. Error t value Pr(&amp;gt;|t|)    
-## (Intercept)     0.04730    0.20353   0.232 0.816274    
-## x               2.25815    0.52911   4.268 2.18e-05 ***
-## factor(case)2   0.02855    0.19972   0.143 0.886355    
-## factor(case)3  -1.50002    0.33618  -4.462 9.11e-06 ***
-## factor(case)4   1.49273    0.28826   5.178 2.74e-07 ***
-## factor(case)5   1.48285    0.27200   5.452 6.39e-08 ***
-## factor(case)6  -0.15484    0.20309  -0.762 0.446008    
-## factor(case)7  -1.55094    0.32407  -4.786 1.98e-06 ***
-## factor(case)8   1.49648    0.30548   4.899 1.14e-06 ***
-## factor(case)9   0.20613    0.19390   1.063 0.288010    
-## factor(case)10 -0.16469    0.19957  -0.825 0.409466    
-## factor(case)11 -0.86470    0.25649  -3.371 0.000779 ***
-## factor(case)12 -0.05720    0.19402  -0.295 0.768205    
-## factor(case)13  0.96576    0.23009   4.197 2.96e-05 ***
-## factor(case)14  1.82950    0.33261   5.500 4.89e-08 ***
-## factor(case)15  0.36507    0.19387   1.883 0.060002 .  
-## factor(case)16 -2.38364    0.44358  -5.374 9.75e-08 ***
-## factor(case)17 -0.75104    0.26464  -2.838 0.004638 ** 
-## factor(case)18  1.22585    0.25425   4.821 1.66e-06 ***
-## factor(case)19  1.08890    0.22072   4.933 9.57e-07 ***
-## factor(case)20  0.72560    0.20966   3.461 0.000563 ***
-## factor(time)2  -0.10838    0.27233  -0.398 0.690733    
-## factor(time)3  -0.08698    0.31037  -0.280 0.779342    
-## factor(time)4   0.11700    0.28380   0.412 0.680236    
-## factor(time)5   0.15409    0.29358   0.525 0.599801    
-## factor(time)6   0.22296    0.26809   0.832 0.405828    
-## factor(time)7   0.26361    0.31998   0.824 0.410254    
-## factor(time)8   0.29181    0.27490   1.062 0.288725    
-## factor(time)9  -0.02611    0.26907  -0.097 0.922722    
-## factor(time)10  0.45526    0.36554   1.245 0.213283    
-## factor(time)11  0.29391    0.44557   0.660 0.509662    
-## factor(time)12  0.16617    0.26550   0.626 0.531542    
-## factor(time)13  0.42420    0.44419   0.955 0.339832    
-## factor(time)14 -0.04405    0.26721  -0.165 0.869099    
-## factor(time)15 -0.24274    0.28502  -0.852 0.394616    
-## factor(time)16  0.78202    0.41181   1.899 0.057874 .  
-## factor(time)17  0.43916    0.31994   1.373 0.170200    
-## factor(time)18  0.44816    0.34327   1.306 0.192024    
-## factor(time)19  0.03360    0.42276   0.079 0.936674    
-## factor(time)20  0.23293    0.29674   0.785 0.432678    
-## factor(time)21  0.63165    0.28613   2.208 0.027519 *  
-## factor(time)22  0.16396    0.27324   0.600 0.548607    
-## factor(time)23 -0.28082    0.27938  -1.005 0.315084    
-## factor(time)24  0.62679    0.50273   1.247 0.212792    
-## factor(time)25 -0.07319    0.26772  -0.273 0.784609    
-## factor(time)26  0.05009    0.28947   0.173 0.862669    
-## factor(time)27  0.30873    0.38612   0.800 0.424162    
-## factor(time)28 -0.08292    0.28611  -0.290 0.772021    
-## factor(time)29  0.28113    0.28901   0.973 0.330934    
-## factor(time)30  0.41912    0.28335   1.479 0.139433    
-## factor(time)31  0.59049    0.59785   0.988 0.323567    
-## factor(time)32  0.09649    0.27324   0.353 0.724081    
-## factor(time)33  0.32573    0.27438   1.187 0.235471    
-## factor(time)34 -0.02994    0.26618  -0.112 0.910465    
-## factor(time)35  0.09598    0.31750   0.302 0.762496    
-## factor(time)36  0.34256    0.30065   1.139 0.254823    
-## factor(time)37  0.63306    0.26543   2.385 0.017277 *  
-## factor(time)38  0.53330    0.47254   1.129 0.259363    
-## factor(time)39 -0.47720    0.43452  -1.098 0.272385    
-## factor(time)40 -0.12787    0.27804  -0.460 0.645687    
-## factor(time)41 -0.01848    0.31200  -0.059 0.952775    
-## factor(time)42  0.17223    0.44301   0.389 0.697527    
-## factor(time)43 -0.28794    0.28957  -0.994 0.320285    
-## factor(time)44  0.21985    0.34151   0.644 0.519884    
-## factor(time)45 -0.17936    0.29675  -0.604 0.545712    
-## factor(time)46 -0.02279    0.26567  -0.086 0.931654    
-## factor(time)47  0.35779    0.38107   0.939 0.348020    
-## factor(time)48 -0.13600    0.33360  -0.408 0.683607    
-## factor(time)49  0.20430    0.26739   0.764 0.445026    
-## factor(time)50       NA         NA      NA       NA    
+## Coefficients:
+##                 Estimate Std. Error  t value Pr(&amp;gt;|t|)    
+## (Intercept)    -0.673576   0.264996   -2.542 0.011188 *  
+## x              -0.812224   0.005523 -147.067  &amp;lt; 2e-16 ***
+## factor(case)2   0.431969   0.201817    2.140 0.032582 *  
+## factor(case)3   0.169660   0.201920    0.840 0.400994    
+## factor(case)4   0.216513   0.201806    1.073 0.283604    
+## factor(case)5   0.377437   0.201835    1.870 0.061794 .  
+## factor(case)6   0.233856   0.201762    1.159 0.246726    
+## factor(case)7   0.291743   0.202146    1.443 0.149292    
+## factor(case)8   0.040054   0.201779    0.199 0.842696    
+## factor(case)9   0.182815   0.201763    0.906 0.365123    
+## factor(case)10  0.197116   0.201782    0.977 0.328886    
+## factor(case)11  0.264956   0.201782    1.313 0.189480    
+## factor(case)12  0.075685   0.201799    0.375 0.707708    
+## factor(case)13  0.249261   0.201795    1.235 0.217062    
+## factor(case)14  0.118726   0.201765    0.588 0.556382    
+## factor(case)15  0.494571   0.201828    2.450 0.014451 *  
+## factor(case)16 -0.085249   0.203634   -0.419 0.675579    
+## factor(case)17  0.383878   0.201766    1.903 0.057403 .  
+## factor(case)18  0.290350   0.201837    1.439 0.150619    
+## factor(case)19  0.483656   0.201790    2.397 0.016734 *  
+## factor(case)20  0.287368   0.201792    1.424 0.154759    
+## factor(time)2   0.596679   0.319058    1.870 0.061780 .  
+## factor(time)3   1.407443   0.319158    4.410 1.16e-05 ***
+## factor(time)4  -0.328379   0.320361   -1.025 0.305616    
+## factor(time)5  -0.119690   0.319047   -0.375 0.707634    
+## factor(time)6   1.539948   0.319015    4.827 1.62e-06 ***
+## factor(time)7   0.338443   0.319042    1.061 0.289052    
+## factor(time)8   0.528072   0.319048    1.655 0.098232 .  
+## factor(time)9  -0.032228   0.319030   -0.101 0.919556    
+## factor(time)10  0.765270   0.319056    2.399 0.016657 *  
+## factor(time)11  0.789097   0.319058    2.473 0.013568 *  
+## factor(time)12  2.149822   0.319199    6.735 2.87e-11 ***
+## factor(time)13  0.118301   0.319032    0.371 0.710862    
+## factor(time)14 -0.734958   0.319015   -2.304 0.021452 *  
+## factor(time)15  0.888259   0.319109    2.784 0.005486 ** 
+## factor(time)16  0.553245   0.319027    1.734 0.083221 .  
+## factor(time)17  0.652004   0.319030    2.044 0.041264 *  
+## factor(time)18  1.351653   0.319104    4.236 2.50e-05 ***
+## factor(time)19  0.260828   0.319061    0.817 0.413860    
+## factor(time)20 -0.662932   0.319060   -2.078 0.038005 *  
+## factor(time)21  1.509116   0.319095    4.729 2.60e-06 ***
+## factor(time)22 -0.014879   0.319029   -0.047 0.962810    
+## factor(time)23 -0.538377   0.319023   -1.688 0.091827 .  
+## factor(time)24  0.493220   0.319046    1.546 0.122464    
+## factor(time)25 -1.820174   0.319100   -5.704 1.57e-08 ***
+## factor(time)26 -0.571426   0.319015   -1.791 0.073583 .  
+## factor(time)27  0.093017   0.319026    0.292 0.770683    
+## factor(time)28 -1.328269   0.319035   -4.163 3.43e-05 ***
+## factor(time)29  0.342019   0.319038    1.072 0.283983    
+## factor(time)30 -0.774338   0.319014   -2.427 0.015401 *  
+## factor(time)31  0.461852   0.319026    1.448 0.148040    
+## factor(time)32  0.308478   0.319046    0.967 0.333858    
+## factor(time)33  1.343319   0.319094    4.210 2.80e-05 ***
+## factor(time)34  1.989206   0.319258    6.231 7.03e-10 ***
+## factor(time)35 -0.422407   0.319019   -1.324 0.185801    
+## factor(time)36  0.614837   0.319085    1.927 0.054299 .  
+## factor(time)37 -0.416240   0.319061   -1.305 0.192359    
+## factor(time)38  0.779448   0.319089    2.443 0.014762 *  
+## factor(time)39 -0.847622   0.319015   -2.657 0.008019 ** 
+## factor(time)40  3.245566   0.319204   10.168  &amp;lt; 2e-16 ***
+## factor(time)41 -0.589393   0.319031   -1.847 0.064999 .  
+## factor(time)42  0.509922   0.319178    1.598 0.110469    
+## factor(time)43 -0.815928   0.319029   -2.558 0.010699 *  
+## factor(time)44  1.200743   0.320664    3.745 0.000192 ***
+## factor(time)45 -0.677540   0.319015   -2.124 0.033946 *  
+## factor(time)46  0.329598   0.319049    1.033 0.301842    
+## factor(time)47  0.254068   0.319037    0.796 0.426027    
+## factor(time)48  0.728453   0.319070    2.283 0.022652 *  
+## factor(time)49  2.376336   0.319302    7.442 2.25e-13 ***
+## factor(time)50  0.525069   0.319064    1.646 0.100172    
 ## ---
 ## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
 ## 
-## Residual standard error: 0.9692 on 931 degrees of freedom
-## Multiple R-squared:  0.3911, Adjusted R-squared:  0.3466 
-## F-statistic: 8.795 on 68 and 931 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
+## Residual standard error: 1.009 on 930 degrees of freedom
+## Multiple R-squared:  0.9625, Adjusted R-squared:  0.9598 
+## F-statistic: 346.3 on 69 and 930 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Bada bing bada boom. Now there are no missing coefficients. However, the coefficient on &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; isn’t any easier to interpret, and in fact it is in even less transparent as it involves taking averages of averages of coefficients in the cross-section and within-case variation (say that five times fast). It is also peculiar that the model can only be fit with this kind of variation in the &lt;em&gt;slopes&lt;/em&gt;, as opposed to the intercepts, as might appear more logical. The models with fixed effects only for cases or time points do not have this problem at all.&lt;/p&gt;
 &lt;p&gt;What makes this lack of identification particularly malicious is that it is virtually impossible to identify unless someone takes the trouble as we did to generate data from scratch. Visually, the dataset with single coefficients for cross-sectional/within-case variation appears pristine. It is only deep under the hood that the problem appears. The fact that R (and Stata has similar behavior) can magically make the problem go away by changing the data only makes it less likely that the problem will ever be identified. We simply do not know how many papers in the literature have been affected by this problem (or by similar situations where the regression slopes are almost fixed across cases or time points).&lt;/p&gt;
 &lt;p&gt;There is one important caveat to this post. The two-way fixed effects model &lt;em&gt;can&lt;/em&gt; be a difference-in -differences model, but &lt;em&gt;only&lt;/em&gt; if there are exactly two (2) time points. It is not possible to run a two-way FE model with many time points and call it difference-in-difference as there are the same difficulties in interpretation. We discuss this more in the paper.&lt;/p&gt;
@@ -896,7 +1003,7 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))&lt;/code&gt;&l
 &lt;p&gt;In summary, fixed effects models are very useful for panel data as they help isolate dimensions of variation that matter for research questions. They are not magical tools for causal inference, but rather frameworks for understanding data. It is important to think about which dimension (cross-section or within-case) is more relevant, and then go with that dimension. All other concerns, including modeling spatial or time autocorrelation, omitted variables and endogeneity are all secondary to this first and most important point, which is what comparisons can be drawn from the data?&lt;/p&gt;
 &lt;p&gt;One important area that this can be applied to is allowing people to fit more models with fixed effects on &lt;em&gt;time points&lt;/em&gt; rather than cases. There are many questions that can be best understood by comparing cases to each other rather than cases to themselves over time. Studying long-run institutions like electoral systems, for example, can only be understood in terms of cross-sectional variation. There is nothing unique or special about the within-case model.&lt;/p&gt;
 &lt;p&gt;Some claim that within-case variation is better because cases have less heterogeneity than the cross-section. However, there is no way this can be true a priori. If minimizing heterogeneity is the aim, then it is important to consider the time frame and how units change over time. For example, if we have a very long time series, say 200 years, and we are comparing the U.S. and Canada, then we might believe that the comparison of the U.S. of 1800 to the Canada of 1800 (the cross-section) has less noise than a comparison of the U.S. of 1800 to the U.S. of 2020 (within-case variation). We need to think more about our data and what it represents rather than taking the short-cut of employing the same model everyone else uses.&lt;/p&gt;
-&lt;p&gt;While we did not discuss random effects/hierarchical models in this post, the same principles apply even if “partial pooling” is used rather than “no pooling”. Intercepts are designed to draw comparisons, and however the intercepts are modeled, it is important to think about what they are saying about the data, and whether that statement makes any sense.&lt;/p&gt;
+&lt;p&gt;While we did not discuss random effects/hierarchical models in this post, the same principles apply even if “partial pooling” is used rather than “no pooling.” Intercepts are designed to draw comparisons, and however the intercepts are modeled, it is important to think about what they are saying about the data, and whether that statement makes any sense.&lt;/p&gt;
 &lt;p&gt;So if you don’t want to eat that cheeseburger… we release you. Go enjoy your tofu-based meat alternative with relish.&lt;/p&gt;
 &lt;/div&gt;
 </description>
@@ -904,718 +1011,30 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))&lt;/code&gt;&l
     
     <item>
       <title>A Proposed Model for Partial Identification of SARS-CoV2 Infection Rates Given Observed Tests and Cases</title>
-      <link>/post/kubinec_model_draft/</link>
+      <link>http://www.robertkubinec.com/post/kubinec_model_draft/</link>
       <pubDate>Sat, 28 Mar 2020 15:00:00 +0000</pubDate>
-      <guid>/post/kubinec_model_draft/</guid>
+      <guid>http://www.robertkubinec.com/post/kubinec_model_draft/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.js&#34;&gt;&lt;/script&gt;
 
 
-&lt;div id=&#34;introduction&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;In recent days as more and more data is available on observed case counts of the SARS-CoV2 coronavirus there are also increasing attempts to infer infection rates from these case counts. Furthermore, policy makers like Deborah Bix have begun to question whether the predictions of epidemiological models are far worse than the observed data.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; By contrast, in this paper I show that it is impossible to infer the true number of infected people from observed tests and cases alone, although it is possible to infer the effect of suppression policies on the &lt;em&gt;relative&lt;/em&gt; rates of infectious growth. As a result, the susceptible-infected-recovered (SIR)/susceptible-exposed-infected-recovered (SEIR) approach &lt;span class=&#34;citation&#34;&gt;(Peak et al. 2020; Riou et al. 2020; Robert Verity 2020; Perkins et al. 2020; Jose Lourenco 2020; Ruiyun Li 2020; Neil M Ferguson 2020)&lt;/span&gt; is the only approach that can provide bounds on the the true number of infected given reasonable assumptions. The intention of this paper is to offer a more limited approach based on modeling empirical data, particularly observed tests and cases, that allows researchers to test for the effect of suppression policies and other region-level factors that is partially identified, i.e. up to an unobserved scaling factor of the true infection rate. Furthermore, by using informed priors from SIR/SEIR models, the estimates presented in this paper can be transformed to reasonable estimates of the actual number of infected persons.&lt;/p&gt;
-&lt;p&gt;The aim of the much simpler model presented in this paper is to show how inter-country comparisons based on observed case counts and tests can be rank-identified, i.e., we can know how countries’ infections compare relative to each other even if we do not know the true number of infected. Given the model’s estimates, we can then identify the effect of suppression policies even without knowing the total number of infected by comparing the &lt;em&gt;rates&lt;/em&gt; of disease progression across regions.&lt;/p&gt;
-&lt;p&gt;Furthermore, by employing insights from SIR models and epidemiologists, we can further put bounds on the infection rates to convert them to actual numbers of infected individuals by allowing that the number of tests could be as low as ten percent of the total infected &lt;span class=&#34;citation&#34;&gt;(Ruiyun Li 2020; Perkins et al. 2020)&lt;/span&gt;. Employing this correction, I show that the model provides external validation of the SIR models’ assessment that the total number of infected is much higher than the reported number of cases given available empirical data &lt;span class=&#34;citation&#34;&gt;(Ruiyun Li 2020; Perkins et al. 2020)&lt;/span&gt;. In other words, policymakers’ skepticism is unfounded if it is based on how many cases have been reported once we condition on the number of tests. To show this, I fit the model to observed cases and test counts among US states and territories while incorporating lower bounds from SIR/SEIR models. This model estimates that the total number of infected people is at least six-seven times higher than the current observed case count of 80,000 individuals according to the New York Times, approaching approximately 700,000 infected individuals with COVID-19 in the United States as of March 27th. Furthermore, this estimate is conservative as it relies on reported data, which necessarily has a time delay as cases and tests are reported.&lt;/p&gt;
-&lt;p&gt;In addition, the model shows that US states that declared states of emergencies earlier than other states have lower infection rates than if they had declared states of emergencies later. However, declaring an early state of emergency has not yet flattened the recent increase spike in infection rates (i.e. flattened the curve), only reduced the overall total of infected people. In other words, if these states had declared states of emergencies later than they did, they might be even worse off than they are now. With these results, the model reveals how we can model suppression policies aimed at the virus with observed data if we make important adjustments to the counts of observed tests and cases.&lt;/p&gt;
-&lt;p&gt;The intention of posting this early draft is to share the model with the wider research community as well as to invite feedback on the model. I and several collaborators are collecting data on government responses to the COVID-19 pandemic via the &lt;a href=&#34;https://lumesserschmidt.github.io/CoronaNet/&#34;&gt;CoronaNet project&lt;/a&gt;, and we want to employ this model to see which government responses are most effective. In the absence of academic conferences, I am hoping that posting online will permit me to recieve necessary feedback on the model’s validity and how to improve it.&lt;/p&gt;
-&lt;p&gt;To reproduce the model and to access the underlying Stan code, please see my &lt;a href=&#34;https://github.com/saudiwin/corona_tscs&#34;&gt;Github page&lt;/a&gt;.&lt;/p&gt;
-&lt;div id=&#34;model-of-empirical-covid-19-data&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Model of Empirical COVID-19 Data&lt;/h2&gt;
-&lt;p&gt;In this document I put forward a model for the rate of infected people &lt;span class=&#34;math inline&#34;&gt;\(I_{ct} \in (0,1)\)&lt;/span&gt; in a given country/region &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt; given the the number of cases &lt;span class=&#34;math inline&#34;&gt;\(a_{ct}\)&lt;/span&gt; and the number of tests &lt;span class=&#34;math inline&#34;&gt;\(q_{ct}\)&lt;/span&gt; for all outbreak time periods &lt;span class=&#34;math inline&#34;&gt;\(t \in T\)&lt;/span&gt;. The outcome is here defined as the tests and cases reported on a given day rather than the cumulative total for ease of modeling purposes (i.e., the lagged difference of the cumulative total). I assume that &lt;span class=&#34;math inline&#34;&gt;\(I_{ct}\)&lt;/span&gt; is an unobserved Beta-distributed variable with a 3-order polynomial time trend of the number of post-outbreak time periods &lt;span class=&#34;math inline&#34;&gt;\(T_O &amp;lt; T_A\)&lt;/span&gt;, where an outbreak begins at the first reported case in a given area. By using a single time function, the model assumes that the coronavirus follows a similar pattern of infection across countries, as appears to be the case (i.e., the virus has not mutated across countries).&lt;/p&gt;
-&lt;p&gt;The unobserved infection rate &lt;span class=&#34;math inline&#34;&gt;\(I_{ct}\)&lt;/span&gt; is a function of the following parameters:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
-Pr(I_{ct}|T=t) \sim Beta(&amp;amp;\alpha_1 + \alpha_c + \beta_{O1}\sum_{c=1}^{C} \textbf{1}(a_{ct&amp;#39;}&amp;gt;0) \forall t&amp;#39; \in t&amp;#39;&amp;lt;t + \textbf{1}\beta_{S1} + \\
-                        &amp;amp;\beta_{I1}t_o + \beta_{I2}t_o^2 + \beta_{I3}t_o^3 + \textbf{1}\beta_{S2},\phi)
-\end{align}\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Where &lt;span class=&#34;math inline&#34;&gt;\(g(\cdot)\)&lt;/span&gt; is the inverse logit function, &lt;span class=&#34;math inline&#34;&gt;\(\alpha_c\)&lt;/span&gt; are country-level intercepts (less one for identification), &lt;span class=&#34;math inline&#34;&gt;\(\beta_{O1}\sum_{c=1}^{C} \textbf{1}(a_{ct_a-1}&amp;gt;0) \forall t&amp;#39; \in t&amp;#39;&amp;lt;t\)&lt;/span&gt; is the sum of countries with at least one case of infection in the world at any previous time point, and the three &lt;span class=&#34;math inline&#34;&gt;\(\beta_{Ii}\)&lt;/span&gt; are polynomial coefficients of post-outbreak time points &lt;span class=&#34;math inline&#34;&gt;\(t_o\)&lt;/span&gt;. The sum of countries parameter measures the spread of the virus due to travel across state borders, and as such will increase rapidly as more states are infected. By contrast, the polynomial time trends represent possible within-state transmission of the virus, which can cause exponentially growing case counts compared to the linear sum of infected countries parameter. Finally, the parameter &lt;span class=&#34;math inline&#34;&gt;\(\phi\)&lt;/span&gt; is a dispersion parameter governing how precise the infection rate estimate is.&lt;/p&gt;
-&lt;p&gt;Given these two primary ways that the infection rate can increase, there are two ways that possible suppression measures targeted at the virus can enter the model. The first is a constant factor, &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}\beta_{S1}\)&lt;/span&gt;, which is an indicator function that is equal to &lt;strong&gt;1&lt;/strong&gt; if a country has taken suppression measures and &lt;strong&gt;0&lt;/strong&gt; otherwise. This constant parameter is meant to capture the ability of countries or regions to stop the spread of transmission due to foreign travelers arriving in the country/region, which occurs at a roughly constant level over time.&lt;/p&gt;
-&lt;p&gt;The second way suppression measures enter the model is through &lt;span class=&#34;math inline&#34;&gt;\(\textbf{1}\beta_{S2}\)&lt;/span&gt;, which can increase over time as the virus increases. This parameter reflects possible social distancing measures which will grow more effective as domestic transmission of the virus increases (i.e. as the polynomial time trend takes off). As such, it is assumed that any deviation from the common domestic virus transmission pattern is due to these time-varying suppression measures.&lt;/p&gt;
-&lt;p&gt;Once the outbreak has started in country &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;, which is indicated by a positive case count in time &lt;span class=&#34;math inline&#34;&gt;\(t-1\)&lt;/span&gt;, a time counter &lt;span class=&#34;math inline&#34;&gt;\(t_O=1\)&lt;/span&gt; starts for that country and increases by 1 for each following time point until &lt;span class=&#34;math inline&#34;&gt;\(T\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Given this specification of the infection rate process, we can then move to the generation of the observed data, tests &lt;span class=&#34;math inline&#34;&gt;\(q_{ct_a}\)&lt;/span&gt; and cases &lt;span class=&#34;math inline&#34;&gt;\(a_{ct_a}\)&lt;/span&gt;. The infection rate is assumed to influence both of these numbers. First, an increasing number of infections is associated with more tests as countries try to identify who may have the virus. Furthermore, a rising infection rate is associated with a higher ratio of positive results (reported cases) conditional on the number of tests. I model both of these observed indicators, tests and cases, jointly to simultaneously adjust for the infection rate’s influence on both factors.&lt;/p&gt;
-&lt;p&gt;To model the number of tests, I assume that each country has an unobserved level of testing parameter, &lt;span class=&#34;math inline&#34;&gt;\(\beta_{cq}&amp;gt;0\)&lt;/span&gt;, indicating how strongly each country is willing and able to perform tests as a factor of the unobserved infection rate. The number of observed tests &lt;span class=&#34;math inline&#34;&gt;\(q_{ct}\)&lt;/span&gt; for a given time point &lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt; and country &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt; is distributed as a Binomial proportion of the countries’ population &lt;span class=&#34;math inline&#34;&gt;\(c_{p}\)&lt;/span&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-q_{ct} \sim B(c_{p},g(\alpha_2 + \beta_{cq}I_{ct}))
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;The parameter &lt;span class=&#34;math inline&#34;&gt;\(\beta_{cq}\)&lt;/span&gt; serves to scale the infection rate &lt;span class=&#34;math inline&#34;&gt;\(I_{ct}\)&lt;/span&gt; so that an increasing infection rate has heterogeneous effects on the number of tests by country. The intercept &lt;span class=&#34;math inline&#34;&gt;\(\alpha_2\)&lt;/span&gt; indicates how many tests would be performed in a country with an infection rate of zero. It is assumed that this number is quite low, though not necessarily zero.&lt;/p&gt;
-&lt;p&gt;Given the parameter &lt;span class=&#34;math inline&#34;&gt;\(\beta_{cq}\)&lt;/span&gt;, a country could test almost no one or test far more than are actually infected depending on their willingness to impose tests. However, the number of tests is increasing in &lt;span class=&#34;math inline&#34;&gt;\(I_{ct}\)&lt;/span&gt; conditional on a country’s willingness to test people. That is, regardless of how much a country wants to test people, as the outbreak grows the number of tests will increase though at very different rates.&lt;/p&gt;
-&lt;p&gt;Given the number of observed tests &lt;span class=&#34;math inline&#34;&gt;\(q_{ct}\)&lt;/span&gt;, I can then generate the number of observed cases &lt;span class=&#34;math inline&#34;&gt;\(a_{ct}\)&lt;/span&gt; as a binomial proportion of the number of tests &lt;span class=&#34;math inline&#34;&gt;\(q_{ct}\)&lt;/span&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-a_{ct} \sim B(q_{ct},g(\alpha_3 + \beta_a I_{ct_a})))
-\]&lt;/span&gt;
-where &lt;span class=&#34;math inline&#34;&gt;\(g(\cdot)\)&lt;/span&gt; is again the inverse logit function, &lt;span class=&#34;math inline&#34;&gt;\(\alpha_3\)&lt;/span&gt; is an intercept that indicates how many cases would test positive with an infection rate of zero (equal to the false positive rate of the test), and &lt;span class=&#34;math inline&#34;&gt;\(\beta_a&amp;gt;0\)&lt;/span&gt; is a parameter that determines how hard it is to find the infected people and test them as opposed to people who are not actually infected. The multiplication of this parameter and the infection rate determines the observed number of cases &lt;span class=&#34;math inline&#34;&gt;\(a_{ct}\)&lt;/span&gt; as a proportion of the number of observed tests &lt;span class=&#34;math inline&#34;&gt;\(q_{ct}\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;To summarize the model, infection rates determine how many tests a country is likely to undertake and also the number of positive tests they receive conditional on a certain number of tests. This simultaneous adjustment helps takes care of mis-interpreting the observed data by not taking into account varying testing rates, which is likely why some policy makers argue that the epidemiological models are wrong.&lt;/p&gt;
-&lt;p&gt;Because sampling from a model with a hierarchical Beta parameter can be difficult, we can simplify the final likelihood by combining the beta distribution and the binomial counts into a beta-binomial model for tests:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-q_{ct_a} \sim BB(c_p,g(\alpha_2 + \beta_qI_{ct_a}),\phi_q)
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;and cases:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-a_{ct_a} \sim BB(q_{ct},g(\alpha_3 + \beta_a I_{ct_a})),\phi_a)
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;For estimation purposes, the infection rates &lt;span class=&#34;math inline&#34;&gt;\(I_{ct}\)&lt;/span&gt; are put in to the beta-binomial model on the logit scale instead of transforming them to (0,1), but they can be transformed to proportions post-estimation with the inverse logit function.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;identification&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Identification&lt;/h1&gt;
-&lt;p&gt;This model contains an unobserved latent process &lt;span class=&#34;math inline&#34;&gt;\(I_{ct_a}\)&lt;/span&gt;, and as such there are further constraints necessary in order to have a unique scale and rotation of the latent variable. First, sign restrictions are put on the suppression measure parameters &lt;span class=&#34;math inline&#34;&gt;\(\beta_{S1}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta_{S2}\)&lt;/span&gt; so that they are strictly negative. Second, positivity constraints are put on the parameters &lt;span class=&#34;math inline&#34;&gt;\(\beta_a\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta_q\)&lt;/span&gt; that govern the relationship between the infection rate and test and case counts. It is assumed that infection rates will increase both the number of tests and the number of cases relative to the number of tests, though at necessarily different rates.&lt;/p&gt;
-&lt;p&gt;The other important restriction is to fix the intercept for the cases model &lt;span class=&#34;math inline&#34;&gt;\(\alpha_3\)&lt;/span&gt; to a fixed value of 0.1, or -2.2 on the logit scale. The reason for this restriction is because the intercept necessarily equals the false positive rate of a COVID-19 test. While there is still ongoing research as to the false positive rate, it is clear that it is likely in the area of 1 in 10 false positives for rapid tests.&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; As such, by pinning this value, we can lower-bound the number of cases we are likely to see given an infection rate of zero, providing a helpful lower-bound for the estimate.&lt;/p&gt;
-&lt;p&gt;As I will show, no other identification restrictions are necessary to estimate the model beyond weakly informative priors assigned to parameters. These are:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
-\beta_a &amp;amp;\sim E(.1)\\
-\beta_{qc} &amp;amp;\sim E(\sigma_q)\\
-\sigma_q &amp;amp;\sim E(.1)\\
-\beta_{Si} &amp;amp;\sim N(0,2)\\
-\alpha_c &amp;amp;\sim N(0,3)\\
-\beta_{Ii} &amp;amp;\sim N(0,10)\\
-\alpha_1 &amp;amp;\sim N(0,10)\\
-\alpha_2 &amp;amp;\sim N(0,10)
-\end{align}\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;The one prior to note is that a hierarchical regularizing prior is put on the varying testing adjustment parameters &lt;span class=&#34;math inline&#34;&gt;\(\beta_{qc}\)&lt;/span&gt; for regularization purposes due to the limited data available to inform the parameter.&lt;/p&gt;
-&lt;p&gt;Other than these weakly informative priors, the model is identified, as I show in the next section. However, it is important to emphasize that there is no information in the model that identifies the &lt;em&gt;true&lt;/em&gt; number of infected people. Rather, the infection rate is a latent process, and as such it is not known exactly what scale to assign to it without further information. However, both the relative growth in infection rates are identified, along with the effect of suppression measures, so &lt;em&gt;the model is useful without being fully identified&lt;/em&gt;. Furthermore, by incorporating insights from SIR/SEIR models I can also identify the latent scale with reasonable informative priors, as I show in the data analysis section. The SIR/SEIR models are not “doomsday” predictions but rather rigorous models of the underlying infection process.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;simulation&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Simulation&lt;/h1&gt;
-&lt;p&gt;Because this model is fully generative, we can simulate it using Monte Carlo methods. The simulation is very important as it is the only way to demonstrate that the model is globally identified and can in fact capture unobserved parameters like suppression effects and relative infection rates. The following R code generates data from the model and plots the resulted unobserved infection rate and observed values for tests and cases:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# simulation parameters
-num_country &amp;lt;- 100
-# unobserved country-level heterogeneity for outbreak onset
-country_int &amp;lt;- c(0,sort(rnorm(num_country-1,0,.25)))
-time_points &amp;lt;- 100
-# allows for linear growth that later becomes explosive
-polynomials &amp;lt;- c(.03,0.007,-0.0001)
-
-# factor that determines how many people a country is willing/able to test
-
-country_test &amp;lt;- rnorm(num_country,5,0.25)
-
-# size of countries
-
-country_pop &amp;lt;- rpois(num_country,10000)
-
-# assumt t=1 is unmodeled = exogenous start of the infection
-  
-t1 &amp;lt;- c(1,rep(0,num_country-1))
-
-# create a suppression coefficient
-# first is for preventing domestic transmission from occuring
-# second is for preventing further domestic transmission once it starts
-
-suppress1 &amp;lt;- -0.8
-suppress2 &amp;lt;- -0.05
-
-# high value of phi = high over-time stability
-phi &amp;lt;- c(300,300)
-
-# countries that suppress or don&amp;#39;t suppress
-
-suppress_measures &amp;lt;- as.numeric(runif(num_country)&amp;gt;0.5)
-
-# parameter governing how hard it is to find infected people and test them
-# strictly positive
-
-finding &amp;lt;- 1.5
-
-# recursive function to generate time-series data by country
-
-out_poly &amp;lt;- function(time_pt,end_pt,time_counts,tested,case_count,rate_infected,pr_domestic) {
-  
-  if(time_pt==1) {
-    time_counts &amp;lt;- as.matrix(c(1,rep(0,num_country-1)))
-    rate_infected &amp;lt;- as.matrix(c(.0001,rep(0,num_country-1)))
-    tested &amp;lt;- as.matrix(rep(0,num_country))
-    case_count &amp;lt;- as.matrix(c(1,rep(0,num_country-1)))
-  }
-  
-  # if at time = t infected, start time tracker at t
-  # need to know how many countries have reported at least one case = infection start
-  
-  world_count &amp;lt;- sum(case_count[,time_pt]&amp;gt;0)
-  
-  
-  if(time_pt==1) {
-    
-    rate_infected_new &amp;lt;-  plogis(-5 + time_counts[,time_pt]*polynomials[1] + 
-                                   suppress1*suppress_measures +
-                    suppress2*suppress_measures*time_counts[,time_pt] +
-                    .05*sum(world_count) +
-      (time_counts[,time_pt]^2)*polynomials[2] + 
-        (time_counts[,time_pt]^3)*polynomials[3])
-    
-    # conservative time counter that only starts when first case is recorded
-    
-    time_counts_new &amp;lt;- ifelse(time_counts[,time_pt]&amp;gt;0 | case_count[,time_pt]&amp;gt;0,time_counts[,time_pt]+1,time_counts[,time_pt])
-    
-  } else {
-    
-    rate_infected_new &amp;lt;- plogis(-5 + time_counts[,time_pt]*polynomials[1] + 
-                    suppress1*suppress_measures +
-                    suppress2*suppress_measures*time_counts[,time_pt] +
-                    .05*sum(world_count) +
-      (time_counts[,time_pt]^2)*polynomials[2] + 
-        (time_counts[,time_pt]^3)*polynomials[3])
-    
-    # conservative time counter that only starts when first case is recorded
-    
-    time_counts_new &amp;lt;- ifelse(time_counts[,time_pt]&amp;gt;0 | case_count[,time_pt]&amp;gt;0,time_counts[,time_pt]+1,time_counts[,time_pt])
-  }
-
-  # of these, need to calculated a set number tested
-  mu_test &amp;lt;- plogis(-7 + country_test*rate_infected_new)
-  tested_new &amp;lt;- rbbinom(num_country,country_pop,mu_test*phi,(1-mu_test)*phi)
-  
-  # determine case count as percentage number tested
-  # this is what we always observe
-  mu_case &amp;lt;- plogis(-2.19 + finding*rate_infected_new)
-  case_count_new &amp;lt;- rbbinom(num_country,tested_new,mu_case*phi,(1-mu_case)*phi)
-  
-  
-  if(time_pt&amp;lt;end_pt) {
-    out_poly(time_pt=time_pt+1,
-             end_pt=end_pt,
-             time_counts=cbind(time_counts,
-                               time_counts_new),
-             rate_infected=cbind(rate_infected,rate_infected_new),
-             tested=cbind(tested,tested_new),
-             case_count=cbind(case_count,case_count_new))
-  } else {
-    return(list(time_counts=time_counts,
-                tested=tested,
-                rate_infected=rate_infected,
-                case_count=case_count))
-  }
-  
-}
-
-check1 &amp;lt;- out_poly(1,time_points)
-
-check1 &amp;lt;- lapply(check1, function(c) {
-  colnames(c) &amp;lt;- as.numeric(1:time_points)
-  c
-})
-
-all_out &amp;lt;- bind_rows(list(time_counts=as_tibble(check1$time_counts),
-                          `Proportion Population\nInfected`=as_tibble(check1$rate_infected),
-                          `Number of Cases`=as_tibble(check1$case_count),
-                          `Proportion of Cases from Domestic Transmission`=as_tibble(check1$pr_domestic),
-                          `Number of Tests`=as_tibble(check1$tested)),.id=&amp;quot;Series&amp;quot;)
-
-all_out$country &amp;lt;- rep(paste0(&amp;quot;country_&amp;quot;,1:num_country),times=length(check1))
-all_out$suppress_measures &amp;lt;- factor(rep(suppress_measures,times=length(check1)),labels=c(&amp;quot;No&amp;quot;,&amp;quot;Yes&amp;quot;))
-
-all_out %&amp;gt;% 
-  gather(key = &amp;quot;time_id&amp;quot;,value=&amp;quot;indicator&amp;quot;,-Series,-country,-suppress_measures) %&amp;gt;% 
-  mutate(time_id=as.numeric(time_id)) %&amp;gt;% 
-  filter(!(Series %in% c(&amp;quot;time_counts&amp;quot;))) %&amp;gt;% 
-  ggplot(aes(y=indicator,x=time_id)) +
-  geom_line(aes(colour=suppress_measures,group=country),alpha=0.3) +
-  xlab(&amp;quot;Days Since Outbreak&amp;quot;) +
-  ylab(&amp;quot;&amp;quot;) +
-  ggtitle(&amp;quot;Simulation of Observed Tests and Cases Given Unobserved Infectious Process&amp;quot;) +
-  facet_wrap(~Series,scales=&amp;quot;free_y&amp;quot;) +
-  theme(panel.background = element_blank(),
-        panel.grid=element_blank(),
-        strip.background = element_blank(),
-        strip.text = element_text(face=&amp;quot;bold&amp;quot;),
-        legend.position = &amp;quot;top&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/kubinec_model_draft_files/figure-html/onset-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(&amp;quot;sim_infect.png&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The plots above show one line for each country’s trajectory from a total of 100 countries and 100 time points. As can be seen, the green lines indicating suppression effects and the red lines indicating no suppression diverge substantially over time. However, the numbers of observed tests and cases show far more random noise due to the difficulty in inferring the true rate from the observed data. It is possible that some countries simply want to test more, and end up with more cases, or that the infection rate is in fact higher. As such, this model is able to incorporate that measurement uncertainty between the true (unobserved) rate and the observed indicators, tests and cases.&lt;/p&gt;
-&lt;p&gt;The advantage of this model is that it allows for the testing of covariates that affect the true infection rate without requiring more heavy-duty approaches like SEIR/SIR. The intention is to have a more parsimonious model that can see how the effect of variables like suppression measures have on different countries/states infection numbers over time. I am currently collecting this data as part of the CoronaNet project.&lt;/p&gt;
-&lt;p&gt;The model could be further extended with more complicated initial infection processes and inter-country transmission processes, such as spatial modeling, but for the purposes of this exposition I do not look further at such extensions.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;estimation&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Estimation&lt;/h1&gt;
-&lt;p&gt;I can then fit an empirical model using Stan, a Markov Chain Monte Carlo sampler, to model the unobserved infection rate given the simulated observed data:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# all data from simulation
-# primarily case and test counts
-
-# need to make centered, ortho-normal polynomials
-
-ortho_time &amp;lt;- poly(scale(1:time_points),degree=3)
-
-init_vals &amp;lt;- function() {
-  list(phi1=100,
-       phi2=100)
-}
-
-sim_data &amp;lt;- list(time_all=time_points,
-                 num_country=num_country,
-                 country_pop=country_pop,
-                 cases=check1$case_count,
-                 phi_scale=1/300,
-                 ortho_time=ortho_time,
-                 tests=check1$tested,
-                 count_outbreak=as.numeric(scale(apply(check1$time_counts,2,function(c) sum(c&amp;gt;0)))),
-                 time_outbreak=check1$time_counts,
-                 suppress=suppress_measures)
-
-if(run_model) {
-  
-  pan_model &amp;lt;- stan_model(&amp;quot;corona_tscs_betab.stan&amp;quot;)
-
-# run model
-
-pan_model_est &amp;lt;- sampling(pan_model,data=sim_data,chains=2,cores=2,iter=1200,warmup=800,init=init_vals)
-
-saveRDS(pan_model_est,&amp;quot;data/pan_model_est.rds&amp;quot;)
-} else {
-  pan_model_est &amp;lt;- readRDS(&amp;quot;data/pan_model_est.rds&amp;quot;)
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now we can access the estimated infection rates and plot them:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;all_est &amp;lt;- as.data.frame(pan_model_est,&amp;quot;num_infected_high&amp;quot;) %&amp;gt;% 
-  mutate(iter=1:n()) %&amp;gt;% 
-  gather(key=&amp;quot;variable&amp;quot;,value=&amp;quot;estimate&amp;quot;,-iter) %&amp;gt;% 
-  group_by(variable) %&amp;gt;% 
-  mutate(estimate=plogis(estimate)) %&amp;gt;% 
-  summarize(med_est=quantile(estimate,.5),
-            high_est=quantile(estimate,.95),
-            low_est=quantile(estimate,.05)) %&amp;gt;% 
-  mutate(country_num=as.numeric(str_extract(variable,&amp;quot;(?&amp;lt;=\\[)[1-9][0-9]?0?&amp;quot;)),
-         time_point=as.numeric(str_extract(variable,&amp;quot;[1-9][0-9]?0?(?=\\])&amp;quot;)))
-
-all_est &amp;lt;- left_join(all_est,tibble(country_num=1:num_country,
-                                    suppress_measures=factor(suppress_measures,labels=c(&amp;quot;No&amp;quot;,&amp;quot;Yes&amp;quot;))),by=&amp;quot;country_num&amp;quot;)
-
-all_est %&amp;gt;% 
-  ggplot(aes(y=med_est,x=time_point)) +
-  geom_ribbon(aes(ymin=low_est,
-  ymax=high_est,
-  group=country_num,
-  fill=suppress_measures),alpha=0.5) +
-  theme_minimal() +
-  scale_color_brewer(type=&amp;quot;div&amp;quot;) +
-  ylab(&amp;quot;Proportion of Population Infected&amp;quot;) +
-  xlab(&amp;quot;Days Since Outbreak Start&amp;quot;) +
-  theme(panel.grid = element_blank(),
-        legend.position = &amp;quot;top&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/kubinec_model_draft_files/figure-html/plot_data-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;We see very good recovery of the estimates from the model given the observed data. The estimates disappear near the top of the plot as the true infected rate approaches 100% and there is little variability in the data. This plots shows the 5% - 95% high posterior density interval over time for each country. As can be seen, the suppression effect can be clearly distinguished even with residual uncertainty from not directly observing the infection rate, i.e., “flattening the curve.” We also can learn what the effect of the suppression measure is:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;require(bayesplot)
-
-mcmc_hist(as.array(pan_model_est,c(&amp;quot;suppress_effect[1]&amp;quot;,&amp;quot;suppress_effect[2]&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/kubinec_model_draft_files/figure-html/suppress_effect-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;We can see that despite the uncertainty in not perfectly observing the infection rate, we can still get a precise credible interval on the suppression effect. The effect is not the same as the “true” value due to the use of orthonormal polynomials for estimation purposes, but the effect is clearly distinguishable.&lt;/p&gt;
-&lt;p&gt;The advantage of this model, as can be seen, is that with testing numbers and case counts, we can model the effect of country-level (or region-level) variables on the unseen infection rate up to an unknown constant. It is far simpler than existing approaches while still permitting inference on these hard-to-quantify measures. It is no substitute for infectious disease modeling–for example, it produces no estimates of the susceptible versus recovered individuals in the population, nor death rates–but rather a way to measure the effect of different suppressive and social-distancing measures on disease outcomes as well as approximate disease trajectory.&lt;/p&gt;
-&lt;p&gt;There is, however, an important caveat to be made. The infection rate here is modeled as a latent variable, and as such the scale is largely determined by the priors. In this simulation we were able to know a priori what the relationship between all the coefficients and the true infection rate is, but in an applied setting, as I discuss next, we will not be able to do so without making further assumptions based on SIR/SEIR models. However, what is important is that the sign and relative rank of suppression covariates is identified &lt;em&gt;even if the true scale of the latent infection rate is unknown&lt;/em&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;estimation-with-data&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Estimation with Data&lt;/h1&gt;
-&lt;p&gt;I am currently in the process of collecting world-wide data to use with this model. To provide some initial empirical findings, in this section I model numbers of COVID-19 case counts on US states and territories provided by &lt;a href=&#34;https://github.com/nytimes/covid-19-data&#34;&gt;The New York Times&lt;/a&gt;. I supplement these observed case counts with testing data by day from the &lt;a href=&#34;https://github.com/COVID19Tracking/covid-tracking-data&#34;&gt;COVID-19 Tracking Project&lt;/a&gt;. The testing data only goes back to March 4th, so we will impute the testing data back in time by assuming that the average case/tests ratio stays the same to the origin of the outbreak (an assumption, of course, but for the purposes of this analysis is acceptable). Furthermore, as there are discrepancies where the reported number of tests in some states like New Jersey is less than the total number of cases, I impute the number of tests via the case/test ratio for the sample as a whole. While more sophisticated imputation strategies may yield more realistic results, along with improved data collection, this minimalist imputation strategy will suffice for this presentation as it represents what data is currently available. If anyone reading this post has more information about available data, I would appreciate if you could let me know &lt;a href=&#34;mailto:rmk7@nyu.edu&#34;&gt;via email&lt;/a&gt; (or if you have any other thoughts on this draft).&lt;/p&gt;
-&lt;p&gt;To analyze the effect of suppression policies, I use the list of the dates that states of emergencies were declared across U.S. states and territories from &lt;a href=&#34;https://en.wikipedia.org/wiki/U.S._state_and_local_government_response_to_the_2020_coronavirus_pandemic&#34;&gt;Wikipedia&lt;/a&gt;. The suppression covariate is then equal to a state X 1 vector of days which is mean centered and standardized.&lt;/p&gt;
-&lt;p&gt;In this section I first fit a partially-identified model without any information about the true number of infected people to demonstrate that we can identify the sign and relative rank effect of suppression policies without this information. I then show how we can use insight from SIR/SEIR models to provide bounds on the total number of infected people.&lt;/p&gt;
-&lt;p&gt;I first load and munge the data to create the necessary time trends and data format for the model, and then fit it using the same partially-identified model as in the previous section:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data(us_state_populations)
-
-state_pop &amp;lt;- filter(us_state_populations,year==2010) %&amp;gt;% 
-  select(state,population)
-
-merge_names &amp;lt;- tibble(state.abb,
-                      state=state.name)
-
-nyt_data &amp;lt;- read_csv(&amp;quot;~/covid-19-data/us-states.csv&amp;quot;) %&amp;gt;% 
-  complete(date,state,fill=list(cases=0,deaths=0,fips=0)) %&amp;gt;% 
-  mutate(month_day=ymd(date)) %&amp;gt;% 
-  group_by(state) %&amp;gt;% 
-    arrange(state,date) %&amp;gt;% 
-  mutate(Difference=cases - dplyr::lag(cases),
-         Difference=coalesce(Difference,0,0)) %&amp;gt;% 
-  left_join(merge_names,by=&amp;quot;state&amp;quot;)
-
-tests &amp;lt;- read_csv(&amp;quot;~/covid-tracking-data/data/states_daily_4pm_et.csv&amp;quot;) %&amp;gt;% 
-  mutate(month_day=ymd(date)) %&amp;gt;% 
-  arrange(state,month_day) %&amp;gt;% 
-  group_by(state) %&amp;gt;% 
-  mutate(tests_diff=total-dplyr::lag(total),
-         cases_diff=positive-dplyr::lag(positive),
-         cases_diff=coalesce(cases_diff,positive),
-         cases_diff=ifelse(cases_diff&amp;lt;0,0,cases_diff),
-         tests_diff=coalesce(tests_diff,total),
-         tests_diff=ifelse(tests_diff&amp;lt;0,0,tests_diff)) %&amp;gt;% 
-  select(month_day,tests=&amp;quot;tests_diff&amp;quot;,total,state.abb=&amp;quot;state&amp;quot;)
-
-# merge cases and tests
-
-combined &amp;lt;- left_join(nyt_data,tests,by=c(&amp;quot;state.abb&amp;quot;,&amp;quot;month_day&amp;quot;)) %&amp;gt;% 
-  left_join(state_pop,by=&amp;quot;state&amp;quot;) %&amp;gt;% 
-  filter(!is.na(population))
-
-# add suppression data
-
-emergency &amp;lt;- read_csv(&amp;quot;data/state_emergency_wikipedia.csv&amp;quot;) %&amp;gt;% 
-  mutate(day_emergency=dmy(paste0(`State of emergency declared`,&amp;quot;-2020&amp;quot;)),
-         mean_day=mean(as.numeric(day_emergency),na.rm=T),
-         sd_day=sd(as.numeric(day_emergency),na.rm=T),
-         day_emergency=((as.numeric(day_emergency) - mean_day)/sd_day)) %&amp;gt;% 
-  select(state=&amp;quot;State/territory&amp;quot;,day_emergency,mean_day,sd_day) %&amp;gt;% 
-  mutate(state=substr(state,2,nchar(state))) %&amp;gt;% 
-  filter(!is.na(day_emergency))
-
-combined &amp;lt;- left_join(combined,emergency,by=&amp;quot;state&amp;quot;)
-
-# impute data
-
-combined &amp;lt;- group_by(combined,state) %&amp;gt;% 
-  mutate(test_case_ratio=sum(tests,na.rm=T)/sum(Difference,na.rm=T)) %&amp;gt;% 
-  ungroup %&amp;gt;% 
-  mutate(test_case_ratio=ifelse(test_case_ratio&amp;lt;1 | is.na(test_case_ratio),
-                                mean(test_case_ratio[test_case_ratio&amp;gt;1],na.rm=T),test_case_ratio)) %&amp;gt;% 
-  group_by(state) %&amp;gt;% 
-    mutate(tests=case_when(Difference&amp;gt;0 &amp;amp; is.na(tests)~Difference*test_case_ratio,
-                    Difference==0~0,
-                    Difference&amp;gt;tests~Difference*test_case_ratio,
-                    TRUE~tests)) %&amp;gt;% 
-  arrange(state)
-
-# create case dataset
-
-cases_matrix &amp;lt;- select(combined,Difference,month_day,state) %&amp;gt;% 
-  group_by(month_day,state) %&amp;gt;% 
-  summarize(Difference=as.integer(mean(Difference))) %&amp;gt;% 
-  spread(key = &amp;quot;month_day&amp;quot;,value=&amp;quot;Difference&amp;quot;)
-
-cases_matrix_num &amp;lt;- as.matrix(select(cases_matrix,-state))
-
-# create tests dataset
-
-tests_matrix &amp;lt;- select(combined,tests,month_day,state) %&amp;gt;% 
-  group_by(month_day,state) %&amp;gt;% 
-  summarize(tests=as.integer(mean(tests))) %&amp;gt;% 
-  spread(key = &amp;quot;month_day&amp;quot;,value=&amp;quot;tests&amp;quot;)
-
-tests_matrix_num &amp;lt;- as.matrix(select(tests_matrix,-state))
-
-# need the outbreak matrix
-
-outbreak_matrix &amp;lt;- as.matrix(lapply(1:ncol(cases_matrix_num), function(c) {
-  if(c==1) {
-    outbreak &amp;lt;- as.numeric(cases_matrix_num[,c]&amp;gt;0)
-  } else {
-    outbreak &amp;lt;- as.numeric(apply(cases_matrix_num[,1:c],1,function(col) any(col&amp;gt;0)))
-  }
-  tibble(outbreak)
-}) %&amp;gt;% bind_cols)
-
-colnames(outbreak_matrix) &amp;lt;- colnames(cases_matrix_num)
-
-time_outbreak_matrix &amp;lt;- t(apply(outbreak_matrix,1,cumsum))
-
-just_data &amp;lt;- distinct(combined,state,day_emergency,population) %&amp;gt;% arrange(state)
-
-# now give to Stan
-
-ortho_time &amp;lt;- poly(scale(1:ncol(cases_matrix_num)),degree=3)
-
-real_data &amp;lt;- list(time_all=ncol(cases_matrix_num),
-                 num_country=nrow(cases_matrix_num),
-                 country_pop=floor(just_data$population/100),
-                 cases=cases_matrix_num,
-                 ortho_time=ortho_time,
-                 phi_scale=.1,
-                 count_outbreak=as.numeric(scale(apply(outbreak_matrix,2,sum))),
-                 tests=tests_matrix_num,
-                 time_outbreak=time_outbreak_matrix,
-                 suppress=just_data$day_emergency)
-
-init_vals &amp;lt;- function() {
-  list(phi_raw=c(10,10),
-       world_infect=0,
-       finding=1,
-       alpha=c(0,0))
-}
-
-
-if(run_model) {
-  us_fit &amp;lt;- sampling(pan_model,data=real_data,chains=3,cores=3,iter=1500,warmup=1000,control=list(adapt_delta=0.95),
-                   init=init_vals)
-  
-  saveRDS(us_fit,&amp;quot;data/us_fit.rds&amp;quot;)
-} else {
-  us_fit &amp;lt;- readRDS(&amp;quot;data/us_fit.rds&amp;quot;)
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I can then extract and plot the inferred infection rates by state. It is important to note that these infection rates are on the partially-identified latent scale, as such, they cannot be converted to total numbers of infected people. The only comparison can made between states (i.e., which states have the most infected people and by what proportion relative to other states).&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;all_est_state &amp;lt;- as.data.frame(us_fit,&amp;quot;num_infected_high&amp;quot;) %&amp;gt;% 
-  mutate(iter=1:n()) %&amp;gt;% 
-  gather(key=&amp;quot;variable&amp;quot;,value=&amp;quot;estimate&amp;quot;,-iter) %&amp;gt;% 
-  group_by(variable) %&amp;gt;% 
-  mutate(state_num=as.numeric(str_extract(variable,&amp;quot;(?&amp;lt;=\\[)[1-9][0-9]?0?&amp;quot;)),
-         time_point=as.numeric(str_extract(variable,&amp;quot;[1-9][0-9]?0?(?=\\])&amp;quot;)),
-         time_point=ymd(min(combined$month_day)) + days(time_point-1))
-
-all_est_state &amp;lt;- left_join(all_est_state,tibble(state_num=1:nrow(cases_matrix),
-                                                state=cases_matrix$state,
-                                                state_pop=real_data$country_pop,
-                                    suppress_measures=real_data$suppress,by=&amp;quot;state_num&amp;quot;))
-
-# merge in total case count
-
-case_count &amp;lt;- gather(cases_matrix,key=&amp;quot;time_point&amp;quot;,value=&amp;quot;cases&amp;quot;,-state) %&amp;gt;% 
-  mutate(time_point=ymd(time_point)) %&amp;gt;% 
-  group_by(state) %&amp;gt;% 
-  arrange(state,time_point) %&amp;gt;% 
-  mutate(cum_sum_cases=cumsum(cases)) 
-
-us_case_count &amp;lt;- group_by(case_count,time_point) %&amp;gt;% 
-  summarize(all_cum_sum=sum(cum_sum_cases))
-
-all_est_state &amp;lt;- left_join(all_est_state,us_case_count,by=&amp;quot;time_point&amp;quot;)
-
-all_est_state %&amp;gt;% 
-  mutate(estimate=estimate) %&amp;gt;% 
-  group_by(state_num,time_point,suppress_measures) %&amp;gt;% 
-    summarize(med_est=quantile(estimate,.5),
-            high_est=quantile(estimate,.95),
-            low_est=quantile(estimate,.05)) %&amp;gt;% 
-  ggplot(aes(y=med_est,x=time_point)) +
-  geom_line(aes(group=state_num,colour=suppress_measures),alpha=0.5) +
-  stat_smooth() +
-  theme_minimal() +
-  scale_color_distiller(palette=&amp;quot;RdBu&amp;quot;,direction=-1) +
-  ylab(&amp;quot;Latent Infection Scale&amp;quot;) +
-  ggtitle(&amp;quot;Measuring Relative Infection Rates by U.S. State with Total Average&amp;quot;,
-          subtitle=&amp;quot;Lines Colored by When State Declared State of Emergency&amp;quot;) +
-  labs(caption=&amp;quot;As the total number of infected people is unknown, this chart measures the relative\ninfection rates between states.&amp;quot;) +
-  xlab(&amp;quot;Days Since Outbreak Start&amp;quot;) +
-  geom_hline(yintercept = 0,linetype=3) +
-  guides(color=guide_colorbar(title=&amp;quot;Timing of State Emergency Declaration&amp;quot;)) +
-  theme(panel.grid = element_blank(),
-        legend.position = &amp;quot;top&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/kubinec_model_draft_files/figure-html/infect_by_state-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;all_est_state %&amp;gt;% 
-  mutate(estimate=estimate) %&amp;gt;% 
-  group_by(state_num,time_point,suppress_measures) %&amp;gt;% 
-    summarize(med_est=quantile(estimate,.5),
-            high_est=quantile(estimate,.95),
-            low_est=quantile(estimate,.05)) %&amp;gt;% 
-  ggplot(aes(y=med_est,x=time_point)) +
-  #geom_line(aes(group=state_num,colour=suppress_measures),alpha=0.5) +
-  geom_ribbon(aes(ymin=low_est,
-  ymax=high_est,
-  group=state_num,
-  fill=suppress_measures),alpha=0.5) +
-  stat_smooth() +
-  theme_minimal() +
-  scale_color_distiller(palette=&amp;quot;RdBu&amp;quot;,direction=-1) +
-  ylab(&amp;quot;Latent Infection Scale&amp;quot;) +
-  ggtitle(&amp;quot;Uncertainty in Relative Infection Rates by U.S. State with Total Average&amp;quot;,
-          subtitle=&amp;quot;5% - 95% HPD Intervals Colored by When State Declared State of Emergency&amp;quot;) +
-  labs(caption=&amp;quot;As the total number of infected people is unknown, this chart measures the relative\ninfection rates between states.&amp;quot;) +
-  xlab(&amp;quot;Days Since Outbreak Start&amp;quot;) +
-  geom_hline(yintercept = 0,linetype=3) +
-  guides(fill=guide_colorbar(title=&amp;quot;Timing of State Emergency Declaration&amp;quot;)) +
-  theme(panel.grid = element_blank(),
-        legend.position = &amp;quot;top&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/kubinec_model_draft_files/figure-html/infect_by_state-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(&amp;quot;uncertain_state_rates.png&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We can see from this plot that the number of infected people started to increase dramatically about March 1st. It is also clear that the infection rate significantly increased before testing occurred, as the SIR models predicted.&lt;/p&gt;
-&lt;p&gt;It would appear that the rate of increase has leveled off in the last week, though that is not a supported inference as the scale is the logit scale, so it is similar to the log scale in that higher numbers are farther away than they appear visually. Because the latent scale is not identified, the model is showing how the infection rates have evolved from zero to the true but unknown top infection rate. As such, it appears to be slowing as it reaches the top of the scale, but that is simply an illusion of logarithmic growth. The infection rate continues to increase in the United States, which will be clearer when I apply a transformation in the next section.&lt;/p&gt;
-&lt;p&gt;As can be expected, on the whole states with earlier declarations of states of emergency have higher infection rates, which might at first lead us to believe that the declarations are associated with more, rather than fewer, infections. However, as I included a parameter for the declarations, we can estimate what independent effect the timing of the declaration had marginal of the rate of infectious growth. To really know what the association is between states of emergency and infection rates, we can examine the relevant parameters in the model:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mcmc_hist(us_fit,regex_pars =&amp;quot;suppress&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/kubinec_model_draft_files/figure-html/suppress-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;We see that there is a statistically identifiable effect of early state of emergency declarations (&lt;code&gt;suppress_effect[1]&lt;/code&gt;) on reducing the infection rate with a 5% - 95% high posterior density (HPD) interval of (-3.57,-0.23). However, there does not appear to be a clear over-time effect on the curve of the epidemic (&lt;code&gt;suppress_effect[2]&lt;/code&gt;), suggesting that these early containment strategies have not yet stopped domestic transmission of the virus. In essence, what the model suggests is that early states of emergencies protected these states from later feedback effects as more neighboring states were also infected by the virus. As a result, even though these states have higher total infection rates, these rates would have been still higher if not for early state of emergency declarations.&lt;/p&gt;
-&lt;p&gt;It is important to note that this association is just that, an association. It could be that states of emergency declarations are correlated with better public health systems, and that it is in fact the public health system that is doing the work, not the timing of the state of emergency declaration. However, the fine-grained distinctions in terms of the exact day that the state of emergency was announced suggests it is indicative that those states which made early preparations are starting to see some of the results already.&lt;/p&gt;
-&lt;p&gt;As I have said, the model adjusts observed case counts for the number of test rates reported. We can see which states seem to do more tests per infected person by examining the estimated &lt;span class=&#34;math inline&#34;&gt;\(\beta_{cq}\)&lt;/span&gt; parameters in this plot:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;test_var &amp;lt;- as.data.frame(us_fit,&amp;quot;country_test_raw&amp;quot;) %&amp;gt;%
-  mutate(iter=1:n()) %&amp;gt;%
-  gather(key=&amp;quot;variable&amp;quot;,value=&amp;quot;estimate&amp;quot;,-iter) %&amp;gt;%
-  mutate(state_num=as.numeric(str_extract(variable,&amp;quot;(?&amp;lt;=\\[)[1-9][0-9]?0?&amp;quot;)))
-
-test_var &amp;lt;- left_join(test_var,tibble(state_num=1:nrow(cases_matrix),
-                                                state=cases_matrix$state,
-                                                state_pop=real_data$country_pop,
-                                    suppress_measures=real_data$suppress))
-
-test_var %&amp;gt;%
-  group_by(state) %&amp;gt;%
-    summarize(med_est=quantile(estimate,.5),
-            high_est=quantile(estimate,.95),
-            low_est=quantile(estimate,.05)) %&amp;gt;%
-  ggplot(aes(y=med_est,x=reorder(state,med_est))) +
-  geom_pointrange(aes(ymin=low_est,ymax=high_est)) +
-  theme_minimal() +
-  theme(panel.grid = element_blank()) +
-  coord_flip() +
-  xlab(&amp;quot;&amp;quot;) +
-  ggtitle(&amp;quot;Comparison of States&amp;#39; Testing Rates Relative to Infection Rates&amp;quot;,
-          subtitle=&amp;quot;Based on Model of Latent COVID-19 Infection Process&amp;quot;) +
-  labs(caption = &amp;quot;Only relative differences between states are identified. The raw numbers do not have a
-                  direct interpretation in terms of tests per infected individuals as the total number
-                  of infected individuals is unknown.&amp;quot;) +
-  ylab(&amp;quot;Proportion Tested Relative to Proportion Infected&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/kubinec_model_draft_files/figure-html/tests_per_infected-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(&amp;quot;testing.png&amp;quot;,scale=1.1)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This plot shows that the states that are testing way more than their infected populations are actually North Dakota, Alaska and Idaho, likely because these states have yet to see very large numbers of infections. While New York has been implementing many tests, the model does not downweight infection rates considerably even with the increase in testing, implying that the increase in cases in New York is a sign of a growing infection, not just increased tests. On the more worrying side, the model estimates that Maryland, Arizona, Georgia and Delaware may be testing far fewer than are actually infected.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;identifying-the-latent-scale&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Identifying the Latent Scale&lt;/h1&gt;
-&lt;p&gt;To show how we can further attempt to identify the scale of the latent variable, instead of only relative differences between states, I show in this section how we can add in information from SEIR/SIR modeling to identify the total number of infected persons in the model. The crucial missing piece of information in the model is the ratio between the proportion of infected persons &lt;span class=&#34;math inline&#34;&gt;\(I_{ct}\)&lt;/span&gt; and the proportion of tests per state population &lt;span class=&#34;math inline&#34;&gt;\(q_{ct}\)&lt;/span&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-\frac{q_{ct}}{I_{ct}}
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Another way of framing the problem is to think of how much the number of tests should increase given a one-percentage increase in the infection rate. How many of these infected people will be tested? Without an idea of the true number of infected people, it is impossible to answer this question and thus identify the latent scale.&lt;/p&gt;
-&lt;p&gt;However, an increasing number of SIR/SEIR papers show that it is likely that as few as 10% of the total number of infected persons are actually recorded as cases, including in the United States &lt;span class=&#34;citation&#34;&gt;(Ruiyun Li 2020; Perkins et al. 2020)&lt;/span&gt;. This number provides us with a conservative lower bound if we consider that the number of tests should be at least 10% of the total proportion of infected persons. In other words, we can consider adding the following information into the model:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-\frac{q_{ct}}{I_{ct}} &amp;gt;0.1
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Every percentage increase in the infection rate should result in at least a 0.1% increase in the total number of people tested as a percentage of the population. It is difficult to impose this constraint directly in the model; however, we can consider adding it as prior information if we can define a prior density over the ratio. First, for computational simplicity, we can consider a distribution over the log differences of the parameters:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-\text{log} q_{ct} - \text{log} I_{ct}
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;By simulating from a uniform distribution of possible rates for &lt;span class=&#34;math inline&#34;&gt;\(\text{log} q_{ct}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\text{log} I_{ct}\)&lt;/span&gt;, it is possible to tell that the a realistic distribution of log differences with 0.1 as a lower bound is in fact very close a standard normal distribution:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;hist(log(runif(1000,.01,.5)) - log(runif(1000,.01,.5)))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/kubinec_model_draft_files/figure-html/std_normal-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;We can test whether it is a standard normal by comparing the log densities of different Normal distributions with different standard deviations:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;log_diff &amp;lt;- log(runif(1000,.01,.5)) - log(runif(1000,.01,.5))
-
-sum(dnorm(log_diff,0,1,log=T))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] -1546.175&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sum(dnorm(log_diff,0,2,log=T))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] -1768.895&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sum(dnorm(log_diff,0,0.5,log=T))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] -2734.737&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sum(dnorm(log_diff,0,3,log=T))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] -2087.244&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We can see that the standard normal has the highest log density. As such, we can add the following prior to the model to bias the results to an interval between &lt;span class=&#34;math inline&#34;&gt;\(e^-2\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(e^2\)&lt;/span&gt;, or 0.14 and 7.38. The prior density allows for the ratio of tests to infected individuals to be very large, suggesting that infection rates are not as high given increasing numbers of tests, but the rate is unlikely to be lower than 0.1, or 10 percent of the total number of infected. This conservative assumption allows us to use SEIR/SIR model conclusions while still permitting uncertainty over the relationship.&lt;/p&gt;
-&lt;p&gt;Because the prior is essentially a way to weight the density, I do not need to do a Jacobian adjustment as I would need to if I wanted to back-transform the density.&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt; For these reasons, I simply add this term to the joint posterior for each time point &lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt; and country &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-\text{log} q_{ct} - \text{log} I_{ct} \sim N(0,1)
-\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;I then fit a model to the same United States data with the addition of the informative prior to scale the latent variable:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;if(run_model) {
-  pan_model_scale &amp;lt;- stan_model(&amp;quot;corona_tscs_betab_scale.stan&amp;quot;)
-  
-  us_fit_scale &amp;lt;- sampling(pan_model_scale,data=real_data,chains=3,cores=3,iter=1500,warmup=1000,
-                           control=list(adapt_delta=0.95),
-                   init=init_vals)
-  
-  saveRDS(us_fit_scale,&amp;quot;data/us_fit_scale.rds&amp;quot;)
-} else {
-  us_fit_scale &amp;lt;- readRDS(&amp;quot;data/us_fit_scale.rds&amp;quot;)
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I then calculate the total number of infected people in the United States by day given this re-scaled latent variable, and compare that to the observed number of cases from the New York Times data:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;all_est_state &amp;lt;- as.data.frame(us_fit_scale,&amp;quot;num_infected_high&amp;quot;) %&amp;gt;% 
-  mutate(iter=1:n()) %&amp;gt;% 
-  gather(key=&amp;quot;variable&amp;quot;,value=&amp;quot;estimate&amp;quot;,-iter) %&amp;gt;% 
-  group_by(variable) %&amp;gt;% 
-  mutate(state_num=as.numeric(str_extract(variable,&amp;quot;(?&amp;lt;=\\[)[1-9][0-9]?0?&amp;quot;)),
-         time_point=as.numeric(str_extract(variable,&amp;quot;[1-9][0-9]?0?(?=\\])&amp;quot;)),
-         time_point=ymd(min(combined$month_day)) + days(time_point-1))
-
-all_est_state &amp;lt;- left_join(all_est_state,tibble(state_num=1:nrow(cases_matrix),
-                                                state=cases_matrix$state,
-                                                state_pop=real_data$country_pop,
-                                    suppress_measures=real_data$suppress,by=&amp;quot;state_num&amp;quot;))
-
-# merge in total case count
-
-case_count &amp;lt;- gather(cases_matrix,key=&amp;quot;time_point&amp;quot;,value=&amp;quot;cases&amp;quot;,-state) %&amp;gt;% 
-  mutate(time_point=ymd(time_point)) %&amp;gt;% 
-  group_by(state) %&amp;gt;% 
-  arrange(state,time_point) %&amp;gt;% 
-  mutate(cum_sum_cases=cumsum(cases)) 
-
-us_case_count &amp;lt;- group_by(case_count,time_point) %&amp;gt;% 
-  summarize(all_cum_sum=sum(cum_sum_cases))
-
-all_est_state &amp;lt;- left_join(all_est_state,us_case_count,by=&amp;quot;time_point&amp;quot;)
-
-calc_sum &amp;lt;- all_est_state %&amp;gt;% 
-  ungroup %&amp;gt;% 
-  mutate(estimate=(plogis(estimate)/100)*(state_pop*100)) %&amp;gt;% 
-  group_by(state_num,iter) %&amp;gt;% 
-  arrange(state_num,time_point) %&amp;gt;% 
-  mutate(cum_est=cumsum(estimate)) %&amp;gt;% 
-  group_by(time_point,iter,all_cum_sum) %&amp;gt;% 
-  summarize(us_total=sum(cum_est)) %&amp;gt;% 
-  group_by(time_point,all_cum_sum) %&amp;gt;% 
-  summarize(med_est=quantile(us_total,.5),
-            high_est=quantile(us_total,.95),
-            low_est=quantile(us_total,.05)) 
-
-max_est &amp;lt;- as.integer(round(calc_sum$med_est[calc_sum$time_point==max(calc_sum$time_point)]))
-high_max_est &amp;lt;- as.integer(round(calc_sum$high_est[calc_sum$time_point==max(calc_sum$time_point)]))
-low_max_est &amp;lt;- as.integer(round(calc_sum$low_est[calc_sum$time_point==max(calc_sum$time_point)]))
-max_obs &amp;lt;- calc_sum$all_cum_sum[calc_sum$time_point==max(calc_sum$time_point)]
-
-options(scipen=999)
-
-calc_sum %&amp;gt;% 
-  ggplot(aes(y=med_est,x=time_point)) +
-  geom_ribbon(aes(ymin=low_est,
-  ymax=high_est),
-  fill=&amp;quot;blue&amp;quot;,
-  alpha=0.5) +
-  geom_line(aes(y=all_cum_sum)) +
-  theme_minimal() +
-  ylab(&amp;quot;Total Number Infected/Reported&amp;quot;) +
-  scale_y_continuous(labels=scales::comma) +
-  ggtitle(&amp;quot;Approximate Total Number of COVID-19 Infected Individuals in the U.S.&amp;quot;,
-          subtitle=&amp;quot;Blue 5% - 95% HPD Intervals Show Estimated Infected and Black Line Observed Cases&amp;quot;) +
-  labs(caption=&amp;quot;These estimates are based on the assumption that as few as 10% of cases\nmay be reported based on SIR/SEIR models.&amp;quot;) +
-  annotate(&amp;quot;text&amp;quot;,x=ymd(c(&amp;quot;2020-03-26&amp;quot;,&amp;quot;2020-03-26&amp;quot;)),
-           y=c(max_est,max_obs),
-           hjust=1,
-           vjust=0,
-           fontface=&amp;quot;bold&amp;quot;,
-           size=3,
-           label=c(paste0(&amp;quot;Estimated Infected:\n&amp;quot;,formatC(low_max_est,big.mark=&amp;quot;,&amp;quot;,format = &amp;quot;f&amp;quot;,digits=0),&amp;quot; - &amp;quot;,
-                                                         formatC(high_max_est,big.mark=&amp;quot;,&amp;quot;,format = &amp;quot;f&amp;quot;,digits=0)),
-                   paste0(&amp;quot;Total Reported Cases:\n&amp;quot;,formatC(max_obs,big.mark=&amp;quot;,&amp;quot;)))) +
-  xlab(&amp;quot;Days Since Outbreak Start&amp;quot;) +
-  theme(panel.grid = element_blank(),
-        legend.position = &amp;quot;top&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/kubinec_model_draft_files/figure-html/infect_total_scaled-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(&amp;quot;est_vs_obs.png&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;conclusion&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;This model was written to permit the identification of suppression measures targeted at the spread of COVID-19. It is not intended to replace the SIR/SEIR modeling literature, especially as this model relies on SIR/SEIR estimates for full identification. If anything, this modeling exercise shows why SIR/SEIR models are so important: without them it is literally impossible to know the total number of infected people on a given day. This model’s simplicity and ability to use empirical data are its main features, and the hope is that it can be used and extended by researchers looking at government policies and other tertiary factors on the spread of the disease.&lt;/p&gt;
-&lt;p&gt;To fit the model, it is necessary to have at least an estimate of how many tests have been conducted. I am currently collecting this data and am open to any additional datasets that may be available. I am also involved in a collaboration known as &lt;a href=&#34;https://lumesserschmidt.github.io/CoronaNet/&#34;&gt;CoronaNet&lt;/a&gt; to collect full information on government responses to the pandemic with the intention of better understanding why governments impose certain policies and what the effect of them can be.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;bibliography&#34; class=&#34;section level1 unnumbered&#34;&gt;
-&lt;h1 class=&#34;unnumbered&#34;&gt;Bibliography&lt;/h1&gt;
-&lt;div id=&#34;refs&#34; class=&#34;references hanging-indent&#34;&gt;
-&lt;div id=&#34;ref-lourenco2020&#34;&gt;
-&lt;p&gt;Jose Lourenco, Mahan Ghafari, Robert Paton. 2020. “Fundamental Principles of Epidemic Spread Highlight the Immediate Need for Large-Scale Serological Surveys to Assess the Stage of the Sars-Cov-2 Epidemic.” &lt;em&gt;medRxiv&lt;/em&gt;. &lt;a href=&#34;https://doi.org/https://doi.org/10.1101/2020.03.24.20042291&#34;&gt;https://doi.org/https://doi.org/10.1101/2020.03.24.20042291&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;ref-ferguson2020&#34;&gt;
-&lt;p&gt;Neil M Ferguson, Gemma Nedjati-Gilani, Daniel Laydon. 2020. “Impact of Non-Pharmaceutical Interventions (Npis) to Reduce Covid19 Mortality and Healthcare Demand.” &lt;em&gt;Imperial College of London Working Paper&lt;/em&gt;. &lt;a href=&#34;https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf&#34;&gt;https://www.imperial.ac.uk/media/imperial-college/medicine/sph/ide/gida-fellowships/Imperial-College-COVID19-NPI-modelling-16-03-2020.pdf&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;ref-peak2020&#34;&gt;
-&lt;p&gt;Peak, Corey M., Rebecca Kahn, Yonatan H. Grad, Lauren M. Childs, Ruoran Li, Marc Lipsitch, and Caroline O. Buckee. 2020. “Modeling the Comparative Impact of Individual Quarantine Vs. Active Monitoring of Contacts for the Mitigation of Covid-19.” &lt;em&gt;medRxiv&lt;/em&gt;. &lt;a href=&#34;https://doi.org/https://doi.org/10.1101/2020.03.05.20031088&#34;&gt;https://doi.org/https://doi.org/10.1101/2020.03.05.20031088&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;ref-perkins2020&#34;&gt;
-&lt;p&gt;Perkins, T. Alex, Sean M. Cavany, Sean M. Moore, Rachel J. Oidtman, Anita Lerch, and Marya Poterek. 2020. “Estimating Unobserved Sars-Cov-2 Infections in the United States.” &lt;em&gt;Working Paper&lt;/em&gt;. &lt;a href=&#34;http://perkinslab.weebly.com/uploads/2/5/6/2/25629832/perkins_etal_sarscov2.pdf&#34;&gt;http://perkinslab.weebly.com/uploads/2/5/6/2/25629832/perkins_etal_sarscov2.pdf&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;ref-riou2020&#34;&gt;
-&lt;p&gt;Riou, Julien, Anthony Hauser, Michel J. Counotte, and Christian L. Althaus. 2020. “Adjusted Age-Specific Case Fatality Ratio During the Covid-19 Epidemic in Hubei, China, January and February 2020.” &lt;em&gt;medRxiv&lt;/em&gt;. &lt;a href=&#34;https://doi.org/https://doi.org/10.1101/2020.03.04.20031104&#34;&gt;https://doi.org/https://doi.org/10.1101/2020.03.04.20031104&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;ref-verity2020&#34;&gt;
-&lt;p&gt;Robert Verity, Ilaria Dorigatti, Lucy C Okell. 2020. “Estimates of the Severity of Covid-19 Disease.” &lt;em&gt;medRxiv&lt;/em&gt;. &lt;a href=&#34;https://doi.org/https://doi.org/10.1101/2020.03.09.20033357&#34;&gt;https://doi.org/https://doi.org/10.1101/2020.03.09.20033357&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;ref-li2020&#34;&gt;
-&lt;p&gt;Ruiyun Li, Bin Chen, Sen Pei. 2020. “Substantial Undocumented Infection Facilitates the Rapid Dissemination of Novel Coronavirus (Sars-Cov2).” &lt;em&gt;Science&lt;/em&gt;. &lt;a href=&#34;https://doi.org/10.1126/science.abb3221&#34;&gt;https://doi.org/10.1126/science.abb3221&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-&lt;hr /&gt;
-&lt;ol&gt;
-&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;See article available at &lt;a href=&#34;https://www.realclearpolitics.com/video/2020/03/26/dr_birx_coronavirus_data_d&#34; class=&#34;uri&#34;&gt;https://www.realclearpolitics.com/video/2020/03/26/dr_birx_coronavirus_data_d&lt;/a&gt;&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;For a discussion, see &lt;a href=&#34;https://www.realclearpolitics.com/articles/2020/03/18/the_perils_of_mass_coronavirus_testing_142693.html&#34; class=&#34;uri&#34;&gt;https://www.realclearpolitics.com/articles/2020/03/18/the_perils_of_mass_coronavirus_testing_142693.html&lt;/a&gt;.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;For more information on this principle, see Daniel Lakeland’s discussion of “masking functions” &lt;a href=&#34;http://models.street-artists.org/2019/09/04/informative-priors-from-masking/&#34; class=&#34;uri&#34;&gt;http://models.street-artists.org/2019/09/04/informative-priors-from-masking/&lt;/a&gt;.&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
+&lt;p&gt;For an up to date version of this model, please see our paper at &lt;a href=&#34;https://osf.io/preprints/socarxiv/jp4wk/&#34; class=&#34;uri&#34;&gt;https://osf.io/preprints/socarxiv/jp4wk/&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Simulating Conjoint Survey Experiments</title>
-      <link>/post/conjoint_power_simulation/</link>
+      <link>http://www.robertkubinec.com/post/conjoint_power_simulation/</link>
       <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>/post/conjoint_power_simulation/</guid>
+      <guid>http://www.robertkubinec.com/post/conjoint_power_simulation/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
 
 
 &lt;div id=&#34;background&#34; class=&#34;section level2&#34;&gt;
@@ -2076,7 +1495,7 @@ filter(long_data,grepl(&amp;#39;No Post&amp;#39;,estimation)) %&amp;gt;% ggplot(
                                               panel.grid.major.y = element_blank()) +
   scale_color_brewer(palette=&amp;#39;Accent&amp;#39;) + guides(colour=g_title,linetype=g_title) +
   theme(legend.position = &amp;#39;bottom&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/Conjoint_Power_Simulation_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/Conjoint_Power_Simulation_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(&amp;#39;clust_err.png&amp;#39;,units=&amp;#39;in&amp;#39;,width=6)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Next I look at post-stratification as an option to improve the precision of estimates. For unclustered errors reported below, post-stratified estimates do have higher power and slightly lower average significant effects, and importantly, the post-stratified estimates worsen neither type S nor type M errors.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;g_title &amp;lt;- guide_legend(title=&amp;#39;&amp;#39;)
@@ -2087,7 +1506,7 @@ filter(long_data,grepl(&amp;#39;Un-clustered&amp;#39;,estimation)) %&amp;gt;% gg
                                               panel.grid.major.y = element_blank()) +
   scale_color_brewer(palette=&amp;#39;Accent&amp;#39;) + guides(colour=g_title,linetype=g_title) +
   theme(legend.position = &amp;#39;bottom&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/Conjoint_Power_Simulation_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/Conjoint_Power_Simulation_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(&amp;#39;post_unclust_err.png&amp;#39;,units=&amp;#39;in&amp;#39;,width=6)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Post-stratification appears to have a similar effect on clustered error estimations, although the differences are smaller. In smaller samples, post-stratified estimates do have smaller M-errors.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;g_title &amp;lt;- guide_legend(title=&amp;#39;&amp;#39;)
@@ -2098,7 +1517,7 @@ filter(long_data,!grepl(&amp;#39;Un-clustered&amp;#39;,estimation)) %&amp;gt;% g
                                               panel.grid.major.y = element_blank()) +
   scale_color_brewer(palette=&amp;#39;Accent&amp;#39;) + guides(colour=g_title,linetype=g_title) +
   theme(legend.position = &amp;#39;bottom&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/Conjoint_Power_Simulation_files/figure-html/unclustered_plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/Conjoint_Power_Simulation_files/figure-html/unclustered_plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(&amp;#39;post_clust_err.png&amp;#39;,units=&amp;#39;in&amp;#39;,width=6)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Finally, I also report average numbers of significant coefficients for the 14 treatments. Given that the 14 treatments were sampled from a normal distribution with prior density in the positive values with a meaan of 0.5, in expectation 95% of estimates should be statisticall significant. While that upper limit is reached only in high sample numbers, it looks like the ratio for treatment effects reaches an acceptable level of 70 percent at about 500 sample respondents. Also, post-stratifying un-clustered models results in effects that are reported as significant at much higher rates, as would follow from the previous results about post-stratification.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;g_title &amp;lt;- guide_legend(title=&amp;#39;&amp;#39;)
@@ -2109,7 +1528,7 @@ theme(panel.grid.minor.y = element_blank(),
                                               panel.grid.major.y = element_blank()) +
   scale_color_brewer(palette=&amp;#39;Dark2&amp;#39;) + guides(linetype=g_title,colour=g_title) +
   theme(legend.position = &amp;#39;bottom&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/Conjoint_Power_Simulation_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/Conjoint_Power_Simulation_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggsave(&amp;#39;all_treat_rate.png&amp;#39;,units=&amp;#39;in&amp;#39;,width=6)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
@@ -2122,50 +1541,32 @@ theme(panel.grid.minor.y = element_blank(),
     
     <item>
       <title>Fragmentation of Autocratic Successor Parties: The Case of Tunisia</title>
-      <link>/talk/apsa_2018_tunisia/</link>
+      <link>http://www.robertkubinec.com/talk/apsa_2018_tunisia/</link>
       <pubDate>Fri, 31 Aug 2018 16:00:00 +0000</pubDate>
-      <guid>/talk/apsa_2018_tunisia/</guid>
+      <guid>http://www.robertkubinec.com/talk/apsa_2018_tunisia/</guid>
       <description></description>
     </item>
     
     <item>
       <title>When Groups Fall Apart: Measuring Transnational Polarization during the Arab Uprisings</title>
-      <link>/talk/preconf_2018/</link>
+      <link>http://www.robertkubinec.com/talk/preconf_2018/</link>
       <pubDate>Wed, 29 Aug 2018 12:00:00 +0000</pubDate>
-      <guid>/talk/preconf_2018/</guid>
+      <guid>http://www.robertkubinec.com/talk/preconf_2018/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Privacy Policy</title>
-      <link>/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
-      <guid>/privacy/</guid>
-      <description>&lt;p&gt;Add your privacy policy here and set &lt;code&gt;draft: false&lt;/code&gt; to publish it. Otherwise, delete this file if you don&amp;rsquo;t need it.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Terms</title>
-      <link>/terms/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
-      <guid>/terms/</guid>
-      <description>&lt;p&gt;Add your terms here and set &lt;code&gt;draft: false&lt;/code&gt; to publish it. Otherwise, delete this file if you don&amp;rsquo;t need it.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>idealstan: an R Package for Ideal Point Modeling with Stan</title>
-      <link>/post/stancon2018_paper/</link>
+      <link>http://www.robertkubinec.com/post/stancon2018_paper/</link>
       <pubDate>Wed, 14 Mar 2018 00:00:00 +0000</pubDate>
-      <guid>/post/stancon2018_paper/</guid>
+      <guid>http://www.robertkubinec.com/post/stancon2018_paper/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;/rmarkdown-libs/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;/rmarkdown-libs/datatables-binding/datatables.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;/rmarkdown-libs/dt-core/css/jquery.dataTables.min.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;link href=&#34;/rmarkdown-libs/dt-core/css/jquery.dataTables.extra.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;/rmarkdown-libs/dt-core/js/jquery.dataTables.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/datatables-binding/datatables.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/dt-core/css/jquery.dataTables.min.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/dt-core/css/jquery.dataTables.extra.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/dt-core/js/jquery.dataTables.min.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;&lt;em&gt;This is a paper that was presented at the &lt;a href=&#34;http://mc-stan.org/events/stancon2018/&#34;&gt;StanCon2018 conference&lt;/a&gt; on Bayesian inference with the Stan Hamiltonian Markov Chain Monte Carlo (MCMC) method. Video of my talk is available &lt;a href=&#34;https://www.youtube.com/watch?v=0ZjrLOosXwk&amp;amp;t=4s&#34;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
@@ -2200,7 +1601,7 @@ Y\_{ij} = \alpha\_j x\_i - \beta\_j
 &lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(Y\_{ij}\)&lt;/span&gt; can be an outcome of any type (binary, ordinal, Poisson, etc.) that includes the correct or incorrect responses of &lt;span class=&#34;math inline&#34;&gt;\(I\)&lt;/span&gt; test takers to &lt;span class=&#34;math inline&#34;&gt;\(J\)&lt;/span&gt; test items, &lt;span class=&#34;math inline&#34;&gt;\(\alpha\_j\)&lt;/span&gt; are the discrimination parameters that control the narrowness, hence discrimination, of each item &lt;span class=&#34;math inline&#34;&gt;\(j\)&lt;/span&gt; on the test in the latent space, &lt;span class=&#34;math inline&#34;&gt;\(x\_i\)&lt;/span&gt; are the test-taker ability parameters that reflect the ability of a person to answer an item correctly, and &lt;span class=&#34;math inline&#34;&gt;\(\beta\_j\)&lt;/span&gt; are the difficulty or average probability/value of a correct response (the intercept). In the traditional IRT format, the &lt;span class=&#34;math inline&#34;&gt;\(\alpha\_j\)&lt;/span&gt; discrimination parameters are always positive because a higher value (a correct answer) is always associated with higher ability &lt;span class=&#34;math inline&#34;&gt;\(x\_i\)&lt;/span&gt;, while a lower value (an incorrect answer) is associated with less ability.&lt;/p&gt;
 &lt;p&gt;However, if the requirement that the discrimination parameters &lt;span class=&#34;math inline&#34;&gt;\(\alpha\_j\)&lt;/span&gt; are positive is removed, then this model can also be used for ideal point modeling. For most applications, ideal-point modeling using IRT is built on the standard 2-PL model &lt;a name=cite-gelman2005&gt;&lt;/a&gt;(&lt;a href=&#34;#bib-jackman2004&#34;&gt;Clinton, Jackman, and Rivers, 2004&lt;/a&gt;; &lt;a href=&#34;#bib-gelman2005&#34;&gt;Bafumi, Gelman, Park, and Kaplan, 2005&lt;/a&gt;), with one notable exception: the discrimination parameters must be un-constrained, while in traditional IRT the discrimination parameters are constrained to all be either positive or negative. Constraining discrimination parameters to be positive is also the approach taken in the &lt;a href=&#34;https://cran.r-project.org/web/packages/edstan/vignettes/briefmanual.html&#34;&gt;&lt;code&gt;edstan&lt;/code&gt;&lt;/a&gt; package, which offers the full range of standard IRT models using Stan.&lt;/p&gt;
 &lt;p&gt;Leaving the discrimination parameters un-consrained ensures that a higher or lower value of &lt;span class=&#34;math inline&#34;&gt;\(Y\_{ij}\)&lt;/span&gt; could be associated with either a “correct” or “incorrect” answer as is necessary in an ideal point model. This happens because the latent space in an ideal point model is fundamentally a Euclidean distance that is rotation-invariant. The following figure makes this clear by showing a version of an ideal point model in which the ideal point (ability parameter) &lt;span class=&#34;math inline&#34;&gt;\(x\_i\)&lt;/span&gt; is represented by a Normal distribution while the Yes and No points of a proposed policy are vertical lines.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/stancon2018_paper_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;If &lt;span class=&#34;math inline&#34;&gt;\(x\_i\)&lt;/span&gt; is to the right of the Indifference line, the legislator will vote Yes on the proposal, whereas if she is to the left, she will vote No. However, a different policy (item) could have the Yes and No positions switched so that a Yes vote would correspond to -2.5 and vice versa for the No vote. Thus the binary outcomes do not have the same interpretation as the standard IRT model because the relationship between the outcomes and the ability points is contingent.&lt;/p&gt;
 &lt;p&gt;If the discrimination parameters are unconstrained, &lt;a href=&#34;#bib-jackman2004&#34;&gt;Clinton, Jackman, and Rivers (2004)&lt;/a&gt; showed that the midpoint of the policy/item parameter, which is labeled on the plot as the indifference line, is identified as &lt;span class=&#34;math inline&#34;&gt;\(-\frac{\alpha\_j}{\beta\_j}\)&lt;/span&gt; in the original IRT model. This midpoint is important because it represents the point in the latent space in which an actor is indifferent, or has a 50% chance of voting yes or no. Unfortunately, the IRT paramerization of the ideal point model does not return the actual Yes or No positions of a bill/item, but these midpoints are sufficient to characterize the position of the items in the latent space.&lt;/p&gt;
 &lt;p&gt;While this difference between ideal point models and standard IRT may seem trivial, it has serious consequences for modeling. The basic issue is the non-identifiability of the IRT model, which the switching polarity of the discrimination parameters only makes more difficult. Ultimately, it becomes necessary to constrain the polarity of some of the ability or discrimination parameters to identify the model. However, it is necessary to choose parameters which would avoid “splitting the likelihood”, such as constraining a legislator whose true ideal point is near zero (&lt;a href=&#34;#bib-gelman2005&#34;&gt;Bafumi, Gelman, Park, et al., 2005&lt;/a&gt;).&lt;/p&gt;
@@ -2261,7 +1662,7 @@ ord_ideal_est &amp;lt;- id_estimate(idealdata=ord_ideal_sim,
                              restrict_ind_low=low_leg$ix[1:2],
                              refresh=500)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;For testing simulation results, the package contains a residual plot for looking at differences between true and estimated values which are stored in the R object:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/stancon2018_paper_files/figure-html/check_true-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/check_true-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The recovery of the true parameters is not perfect, but generally the errors sum to zero across the parameters. Recovering the true parameters is not usually of great interest in a latent variable model as the scale and rotation of the true values is rather arbitrary. However, this exercise is a basic test of the Stan model’s correspondence with the simulated data.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;empirical-example-the-polarization-of-coffee&#34; class=&#34;section level2&#34;&gt;
@@ -2365,7 +1766,7 @@ just_coffee &amp;lt;- anti_join(just_coffee,coffee_count_prod,by=&amp;#39;Produc
 ## COMPLETED.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;What is of primary interest in this model are the discrimination parameters for the products. The discriminations will tell us which coffee products tend to divide the users most strongly into two poles as the model is one-dimensional. We can first look at the distribution of discriminations via a histogram:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;id_plot_all_hist(coffee_model,params = &amp;#39;regular_discrim&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/stancon2018_paper_files/figure-html/plot_discrim-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/plot_discrim-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;To gain a sense of how polarizing these products, we can plot the product mid-point, or the point at which a user is indifferent between one rating score and a higher rating score, over the ideal point distribution. I color the user points by their actual ratings:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;id_plot_legis(coffee_model,group_color=F,group_overlap = T,
               person_labels=F,person_ci_alpha = .05,
@@ -2374,7 +1775,7 @@ just_coffee &amp;lt;- anti_join(just_coffee,coffee_count_prod,by=&amp;#39;Produc
               point_size=2,
               show_score = c(&amp;#39;1&amp;#39;,&amp;#39;2&amp;#39;,&amp;#39;3&amp;#39;,&amp;#39;4&amp;#39;,&amp;#39;5&amp;#39;),
               text_size_group = 4)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/stancon2018_paper_files/figure-html/high_pos_discrim-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/high_pos_discrim-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As can be seen, the product midpoints nearly perfectly segment the user base. We also a large number of 1s and 5s in the observed ratings. This distribution shows that users tend to be very divided on this product, and also that their disagreement over the product is itself a reflection of an underlying dimension, their ideal points.&lt;/p&gt;
 &lt;p&gt;Finally, I include here the top 10 most polarizing (highly discriminative) products from each end of the ideal point spectrum.&lt;/p&gt;
 &lt;p&gt;First, the top 10 most positive discrimination:&lt;/p&gt;
@@ -2389,7 +1790,7 @@ just_coffee &amp;lt;- anti_join(just_coffee,coffee_count_prod,by=&amp;#39;Produc
 &lt;div id=&#34;empirical-example-114th-senate&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Empirical Example: 114th Senate&lt;/h2&gt;
 &lt;p&gt;As an empirical example of the model, I use data from the &lt;a href=&#34;http://www.voteview.com&#34; class=&#34;uri&#34;&gt;http://www.voteview.com&lt;/a&gt; website on the voting record of the 114th US Senate. This dataset comes with the &lt;code&gt;idealstan&lt;/code&gt; package, and I then recode the data to correspond to a standard R matrix. However, because abstentions rarely happen in the US Congress, I do not include abstentions in this model and instead estimate a standard binary IRT 2-PL with inflation for missing data (absences). I then pass the matrix of vote records to the &lt;code&gt;id_make&lt;/code&gt; function to create an object suitable for running the model.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/stancon2018_paper_files/figure-html/use_senate-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/use_senate-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Given a suitable object from &lt;code&gt;id_make&lt;/code&gt;, the &lt;code&gt;id_estimate&lt;/code&gt; function can estimate a variety of IRT ideal point models, including 2-PL, ordinal, hierarchical and dynamic IRT (using random-walk priors). For this run we set the &lt;code&gt;model_type&lt;/code&gt; parameter to &lt;code&gt;2&lt;/code&gt;, which represents a 2-PL model with absence inflation. Because this dataset is of a significant size, I use variational inference instead of the full sampler to demonstrate its use. I do not, however, use the automatic identification option &lt;code&gt;auto_id&lt;/code&gt; because it is relatively easy to constrain particular legislator ideal points for the Senate. In this case, I constrain Ben Sasse, Marco Rubio, Berni Sanders, Ted Cruz, Harry Reid and Elizabeth Warren, all senators with pronounced ideological views.&lt;/p&gt;
 &lt;p&gt;After estimating the model, I can look at a graphical display of the ideal points with the &lt;code&gt;id_plot&lt;/code&gt; function. The &lt;code&gt;id_plot&lt;/code&gt; function produces a &lt;code&gt;ggplot2&lt;/code&gt; object which can be further modified. The legislators are given colors based on their party affiliation. The general shape of the ideal point distribution reflects the nature of polarization in the US Congress, with relatively few moderates near the center of the distribution.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## ------------------------------------------------------------
@@ -2423,15 +1824,15 @@ just_coffee &amp;lt;- anti_join(just_coffee,coffee_count_prod,by=&amp;#39;Produc
 ## 
 ## Drawing a sample of size 1000 from the approximate posterior... 
 ## COMPLETED.&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/stancon2018_paper_files/figure-html/run_114_model-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/run_114_model-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;We can also plot the bill (item) midpoints as a line of indifference that we overlay on top of the ideal points.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;id_plot(sen_est,person_ci_alpha=.1,item_plot=205,
         group_labels=T,
         abs_and_reg=&amp;#39;Vote Points&amp;#39;) + scale_colour_brewer(type=&amp;#39;qual&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/stancon2018_paper_files/figure-html/bill_plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/bill_plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;For this particular piece of legislation, the midpoint is right in the middle of the ideal point distribution, showing that the bill has very high discrimination. Also, the rug lines at the bottom of the plot, which show the HPD for the midpoint, indicate that the model is uncertain about the votes of only a handful of Senators on this bill.&lt;/p&gt;
 &lt;p&gt;We can similarly examine the absence midpoint for the same bill, which signifies the place on the ideal point spectrum at which a legislator is indifferent from showing up to vote. In this case, only very conservative Republicans chose not to show up to vote.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/stancon2018_paper_files/figure-html/abs_bill_plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/stancon2018_paper_files/figure-html/abs_bill_plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;We can use the bill absence parameters to also see which bills showed the highest discrimination in terms of absences, or in other words, for which bills did the absence of legislators signify that they intentionally did not show up? To do this, I sort the discrimination parameters from the underlying Stan object and then merge them with the bill labels from voteview.org.&lt;/p&gt;
 &lt;p&gt;First we can look at the top 10 bills with liberal/Democrat absence discrimination:&lt;/p&gt;
 &lt;div id=&#34;htmlwidget-4&#34; style=&#34;width:100%;height:auto;&#34; class=&#34;datatables html-widget&#34;&gt;&lt;/div&gt;
@@ -2470,25 +1871,25 @@ just_coffee &amp;lt;- anti_join(just_coffee,coffee_count_prod,by=&amp;#39;Produc
     
     <item>
       <title>idealstan: A Package for Bayesian Ideal-Point Modeling with Stan</title>
-      <link>/talk/stancon2018/</link>
+      <link>http://www.robertkubinec.com/talk/stancon2018/</link>
       <pubDate>Thu, 11 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>/talk/stancon2018/</guid>
+      <guid>http://www.robertkubinec.com/talk/stancon2018/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Islamist-Secularist Polarization during the Arab Uprisings</title>
-      <link>/talk/apsa_twitter/</link>
+      <link>http://www.robertkubinec.com/talk/apsa_twitter/</link>
       <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>/talk/apsa_twitter/</guid>
+      <guid>http://www.robertkubinec.com/talk/apsa_twitter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Making Democracy Safe for Business: Business Collective Action in Algeria, Egypt and Tunisia</title>
-      <link>/talk/apsa_tunisia/</link>
+      <link>http://www.robertkubinec.com/talk/apsa_tunisia/</link>
       <pubDate>Fri, 01 Sep 2017 00:00:00 +0000</pubDate>
-      <guid>/talk/apsa_tunisia/</guid>
+      <guid>http://www.robertkubinec.com/talk/apsa_tunisia/</guid>
       <description></description>
     </item>
     
