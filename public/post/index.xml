@@ -5,12 +5,115 @@
     <link>http://www.robertkubinec.com/post/</link>
       <atom:link href="http://www.robertkubinec.com/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Robert Kubinec</copyright><lastBuildDate>Sun, 13 Sep 2020 15:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Robert Kubinec</copyright><lastBuildDate>Thu, 19 Nov 2020 15:00:00 +0000</lastBuildDate>
     <image>
       <url>http://www.robertkubinec.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>http://www.robertkubinec.com/post/</link>
     </image>
+    
+    <item>
+      <title>A More Realistic P-Value for the Pfizer Vaccine Report</title>
+      <link>http://www.robertkubinec.com/post/vaccinepval/</link>
+      <pubDate>Thu, 19 Nov 2020 15:00:00 +0000</pubDate>
+      <guid>http://www.robertkubinec.com/post/vaccinepval/</guid>
+      <description>
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;I start with &lt;a href=&#34;https://rpubs.com/ericnovik/692460&#34;&gt;Eric Novik’s excellent blog post&lt;/a&gt; on how to calculate the relevant statistics for the vaccine, i.e. vaccine efficacy (VE). This is defined as:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+VE = 1 - \frac{p_t}{p_c}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Where &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; is the proportion of cases in the treatment (vaccinated) group with COVID-19 and &lt;span class=&#34;math inline&#34;&gt;\(p_c\)&lt;/span&gt; is the proportion of cases in the control (un-vaccinated) group). This is kind of an odd statistic as it would seem to make more sense to simply report the ratio rather than one minus the ratio, although subtracting one means a null ratio (difference of 1) equals zero. I am not sure a general audience is very aware of the distinction and what VE in fact means. In essence, if we assume the vaccinated group will have no more cases than the control group, this statistic will converge to 1 as &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; goes to zero, so VE of 100% would be a case in which there are no cases in the treatment group.&lt;/p&gt;
+&lt;p&gt;As Eric Novik shows, the VE is actually a calculated quantity and isn’t modeled directly. The &lt;a href=&#34;https://pfe-pfizercom-d8-prod.s3.amazonaws.com/2020-09/C4591001_Clinical_Protocol.pdf&#34;&gt;clinical pre-registration&lt;/a&gt; says they will use a beta-binomial model. The put a prior on a transformation of the VE (vaccine efficacy) of &lt;span class=&#34;math inline&#34;&gt;\(Beta(0.700102, 1)\)&lt;/span&gt;. We can get an idea of what that looks like by examining the distribution of these values:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;prior_VE &amp;lt;- rbeta(10000,.700102,1)
+
+round(quantile((2*prior_VE - 1)/(prior_VE - 1),probs=seq(0,1,by=.05)),5)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##          0%          5%         10%         15%         20%         25% 
+## -4994.45563   -12.93514    -5.62962    -3.11045    -1.86012    -1.15668 
+##         30%         35%         40%         45%         50%         55% 
+##    -0.63120    -0.28035    -0.00591     0.19966     0.36281     0.50447 
+##         60%         65%         70%         75%         80%         85% 
+##     0.61128     0.69638     0.76767     0.83150     0.88354     0.92454 
+##         90%         95%        100% 
+##     0.95870     0.98584     1.00000&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This prior puts significant mass at negative VEs which would suggest that the vaccine actually makes things worse for the treatment group than for the control group. While this would seem unrealistic, it also suggests that very high VEs, such as above 90%, are relatively unlikely. We can see that the prior suggests it is about as likely that the VE is negative (the vaccine causes the virus) as it is likely that the VE is greater than 80%.&lt;/p&gt;
+&lt;p&gt;Given this conservative but weakly informative prior, we can then calculate a p-value for what they pre-register in their study, which is the probability that the VE (vaccine efficacy) is greater than 30%. We can then fit a Bayesian beta-binomial model with these priors by modifying Eric Novik’s original code:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# from Eric Novik, changed the prior per pre-reg
+
+vac_model &amp;lt;- &amp;quot;data {
+  int&amp;lt;lower=1&amp;gt; r_c; // num events, control
+  int&amp;lt;lower=1&amp;gt; r_t; // num events, treatment
+  int&amp;lt;lower=1&amp;gt; n_c; // num cases, control
+  int&amp;lt;lower=1&amp;gt; n_t; // num cases, treatment
+  real a[2];   // prior values for treatment effect
+  
+}
+parameters {
+  real&amp;lt;lower=0, upper=1&amp;gt; p_c; // binomial p for control
+  real&amp;lt;lower=0, upper=1&amp;gt; p_t; // binomial p for treatment 
+}
+transformed parameters {
+  real VE       = 1 - p_t / p_c;  // vaccine effectiveness
+}
+model {
+  (VE - 1)/(VE - 2) ~ beta(a[1], a[2]); // prior for treatment effect
+  r_c ~ binomial(n_c, p_c); // likelihood for control
+  r_t ~ binomial(n_t, p_t); // likelihood for treatment
+}
+generated quantities {
+  real effect   = p_t - p_c;      // treatment effect
+  real log_odds = log(p_t / (1 - p_t)) -
+                  log(p_c / (1 - p_c));
+}&amp;quot;
+
+to_stan &amp;lt;- cmdstan_model(write_stan_file(vac_model))
+
+n &amp;lt;- 4.4e4  # number of volunteers
+r_c &amp;lt;- 162  # number of events in control
+r_t &amp;lt;- 8    # number of events in vaccine group
+
+stan_data &amp;lt;- list(n=n,r_c=r_c,r_t=r_t,
+                  n_c=n/2,n_t=n/2,
+                  a=c(.700102,1))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then we can sample and plot the results. We’ll draw a lot of samples so we can get good estimates in the tails (i.e. very low p-values).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pfizer_est &amp;lt;- to_stan$sample(data=stan_data,chains=1,iter_warmup=500,iter_sampling=100000,refresh=50000,show_messages=F)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:      1 / 100500 [  0%]  (Warmup) 
+## Chain 1 Iteration:    501 / 100500 [  0%]  (Sampling) 
+## Chain 1 Iteration:  50500 / 100500 [ 50%]  (Sampling) 
+## Chain 1 Iteration: 100500 / 100500 [100%]  (Sampling) 
+## Chain 1 finished in 2.0 seconds.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;draws &amp;lt;- pfizer_est$draws() %&amp;gt;% as_draws_df&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here’s a plot of the VE as reported in the press release with the dotted line as the average estimate:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean_ve &amp;lt;- mean(draws$VE)
+
+draws %&amp;gt;% 
+  ggplot(aes(x=VE)) +
+  geom_density(fill=&amp;quot;blue&amp;quot;,alpha=0.5)+
+  theme_tufte() +
+  ylab(&amp;quot;&amp;quot;) +
+  scale_x_continuous(labels=scales::percent_format(accuracy = 1)) +
+  geom_vline(aes(xintercept=mean(VE)),linetype=2) +
+  annotate(&amp;quot;text&amp;quot;,x=mean_ve,y=12,label=paste0(&amp;quot;  VE = &amp;quot;,round(mean_ve*100,1),&amp;quot;%&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/vaccinepval_files/figure-html/veplot-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This estimate matches the press release. So let’s calculate the p-value:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean(1 - as.numeric(draws$VE&amp;gt;.3))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Virtually nil.&lt;/p&gt;
+&lt;p&gt;However, we can also test some other thresholds, such as the FDA value of 50% VE:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean(1 - as.numeric(draws$VE&amp;gt;.5))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Still vanishingly small. We can try something a bit closer, such as whether VE exceeds 90%:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean(1 - as.numeric(draws$VE&amp;gt;.9))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.01913&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This p-value is at least reportable at 0.02. As this is a Bayesian model, this can be interpreted directly that the probability that the vaccine efficacy is less than 90% is quite small, less than a 2% chance.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Why You Should Be Careful About the MaterniT 21 Test</title>

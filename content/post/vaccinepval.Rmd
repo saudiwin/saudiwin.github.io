@@ -9,7 +9,7 @@ header:
   title: "A More Realistic P-Value for Pfizer Vaccine Test"
   summary: "The clinical pre-registration for the Moderna vaccine defines clearly what statistic we should use to evaluate their trial, in contrast to their press release."
   image: "headers/ft_header.png"
-  date: "2020-04-22T15:00:00"
+  date: "2020-11-19T15:00:00"
 ---
 
 ```{r setup, include=FALSE}
