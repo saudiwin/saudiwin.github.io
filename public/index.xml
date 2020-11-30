@@ -30,11 +30,11 @@ VE = 1 - \frac{p_t}{p_c}
 \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Where &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; is the proportion of cases in the treatment (vaccinated) group with COVID-19 and &lt;span class=&#34;math inline&#34;&gt;\(p_c\)&lt;/span&gt; is the proportion of cases in the control (un-vaccinated) group). In essence, if we assume the vaccinated group will have no more cases than the control group, this statistic will converge to 1 as &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; goes to zero, so VE of 100% would be a case in which there are no cases in the treatment group.&lt;/p&gt;
 &lt;p&gt;They don’t give us all the information to figure out how many people were infected with COVID-19 in treatment versus control, but we can infer &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(p_c\)&lt;/span&gt; by solving two equations given the fact that we know that the proportion infected in the whole trial was equal to &lt;span class=&#34;math inline&#34;&gt;\(\frac{131}{11636}\)&lt;/span&gt; and the overall VE was 0.7:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{equation}
-1 - \frac{p_t}{p_c} = 0.7\\
-p_t + p_c = \frac{131}{11636}
-\end{equation}\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Thankfully, this system has a single solution where &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; is equal to  (~0.0026) and &lt;span class=&#34;math inline&#34;&gt;\(p_c\)&lt;/span&gt; is equal to  (~0.0087). In other words, the proportion infected in the treatment group was about four times less than the control group. We’ll assume that these distributions are the correct ones, and then sample &lt;span class=&#34;math inline&#34;&gt;\(p_{ti}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(p_{ci}\)&lt;/span&gt; from Beta distributions that are fairly tight around these values. This will allow us to model treatment heterogeneity within the sample. The distribution of possible VEs given this heterogeneity can be seen in the plot below:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+1 - \frac{p_t}{p_c} &amp;amp;= 0.7\\
+p_t + p_c &amp;amp;= \frac{131}{11636}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Thankfully, this system has a single solution where &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; is equal to  (~0.0026) and &lt;span class=&#34;math inline&#34;&gt;\(p_c\)&lt;/span&gt; is equal to  (~0.0087). In other words, the proportion infected in the treatment group was about four times less than the control group. We’ll assume that these distributions are the correct ones, and then sample subgroup-varying &lt;span class=&#34;math inline&#34;&gt;\(p_{ti}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(p_{ci}\)&lt;/span&gt; from Beta distributions that are fairly tight around these values. This will allow us to model treatment heterogeneity within the sample. The distribution of possible VEs given subgroup heterogeneity can be seen in the plot below:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# use the mean/variance parameterization of the beta distribution
 
 pt &amp;lt;- 393/151268
@@ -46,11 +46,11 @@ VE &amp;lt;-  1 - rbeta(10000,pt*5000,(1-pt)*5000)/rbeta(10000,pc*5000,(1-pc)*50
 
 hist(VE)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/astrazeneca_files/figure-html/veheg-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;This plot shows that the true VE in the population is on average 0.7 but could vary substantially. It could be below 0.5 for a small subset of the population and above 0.9 for a small subset of the population. To simulate our data, we will draw VEs from this beta distribution separately for each of four possible subgroups &lt;span class=&#34;math inline&#34;&gt;\(i \in {1, 2, 3, 4}\)&lt;/span&gt; in a hypothetical study:&lt;/p&gt;
+&lt;p&gt;This plot shows that the true VE in the population is on average 0.7 but could vary substantially. It could be below 0.5 for a small subset of the population and above 0.9 for a small subset of the population. To simulate our data, we will draw VEs from this beta distribution separately for each of four possible subgroups &lt;span class=&#34;math inline&#34;&gt;\(i \in \{1, 2, 3, 4\}\)&lt;/span&gt; in a hypothetical study:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
 VE_i \sim 1 - \frac{Beta(5000p_{ti},5000(1-p_{ti}))}{Beta(5000p_{ci},5000(1-p_{ci}))}
 \]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Four subgroups are chosen to be roughly equal to the size of the half-dose group in the AstraZeneca study given a sample size of 11,636. I add a further step in that I assume that the probability of VE being reported for a subgroup &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; (&lt;span class=&#34;math inline&#34;&gt;\(Pr(r=1)\)&lt;/span&gt; is increasing in the rate of VE. As VE rises, the subgroup analysis is more likely to be reported. For these reasons, we can distinguish between the full range of VE estimates for subroup &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; (&lt;span class=&#34;math inline&#34;&gt;\(VE_i\)&lt;/span&gt;) and the particular subgroup &lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt; that is reported, &lt;span class=&#34;math inline&#34;&gt;\(VE_{ir=1}\)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;Four subgroups are chosen to be roughly equal to the size of the half-dose group in the AstraZeneca study given a sample size of 11,636. I add a further step in that I assume that the probability of VE being reported for a subgroup &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;, which I term &lt;span class=&#34;math inline&#34;&gt;\(Pr(r=1)\)&lt;/span&gt;, is increasing in the rate of VE. That is, as VE rises, the subgroup analysis is more likely to be reported. For these reasons, we can distinguish between the full range of VE estimates for a subgroup &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(VE_i\)&lt;/span&gt;, and the particular subgroup &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; that is reported, &lt;span class=&#34;math inline&#34;&gt;\(VE_{ir=1}\)&lt;/span&gt;:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
 Pr(VE_{ir}) = Pr(r|VE_i)VE_{ir=1} + (1 - Pr(r|VE_i))VE_{ir=0}
 \]&lt;/span&gt;&lt;/p&gt;
@@ -246,7 +246,7 @@ stan_data &amp;lt;- list(n=n,r_c=r_c,r_t=r_t,
 ## Chain 1 Iteration:    501 / 100500 [  0%]  (Sampling) 
 ## Chain 1 Iteration:  50500 / 100500 [ 50%]  (Sampling) 
 ## Chain 1 Iteration: 100500 / 100500 [100%]  (Sampling) 
-## Chain 1 finished in 3.4 seconds.&lt;/code&gt;&lt;/pre&gt;
+## Chain 1 finished in 2.1 seconds.&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;draws &amp;lt;- pfizer_est$draws() %&amp;gt;% as_draws_df&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here’s a plot of the VE as reported in the press release with the dotted line as the average estimate:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean_ve &amp;lt;- mean(draws$VE)

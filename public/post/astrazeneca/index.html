@@ -699,11 +699,11 @@ VE = 1 - \frac{p_t}{p_c}
 \]</span></p>
 <p>Where <span class="math inline">\(p_t\)</span> is the proportion of cases in the treatment (vaccinated) group with COVID-19 and <span class="math inline">\(p_c\)</span> is the proportion of cases in the control (un-vaccinated) group). In essence, if we assume the vaccinated group will have no more cases than the control group, this statistic will converge to 1 as <span class="math inline">\(p_t\)</span> goes to zero, so VE of 100% would be a case in which there are no cases in the treatment group.</p>
 <p>They don’t give us all the information to figure out how many people were infected with COVID-19 in treatment versus control, but we can infer <span class="math inline">\(p_t\)</span> and <span class="math inline">\(p_c\)</span> by solving two equations given the fact that we know that the proportion infected in the whole trial was equal to <span class="math inline">\(\frac{131}{11636}\)</span> and the overall VE was 0.7:</p>
-<p><span class="math display">\[\begin{equation}
-1 - \frac{p_t}{p_c} = 0.7\\
-p_t + p_c = \frac{131}{11636}
-\end{equation}\]</span></p>
-<p>Thankfully, this system has a single solution where <span class="math inline">\(p_t\)</span> is equal to  (~0.0026) and <span class="math inline">\(p_c\)</span> is equal to  (~0.0087). In other words, the proportion infected in the treatment group was about four times less than the control group. We’ll assume that these distributions are the correct ones, and then sample <span class="math inline">\(p_{ti}\)</span> and <span class="math inline">\(p_{ci}\)</span> from Beta distributions that are fairly tight around these values. This will allow us to model treatment heterogeneity within the sample. The distribution of possible VEs given this heterogeneity can be seen in the plot below:</p>
+<p><span class="math display">\[\begin{align}
+1 - \frac{p_t}{p_c} &amp;= 0.7\\
+p_t + p_c &amp;= \frac{131}{11636}
+\end{align}\]</span></p>
+<p>Thankfully, this system has a single solution where <span class="math inline">\(p_t\)</span> is equal to  (~0.0026) and <span class="math inline">\(p_c\)</span> is equal to  (~0.0087). In other words, the proportion infected in the treatment group was about four times less than the control group. We’ll assume that these distributions are the correct ones, and then sample subgroup-varying <span class="math inline">\(p_{ti}\)</span> and <span class="math inline">\(p_{ci}\)</span> from Beta distributions that are fairly tight around these values. This will allow us to model treatment heterogeneity within the sample. The distribution of possible VEs given subgroup heterogeneity can be seen in the plot below:</p>
 <pre class="r"><code># use the mean/variance parameterization of the beta distribution
 
 pt &lt;- 393/151268
@@ -715,11 +715,11 @@ VE &lt;-  1 - rbeta(10000,pt*5000,(1-pt)*5000)/rbeta(10000,pc*5000,(1-pc)*5000)
 
 hist(VE)</code></pre>
 <p><img src="/post/astrazeneca_files/figure-html/veheg-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>This plot shows that the true VE in the population is on average 0.7 but could vary substantially. It could be below 0.5 for a small subset of the population and above 0.9 for a small subset of the population. To simulate our data, we will draw VEs from this beta distribution separately for each of four possible subgroups <span class="math inline">\(i \in {1, 2, 3, 4}\)</span> in a hypothetical study:</p>
+<p>This plot shows that the true VE in the population is on average 0.7 but could vary substantially. It could be below 0.5 for a small subset of the population and above 0.9 for a small subset of the population. To simulate our data, we will draw VEs from this beta distribution separately for each of four possible subgroups <span class="math inline">\(i \in \{1, 2, 3, 4\}\)</span> in a hypothetical study:</p>
 <p><span class="math display">\[
 VE_i \sim 1 - \frac{Beta(5000p_{ti},5000(1-p_{ti}))}{Beta(5000p_{ci},5000(1-p_{ci}))}
 \]</span></p>
-<p>Four subgroups are chosen to be roughly equal to the size of the half-dose group in the AstraZeneca study given a sample size of 11,636. I add a further step in that I assume that the probability of VE being reported for a subgroup <span class="math inline">\(i\)</span> (<span class="math inline">\(Pr(r=1)\)</span> is increasing in the rate of VE. As VE rises, the subgroup analysis is more likely to be reported. For these reasons, we can distinguish between the full range of VE estimates for subroup <span class="math inline">\(i\)</span> (<span class="math inline">\(VE_i\)</span>) and the particular subgroup <span class="math inline">\(r\)</span> that is reported, <span class="math inline">\(VE_{ir=1}\)</span>:</p>
+<p>Four subgroups are chosen to be roughly equal to the size of the half-dose group in the AstraZeneca study given a sample size of 11,636. I add a further step in that I assume that the probability of VE being reported for a subgroup <span class="math inline">\(i\)</span>, which I term <span class="math inline">\(Pr(r=1)\)</span>, is increasing in the rate of VE. That is, as VE rises, the subgroup analysis is more likely to be reported. For these reasons, we can distinguish between the full range of VE estimates for a subgroup <span class="math inline">\(i\)</span>, <span class="math inline">\(VE_i\)</span>, and the particular subgroup <span class="math inline">\(i\)</span> that is reported, <span class="math inline">\(VE_{ir=1}\)</span>:</p>
 <p><span class="math display">\[
 Pr(VE_{ir}) = Pr(r|VE_i)VE_{ir=1} + (1 - Pr(r|VE_i))VE_{ir=0}
 \]</span></p>
