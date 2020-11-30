@@ -5,12 +5,1355 @@
     <link>http://www.robertkubinec.com/</link>
       <atom:link href="http://www.robertkubinec.com/index.xml" rel="self" type="application/rss+xml" />
     <description>Academic</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Robert Kubinec</copyright><lastBuildDate>Thu, 19 Nov 2020 15:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Robert Kubinec</copyright><lastBuildDate>Fri, 27 Nov 2020 15:00:00 +0000</lastBuildDate>
     <image>
       <url>http://www.robertkubinec.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Academic</title>
       <link>http://www.robertkubinec.com/</link>
     </image>
+    
+    <item>
+      <title>Why People Are Doubting the AstraZeneca Vaccine Report</title>
+      <link>http://www.robertkubinec.com/post/astrazeneca/</link>
+      <pubDate>Fri, 27 Nov 2020 15:00:00 +0000</pubDate>
+      <guid>http://www.robertkubinec.com/post/astrazeneca/</guid>
+      <description>
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;In this blog post, I use Gelman and Loken’s &lt;a href=&#34;http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf&#34;&gt;garden of forking paths&lt;/a&gt; analysis to construct a simulation showing why skepticism of &lt;a href=&#34;https://www.astrazeneca.com/media-centre/press-releases/2020/azd1222hlr.html&#34;&gt;AstraZeneca’s vaccine results&lt;/a&gt; is warranted at this early stage. This simulation uses the numbers from their press release to illustrate how noise in treatment regimes can undermine serendipitious results. As Gelman and Loken describe, researchers can stumble on conclusions which they are then very able to provide post hoc justifications for. Unfortunately, when incentives to get results are strong, human beings are also very likely to focus on the positive at the expense of obtaining the full picture.&lt;/p&gt;
+&lt;p&gt;Similar to my &lt;a href=&#34;http://www.robertkubinec.com/post/vaccinepval/&#34;&gt;last post on Pfizer’s vaccine&lt;/a&gt;, I start with &lt;a href=&#34;https://rpubs.com/ericnovik/692460&#34;&gt;Eric Novik’s excellent blog post&lt;/a&gt; on how to calculate the relevant statistics for the vaccine, i.e. vaccine efficacy (VE). This is defined as:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+VE = 1 - \frac{p_t}{p_c}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Where &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; is the proportion of cases in the treatment (vaccinated) group with COVID-19 and &lt;span class=&#34;math inline&#34;&gt;\(p_c\)&lt;/span&gt; is the proportion of cases in the control (un-vaccinated) group). In essence, if we assume the vaccinated group will have no more cases than the control group, this statistic will converge to 1 as &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; goes to zero, so VE of 100% would be a case in which there are no cases in the treatment group.&lt;/p&gt;
+&lt;p&gt;They don’t give us all the information to figure out how many people were infected with COVID-19 in treatment versus control, but we can infer &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(p_c\)&lt;/span&gt; by solving two equations given the fact that we know that the proportion infected in the whole trial was equal to &lt;span class=&#34;math inline&#34;&gt;\(\frac{131}{11636}\)&lt;/span&gt; and the overall VE was 0.7:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{equation}
+1 - \frac{p_t}{p_c} = 0.7\\
+p_t + p_c = \frac{131}{11636}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Thankfully, this system has a single solution where &lt;span class=&#34;math inline&#34;&gt;\(p_t\)&lt;/span&gt; is equal to  (~0.0026) and &lt;span class=&#34;math inline&#34;&gt;\(p_c\)&lt;/span&gt; is equal to  (~0.0087). In other words, the proportion infected in the treatment group was about four times less than the control group. We’ll assume that these distributions are the correct ones, and then sample &lt;span class=&#34;math inline&#34;&gt;\(p_{ti}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(p_{ci}\)&lt;/span&gt; from Beta distributions that are fairly tight around these values. This will allow us to model treatment heterogeneity within the sample. The distribution of possible VEs given this heterogeneity can be seen in the plot below:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# use the mean/variance parameterization of the beta distribution
+
+pt &amp;lt;- 393/151268
+pc &amp;lt;- 655/75634
+
+# Generate values for VE given beta distributions for pt/pc
+
+VE &amp;lt;-  1 - rbeta(10000,pt*5000,(1-pt)*5000)/rbeta(10000,pc*5000,(1-pc)*5000)
+
+hist(VE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/astrazeneca_files/figure-html/veheg-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This plot shows that the true VE in the population is on average 0.7 but could vary substantially. It could be below 0.5 for a small subset of the population and above 0.9 for a small subset of the population. To simulate our data, we will draw VEs from this beta distribution separately for each of four possible subgroups &lt;span class=&#34;math inline&#34;&gt;\(i \in {1, 2, 3, 4}\)&lt;/span&gt; in a hypothetical study:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+VE_i \sim 1 - \frac{Beta(5000p_t,5000(1-p_t))}{Beta(5000p_c,5000(1-p_c))}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Four subgroups are chosen to be roughly equal to the size of the half-dose group in the AstraZeneca study given a sample size of 11,636. I add a further step in that I assume that the probability of VE being reported for a subgroup &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; (&lt;span class=&#34;math inline&#34;&gt;\(Pr(r=1)\)&lt;/span&gt; is increasing in the rate of VE. As VE rises, the subgroup analysis is more likely to be reported. For these reasons, we can distinguish between the full range of VE estimates for subroup &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; (&lt;span class=&#34;math inline&#34;&gt;\(VE_i\)&lt;/span&gt;) and the particular subgroup &lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt; that is reported, &lt;span class=&#34;math inline&#34;&gt;\(VE_{ir=1}\)&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+Pr(VE_{ir}) = Pr(r|VE_i)VE_i + (1 - Pr(r|VE_i))VE_i
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;This equation shows that the extent of the bias in using only reported results is equal to &lt;span class=&#34;math inline&#34;&gt;\((1 - Pr(r|VE_i))VE_i\)&lt;/span&gt;, or the weighted probability that a result won’t be reported conditional on the level of VE in the result.&lt;/p&gt;
+&lt;p&gt;The R code to generate this model in terms of treatment/control COVID cases and whether or not subgroup analyses are reported is as follows:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# number of samples
+
+N &amp;lt;- 1000
+
+sim_data &amp;lt;- lapply(1:N,function(n) {
+  
+  # generate subgroup treatment/control COVID proportions
+  
+  sub_pt &amp;lt;- rbeta(4,pt*5000,(1-pt)*5000)
+  sub_pc &amp;lt;- rbeta(4,pc*5000,(1-pc)*5000)
+  
+  
+  # generate subgroup VEs
+  
+  VE &amp;lt;-  1 - sub_pt/sub_pc
+  
+  # generate COVID case data with binomial distribution
+  
+  covid_t &amp;lt;- sapply(sub_pt, function(pt) rbinom(n=1,size = floor(11636/4),prob=pt))
+  covid_c &amp;lt;- sapply(sub_pc, function(pc) rbinom(n=1,size = floor(11636/4),prob=pc))
+  
+  # output data
+  
+  tibble(draw=n,
+         groups=1:4,
+         sub_pt=sub_pt,
+         sub_pc=sub_pc,
+         VE=VE,
+         VE_r=as.numeric(runif(n=4)&amp;lt;plogis(-250 + 300*VE)),
+         covid_t = covid_t,
+         covid_c=covid_c)
+  
+}) %&amp;gt;% bind_rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Given this simulation, only a minority (4%) of subgroup analyses are reported. The average VE for the reported subgroups is 77% as opposed to a VE of 69 across all simulations. As such, this adjustment makes it unlikely that subgroups with VEs with a low efficacy will end up being reported, while subgroups with higher VEs are more likely to be reported.&lt;/p&gt;
+&lt;p&gt;For each random draw, I can then fit a model that analyses only those analyses that are reported:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Running MCMC with 1 chain...
+## 
+## Chain 1 Iteration:    1 / 1500 [  0%]  (Warmup) 
+## Chain 1 Iteration:  500 / 1500 [ 33%]  (Warmup) 
+## Chain 1 Iteration:  501 / 1500 [ 33%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1500 [ 66%]  (Sampling) 
+## Chain 1 Iteration: 1500 / 1500 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I can then plot the density of the estimated reported VE from this simulation along with a line indicating the true average VE in the population:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;est_bias %&amp;gt;% 
+  ggplot(aes(x=VE)) +
+  geom_density(fill=&amp;quot;blue&amp;quot;,alpha=0.5) +
+  geom_vline(xintercept=mean(sim_data$VE),linetype=2) +
+  theme_tufte() +
+  xlim(c(0,1)) +
+  xlab(&amp;quot;Reported VE&amp;quot;) +
+  ylab(&amp;quot;&amp;quot;) +
+  annotate(&amp;quot;text&amp;quot;,x=mean(sim_data$VE),y=3,label=paste0(&amp;quot;True VE = &amp;quot;,round(mean(sim_data$VE)*100,1),&amp;quot;%&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/astrazeneca_files/figure-html/sample-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As can be seen, it is much more likely that VEs higher than the true average VE will be reported. The extent of the bias is driven by the simulation and how much weight the simulation puts on discovering high VE values. Given the profit that AstraZeneca stands to gain, and the fame and prestige for the involved academics, it would seem logical that reported analyses from subgroups will tend to be subgroups that out-perform the average.&lt;/p&gt;
+&lt;p&gt;Note that this simulation shows how AstraZeneca could be reporting valid statistical results, yet these results can still be a biased estimate of what we want to know, which is how the vaccine works for the population as a whole. The possibility of random noise in subgroups and the fact that subgroups are likely to respond differently means that we should be skeptical of analyses that only report certain subgroups instead of all subgroups. Only when we understand the variability in subgroups can we say whether the reported finding in AstraZeneca’s press release represents a real break-through or simply luck. Of course, they can test it directly by doing another trial, which it seems to be is their intention. Serendipity, though, isn’t enough of a reason to trust these results unless we can examine all of their data.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>A More Realistic P-Value for the Pfizer Vaccine Report</title>
@@ -87,7 +1430,7 @@ stan_data &amp;lt;- list(n=n,r_c=r_c,r_t=r_t,
 ## Chain 1 Iteration:    501 / 100500 [  0%]  (Sampling) 
 ## Chain 1 Iteration:  50500 / 100500 [ 50%]  (Sampling) 
 ## Chain 1 Iteration: 100500 / 100500 [100%]  (Sampling) 
-## Chain 1 finished in 2.0 seconds.&lt;/code&gt;&lt;/pre&gt;
+## Chain 1 finished in 1.9 seconds.&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;draws &amp;lt;- pfizer_est$draws() %&amp;gt;% as_draws_df&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here’s a plot of the VE as reported in the press release with the dotted line as the average estimate:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean_ve &amp;lt;- mean(draws$VE)
