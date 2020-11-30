@@ -30,7 +30,7 @@ knitr::opts_chunk$set(warning=F,message=F,fig.align = "center")
 ```
 
 
-In this blog post, I use Gelman and Loken's [garden of forking paths](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf) analysis to construct a simulation showing why skepticism of [AstraZeneca's vaccine results](https://www.astrazeneca.com/media-centre/press-releases/2020/azd1222hlr.html) is warranted at this early stage. This simulation uses the numbers from their press release to illustrate how noise in treatment regimes can undermine serendipitious results. As Gelman and Loken describe, researchers can stumble on conclusions which they are then very able to provide post hoc justifications for. Unfortunately, when incentives to get results are strong, human beings are also very likely to focus on the positive at the expense of obtaining the full picture.
+In this blog post, I use Gelman and Loken's [garden of forking paths](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf) analysis to construct a simulation showing why skepticism of [AstraZeneca's vaccine results](https://www.astrazeneca.com/media-centre/press-releases/2020/azd1222hlr.html) is warranted at this early stage. This simulation uses the numbers from their press release to illustrate how noise in treatment regimes can undermine serendipitous results. As Gelman and Loken describe, researchers can stumble on conclusions which they are then very able to provide post hoc justifications for. Unfortunately, when incentives to get results are strong, human beings are also very likely to focus on the positive at the expense of obtaining the full picture.
 
 
 Similar to my [last post on Pfizer's vaccine](http://www.robertkubinec.com/post/vaccinepval/), I start with [Eric Novik's excellent blog post](https://rpubs.com/ericnovik/692460) on how to calculate the relevant statistics for the vaccine, i.e. vaccine efficacy (VE). This is defined as:
@@ -68,16 +68,16 @@ hist(VE)
 This plot shows that the true VE in the population is on average 0.7 but could vary substantially. It could be below 0.5 for a small subset of the population and above 0.9 for a small subset of the population. To simulate our data, we will draw VEs from this beta distribution separately for each of four possible subgroups $i \in {1, 2, 3, 4}$ in a hypothetical study:
 
 $$
-VE_i \sim 1 - \frac{Beta(5000p_t,5000(1-p_t))}{Beta(5000p_c,5000(1-p_c))}
+VE_i \sim 1 - \frac{Beta(5000p_{ti},5000(1-p_{ti}))}{Beta(5000p_{ci},5000(1-p_{ci}))}
 $$
 
 Four subgroups are chosen to be roughly equal to the size of the half-dose group in the AstraZeneca study given a sample size of 11,636. I add a further step in that I assume that the probability of VE being reported for a subgroup $i$ ($Pr(r=1)$ is increasing in the rate of VE. As VE rises, the subgroup analysis is more likely to be reported. For these reasons, we can distinguish between the full range of VE estimates for subroup $i$ ($VE_i$) and the particular subgroup $r$ that is reported, $VE_{ir=1}$:
 
 $$
-Pr(VE_{ir}) = Pr(r|VE_i)VE_i + (1 - Pr(r|VE_i))VE_i
+Pr(VE_{ir}) = Pr(r|VE_i)VE_{ir=1} + (1 - Pr(r|VE_i))VE_{ir=0}
 $$
 
-This equation shows that the extent of the bias in using only reported results is equal to $(1 - Pr(r|VE_i))VE_i$, or the weighted probability that a result won't be reported conditional on the level of VE in the result.
+This equation shows that the extent of the bias in using only reported results is equal to $(1 - Pr(r|VE_i))VE_{ir=0}$, or the probability that a result won't be reported times the level of VE in the non-reported subgroups.
 
 The R code to generate this model in terms of treatment/control COVID cases and whether or not subgroup analyses are reported is as follows:
 
@@ -119,11 +119,11 @@ sim_data <- lapply(1:N,function(n) {
 
 ```
 
-Given this simulation, only a minority (`r round(mean(sim_data$VE_r),2)*100`%) of subgroup analyses are reported. The average VE for the reported subgroups is `r round(mean(sim_data$VE[sim_data$VE_r]),2)*100`% as opposed to a VE of `r round(mean(sim_data$VE),2)*100` across all simulations. As such, this adjustment makes it unlikely that subgroups with VEs with a low efficacy will end up being reported, while subgroups with higher VEs are more likely to be reported.
+Given this simulation, only a minority (`r round(mean(sim_data$VE_r),2)*100`%) of subgroup analyses are reported. The average VE for the reported subgroups is `r round(mean(sim_data$VE[sim_data$VE_r]),2)*100`% as opposed to a VE of `r round(mean(sim_data$VE),2)*100`% across all simulations. As such, the simulation assumes that it is unlikely that subgroups with low vaccine efficacy will end up being reported, while subgroups with stronger efficacy are more likely to be reported.
 
-For each random draw, I can then fit a model that analyses only those analyses that are reported:
+For each random draw from the simulation, I can then fit a model that analyses only those analyses that are reported:
 
-```{r code,message=F,warning=F,echo=F}
+```{r code,message=F,warning=F}
 
 # modified code from Eric Novik
 
@@ -155,9 +155,11 @@ generated quantities {
 
 to_stan <- cmdstan_model(write_stan_file(vac_model))
 
-sink("output.txt")
+
 
 est_bias <- lapply(unique(sim_data$draw), function(i) {
+  
+  sink("output.txt")
   
   this_data <- filter(sim_data,draw==i,VE_r==1)
   
@@ -184,9 +186,11 @@ est_bias <- lapply(unique(sim_data$draw), function(i) {
          VE=draws$VE)
   }
   
+  sink()
+  
 }) %>% bind_rows
 
-sink()
+
 
 ```
 
