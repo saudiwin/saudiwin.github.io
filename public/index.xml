@@ -13,6 +13,21 @@
     </image>
     
     <item>
+      <title>Linking to RBloggers</title>
+      <link>http://www.robertkubinec.com/post/rbloggers/</link>
+      <pubDate>Fri, 27 Nov 2020 15:00:00 +0000</pubDate>
+      <guid>http://www.robertkubinec.com/post/rbloggers/</guid>
+      <description>
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/anchor-sections/anchor-sections.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;You can access RBloggers, an R consortium of bloggers, &lt;a href=&#34;https://www.r-bloggers.com/&#34;&gt;at this link&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Why People Are Doubting the AstraZeneca Vaccine Report</title>
       <link>http://www.robertkubinec.com/post/astrazeneca/</link>
       <pubDate>Fri, 27 Nov 2020 15:00:00 +0000</pubDate>
@@ -246,7 +261,7 @@ stan_data &amp;lt;- list(n=n,r_c=r_c,r_t=r_t,
 ## Chain 1 Iteration:    501 / 100500 [  0%]  (Sampling) 
 ## Chain 1 Iteration:  50500 / 100500 [ 50%]  (Sampling) 
 ## Chain 1 Iteration: 100500 / 100500 [100%]  (Sampling) 
-## Chain 1 finished in 2.1 seconds.&lt;/code&gt;&lt;/pre&gt;
+## Chain 1 finished in 1.9 seconds.&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;draws &amp;lt;- pfizer_est$draws() %&amp;gt;% as_draws_df&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here’s a plot of the VE as reported in the press release with the dotted line as the average estimate:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean_ve &amp;lt;- mean(draws$VE)
