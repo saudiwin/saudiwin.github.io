@@ -261,7 +261,7 @@ stan_data &amp;lt;- list(n=n,r_c=r_c,r_t=r_t,
 ## Chain 1 Iteration:    501 / 100500 [  0%]  (Sampling) 
 ## Chain 1 Iteration:  50500 / 100500 [ 50%]  (Sampling) 
 ## Chain 1 Iteration: 100500 / 100500 [100%]  (Sampling) 
-## Chain 1 finished in 1.9 seconds.&lt;/code&gt;&lt;/pre&gt;
+## Chain 1 finished in 2.1 seconds.&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;draws &amp;lt;- pfizer_est$draws() %&amp;gt;% as_draws_df&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here’s a plot of the VE as reported in the press release with the dotted line as the average estimate:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean_ve &amp;lt;- mean(draws$VE)
