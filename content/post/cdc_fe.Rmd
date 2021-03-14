@@ -21,6 +21,7 @@ require(readr)
 require(tidycensus)
 require(lubridate)
 require(did)
+require(DRDID)
 #require(plm)
 
 set.seed(1062021)
@@ -28,6 +29,7 @@ set.seed(1062021)
 knitr::opts_chunk$set(warning=FALSE,message=FALSE,echo=TRUE,fig.align = "center")
 
 load_files <- F
+run_did <- F
 
 # NOTE: These files are too big to store on Github. You can download all 
 # three as a zip file from this link:
