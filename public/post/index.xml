@@ -5,12 +5,426 @@
     <link>http://www.robertkubinec.com/post/</link>
       <atom:link href="http://www.robertkubinec.com/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Robert Kubinec</copyright><lastBuildDate>Fri, 27 Nov 2020 15:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020 Robert Kubinec</copyright><lastBuildDate>Fri, 12 Mar 2021 15:00:00 +0000</lastBuildDate>
     <image>
       <url>http://www.robertkubinec.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>http://www.robertkubinec.com/post/</link>
     </image>
+    
+    <item>
+      <title>About the CDC&#39;s Face Mask Study</title>
+      <link>http://www.robertkubinec.com/post/cdc_fe/</link>
+      <pubDate>Fri, 12 Mar 2021 15:00:00 +0000</pubDate>
+      <guid>http://www.robertkubinec.com/post/cdc_fe/</guid>
+      <description>
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;http://www.robertkubinec.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;http://www.robertkubinec.com/rmarkdown-libs/lightable/lightable.css&#34; rel=&#34;stylesheet&#34; /&gt;
+
+
+&lt;p&gt;While perusing the news, I read eagerly about the &lt;a href=&#34;https://www.cdc.gov/mmwr/volumes/70/wr/mm7010e3.htm&#34;&gt;CDC’s recent study examining associations between county-level mask mandates and COVID-19 growth rates&lt;/a&gt;. This study has already been the subject of &lt;a href=&#34;https://www.nytimes.com/2021/03/05/health/coronavirus-restaurant-dining-masks.html&#34;&gt;angry retorts from the restaurant industry&lt;/a&gt; due to the CDC’s claim that restaurant closures reduced COVID-19 spread. Looking at the underlying details in the study, though, revealed some concerns about the particular model they used, known as a two-way fixed effects model, and also an important factor they left out of the model entirely: political partisanship.&lt;/p&gt;
+&lt;p&gt;To examine these deficiencies, I replicated their model from scratch and also employed different panel data models to provide clearer answers. In brief, the negative association between mask mandates and the spread of COVID-19 does hold up, but it appears to be highly conditional on partisanship. In addition, there are a lot of complexities when it comes to comparing counties, and I do not believe the CDC or anyone else has yet resolved all of them. So while I applaud the CDC for doing a lot of hard work on data collection, we still have a ways to go before we can fully understand how effective mask mandates were against COVID-19.&lt;/p&gt;
+&lt;p&gt;In this post I first discuss my challenges replicating their analysis, and then I critique the choices they made in their paper. Later I put forward my own analysis to probe in more detail the role of mask mandates. I include the code I use to estimate models in this blog post to be transparent about how I did the re-analysis. If you are not familiar with R code, feel free to skip those sections.&lt;/p&gt;
+&lt;div id=&#34;collecting-the-cdc-papers-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Collecting the CDC Paper’s Data&lt;/h2&gt;
+&lt;p&gt;The first and most necessary step to replicate the CDC’s findings is to obtain data to fit their model. This exercise is also important because it shows if 1) their article is clear enough to successfully re-trace their steps and if 2) all the data is available to do so. The authors of the study have posted their mask and other county policy data online, which was easy to download and analyze. Unfortunately, some of their data, particularly testing and case data collected by Health and Human Services (HHS), is not available to the wider public. Given the new administration’s commitment to transparency, it really should be available publicly. Because I am writing a blog post and wanted data I could share, I chose instead to use open source repositories of case and test data, specifically the &lt;a href=&#34;https://github.com/nytimes/covid-19-data&#34;&gt;New York Times&lt;/a&gt; for county-level cases and the &lt;a href=&#34;https://github.com/COVID19Tracking/website&#34;&gt;COVID-19 Tracking Project&lt;/a&gt; for test data by state. Because I could not find testing at the county level, I approximated tests by county by multiplying that county’s share of state COVID-19 tests with that state’s daily testing total.&lt;/p&gt;
+&lt;p&gt;There were some ambiguities in interpreting the article’s instructions about the CDC’s county policy data. The policy restrictions, including stay-at-home orders, mask mandates, and restaurant and bar closures, have multiple categories, such as partial enforcement, and it was not clear if I should use all the categories or collapse them to binary indicators. This became an issue later in the model because some of the categories were collinear and the model dropped them, particularly bar closures. I am not sure for that reason if my use of the CDC’s data exactly matches theirs.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;replicating-the-cdcs-results&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Replicating the CDC’s Results&lt;/h2&gt;
+&lt;p&gt;Given these caveats about data collection, the model estimates I obtained using the same specification–two-way fixed effects for county and day–are broadly similar to their estimates, although the associations are weaker on average. I also used the same comparison periods they describe in the paper. For each county, I selected the first twenty days preceding the mask mandate implementation, and then fit separate models to five different post-mandate periods: 1-20 days following the mandate, 21-40 days, 41-60 days, 61-80 days, and 81-100 days. The ambiguity that surfaced while doing this occurred in counties with multiple periods of mask mandates: what if there weren’t twenty days prior to the second mask mandate? I included as many as were available, but its still important to note this ambiguity as&lt;/p&gt;
+&lt;p&gt;The plot below compares my estimates of the effect of mask mandates to theirs by the five different post-mandate time periods. The weaker associations in my estimates could simply be due to measurement error from using unofficial sources, so the smaller effects are not necessarily a huge concern (though it would be better if the CDC released all of the data they used). On the whole, I think this replication was at least partially successfulas the confidence intervals of the estimates overlap.&lt;/p&gt;
+&lt;p&gt;The following code replicating the CDC’s paper is quite long but is included for transparency’s sake. I used the &lt;code&gt;fixest&lt;/code&gt; package with R to fit linear models due to the scale of the data and the number of fixed effects (one for each county plus one for each day).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# estimate CDC model using lm
+# baseline = 1-20 days before implementation
+# models differentiated by number of days included post-implementation
+# note: no mention of whether this makes the panel imbalanced
+# a bit odd too if there are multiple times that county switches in and out of mask mandates
+d1 &amp;lt;-
+  filter(combined_data,
+         (n_day_before &amp;gt; 0 &amp;amp;
+            n_day_before &amp;lt; 21) |
+           (n_day_after &amp;gt; 0 &amp;amp;
+              n_day_after &amp;lt; 21)) %&amp;gt;% fixest::feols(
+                cases_diff_log ~ mask_status + test_prop + stay_status + rest_action + bar_order + ban_gather |
+                  fips + date,
+                data =
+                  .,
+                cluster =
+                  &amp;quot;FIPS_State&amp;quot;,
+                weights =
+                  ~ pop
+              )
+
+d2 &amp;lt;-
+  filter(combined_data,
+         (n_day_before &amp;gt; 0 &amp;amp;
+            n_day_before &amp;lt; 21) |
+           (n_day_after &amp;gt; 20 &amp;amp;
+              n_day_after &amp;lt; 41)) %&amp;gt;% fixest::feols(
+                cases_diff_log ~ mask_status + test_prop + stay_status + rest_action + bar_order + ban_gather |
+                  fips + date,
+                data =
+                  .,
+                cluster =
+                  &amp;quot;FIPS_State&amp;quot;,
+                weights =
+                  ~ pop
+              )
+
+d3 &amp;lt;-
+  filter(combined_data,
+         (n_day_before &amp;gt; 0 &amp;amp;
+            n_day_before &amp;lt; 21) |
+           (n_day_after &amp;gt; 40 &amp;amp;
+              n_day_after &amp;lt; 61)) %&amp;gt;% fixest::feols(
+                cases_diff_log ~ mask_status + test_prop + stay_status + rest_action + bar_order + ban_gather |
+                  fips + date,
+                data =
+                  .,
+                cluster =
+                  &amp;quot;FIPS_State&amp;quot;,
+                weights =
+                  ~ pop
+              )
+
+d4 &amp;lt;-
+  filter(combined_data,
+         (n_day_before &amp;gt; 0 &amp;amp;
+            n_day_before &amp;lt; 21) |
+           (n_day_after &amp;gt; 60 &amp;amp;
+              n_day_after &amp;lt; 81)) %&amp;gt;% fixest::feols(
+                cases_diff_log ~ mask_status + test_prop + stay_status + rest_action + bar_order + ban_gather |
+                  fips + date,
+                data =
+                  .,
+                cluster =
+                  &amp;quot;FIPS_State&amp;quot;,
+                weights =
+                  ~ pop
+              )
+
+d5 &amp;lt;-
+  filter(
+    combined_data,
+    (n_day_before &amp;gt; 0 &amp;amp;
+       n_day_before &amp;lt; 21) | (n_day_after &amp;gt; 80 &amp;amp; n_day_after &amp;lt; 101)
+  ) %&amp;gt;%
+  fixest::feols(
+    cases_diff_log ~ mask_status + test_prop + stay_status + rest_action + bar_order + ban_gather |
+      fips + date,
+    data = .,
+    cluster = &amp;quot;FIPS_State&amp;quot;,
+    weights =  ~ pop
+  )
+
+# combine data from all models together into a tibble
+
+all_coefs &amp;lt;- lapply(list(d1,d2,d3,d4,d5),function(d) slice(summary(d)$coeftable,1)) %&amp;gt;% 
+  bind_rows %&amp;gt;% 
+  mutate(Model=c(&amp;quot;1-20 Days&amp;quot;,
+                 &amp;quot;21-40 Days&amp;quot;,
+                 &amp;quot;41-60 Days&amp;quot;,
+                 &amp;quot;61-80 Days&amp;quot;,
+                 &amp;quot;81-100 Days&amp;quot;),
+         upb=Estimate + 1.96*`Std. Error`,
+         lb=Estimate - 1.96*`Std. Error`,
+         Type=&amp;quot;Replication&amp;quot;)
+
+# combine with original estimates
+
+all_coefs &amp;lt;- bind_rows(all_coefs,
+                       tibble(Estimate=c(-0.5,-1.1,-1.5,-1.7,-1.8),
+                              lb=c(-0.1,-0.6,-0.8,-0.9,-0.7),
+                              upb=c(-0.8,-1.6,-2.1,-2.6,-2.8),
+                              Model=c(&amp;quot;1-20 Days&amp;quot;,
+                 &amp;quot;21-40 Days&amp;quot;,
+                 &amp;quot;41-60 Days&amp;quot;,
+                 &amp;quot;61-80 Days&amp;quot;,
+                 &amp;quot;81-100 Days&amp;quot;),Type=&amp;quot;CDC&amp;quot;))
+
+all_coefs %&amp;gt;% 
+  ggplot(aes(x=Estimate,y=Model)) +
+  geom_errorbarh(aes(xmin=lb,xmax=upb,colour=Type),position=position_dodge(width=0.5)) +
+  geom_text(aes(label=round(Estimate,digits=2),group=Type),
+            position=position_dodge(width=0.5),
+            size=3,vjust=-.75) +
+  theme_tufte() +
+  geom_vline(xintercept=0,linetype=2) +
+  scale_colour_viridis_d() +
+  scale_x_continuous(labels=scales::percent_format(scale=1)) +
+  labs(y=&amp;quot;Comparison Period&amp;quot;,x=&amp;quot;Percentage Change in Daily COVID-19 Cases&amp;quot;) +
+  ggtitle(&amp;quot;Replication of CDC Mask Results with Open Source Data&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/cdc_fe_files/figure-html/cdc_model-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;issues-with-the-cdcs-analysis&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Issues with the CDC’s Analysis&lt;/h2&gt;
+&lt;p&gt;Given the reasonably successful replication, I now turn to some of the issues with the analysis. One peculiar choice they made was to subdivide their data into the different days following a mask mandate as the plot above shows. The reason for this choice, though they did not discuss it in their paper, is probably due to the difficulty in comparing COVID-19 case rates across counties. It is quite likely that counties will wait to adopt mask mandates until COVID-19 rates are very high, so the unconditional association between mask mandates and COVID-19 could end up being strongly positive. This issue can be seen in the plot below, where I show each county’s COVID-19 growth rate by day, and colour the lines by whether a mask mandate was enforced. As can be seen, the imposition of mask mandates begins later in the course of the pandemic around March and April as case rates pick up and the CDC issues mask-wearing guidance.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot the orders as line plots to show when the tend to be implemented
+
+combined_data %&amp;gt;% 
+  ggplot(aes(y=cases/pop,x=date)) +
+  geom_line(aes(colour=mask_status,group=fips),alpha=0.5) +
+  theme_tufte() +
+  scale_color_viridis_d() +
+  labs(x=&amp;quot;&amp;quot;,y=&amp;quot;Percent of County Infected with COVID-19&amp;quot;,
+       caption=&amp;quot;COVID-10 cases data from the New York Times and mask mandate data from the CDC.&amp;quot;) +
+  scale_y_continuous(labels=scales::percent) +
+  ggtitle(&amp;quot;County COVID-19 Infection Rates Over Time&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/cdc_fe_files/figure-html/plotorders-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The CDC tried to resolve this by restricting their sample to the twenty days preceding a mask mandate and one of the five categories mentioned before for twenty-day periods following the mask mandate. This is one approach, but not a particularly satisfying one. The day cutoffs are very arbitrary (why twenty-day intervals? Why only the previous twenty days before a mask mandate?). I think a much better approach, and one I show later, is to try to control for some of the differences that may lead to mask adoption, and to use all the sample data unless there is a very clear reason not to.&lt;/p&gt;
+&lt;p&gt;However, there is an even more significant concern, and that is the modeling approach itself. The CDC used a linear model with fixed effects for both days and counties, or what is commonly known as a “two-way” fixed effects model. This would be the equivalent of having a dummy/binary variable in the model for each county and day separately, or 3477 additional variables. This stunning number should give us pause: what is the point of adding thousands of variables to the model? The resulting linear model is so big that R’s default linear model function &lt;code&gt;lm&lt;/code&gt; could not estimate it, requiring me to use the &lt;code&gt;fixest&lt;/code&gt; package which is more memory efficient. What is happening to our interpretation of mask mandates by including so many extra variables?&lt;/p&gt;
+&lt;p&gt;I’ve written a previous blog post about the &lt;a href=&#34;http://www.robertkubinec.com/post/fixed_effects/&#34;&gt;two-way fixed effect model and panel data models in general&lt;/a&gt;, following on a &lt;a href=&#34;https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0231349&#34;&gt;paper I wrote with Jon Kropko on the topic&lt;/a&gt;, which I refer to the reader to a fuller answer to these questions. Our research and an increasing number of papers question whether the two-way fixed effects model does what people say it does, which is control for a wide array of possible omitted variables.&lt;/p&gt;
+&lt;p&gt;The problem is that fixed effects are &lt;em&gt;not&lt;/em&gt;, on their own, some magic formula to get rid of inferential problems. Including fixed effects can help isolate one of two dimensions in the data: 1) variation in COVID-19 growth rates within counties over time (what the plot above shows) &lt;strong&gt;or&lt;/strong&gt; 2) a cross-section of county growth rates for a given day. The first corresponds to including a dummy variable for each county, and the second including a dummy variable for each day.&lt;/p&gt;
+&lt;p&gt;In general, both of these comparisons are potentially interesting. Looking at growth rates within counties implies that we think COVID-19 growth rates following the introduction of mask mandates will fall. However, this comparison can be difficult because we know there are a lot of other factors that change over time within counties, such as people’s increasing awareness of the effectiveness of masks. Similarly, we would think that if mask mandates are effective, counties with mandates on a given day should have lower growth rates than counties without mandates (the cross-section). Of course, differences across counties can affect these comparisons, especially if there are reasons why some counties may want to adopt and enforce mask mandates more than others.&lt;/p&gt;
+&lt;p&gt;The CDC, though, included both kind of fixed effects, which makes it very hard to know what comparison they are trying to draw. In the blog post mentioned above, I show why this particular estimate is nearly impossible to understand. It would seem the CDC is to trying to address all possible inferential issues by including a cornucopia of fixed effects, but fixed effects only enable the researcher to draw comparisons, not remove all sources of bias. To deal with the possible factors that might affect our estimates, we need to think about including data that measures potential confounding variables, not just including as many fixed effects as possible and hoping for the best.&lt;/p&gt;
+&lt;p&gt;To illustrate this, I replicate the CDC’s analysis except that I compare a model with fixed effects for counties (within-country variation), a model with fixed effects for days (cross-sectional variation), and plot them next to the two-way fixed effects results:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bind_rows(all_coefs_within,
+          all_coefs_between,filter(all_coefs,Type==&amp;quot;Replication&amp;quot;)) %&amp;gt;% 
+  ggplot(aes(x=Estimate,y=Model)) +
+  geom_errorbarh(aes(xmin=lb,xmax=upb,colour=Type),position=position_dodge(width=.8)) +
+  geom_text(aes(label=round(Estimate,digits=2),group=Type),
+            position=position_dodge(width=.8),
+            size=2.5,vjust=-.75,fontface=&amp;quot;bold&amp;quot;) +
+  theme_tufte() +
+  geom_vline(xintercept=0,linetype=2) +
+  scale_colour_viridis_d() +
+  scale_x_continuous(labels=scales::percent_format(scale=1)) +
+  labs(y=&amp;quot;Comparison Period&amp;quot;,x=&amp;quot;Percentage Change in Daily COVID-19 Cases&amp;quot;) +
+  ggtitle(stringr::str_wrap(&amp;quot;Comparison of Mask Mandates Effects both Within-County Over-time and Daily Cross-sections&amp;quot;,width = 60))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/cdc_fe_files/figure-html/crosswithin-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As can be seen, the models with either fixed effects for days or counties tend to have larger and more negative estimates of the effect of mask mandates than do the two-way fixed effects models. This is of course puzzling, as if the two-way fixed effects models controls accounts for both sets of fixed effects, shouldn’t the estimate be somewhere between the two one-way models? That intuition is misleading and deeply flawed. The two-way fixed effects model combines variation in both dimensions in a way that is complex and highly non-linear, which means it could produce an estimate completely independent of both dimensions in the data. That is the reason why that estimate is hard to interpret, and frankly not the best choice for the CDC. I have no idea what the two-way estimates substantively mean–whether and to what extent they refer to variation within counties or variation across counties–and as a result I can’t also explain why they are lower than either considered separately.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-to-do-it-better&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;How to Do It Better&lt;/h2&gt;
+&lt;p&gt;To summarize the blog post so far, the CDC is trying to take seriously the fact that mask mandates were not randomly assigned to counties, and that the course of the pandemic is affecting counties in a variety of ways over time. However, their approach tries to use brute force modeling and arbitrary data subsetting. There must be a better way, you ask. Well, there is, if we are comfortable with trying first to draw relevant comparisons while acknowledging that in this situation, there probably is no way to easily remove all concerns about other factors that could affect or explain the results. However, we can still do better by addressing these inferential threats head on rather than try to sneak around them with hordes of dummy variables.&lt;/p&gt;
+&lt;p&gt;As mentioned earlier, there are two basic and much clearer options for panel data models: within-case county models and cross-section by day models. (Later on I will show some new work that offers other options, but we’ll stick with these for now). I chose to go with the cross-sectional models, which may be a bit surprising, but the reason has to do with available data. For the within-county over-time model, we should be concerned about rising awareness of masks and beliefs in their effectiveness. Unfortunately, there is very little over-time data on counties we can use. Most polling is only available at the state level at best. We have Google mobility data by day, but that is about it. If we are concerned that people become more compliant with mask mandates over time because they are becoming better informed about how masks help, there is no way to include data about those changing perceptions in the model.&lt;/p&gt;
+&lt;p&gt;By contrast, in the cross-sectional model we would need to be worried about a different issues: are there different reasons why some counties would adopt mask mandates in the first place? That is, when we compare counties with and without mask mandates, are there reasons why they adopt mask mandates &lt;em&gt;and&lt;/em&gt; see fewer infections? The answer is, of course there are. However, we &lt;em&gt;can&lt;/em&gt; measure these factors because they are constant over time. For my purposes, I collected three important control variables: county median income, the proportion foreign-born from the Census, and crucially, 2016 presidential vote totals for Donald J. Trump.&lt;/p&gt;
+&lt;p&gt;In my own work on the pandemic, which you can &lt;a href=&#34;https://osf.io/preprints/socarxiv/jp4wk/&#34;&gt;read more here&lt;/a&gt;, I show that Trump partisanship has a very strong relationshp to spread of the pandemic. In that paper I examine states, so I can look at within-state variation because I can measure changes in Trump approval ratings over time. Lacking that data for counties, though, we can still examine whether partisanship affects mask mandates–which we should expect. Counties that are more conservative are probably less likely to adopt mask mandates, and if they do adopt them, to comply with them, while the opposite probably holds true for more liberal areas. Adding in county-level income helps account for the resources a county might have to address the pandemic and also how many workers are exposed to the virus through their daily jobs as we know that higher-paid workers tended to work at home. The proportion of foreign-born is a proxy for travel patterns as foreign residents tend to live closer to areas with access to international travel, which was a cause of the early spread of COVID-19. By accounting for these factors, we can make more compelling comparisons between counties by controlling for the factors that might prompt some counties to be more likely to adopt mask mandates and to see greater levels of compliance.&lt;/p&gt;
+&lt;p&gt;In the code below, I include the CDC’s data with the additional control variables. I also interact mask mandate status with vote share to see if mask mandates do seem to be more effective in more liberal areas. While it would be nice to include a two-way fixed effects for comparison’s sake, the model could not estimate due to some collinearities between varibles (not clear why). Oddly enough, I could estimate such a model when using the smaller subsets of the data that the CDC did. It is really an odd duck.&lt;/p&gt;
+&lt;p&gt;Following is the code I used to estimate a model with additional controls and fixed effects for days:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;d1_part_between &amp;lt;- fixest::feols(
+                cases_diff_log ~ mask_status*vote_share + scale(test_prop) +   vote_share +prop_foreign + scale(median_income) + stay_status + rest_action + bar_order + ban_gather  |
+                  date,
+                data =
+                  combined_data,
+                cluster =
+                  &amp;quot;FIPS_State&amp;quot;,
+                weights =
+                  ~ pop
+              )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the plot below I show all of the results of the model ordered by how negative or positive their association is with COVID-19 spread. What is immediately apparent is a strong and very positive association between Trump vote share and COVID-19: more conservative areas tend to see more infections after controlling for other factors. Furthermore, removing restrictions on bars is strongly associated with more infections, though we don’t see similar associations for restaurants, which may be a comfort to non-bar restaurant owners and the precautions they’ve taken. Importantly, the interaction effect on Trump vote share and mask mandates is strongly positive, suggesting that mask mandates are less effective in conservative areas.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;d1_part_between$coeftable %&amp;gt;% 
+  mutate(Variables=row.names(d1_part_between$coeftable),
+         Variables=forcats::fct_recode(Variables,
+  &amp;quot;Ban on &amp;gt;10 Gatherings&amp;quot; = &amp;quot;ban_gather&amp;quot;,
+  &amp;quot;Bars Curbside Only&amp;quot; = &amp;quot;bar_orderCurbside/delivery only&amp;quot;,
+  &amp;quot;No Bar Restrictions&amp;quot; = &amp;quot;bar_orderNo restriction found&amp;quot;,
+  &amp;quot;Bars Open with Limitations&amp;quot; = &amp;quot;bar_orderOpen with limitations&amp;quot;,
+  &amp;quot;Mask Mandate&amp;quot; = &amp;quot;mask_statusPublic Mask Mandate&amp;quot;,
+  &amp;quot;Mask Mandate X Trump Vote&amp;quot; = &amp;quot;mask_statusPublic Mask Mandate:vote_share&amp;quot;,
+  &amp;quot;Median Income&amp;quot; = &amp;quot;scale(median_income)&amp;quot;,
+  &amp;quot;% Foreign&amp;quot; = &amp;quot;prop_foreign&amp;quot;,
+  &amp;quot;Restaurant Curbside Only&amp;quot; = &amp;quot;rest_actionCurbside/carryout/delivery only&amp;quot;,
+  &amp;quot;Restaurant Open with Precautions&amp;quot; = &amp;quot;rest_actionOpen with social distancing/reduced seating/enhanced sanitation&amp;quot;,
+  &amp;quot;Stay at Home Advisory&amp;quot; = &amp;quot;stay_statusAdvisory/Recommendation&amp;quot;,
+  &amp;quot;Stay at Home Mandatory&amp;quot; = &amp;quot;stay_statusMandatory - all people&amp;quot;,
+  &amp;quot;Stay at Home Certain Areas&amp;quot; = &amp;quot;stay_statusMandatory - all people in certain areas of state&amp;quot;,
+  &amp;quot;Stay at Home At-risk Certain Areas&amp;quot; = &amp;quot;stay_statusMandatory - at-risk in certain areas of state&amp;quot;,
+  &amp;quot;Stay at Home At Risk Only&amp;quot; = &amp;quot;stay_statusMandatory - at-risk people only&amp;quot;,
+  &amp;quot;Tests&amp;quot; = &amp;quot;scale(test_prop)&amp;quot;,
+  &amp;quot;Trump Vote&amp;quot; = &amp;quot;vote_share&amp;quot;
+)) %&amp;gt;% 
+  ggplot(aes(x=Estimate,y=reorder(stringr::str_wrap(Variables,width = 25),Estimate))) +
+  geom_errorbarh(aes(xmin=Estimate - 1.96*`Std. Error`,
+                     xmax=Estimate + 1.96*`Std. Error`)) +
+  geom_text(aes(label=round(Estimate,digits=2)),
+            size=2.5,vjust=-.75) +
+  theme_tufte() +
+  geom_vline(xintercept=0,linetype=2) +
+  scale_colour_viridis_d() +
+  scale_x_continuous(labels=scales::percent_format(scale=1)) +
+  labs(y=&amp;quot;Comparison Period&amp;quot;,x=&amp;quot;Percentage Change in Daily COVID-19 Cases&amp;quot;) +
+  ggtitle(stringr::str_wrap(&amp;quot;Trump Vote Share Interaction with Mask Mandates&amp;quot;,width = 60))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/cdc_fe_files/figure-html/plotpartisan-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;To better understand the relationship between vote share and mask mandates, I plot the sample-average marginal effects for mask mandates below. These estimates show what effect the mask mandate seemed to have across counties when we vary vote share for Donald Trump from the lowest observed value of 4.1% voting for Trump to the maximum value of 96% voting for Trump:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# use Leeper&amp;#39;s method for calculating marginal effects
+# ignore uncertainty as that would require bootstrapping/jackknifing
+
+eps &amp;lt;- 1e-7
+setstep &amp;lt;- function(x) {
+  x + (max(abs(x), 1, na.rm = TRUE) * sqrt(eps)) - x
+}
+
+# loop over full range of vote shares
+
+combined_filter &amp;lt;- ungroup(combined_data) %&amp;gt;%
+  select(
+    date,
+    mask_status,
+    test_prop,
+    vote_share,
+    prop_foreign,
+    median_income,
+    stay_status,
+    rest_action,
+    bar_order,
+    ban_gather
+  ) %&amp;gt;%
+  mutate(test_prop = scale(test_prop),
+         median_income = scale(median_income)) %&amp;gt;%
+  filter(complete.cases(.))
+
+over_vote &amp;lt;- parallel::mclapply(seq(
+  min(combined_filter$vote_share),
+  max(combined_filter$vote_share),
+  length.out = 100
+),
+function(v) {
+  this_data &amp;lt;- rbind(
+    mutate(
+      combined_filter,
+      vote_share = v,
+      mask_status = &amp;quot;No Public Mask Mandate&amp;quot;
+    ),
+    mutate(
+      combined_filter,
+      vote_share = v,
+      mask_status = &amp;quot;Public Mask Mandate&amp;quot;
+    )
+  )
+  
+  # get predictions and take average difference
+  
+  y_hat &amp;lt;-
+    predict(d1_part_between, newdata = this_data)
+  
+  ld &amp;lt;- nrow(combined_filter)
+  
+  # marginal effect = E[y_hat under treatment - y_hat under
+  # control] conditional on vote_share = v
+  
+  marg_eff &amp;lt;-
+    mean(y_hat[(ld + 1):(2 * ld)] - y_hat[1:ld])
+         
+         tibble(`Marginal Effect` = marg_eff,
+                `Vote Share` = v)
+         
+         
+}, mc.cores = parallel::detectCores()) %&amp;gt;% bind_rows
+  
+over_vote %&amp;gt;% 
+  ggplot(aes(y=`Marginal Effect`,
+             x=`Vote Share`)) +
+  geom_line(linetype=2) +
+  scale_y_continuous(labels=scales::percent_format(scale=1)) +
+  scale_x_continuous(labels=scales::percent) + 
+  theme_tufte() +
+  labs(y=&amp;quot;Change in Growth Rates&amp;quot;,
+       x=&amp;quot;Trump 2016 Vote Share&amp;quot;) +
+  ggtitle(&amp;quot;Marginal Effect of Mask Mandates on COVID-19 Growth Rates&amp;quot;,
+          subtitle = &amp;quot;Conditional on 2016 County-level Trump Vote Share&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/cdc_fe_files/figure-html/predictmask-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Unfortunately, I don’t have uncertainty for the plot as that would require a lot more work given the fixed effects. However, the relationship is quite strong and clear: mask mandates are most effective in counties that did not vote for Trump and least effective in counties that voted the most for Trump. In those counties, mask mandates are almost ineffective at preventing COVID-19. As a result, it’s clear that the CDC &lt;em&gt;should&lt;/em&gt; have included partisanship in their model in some way.&lt;/p&gt;
+&lt;p&gt;Again, this model is imperfect: there are certainly other factors we might want to include in the model, and there is always the chance that there is some other part of the picture we are missing. Such, however, is life with observational data. We can still learn from these comparisons &lt;a href=&#34;https://osf.io/preprints/socarxiv/a492b/&#34;&gt;provided we are appropriately skeptical&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In addition, we could consider using some newer, more nuanced methods. I turn to these next.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;another-way-multiple-period-diff-in-diff&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Another Way: Multiple Period Diff-in-Diff&lt;/h2&gt;
+&lt;p&gt;Recent research on panel data models has been promoting the use of what is called multi-period difference-in-difference. Difference-in-difference modeling has a big fan base because it seems to draw a compelling and possibly causally identified comparison between units observed at two time periods, pre and post-treatment. Curiously, though few notice it, the comparisons are actually of two &lt;em&gt;cross-sections&lt;/em&gt; over time, and so is substantively similar to the cross-sectional model I ran earlier.&lt;/p&gt;
+&lt;p&gt;However, when there are more than two time periods, or when units are treated at different times, then the simple difference-in-difference model doesn’t apply. There issues are present in spades in the CDC’s analysis: many counties adopted mask mandates at different times and for different lengths of time. The CDC tried to restrict their sample to specific days, to avoid this, but because counties adopted mask mandates on different dates, they inevitably end up comparing different periods as well.&lt;/p&gt;
+&lt;p&gt;There is increasing research on how best to make a difference-in-difference like comparison in more complicated situations. In this section I use the work of &lt;a href=&#34;https://www.sciencedirect.com/science/article/pii/S0304407620303948&#34;&gt;Callaway and Sant’Anna&lt;/a&gt;, which has a compelling take on this question. Using their approach, we first assign counties to the same group for comparison if they adopted a mask mandate on the same day. In that way, we might think that some of the over-time issues I mentioned earlier will not matter as much. Second, we can be more up front about what we use as the reference group, either counties that on that day did not have a mask mandate or counties which never imposed a mask mandate. For our purposes, I’ll adopt the former approach given that many counties had a mask mandate at some point. As if that weren’t enough, we can even include what they call anticipation effects, which would occur if people started to change their behavior &lt;em&gt;before&lt;/em&gt; the mask mandate was implemented.&lt;/p&gt;
+&lt;p&gt;In the code below I fit their model to the CDC data with an allowance for anticipation of up to 3 days. The resulting model ends up being gigantic as the 3,000 plus counties are assigned to one of a possible 200+ groups given the number of days. The model also complained that some of our groups were consequently too small, i.e., only a few counties adopted a mask mandate on that particular day. Furthermore, I only include the additional control variables like vote share, not the CDC’s policy data as it is likely to be problematic to include it when the groups are so small. As is always the case, this model is not a panacea for our concerns due to these issues, but we can still learn quite a bit from it.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# takes about 30 minutes to estimate
+
+if(run_did) {
+  
+  did_est &amp;lt;- combined_data %&amp;gt;%  
+  ungroup %&amp;gt;% 
+  select(cases_diff_log,first_treat,fips_num,date_num,
+         vote_share,test_prop,prop_foreign,median_income,
+         stay_status,rest_action,bar_order,ban_gather) %&amp;gt;% 
+  filter(complete.cases(.)) %&amp;gt;% 
+  att_gt(yname=&amp;quot;cases_diff_log&amp;quot;,
+                          gname=&amp;quot;first_treat&amp;quot;,
+                          idname=&amp;quot;fips_num&amp;quot;,
+                          tname=&amp;quot;date_num&amp;quot;,
+                          xformla=~vote_share + test_prop + prop_foreign + median_income,
+                          # xformla=~vote_share + test_prop  +prop_foreign + median_income + stay_status + rest_action + bar_order + ban_gather,
+                          control_group=&amp;quot;notyettreated&amp;quot;,
+                          anticipation=3,panel=TRUE,allow_unbalanced_panel = F,
+                          cores=4,weightsname = NULL,
+                          est_method=&amp;quot;reg&amp;quot;,
+                          data=.)
+  
+  saveRDS(did_est,&amp;quot;data/did_est.rds&amp;quot;)
+  
+} else {
+  
+  # File is too big to store on github, to download use this link:
+  # https://drive.google.com/file/d/18GhUFbcLbx4a27Y5LJ2Ov_Iexn0ws6mb/view?usp=sharing
+  
+  did_est &amp;lt;- readRDS(&amp;quot;data/did_est.rds&amp;quot;)
+  
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We then end up with separate estimates for mask mandate &lt;em&gt;for each of the 3,000+ groups&lt;/em&gt;. This is cool, though not particularly useful for us. What I like about Callaway and Sant’Anna’s work though is that they are more transparent about the different dimensions of panel data (even if they tend not use that terminology). Given the group-level estimates, they have a way of aggregating these to an effect of the mask mandate for each day of the sample. I show these in the plot below.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# we need to aggregate and plot these
+
+# some bug in the package requires this to be loaded
+library(DRDID)
+library(matrixStats)
+library(MatrixModels)
+
+ag_did &amp;lt;- aggte(did_est,type=&amp;quot;dynamic&amp;quot;)
+ag_overall &amp;lt;- aggte(did_est,type=&amp;quot;group&amp;quot;)
+
+ggdid(ag_did) + 
+  theme_tufte() +
+  theme(axis.ticks.x = element_blank()) +
+  scale_x_continuous(breaks=c(-200,-100,-50,-25,0,25,50,100,200)) +
+  geom_hline(yintercept=0,linetype=2) +
+  xlab(&amp;quot;Days Before/After Mask Mandate&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.robertkubinec.com/post/cdc_fe_files/figure-html/didplot-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This plot encapsulates a much more nuanced set of comparisons than those considered previously. At the same time, the uncertainty in the estimates means there is also only so much we can learn. It would appear that at earlier and later time periods, mask mandates were associated with more COVID-19, but its impossible to say for sure. One approach to deal with this could be to collapse the data to weeks and then estimate a model, which might pool the data somewhat to get more precise answers.&lt;/p&gt;
+&lt;p&gt;What we can also do with this model is combine the estimates into a single, overall effect. I show that in the table below.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tibble(`Average Treatment Effect for Treated`=ag_overall$overall.att,
+       `5% CI Lower`=ag_overall$overall.att - 1.96*ag_overall$overall.se,
+       `95% CI Upper`=ag_overall$overall.att + 1.96*ag_overall$overall.se) %&amp;gt;% 
+  knitr::kable(digits=2) %&amp;gt;% 
+  kableExtra::kable_styling()&lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table&#34; style=&#34;margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Average Treatment Effect for Treated
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+5% CI Lower
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+95% CI Upper
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+-0.33
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+-0.94
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.28
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This table shows that it is most likely there is a negative association for mask mandates with COVID-19: hurray! Unfortunately, the estimate is fairly imprecise and it could also be associated with increased disease spread. As is so often the case, data analysis does not always produce definitive answers. However, I believe it is most important to be open about what we know and what we don’t know, which is why I spent the time to write this post. On the whole, the evidence suggests a negative association between mask mandates and COVID-19 spread, but we need to do a better job collecting additional data to allow us to do informed comparisons at the county level.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Linking to RBloggers</title>

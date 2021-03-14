@@ -1,0 +1,1500 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Robert Kubinec">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="While perusing the news, I read eagerly about the CDC’s recent study examining associations between county-level mask mandates and COVID-19 growth rates. This study has already been the subject of angry retorts from the restaurant industry due to the CDC’s claim that restaurant closures reduced COVID-19 spread.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="http://www.robertkubinec.com/post/cdc_fe/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67302886-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-67302886-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="http://www.robertkubinec.com/post/cdc_fe/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@rmkubinec">
+  <meta property="twitter:creator" content="@rmkubinec">
+  
+  <meta property="og:site_name" content="Academic">
+  <meta property="og:url" content="http://www.robertkubinec.com/post/cdc_fe/">
+  <meta property="og:title" content="About the CDC&#39;s Face Mask Study | Academic">
+  <meta property="og:description" content="While perusing the news, I read eagerly about the CDC’s recent study examining associations between county-level mask mandates and COVID-19 growth rates. This study has already been the subject of angry retorts from the restaurant industry due to the CDC’s claim that restaurant closures reduced COVID-19 spread."><meta property="og:image" content="http://www.robertkubinec.com/img/headers/CDC_Fight_Flu_PSA.jpg">
+  <meta property="twitter:image" content="http://www.robertkubinec.com/img/headers/CDC_Fight_Flu_PSA.jpg"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2021-03-12T15:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-03-12T15:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://www.robertkubinec.com/post/cdc_fe/"
+  },
+  "headline": "About the CDC's Face Mask Study",
+  
+  "datePublished": "2021-03-12T15:00:00Z",
+  "dateModified": "2021-03-12T15:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Robert Kubinec"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Academic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://www.robertkubinec.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "While perusing the news, I read eagerly about the CDC’s recent study examining associations between county-level mask mandates and COVID-19 growth rates. This study has already been the subject of angry retorts from the restaurant industry due to the CDC’s claim that restaurant closures reduced COVID-19 spread."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>About the CDC&#39;s Face Mask Study | Academic</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Academic</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Academic</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+<div class="article-header">
+  
+  
+  <img src="/img/headers/CDC_Fight_Flu_PSA.jpg" class="article-banner" alt="">
+  
+
+  
+</div>
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>About the CDC&#39;s Face Mask Study</h1>
+
+  
+  <p class="page-subtitle">They used an inappropriate model and few control variables.</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Mar 12, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    22 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<p>While perusing the news, I read eagerly about the <a href="https://www.cdc.gov/mmwr/volumes/70/wr/mm7010e3.htm">CDC’s recent study examining associations between county-level mask mandates and COVID-19 growth rates</a>. This study has already been the subject of <a href="https://www.nytimes.com/2021/03/05/health/coronavirus-restaurant-dining-masks.html">angry retorts from the restaurant industry</a> due to the CDC’s claim that restaurant closures reduced COVID-19 spread. Looking at the underlying details in the study, though, revealed some concerns about the particular model they used, known as a two-way fixed effects model, and also an important factor they left out of the model entirely: political partisanship.</p>
+<p>To examine these deficiencies, I replicated their model from scratch and also employed different panel data models to provide clearer answers. In brief, the negative association between mask mandates and the spread of COVID-19 does hold up, but it appears to be highly conditional on partisanship. In addition, there are a lot of complexities when it comes to comparing counties, and I do not believe the CDC or anyone else has yet resolved all of them. So while I applaud the CDC for doing a lot of hard work on data collection, we still have a ways to go before we can fully understand how effective mask mandates were against COVID-19.</p>
+<p>In this post I first discuss my challenges replicating their analysis, and then I critique the choices they made in their paper. Later I put forward my own analysis to probe in more detail the role of mask mandates. I include the code I use to estimate models in this blog post to be transparent about how I did the re-analysis. If you are not familiar with R code, feel free to skip those sections.</p>
+<div id="collecting-the-cdc-papers-data" class="section level2">
+<h2>Collecting the CDC Paper’s Data</h2>
+<p>The first and most necessary step to replicate the CDC’s findings is to obtain data to fit their model. This exercise is also important because it shows if 1) their article is clear enough to successfully re-trace their steps and if 2) all the data is available to do so. The authors of the study have posted their mask and other county policy data online, which was easy to download and analyze. Unfortunately, some of their data, particularly testing and case data collected by Health and Human Services (HHS), is not available to the wider public. Given the new administration’s commitment to transparency, it really should be available publicly. Because I am writing a blog post and wanted data I could share, I chose instead to use open source repositories of case and test data, specifically the <a href="https://github.com/nytimes/covid-19-data">New York Times</a> for county-level cases and the <a href="https://github.com/COVID19Tracking/website">COVID-19 Tracking Project</a> for test data by state. Because I could not find testing at the county level, I approximated tests by county by multiplying that county’s share of state COVID-19 tests with that state’s daily testing total.</p>
+<p>There were some ambiguities in interpreting the article’s instructions about the CDC’s county policy data. The policy restrictions, including stay-at-home orders, mask mandates, and restaurant and bar closures, have multiple categories, such as partial enforcement, and it was not clear if I should use all the categories or collapse them to binary indicators. This became an issue later in the model because some of the categories were collinear and the model dropped them, particularly bar closures. I am not sure for that reason if my use of the CDC’s data exactly matches theirs.</p>
+</div>
+<div id="replicating-the-cdcs-results" class="section level2">
+<h2>Replicating the CDC’s Results</h2>
+<p>Given these caveats about data collection, the model estimates I obtained using the same specification–two-way fixed effects for county and day–are broadly similar to their estimates, although the associations are weaker on average. I also used the same comparison periods they describe in the paper. For each county, I selected the first twenty days preceding the mask mandate implementation, and then fit separate models to five different post-mandate periods: 1-20 days following the mandate, 21-40 days, 41-60 days, 61-80 days, and 81-100 days. The ambiguity that surfaced while doing this occurred in counties with multiple periods of mask mandates: what if there weren’t twenty days prior to the second mask mandate? I included as many as were available, but its still important to note this ambiguity as</p>
+<p>The plot below compares my estimates of the effect of mask mandates to theirs by the five different post-mandate time periods. The weaker associations in my estimates could simply be due to measurement error from using unofficial sources, so the smaller effects are not necessarily a huge concern (though it would be better if the CDC released all of the data they used). On the whole, I think this replication was at least partially successfulas the confidence intervals of the estimates overlap.</p>
+<p>The following code replicating the CDC’s paper is quite long but is included for transparency’s sake. I used the <code>fixest</code> package with R to fit linear models due to the scale of the data and the number of fixed effects (one for each county plus one for each day).</p>
+<pre class="r"><code># estimate CDC model using lm
+# baseline = 1-20 days before implementation
+# models differentiated by number of days included post-implementation
+# note: no mention of whether this makes the panel imbalanced
+# a bit odd too if there are multiple times that county switches in and out of mask mandates
+d1 &lt;-
+  filter(combined_data,
+         (n_day_before &gt; 0 &amp;
+            n_day_before &lt; 21) |
+           (n_day_after &gt; 0 &amp;
+              n_day_after &lt; 21)) %&gt;% fixest::feols(
+                cases_diff_log ~ mask_status + test_prop + stay_status + rest_action + bar_order + ban_gather |
+                  fips + date,
+                data =
+                  .,
+                cluster =
+                  &quot;FIPS_State&quot;,
+                weights =
+                  ~ pop
+              )
+
+d2 &lt;-
+  filter(combined_data,
+         (n_day_before &gt; 0 &amp;
+            n_day_before &lt; 21) |
+           (n_day_after &gt; 20 &amp;
+              n_day_after &lt; 41)) %&gt;% fixest::feols(
+                cases_diff_log ~ mask_status + test_prop + stay_status + rest_action + bar_order + ban_gather |
+                  fips + date,
+                data =
+                  .,
+                cluster =
+                  &quot;FIPS_State&quot;,
+                weights =
+                  ~ pop
+              )
+
+d3 &lt;-
+  filter(combined_data,
+         (n_day_before &gt; 0 &amp;
+            n_day_before &lt; 21) |
+           (n_day_after &gt; 40 &amp;
+              n_day_after &lt; 61)) %&gt;% fixest::feols(
+                cases_diff_log ~ mask_status + test_prop + stay_status + rest_action + bar_order + ban_gather |
+                  fips + date,
+                data =
+                  .,
+                cluster =
+                  &quot;FIPS_State&quot;,
+                weights =
+                  ~ pop
+              )
+
+d4 &lt;-
+  filter(combined_data,
+         (n_day_before &gt; 0 &amp;
+            n_day_before &lt; 21) |
+           (n_day_after &gt; 60 &amp;
+              n_day_after &lt; 81)) %&gt;% fixest::feols(
+                cases_diff_log ~ mask_status + test_prop + stay_status + rest_action + bar_order + ban_gather |
+                  fips + date,
+                data =
+                  .,
+                cluster =
+                  &quot;FIPS_State&quot;,
+                weights =
+                  ~ pop
+              )
+
+d5 &lt;-
+  filter(
+    combined_data,
+    (n_day_before &gt; 0 &amp;
+       n_day_before &lt; 21) | (n_day_after &gt; 80 &amp; n_day_after &lt; 101)
+  ) %&gt;%
+  fixest::feols(
+    cases_diff_log ~ mask_status + test_prop + stay_status + rest_action + bar_order + ban_gather |
+      fips + date,
+    data = .,
+    cluster = &quot;FIPS_State&quot;,
+    weights =  ~ pop
+  )
+
+# combine data from all models together into a tibble
+
+all_coefs &lt;- lapply(list(d1,d2,d3,d4,d5),function(d) slice(summary(d)$coeftable,1)) %&gt;% 
+  bind_rows %&gt;% 
+  mutate(Model=c(&quot;1-20 Days&quot;,
+                 &quot;21-40 Days&quot;,
+                 &quot;41-60 Days&quot;,
+                 &quot;61-80 Days&quot;,
+                 &quot;81-100 Days&quot;),
+         upb=Estimate + 1.96*`Std. Error`,
+         lb=Estimate - 1.96*`Std. Error`,
+         Type=&quot;Replication&quot;)
+
+# combine with original estimates
+
+all_coefs &lt;- bind_rows(all_coefs,
+                       tibble(Estimate=c(-0.5,-1.1,-1.5,-1.7,-1.8),
+                              lb=c(-0.1,-0.6,-0.8,-0.9,-0.7),
+                              upb=c(-0.8,-1.6,-2.1,-2.6,-2.8),
+                              Model=c(&quot;1-20 Days&quot;,
+                 &quot;21-40 Days&quot;,
+                 &quot;41-60 Days&quot;,
+                 &quot;61-80 Days&quot;,
+                 &quot;81-100 Days&quot;),Type=&quot;CDC&quot;))
+
+all_coefs %&gt;% 
+  ggplot(aes(x=Estimate,y=Model)) +
+  geom_errorbarh(aes(xmin=lb,xmax=upb,colour=Type),position=position_dodge(width=0.5)) +
+  geom_text(aes(label=round(Estimate,digits=2),group=Type),
+            position=position_dodge(width=0.5),
+            size=3,vjust=-.75) +
+  theme_tufte() +
+  geom_vline(xintercept=0,linetype=2) +
+  scale_colour_viridis_d() +
+  scale_x_continuous(labels=scales::percent_format(scale=1)) +
+  labs(y=&quot;Comparison Period&quot;,x=&quot;Percentage Change in Daily COVID-19 Cases&quot;) +
+  ggtitle(&quot;Replication of CDC Mask Results with Open Source Data&quot;)</code></pre>
+<p><img src="/post/cdc_fe_files/figure-html/cdc_model-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="issues-with-the-cdcs-analysis" class="section level2">
+<h2>Issues with the CDC’s Analysis</h2>
+<p>Given the reasonably successful replication, I now turn to some of the issues with the analysis. One peculiar choice they made was to subdivide their data into the different days following a mask mandate as the plot above shows. The reason for this choice, though they did not discuss it in their paper, is probably due to the difficulty in comparing COVID-19 case rates across counties. It is quite likely that counties will wait to adopt mask mandates until COVID-19 rates are very high, so the unconditional association between mask mandates and COVID-19 could end up being strongly positive. This issue can be seen in the plot below, where I show each county’s COVID-19 growth rate by day, and colour the lines by whether a mask mandate was enforced. As can be seen, the imposition of mask mandates begins later in the course of the pandemic around March and April as case rates pick up and the CDC issues mask-wearing guidance.</p>
+<pre class="r"><code># plot the orders as line plots to show when the tend to be implemented
+
+combined_data %&gt;% 
+  ggplot(aes(y=cases/pop,x=date)) +
+  geom_line(aes(colour=mask_status,group=fips),alpha=0.5) +
+  theme_tufte() +
+  scale_color_viridis_d() +
+  labs(x=&quot;&quot;,y=&quot;Percent of County Infected with COVID-19&quot;,
+       caption=&quot;COVID-10 cases data from the New York Times and mask mandate data from the CDC.&quot;) +
+  scale_y_continuous(labels=scales::percent) +
+  ggtitle(&quot;County COVID-19 Infection Rates Over Time&quot;)</code></pre>
+<p><img src="/post/cdc_fe_files/figure-html/plotorders-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The CDC tried to resolve this by restricting their sample to the twenty days preceding a mask mandate and one of the five categories mentioned before for twenty-day periods following the mask mandate. This is one approach, but not a particularly satisfying one. The day cutoffs are very arbitrary (why twenty-day intervals? Why only the previous twenty days before a mask mandate?). I think a much better approach, and one I show later, is to try to control for some of the differences that may lead to mask adoption, and to use all the sample data unless there is a very clear reason not to.</p>
+<p>However, there is an even more significant concern, and that is the modeling approach itself. The CDC used a linear model with fixed effects for both days and counties, or what is commonly known as a “two-way” fixed effects model. This would be the equivalent of having a dummy/binary variable in the model for each county and day separately, or 3477 additional variables. This stunning number should give us pause: what is the point of adding thousands of variables to the model? The resulting linear model is so big that R’s default linear model function <code>lm</code> could not estimate it, requiring me to use the <code>fixest</code> package which is more memory efficient. What is happening to our interpretation of mask mandates by including so many extra variables?</p>
+<p>I’ve written a previous blog post about the <a href="http://www.robertkubinec.com/post/fixed_effects/">two-way fixed effect model and panel data models in general</a>, following on a <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0231349">paper I wrote with Jon Kropko on the topic</a>, which I refer to the reader to a fuller answer to these questions. Our research and an increasing number of papers question whether the two-way fixed effects model does what people say it does, which is control for a wide array of possible omitted variables.</p>
+<p>The problem is that fixed effects are <em>not</em>, on their own, some magic formula to get rid of inferential problems. Including fixed effects can help isolate one of two dimensions in the data: 1) variation in COVID-19 growth rates within counties over time (what the plot above shows) <strong>or</strong> 2) a cross-section of county growth rates for a given day. The first corresponds to including a dummy variable for each county, and the second including a dummy variable for each day.</p>
+<p>In general, both of these comparisons are potentially interesting. Looking at growth rates within counties implies that we think COVID-19 growth rates following the introduction of mask mandates will fall. However, this comparison can be difficult because we know there are a lot of other factors that change over time within counties, such as people’s increasing awareness of the effectiveness of masks. Similarly, we would think that if mask mandates are effective, counties with mandates on a given day should have lower growth rates than counties without mandates (the cross-section). Of course, differences across counties can affect these comparisons, especially if there are reasons why some counties may want to adopt and enforce mask mandates more than others.</p>
+<p>The CDC, though, included both kind of fixed effects, which makes it very hard to know what comparison they are trying to draw. In the blog post mentioned above, I show why this particular estimate is nearly impossible to understand. It would seem the CDC is to trying to address all possible inferential issues by including a cornucopia of fixed effects, but fixed effects only enable the researcher to draw comparisons, not remove all sources of bias. To deal with the possible factors that might affect our estimates, we need to think about including data that measures potential confounding variables, not just including as many fixed effects as possible and hoping for the best.</p>
+<p>To illustrate this, I replicate the CDC’s analysis except that I compare a model with fixed effects for counties (within-country variation), a model with fixed effects for days (cross-sectional variation), and plot them next to the two-way fixed effects results:</p>
+<pre class="r"><code>bind_rows(all_coefs_within,
+          all_coefs_between,filter(all_coefs,Type==&quot;Replication&quot;)) %&gt;% 
+  ggplot(aes(x=Estimate,y=Model)) +
+  geom_errorbarh(aes(xmin=lb,xmax=upb,colour=Type),position=position_dodge(width=.8)) +
+  geom_text(aes(label=round(Estimate,digits=2),group=Type),
+            position=position_dodge(width=.8),
+            size=2.5,vjust=-.75,fontface=&quot;bold&quot;) +
+  theme_tufte() +
+  geom_vline(xintercept=0,linetype=2) +
+  scale_colour_viridis_d() +
+  scale_x_continuous(labels=scales::percent_format(scale=1)) +
+  labs(y=&quot;Comparison Period&quot;,x=&quot;Percentage Change in Daily COVID-19 Cases&quot;) +
+  ggtitle(stringr::str_wrap(&quot;Comparison of Mask Mandates Effects both Within-County Over-time and Daily Cross-sections&quot;,width = 60))</code></pre>
+<p><img src="/post/cdc_fe_files/figure-html/crosswithin-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>As can be seen, the models with either fixed effects for days or counties tend to have larger and more negative estimates of the effect of mask mandates than do the two-way fixed effects models. This is of course puzzling, as if the two-way fixed effects models controls accounts for both sets of fixed effects, shouldn’t the estimate be somewhere between the two one-way models? That intuition is misleading and deeply flawed. The two-way fixed effects model combines variation in both dimensions in a way that is complex and highly non-linear, which means it could produce an estimate completely independent of both dimensions in the data. That is the reason why that estimate is hard to interpret, and frankly not the best choice for the CDC. I have no idea what the two-way estimates substantively mean–whether and to what extent they refer to variation within counties or variation across counties–and as a result I can’t also explain why they are lower than either considered separately.</p>
+</div>
+<div id="how-to-do-it-better" class="section level2">
+<h2>How to Do It Better</h2>
+<p>To summarize the blog post so far, the CDC is trying to take seriously the fact that mask mandates were not randomly assigned to counties, and that the course of the pandemic is affecting counties in a variety of ways over time. However, their approach tries to use brute force modeling and arbitrary data subsetting. There must be a better way, you ask. Well, there is, if we are comfortable with trying first to draw relevant comparisons while acknowledging that in this situation, there probably is no way to easily remove all concerns about other factors that could affect or explain the results. However, we can still do better by addressing these inferential threats head on rather than try to sneak around them with hordes of dummy variables.</p>
+<p>As mentioned earlier, there are two basic and much clearer options for panel data models: within-case county models and cross-section by day models. (Later on I will show some new work that offers other options, but we’ll stick with these for now). I chose to go with the cross-sectional models, which may be a bit surprising, but the reason has to do with available data. For the within-county over-time model, we should be concerned about rising awareness of masks and beliefs in their effectiveness. Unfortunately, there is very little over-time data on counties we can use. Most polling is only available at the state level at best. We have Google mobility data by day, but that is about it. If we are concerned that people become more compliant with mask mandates over time because they are becoming better informed about how masks help, there is no way to include data about those changing perceptions in the model.</p>
+<p>By contrast, in the cross-sectional model we would need to be worried about a different issues: are there different reasons why some counties would adopt mask mandates in the first place? That is, when we compare counties with and without mask mandates, are there reasons why they adopt mask mandates <em>and</em> see fewer infections? The answer is, of course there are. However, we <em>can</em> measure these factors because they are constant over time. For my purposes, I collected three important control variables: county median income, the proportion foreign-born from the Census, and crucially, 2016 presidential vote totals for Donald J. Trump.</p>
+<p>In my own work on the pandemic, which you can <a href="https://osf.io/preprints/socarxiv/jp4wk/">read more here</a>, I show that Trump partisanship has a very strong relationshp to spread of the pandemic. In that paper I examine states, so I can look at within-state variation because I can measure changes in Trump approval ratings over time. Lacking that data for counties, though, we can still examine whether partisanship affects mask mandates–which we should expect. Counties that are more conservative are probably less likely to adopt mask mandates, and if they do adopt them, to comply with them, while the opposite probably holds true for more liberal areas. Adding in county-level income helps account for the resources a county might have to address the pandemic and also how many workers are exposed to the virus through their daily jobs as we know that higher-paid workers tended to work at home. The proportion of foreign-born is a proxy for travel patterns as foreign residents tend to live closer to areas with access to international travel, which was a cause of the early spread of COVID-19. By accounting for these factors, we can make more compelling comparisons between counties by controlling for the factors that might prompt some counties to be more likely to adopt mask mandates and to see greater levels of compliance.</p>
+<p>In the code below, I include the CDC’s data with the additional control variables. I also interact mask mandate status with vote share to see if mask mandates do seem to be more effective in more liberal areas. While it would be nice to include a two-way fixed effects for comparison’s sake, the model could not estimate due to some collinearities between varibles (not clear why). Oddly enough, I could estimate such a model when using the smaller subsets of the data that the CDC did. It is really an odd duck.</p>
+<p>Following is the code I used to estimate a model with additional controls and fixed effects for days:</p>
+<pre class="r"><code>d1_part_between &lt;- fixest::feols(
+                cases_diff_log ~ mask_status*vote_share + scale(test_prop) +   vote_share +prop_foreign + scale(median_income) + stay_status + rest_action + bar_order + ban_gather  |
+                  date,
+                data =
+                  combined_data,
+                cluster =
+                  &quot;FIPS_State&quot;,
+                weights =
+                  ~ pop
+              )</code></pre>
+<p>In the plot below I show all of the results of the model ordered by how negative or positive their association is with COVID-19 spread. What is immediately apparent is a strong and very positive association between Trump vote share and COVID-19: more conservative areas tend to see more infections after controlling for other factors. Furthermore, removing restrictions on bars is strongly associated with more infections, though we don’t see similar associations for restaurants, which may be a comfort to non-bar restaurant owners and the precautions they’ve taken. Importantly, the interaction effect on Trump vote share and mask mandates is strongly positive, suggesting that mask mandates are less effective in conservative areas.</p>
+<pre class="r"><code>d1_part_between$coeftable %&gt;% 
+  mutate(Variables=row.names(d1_part_between$coeftable),
+         Variables=forcats::fct_recode(Variables,
+  &quot;Ban on &gt;10 Gatherings&quot; = &quot;ban_gather&quot;,
+  &quot;Bars Curbside Only&quot; = &quot;bar_orderCurbside/delivery only&quot;,
+  &quot;No Bar Restrictions&quot; = &quot;bar_orderNo restriction found&quot;,
+  &quot;Bars Open with Limitations&quot; = &quot;bar_orderOpen with limitations&quot;,
+  &quot;Mask Mandate&quot; = &quot;mask_statusPublic Mask Mandate&quot;,
+  &quot;Mask Mandate X Trump Vote&quot; = &quot;mask_statusPublic Mask Mandate:vote_share&quot;,
+  &quot;Median Income&quot; = &quot;scale(median_income)&quot;,
+  &quot;% Foreign&quot; = &quot;prop_foreign&quot;,
+  &quot;Restaurant Curbside Only&quot; = &quot;rest_actionCurbside/carryout/delivery only&quot;,
+  &quot;Restaurant Open with Precautions&quot; = &quot;rest_actionOpen with social distancing/reduced seating/enhanced sanitation&quot;,
+  &quot;Stay at Home Advisory&quot; = &quot;stay_statusAdvisory/Recommendation&quot;,
+  &quot;Stay at Home Mandatory&quot; = &quot;stay_statusMandatory - all people&quot;,
+  &quot;Stay at Home Certain Areas&quot; = &quot;stay_statusMandatory - all people in certain areas of state&quot;,
+  &quot;Stay at Home At-risk Certain Areas&quot; = &quot;stay_statusMandatory - at-risk in certain areas of state&quot;,
+  &quot;Stay at Home At Risk Only&quot; = &quot;stay_statusMandatory - at-risk people only&quot;,
+  &quot;Tests&quot; = &quot;scale(test_prop)&quot;,
+  &quot;Trump Vote&quot; = &quot;vote_share&quot;
+)) %&gt;% 
+  ggplot(aes(x=Estimate,y=reorder(stringr::str_wrap(Variables,width = 25),Estimate))) +
+  geom_errorbarh(aes(xmin=Estimate - 1.96*`Std. Error`,
+                     xmax=Estimate + 1.96*`Std. Error`)) +
+  geom_text(aes(label=round(Estimate,digits=2)),
+            size=2.5,vjust=-.75) +
+  theme_tufte() +
+  geom_vline(xintercept=0,linetype=2) +
+  scale_colour_viridis_d() +
+  scale_x_continuous(labels=scales::percent_format(scale=1)) +
+  labs(y=&quot;Comparison Period&quot;,x=&quot;Percentage Change in Daily COVID-19 Cases&quot;) +
+  ggtitle(stringr::str_wrap(&quot;Trump Vote Share Interaction with Mask Mandates&quot;,width = 60))</code></pre>
+<p><img src="/post/cdc_fe_files/figure-html/plotpartisan-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>To better understand the relationship between vote share and mask mandates, I plot the sample-average marginal effects for mask mandates below. These estimates show what effect the mask mandate seemed to have across counties when we vary vote share for Donald Trump from the lowest observed value of 4.1% voting for Trump to the maximum value of 96% voting for Trump:</p>
+<pre class="r"><code># use Leeper&#39;s method for calculating marginal effects
+# ignore uncertainty as that would require bootstrapping/jackknifing
+
+eps &lt;- 1e-7
+setstep &lt;- function(x) {
+  x + (max(abs(x), 1, na.rm = TRUE) * sqrt(eps)) - x
+}
+
+# loop over full range of vote shares
+
+combined_filter &lt;- ungroup(combined_data) %&gt;%
+  select(
+    date,
+    mask_status,
+    test_prop,
+    vote_share,
+    prop_foreign,
+    median_income,
+    stay_status,
+    rest_action,
+    bar_order,
+    ban_gather
+  ) %&gt;%
+  mutate(test_prop = scale(test_prop),
+         median_income = scale(median_income)) %&gt;%
+  filter(complete.cases(.))
+
+over_vote &lt;- parallel::mclapply(seq(
+  min(combined_filter$vote_share),
+  max(combined_filter$vote_share),
+  length.out = 100
+),
+function(v) {
+  this_data &lt;- rbind(
+    mutate(
+      combined_filter,
+      vote_share = v,
+      mask_status = &quot;No Public Mask Mandate&quot;
+    ),
+    mutate(
+      combined_filter,
+      vote_share = v,
+      mask_status = &quot;Public Mask Mandate&quot;
+    )
+  )
+  
+  # get predictions and take average difference
+  
+  y_hat &lt;-
+    predict(d1_part_between, newdata = this_data)
+  
+  ld &lt;- nrow(combined_filter)
+  
+  # marginal effect = E[y_hat under treatment - y_hat under
+  # control] conditional on vote_share = v
+  
+  marg_eff &lt;-
+    mean(y_hat[(ld + 1):(2 * ld)] - y_hat[1:ld])
+         
+         tibble(`Marginal Effect` = marg_eff,
+                `Vote Share` = v)
+         
+         
+}, mc.cores = parallel::detectCores()) %&gt;% bind_rows
+  
+over_vote %&gt;% 
+  ggplot(aes(y=`Marginal Effect`,
+             x=`Vote Share`)) +
+  geom_line(linetype=2) +
+  scale_y_continuous(labels=scales::percent_format(scale=1)) +
+  scale_x_continuous(labels=scales::percent) + 
+  theme_tufte() +
+  labs(y=&quot;Change in Growth Rates&quot;,
+       x=&quot;Trump 2016 Vote Share&quot;) +
+  ggtitle(&quot;Marginal Effect of Mask Mandates on COVID-19 Growth Rates&quot;,
+          subtitle = &quot;Conditional on 2016 County-level Trump Vote Share&quot;)</code></pre>
+<p><img src="/post/cdc_fe_files/figure-html/predictmask-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Unfortunately, I don’t have uncertainty for the plot as that would require a lot more work given the fixed effects. However, the relationship is quite strong and clear: mask mandates are most effective in counties that did not vote for Trump and least effective in counties that voted the most for Trump. In those counties, mask mandates are almost ineffective at preventing COVID-19. As a result, it’s clear that the CDC <em>should</em> have included partisanship in their model in some way.</p>
+<p>Again, this model is imperfect: there are certainly other factors we might want to include in the model, and there is always the chance that there is some other part of the picture we are missing. Such, however, is life with observational data. We can still learn from these comparisons <a href="https://osf.io/preprints/socarxiv/a492b/">provided we are appropriately skeptical</a>.</p>
+<p>In addition, we could consider using some newer, more nuanced methods. I turn to these next.</p>
+</div>
+<div id="another-way-multiple-period-diff-in-diff" class="section level2">
+<h2>Another Way: Multiple Period Diff-in-Diff</h2>
+<p>Recent research on panel data models has been promoting the use of what is called multi-period difference-in-difference. Difference-in-difference modeling has a big fan base because it seems to draw a compelling and possibly causally identified comparison between units observed at two time periods, pre and post-treatment. Curiously, though few notice it, the comparisons are actually of two <em>cross-sections</em> over time, and so is substantively similar to the cross-sectional model I ran earlier.</p>
+<p>However, when there are more than two time periods, or when units are treated at different times, then the simple difference-in-difference model doesn’t apply. There issues are present in spades in the CDC’s analysis: many counties adopted mask mandates at different times and for different lengths of time. The CDC tried to restrict their sample to specific days, to avoid this, but because counties adopted mask mandates on different dates, they inevitably end up comparing different periods as well.</p>
+<p>There is increasing research on how best to make a difference-in-difference like comparison in more complicated situations. In this section I use the work of <a href="https://www.sciencedirect.com/science/article/pii/S0304407620303948">Callaway and Sant’Anna</a>, which has a compelling take on this question. Using their approach, we first assign counties to the same group for comparison if they adopted a mask mandate on the same day. In that way, we might think that some of the over-time issues I mentioned earlier will not matter as much. Second, we can be more up front about what we use as the reference group, either counties that on that day did not have a mask mandate or counties which never imposed a mask mandate. For our purposes, I’ll adopt the former approach given that many counties had a mask mandate at some point. As if that weren’t enough, we can even include what they call anticipation effects, which would occur if people started to change their behavior <em>before</em> the mask mandate was implemented.</p>
+<p>In the code below I fit their model to the CDC data with an allowance for anticipation of up to 3 days. The resulting model ends up being gigantic as the 3,000 plus counties are assigned to one of a possible 200+ groups given the number of days. The model also complained that some of our groups were consequently too small, i.e., only a few counties adopted a mask mandate on that particular day. Furthermore, I only include the additional control variables like vote share, not the CDC’s policy data as it is likely to be problematic to include it when the groups are so small. As is always the case, this model is not a panacea for our concerns due to these issues, but we can still learn quite a bit from it.</p>
+<pre class="r"><code># takes about 30 minutes to estimate
+
+if(run_did) {
+  
+  did_est &lt;- combined_data %&gt;%  
+  ungroup %&gt;% 
+  select(cases_diff_log,first_treat,fips_num,date_num,
+         vote_share,test_prop,prop_foreign,median_income,
+         stay_status,rest_action,bar_order,ban_gather) %&gt;% 
+  filter(complete.cases(.)) %&gt;% 
+  att_gt(yname=&quot;cases_diff_log&quot;,
+                          gname=&quot;first_treat&quot;,
+                          idname=&quot;fips_num&quot;,
+                          tname=&quot;date_num&quot;,
+                          xformla=~vote_share + test_prop + prop_foreign + median_income,
+                          # xformla=~vote_share + test_prop  +prop_foreign + median_income + stay_status + rest_action + bar_order + ban_gather,
+                          control_group=&quot;notyettreated&quot;,
+                          anticipation=3,panel=TRUE,allow_unbalanced_panel = F,
+                          cores=4,weightsname = NULL,
+                          est_method=&quot;reg&quot;,
+                          data=.)
+  
+  saveRDS(did_est,&quot;data/did_est.rds&quot;)
+  
+} else {
+  
+  # File is too big to store on github, to download use this link:
+  # https://drive.google.com/file/d/18GhUFbcLbx4a27Y5LJ2Ov_Iexn0ws6mb/view?usp=sharing
+  
+  did_est &lt;- readRDS(&quot;data/did_est.rds&quot;)
+  
+}</code></pre>
+<p>We then end up with separate estimates for mask mandate <em>for each of the 3,000+ groups</em>. This is cool, though not particularly useful for us. What I like about Callaway and Sant’Anna’s work though is that they are more transparent about the different dimensions of panel data (even if they tend not use that terminology). Given the group-level estimates, they have a way of aggregating these to an effect of the mask mandate for each day of the sample. I show these in the plot below.</p>
+<pre class="r"><code># we need to aggregate and plot these
+
+# some bug in the package requires this to be loaded
+library(DRDID)
+library(matrixStats)
+library(MatrixModels)
+
+ag_did &lt;- aggte(did_est,type=&quot;dynamic&quot;)
+ag_overall &lt;- aggte(did_est,type=&quot;group&quot;)
+
+ggdid(ag_did) + 
+  theme_tufte() +
+  theme(axis.ticks.x = element_blank()) +
+  scale_x_continuous(breaks=c(-200,-100,-50,-25,0,25,50,100,200)) +
+  geom_hline(yintercept=0,linetype=2) +
+  xlab(&quot;Days Before/After Mask Mandate&quot;)</code></pre>
+<p><img src="/post/cdc_fe_files/figure-html/didplot-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>This plot encapsulates a much more nuanced set of comparisons than those considered previously. At the same time, the uncertainty in the estimates means there is also only so much we can learn. It would appear that at earlier and later time periods, mask mandates were associated with more COVID-19, but its impossible to say for sure. One approach to deal with this could be to collapse the data to weeks and then estimate a model, which might pool the data somewhat to get more precise answers.</p>
+<p>What we can also do with this model is combine the estimates into a single, overall effect. I show that in the table below.</p>
+<pre class="r"><code>tibble(`Average Treatment Effect for Treated`=ag_overall$overall.att,
+       `5% CI Lower`=ag_overall$overall.att - 1.96*ag_overall$overall.se,
+       `95% CI Upper`=ag_overall$overall.att + 1.96*ag_overall$overall.se) %&gt;% 
+  knitr::kable(digits=2) %&gt;% 
+  kableExtra::kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Average Treatment Effect for Treated
+</th>
+<th style="text-align:right;">
+5% CI Lower
+</th>
+<th style="text-align:right;">
+95% CI Upper
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+-0.33
+</td>
+<td style="text-align:right;">
+-0.94
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+</tr>
+</tbody>
+</table>
+<p>This table shows that it is most likely there is a negative association for mask mandates with COVID-19: hurray! Unfortunately, the estimate is fairly imprecise and it could also be associated with increased disease spread. As is so often the case, data analysis does not always produce definitive answers. However, I believe it is most important to be open about what we know and what we don’t know, which is why I spent the time to write this post. On the whole, the evidence suggests a negative association between mask mandates and COVID-19 spread, but we need to do a better job collecting additional data to allow us to do informed comparisons at the county level.</p>
+</div>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=http://www.robertkubinec.com/post/cdc_fe/&amp;text=About%20the%20CDC&amp;#39;s%20Face%20Mask%20Study" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=http://www.robertkubinec.com/post/cdc_fe/&amp;t=About%20the%20CDC&amp;#39;s%20Face%20Mask%20Study" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=About%20the%20CDC&amp;#39;s%20Face%20Mask%20Study&amp;body=http://www.robertkubinec.com/post/cdc_fe/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=http://www.robertkubinec.com/post/cdc_fe/&amp;title=About%20the%20CDC&amp;#39;s%20Face%20Mask%20Study" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=About%20the%20CDC&amp;#39;s%20Face%20Mask%20Study%20http://www.robertkubinec.com/post/cdc_fe/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=http://www.robertkubinec.com/post/cdc_fe/&amp;title=About%20the%20CDC&amp;#39;s%20Face%20Mask%20Study" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="/author/robert-kubinec/avatar_hudd5d7efb917a26e45c39c19ab8d853e6_36248_270x270_fill_q90_lanczos_center.jpg" alt="Robert Kubinec">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="http://www.robertkubinec.com/">Robert Kubinec</a></h5>
+        <h6 class="card-subtitle">Assistant Professor of Political Science</h6>
+        <p class="card-text">My research centers on political-economic issues such as corruption, economic development, and business-state relations in developing countries, and in particular the Middle East and North Africa. I am also involved in the development of Bayesian statistical models with Stan for hard-to-study subjects like corruption, polarization, and other latent social constructs.</p>
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/rmkubinec" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=1tI8usUAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/saudiwin" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/Robert_Kubinec_CV_6_23_2020.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2020 Robert Kubinec &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

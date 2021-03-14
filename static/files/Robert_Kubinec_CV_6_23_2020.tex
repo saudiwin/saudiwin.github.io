@@ -1,0 +1,171 @@
+%------------------------------------
+% Dario Taraborelli
+% Typesetting your academic CV in LaTeX
+%
+% URL: http://nitens.org/taraborelli/cvtex
+% DISCLAIMER: This template is provided for free and without any guarantee
+% that it will correctly compile on your system if you have a non-standard
+% configuration.
+% Some rights reserved: http://creativecommons.org/licenses/by-sa/3.0/
+%------------------------------------
+
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt, a4paper]{article}
+\usepackage{fontspec}
+
+
+% DOCUMENT LAYOUT
+\usepackage{geometry}
+\geometry{a4paper, textwidth=5.5in, textheight=8.5in, marginparsep=7pt, marginparwidth=.6in}
+\setlength\parindent{0in}
+
+% FONTS
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\defaultfontfeatures{Mapping=tex-text} % converts LaTeX specials (``quotes'' --- dashes etc.) to unicode
+\setromanfont [Ligatures={Common}, BoldFont={Gentium Basic Bold}, ItalicFont={Gentium Basic Italic}]{Gentium Basic}
+\setmonofont[Scale=0.8]{Monaco}
+% ---- CUSTOM AMPERSAND
+\newcommand{\amper}{{\fontspec[Scale=.95]{Gentium Basic Italic}\selectfont\itshape\&}}
+% ---- MARGIN YEARS
+\usepackage{marginnote}
+\newcommand{\years}[1]{\marginnote{\scriptsize #1}}
+\renewcommand*{\raggedleftmarginnote}{}
+\setlength{\marginparsep}{7pt}
+\reversemarginpar
+
+% HEADINGS
+\usepackage{sectsty}
+\usepackage[normalem]{ulem}
+\sectionfont{\rmfamily\mdseries\upshape\Large}
+\subsectionfont{\rmfamily\bfseries\upshape\normalsize}
+\subsubsectionfont{\rmfamily\mdseries\upshape\normalsize}
+
+% PDF SETUP
+% ---- FILL IN HERE THE DOC TITLE AND AUTHOR
+\usepackage[bookmarks, colorlinks, breaklinks, pdftitle={Robert Kubinec - vita},pdfauthor={Robert Kubinec}]{hyperref}
+\hypersetup{linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
+\usepackage{doi}
+
+% DOCUMENT
+\begin{document}
+{\LARGE Robert M. Kubinec}\\[1cm]
+New York University Abu Dhabi\\
+Abu Dhabi, United Arab Emirates\\[.2cm]
+Email: \href{mailto:rmk7@nyu.edu}{rmk7@nyu.edu}\\
+\textsc{url}: \href{http://www.robertkubinec.com}{www.robertkubinec.com}\\
+
+%%\hrule
+\section*{Current position}
+\noindent
+\years{2019-}\emph{Assistant Professor}, Social Sciences Division, New York University Abu Dhabi\\
+
+\section*{Previous positions}
+\noindent
+\years{2018-2019}\emph{Postdoctoral Research Scholar}, Niehaus Center for Globalization and Governance, Princeton University\\
+
+%\hrule
+\section*{Education}
+\noindent
+\years{2018}\textsc{PhD} in Foreign Affairs, University of Virginia\\
+\years{2010}\textsc{MA} in Middle East Studies, George Washington University\\
+\years{2008}\textsc{BA} in International Relations, Wheaton College
+
+\section*{Publications}
+
+\subsection*{Peer-Reviewed}
+
+\years{2020}Kubinec, Robert and Owen, John. ``When Groups Fall Apart: Identifying Transnational Polarization with Twitter from the Arab Uprisings." Forthcoming \textit{Political Analysis}. \\
+
+\years{2020}Cheng, Cindy, Barcelo, Joan, Hartnett, Allison, Kubinec, Robert and Messerschmidt, Luca. ``COVID-19 Government Response Event Dataset (CoronaNet v.1.0)." \textit{Nature Human Behavior}. \doi{10.1038/s41562-020-0909-7} \\
+
+\years{2020}Kropko, Jonathan and Kubinec, Robert. ``Why the Two-way Fixed Effects Model is Difficult to Interpret, and What to Do About It." \textit{PLOS One}. \doi{10.1371/journal.pone.0231349}
+
+\subsection*{Working Papers}
+\noindent
+
+\years{2018}Kubinec, Robert. ``Generalized Ideal Point Models for Time-Varying and Missing-Data Inference." \doi{10.31219/osf.io/8j2bt}
+\begin{itemize}
+	\item Presented at Polmeth 2017 and Polmeth 2019
+\end{itemize}
+\years{2017}Kubinec, Robert. ``Politically-Connected Firms and the Military-Clientelist Complex in North Africa." \doi{10.31235/osf.io/mrfcu}
+\begin{itemize}
+	\item Presented at APSA 2017
+\end{itemize}
+\years{2018}Kubinec, Robert and Grewal, Sharan. ``When National Unity Governments are neither National, United, nor Governments: The Case of Tunisia's Parliament." \doi{10.31235/osf.io/6z74r}
+\begin{itemize}
+	\item Presented at APSA 2018
+\end{itemize}
+\years{2018}Kubinec, Robert. ``Patrons or Clients? Measuring and Experimentally Evaluating Political Connections of Firms in Morocco and Jordan." \href{http://erf.org.eg/publications/patrons-or-clients-measuring-and-experimentally-evaluating-political-connections-of-firms-in-morocco-and-jordan/}{Working Paper available at the Economic Research Forum}.
+\begin{itemize}
+	\item Workshop on the Political Economy of State Business Relations and of Growth in the Middle East and North Africa at the Universite Paris-Dauphine 2018
+\end{itemize}
+
+\subsection*{Software}
+\years{2017-2019}Kubinec, Robert. \href{https://github.com/saudiwin/idealstan}{\texttt{idealstan}: An R  Package for Bayesian Ideal Point Modeling}. \href{https://cran.r-project.org/web/packages/idealstan/index.html}{CRAN link}\\
+\years{2017}Kubinec, Robert. \href{https://github.com/saudiwin/algoeval}{\texttt{algoeval}: An R Package for Evaluation of Machine-Learning Algorithm Performance.}
+
+\subsection*{Newspaper articles}
+\noindent
+\years{2017}Kubinec, Robert, (Aug. 13, 2017), ``How to Respond to Terrorism", \emph{The Daily Progress}\\
+\years{2016}Kubinec, Robert, (Dec. 19, 2016), ``How Foreign Aid Could Hurt Tunisia's Transition to Democracy", \emph{Washington Post}\\
+
+\section*{Reviewing}
+
+I have been a reviewer for \emph{Political Analysis}, \emph{The American Political Science Review}, \emph{The American Journal of Political Science}, \emph{Political Science Research and Methods}, \emph{PLOS One}, \emph{SAGE Open}, and \emph{Middle East Law and Governance}.\\
+
+
+%\hrule
+\section*{Grants and fellowships}
+
+\subsection*{External}
+\noindent
+\years{2019}Koch Foundation Grant for ``Online Survey Research on the U.S. - China Trade War" (\$10k)\\
+\years{2017-2018}Economic Research Forum, ``A Survey of Firm-Level Political Participation" (\$6k)\\
+\years{2017}Koch Foundation Dissertation Grant (\$5k)\\
+\years{2016}Project on Middle East Political Science Travel, Research \& Engagement Grant (\$3k)\\
+
+\subsection*{Internal}
+\noindent
+\years{2017}Quantitative Collaborative Bynum Grant\\
+\years{2015 - 2016}Quandt International Research Fund travel grant, University of Virginia\\
+\years{2015}Summer Research Grant, Graduate School for Arts and Sciences, University of Virginia\\
+\years{2014-2015}Developing Students for Leadership in Data-intensive Research and Innovation fellowship, Data Science Institute, University of Virginia\\
+\years{2014}Summer Foreign Language Fellowship, University of Virginia\\
+\years{2008-2010}Elliott School High Achievement Fellowship, George Washington University\\
+\years{2009}Banville Tuition Fellowship, George Washington University\\
+
+\section*{Invited Talks}
+\years{2017}Tunisia Country Team, Millennial Challenge Corporation, Washington DC\\
+
+% \section*{Field Research}
+%
+% \noindent
+% \years{2016}Interviews about the political role of businesspeople in Egypt and Tunisia.\\
+% \years{2015}Semi-structured interviews with Tunisian scholars, pundits and journalists\\
+% \years{2015}Focus groups on sharia law courts in Palestine with PI Prof. Deena Hurwitz\\
+% \years{2010}Structured interviews with Jordanian policymakers
+
+
+
+%%\hrule
+\section*{Professional Experience \& Consulting}
+\noindent
+\years{2017-2018}Acting Data Scientist, Unbias\\
+\years{2011-2013}Foreign Service Officer, U.S. Department of State\\
+\years{2010-2011}Data Mining Consultant, IBM Advanced Analytics \& Optimization
+
+
+
+%\vspace{1cm}
+\vfill{}
+%\hrulefill
+
+\begin{center}
+{\scriptsize  Last updated: \today\- •\- Typeset in \href{http://nitens.org/taraborelli/cvtex}{
+\fontspec{Times New Roman}\XeTeX }}
+\end{center}
+
+\end{document}
