@@ -1,6 +1,6 @@
 ---
-title: "About the CDC's Face Mask Study"
-subtitle: "They used an inappropriate model and few control variables."
+title: "The Good, the Bad and the Ugly in the CDC's Face Mask Study"
+subtitle: "They could have used more appropriate models and they should have accounted for political partisanship."
 author: "Robert Kubinec"
 date: "2021-03-12T15:00:00"
 output: blogdown::html_page
@@ -249,6 +249,9 @@ While perusing the news, I read eagerly about the [CDC's recent study examining 
 To examine these deficiencies, I replicated their model from scratch and also employed different panel data models to provide clearer answers. In brief, the negative association between mask mandates and the spread of COVID-19 does hold up, but it appears to be highly conditional on partisanship. In addition, there are a lot of complexities when it comes to comparing counties, and I do not believe the CDC or anyone else has yet resolved all of them. So while I applaud the CDC for doing a lot of hard work on data collection, we still have a ways to go before we can fully understand how effective mask mandates were against COVID-19.
 
 In this post I first discuss my challenges replicating their analysis, and then I critique the choices they made in their paper. Later I put forward my own analysis to probe in more detail the role of mask mandates. I include the code I use to estimate models in this blog post to be transparent about how I did the re-analysis. If you are not familiar with R code, feel free to skip those sections.
+
+
+If you would like access to the code and data I used to write this blog post, please use this [Github repository](https://github.com/saudiwin/cdcmask).
 
 ## Collecting the CDC Paper's Data
 
