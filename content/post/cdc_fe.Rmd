@@ -21,7 +21,6 @@ require(readr)
 require(tidycensus)
 require(lubridate)
 require(did)
-require(DRDID)
 #require(plm)
 
 set.seed(1062021)
@@ -847,6 +846,11 @@ We then end up with separate estimates for mask mandate *for each of the 3,000+ 
 
 ```{r didplot}
 # we need to aggregate and plot these
+
+# some bug in the package requires this to be loaded
+library(DRDID)
+library(matrixStats)
+library(MatrixModels)
 
 ag_did <- aggte(did_est,type="dynamic")
 ag_overall <- aggte(did_est,type="group")
