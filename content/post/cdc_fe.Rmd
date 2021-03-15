@@ -391,7 +391,7 @@ all_coefs %>%
   scale_colour_viridis_d() +
   coord_flip() +
   scale_y_continuous(labels=scales::percent_format(scale=1)) +
-  labs(y="Comparison Period",x="Percentage Change in Daily COVID-19 Cases") +
+  labs(x="Comparison Period",y="Percentage Change in Daily COVID-19 Cases") +
   ggtitle("Replication of CDC Mask Results with Open Source Data")
 
 ```
@@ -633,7 +633,7 @@ bind_rows(all_coefs_within,
   geom_hline(yintercept=0,linetype=2) +
   scale_y_continuous(labels=scales::percent_format(scale=1)) +
   coord_flip() +
-  labs(y="Comparison Period",x="Percentage Change in Daily COVID-19 Cases") +
+  labs(x="Comparison Period",y="Percentage Change in Daily COVID-19 Cases") +
   ggtitle(stringr::str_wrap("Comparison of Mask Mandates Effects both Within-County Over-time and Daily Cross-sections",width = 60))
 
 ```
@@ -648,9 +648,9 @@ As mentioned earlier, there are two basic and much clearer options for panel dat
 
 By contrast, in the cross-sectional model we would need to be worried about a different issues: are there different reasons why some counties would adopt mask mandates in the first place? That is, when we compare counties with and without mask mandates, are there reasons why they adopt mask mandates *and* see fewer infections? The answer is, of course there are. However, we *can* measure these factors because they are constant over time. For my purposes, I collected three important control variables: county median income, the proportion foreign-born from the Census, and crucially, 2016 presidential vote totals for Donald J. Trump.
 
-In my own work on the pandemic, which you can [read more here](https://osf.io/preprints/socarxiv/jp4wk/), I show that Trump partisanship has a very strong relationshp to spread of the pandemic. In that paper I examine states, so I can look at within-state variation because I can measure changes in Trump approval ratings over time. Lacking that data for counties, though, we can still examine whether partisanship affects mask mandates--which we should expect. Counties that are more conservative are probably less likely to adopt mask mandates, and if they do adopt them, to comply with them, while the opposite probably holds true for more liberal areas. Adding in county-level income helps account for the resources a county might have to address the pandemic and also how many workers are exposed to the virus through their daily jobs as we know that higher-paid workers tended to work at home. The proportion of foreign-born is a proxy for travel patterns as foreign residents tend to live closer to areas with access to international travel, which was a cause of the early spread of COVID-19. By accounting for these factors, we can make more compelling comparisons between counties by controlling for the factors that might prompt some counties to be more likely to adopt mask mandates and to see greater levels of compliance.
+In my own work on the pandemic, which you can [read more here](https://osf.io/preprints/socarxiv/jp4wk/), I show that Trump partisanship has a very strong relationship to spread of the pandemic. In that paper I examine states, so I can look at within-state variation because I can measure changes in Trump approval ratings over time. Lacking that data for counties, though, we can still examine whether partisanship affects mask mandates--which we should expect. Counties that are more conservative are probably less likely to adopt mask mandates, and if they do adopt them, to comply with them, while the opposite probably holds true for more liberal areas. Adding in county-level income helps account for the resources a county might have to address the pandemic and also how many workers are exposed to the virus through their daily jobs as we know that higher-paid workers tended to work at home. The proportion of foreign-born is a proxy for travel patterns as foreign residents tend to live closer to areas with access to international travel, which was a cause of the early spread of COVID-19. By accounting for these factors, we can make more compelling comparisons between counties by controlling for the factors that might prompt some counties to be more likely to adopt mask mandates and to see greater levels of compliance.
 
-In the code below, I include the CDC's data with the additional control variables. I also interact mask mandate status with vote share to see if mask mandates do seem to be more effective in more liberal areas. While it would be nice to include a two-way fixed effects for comparison's sake, the model could not estimate due to some collinearities between varibles (not clear why). Oddly enough, I could estimate such a model when using the smaller subsets of the data that the CDC did. It is really an odd duck.
+In the code below, I include the CDC's data with the additional control variables. I also interact mask mandate status with vote share to see if mask mandates do seem to be more effective in more liberal areas. While it would be nice to include a two-way fixed effects for comparison's sake, the model could not estimate due to some collinearities between variables (not clear why). Oddly enough, I could estimate such a model when using the smaller subsets of the data that the CDC did. It is really an odd duck.
 
 Following is the code I used to estimate a model with additional controls and fixed effects for days:
 
@@ -706,7 +706,7 @@ d1_part_between$coeftable %>%
   scale_colour_viridis_d() +
   scale_y_continuous(labels=scales::percent_format(scale=1)) +
   coord_flip() +
-  labs(y="Comparison Period",x="Percentage Change in Daily COVID-19 Cases") +
+  labs(y="Percentage Change in COVID-19 Cases",x="") +
   ggtitle(stringr::str_wrap("Trump Vote Share Interaction with Mask Mandates",width = 60))
 
 ```
@@ -862,7 +862,7 @@ if(run_did) {
 
 ```
 
-We then end up with separate estimates for mask mandate *for each of the 3,000+ groups*. This is cool, though not particularly useful for us. What I like about Callaway and Sant'Anna's work though is that they are more transparent about the different dimensions of panel data (even if they tend not use that terminology). Given the group-level estimates, they have a way of aggregating these to an effect of the mask mandate for each day of the sample. I show these in the plot below.
+We then end up with separate estimates for mask mandate *for each of the 3,000+ groups*. This is cool, though not particularly useful for us. What I like about Callaway and Sant'Anna's work though is that they are more transparent about the different dimensions of panel data (even if they tend not to use that terminology). Given the group-level estimates, they have a way of aggregating these to an effect of the mask mandate for each day of the sample. I show these in the plot below.
 
 ```{r didplot}
 # we need to aggregate and plot these
@@ -898,4 +898,4 @@ tibble(`Average Treatment Effect for Treated`=ag_overall$overall.att,
 
 ```
 
-This table shows that it is most likely there is a negative association for mask mandates with COVID-19: hurray! Unfortunately, the estimate is fairly imprecise and it could also be associated with increased disease spread. As is so often the case, data analysis does not always produce definitive answers. However, I believe it is most important to be open about what we know and what we don't know, which is why I spent the time to write this post. On the whole, the evidence suggests a negative association between mask mandates and COVID-19 spread, but we need to do a better job collecting additional data to allow us to do informed comparisons at the county level.
+This table shows that it is most likely there is a negative association for mask mandates with COVID-19: hurrah! Unfortunately, the estimate is fairly imprecise and it could also be associated with increased disease spread. As is so often the case, data analysis does not always produce definitive answers. However, I believe it is most important to be open about what we know and what we don't know, which is why I spent the time to write this post. On the whole, the evidence suggests a negative association between mask mandates and COVID-19 spread, but we need to do a better job collecting additional data to allow us to do informed comparisons at the county level.
