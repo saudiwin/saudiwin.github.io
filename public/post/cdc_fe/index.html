@@ -815,15 +815,19 @@ all_coefs &lt;- bind_rows(all_coefs,
                  &quot;81-100 Days&quot;),Type=&quot;CDC&quot;))
 
 all_coefs %&gt;% 
-  ggplot(aes(x=Estimate,y=Model)) +
-  geom_errorbarh(aes(xmin=lb,xmax=upb,colour=Type),position=position_dodge(width=0.5)) +
+  ggplot(aes(y=Estimate,x=Model)) +
+  geom_pointrange(aes(ymin=lb,ymax=upb,colour=Type),
+                  position=position_dodge(width=0.5),
+                  fatten=2) +
   geom_text(aes(label=round(Estimate,digits=2),group=Type),
             position=position_dodge(width=0.5),
             size=3,vjust=-.75) +
+  geom_hline(yintercept=0,linetype=2) +
   theme_tufte() +
   geom_vline(xintercept=0,linetype=2) +
   scale_colour_viridis_d() +
-  scale_x_continuous(labels=scales::percent_format(scale=1)) +
+  coord_flip() +
+  scale_y_continuous(labels=scales::percent_format(scale=1)) +
   labs(y=&quot;Comparison Period&quot;,x=&quot;Percentage Change in Daily COVID-19 Cases&quot;) +
   ggtitle(&quot;Replication of CDC Mask Results with Open Source Data&quot;)</code></pre>
 <p><img src="/post/cdc_fe_files/figure-html/cdc_model-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -852,15 +856,19 @@ combined_data %&gt;%
 <p>To illustrate this, I replicate the CDC’s analysis except that I compare a model with fixed effects for counties (within-country variation), a model with fixed effects for days (cross-sectional variation), and plot them next to the two-way fixed effects results:</p>
 <pre class="r"><code>bind_rows(all_coefs_within,
           all_coefs_between,filter(all_coefs,Type==&quot;Replication&quot;)) %&gt;% 
-  ggplot(aes(x=Estimate,y=Model)) +
-  geom_errorbarh(aes(xmin=lb,xmax=upb,colour=Type),position=position_dodge(width=.8)) +
+  ggplot(aes(y=Estimate,x=Model)) +
+  geom_pointrange(aes(ymin=lb,ymax=upb,colour=Type),
+                  position=position_dodge(width=.8),
+                  fatten=2) +
   geom_text(aes(label=round(Estimate,digits=2),group=Type),
             position=position_dodge(width=.8),
             size=2.5,vjust=-.75,fontface=&quot;bold&quot;) +
   theme_tufte() +
   geom_vline(xintercept=0,linetype=2) +
   scale_colour_viridis_d() +
-  scale_x_continuous(labels=scales::percent_format(scale=1)) +
+  geom_hline(yintercept=0,linetype=2) +
+  scale_y_continuous(labels=scales::percent_format(scale=1)) +
+  coord_flip() +
   labs(y=&quot;Comparison Period&quot;,x=&quot;Percentage Change in Daily COVID-19 Cases&quot;) +
   ggtitle(stringr::str_wrap(&quot;Comparison of Mask Mandates Effects both Within-County Over-time and Daily Cross-sections&quot;,width = 60))</code></pre>
 <p><img src="/post/cdc_fe_files/figure-html/crosswithin-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -906,18 +914,19 @@ combined_data %&gt;%
   &quot;Tests&quot; = &quot;scale(test_prop)&quot;,
   &quot;Trump Vote&quot; = &quot;vote_share&quot;
 )) %&gt;% 
-  ggplot(aes(x=Estimate,y=reorder(stringr::str_wrap(Variables,width = 25),Estimate))) +
-  geom_errorbarh(aes(xmin=Estimate - 1.96*`Std. Error`,
-                     xmax=Estimate + 1.96*`Std. Error`)) +
+  ggplot(aes(y=Estimate,x=reorder(stringr::str_wrap(Variables,width = 40),Estimate))) +
+  geom_pointrange(aes(ymin=Estimate - 1.96*`Std. Error`,
+                     ymax=Estimate + 1.96*`Std. Error`),fatten=2,alpha=0.8) +
   geom_text(aes(label=round(Estimate,digits=2)),
             size=2.5,vjust=-.75) +
   theme_tufte() +
   geom_vline(xintercept=0,linetype=2) +
   scale_colour_viridis_d() +
-  scale_x_continuous(labels=scales::percent_format(scale=1)) +
+  scale_y_continuous(labels=scales::percent_format(scale=1)) +
+  coord_flip() +
   labs(y=&quot;Comparison Period&quot;,x=&quot;Percentage Change in Daily COVID-19 Cases&quot;) +
   ggtitle(stringr::str_wrap(&quot;Trump Vote Share Interaction with Mask Mandates&quot;,width = 60))</code></pre>
-<p><img src="/post/cdc_fe_files/figure-html/plotpartisan-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="/post/cdc_fe_files/figure-html/plotpartisan-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>To better understand the relationship between vote share and mask mandates, I plot the sample-average marginal effects for mask mandates below. These estimates show what effect the mask mandate seemed to have across counties when we vary vote share for Donald Trump from the lowest observed value of 4.1% voting for Trump to the maximum value of 96% voting for Trump:</p>
 <pre class="r"><code># use Leeper&#39;s method for calculating marginal effects
 # ignore uncertainty as that would require bootstrapping/jackknifing

@@ -261,9 +261,9 @@ There were some ambiguities in interpreting the article's instructions about the
 
 ## Replicating the CDC's Results
 
-Given these caveats about data collection, the model estimates I obtained using the same specification--two-way fixed effects for county and day--are broadly similar to their estimates, although the associations are weaker on average. I also used the same comparison periods they describe in the paper. For each county, I selected the first twenty days preceding the mask mandate implementation, and then fit separate models to five different post-mandate periods: 1-20 days following the mandate, 21-40 days, 41-60 days, 61-80 days, and 81-100 days. The ambiguity that surfaced while doing this occurred in counties with multiple periods of mask mandates: what if there weren't twenty days prior to the second mask mandate? I included as many as were available, but its still important to note this ambiguity as 
+Given these caveats about data collection, the model estimates I obtained using the same specification--two-way fixed effects for county and day--are broadly similar to their estimates, although the associations are weaker on average. I also used the same comparison periods they describe in the paper. For each county, I selected the first twenty days preceding the mask mandate implementation, and then fit separate models to five different post-mandate periods: 1-20 days following the mandate, 21-40 days, 41-60 days, 61-80 days, and 81-100 days. The ambiguity that surfaced while doing this occurred in counties with multiple periods of mask mandates: what if there weren't twenty days prior to the second mask mandate? I included as many as were available, but its still important to note this ambiguity as it is not clear exactly what data coding the CDC used.
 
-The plot below compares my estimates of the effect of mask mandates to theirs by the five different post-mandate time periods. The weaker associations in my estimates could simply be due to measurement error from using unofficial sources, so the smaller effects are not necessarily a huge concern (though it would be better if the CDC released all of the data they used). On the whole, I think this replication was at least partially successfulas the confidence intervals of the estimates overlap. 
+The plot below compares my estimates of the effect of mask mandates to theirs by the five different post-mandate time periods. The weaker associations in my estimates could simply be due to measurement error from using unofficial sources, so the smaller effects are not necessarily a huge concern (though it would be better if the CDC released all of the data they used). On the whole, I think this replication was at least partially successful as the confidence intervals of the estimates overlap. 
 
 The following code replicating the CDC's paper is quite long but is included for transparency's sake. I used the `fixest` package with R to fit linear models due to the scale of the data and the number of fixed effects (one for each county plus one for each day). 
 
@@ -378,15 +378,19 @@ all_coefs <- bind_rows(all_coefs,
                  "81-100 Days"),Type="CDC"))
 
 all_coefs %>% 
-  ggplot(aes(x=Estimate,y=Model)) +
-  geom_errorbarh(aes(xmin=lb,xmax=upb,colour=Type),position=position_dodge(width=0.5)) +
+  ggplot(aes(y=Estimate,x=Model)) +
+  geom_pointrange(aes(ymin=lb,ymax=upb,colour=Type),
+                  position=position_dodge(width=0.5),
+                  fatten=2) +
   geom_text(aes(label=round(Estimate,digits=2),group=Type),
             position=position_dodge(width=0.5),
             size=3,vjust=-.75) +
+  geom_hline(yintercept=0,linetype=2) +
   theme_tufte() +
   geom_vline(xintercept=0,linetype=2) +
   scale_colour_viridis_d() +
-  scale_x_continuous(labels=scales::percent_format(scale=1)) +
+  coord_flip() +
+  scale_y_continuous(labels=scales::percent_format(scale=1)) +
   labs(y="Comparison Period",x="Percentage Change in Daily COVID-19 Cases") +
   ggtitle("Replication of CDC Mask Results with Open Source Data")
 
@@ -616,15 +620,19 @@ all_coefs_between <- lapply(list(d1_between,d2_between,d3_between,d4_between,d5_
 
 bind_rows(all_coefs_within,
           all_coefs_between,filter(all_coefs,Type=="Replication")) %>% 
-  ggplot(aes(x=Estimate,y=Model)) +
-  geom_errorbarh(aes(xmin=lb,xmax=upb,colour=Type),position=position_dodge(width=.8)) +
+  ggplot(aes(y=Estimate,x=Model)) +
+  geom_pointrange(aes(ymin=lb,ymax=upb,colour=Type),
+                  position=position_dodge(width=.8),
+                  fatten=2) +
   geom_text(aes(label=round(Estimate,digits=2),group=Type),
             position=position_dodge(width=.8),
             size=2.5,vjust=-.75,fontface="bold") +
   theme_tufte() +
   geom_vline(xintercept=0,linetype=2) +
   scale_colour_viridis_d() +
-  scale_x_continuous(labels=scales::percent_format(scale=1)) +
+  geom_hline(yintercept=0,linetype=2) +
+  scale_y_continuous(labels=scales::percent_format(scale=1)) +
+  coord_flip() +
   labs(y="Comparison Period",x="Percentage Change in Daily COVID-19 Cases") +
   ggtitle(stringr::str_wrap("Comparison of Mask Mandates Effects both Within-County Over-time and Daily Cross-sections",width = 60))
 
@@ -665,7 +673,7 @@ d1_part_between <- fixest::feols(
 In the plot below I show all of the results of the model ordered by how negative or positive their association is with COVID-19 spread. What is immediately apparent is a strong and very positive association between Trump vote share and COVID-19: more conservative areas tend to see more infections after controlling for other factors. Furthermore, removing restrictions on bars is strongly associated with more infections, though we don't see similar associations for restaurants, which may be a comfort to non-bar restaurant owners and the precautions they've taken. Importantly, the interaction effect on Trump vote share and mask mandates is strongly positive, suggesting that mask mandates are less effective in conservative areas.
 
 
-```{r plotpartisan,fig.height=4}
+```{r plotpartisan,out.width = "100%"}
 
 d1_part_between$coeftable %>% 
   mutate(Variables=row.names(d1_part_between$coeftable),
@@ -688,15 +696,16 @@ d1_part_between$coeftable %>%
   "Tests" = "scale(test_prop)",
   "Trump Vote" = "vote_share"
 )) %>% 
-  ggplot(aes(x=Estimate,y=reorder(stringr::str_wrap(Variables,width = 25),Estimate))) +
-  geom_errorbarh(aes(xmin=Estimate - 1.96*`Std. Error`,
-                     xmax=Estimate + 1.96*`Std. Error`)) +
+  ggplot(aes(y=Estimate,x=reorder(stringr::str_wrap(Variables,width = 40),Estimate))) +
+  geom_pointrange(aes(ymin=Estimate - 1.96*`Std. Error`,
+                     ymax=Estimate + 1.96*`Std. Error`),fatten=2,alpha=0.8) +
   geom_text(aes(label=round(Estimate,digits=2)),
             size=2.5,vjust=-.75) +
   theme_tufte() +
   geom_vline(xintercept=0,linetype=2) +
   scale_colour_viridis_d() +
-  scale_x_continuous(labels=scales::percent_format(scale=1)) +
+  scale_y_continuous(labels=scales::percent_format(scale=1)) +
+  coord_flip() +
   labs(y="Comparison Period",x="Percentage Change in Daily COVID-19 Cases") +
   ggtitle(stringr::str_wrap("Trump Vote Share Interaction with Mask Mandates",width = 60))
 
