@@ -1,0 +1,1122 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Robert Kubinec">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Recently I had a spirited conversation with Victor Chernozhukov, a leading econometrician whose work spans both traditional subjects like panel data modeling and newer application of machine learning models to causal inference.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="http://www.robertkubinec.com/post/panel_dag/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-67302886-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-67302886-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="http://www.robertkubinec.com/post/panel_dag/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@rmkubinec">
+  <meta property="twitter:creator" content="@rmkubinec">
+  
+  <meta property="og:site_name" content="Academic">
+  <meta property="og:url" content="http://www.robertkubinec.com/post/panel_dag/">
+  <meta property="og:title" content="Tornadoes Have Side Effects: A Response to Victor Chernozhukov | Academic">
+  <meta property="og:description" content="Recently I had a spirited conversation with Victor Chernozhukov, a leading econometrician whose work spans both traditional subjects like panel data modeling and newer application of machine learning models to causal inference."><meta property="og:image" content="http://www.robertkubinec.com/img/headers/tornado.jpeg">
+  <meta property="twitter:image" content="http://www.robertkubinec.com/img/headers/tornado.jpeg"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2021-04-25T15:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2021-04-25T15:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://www.robertkubinec.com/post/panel_dag/"
+  },
+  "headline": "Tornadoes Have Side Effects: A Response to Victor Chernozhukov",
+  
+  "datePublished": "2021-04-25T15:00:00Z",
+  "dateModified": "2021-04-25T15:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Robert Kubinec"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Academic",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://www.robertkubinec.com/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Recently I had a spirited conversation with Victor Chernozhukov, a leading econometrician whose work spans both traditional subjects like panel data modeling and newer application of machine learning models to causal inference."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Tornadoes Have Side Effects: A Response to Victor Chernozhukov | Academic</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Academic</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Academic</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+<div class="article-header">
+  
+  
+  <img src="/img/headers/tornado.jpeg" class="article-banner" alt="">
+  
+
+  
+</div>
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Tornadoes Have Side Effects: A Response to Victor Chernozhukov</h1>
+
+  
+  <p class="page-subtitle">Why Intercepts (Fixed Effects) Aren&rsquo;t Latent Confounding Variables</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Apr 25, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Recently I had a <a href="https://twitter.com/rmkubinec/status/1385167816165363713">spirited conversation</a> with Victor Chernozhukov, a leading econometrician whose work spans both traditional subjects like panel data modeling and newer application of machine learning models to causal inference. While I admire his work, I objected to his interpretation of a directed a-cyclic graph (DAG: read diagram) that showed fixed effects/varying intercepts as “latent confounders.” Below is Victor’s screenshot which he shared on Twitter:</p>
+<p><img src="/img/baddag.jpeg" style="display: block; margin: auto;" />
+Victor’s point was not related to the fixed effects-as-confounders aspect of the DAG but rather to people’s conflation of panel data with difference-in-difference methods (a point on which I happen to very much agree with him). We had a substantial back-and-forth over a different question: when including “fixed effects” in a panel data model, which involves including a separate intercept or dummy variable for each case/unit/subject <span class="math inline">\(i\)</span>, what do these intercepts/fixed effects represent in causal terms?</p>
+<p>I think this is an important and largely overlooked question in Judea Pearl’s causal diagram analysis (though of course given how vast the literature is using his methods, I may have simply missed that paper). The promise of making causal graphs like the one above is that we can then figure out what we are likely to observe in Nature given a causal graph, and consequently what kind of statistical models we can use to identify effects. It’s really very cool, and it’s been a big help in my own work.</p>
+<p>However, while I appreciate the usage of DAGs, it can be tricky to pin down exactly what they mean. As Pearl explains in his new <a href="http://bayes.cs.ucla.edu/WHY/">Book of Why</a>, the importance of causal analysis is to separate the things we see in the world that we are trying to understand from the limitations of mathematical models. To think in causal terms we have to have a causal language. So when we make a causal diagram, we have to think very carefully about how to translate it into other languages such as regression equations.</p>
+<p>In a causal diagram, every node on the graph has to be its own separate causal factor. For that to be true, it has to have some kind of independent existence in the “real world.” We could also call it a random variable–some trait we can observe that can take on multiple values. If we have a complete and accurate causal graph, we can then know with confidence which variables we need to measure to ensure so that our statistics have a causal interpretation.</p>
+<p>Now going back to Figure 8.1 above, it’s useful to think about the nodes on this graph and what they mean. The two main actors in the graph are <span class="math inline">\(D_{it}\)</span>, the treatment or main predictor of interest, and <span class="math inline">\(Y_{it}\)</span>, the outcome, indexed by <span class="math inline">\(i\)</span> for cases/units/subjects and <span class="math inline">\(t\)</span> for time. We also have two potential confounding variables, <span class="math inline">\(W_{it}\)</span> and <span class="math inline">\(\alpha_i\)</span>. <span class="math inline">\(W_{it}\)</span> is a conventional confounder: it sets up a “back-door” path between the treatment <span class="math inline">\(D_{it}\)</span> and the outcome <span class="math inline">\(Y_{it}\)</span> by causing both of them. If we don’t include <span class="math inline">\(W_{it}\)</span>, its causal influence will get absorbed by <span class="math inline">\(D_{it}\)</span> in our regression model and we won’t know what the real causal effect of <span class="math inline">\(D_{it}\)</span> is.</p>
+<p>All well and good so far, but we still have this mysterious <span class="math inline">\(\alpha_i\)</span>. The first thing you should notice, of course, is that this variable is <em>not</em> indexed by <span class="math inline">\(t\)</span>. Why is that? Well, these variables represent intercepts or dummy variables that are included in the model, one for each case/subject/unit in the data. The DAG is claiming that these intercepts confound the relationship between <span class="math inline">\(D_{it}\)</span> and <span class="math inline">\(Y_{it}\)</span> in a manner identical to <span class="math inline">\(W_{it}\)</span>, and interestingly, also cause <span class="math inline">\(W_{it}\)</span> in some sense. Based on this DAG, we must then include these intercepts to identify the effect of <span class="math inline">\(D_{it}\)</span> just as we did with <span class="math inline">\(W_{it}\)</span>. Problem solved! We can all now go get a beer and call it a day.</p>
+<p>Well… not so fast. Again, one element of causal analysis is that we are studying things “in the real world.” Each element of our graph must be some factor or force or element which we could (at least in theory) manipulate. Does including an intercept for each case meet that standard? I would say that in general, no. Including these intercepts is often a good idea to build a model that is relevant to your research question, but it’s neither necessary nor sufficient for causal inference with panel data. (A bold statement, but read on!)</p>
+<p>To illustrate this, I’m going to start with a DAG that is much easier to understand and that has an empirical meaning. In this DAG, the outcome <span class="math inline">\(Y_{it}\)</span> represents the level of democracy in a country <span class="math inline">\(i\)</span> in year <span class="math inline">\(t\)</span>. We want to know what the causal effect of the level of gross domestic product (<span class="math inline">\(G_{it}\)</span>) is on a country’s democracy over time. Unfortunately, there are potential confounding variables in this relationship.</p>
+<p>In the diagram I also put <span class="math inline">\(F_i\)</span>, which represents a country’s factor endowment, or types of soil and other natural resources. As <a href="https://www.aeaweb.org/articles?id=10.1257/jep.14.3.217">Engerman and Sokoloff</a> argue, it could be that the type of natural environment predisposed some countries to more repressive types of agriculture such as large slaveholder plantations, and slave-owning countries and regions were more resistant to democracy over time. We know that slave-owning areas also tend to be poorer over time as well as they are less likely to industrialize. As a consequence, we are concerned that the relationship between GDP and democracy will be confounded by the level of factor endowments. Note that for factor endowments I only include the subscript <span class="math inline">\(i\)</span>: a country’s factor endowments are fixed over time, unlike GDP, which can vary over time and also across countries at a single point in time.</p>
+<p><img src="/img/panel1.png" style="display: block; margin: auto;" /></p>
+<p>This sort of setup is the typical justification for including fixed effects, or one intercept/dummy variable for each country <span class="math inline">\(i\)</span>. So went Victor’s reasoning on Twitter: if we include <span class="math inline">\(\alpha_i\)</span> then it will adjust for <span class="math inline">\(F_i\)</span> so long as the two are <em>equivalent</em> (<span class="math inline">\(\alpha_i \equiv F_i\)</span>). This seems easy and straightforward: <span class="math inline">\(\alpha_i\)</span> only varies by country and <span class="math inline">\(F_i\)</span> only varies by country. Bingo.</p>
+<p>Well, I hate to be the bearer of bad news, but including <span class="math inline">\(\alpha_i\)</span> as an adjustment variable to account for <span class="math inline">\(F_i\)</span> doesn’t get you the same thing because <span class="math inline">\(\alpha_i\)</span> and <span class="math inline">\(F_i\)</span> are not equivalent, logically or otherwise. <span class="math inline">\(F_i\)</span> is a vector of factor endowments with a plausible range from zero to a very large number, depending on how exactly we want to measure endowments. <span class="math inline">\(\alpha_i\)</span>, by contrast, is either a categorical variable where each value is the particular country in the data, or a matrix of dummy variables minus one country which serves as the reference category. Declaring these two equivalent is… odd.</p>
+<p>In particular, something happens to the DAG above when we include <span class="math inline">\(\alpha_i\)</span> as an adjustment factor instead of just <span class="math inline">\(F_i\)</span>. The following DAG shows what happens:</p>
+<p><img src="/img/panel2.png" style="display: block; margin: auto;" />
+The above formula is likely familiar to people who have studied panel data in economics or political science. For both the treatment GDP and the outcome of democracy, <span class="math inline">\(Y_{it}\)</span>, I subtracted away the average value for each case <span class="math inline">\(i\)</span>. This process is also called “de-meaning” (which no one has yet made clever puns about, unfortunately) as we convert the two variables into deviations away from their over-time mean. Why did this happen? Again, the <span class="math inline">\(\alpha_i\)</span> represent here an intercept for <em>every</em> country. If we have 100 countries, then we have a giant matrix of ninety-nine dummy variables. Each dummy variable will absorb <em>everything</em> that doesn’t vary over time in that country. Think of it like a tornado that sweeps through the country, leaving behind only time-varying debris.</p>
+<p>Now did the <span class="math inline">\(\alpha_i\)</span> get rid of the confounding variable <span class="math inline">\(F_i\)</span>? Well, sort of. If you think about it, we couldn’t keep <span class="math inline">\(F_i\)</span> in the DAG because there is only one value of factor endowment per country, so the average of 1 number is…. that value. You subtract it away and you have zero. This neat math trick is what first motivated economists to think of fixed effects (intercepts for cases) as a cool way to get rid of confounders.</p>
+<p>However, tornadoes have side effects. We no longer have <span class="math inline">\(Y_{it}\)</span> as our outcome, we have <span class="math inline">\(Y_{it} - \bar{Y_i}\)</span>. In other words, we no longer have to worry about <span class="math inline">\(F_i\)</span> or any other time-invariant confounder, but <em>we’ve also changed the question we’re asking.</em> We have never answered the question posed in the earlier DAG about what the effect of GDP on democracy is because… we now only have above or below average GDP regressed on above or below average democracy.</p>
+<p>So is <span class="math inline">\(\alpha_i\)</span> an adjustment set or control variable for factor endowments? No, it isn’t. It’s true that if you include it in the model, you won’t need to worry about factor endowments, but that’s as comforting as telling someone trying to find shelter in order to protect themselves from a tornado that they no longer need to worry about being late for the plane flight they were supposed to catch later that day. True, but largely irrelevant to the problem at hand.</p>
+<p>If we want to know what the causal effect of <span class="math inline">\(G_{it}\)</span> on <span class="math inline">\(Y_{it}\)</span> is when accounting for factor endowments, then we need to include a measure of factor endowments or find a way of manipulating a country’s income in a way that is independent of other causal factors (i.e. random assignment). Including fixed effects or intercepts for countries/cases does something different; it <em>isolates a dimension of variation in the outcome</em>. This is itself an important thing to do as the two subscripts of <span class="math inline">\(Y_{it}\)</span> both matter but have different interpretations. We may be more interested, for example, in comparing countries at cross-sections for each year period. In that case, we could include intercepts for time points in the model. Or we might prefer to compare countries to themselves over time–in that case we would include the <span class="math inline">\(\alpha_i\)</span> as above.</p>
+<p>So circling back to the original question… can fixed effects help us identify a causal effect? I argue that it’s not by “adjusting for latent confounders” as above. But it could still be beneficial, though a causal diagram alone can’t tell us when it might be. We have to use our own knowledge of the case at hand and some heuristics about how we think the unobserved and unobservable aspects of our data–<em>the unobserved heterogeneity</em>–vary in the sample.</p>
+<p>For example, if we had a very long time series, such as a series of country democracy and GDP over a couple hundred years, then including case intercepts <span class="math inline">\(\alpha_i\)</span> would mean that we would be comparing countries’ democracy and GDP scores over that time period. In other words, we would compare the level of GDP and democracy in the United States in 1805 to the level of GDP and democracy in 2020. While we don’t know what confounders exist, we might be suspicious that this comparison is a bit of apples and oranges. Contrary to received wisdom, it might actually be better to drop the <span class="math inline">\(\alpha_i\)</span> and include <span class="math inline">\(\alpha_t\)</span>. Canada and the United States in 1805 might be more similar to each other than 1805 and 2020 versions of the United States.</p>
+<p>If you want to read more on the topic, I have both a <a href="http://www.robertkubinec.com/post/fixed_effects/">prior blog post</a> and a <a href="https://journals.plos.org/plosone/article/authors?id=10.1371/journal.pone.0231349">co-authored paper</a> which I recommend you read at your leisure while avoiding tornadoes, miss-specified causal graphs and false equivalencies.</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=http://www.robertkubinec.com/post/panel_dag/&amp;text=Tornadoes%20Have%20Side%20Effects:%20A%20Response%20to%20Victor%20Chernozhukov" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=http://www.robertkubinec.com/post/panel_dag/&amp;t=Tornadoes%20Have%20Side%20Effects:%20A%20Response%20to%20Victor%20Chernozhukov" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Tornadoes%20Have%20Side%20Effects:%20A%20Response%20to%20Victor%20Chernozhukov&amp;body=http://www.robertkubinec.com/post/panel_dag/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=http://www.robertkubinec.com/post/panel_dag/&amp;title=Tornadoes%20Have%20Side%20Effects:%20A%20Response%20to%20Victor%20Chernozhukov" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Tornadoes%20Have%20Side%20Effects:%20A%20Response%20to%20Victor%20Chernozhukov%20http://www.robertkubinec.com/post/panel_dag/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=http://www.robertkubinec.com/post/panel_dag/&amp;title=Tornadoes%20Have%20Side%20Effects:%20A%20Response%20to%20Victor%20Chernozhukov" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="/author/robert-kubinec/avatar_hudd5d7efb917a26e45c39c19ab8d853e6_36248_270x270_fill_q90_lanczos_center.jpg" alt="Robert Kubinec">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="http://www.robertkubinec.com/">Robert Kubinec</a></h5>
+        <h6 class="card-subtitle">Assistant Professor of Political Science</h6>
+        <p class="card-text">My research centers on political-economic issues such as corruption, economic development, and business-state relations in developing countries, and in particular the Middle East and North Africa. I am also involved in the development of Bayesian statistical models with Stan for hard-to-study subjects like corruption, polarization, and other latent social constructs.</p>
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/rmkubinec" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=1tI8usUAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/saudiwin" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/Robert_Kubinec_CV_6_23_2020.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2020 Robert Kubinec &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
