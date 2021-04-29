@@ -2,7 +2,7 @@
 title: "How to Estimate Models with Measurement Error for our COVID-19 Indices"
 subtitle: "Learn how to use errors-in-variables models to take into account coding and data accuracy uncertainty."
 author: "Robert Kubinec"
-date: "2021-04-29T15:00:00"
+date: "2021-04-28T15:00:00"
 output: blogdown::html_page
 bibliography: BibTexDatabase.bib
 draft: false
@@ -10,7 +10,7 @@ header:
   title: "How to Estimate Models with Measurement Error from our COVID-19 Indices"
   summary: "In this post I show how to incorporate the measurement error which is included in the six COVID-19 policy restriction indices released by Kubinec et al. I use R packages with errors-in-variables models and also a Bayesian version with R package brms."
   image: "headers/measure.jpeg"
-  date: "2021-04-29T15:00:00"
+  date: "2021-04-28T15:00:00"
 ---
 
 ```{r setup, include=FALSE}
