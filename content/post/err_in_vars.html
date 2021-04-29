@@ -1,0 +1,573 @@
+---
+title: "How to Estimate Models with Measurement Error for our COVID-19 Indices"
+subtitle: "Learn how to use errors-in-variables models to take into account coding and data accuracy uncertainty."
+author: "Robert Kubinec"
+date: "2021-04-29T15:00:00"
+output: blogdown::html_page
+bibliography: BibTexDatabase.bib
+header:
+  title: "How to Estimate Models with Measurement Error from our COVID-19 Indices"
+  summary: "In this post I show how to incorporate the measurement error which is included in the six COVID-19 policy restriction indices released by Kubinec et al. I use R packages with errors-in-variables models and also a Bayesian version with R package brms."
+  image: "headers/measure.jpeg"
+  date: "2021-04-29T15:00:00"
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<p>This tutorial is designed to present the indexes by the joint CoronaNet-Oxford CGRT policy projects. It shows how to download the estimated indices and also how to incorporate measurement error into analyses using the <code>eivtools</code> and <code>brms</code> R packages.</p>
+<p>As shown in our working paper, these six indices (social distancing policies, business restrictions, school restrictions, health resources, health monitoring and mask policies) provide statistical estimates that take into account coding and data limitations. Each index has an associated value between 0 and 100 along with an uncertainty interval that provides the most likely values for the true level of policy activity for that index type. We also provide for each estimate the posterior standard deviation of the estimate, which is an analogue to the standard error in frequentist statistics. These standard deviations are helpful for incorporating measurement error in analyses using existing packages without much further work. It is the aim of this blog post to show how to do that.</p>
+<p>If you want to see the full code underlying this post as an Rmarkdown file, just hop over to the site’s <a href="https://github.com/saudiwin/saudiwin.github.io.git">Github repo</a>. The Rmarkdown file is in the <code>content/post</code> folder and the Google mobility data is in the <code>content/post/data</code> folder.</p>
+<div id="load-and-merge-data" class="section level2">
+<h2>Load and Merge Data</h2>
+<p>First, the outcome variable we will look at is the Google cell phone mobility data reported in retail establishments and restaurants. This is a key metric in COVID-19 spread because these kinds of areas can be a hotspot for indoors transmission of the virus.</p>
+<pre class="r"><code>mobility &lt;- readRDS(&quot;data/gmob.rds&quot;) %&gt;% 
+    filter(is.na(sub_region_1), is.na(sub_region_2), is.na(metro_area)) %&gt;% 
+    select(country,date_policy=&quot;date&quot;,
+           retail=&quot;retail_and_recreation_percent_change_from_baseline&quot;)</code></pre>
+<p>I next load the CoronaNet-OxCGRT indices from this <a href="https://drive.google.com/uc?export=download&amp;id=1dMCTVPrf-tJyhv_uxr0yAQO-Elx0QOCG">direct download link</a> as a CSV:</p>
+<pre class="r"><code>indices &lt;- read_csv(&quot;https://drive.google.com/uc?export=download&amp;id=1dMCTVPrf-tJyhv_uxr0yAQO-Elx0QOCG&quot;)</code></pre>
+<p>I also want to point out that we have the full list of indicators (i.e, individual policies as variables) available via a direct download link as well:</p>
+<pre class="r"><code>indicators &lt;- read_csv(&quot;https://drive.google.com/uc?id=1lorcowHNnF0Vl6pxBjMdjTC4yPhHBLJI&amp;export=download&quot;)</code></pre>
+<p>I’ll display the data to get a sense of what it looks like. First, these are the raw indicators. There are a lot of them–more than 160 variables:</p>
+<pre class="r"><code>indicators %&gt;% 
+  filter(date_policy&gt;ymd(&quot;2020-04-01&quot;),
+         date_policy&lt;ymd(&quot;2020-04-07&quot;),
+         country==&quot;Afghanistan&quot;) %&gt;% 
+  select(country,date_policy,social_distance,mask_everywhere,primary_school) %&gt;% 
+  knitr::kable() %&gt;% 
+  kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+country
+</th>
+<th style="text-align:left;">
+date_policy
+</th>
+<th style="text-align:right;">
+social_distance
+</th>
+<th style="text-align:right;">
+mask_everywhere
+</th>
+<th style="text-align:right;">
+primary_school
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+2020-04-02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.1624358
+</td>
+<td style="text-align:right;">
+4.516191
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+2020-04-03
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.1624358
+</td>
+<td style="text-align:right;">
+4.516191
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+2020-04-04
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.1624358
+</td>
+<td style="text-align:right;">
+4.565445
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+2020-04-05
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.1624358
+</td>
+<td style="text-align:right;">
+4.565445
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+2020-04-06
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.1624358
+</td>
+<td style="text-align:right;">
+4.565445
+</td>
+</tr>
+</tbody>
+</table>
+<p>The data is organized in a country-day-policy record format with the different policy indicators in columns. The fractional values indicate a proportion of the population that ha the following policy in place (i.e., at the provincial or municipal level). The high value for <code>primary_school</code> has to do with the fact that this variable naturally has 3 levels, from totally open to totally closed. For more information about the underlying indicators, you can see <a href="https://docs.google.com/document/d/1ScKWFv7jOHYVQlsbqvf--yU0mO2JscTsNEmb0SMXcsg/edit?usp=sharing">our codebook</a>.</p>
+<p>We can now take a glance at the estimated indices that collapse these indicators into single constructs:</p>
+<pre class="r"><code>indices %&gt;% 
+  filter(date_policy==ymd(&quot;2020-04-01&quot;),
+         country==&quot;Afghanistan&quot;) %&gt;% 
+  knitr::kable() %&gt;% 
+  kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+country
+</th>
+<th style="text-align:left;">
+modtype
+</th>
+<th style="text-align:left;">
+date_policy
+</th>
+<th style="text-align:right;">
+med_est
+</th>
+<th style="text-align:right;">
+high_est
+</th>
+<th style="text-align:right;">
+low_est
+</th>
+<th style="text-align:right;">
+sd_est
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+Business Restrictions
+</td>
+<td style="text-align:left;">
+2020-04-01
+</td>
+<td style="text-align:right;">
+62.53219
+</td>
+<td style="text-align:right;">
+67.09647
+</td>
+<td style="text-align:right;">
+57.94249
+</td>
+<td style="text-align:right;">
+2.8344479
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+Health Monitoring
+</td>
+<td style="text-align:left;">
+2020-04-01
+</td>
+<td style="text-align:right;">
+41.40538
+</td>
+<td style="text-align:right;">
+48.99068
+</td>
+<td style="text-align:right;">
+34.40337
+</td>
+<td style="text-align:right;">
+4.4375788
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+Health Resources
+</td>
+<td style="text-align:left;">
+2020-04-01
+</td>
+<td style="text-align:right;">
+46.97723
+</td>
+<td style="text-align:right;">
+52.57886
+</td>
+<td style="text-align:right;">
+41.45534
+</td>
+<td style="text-align:right;">
+3.4747765
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+Mask Policies
+</td>
+<td style="text-align:left;">
+2020-04-01
+</td>
+<td style="text-align:right;">
+40.92886
+</td>
+<td style="text-align:right;">
+48.72028
+</td>
+<td style="text-align:right;">
+32.89501
+</td>
+<td style="text-align:right;">
+4.8434060
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+School Restrictions
+</td>
+<td style="text-align:left;">
+2020-04-01
+</td>
+<td style="text-align:right;">
+77.33891
+</td>
+<td style="text-align:right;">
+78.97166
+</td>
+<td style="text-align:right;">
+75.70822
+</td>
+<td style="text-align:right;">
+0.9911008
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Afghanistan
+</td>
+<td style="text-align:left;">
+Social Distancing
+</td>
+<td style="text-align:left;">
+2020-04-01
+</td>
+<td style="text-align:right;">
+61.88964
+</td>
+<td style="text-align:right;">
+68.51834
+</td>
+<td style="text-align:right;">
+55.19300
+</td>
+<td style="text-align:right;">
+3.9687823
+</td>
+</tr>
+</tbody>
+</table>
+<p>This dataset is organized somewhat differently. We have one row per index value per index type. The <code>modtype</code> column records which index is in each row. The columns include estimates of the given index for that day. <code>med_est</code> is the median posterior estimate; i.e., the most likely estimate. The upper and lower bounds of the 5% - 95% posterior distribution (the uncertainty interval) are the <code>low_est</code> - <code>high_est</code> columns. Finally, the posterior standard deviation (standard error) is the <code>sd_est</code> column.</p>
+<p>If you just want “the” value of the index, then <code>med_est</code> is the best bet. However, it’s best not to ignore the other columns. A simple way to take into account measurement error is to fit three separate models, one with <code>med_est</code>, another with <code>low_est</code>, and another with <code>high_est</code>. If there are important differences across these models than you would know that measurement error in the indices could be affecting your results.</p>
+<p>However, there are better ways to incorporate your uncertainty into models, which I will show next. We will use the retail and recreation outcome from the Google mobility as the response we want to understand, and each of our indices as predictors. We will use the <code>sd_est</code> column to incorporate Normally-distributed measurement error in our models; i.e., we will assume that measurement error is centered around <code>med_est</code> with a standard deviation of <code>sd_est</code>. It’s not an exact incorporation of uncertainty as the posterior isn’t a perfect bell curve shape, but it’s pretty good as the posterior is usually at least unimodal if not symmetric.</p>
+<p>First I use the <code>eivtools</code> package to do a what is called an errors-in-variables model. These have been around for some time in economics and other fields, and are relatively easy to estimate. To do so, first I convert our index into two datasets with the posterior median estimates and standard deviations and one column for each index. I can then join these together to make one dataset with both estimates per index:</p>
+<pre class="r"><code>index_med &lt;- select(indices,country,date_policy,med_est,modtype) %&gt;% 
+  spread(key=&quot;modtype&quot;,value=&quot;med_est&quot;)
+
+index_sds &lt;- select(indices,country,date_policy,sd_est,modtype) %&gt;% 
+  spread(key=&quot;modtype&quot;,value=&quot;sd_est&quot;)
+
+# need to adjust names so that we can bind by column
+
+names(index_med)[3:8] &lt;- paste0(names(index_med)[3:8],&quot;_med&quot;) %&gt;% 
+  str_replace(&quot; &quot;,&quot;_&quot;)
+names(index_sds)[3:8] &lt;- paste0(names(index_sds)[3:8],&quot;_sd&quot;) %&gt;% 
+  str_replace(&quot; &quot;,&quot;_&quot;)
+
+# merge back together
+
+index_combined &lt;- left_join(index_med,index_sds,by=c(&quot;country&quot;,&quot;date_policy&quot;))</code></pre>
+<p>Finally we will merge our predictors into the Google mobility data:</p>
+<pre class="r"><code># we only have index values through Jan 16th, 2021
+
+mobility &lt;- left_join(mobility,index_combined,by=c(&quot;country&quot;,&quot;date_policy&quot;)) %&gt;% 
+  filter(!is.na(Social_Distancing_sd))</code></pre>
+<p>To make the modeling a bit easier, we will only use a subset of the countries in the full data.</p>
+<pre class="r"><code>mobility &lt;- filter(mobility, country %in% c(&quot;United States&quot;,
+                                            &quot;Brazil&quot;,&quot;China&quot;,
+                                            &quot;United Kingdom&quot;,
+                                            &quot;France&quot;,
+                                            &quot;South Africa&quot;,&quot;Nigeria&quot;,
+                                            &quot;Indonesia&quot;,
+                                            &quot;Australia&quot;,&quot;Thailand&quot;))</code></pre>
+</div>
+<div id="conventional-errors-in-variables" class="section level2">
+<h2>Conventional Errors-in-Variables</h2>
+<p>Now we can use the <code>eivreg</code> as a function for estimating a linear regression model for our outcome, <code>retail</code>. We need to simplify our uncertainty measures because conventional measurement/errors-in-variables models can only handle one standard deviation/standard error per variable. As such, we will pass in the average posterior standard deviation as our estimate of <code>Sigma</code>, or the uncertainty of each index:</p>
+<pre class="r"><code># first create Sigma, the covariance matrix
+# only has a diagonal value as we don&#39;t have covariance estimates across indices
+
+Sigma &lt;- diag(c(mean(mobility$`Business_Restrictions_sd`,na.rm=T),
+                mean(mobility$`Health_Monitoring_sd`,na.rm=T),
+                mean(mobility$`Health_Resources_sd`,na.rm=T),
+                mean(mobility$`Mask_Policies_sd`,na.rm=T),
+                mean(mobility$`School_Restrictions_sd`,na.rm=T),
+                mean(mobility$`Social_Distancing_sd`,na.rm=T)))
+
+# add dimnames to identify each variables
+
+dimnames(Sigma) &lt;- list(c(&quot;Business_Restrictions_med&quot;,
+                          &quot;Health_Monitoring_med&quot;,
+                          &quot;Health_Resources_med&quot;,
+                          &quot;Mask_Policies_med&quot;,
+                          &quot;School_Restrictions_med&quot;,
+                          &quot;Social_Distancing_med&quot;),
+                        c(&quot;Business_Restrictions_med&quot;,
+                          &quot;Health_Monitoring_med&quot;,
+                          &quot;Health_Resources_med&quot;,
+                          &quot;Mask_Policies_med&quot;,
+                          &quot;School_Restrictions_med&quot;,
+                          &quot;Social_Distancing_med&quot;))
+
+retail_eiv &lt;- eivreg(retail~Business_Restrictions_med +
+                            Health_Monitoring_med +
+                            Health_Resources_med +
+                            Mask_Policies_med +
+                            School_Restrictions_med +
+                            Social_Distancing_med,
+                     data=mobility,Sigma_error=Sigma)</code></pre>
+<p>We can then see what our estimated associations are incorporating average standard errors for each index:</p>
+<pre class="r"><code>summary(retail_eiv)</code></pre>
+<pre><code>## 
+## Call:
+## eivreg(formula = retail ~ Business_Restrictions_med + Health_Monitoring_med + 
+##     Health_Resources_med + Mask_Policies_med + School_Restrictions_med + 
+##     Social_Distancing_med, data = mobility, Sigma_error = Sigma)
+## 
+## Error Covariance Matrix
+##                           Business_Restrictions_med Health_Monitoring_med
+## Business_Restrictions_med                     1.862                 0.000
+## Health_Monitoring_med                         0.000                 2.847
+## Health_Resources_med                          0.000                 0.000
+## Mask_Policies_med                             0.000                 0.000
+## School_Restrictions_med                       0.000                 0.000
+## Social_Distancing_med                         0.000                 0.000
+##                           Health_Resources_med Mask_Policies_med
+## Business_Restrictions_med                0.000             0.000
+## Health_Monitoring_med                    0.000             0.000
+## Health_Resources_med                     2.378             0.000
+## Mask_Policies_med                        0.000             3.887
+## School_Restrictions_med                  0.000             0.000
+## Social_Distancing_med                    0.000             0.000
+##                           School_Restrictions_med Social_Distancing_med
+## Business_Restrictions_med                   0.000                 0.000
+## Health_Monitoring_med                       0.000                 0.000
+## Health_Resources_med                        0.000                 0.000
+## Mask_Policies_med                           0.000                 0.000
+## School_Restrictions_med                     1.291                 0.000
+## Social_Distancing_med                       0.000                 2.971
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -53.57 -10.52   2.34  11.95  55.97 
+## 
+## Coefficients:
+##                           Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               11.14200    1.62278   6.866 8.18e-12 ***
+## Business_Restrictions_med  0.26944    0.03882   6.941 4.85e-12 ***
+## Health_Monitoring_med      0.04689    0.02529   1.855   0.0638 .  
+## Health_Resources_med       0.24416    0.05437   4.490 7.41e-06 ***
+## Mask_Policies_med         -0.05013    0.02062  -2.431   0.0151 *  
+## School_Restrictions_med    0.15210    0.01891   8.045 1.28e-15 ***
+## Social_Distancing_med     -1.30750    0.04362 -29.974  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Number of observations used: 2680 
+## Latent residual standard deviation: 16.5 
+## Latent R-squared: 0.3773, (df-adjusted: 0.3757)
+## 
+## EIV-Adjusted vs Unadjusted Coefficients:
+##                           Adjusted Unadjusted
+## (Intercept)               11.14200   10.67932
+## Business_Restrictions_med  0.26944    0.26442
+## Health_Monitoring_med      0.04689    0.05415
+## Health_Resources_med       0.24416    0.21373
+## Mask_Policies_med         -0.05013   -0.05209
+## School_Restrictions_med    0.15210    0.14216
+## Social_Distancing_med     -1.30750   -1.25473</code></pre>
+<p>We see that the social distancing index has the strongest association with reduced retail mobility, followed by the mask policy index. The other indices are associated with increased retail mobility. It is important to note that even with the inclusion of measurement error, the effects are still very precisely estimated due to the amount of data we have.</p>
+</div>
+<div id="bayesian-measurement-models" class="section level2">
+<h2>Bayesian Measurement Models</h2>
+<p>Next we will do the same exercise, except we will use Bayesian estimation with the R package <code>brms</code>. The big advantage here is that we do not need to simplify to average posterior standard deviations for our estimate of uncertainty; rather, we can include the standard deviation/standard error for each variable separately. It’s also easier frankly to use this package as we don’t need to take the extra step of making a Sigma matrix.</p>
+<p>Instead, we can use the handy <code>me()</code> function as part of the <code>brms</code> formula syntax to identify each variable with measurement error:</p>
+<pre class="r"><code># read from disk as this can take a while to run
+
+if(run_model) {
+  
+  # turn off correlations among latent variables to match what we gave 
+  # eivreg
+  
+  brms_formula &lt;- bf(retail ~ 
+                  me(Business_Restrictions_med,Business_Restrictions_sd) +
+                  me(Health_Monitoring_med,Health_Monitoring_sd) +
+                  me(Health_Resources_med,Health_Resources_sd) +
+                  me(Mask_Policies_med,Mask_Policies_sd) +
+                  me(School_Restrictions_med,School_Restrictions_sd) +
+                  me(Social_Distancing_med,Social_Distancing_sd),
+                  center=TRUE) +
+                  set_mecor(FALSE)
+  
+  brms_est &lt;- brm(brms_formula,
+                data=mobility,
+                silent=0,
+                chains=1,save_pars = save_pars(),
+                iter=500,
+                warmup=250,
+                backend=&#39;rstan&#39;)
+  
+  saveRDS(brms_est,&quot;data/brms_est.rds&quot;)
+  
+} else {
+  
+  brms_est &lt;- readRDS(&quot;data/brms_est.rds&quot;)
+  
+}</code></pre>
+<p>We can then look at the estimated associations:</p>
+<pre class="r"><code>summary(brms_est)</code></pre>
+<pre><code>##  Family: gaussian 
+##   Links: mu = identity; sigma = identity 
+## Formula: retail ~ me(Business_Restrictions_med, Business_Restrictions_sd) + me(Health_Monitoring_med, Health_Monitoring_sd) + me(Health_Resources_med, Health_Resources_sd) + me(Mask_Policies_med, Mask_Policies_sd) + me(School_Restrictions_med, School_Restrictions_sd) + me(Social_Distancing_med, Social_Distancing_sd) 
+##    Data: mobility (Number of observations: 2680) 
+## Samples: 1 chains, each with iter = 500; warmup = 250; thin = 1;
+##          total post-warmup samples = 250
+## 
+## Population-Level Effects: 
+##                                                     Estimate Est.Error l-95% CI
+## Intercept                                              13.89      1.95    10.20
+## meBusiness_Restrictions_medBusiness_Restrictions_sd     0.28      0.04     0.21
+## meHealth_Monitoring_medHealth_Monitoring_sd             0.06      0.02     0.02
+## meHealth_Resources_medHealth_Resources_sd               0.20      0.05     0.11
+## meMask_Policies_medMask_Policies_sd                    -0.06      0.02    -0.09
+## meSchool_Restrictions_medSchool_Restrictions_sd         0.14      0.02     0.10
+## meSocial_Distancing_medSocial_Distancing_sd            -1.31      0.04    -1.38
+##                                                     u-95% CI Rhat Bulk_ESS
+## Intercept                                              17.55 1.00      218
+## meBusiness_Restrictions_medBusiness_Restrictions_sd     0.35 1.00      136
+## meHealth_Monitoring_medHealth_Monitoring_sd             0.11 1.00      119
+## meHealth_Resources_medHealth_Resources_sd               0.28 1.00      119
+## meMask_Policies_medMask_Policies_sd                    -0.03 1.01      249
+## meSchool_Restrictions_medSchool_Restrictions_sd         0.18 1.06      288
+## meSocial_Distancing_medSocial_Distancing_sd            -1.23 1.00      213
+##                                                     Tail_ESS
+## Intercept                                                187
+## meBusiness_Restrictions_medBusiness_Restrictions_sd      128
+## meHealth_Monitoring_medHealth_Monitoring_sd              193
+## meHealth_Resources_medHealth_Resources_sd                196
+## meMask_Policies_medMask_Policies_sd                      206
+## meSchool_Restrictions_medSchool_Restrictions_sd          147
+## meSocial_Distancing_medSocial_Distancing_sd              162
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma    16.22      0.24    15.79    16.68 1.00      573      197
+## 
+## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+<p>The associations are quite similar in magnitude and sign to those we estimated with <code>eivreg</code>. We estimated that an increase of one unit in the social distancing index is associated with a -1.307 decrease in retail mobility, while with <code>brms</code> we estimated a -1.31 decrease in retail mobility.</p>
+<p>As we can see, for this simple model the two are equivalent, and <code>eivreg</code> is much faster–it took almost no time to estimate the model, while <code>brms</code> took 20 minutes. However, <code>brms</code> is incorporating much more measurement uncertainty, and <code>brms</code> also allows for a much wider of array of modeling options, such as GLMs (probit/logit/ordered logit), multilevel/hierarchical models, and multiple imputation. The <code>eivreg</code> is limited to continuous (Gaussian) outcomes and does not allow for interactions with variables with measurement uncertainty. In any case, both of these packages will incorporate measurement uncertainty in their estimates.</p>
+</div>
+<div id="comparison-with-no-measurement-error" class="section level2">
+<h2>Comparison with No Measurement Error</h2>
+<p>Finally, we can examine what measurement error does to our coefficients’ uncertainty by comparing the results to the standard OLS <code>lm</code> regression that ignores uncertainty:</p>
+<pre class="r"><code>lm_est &lt;- lm(retail~Business_Restrictions_med +
+                            Health_Monitoring_med +
+                            Health_Resources_med +
+                            Mask_Policies_med +
+                            School_Restrictions_med +
+                            Social_Distancing_med,
+                     data=mobility)
+
+summary(lm_est)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = retail ~ Business_Restrictions_med + Health_Monitoring_med + 
+##     Health_Resources_med + Mask_Policies_med + School_Restrictions_med + 
+##     Social_Distancing_med, data = mobility)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -53.785 -10.103   2.617  11.961  55.443 
+## 
+## Coefficients:
+##                           Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               10.67932    1.97234   5.415 6.69e-08 ***
+## Business_Restrictions_med  0.26442    0.03575   7.397 1.85e-13 ***
+## Health_Monitoring_med      0.05415    0.02351   2.304  0.02132 *  
+## Health_Resources_med       0.21373    0.04215   5.071 4.23e-07 ***
+## Mask_Policies_med         -0.05209    0.01797  -2.899  0.00377 ** 
+## School_Restrictions_med    0.14216    0.01881   7.557 5.64e-14 ***
+## Social_Distancing_med     -1.25473    0.03588 -34.971  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 16.66 on 2673 degrees of freedom
+## Multiple R-squared:  0.3654, Adjusted R-squared:  0.364 
+## F-statistic: 256.6 on 6 and 2673 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>We can see that the coefficients are similar though not identical to <code>brms</code> and <code>eivreg</code>, and the standard errors are noticeably smaller. The <code>eivreg</code> estimated that there was 19.44% more uncertainty than the naive <code>lm</code> estimator, and <code>brms</code> 8.33% more uncertainty. As such, this kind of uncertainty is important to take into account, and it can get much more important when there is less data available or we are examining non-linear effects such as interactions.</p>
+</div>
