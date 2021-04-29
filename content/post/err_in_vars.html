@@ -5,7 +5,6 @@ author: "Robert Kubinec"
 date: "2021-04-28T15:00:00"
 output: blogdown::html_page
 bibliography: BibTexDatabase.bib
-draft: false
 header:
   title: "How to Estimate Models with Measurement Error from our COVID-19 Indices"
   summary: "In this post I show how to incorporate the measurement error which is included in the six COVID-19 policy restriction indices released by Kubinec et al. I use R packages with errors-in-variables models and also a Bayesian version with R package brms."
@@ -30,7 +29,7 @@ header:
            retail=&quot;retail_and_recreation_percent_change_from_baseline&quot;)</code></pre>
 <p>I next load the CoronaNet-OxCGRT indices from this <a href="https://drive.google.com/uc?export=download&amp;id=1dMCTVPrf-tJyhv_uxr0yAQO-Elx0QOCG">direct download link</a> as a CSV:</p>
 <pre class="r"><code>indices &lt;- read_csv(&quot;https://drive.google.com/uc?export=download&amp;id=1dMCTVPrf-tJyhv_uxr0yAQO-Elx0QOCG&quot;)</code></pre>
-<p>I also want to point out that we have the full list of indicators (i.e, individual policies as variables) available via a direct download link as well:</p>
+<p>I also want to point out that we have the full list of indicators (i.e, individual policies as variables) available via a <a href="https://drive.google.com/uc?export=download&amp;id=1dMCTVPrf-tJyhv_uxr0yAQO-Elx0QOCG">direct download link</a> as well:</p>
 <pre class="r"><code>indicators &lt;- read_csv(&quot;https://drive.google.com/uc?id=1lorcowHNnF0Vl6pxBjMdjTC4yPhHBLJI&amp;export=download&quot;)</code></pre>
 <p>I’ll display the data to get a sense of what it looks like. First, these are the raw indicators. There are a lot of them–more than 160 variables:</p>
 <pre class="r"><code>indicators %&gt;% 
@@ -148,7 +147,7 @@ Afghanistan
 </tr>
 </tbody>
 </table>
-<p>The data is organized in a country-day-policy record format with the different policy indicators in columns. The fractional values indicate a proportion of the population that ha the following policy in place (i.e., at the provincial or municipal level). The high value for <code>primary_school</code> has to do with the fact that this variable naturally has 3 levels, from totally open to totally closed. For more information about the underlying indicators, you can see <a href="https://docs.google.com/document/d/1ScKWFv7jOHYVQlsbqvf--yU0mO2JscTsNEmb0SMXcsg/edit?usp=sharing">our codebook</a>.</p>
+<p>The data is organized in a country-day-policy record format with the different policy indicators in columns. The fractional values indicate a proportion of the population that have the following policy in place (i.e., at the provincial or municipal level). The high value for <code>primary_school</code> has to do with the fact that this variable naturally has 3 levels, from totally open to totally closed, and when provincial and municipal policies are added it can exceed 3. For more information about the underlying indicators, you can see <a href="https://docs.google.com/document/d/1ScKWFv7jOHYVQlsbqvf--yU0mO2JscTsNEmb0SMXcsg/edit?usp=sharing">our codebook</a>.</p>
 <p>We can now take a glance at the estimated indices that collapse these indicators into single constructs:</p>
 <pre class="r"><code>indices %&gt;% 
   filter(date_policy==ymd(&quot;2020-04-01&quot;),
@@ -358,7 +357,7 @@ mobility &lt;- left_join(mobility,index_combined,by=c(&quot;country&quot;,&quot;
 </div>
 <div id="conventional-errors-in-variables" class="section level2">
 <h2>Conventional Errors-in-Variables</h2>
-<p>Now we can use the <code>eivreg</code> as a function for estimating a linear regression model for our outcome, <code>retail</code>. We need to simplify our uncertainty measures because conventional measurement/errors-in-variables models can only handle one standard deviation/standard error per variable. As such, we will pass in the average posterior standard deviation as our estimate of <code>Sigma</code>, or the uncertainty of each index:</p>
+<p>Now we can use the <code>eivreg</code> as a function for estimating a linear regression model for our outcome, <code>retail</code>. We need to simplify our uncertainty measures because conventional measurement/errors-in-variables models can only handle one standard deviation/standard error per variable. As such, we will pass in the average posterior standard deviation for each index as our estimate of measurement error <code>Sigma</code>:</p>
 <pre class="r"><code># first create Sigma, the covariance matrix
 # only has a diagonal value as we don&#39;t have covariance estimates across indices
 
@@ -391,7 +390,7 @@ retail_eiv &lt;- eivreg(retail~Business_Restrictions_med +
                             School_Restrictions_med +
                             Social_Distancing_med,
                      data=mobility,Sigma_error=Sigma)</code></pre>
-<p>We can then see what our estimated associations are incorporating average standard errors for each index:</p>
+<p>We can then see what our estimated associations are given that we incorporated average standard errors for each index:</p>
 <pre class="r"><code>summary(retail_eiv)</code></pre>
 <pre><code>## 
 ## Call:
@@ -454,7 +453,7 @@ retail_eiv &lt;- eivreg(retail~Business_Restrictions_med +
 </div>
 <div id="bayesian-measurement-models" class="section level2">
 <h2>Bayesian Measurement Models</h2>
-<p>Next we will do the same exercise, except we will use Bayesian estimation with the R package <code>brms</code>. The big advantage here is that we do not need to simplify to average posterior standard deviations for our estimate of uncertainty; rather, we can include the standard deviation/standard error for each variable separately. It’s also easier frankly to use this package as we don’t need to take the extra step of making a Sigma matrix.</p>
+<p>Next we will do the same exercise, except we will use Bayesian estimation with the R package <code>brms</code>. The big advantage here is that we do not need to simplify to average posterior standard deviations for our estimate of uncertainty; rather, we can include the standard deviation/standard error for each variable separately. It’s also frankly easier to use this package as we don’t need to take the extra step of making a Sigma matrix.</p>
 <p>Instead, we can use the handy <code>me()</code> function as part of the <code>brms</code> formula syntax to identify each variable with measurement error:</p>
 <pre class="r"><code># read from disk as this can take a while to run
 
@@ -570,5 +569,5 @@ summary(lm_est)</code></pre>
 ## Residual standard error: 16.66 on 2673 degrees of freedom
 ## Multiple R-squared:  0.3654, Adjusted R-squared:  0.364 
 ## F-statistic: 256.6 on 6 and 2673 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>We can see that the coefficients are similar though not identical to <code>brms</code> and <code>eivreg</code>, and the standard errors are noticeably smaller. The <code>eivreg</code> estimated that there was 19.44% more uncertainty than the naive <code>lm</code> estimator, and <code>brms</code> 8.33% more uncertainty. As such, this kind of uncertainty is important to take into account, and it can get much more important when there is less data available or we are examining non-linear effects such as interactions.</p>
+<p>We can see that the coefficients are similar though not identical to <code>brms</code> and <code>eivreg</code>, and the standard errors are noticeably smaller. The <code>eivreg</code> estimated that there was 19.44% more uncertainty than the naive <code>lm</code> estimator, and <code>brms</code> 8.33% more uncertainty. As such, this kind of uncertainty is important to take into account, and it can get much more critical when there is less data available or when are examining non-linear effects such as interactions.</p>
 </div>

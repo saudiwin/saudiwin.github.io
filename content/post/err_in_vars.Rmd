@@ -62,7 +62,7 @@ indices <- read_csv("https://drive.google.com/uc?export=download&id=1dMCTVPrf-tJ
 
 ```
 
-I also want to point out that we have the full list of indicators (i.e, individual policies as variables) available via a direct download link as well:
+I also want to point out that we have the full list of indicators (i.e, individual policies as variables) available via a [direct download link](https://drive.google.com/uc?export=download&id=1dMCTVPrf-tJyhv_uxr0yAQO-Elx0QOCG) as well:
 
 ```{r data3}
 
@@ -83,7 +83,7 @@ indicators %>%
   kable_styling()
 
 ```
-The data is organized in a country-day-policy record format with the different policy indicators in columns. The fractional values indicate a proportion of the population that ha the following policy in place (i.e., at the provincial or municipal level). The high value for `primary_school` has to do with the fact that this variable naturally has 3 levels, from totally open to totally closed. For more information about the underlying indicators, you can see [our codebook](https://docs.google.com/document/d/1ScKWFv7jOHYVQlsbqvf--yU0mO2JscTsNEmb0SMXcsg/edit?usp=sharing).
+The data is organized in a country-day-policy record format with the different policy indicators in columns. The fractional values indicate a proportion of the population that have the following policy in place (i.e., at the provincial or municipal level). The high value for `primary_school` has to do with the fact that this variable naturally has 3 levels, from totally open to totally closed, and when provincial and municipal policies are added it can exceed 3. For more information about the underlying indicators, you can see [our codebook](https://docs.google.com/document/d/1ScKWFv7jOHYVQlsbqvf--yU0mO2JscTsNEmb0SMXcsg/edit?usp=sharing).
 
 We can now take a glance at the estimated indices that collapse these indicators into single constructs:
 
@@ -154,7 +154,7 @@ mobility <- filter(mobility, country %in% c("United States",
 
 ## Conventional Errors-in-Variables
 
-Now we can use the `eivreg` as a function for estimating a linear regression model for our outcome, `retail`. We need to simplify our uncertainty measures because conventional measurement/errors-in-variables models can only handle one standard deviation/standard error per variable. As such, we will pass in the average posterior standard deviation as our estimate of `Sigma`, or the uncertainty of each index:
+Now we can use the `eivreg` as a function for estimating a linear regression model for our outcome, `retail`. We need to simplify our uncertainty measures because conventional measurement/errors-in-variables models can only handle one standard deviation/standard error per variable. As such, we will pass in the average posterior standard deviation for each index as our estimate of measurement error `Sigma`:
 
 ```{r error1}
 
@@ -194,7 +194,7 @@ retail_eiv <- eivreg(retail~Business_Restrictions_med +
 ```
 
 
-We can then see what our estimated associations are incorporating average standard errors for each index:
+We can then see what our estimated associations are given that we incorporated average standard errors for each index:
 
 ```{r eivsum}
 
@@ -207,7 +207,7 @@ We see that the social distancing index has the strongest association with reduc
 
 ## Bayesian Measurement Models 
 
-Next we will do the same exercise, except we will use Bayesian estimation with the R package `brms`. The big advantage here is that we do not need to simplify to average posterior standard deviations for our estimate of uncertainty; rather, we can include the standard deviation/standard error for each variable separately. It's also easier frankly to use this package as we don't need to take the extra step of making a Sigma matrix.
+Next we will do the same exercise, except we will use Bayesian estimation with the R package `brms`. The big advantage here is that we do not need to simplify to average posterior standard deviations for our estimate of uncertainty; rather, we can include the standard deviation/standard error for each variable separately. It's also frankly easier to use this package as we don't need to take the extra step of making a Sigma matrix.
 
 Instead, we can use the handy `me()` function as part of the `brms` formula syntax to identify each variable with measurement error:
 
@@ -278,4 +278,4 @@ summary(lm_est)
 
 ```
 
-We can see that the coefficients are similar though not identical to `brms` and `eivreg`, and the standard errors are noticeably smaller. The `eivreg` estimated that there was `r round(((.043-.036)/.036)*100,2)`% more uncertainty than the naive `lm` estimator, and `brms` `r round(((.039-.036)/.036)*100,2)`% more uncertainty. As such, this kind of uncertainty is important to take into account, and it can get much more important when there is less data available or we are examining non-linear effects such as interactions.
+We can see that the coefficients are similar though not identical to `brms` and `eivreg`, and the standard errors are noticeably smaller. The `eivreg` estimated that there was `r round(((.043-.036)/.036)*100,2)`% more uncertainty than the naive `lm` estimator, and `brms` `r round(((.039-.036)/.036)*100,2)`% more uncertainty. As such, this kind of uncertainty is important to take into account, and it can get much more critical when there is less data available or when are examining non-linear effects such as interactions.
