@@ -62,7 +62,7 @@ indices <- read_csv("https://drive.google.com/uc?export=download&id=1dMCTVPrf-tJ
 
 ```
 
-I also want to point out that we have the full list of indicators (i.e, individual policies as variables) available via a [direct download link](https://drive.google.com/uc?export=download&id=1dMCTVPrf-tJyhv_uxr0yAQO-Elx0QOCG) as well:
+I also want to point out that we have the full list of indicators (i.e, individual policies as variables) available via a [direct download link](https://drive.google.com/uc?id=1lorcowHNnF0Vl6pxBjMdjTC4yPhHBLJI&export=download) as well:
 
 ```{r data3}
 

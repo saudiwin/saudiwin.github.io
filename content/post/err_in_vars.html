@@ -29,7 +29,7 @@ header:
            retail=&quot;retail_and_recreation_percent_change_from_baseline&quot;)</code></pre>
 <p>I next load the CoronaNet-OxCGRT indices from this <a href="https://drive.google.com/uc?export=download&amp;id=1dMCTVPrf-tJyhv_uxr0yAQO-Elx0QOCG">direct download link</a> as a CSV:</p>
 <pre class="r"><code>indices &lt;- read_csv(&quot;https://drive.google.com/uc?export=download&amp;id=1dMCTVPrf-tJyhv_uxr0yAQO-Elx0QOCG&quot;)</code></pre>
-<p>I also want to point out that we have the full list of indicators (i.e, individual policies as variables) available via a <a href="https://drive.google.com/uc?export=download&amp;id=1dMCTVPrf-tJyhv_uxr0yAQO-Elx0QOCG">direct download link</a> as well:</p>
+<p>I also want to point out that we have the full list of indicators (i.e, individual policies as variables) available via a <a href="https://drive.google.com/uc?id=1lorcowHNnF0Vl6pxBjMdjTC4yPhHBLJI&amp;export=download">direct download link</a> as well:</p>
 <pre class="r"><code>indicators &lt;- read_csv(&quot;https://drive.google.com/uc?id=1lorcowHNnF0Vl6pxBjMdjTC4yPhHBLJI&amp;export=download&quot;)</code></pre>
 <p>I’ll display the data to get a sense of what it looks like. First, these are the raw indicators. There are a lot of them–more than 160 variables:</p>
 <pre class="r"><code>indicators %&gt;% 
