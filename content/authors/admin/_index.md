@@ -20,16 +20,16 @@ organizations:
 # Short bio (displayed in user profile at end of posts)
 bio: My research centers on political-economic issues such as corruption, economic development, and business-state relations in developing countries, and in particular the Middle East and North Africa. I am also involved in the development of Bayesian statistical models with Stan for hard-to-study subjects like corruption, polarization, and other latent social constructs.
 
-interests:
-- Political Economy
-- Middle East and North Africa
-- Applied Bayesian Methods (Stan)
-
-education:
-  courses:
-  - course: PhD
-    institution: University of Virginia
-    year: 2018
+# interests:
+# - Political Economy
+# - Middle East and North Africa
+# - Applied Bayesian Methods (Stan)
+# 
+# education:
+#   courses:
+#   - course: PhD
+#     institution: University of Virginia
+#     year: 2018
 
 # Social/Academic Networking
 # For available icons, see: https://sourcethemes.com/academic/docs/page-builder/#icons
@@ -44,7 +44,7 @@ social:
   link: https://twitter.com/rmkubinec
 - icon: google-scholar
   icon_pack: ai
-  link: https://scholar.google.com/citations?user=1tI8usUAAAAJ&hl=en
+  link: https://scholar.google.com/citations?user=bhOaXR4AAAAJ&hl=en&authuser=1
 - icon: github
   icon_pack: fab
   link: https://github.com/saudiwin
@@ -52,7 +52,7 @@ social:
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 - icon: cv
   icon_pack: ai
-  link: files/Robert_Kubinec_CV_6_23_2020.pdf
+  link: files/Robert_Kubinec_CV_5_2_2021.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ""
@@ -64,4 +64,6 @@ user_groups:
 - Visitors
 ---
 
-My research centers on political-economic issues such as corruption, economic development, and business-state relations in developing countries, and in particular the Middle East and North Africa. I am also involved in the development of Bayesian statistical models with Stan for hard-to-study subjects like corruption, polarization, and other latent social constructs.
+This website serves mainly as a blog in which I present ideas on political-economic topics I study and issues related to data science with R/Rstudio and causal inference. My R-related posts are syndicated with [RBloggers](https://www.r-bloggers.com/), a consortium of R bloggers.
+
+My research centers on political-economic issues such as corruption, economic development, and business-state relations in developing countries, and in particular the Middle East and North Africa. I am also involved in the development of Bayesian statistical models with Stan for hard-to-study subjects like corruption, polarization, and other latent social constructs. To see a list of my current working papers and access the PDFs, see my [Google Scholar](https://scholar.google.com/citations?user=bhOaXR4AAAAJ&hl=en&authuser=1) page.

@@ -1,0 +1,12 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=border] (0) at (0, -3) {$Y_{it}$};
+		\node [style=border] (1) at (0, 2.25) {$G_{it}$};
+		\node [style=border] (2) at (-3, 0) {$F_i$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=arrow] (1) to (0);
+		\draw [style=arrow] (2) to (1);
+		\draw [style=arrow] (2) to (0);
+	\end{pgfonlayer}
+\end{tikzpicture}
