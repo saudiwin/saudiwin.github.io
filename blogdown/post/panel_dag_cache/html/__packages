@@ -1,0 +1,8 @@
+base
+dplyr
+tidyr
+ggplot2
+ggthemes
+readr
+tidycensus
+lubridate

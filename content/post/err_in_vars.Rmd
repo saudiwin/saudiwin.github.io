@@ -13,6 +13,7 @@ header:
 ---
 
 ```{r setup, include=FALSE}
+
 knitr::opts_chunk$set(echo = TRUE)
 require(dplyr)
 require(tidyr)
@@ -160,13 +161,14 @@ Now we can use the `eivreg` as a function for estimating a linear regression mod
 
 # first create Sigma, the covariance matrix
 # only has a diagonal value as we don't have covariance estimates across indices
+# we have to square them first as Sigma is a covariance matrix and we have standard deviations (variance = SD^2)
 
-Sigma <- diag(c(mean(mobility$`Business_Restrictions_sd`,na.rm=T),
-                mean(mobility$`Health_Monitoring_sd`,na.rm=T),
-                mean(mobility$`Health_Resources_sd`,na.rm=T),
-                mean(mobility$`Mask_Policies_sd`,na.rm=T),
-                mean(mobility$`School_Restrictions_sd`,na.rm=T),
-                mean(mobility$`Social_Distancing_sd`,na.rm=T)))
+Sigma <- diag(c(mean(mobility$`Business_Restrictions_sd`^2,na.rm=T),
+                mean(mobility$`Health_Monitoring_sd`^2,na.rm=T),
+                mean(mobility$`Health_Resources_sd`^2,na.rm=T),
+                mean(mobility$`Mask_Policies_sd`^2,na.rm=T),
+                mean(mobility$`School_Restrictions_sd`^2,na.rm=T),
+                mean(mobility$`Social_Distancing_sd`^2,na.rm=T)))
 
 # add dimnames to identify each variables
 

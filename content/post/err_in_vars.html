@@ -360,13 +360,14 @@ mobility &lt;- left_join(mobility,index_combined,by=c(&quot;country&quot;,&quot;
 <p>Now we can use the <code>eivreg</code> as a function for estimating a linear regression model for our outcome, <code>retail</code>. We need to simplify our uncertainty measures because conventional measurement/errors-in-variables models can only handle one standard deviation/standard error per variable. As such, we will pass in the average posterior standard deviation for each index as our estimate of measurement error <code>Sigma</code>:</p>
 <pre class="r"><code># first create Sigma, the covariance matrix
 # only has a diagonal value as we don&#39;t have covariance estimates across indices
+# we have to square them first as Sigma is a covariance matrix and we have standard deviations (variance = SD^2)
 
-Sigma &lt;- diag(c(mean(mobility$`Business_Restrictions_sd`,na.rm=T),
-                mean(mobility$`Health_Monitoring_sd`,na.rm=T),
-                mean(mobility$`Health_Resources_sd`,na.rm=T),
-                mean(mobility$`Mask_Policies_sd`,na.rm=T),
-                mean(mobility$`School_Restrictions_sd`,na.rm=T),
-                mean(mobility$`Social_Distancing_sd`,na.rm=T)))
+Sigma &lt;- diag(c(mean(mobility$`Business_Restrictions_sd`^2,na.rm=T),
+                mean(mobility$`Health_Monitoring_sd`^2,na.rm=T),
+                mean(mobility$`Health_Resources_sd`^2,na.rm=T),
+                mean(mobility$`Mask_Policies_sd`^2,na.rm=T),
+                mean(mobility$`School_Restrictions_sd`^2,na.rm=T),
+                mean(mobility$`Social_Distancing_sd`^2,na.rm=T)))
 
 # add dimnames to identify each variables
 
@@ -400,55 +401,55 @@ retail_eiv &lt;- eivreg(retail~Business_Restrictions_med +
 ## 
 ## Error Covariance Matrix
 ##                           Business_Restrictions_med Health_Monitoring_med
-## Business_Restrictions_med                     1.862                 0.000
-## Health_Monitoring_med                         0.000                 2.847
+## Business_Restrictions_med                     3.658                 0.000
+## Health_Monitoring_med                         0.000                 9.721
 ## Health_Resources_med                          0.000                 0.000
 ## Mask_Policies_med                             0.000                 0.000
 ## School_Restrictions_med                       0.000                 0.000
 ## Social_Distancing_med                         0.000                 0.000
 ##                           Health_Resources_med Mask_Policies_med
-## Business_Restrictions_med                0.000             0.000
-## Health_Monitoring_med                    0.000             0.000
-## Health_Resources_med                     2.378             0.000
-## Mask_Policies_med                        0.000             3.887
-## School_Restrictions_med                  0.000             0.000
-## Social_Distancing_med                    0.000             0.000
+## Business_Restrictions_med                0.000              0.00
+## Health_Monitoring_med                    0.000              0.00
+## Health_Resources_med                     6.375              0.00
+## Mask_Policies_med                        0.000             15.79
+## School_Restrictions_med                  0.000              0.00
+## Social_Distancing_med                    0.000              0.00
 ##                           School_Restrictions_med Social_Distancing_med
 ## Business_Restrictions_med                   0.000                 0.000
 ## Health_Monitoring_med                       0.000                 0.000
 ## Health_Resources_med                        0.000                 0.000
 ## Mask_Policies_med                           0.000                 0.000
-## School_Restrictions_med                     1.291                 0.000
-## Social_Distancing_med                       0.000                 2.971
+## School_Restrictions_med                     1.755                 0.000
+## Social_Distancing_med                       0.000                 8.896
 ## 
 ## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -53.57 -10.52   2.34  11.95  55.97 
+##     Min      1Q  Median      3Q     Max 
+## -53.157 -11.276   2.005  12.105  57.204 
 ## 
 ## Coefficients:
 ##                           Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)               11.14200    1.62278   6.866 8.18e-12 ***
-## Business_Restrictions_med  0.26944    0.03882   6.941 4.85e-12 ***
-## Health_Monitoring_med      0.04689    0.02529   1.855   0.0638 .  
-## Health_Resources_med       0.24416    0.05437   4.490 7.41e-06 ***
-## Mask_Policies_med         -0.05013    0.02062  -2.431   0.0151 *  
-## School_Restrictions_med    0.15210    0.01891   8.045 1.28e-15 ***
-## Social_Distancing_med     -1.30750    0.04362 -29.974  &lt; 2e-16 ***
+## (Intercept)               12.45477    1.74730   7.128 1.30e-12 ***
+## Business_Restrictions_med  0.27001    0.04336   6.228 5.48e-10 ***
+## Health_Monitoring_med      0.02532    0.02871   0.882   0.3779    
+## Health_Resources_med       0.32352    0.06208   5.212 2.01e-07 ***
+## Mask_Policies_med         -0.04313    0.02231  -1.933   0.0533 .  
+## School_Restrictions_med    0.17267    0.01967   8.779  &lt; 2e-16 ***
+## Social_Distancing_med     -1.42736    0.04879 -29.254  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## Number of observations used: 2680 
-## Latent residual standard deviation: 16.5 
-## Latent R-squared: 0.3773, (df-adjusted: 0.3757)
+## Latent residual standard deviation: 16.14 
+## Latent R-squared: 0.4038, (df-adjusted: 0.4022)
 ## 
 ## EIV-Adjusted vs Unadjusted Coefficients:
 ##                           Adjusted Unadjusted
-## (Intercept)               11.14200   10.67932
-## Business_Restrictions_med  0.26944    0.26442
-## Health_Monitoring_med      0.04689    0.05415
-## Health_Resources_med       0.24416    0.21373
-## Mask_Policies_med         -0.05013   -0.05209
-## School_Restrictions_med    0.15210    0.14216
-## Social_Distancing_med     -1.30750   -1.25473</code></pre>
+## (Intercept)               12.45477   10.67932
+## Business_Restrictions_med  0.27001    0.26442
+## Health_Monitoring_med      0.02532    0.05415
+## Health_Resources_med       0.32352    0.21373
+## Mask_Policies_med         -0.04313   -0.05209
+## School_Restrictions_med    0.17267    0.14216
+## Social_Distancing_med     -1.42736   -1.25473</code></pre>
 <p>We see that the social distancing index has the strongest association with reduced retail mobility, followed by the mask policy index. The other indices are associated with increased retail mobility. It is important to note that even with the inclusion of measurement error, the effects are still very precisely estimated due to the amount of data we have.</p>
 </div>
 <div id="bayesian-measurement-models" class="section level2">
@@ -529,7 +530,7 @@ if(run_model) {
 ## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<p>The associations are quite similar in magnitude and sign to those we estimated with <code>eivreg</code>. We estimated that an increase of one unit in the social distancing index is associated with a -1.307 decrease in retail mobility, while with <code>brms</code> we estimated a -1.31 decrease in retail mobility.</p>
+<p>The associations are quite similar in magnitude and sign to those we estimated with <code>eivreg</code>. We estimated that an increase of one unit in the social distancing index is associated with a -1.427 decrease in retail mobility, while with <code>brms</code> we estimated a -1.31 decrease in retail mobility.</p>
 <p>As we can see, for this simple model the two are equivalent, and <code>eivreg</code> is much faster–it took almost no time to estimate the model, while <code>brms</code> took 20 minutes. However, <code>brms</code> is incorporating much more measurement uncertainty, and <code>brms</code> also allows for a much wider of array of modeling options, such as GLMs (probit/logit/ordered logit), multilevel/hierarchical models, and multiple imputation. The <code>eivreg</code> is limited to continuous (Gaussian) outcomes and does not allow for interactions with variables with measurement uncertainty. In any case, both of these packages will incorporate measurement uncertainty in their estimates.</p>
 </div>
 <div id="comparison-with-no-measurement-error" class="section level2">
