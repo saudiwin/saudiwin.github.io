@@ -10,6 +10,8 @@ header:
   summary: "A model that shows how to estimate the effect of suppression measures on the SARS-CoV2 without knowing the true infection rate."
   image: "headers/coronavirus.jpg"
   date: "2020-03-28T15:00:00"
+tags: ["R","Measurement", "Bayesian","Data Science"]
+categories: ["R"]
 ---
 
 ```{r setup, include=FALSE}

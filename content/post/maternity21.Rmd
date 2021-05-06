@@ -10,6 +10,8 @@ header:
   summary: "In this post I discuss the very popular MaterniT 21 test used to identify fetuses with Downe's Syndrome and other genetic conditions, and show why it can't really be trusted for women under 40."
   image: "headers/ultrasound.jpg"
   date: "2020-09-13T15:00:00"
+tags: ["R","Public Health","Meta-analysis","Data Science"]
+categories: ["R"]
 ---
 
 ```{r setup, include=FALSE}

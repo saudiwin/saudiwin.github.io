@@ -10,11 +10,11 @@ header:
   summary: "The clinical pre-registration for the Moderna vaccine defines clearly what statistic we should use to evaluate their trial, in contrast to their press release."
   image: "headers/ft_header.png"
   date: "2020-11-19T15:00:00"
+tags: ["R","Causal Inferece", "COVID-19","Data Science"]
+categories: ["R"]
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
-<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>I start with <a href="https://rpubs.com/ericnovik/692460">Eric Novik’s excellent blog post</a> on how to calculate the relevant statistics for the vaccine, i.e. vaccine efficacy (VE). This is defined as:</p>
@@ -81,7 +81,7 @@ stan_data &lt;- list(n=n,r_c=r_c,r_t=r_t,
 ## Chain 1 Iteration:    501 / 100500 [  0%]  (Sampling) 
 ## Chain 1 Iteration:  50500 / 100500 [ 50%]  (Sampling) 
 ## Chain 1 Iteration: 100500 / 100500 [100%]  (Sampling) 
-## Chain 1 finished in 2.1 seconds.</code></pre>
+## Chain 1 finished in 1.8 seconds.</code></pre>
 <pre class="r"><code>draws &lt;- pfizer_est$draws() %&gt;% as_draws_df</code></pre>
 <p>Here’s a plot of the VE as reported in the press release with the dotted line as the average estimate:</p>
 <pre class="r"><code>mean_ve &lt;- mean(draws$VE)

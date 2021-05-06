@@ -10,6 +10,8 @@ header:
   summary: "People are very skeptical of AstraZeneca's attempt to spin the results of their vaccine trial to be more than 90 percent effective. I demonstrate in this blog post why skepticism of post hoc analyses is warranted."
   image: "headers/ft_header.png"
   date: "2020-11-19T15:00:00"
+tags: ["R","Causal Inference", "COVID-19","Data Science"]
+categories: ["R"]
 ---
 
 ```{r setup, include=FALSE}

@@ -9,6 +9,8 @@ header:
   summary: "I critique Victor Chernozhukov (and the wider econometric community's) assumption that fixed effects are best understood as unobserved confounders."
   image: "headers/tornado.jpeg"
   date: "2021-03-12T15:00:00"
+tags: ["R","Fixed Effects", "Panel Data","Data Science"]
+categories: ["R"]
 ---
 
 ```{r setup, include=FALSE}
