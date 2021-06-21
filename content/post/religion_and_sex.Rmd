@@ -91,9 +91,9 @@ This matters for birth rates because it seems like people who do not have a reli
 
 So that you don't have to read the post, here are the topline findings:
 
-1. On the whole, non-religous people have more frequent sex than religious people. However, the differences only exist for unmarried people. For married people, there aren't very clear differences in terms of sexual frequency, and if anything religious people may have very frequent sex more often.
+1. On the whole, non-religious people have more frequent sex than religious people. However, the differences only exist for unmarried people. For married people, there aren't very clear differences in terms of sexual frequency, and if anything religious people may have very frequent sex more often.
 
-2. When looking at unmarried people, the differences are most pronounced for abstaining from sex entirely (no sexual intercourse in the past year) and more frequent sexual activity (once a week or more). Non-religious unmarried people are much less likely to abstain from sex entirely and considerably mroe likely to engage in very frequent sexual activity.
+2. When looking at unmarried people, the differences are most pronounced for abstaining from sex entirely (no sexual intercourse in the past year) and more frequent sexual activity (once a week or more). Non-religious unmarried people are much less likely to abstain from sex entirely and considerably more likely to engage in very frequent sexual activity.
 
 3. For intermediate levels of sexual activity (once or twice a month), there do not seem to be big differences in sexual frequency by religion no matter how the data is chopped up.
 
@@ -237,7 +237,7 @@ GSS %>%
 
 ```
 
-The plot above provides some more nuance to the story: those who pray a lot tend to abstain more and have less frequent sex at high rates, though again the record is much more mixed for intermediate levels of sexual activity. For people who report religous affiliation but don't pray much, they actually report higher sexual frequency than peole who are religiously unaffiliated, though the estimates are somewhat imprecise. We can also look at a similar breakdown for beliefs about the bible:
+The plot above provides some more nuance to the story: those who pray a lot tend to abstain more and have less frequent sex at high rates, though again the record is much more mixed for intermediate levels of sexual activity. For people who report religious affiliation but don't pray much, they actually report higher sexual frequency than people who are religiously unaffiliated, though the estimates are somewhat imprecise. We can also look at a similar breakdown for beliefs about the bible:
 
 ```{r relbible}
 
@@ -310,12 +310,12 @@ GSS %>%
   ggtitle("About how often did you have sex during the last 12 months?",subtitle="Data from General Social Survey (2013 - 2018).")
 
 ```
-We see that this plot helps clarifies things. Virtually all the differences between religious and non-religious people have to do with marriage. Married religious and non-religious people have sex at roughly similar frequencies; married religious people in fact report very frquent sex at slightly higher rates than non-religious paper. For unmarried people, however, the differences can be stark. Over 40% of unmarried Christian respondents report no sexual activity in the past year, versus fewer than 30% for non-religious people. 
+We see that this plot helps clarifies things. Virtually all the differences between religious and non-religious people have to do with marriage. Married religious and non-religious people have sex at roughly similar frequencies; married religious people in fact report very frequent sex at slightly higher rates than non-religious paper. For unmarried people, however, the differences can be stark. Over 40% of unmarried Christian respondents report no sexual activity in the past year, versus fewer than 30% for non-religious people. 
 
 Again, and quite interestingly, the differences for unmarried people are only pronounced for either abstention or more frequent sexual activity (one week or more). For more monthly sexual activity there do not appear to be differences between religious and non-religious people.
 
 ## Conclusion
 
-There are indeed profound differences in the rates of sexual activity by religious affiliation, even just reported membership in a religious tradition. The differences become much more pronouned when we take into account religious beliefs and religious practices, but it is clear that marriage is arguably the most important factor. Married people report largely similar levels of sexual activity regardless of religious inclination, and if anything religious married people may have very frequent sex more often than non-religious married people.
+There are indeed profound differences in the rates of sexual activity by religious affiliation, even just reported membership in a religious tradition. The differences become much more pronounced when we take into account religious beliefs and religious practices, but it is clear that marriage is arguably the most important factor. Married people report largely similar levels of sexual activity regardless of religious inclination, and if anything religious married people may have very frequent sex more often than non-religious married people.
 
-It should be clear by now that making these comparisons is difficult. I did not look at income, people's family history or number of children in their marriage, all of which could affect sexual activity. Instead, I wanted to draw some basic descriptive findings, which I think can help frame this question. It also provides some important evidence that sexual activity and religion do appear to be closely entertwined, even if it's not always clear exactly what is driving the differences.
+It should be clear by now that making these comparisons is difficult. I did not look at income, people's family history or number of children in their marriage, all of which could affect sexual activity. Instead, I wanted to draw some basic descriptive findings, which I think can help frame this question. It also provides some important evidence that sexual activity and religion do appear to be closely intertwined, even if it's not always clear exactly what is driving the differences.
