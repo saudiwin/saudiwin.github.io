@@ -2,13 +2,13 @@
 title: "Alt-APSA 2021 Online Panel List"
 subtitle: "List of available Zoom sessions for those who can't make it."
 author: "Robert Kubinec"
-date: "2021-09-19T15:00:00"
+date: "2021-09-18T15:00:00"
 output: blogdown::html_page
 header:
   title: "Alt-APSA 2021 Online Panel List"
   summary: "List of available Zoom sessions for those who can't make it."
   image: "headers/conf.jpeg"
-  date: "2021-09-19T15:00:00"
+  date: "2021-09-18T15:00:00"
 tags: ["APSA-2021"]
 categories: ["Conferences"]
 ---
