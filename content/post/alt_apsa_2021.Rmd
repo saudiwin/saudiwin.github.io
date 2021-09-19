@@ -1,0 +1,16 @@
+---
+title: "Alt-APSA 2021 Online Panel List"
+subtitle: "List of available Zoom sessions for those who can't make it."
+author: "Robert Kubinec"
+date: "2021-09-19T15:00:00"
+output: blogdown::html_page
+header:
+  title: "Alt-APSA 2021 Online Panel List"
+  summary: "List of available Zoom sessions for those who can't make it."
+  image: "headers/conf.jpeg"
+  date: "2021-09-19T15:00:00"
+tags: ["APSA-2021"]
+categories: ["Conferences"]
+---
+
+<iframe width="100%" height="150" name="iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTwMzInCeY7DL4O2-3PhnD2xVyeFNmTiEi7mmLbjpVqbVe5FrFPLUdN6Snn89y1yYGiIuzqFrIeU4Ad/pubhtml?widget=true&amp;headers=false"></iframe>
