@@ -13,4 +13,6 @@ tags: ["APSA-2021"]
 categories: ["Conferences"]
 ---
 
+To submit your panel Zoom session, please use this form (submissions are moderated): https://docs.google.com/forms/d/e/1FAIpQLSfF_Edqb5ssiS9kTUtm87-T44VLofKuiTdObZgoWdICbXuilg/viewform?usp=sf_link
+
 <iframe width="100%" height="500" name="iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTwMzInCeY7DL4O2-3PhnD2xVyeFNmTiEi7mmLbjpVqbVe5FrFPLUdN6Snn89y1yYGiIuzqFrIeU4Ad/pubhtml?widget=true&amp;headers=false"></iframe>
