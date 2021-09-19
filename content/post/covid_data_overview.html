@@ -1,0 +1,35 @@
+---
+title: "An Overview of Data for COVID Analysis"
+subtitle: "There are a lot of datasets out there about the COVID pandemic--learn their coverage, strengths and weaknesses before you dive in."
+author: "Robert Kubinec"
+date: "2021-04-28T15:00:00"
+output: blogdown::html_page
+bibliography: BibTexDatabase.bib
+header:
+  title: "An Overview of Data for COVID Analysis"
+  summary: "There are a lot of datasets out there about the COVID pandemic--learn their coverage, strengths and weaknesses before you dive in."
+  image: "headers/measure.jpeg"
+  date: "2021-05-27T15:00:00"
+tags: ["R", "COVID-19","Data Science"]
+categories: ["R"]
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>The COVID-19 pandemic has led to a wealth of research studies examining various aspects of the pandemic. In this post, I will discuss some of the available datasets for doing aggregate level analysis, i.e., comparing countries, provinces, or counties to see what the correlates of COVID-19 infections are (or related outcomes like COVID-19 restrictions). This overview is not comprehensive, of course, but it can hopefully give you a sense of what is out there and what is worth downloading and potentially incorporating into your analysis.</p>
+<div id="the-basics-covid-19-cases-deaths-and-tests" class="section level2">
+<h2>The Basics: COVID-19 Cases, Deaths and Tests</h2>
+<p>The most standard indicator available for COVID-19 are reported confirmed cases and deaths. This data is displayed in many data visualizations, but it is not actually as standard as may seem. The most commonly utilized source is the John Hopkins COVID-19 dashboard (<a href="https://coronavirus.jhu.edu/map.html">visualization</a> and <a href="https://github.com/CSSEGISandData/COVID-19">Github page</a>). The JHU dashboard has been one of the earliest and continually-updated resources for COVID-19 cases, and is even used by Google for COVID-19 reporting when using its search engine.</p>
+<p>While this is a good resource as a first cut, especially when aggregating to the country level, it is not perfect, especially when looking for recent data. The world is simply too large for an automated system to do this perfectly, and JHU’s Github has <a href="https://github.com/CSSEGISandData/COVID-19/issues">1,400+ open issues</a> reflecting data quality problems. The data in general are fine, in my experience, but some caution is advised when using the most recent data and also for potential anomalies in different countries.</p>
+<p>To collect higher quality, and also more specialized cases data, it is best to turn to lower-level aggregators, which are primarily country health ministries. For example, the US Center for Disease Control has its own historical dataset for <a href="https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36">states</a> and even down to the <a href="https://data.cdc.gov/Case-Surveillance/COVID-19-Case-Surveillance-Public-Use-Data-with-Ge/n8mc-b4w4">county level</a>. The advantage of using this data is that it is probably the most reliable source of data on cases for the United States. The New York Times also collected this data and have an easy to use dataset via <a href="https://github.com/nytimes/covid-19-data">Github</a>, though this was more important earlier in the pandemic when the CDC did not release timely data on cases.</p>
+<p>The European CDC released its own world-wide data that appeared be higher quality than JHU’s data, though they have since discontinued the world-wide releases. They do though have detailed data for <a href="https://www.ecdc.europa.eu/en/covid-19/data">EU countries updated regularly</a>.</p>
+<p>As such, if the aim is to analyze a specific region, then using a regional or country-level source of COVID cases is more reliable than using JHU or other aggregators due to known measurement issues. However, JHU remains the only available source of world-wide COVID cases. I would certainy not use other sources of information like Statista, which are simply re-packaging JHU data.</p>
+<p>However, there is a big caveat here. It’s widely known at this point that there is serious measurement error in both cases and deaths if the aim is to study the severity of the disease. My own work shows how <a href="https://osf.io/preprints/socarxiv/jp4wk/">poor the U.S.’ reported case numbers match actual infections at the state level</a>. So you might want to consider using some kind of statistically-adjusted measure of COVID-19. You can use our estimates from the paper above for infections at the state level, though it only covers the first four months of the pandemic. For world-wide coverage, consider looking at the Economist’ release of adjusted death numbers at the <a href="https://github.com/TheEconomist/covid-19-excess-deaths-tracker">country level</a>. Otherwise, it can be very hard to remove bias from these numbers without careful thought.</p>
+<p>One variable which <em>can</em> help adjust the numbers is reported tests. However, there is only one source of reported tests at the worldwide level, and that is released by <a href="https://ourworldindata.org/coronavirus-testing">Our World In Data</a>. Including tests in your model is arguably the best way to tackle the under-reporting in COVID cases apart from modeling it directly, as we do above and others do with SIR/SEIR models. However, this source of testing data is incomplete as Our World in Data is a relatively small team and this is only one dataset they put together and visualize. It is possible to get more detailed test numbers, though even the US CDC does not release test counts at the country level (they are still only available via the volunteer-led <a href="https://covidtracking.com/data/national">COVID Tracking Project</a>).</p>
+<p>The only other source of testing data is to check each country or region-level website individually. Again, reporting of tests varies widely and is quite frustrating to collect, so be warned before attempting this. On the whole, the recent Economist adjusted death data release may be the simplest way to model COVID-19 severity if you don’t want to get into the details of the disease too much. It is important to adjust for factors that affect the death rate, though, such as the age structure of the population.</p>
+</div>
+<div id="time-varying-covid-19-predictors" class="section level2">
+<h2>Time-Varying COVID-19 Predictors</h2>
+<p>The COVID-19 pandemic varied tremendously over time, and to understand it, it is imperative to have as finely grained time-varying information. Unfortunately, there is not as much of this as we would like as academics and other researchers were caught off-guard and it took a long time to get data collection up to speed.</p>
+</div>
