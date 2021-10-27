@@ -52,7 +52,7 @@ social:
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 - icon: cv
   icon_pack: ai
-  link: files/Robert_Kubinec_CV_5_2_2021.pdf
+  link: files/Robert_Kubinec_CV_6_23_2020.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ""
