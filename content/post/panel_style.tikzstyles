@@ -5,6 +5,7 @@
 
 % Node styles
 \tikzstyle{border}=[fill=white, draw=black, shape=circle]
+\tikzstyle{up}=
 
 % Edge styles
 \tikzstyle{arrow}=[->]
