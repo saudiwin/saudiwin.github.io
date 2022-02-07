@@ -83,7 +83,7 @@ $$
 $$
 I think that estimating an over-time $\hat{ATE}_t$ provides a straightforward way to understand this common assumption. We need sequential ignorability because time limits us; we can't randomize simultaneously across time points without a time machine, and even Stanford's vaunted methods program hasn't invented one yet.^[Granted, if they had one, they probably wouldn't tell us about it.] 
 
-Put simply, we are taking an average of over-time observations for each unit $i$. Of course, the order of averages could be clearer. I think it would make the most sense to calculate an $\hat{ATE}_t$ for each unit $i$, and then average those $\hat{ATE}_t$s for all units $i$ to get a more precise estimate of $\hat{ATE}_t$. Of course, we need sequential ignorability assumptions here to do the averaging and get an unbiased estimate. 
+Put simply, we are taking an average of over-time observations for each unit $i$. Of course, we need to think about the order in which we do the averaging. I think it would make the most sense to calculate an $\hat{ATE}_t$ for each unit $i$, and then average those $\hat{ATE}_t$s for all units $i$ to get a more precise estimate of $\hat{ATE}_t$. Of course, we need sequential ignorability assumptions here to do the averaging and get an unbiased estimate. 
 
 ## Fixed Effects and DAGs
 
