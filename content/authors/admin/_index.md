@@ -67,3 +67,5 @@ user_groups:
 This website serves mainly as a blog in which I present ideas on political-economic topics I study and issues related to data science with R/Rstudio and causal inference. My R-related posts are syndicated with [RBloggers](https://www.r-bloggers.com/), a consortium of R bloggers.
 
 My research centers on political-economic issues such as corruption, economic development, and business-state relations in developing countries, and in particular the Middle East and North Africa. I am also involved in the development of Bayesian statistical models with Stan for hard-to-study subjects like corruption, polarization, and other latent social constructs. To see a list of my current working papers and access the PDFs, see my [Google Scholar](https://scholar.google.com/citations?user=bhOaXR4AAAAJ&hl=en&authuser=1) page.
+
+**Scroll down to see my recent blog posts.**
