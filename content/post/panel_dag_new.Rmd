@@ -79,7 +79,7 @@ In the limit, it's of course straightforward to see when over-time inference sho
 This definition of over-time inference also makes it easier to see what one of the most popular assumptions, sequential ignorability, is all about. In Xu's formulation, sequential ignorability is similar to his first formula except that he dropped the fixed effects: 
 
 $$
-\{Y_{it}(0),Y_{it}(1)\} \perp D_{it} | \textbf{X}_i^{1:T}, Y_i^{1:(t-1)} \forall i, t.
+\{Y_{it}(0),Y_{it}(1)\} \perp D_{it} | \textbf{X}_i^{1:T}, Y_i^{1:(T-1)} \forall i, t.
 $$
 I think an straightforward way to understand this common assumption is as a way of estimating an over-time
 $\hat{ATE}_t$. We need sequential ignorability because time limits us; we can't randomize simultaneously across time points without a time machine, and even Stanford's vaunted methods program hasn't invented one yet.^[Granted, if they had one, they probably wouldn't tell us about it.] 
