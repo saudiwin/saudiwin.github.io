@@ -43,8 +43,7 @@ In other words, we can now get an estimate of the average treatment effect solel
 <p><span class="math display">\[
 \{Y_{it}(0),Y_{it}(1)\} \perp D_{it} | \textbf{X}_i^{1:T}, Y_i^{1:(T-1)} \forall i, t.
 \]</span>
-I think an straightforward way to understand this common assumption is as a way of estimating an over-time
-<span class="math inline">\(\hat{ATE}_t\)</span>. We need sequential ignorability because time limits us; we can’t randomize simultaneously across time points without a time machine, and even Stanford’s vaunted methods program hasn’t invented one yet.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+I think that estimating an over-time <span class="math inline">\(\hat{ATE}_t\)</span> provides a straightforward way to understand this common assumption. We need sequential ignorability because time limits us; we can’t randomize simultaneously across time points without a time machine, and even Stanford’s vaunted methods program hasn’t invented one yet.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>Put simply, we are taking an average of over-time observations for each unit <span class="math inline">\(i\)</span>. Of course, the order of averages could be clearer. I think it would make the most sense to calculate an <span class="math inline">\(\hat{ATE}_t\)</span> for each unit <span class="math inline">\(i\)</span>, and then average those <span class="math inline">\(\hat{ATE}_t\)</span>s for all units <span class="math inline">\(i\)</span> to get a more precise estimate of <span class="math inline">\(\hat{ATE}_t\)</span>. Of course, we need sequential ignorability assumptions here to do the averaging and get an unbiased estimate.</p>
 <div id="fixed-effects-and-dags" class="section level2">
 <h2>Fixed Effects and DAGs</h2>
