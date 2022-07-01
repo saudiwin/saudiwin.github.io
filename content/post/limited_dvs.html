@@ -87,7 +87,7 @@ This distribution is quite simple. It says that the probability that X equals on
 <p><span class="math display">\[
 P(X=0.6) = 0.4^{0.6}(0.6^{0.4}) =  0.47
 \]</span></p>
-<p>This formula essentially tries to force the Bernoulli distribution to handle continuous variables by simply plugging them in. The problem is, what we end up with is not actually a statistical distribution. This means I can’t generate data using a function like <code>rnorm</code>, and there also isn’t a PDF or a CDF. In other words, it’s a bit of a hack.</p>
+<p>This formula essentially tries to force the Bernoulli distribution to handle continuous variables by simply plugging them in. The problem is, what we end up with is not actually a statistical distribution. This means I can’t generate data using a function like <code>rnorm</code>, and there also isn’t a PDF or a CDF. In other words, it’s a bit of a hack.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>It does “work” in the sense the probability of X increases as <span class="math inline">\(p\)</span> is closest to X. For example, you can look at the probability of various values of <span class="math inline">\(p\)</span> if X is equal to 0.3:</p>
 <pre class="r"><code>X &lt;- 0.3
 p &lt;- seq(0,1,by=0.001)
@@ -534,4 +534,10 @@ Figure 7: Comparison of Model Predictions of Elected Seats to Ordered Beta Predi
 <div id="conclusion" class="section level1">
 <h1>Conclusion</h1>
 <p>To conclude, ordered beta regression is a parsimonious yet powerful model that combines the best features of existing models–boundaries, Beta regression–while still using a simple parameterization and a single linear model. This example also shows why it is important to use an appropriate model for the outcome: while most of the models that used a limited distribution did not show a quadratic effect, OLS did find one. OLS was likely confusing the bounds of the distribution with evidence of a non-linear relationship in the data. This type of mistaken inference can be difficult to detect and is a primary reason why using an appropriate statistical distribution is such a good idea.</p>
+</div>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>As Staffan Betner informed me, it is possible to convert the fractional logit specification into an actual distribution known as the <a href="https://en.wikipedia.org/wiki/Continuous_Bernoulli_distribution">continuous Bernoulli</a>. However, to do so a normalizing function has to be added to the distribution which is ugly as sin, involving the inverse hyperbolic tan function. Generally speaking, if you have to use the inverse hyperbolic tan function to get your distribution square, you are headed towards a dark place. In any case, the continuous Bernoulli is a different specification even if it shares part of its formula with the simpler fractional logit model.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
