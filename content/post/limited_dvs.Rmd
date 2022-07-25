@@ -149,7 +149,8 @@ $$
 P(X=0.6) = 0.4^{0.6}(0.6^{0.4}) =  0.47
 $$
 
-This formula essentially tries to force the Bernoulli distribution to handle continuous variables by simply plugging them in. The problem is, what we end up with is not actually a statistical distribution. This means I can't generate data using a function like `rnorm`, and there also isn't a PDF or a CDF. In other words, it's a bit of a hack.
+This formula essentially tries to force the Bernoulli distribution to handle continuous variables by simply plugging them in. The problem is, what we end up with is not actually a statistical distribution. This means I can't generate data using a function like `rnorm`, and there also isn't a PDF or a CDF. In other words, it's a bit of a hack.^[As Staffan Betner informed me, it is possible to convert the fractional logit specification into an actual distribution known as the [continuous Bernoulli](https://en.wikipedia.org/wiki/Continuous_Bernoulli_distribution). However, to do so a normalizing function has to be added to the distribution which is ugly as sin, involving the inverse hyperbolic tan function. Generally speaking, if you have to use the inverse hyperbolic tan function to get your distribution square, you are headed towards a dark place. In any case, the continuous Bernoulli is a different specification even if it shares part of its formula with the simpler fractional logit model.] 
+
 
 It does "work" in the sense the probability of X increases as $p$ is closest to X. For example, you can look at the probability of various values of $p$ if X is equal to 0.3:
 
