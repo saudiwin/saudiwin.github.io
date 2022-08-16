@@ -1,0 +1,238 @@
+%------------------------------------
+% Dario Taraborelli
+% Typesetting your academic CV in LaTeX
+%
+% URL: http://nitens.org/taraborelli/cvtex
+% DISCLAIMER: This template is provided for free and without any guarantee
+% that it will correctly compile on your system if you have a non-standard
+% configuration.
+% Some rights reserved: http://creativecommons.org/licenses/by-sa/3.0/
+%------------------------------------
+
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt, a4paper]{article}
+\usepackage{fontspec}
+
+
+% DOCUMENT LAYOUT
+\usepackage{geometry}
+\geometry{a4paper, textwidth=5.5in, textheight=8.5in, marginparsep=7pt, marginparwidth=.6in}
+\setlength\parindent{0in}
+
+% FONTS
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\defaultfontfeatures{Mapping=tex-text} % converts LaTeX specials (``quotes'' --- dashes etc.) to unicode
+\setromanfont [Ligatures={Common}, BoldFont={Gentium Basic Bold}, ItalicFont={Gentium Basic Italic}]{Gentium Basic}
+\setmonofont[Scale=0.8]{Monaco}
+% ---- CUSTOM AMPERSAND
+\newcommand{\amper}{{\fontspec[Scale=.95]{Gentium Basic Italic}\selectfont\itshape\&}}
+% ---- MARGIN YEARS
+\usepackage{marginnote}
+\newcommand{\years}[1]{\marginnote{\scriptsize #1}}
+\renewcommand*{\raggedleftmarginnote}{}
+\setlength{\marginparsep}{7pt}
+\reversemarginpar
+
+% HEADINGS
+\usepackage{sectsty}
+\usepackage[normalem]{ulem}
+\sectionfont{\rmfamily\mdseries\upshape\Large}
+\subsectionfont{\rmfamily\bfseries\upshape\normalsize}
+\subsubsectionfont{\rmfamily\mdseries\upshape\normalsize}
+
+% PDF SETUP
+% ---- FILL IN HERE THE DOC TITLE AND AUTHOR
+\usepackage[bookmarks, colorlinks, breaklinks, pdftitle={Robert Kubinec - vita},pdfauthor={Robert Kubinec}]{hyperref}
+\hypersetup{linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
+\usepackage{doi}
+
+% DOCUMENT
+\begin{document}
+{\LARGE Robert Kubinec}\\[1cm]
+New York University Abu Dhabi\\
+Abu Dhabi, United Arab Emirates\\[.2cm]
+Email: \href{mailto:rmk7@nyu.edu}{rmk7@nyu.edu}\\
+\textsc{url}: \href{http://www.robertkubinec.com}{www.robertkubinec.com}\\
+
+%%\hrule
+\section*{Current position}
+\noindent
+\years{2019-}\emph{Assistant Professor of Political Science}, Social Sciences Division, New York University Abu Dhabi\\
+
+\section*{Previous positions}
+\noindent
+\years{2018-2019}\emph{Postdoctoral Research Scholar}, Niehaus Center for Globalization and Governance, Princeton University\\
+
+%\hrule
+\section*{Education}
+\noindent
+\years{2018}\textsc{PhD} in Foreign Affairs, University of Virginia\\
+\years{2010}\textsc{MA} in Middle East Studies, George Washington University\\
+\years{2008}\textsc{BA} in International Relations, Wheaton College
+
+\section*{Publications}
+
+\subsection*{Books}
+
+\years{2022} \emph{(In Press).} Kubinec, Robert. \emph{Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings.} Cambridge University Press.
+
+\subsection*{Journal Articles}
+
+\years{2022} Kilavuz, Tahir; Grewal, Sharan and Kubinec, Robert. ``Ghosts of the Black Decade: How Legacies of Violence Shaped Algeria's Hirak Protests." Forthcoming at \emph{Journal of Peace Research}.\\
+
+\years{2022}  Kubinec, Robert.``Ordered Beta Regression: A Parsimonious, Well-Fitting Model for Continuous Data with Lower and Upper Bounds." \textit{Political Analysis} \doi{10.1017/pan.2022.20}.\\
+
+\years{2022}Barcelo, Joan; Kubinec, Robert; Cheng, Cindy; Hoye Rahn, Tiril; and Messerschmidt, Luca. ``Windows of Repression: Using COVID-19 Policies against Political Dissidents?"  \textit{Journal of Peace Research} \doi{10.1177/00223433211062389}.\\
+
+\years{2021}Kubinec, Robert; Lee, Haillie and Tomashevskiy, Andrey. ``Politically-Connected Companies Are Less Likely to Shutdown Due to COVID-19 Restrictions." \textit{Social Science Quarterly}. \doi{10.1111/ssqu.13040}.\\
+
+\years{2020}Kubinec, Robert and Owen, John. ``When Groups Fall Apart: Identifying Transnational Polarization with Twitter from the Arab Uprisings." \textit{Political Analysis} \doi{10.1017/pan.2020.46}. \\
+
+\years{2020}Cheng, Cindy; Barcelo, Joan; Hartnett, Allison; Kubinec, Robert and Messerschmidt, Luca. ``COVID-19 Government Response Event Dataset (CoronaNet v.1.0)." \textit{Nature Human Behavior}. \doi{10.1038/s41562-020-0909-7}.\\
+
+\years{2020}Kropko, Jonathan and Kubinec, Robert. ``Why the Two-way Fixed Effects Model is Difficult to Interpret, and What to Do About It." \textit{PLOS One}. \doi{10.1371/journal.pone.0231349}
+
+\subsection*{Working Papers}
+\noindent
+
+\years{2022} Kubinec, Robert; Lee, Haillie and Tomashevskiy, Andrey. ``Why Corporate Political Connections Can Impede Investment." \emph{SocArchiv Preprint}. \doi{10.31235/osf.io/uks25}\\
+
+\begin{itemize}
+	\item\emph{Revise and Resubmit} at the Journal of Politics
+\end{itemize}
+
+\years{2022} Kubinec, Robert; Barcelo, Joan; Goldszmidt, Rafael; Grujic, Vanja; Model, Timothy; Schenk, Caress; Cheng, Cindy; Hale, Thomas; Spencer Hartnett; Allison, Messerschmidt, Luca; Petherick, Anna, and Thorvaldsdottir, Svanhildur. ``Cross-National Measures of the Intensity of COVID-19 Public Health Policies." \emph{SocArchiv Preprint}. \doi{10.31235/osf.io/rn9xk}\\
+
+\begin{itemize}
+	\item \emph{Under review}
+\end{itemize}
+
+\years{2022} Kubinec, Robert; Carvalho, Luiz Max; Barcelo, Joan; Cheng, Cindy; Messerschmidt, Luca; Cottrell, Matthew Sean and Duba, Derek. ``Fear, Partisanship and the Spread of COVID-19 in the United States." \emph{SocArchiv Preprint}. \doi{10.31235/osf.io/jp4wk}\\
+
+\begin{itemize}
+	\item \emph{Under review}
+\end{itemize}
+
+\years{2022} Dolan, Lindsay; Kubinec, Robert; Nielson, Daniel, and Zhang, Jack. ``A Field Experiment on Business Opposition to the U.S.-China Trade War." \emph{SocArchiv Preprint}. \doi{10.31235/osf.io/435u9}\\
+
+\begin{itemize}
+	\item \emph{Under review}
+\end{itemize}
+
+\years{2022} Kubinec, Robert. ``Politically-Connected Firms and the Military-Clientelist Complex in North Africa." \emph{SocArchiv Preprint}. \doi{10.31235/osf.io/mrfcu}\\
+
+\begin{itemize}
+	\item \emph{Under review}
+\end{itemize}
+
+\years{2022} Kubinec, Robert and Milner, Helen. ``Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria's Hirak." \emph{SocArchiv Preprint}. \doi{10.31235/osf.io/hu3vq}\\
+
+\begin{itemize}
+	\item \emph{Under review}
+\end{itemize}
+
+
+\years{2022}  Francis, David and Kubinec, Robert.``Beyond Political Connections : A Measurement Model Approach to Estimating Firm-level Political Influence in 41 Economies." \emph{World Bank Working Paper}. No. WPS10119. \url{https://documents.worldbank.org/en/publication/documents-reports/documentdetail/099855207052233298/idu0158ecaac01be104fd80a04a03c9cf1992a74}\\
+
+\years{2022} Kubinec, Robert. ``Getting Off the Gold Standard: A Holistic Approach to Causal Inference with Entropic Causal Graphs." \emph{SocArchiv Preprint}. \doi{10.31235/osf.io/a492b}\\
+
+\years{2020} Kubinec, Robert. ``Generalized Ideal Point Models for Time-Varying and Missing-Data Inference." \emph{SocArchiv Preprint}. \doi{10.31219/osf.io/8j2bt}\\
+
+\years{2019} Kubinec, Robert and Grewal, Sharan. ``When National Unity Governments are neither National, United, nor Governments: The Case of Tunisia." \emph{SocArchiv Preprint}. \doi{10.31235/osf.io/6z74r}\\
+
+\years{2018} Kubinec, Robert. ``Patrons or Clients? Measuring and Experimentally Evaluating Political Connections of Firms in Morocco and Jordan." \emph{Economic Research Forum Working Paper Series}. No. 1280. \url{https://erf.org.eg/publications/patrons-or-clients-measuring-and-experimentally-evaluating-political-connections-of-firms-in-morocco-and-jordan/}\\
+
+\subsection*{Reports and Op-eds}
+\noindent
+\years{2022}Kubinec, Robert and Mighri, Hamza, "Tunisia Faces the Specter of Government Failure", \emph{Carnegie Endowment for International Peace}\\
+
+\years{2022}Kubinec, Robert, COVID-19 Responses in the Middle East and North Africa in Global Perspective", \emph{Project on Middle East Political Science}\\
+
+\years{2022}Dolan, Lindsay; Kubinec, Robert; Nielson, Daniel; and Zhang, Jack. "Trump's Trade War with China Failed. Why Didn't US Companies Push Back More?", \emph{Washington Post}\\
+
+\years{2021}Kubinec, Robert, (Spring 2021), ``Pandemic Safe Research with Online Surveys", \emph{American Political Science Association MENA Politics Newsletter}\\
+
+\newpage
+
+\years{2020}Kubinec, Robert, (April 2020), ``The CoronaNet Database", \emph{Project on Middle East Political Science Studies No. 39}\\
+
+
+\years{2019}Grewal, Sharan; Kilavuz, Tahir M.; and Kubinec, Robert, (July 2019), ``Algeria's Uprising: A Survey of Protesters and the Military", \emph{The Brookings Institution}\\
+
+\years{2017}Kubinec, Robert, (Aug. 13, 2017), ``How to Respond to Terrorism", \emph{The Daily Progress}\\
+
+
+\years{2016}Kubinec, Robert, (Dec. 19, 2016), ``How Foreign Aid Could Hurt Tunisia's Transition to Democracy", \emph{Washington Post}\\
+
+\subsection*{Software}
+
+\years{2022}Kubinec, Robert. \href{https://github.com/saudiwin/ordbetareg_pack}{\texttt{ordbetareg}: Ordered Beta Regression Models with Brms}. \href{https://cran.r-project.org/web/packages/ordbetareg/index.html}{CRAN link}\\
+
+\years{2022}Kubinec, Robert. \href{https://github.com/saudiwin/idealstan}{\texttt{idealstan}: An R  Package for Bayesian Ideal Point Modeling}. \href{https://github.com/saudiwin/idealstan}{Github link}\\
+
+\years{2022}Model, Timothy and Kubinec, Robert. \href{https://github.com/saudiwin/idealstan}{\texttt{CoronaNetR}: Access CoronaNet COVID-19 Policy Data}. \href{https://github.com/CoronaNetDataScience/CoronaNetR}{Github link}\\
+
+\section*{Reviewing}
+
+I have been a reviewer for \emph{Political Analysis}, \emph{The American Political Science Review}, \emph{The American Journal of Political Science}, \emph{Political Science Research and Methods}, \emph{Political Analysis}, \emph{Journal of Peace Research}, \emph{PLOS One}, \emph{PLOS Global Public Health}, \emph{The Japanese Journal of Political Science}, \emph{SAGE Open}, \emph{Global Environmental Politics} and \emph{Middle East Law and Governance}.\\
+
+
+%\hrule
+\section*{Grants and fellowships}
+
+\subsection*{External}
+\noindent
+\years{2019}Koch Foundation Grant for ``Online Survey Research on the U.S. - China Trade War" (\$10k)\\
+\years{2017-2018}Economic Research Forum, ``A Survey of Firm-Level Political Participation" (\$6k)\\
+\years{2017}Koch Foundation Dissertation Grant (\$5k)\\
+\years{2016}Project on Middle East Political Science Travel, Research \& Engagement Grant (\$3k)\\
+
+\subsection*{Internal}
+\noindent
+\years{2020}COVID-19 Facilitator Research Fund (\$30k)\\
+\years{2017}Quantitative Collaborative Bynum Grant\\
+\years{2015 - 2016}Quandt International Research Fund travel grant, University of Virginia\\
+\years{2015}Summer Research Grant, Graduate School for Arts and Sciences, University of Virginia\\
+\years{2014-2015}Developing Students for Leadership in Data-intensive Research and Innovation fellowship, Data Science Institute, University of Virginia\\
+\years{2014}Summer Foreign Language Fellowship, University of Virginia\\
+\years{2008-2010}Elliott School High Achievement Fellowship, George Washington University\\
+\years{2009}Banville Tuition Fellowship, George Washington University\\
+
+\section*{Invited Talks}
+\years{2022} Rutgers University Summer Institute for Computational Social Science\\
+\years{2022} Seoul National University\\
+\years{2021} European Union Periscope Project\\
+\years{2017}Tunisia Country Team, Millennial Challenge Corporation, Washington DC\\
+
+% \section*{Field Research}
+%
+% \noindent
+% \years{2016}Interviews about the political role of businesspeople in Egypt and Tunisia.\\
+% \years{2015}Semi-structured interviews with Tunisian scholars, pundits and journalists\\
+% \years{2015}Focus groups on sharia law courts in Palestine with PI Prof. Deena Hurwitz\\
+% \years{2010}Structured interviews with Jordanian policymakers
+
+
+
+%%\hrule
+\section*{Professional Experience \& Consulting}
+\noindent
+\years{2017-2018}Acting Data Scientist, Unbias\\
+\years{2011-2013}Foreign Service Officer, U.S. Department of State\\
+\years{2010-2011}Data Mining Consultant, IBM Advanced Analytics \& Optimization
+
+
+
+%\vspace{1cm}
+\vfill{}
+%\hrulefill
+
+\begin{center}
+{\scriptsize  Last updated: \today\- •\- Typeset in \href{http://nitens.org/taraborelli/cvtex}{
+\fontspec{Times New Roman}\XeTeX }}
+\end{center}
+
+\end{document}

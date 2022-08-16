@@ -50,12 +50,14 @@ First, we randomly create polling stations roughly corresponding to Tunisia's po
 
 ```{r tun_pop}
 
-N <- 7000000
+N <- 8900000
 
-stations <- 4500
+stations <- 11000
 
 vote_assign <- sample(1:stations,N,replace=T,
                       prob=sample(1:3,stations,replace=T))
+
+sample_size <- 1000
 
 ```
 
@@ -84,7 +86,7 @@ over_turnout <- parallel::mclapply(seq(.05,.5,by=.1), function(t) {
     over_samples <- lapply(1:1000, function(i) {
       
         # sample 100 random polling stations 1,000 times
-        sample_station <- sample(1:stations, size=50)
+        sample_station <- sample(1:stations, size=sample_size)
         
         turn_est <- mean(pop_turnout$turnout[pop_turnout$station %in% sample_station])
         
