@@ -1,12 +1,12 @@
 ---
 title: "What's Logs Got to Do With It?"
-subtitle: "Ordered beta regression can give you scale-free ATEs that do not lose their meaning in the underlying scale."
+subtitle: "Ordered beta regression can give you comparable, scale-free ATEs that can still be understood in the scale of the original data--all without using logs."
 author: "Robert Kubinec"
 date: "2022-12-15T06:00:00"
 output: blogdown::html_page
 header:
   title: "What's Logs Got to Do With It?"
-  summary: "Ordered beta regression can give you scale-free outcomes, and quadratic terms can model skewness in predictors."
+  summary: "Ordered beta regression can give you comparable, scale-free ATEs that can still be understood in the scale of the original data--all without using logs."
   image: "headers/logs.jpeg"
   date: "2022-12-15T06:00:00"
 tags: ["R", "Elections","Beta Regression"]
@@ -18,18 +18,19 @@ categories: ["R"]
 <link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
 
 
-<p>Twitter (or what’s left of it) was recently ablaze with a discussion of two smart working papers, one by <a href="https://www.jonathandroth.com/assets/files/LogUniqueHOD0_Draft.pdf">Jiafeng Chen and Jonathan Roth</a> and the other by <a href="https://www.nber.org/system/files/working_papers/w30735/w30735.pdf">John Mullahy and Edward Norton</a>. In different ways, they argue against the use of non-linear transformations in applied modeling, especially logarithms (logs). I had been meaning to discuss the subject myself; I’ve been critical of the logarithmic transformation previously because it has been difficult to put a clear meaning on the transformation in a linear model. Furthermore, the inability of logs to include 0 (log of 0 is undefined or negative infinity, whichever is smaller) was a warning flag that there was a mismatch between what people wanted the math to do, and what it actually did. I’ve come to think that the best problems to explore or those where statistical decisions seem arbitrary or poorly justified.</p>
-<p>What I’m going to show in this post is that the ordered beta regression model can also address issues with logs (and the related hyperbolic arc sine transformation) because it can produce estimates (including ATEs) that are based on proportions, and thus naturally scale-free. When the scale of the outcome is an issue, the ordered beta regression can help address that problem by estimating regression coefficients or treatment effects that do not vary with scale and also include 0s.</p>
-<p>The two papers presented above approach the log issue in different ways, which makes them both fascinating when read together. Mullahy and Norton take a more traditional econometric approach, discussing how the log and hyperbolic arc sine transformations are heavily influenced by the constant chosen to either “bump” zeros to 1s for the log or to scale the hyperbolic arc sine. Chen and Roth use different notation to discuss how the logarithmic transformation affects estimation of an average treatment effect (ATE) using the potential outcomes framework in the causal inference literature.</p>
-<p>Both sets of authors point out that these transformations end up changing either linear regression coefficients or estimated ATEs in ways that are not immediately obvious. Using economic theory, Mullahy and Norton discuss how adding 1 to any zero value in a model in order to use logs results in the model weighting estimates by the proportion of 0s and non-0 values in the data, or what they call the “intensive” and “extensive” margin. The regression coefficient will vary depending on whether 0s are replaced by 1, 0.9, 0.8, 0.7… etc. There simply isn’t one good value that can be added to the data to allow log to be used.</p>
-<p>Chen and Roth, on the other hand, make the point that the estimate of an ATE can vary with different scaling functions such as logarithms. As they put it,</p>
+<p>Twitter (or what’s left of it) was recently ablaze with a discussion of two smart working papers, one by <a href="https://www.jonathandroth.com/assets/files/LogUniqueHOD0_Draft.pdf">Jiafeng Chen and Jonathan Roth</a> and the other by <a href="https://www.nber.org/system/files/working_papers/w30735/w30735.pdf">John Mullahy and Edward Norton</a>. In different ways, they argue against the use of non-linear transformations in applied modeling, especially logarithms (logs). I had been meaning to discuss the subject myself; I’ve been critical of the logarithmic transformation previously because it has been difficult to put a clear meaning on the transformation in a linear model. Furthermore, the inability of logs to include 0 (log of 0 is undefined or negative infinity, whichever is smaller) was a warning flag that there was a mismatch between what people wanted the math to do, and what it actually did.</p>
+<p>What I’m going to show in this post is that the <a href="https://www.cambridge.org/core/journals/political-analysis/article/ordered-beta-regression-a-parsimonious-wellfitting-model-for-continuous-data-with-lower-and-upper-bounds/89F4141DA16D4FC217809B5EB45EEE83">ordered beta regression model</a> can also address issues with logs (and the related inverse hyperbolic sine transformation) because it can produce estimates (including ATEs) that are based on proportions, and thus naturally scale-free. When the scale of the outcome is an issue, the ordered beta regression can help address that problem by estimating regression coefficients or treatment effects that do not vary with scale and also include 0s.</p>
+<p>The two papers presented above approach the log issue in different ways, which makes them both fascinating when read together. Mullahy and Norton take a more traditional econometric approach, discussing how the log and hyperbolic sine transformations are heavily influenced by the constant chosen to either “bump” zeros to 1s for the log or to scale the hyperbolic sine. Chen and Roth use different notation to discuss how the logarithmic transformation affects estimation of an average treatment effect (ATE) using the potential outcomes framework in the causal inference literature.</p>
+<p>Both sets of authors point out that these transformations end up changing either linear regression coefficients or estimated ATEs in ways that are not immediately obvious. Using economic theory, Mullahy and Norton discuss how adding 1 to any zero value in a model in order to use logs results in the model weighting estimates by the proportion of 0s and non-0 values in the data, or what they call the “intensive” and “extensive” margin. The regression coefficient will vary depending on whether 0s are replaced by 1, 0.9, 0.8, 0.7… etc. There simply isn’t one good value that can be added to the data to allow a logarithm to be well-defined.</p>
+<p>Chen and Roth make the point that the estimate of an ATE can vary with different scaling functions such as logarithms. As they put it,</p>
 <blockquote>
 <p>Our results above show that ATEs for common transformations such as <span class="math inline">\(log(1 + Y)\)</span> and <span class="math inline">\(arcsinh(Y)\)</span> can not be interpreted as percentage effects, given that their magnitudes depend arbitrarily on the units of the outcome.</p>
 </blockquote>
-<p>In other words, once you transform the outcome using one of these functions, we no longer know for sure that we will get the same ATE if we change the units, i.e. from dollars to cents, when using one of these common transformations. Chen and Roth’s suggestion, which is similar as well to Mullahy and Norton, is to consider using models that incorporate 0s (two-part models, also known as hurdles/zero-inflated models) or simple GLMs like the Poisson regression, which has had an amazing resurgence on <a href="https://twitter.com/jmwooldridge/status/1363828456136523779">Twitter at the moment</a>. No idea, though, if the momentum will last through the 2024 election.</p>
+<p>In other words, once you transform the outcome using one of these functions, we no longer know for sure that we will get the same ATE if we change the units, i.e. from dollars to cents, when using one of these common transformations. Chen and Roth’s suggestion, which is similar as well to Mullahy and Norton, is to consider using models that incorporate 0s (two-part models, also known as hurdles/zero-inflated models) or simple GLMs like the Poisson regression, which has had an amazing resurgence on <a href="https://twitter.com/jmwooldridge/status/1363828456136523779">Twitter at the moment</a>. (No idea, though, if Poisson’s momentum will last through the 2024 election.)</p>
 <div id="simulation" class="section level2">
 <h2>Simulation</h2>
-<p>To show how <code>ordbetareg</code> can estimate scale-free ATEs, we will first start with data that matches what the articles discuss: highly skewed outcomes with zeroes. To do so I’ll simulate a two-part or hurdle model in which the ATE influences the first part is the probability of a zero and the second part is a conventional log-normal distribution. The ATE will influence both the probability of non-zeroes, which at baseline is 10%, and the mean of the non-zero (log-normal) distribution. I will assume a true ATE of +1 on the log/logit scale. I can then simulate the potential outcomes, Y1 and Y0, as independent distributions with a difference of the ATE.</p>
+<p>I next use simulations to discuss this issue to show practically what the authors are talking about and also demonstrate how <code>ordbetareg</code> can estimate scale-free ATEs.</p>
+<p>I simulate data that matches what the articles discuss: highly skewed outcomes with zeroes. To do so I’ll simulate a two-part or hurdle model in which the ATE influences the first part (the probability of a 0) and the second part (a conventional log-normal distribution strictly greater than 0). The ATE will influence both the probability of 0s, which at baseline is 10% of total observations, and the mean of the non-0 (log-normal) distribution. I will assume a true ATE of +1 on the log/logit scale. I can then simulate the potential outcomes, Y1 and Y0, as independent distributions with a difference of the ATE.</p>
 <pre class="r"><code>ate &lt;- 1
 N &lt;- 500
 Y0 &lt;- ifelse(runif(N)&lt;0.9,rlnorm(N),0)
@@ -229,8 +230,8 @@ F
 <pre class="r"><code>exp(coef(y_mod2)[2]) - .01</code></pre>
 <pre><code>##        T 
 ## 3.433134</code></pre>
-<p>We can see that the reverse transform doesn’t improve matters. In either case we end up with a very different coefficient. If we were to interpret the outcome as dollars, such as a salary, then the ATE in the first model would be $0.92 and the ATE in the second would be $3.28. As the papers suggest, changing that constant results in changes in the ATE, and so we need to be careful what constant we choose.</p>
-<p>To see if units matters as the papers also propose, we will divide the outcome by 10 and compare to the original outcome while using the same transformation of <span class="math inline">\(log(Y + 1)\)</span>:</p>
+<p>We can see that the reverse transform doesn’t improve matters. In either case we end up with a very different coefficient. If we were to interpret the outcome as dollars, such as a salary, then the ATE in the first model would be 0.92 and the ATE in the second would be 3.28. As the papers suggest, changing that constant results in changes in the ATE, and so we need to be careful what constant we choose.</p>
+<p>To see if units matters as the papers also propose, we will divide the outcome by 100 and compare to the original outcome while using the same transformation of <span class="math inline">\(log(Y + 1)\)</span>:</p>
 <pre class="r"><code>t_data &lt;- mutate(t_data,
                  Y_1_rescale=(Y/100)+1)
 
@@ -377,7 +378,7 @@ F
 </div>
 <div id="ordbetareg-to-the-rescue" class="section level2">
 <h2><code>ordbetareg</code> to the Rescue</h2>
-<p>While the authors propose some solutions to this problem, such as using a two-part model, I want to show that the ordered beta regression can estimate scale-free ATEs if the outcome is normalized; that is, rescaled to between 0 and 1. Here we will let 0 be equal to 0 while 1 will be the sum of the outcome. We can rescale so that each observation in our data is equal to the <em>proportion</em> of the total. It corresponds to the following estimand, which I’ll call <span class="math inline">\(ATE_n\)</span> for normalized:</p>
+<p>While the authors propose some solutions to this problem, such as using a two-part model, I want to show that the ordered beta regression can estimate scale-free ATEs if the outcome is normalized; that is, rescaled to between 0 and 1. Here we will let 0 be equal to 0 while 1 will be the sum of the outcome, i.e., the total income of the sample. We can rescale so that each observation in our data is equal to the <em>proportion</em> of the total. It corresponds to the following estimand, which I’ll call <span class="math inline">\(ATE_n\)</span> for normalized:</p>
 <p><span class="math display">\[
 ATE_n = E[\frac{Y1}{Y1+Y0} - \frac{Y0}{Y1+Y0}]
 \]</span></p>
@@ -392,7 +393,7 @@ y_n_mod &lt;- ordbetareg(Y_n ~ T,data=t_data,
                       backend=&quot;cmdstanr&quot;)</code></pre>
 <pre><code>## Running MCMC with 1 chain...
 ## 
-## Chain 1 finished in 3.3 seconds.</code></pre>
+## Chain 1 finished in 3.1 seconds.</code></pre>
 <pre class="r"><code>y_n_rescale &lt;- ordbetareg(Y_n_rescale ~ T,data=t_data,
                           chains=1,iter=1000,
                           true_bounds=c(0,1),refresh=0,
@@ -579,6 +580,6 @@ summary(treatment$T)</code></pre>
 <pre class="r"><code># plot full distribution/uncertainty
 hist(treatment$T)</code></pre>
 <p><img src="/post/logs_files/figure-html/transform-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Doing so gives us a treatment effect of approximately $2.7 dollars on the original scale. Importantly, this ATE reflects the skew of the underlying variable, which we would want to capture.</p>
+<p>Doing so gives us a treatment effect of approximately $2.7 dollars on the original scale. Importantly, the estimated uncertainty of this ATE, which we can visualize by plotting all the posterior draws as a histogram, reflects the skew of the underlying variable, which in this case we would want to capture.</p>
 <p>For these reasons, <code>ordbetareg</code> can be used to produce ATEs that are scale-free yet can be still be back-transformed to the original scale by rescaling the marginal effects as produced by the <code>marginaleffects</code> package. If the aim of the analysis is to estimate an ATE that is comparable across samples and income distributions, yet also doesn’t lose its relation to the original data, then <code>ordbetareg</code> can provide readily comparable estimates.</p>
 </div>
