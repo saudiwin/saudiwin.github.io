@@ -1,0 +1,584 @@
+---
+title: "What's Logs Got to Do With It?"
+subtitle: "Ordered beta regression can give you scale-free ATEs that do not lose their meaning in the underlying scale."
+author: "Robert Kubinec"
+date: "2022-12-15T06:00:00"
+output: blogdown::html_page
+header:
+  title: "What's Logs Got to Do With It?"
+  summary: "Ordered beta regression can give you scale-free outcomes, and quadratic terms can model skewness in predictors."
+  image: "headers/logs.jpeg"
+  date: "2022-12-15T06:00:00"
+tags: ["R", "Elections","Beta Regression"]
+categories: ["R"]
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
+
+
+<p>Twitter (or what’s left of it) was recently ablaze with a discussion of two smart working papers, one by <a href="https://www.jonathandroth.com/assets/files/LogUniqueHOD0_Draft.pdf">Jiafeng Chen and Jonathan Roth</a> and the other by <a href="https://www.nber.org/system/files/working_papers/w30735/w30735.pdf">John Mullahy and Edward Norton</a>. In different ways, they argue against the use of non-linear transformations in applied modeling, especially logarithms (logs). I had been meaning to discuss the subject myself; I’ve been critical of the logarithmic transformation previously because it has been difficult to put a clear meaning on the transformation in a linear model. Furthermore, the inability of logs to include 0 (log of 0 is undefined or negative infinity, whichever is smaller) was a warning flag that there was a mismatch between what people wanted the math to do, and what it actually did. I’ve come to think that the best problems to explore or those where statistical decisions seem arbitrary or poorly justified.</p>
+<p>What I’m going to show in this post is that the ordered beta regression model can also address issues with logs (and the related hyperbolic arc sine transformation) because it can produce estimates (including ATEs) that are based on proportions, and thus naturally scale-free. When the scale of the outcome is an issue, the ordered beta regression can help address that problem by estimating regression coefficients or treatment effects that do not vary with scale and also include 0s.</p>
+<p>The two papers presented above approach the log issue in different ways, which makes them both fascinating when read together. Mullahy and Norton take a more traditional econometric approach, discussing how the log and hyperbolic arc sine transformations are heavily influenced by the constant chosen to either “bump” zeros to 1s for the log or to scale the hyperbolic arc sine. Chen and Roth use different notation to discuss how the logarithmic transformation affects estimation of an average treatment effect (ATE) using the potential outcomes framework in the causal inference literature.</p>
+<p>Both sets of authors point out that these transformations end up changing either linear regression coefficients or estimated ATEs in ways that are not immediately obvious. Using economic theory, Mullahy and Norton discuss how adding 1 to any zero value in a model in order to use logs results in the model weighting estimates by the proportion of 0s and non-0 values in the data, or what they call the “intensive” and “extensive” margin. The regression coefficient will vary depending on whether 0s are replaced by 1, 0.9, 0.8, 0.7… etc. There simply isn’t one good value that can be added to the data to allow log to be used.</p>
+<p>Chen and Roth, on the other hand, make the point that the estimate of an ATE can vary with different scaling functions such as logarithms. As they put it,</p>
+<blockquote>
+<p>Our results above show that ATEs for common transformations such as <span class="math inline">\(log(1 + Y)\)</span> and <span class="math inline">\(arcsinh(Y)\)</span> can not be interpreted as percentage effects, given that their magnitudes depend arbitrarily on the units of the outcome.</p>
+</blockquote>
+<p>In other words, once you transform the outcome using one of these functions, we no longer know for sure that we will get the same ATE if we change the units, i.e. from dollars to cents, when using one of these common transformations. Chen and Roth’s suggestion, which is similar as well to Mullahy and Norton, is to consider using models that incorporate 0s (two-part models, also known as hurdles/zero-inflated models) or simple GLMs like the Poisson regression, which has had an amazing resurgence on <a href="https://twitter.com/jmwooldridge/status/1363828456136523779">Twitter at the moment</a>. No idea, though, if the momentum will last through the 2024 election.</p>
+<div id="simulation" class="section level2">
+<h2>Simulation</h2>
+<p>To show how <code>ordbetareg</code> can estimate scale-free ATEs, we will first start with data that matches what the articles discuss: highly skewed outcomes with zeroes. To do so I’ll simulate a two-part or hurdle model in which the ATE influences the first part is the probability of a zero and the second part is a conventional log-normal distribution. The ATE will influence both the probability of non-zeroes, which at baseline is 10%, and the mean of the non-zero (log-normal) distribution. I will assume a true ATE of +1 on the log/logit scale. I can then simulate the potential outcomes, Y1 and Y0, as independent distributions with a difference of the ATE.</p>
+<pre class="r"><code>ate &lt;- 1
+N &lt;- 500
+Y0 &lt;- ifelse(runif(N)&lt;0.9,rlnorm(N),0)
+Y1 &lt;- ifelse(runif(N)&lt;plogis(qlogis(0.9) + ate),
+             rlnorm(N,meanlog=ate),
+             0)</code></pre>
+<p>We can take a quick glance at the distributions:</p>
+<pre class="r"><code>hist(Y1)</code></pre>
+<p><img src="/post/logs_files/figure-html/hist-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>hist(Y0)</code></pre>
+<p><img src="/post/logs_files/figure-html/hist-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The proportion of zeroes in Y0 is 0.086 and the proportion of zeroes in Y1 is 0.034.</p>
+<p>We can then do some conventional comparisons of the treatment and control group, a t-test and linear model fit:</p>
+<pre class="r"><code>t.test(Y1,Y0)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Y1 and Y0
+## t = 11.45, df = 639.8, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  2.423978 3.427505
+## sample estimates:
+## mean of x mean of y 
+##  4.330918  1.405176</code></pre>
+<pre class="r"><code>t_data &lt;- tibble(Y=c(Y0,Y1),T=c(rep(0,N),rep(1,N)))
+mod1 &lt;- lm(Y ~ T,data=t_data)
+summary(mod1)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Y ~ T, data = t_data)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -4.331 -1.839 -0.795  0.423 48.338 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   1.4052     0.1807   7.777 1.84e-14 ***
+## T             2.9257     0.2555  11.450  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.04 on 998 degrees of freedom
+## Multiple R-squared:  0.1161, Adjusted R-squared:  0.1152 
+## F-statistic: 131.1 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The linear model and the t-test do not return the true ATE as that was simulated on the log scale. However, if we take the log of the estimate, it is pretty close – log of 2.926 is 1.074. The simulation is not perfect because the ATE will vary across the two parts due to scaling effects, but it will work for our purposes.</p>
+<p>As the papers pointed out, the ATE could change if we use nonlinear transformations such as log with an adjustment such as 1 or 0.1 to replace the zeroes. We will test this by fitting two models, one with an outcome of <span class="math inline">\(log(Y+1)\)</span> and the other with <span class="math inline">\(log(Y+0.01)\)</span>. We can then make a table of the model results with the <code>modelsummary</code> package:</p>
+<pre class="r"><code>t_data &lt;- mutate(t_data,
+                 Y_1=Y + 1,
+                 Y_01=Y + 0.01)
+
+y_mod1 &lt;- lm(log(Y_1) ~ T,data=t_data)
+y_mod2 &lt;- lm(log(Y_01) ~ T, data=t_data)
+
+modelsummary(models=list(`log(Y + 1)`=y_mod1, 
+                         `log(Y + 0.01)`=y_mod2))</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+log(Y + 1)
+</th>
+<th style="text-align:center;">
+log(Y + 0.01)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+0.706
+</td>
+<td style="text-align:center;">
+−0.430
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.029)
+</td>
+<td style="text-align:center;">
+(0.067)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:center;">
+0.650
+</td>
+<td style="text-align:center;">
+1.236
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(0.041)
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(0.095)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+1000
+</td>
+<td style="text-align:center;">
+1000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.200
+</td>
+<td style="text-align:center;">
+0.146
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.200
+</td>
+<td style="text-align:center;">
+0.145
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+1980.6
+</td>
+<td style="text-align:center;">
+3651.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+1995.4
+</td>
+<td style="text-align:center;">
+3666.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+−987.324
+</td>
+<td style="text-align:center;">
+−1822.961
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:center;">
+250.073
+</td>
+<td style="text-align:center;">
+169.999
+</td>
+</tr>
+</tbody>
+</table>
+<p>We can see that the treatment effects are quite different. To get them back on the same scale, we can try a reverse transform (exponential the coefficient):</p>
+<pre class="r"><code>exp(coef(y_mod1)[2]) - 1</code></pre>
+<pre><code>##         T 
+## 0.9159342</code></pre>
+<pre class="r"><code>exp(coef(y_mod2)[2]) - .01</code></pre>
+<pre><code>##        T 
+## 3.433134</code></pre>
+<p>We can see that the reverse transform doesn’t improve matters. In either case we end up with a very different coefficient. If we were to interpret the outcome as dollars, such as a salary, then the ATE in the first model would be $0.92 and the ATE in the second would be $3.28. As the papers suggest, changing that constant results in changes in the ATE, and so we need to be careful what constant we choose.</p>
+<p>To see if units matters as the papers also propose, we will divide the outcome by 10 and compare to the original outcome while using the same transformation of <span class="math inline">\(log(Y + 1)\)</span>:</p>
+<pre class="r"><code>t_data &lt;- mutate(t_data,
+                 Y_1_rescale=(Y/100)+1)
+
+y_mod1_rescale &lt;- lm(log(Y_1_rescale) ~ T,data=t_data)
+
+modelsummary(models=list(`log(Y + 1) Original`=y_mod1, 
+                         `log(Y + 1) Rescaled`=y_mod1_rescale))</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+log(Y + 1) Original
+</th>
+<th style="text-align:center;">
+log(Y + 1) Rescaled
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+0.706
+</td>
+<td style="text-align:center;">
+0.014
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.029)
+</td>
+<td style="text-align:center;">
+(0.002)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:center;">
+0.650
+</td>
+<td style="text-align:center;">
+0.027
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(0.041)
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(0.002)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+1000
+</td>
+<td style="text-align:center;">
+1000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.200
+</td>
+<td style="text-align:center;">
+0.125
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.200
+</td>
+<td style="text-align:center;">
+0.124
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+1980.6
+</td>
+<td style="text-align:center;">
+−3790.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+1995.4
+</td>
+<td style="text-align:center;">
+−3775.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+−987.324
+</td>
+<td style="text-align:center;">
+1898.213
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:center;">
+250.073
+</td>
+<td style="text-align:center;">
+142.951
+</td>
+</tr>
+</tbody>
+</table>
+<p>Again, we can see that rescaling <span class="math inline">\(Y\)</span> and then applying the <span class="math inline">\(log(Y+1)\)</span> transformation results in a remarkably different ATE. Because dividing by a constant doesn’t affect the proportion of zeroes but does affect the non-zero values, the ATE will consequently change when using this transformation.</p>
+</div>
+<div id="ordbetareg-to-the-rescue" class="section level2">
+<h2><code>ordbetareg</code> to the Rescue</h2>
+<p>While the authors propose some solutions to this problem, such as using a two-part model, I want to show that the ordered beta regression can estimate scale-free ATEs if the outcome is normalized; that is, rescaled to between 0 and 1. Here we will let 0 be equal to 0 while 1 will be the sum of the outcome. We can rescale so that each observation in our data is equal to the <em>proportion</em> of the total. It corresponds to the following estimand, which I’ll call <span class="math inline">\(ATE_n\)</span> for normalized:</p>
+<p><span class="math display">\[
+ATE_n = E[\frac{Y1}{Y1+Y0} - \frac{Y0}{Y1+Y0}]
+\]</span></p>
+<p>Crucially, if we scale the outcome by any value <span class="math inline">\(c\)</span>, <span class="math inline">\(c\)</span> will cancel as it will be in both the top and bottom of the fraction. We could estimate this quantity with either OLS or a t-test, but the error term is likely to be misleading as it won’t respect the bounds of the outcome (i.e. 0 or 1). This is where ordered beta regression can help. I’ll estimate two models, one with the original outcome and the second with the original outcome multiplied by a 100 to test for scaling effects. I will specify the <code>true_bounds</code> parameter to be 0 and 1 as by definition there will not be any values at the upper bound of 1.</p>
+<pre class="r"><code>t_data &lt;- mutate(t_data,
+                 Y_n=Y/(sum(Y)),
+                 Y_n_rescale=(Y/100)/(sum(Y/100)))
+
+y_n_mod &lt;- ordbetareg(Y_n ~ T,data=t_data,
+                      chains=1,iter=1000,
+                      true_bounds=c(0,1),refresh=0,
+                      backend=&quot;cmdstanr&quot;)</code></pre>
+<pre><code>## Running MCMC with 1 chain...
+## 
+## Chain 1 finished in 3.3 seconds.</code></pre>
+<pre class="r"><code>y_n_rescale &lt;- ordbetareg(Y_n_rescale ~ T,data=t_data,
+                          chains=1,iter=1000,
+                          true_bounds=c(0,1),refresh=0,
+                          backend=&quot;cmdstanr&quot;)</code></pre>
+<pre><code>## Running MCMC with 1 chain...
+## 
+## Chain 1 finished in 3.4 seconds.</code></pre>
+<pre class="r"><code>modelsummary(models=list(`Normalized Y Original`=y_n_mod, 
+                         `Normalized Y Rescaled`=y_n_rescale),
+             statistic=&quot;conf.int&quot;)</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Normalized Y Original
+</th>
+<th style="text-align:center;">
+Normalized Y Rescaled
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+b_Intercept
+</td>
+<td style="text-align:center;">
+−7.103
+</td>
+<td style="text-align:center;">
+−7.106
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+[−7.195, −6.996]
+</td>
+<td style="text-align:center;">
+[−7.189, −7.002]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+b_T
+</td>
+<td style="text-align:center;">
+0.608
+</td>
+<td style="text-align:center;">
+0.602
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+[0.502, 0.709]
+</td>
+<td style="text-align:center;">
+[0.502, 0.715]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+phi
+</td>
+<td style="text-align:center;">
+812.428
+</td>
+<td style="text-align:center;">
+809.137
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+[714.779, 894.759]
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+[719.141, 878.541]
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+1000
+</td>
+<td style="text-align:center;">
+1000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ELPD
+</td>
+<td style="text-align:center;">
+5335.8
+</td>
+<td style="text-align:center;">
+5335.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ELPD s.e.
+</td>
+<td style="text-align:center;">
+74.7
+</td>
+<td style="text-align:center;">
+74.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LOOIC
+</td>
+<td style="text-align:center;">
+−10671.5
+</td>
+<td style="text-align:center;">
+−10670.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LOOIC s.e.
+</td>
+<td style="text-align:center;">
+149.4
+</td>
+<td style="text-align:center;">
+149.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WAIC
+</td>
+<td style="text-align:center;">
+−10671.6
+</td>
+<td style="text-align:center;">
+−10670.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RMSE
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+</tr>
+</tbody>
+</table>
+<p>As can be seen, both estimates are very close. We can convert these treatment effects to marginal effects using the <code>marginaleffects</code> package:</p>
+<pre class="r"><code>margin_Y &lt;- marginaleffects(y_n_mod, variables=&quot;T&quot;)
+summary(margin_Y)</code></pre>
+<pre><code>##   Term    Effect    2.5 %   97.5 %
+## 1    T 0.0009132 0.000636 0.001788
+## 
+## Model type:  brmsfit 
+## Prediction type:  response</code></pre>
+<p>The treatment effect here is miniscule as it represents the proportion of income in the sample accruing to an individual unit. However, we can transform this back to the original scale by simply multiplying the estimated marginal effect for each posterior draw by the sum of Y1 and Y0:</p>
+<pre class="r"><code>treatment &lt;- posteriordraws(margin_Y) %&gt;% 
+  distinct(draw) %&gt;% 
+  mutate(T=draw * sum(t_data$Y))
+
+# calculate a summary/point estimate
+summary(treatment$T)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.191   1.814   2.623   2.830   3.468   8.645</code></pre>
+<pre class="r"><code># plot full distribution/uncertainty
+hist(treatment$T)</code></pre>
+<p><img src="/post/logs_files/figure-html/transform-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Doing so gives us a treatment effect of approximately $2.7 dollars on the original scale. Importantly, this ATE reflects the skew of the underlying variable, which we would want to capture.</p>
+<p>For these reasons, <code>ordbetareg</code> can be used to produce ATEs that are scale-free yet can be still be back-transformed to the original scale by rescaling the marginal effects as produced by the <code>marginaleffects</code> package. If the aim of the analysis is to estimate an ATE that is comparable across samples and income distributions, yet also doesn’t lose its relation to the original data, then <code>ordbetareg</code> can provide readily comparable estimates.</p>
+</div>
