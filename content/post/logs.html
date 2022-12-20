@@ -393,7 +393,7 @@ y_n_mod &lt;- ordbetareg(Y_n ~ T,data=t_data,
                       backend=&quot;cmdstanr&quot;)</code></pre>
 <pre><code>## Running MCMC with 1 chain...
 ## 
-## Chain 1 finished in 3.1 seconds.</code></pre>
+## Chain 1 finished in 3.3 seconds.</code></pre>
 <pre class="r"><code>y_n_rescale &lt;- ordbetareg(Y_n_rescale ~ T,data=t_data,
                           chains=1,iter=1000,
                           true_bounds=c(0,1),refresh=0,
@@ -580,6 +580,6 @@ summary(treatment$T)</code></pre>
 <pre class="r"><code># plot full distribution/uncertainty
 hist(treatment$T)</code></pre>
 <p><img src="/post/logs_files/figure-html/transform-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Doing so gives us a treatment effect of approximately $2.7 dollars on the original scale. Importantly, the estimated uncertainty of this ATE, which we can visualize by plotting all the posterior draws as a histogram, reflects the skew of the underlying variable, which in this case we would want to capture.</p>
+<p>Doing so gives us a treatment effect of approximately $2.7 dollars on the original scale–or, almost exactly <span class="math inline">\(log 1\)</span> as per our original true ATE. Importantly, the estimated uncertainty of this ATE, which we can visualize by plotting all the posterior draws as a histogram, reflects the skew of the underlying variable, which in this case we would want to capture.</p>
 <p>For these reasons, <code>ordbetareg</code> can be used to produce ATEs that are scale-free yet can be still be back-transformed to the original scale by rescaling the marginal effects as produced by the <code>marginaleffects</code> package. If the aim of the analysis is to estimate an ATE that is comparable across samples and income distributions, yet also doesn’t lose its relation to the original data, then <code>ordbetareg</code> can provide readily comparable estimates.</p>
 </div>
