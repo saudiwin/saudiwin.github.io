@@ -400,7 +400,7 @@ y_n_mod &lt;- ordbetareg(Y_n ~ T,data=t_data,
                           backend=&quot;cmdstanr&quot;)</code></pre>
 <pre><code>## Running MCMC with 1 chain...
 ## 
-## Chain 1 finished in 3.4 seconds.</code></pre>
+## Chain 1 finished in 3.5 seconds.</code></pre>
 <pre class="r"><code>modelsummary(models=list(`Normalized Y Original`=y_n_mod, 
                          `Normalized Y Rescaled`=y_n_rescale),
              statistic=&quot;conf.int&quot;)</code></pre>
@@ -581,5 +581,22 @@ summary(treatment$T)</code></pre>
 hist(treatment$T)</code></pre>
 <p><img src="/post/logs_files/figure-html/transform-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Doing so gives us a treatment effect of approximately $2.7 dollars on the original scale–or, almost exactly <span class="math inline">\(log 1\)</span> as per our original true ATE. Importantly, the estimated uncertainty of this ATE, which we can visualize by plotting all the posterior draws as a histogram, reflects the skew of the underlying variable, which in this case we would want to capture.</p>
+<p>As the package designer Vincent Arel-Bundock pointed out, I can also do the code above using the <code>marginaleffects</code> package directly with the <code>comparisons</code> function:</p>
+<pre class="r"><code>treatment2 &lt;- comparisons(y_n_mod,
+                          variables=&quot;T&quot;,
+                          transform_pre=&quot;dydx&quot;,
+                          transform_post=function(x) x * sum(t_data$Y)) %&gt;% 
+  summary
+
+print(paste0(&quot;The treatment effect estimate is &quot;,
+             round(treatment2$estimate,3),
+             &quot; with a lower bound of &quot;,
+             round(treatment2$conf.low,3), 
+             &quot; and an upper bound of &quot;,
+             round(treatment2$conf.high,3),&quot;.&quot;))</code></pre>
+<pre><code>## [1] &quot;The treatment effect estimate is 2.619 with a lower bound of 1.824 and an upper bound of 5.128.&quot;</code></pre>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
 <p>For these reasons, <code>ordbetareg</code> can be used to produce ATEs that are scale-free yet can be still be back-transformed to the original scale by rescaling the marginal effects as produced by the <code>marginaleffects</code> package. If the aim of the analysis is to estimate an ATE that is comparable across samples and income distributions, yet also doesn’t lose its relation to the original data, then <code>ordbetareg</code> can provide readily comparable estimates.</p>
 </div>
