@@ -38,20 +38,20 @@ set.seed(07252022)
 
 This post focuses on one of the more curious models in contemporary statistics, a specification for proportions that is either called fractional logit or quasi-Binomial. While in most cases in statistics, the evaluation of a model necessarily involves trade-offs in which a model is best applied to certain cases but not others, in this case fractional logit is simply the wrong model. The reason is that fractional logit is missing a normalizing constant, which in essence means that it doesn't divide by the total to make a true probability. While this distinction may seem esoteric, I use examples in this blog post to indicate why this is a quite serious problem.
 
-Importantly, recent work has resolved this issue with fractional logit and provides alternatives. It turns out based on recent machine learning research that the model *can* be fixed, resulting in a true statistical distribution but 2) if that is done, the supposed utility of the model appears to vanish, especially when compared to alternatives like beta regression. For this reason, there is no reason to use fractional logit anymore, hence the title of this post.
+Importantly, recent work has resolved this issue with fractional logit and provides alternatives. It turns out based on recent machine learning research that the model *can* be fixed, resulting in a true statistical distribution, albeit a much more complicated one. Furthermore, there are excellent other alternatives like (ordered) beta regression that are more flexible and straightforward to estimate. For this reason, there is no reason to use fractional logit anymore, hence the title of this post.
 
 I know this will be controversial for some, but I do not see any point in beating around the bush. This model just doesn't have a clear purpose anymore given known biases and alternatives that are both useful and unbiased.
 
-If you want the code for this post, you can see the [full Rmarkdown file here](https://github.com/saudiwin/saudiwin.github.io/blob/sources/content/post/frac_logit.Rmd).
-
 ![](/img/reaction-stop-it-01.gif)
+
+If you want the code for this post, you can see the [full Rmarkdown file here](https://github.com/saudiwin/saudiwin.github.io/blob/sources/content/post/frac_logit.Rmd).
 
 ## The Problem: What a Probability Is
 
 We can first start with the definition of the model, which comes from a [1996 paper by Papke and Wooldridge](https://onlinelibrary.wiley.com/doi/10.1002/%28SICI%291099-1255%28199611%2911%3A6%3C619%3A%3AAID-JAE418%3E3.0.CO%3B2-1). Given a linear model $X\beta$, a link function $G(\cdot)$ (logit), and an outcome $y_i$ that can take on any value between 0 and 1, we have a likelihood as follows:
 
 $$
-ll(y_i) = G(x_i\beta)^{y_i}(1-G(x_i\beta))^{(1 - y_i)}
+L(y_i) = G(x_i\beta)^{y_i}(1-G(x_i\beta))^{(1 - y_i)}
 $$ To get the intuition behind this model, the definition is in fact the same for the Bernoulli distribution. The only difference is that instead of $y_i$ being a binary variable with values of 0 or 1, $y_i$ could be anything from 0 to 1, including 0.2, 0.4, etc. Inserting these continuous values into a discrete distribution is the neat trick that Papke and Wooldridge came up with and labeled fractional for a fraction of 0 and 1. They also showed that it was possible to find a maximum to the likelihood function and obtain estimates for the regression coefficients $\beta$ on the logit scale.
 
 This model represented a substantial step forward from what was available at the time, mainly OLS. There were plenty of GLMs but not for a fractional or proportional response. No one was using beta regression as that model would not be proposed until 2004. For these reasons, fractional logit became very popular and has almost 5,000 citations according to Google Scholar.
