@@ -183,7 +183,7 @@ fit_c_bern &lt;- brm(
 ## Chain 1 finished in 0.9 seconds.
 ## Chain 2 finished in 0.9 seconds.
 ## Chain 3 finished in 0.9 seconds.
-## Chain 4 finished in 0.8 seconds.
+## Chain 4 finished in 0.9 seconds.
 ## 
 ## All 4 chains finished successfully.
 ## Mean chain execution time: 0.9 seconds.
@@ -210,7 +210,7 @@ avg_slopes(fit_c_bern)</code></pre>
 <pre><code>## Running MCMC with 4 sequential chains...
 ## 
 ## Chain 1 finished in 2.5 seconds.
-## Chain 2 finished in 2.5 seconds.
+## Chain 2 finished in 2.4 seconds.
 ## Chain 3 finished in 2.5 seconds.
 ## Chain 4 finished in 2.5 seconds.
 ## 
@@ -226,6 +226,6 @@ avg_slopes(fit_c_bern)</code></pre>
 ## Columns: type, term, estimate, conf.low, conf.high</code></pre>
 <pre class="r"><code>pp_check(fit_ordbeta)</code></pre>
 <p><img src="/post/frac_logit_files/figure-html/fit_ordbeta-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>The marginal effect of X seems like a more realistic 0.57, and the posterior distribution is very close to the true distribution. But again, we generated the data from the ordered beta distribution so it’s not surprising that the continuous Bernoulli estimate is different. It might take some time to figure out exactly where and when the distributions will differ. For this relatively simple example, the marginal effects of both distributions are fairly close. We might expect beta regression to differ more widely from the continuous Bernoulli when there are more extreme values in the beta distribution (high dispersion).</p>
+<p>The marginal effect of X is fairly close at 0.57, and the posterior distribution is very close to the true distribution. But again, we generated the data from the ordered beta distribution so it’s not surprising that the continuous Bernoulli estimate is different. It might take some time to figure out exactly where and when the distributions will differ. For this relatively simple example, the marginal effects of both distributions are fairly close. We might expect beta regression to differ more widely from the continuous Bernoulli when there are more extreme values in the beta distribution (high dispersion).</p>
 <p>In any case, though, there are clearly alternatives to fractional logit, and it is safe to let the model go. If the fractional logit specification is preferred, than the continuous Bernoulli (as implemented in the code above) is a correct distribution. I still think ordered beta (or the beta variants in general) are preferable as they don’t have a strange discontinuity in the middle of the function and their properties are well-known.</p>
 </div>
