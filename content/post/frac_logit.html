@@ -54,7 +54,7 @@ ll(y_i) = G(x_i\beta)^{y_i}(1-G(x_i\beta))^{(1 - y_i)}
 </div>
 <div id="ok-so-what" class="section level2">
 <h2>OK So What?</h2>
-<p>The reader at this point might think, OK, so I’ve broken a statistical taboo. What’s going to happen to me, the statistical gods will strike me with lightning?[^With some positive probability, yes.] Well, weird things start happening when you lack a normalizing constant as fractional logit does. In <a href="https://www.cambridge.org/core/journals/political-analysis/article/ordered-beta-regression-a-parsimonious-wellfitting-model-for-continuous-data-with-lower-and-upper-bounds/89F4141DA16D4FC217809B5EB45EEE83">my paper on ordered beta regression</a>, I simulated data and compared fractional logit with beta regression, OLS, and other alternatives, and its performance varied wildly. For that reason I did not recommend it as an alternative, but that was just one simulation (if a very big one).</p>
+<p>The reader at this point might think, OK, so I’ve broken a statistical taboo. What’s going to happen to me, the statistical gods will strike me with lightning?<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Well, weird things start happening when you lack a normalizing constant as fractional logit does. In <a href="https://www.cambridge.org/core/journals/political-analysis/article/ordered-beta-regression-a-parsimonious-wellfitting-model-for-continuous-data-with-lower-and-upper-bounds/89F4141DA16D4FC217809B5EB45EEE83">my paper on ordered beta regression</a>, I simulated data and compared fractional logit with beta regression, OLS, and other alternatives, and its performance varied wildly. For that reason I did not recommend it as an alternative, but that was just one simulation (if a very big one).</p>
 <p>However, there is more thorough research on this topic by people working in the machine learning literature. <a href="https://arxiv.org/pdf/1907.06845.pdf">Gabriel Loaiza-Ganem and John Cunningham looked at variational auto-encoders</a>, which are models for pixels that make up images. Apparently people using these models had been employing fractional logit, and they were likewise concerned about the lack of normalization. They went as far as identifying what the normalization constant is, which turns out to be the following for a given value of the linear predictor <span class="math inline">\(G(X\beta)\)</span>, which I denote as <span class="math inline">\(\mu\)</span> (see their eqn (7)):</p>
 <p><span class="math display">\[
 C(\mu) = \begin{cases}
@@ -184,11 +184,11 @@ fit_c_bern &lt;- brm(
 ## Chain 1 finished in 0.9 seconds.
 ## Chain 2 finished in 0.9 seconds.
 ## Chain 3 finished in 0.9 seconds.
-## Chain 4 finished in 0.8 seconds.
+## Chain 4 finished in 0.9 seconds.
 ## 
 ## All 4 chains finished successfully.
 ## Mean chain execution time: 0.9 seconds.
-## Total execution time: 4.0 seconds.</code></pre>
+## Total execution time: 4.1 seconds.</code></pre>
 <pre class="r"><code>library(marginaleffects)
 
 avg_slopes(fit_c_bern)</code></pre>
@@ -210,13 +210,13 @@ avg_slopes(fit_c_bern)</code></pre>
 )</code></pre>
 <pre><code>## Running MCMC with 4 sequential chains...
 ## 
-## Chain 1 finished in 2.5 seconds.
+## Chain 1 finished in 2.4 seconds.
 ## Chain 2 finished in 2.5 seconds.
-## Chain 3 finished in 2.5 seconds.
-## Chain 4 finished in 2.5 seconds.
+## Chain 3 finished in 2.3 seconds.
+## Chain 4 finished in 2.6 seconds.
 ## 
 ## All 4 chains finished successfully.
-## Mean chain execution time: 2.5 seconds.
+## Mean chain execution time: 2.4 seconds.
 ## Total execution time: 10.1 seconds.</code></pre>
 <pre class="r"><code>avg_slopes(fit_ordbeta)</code></pre>
 <pre><code>## 
@@ -229,4 +229,10 @@ avg_slopes(fit_c_bern)</code></pre>
 <p><img src="/post/frac_logit_files/figure-html/fit_ordbeta-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The marginal effect of X is fairly close to the continuous Bernoulli’s, and the posterior distribution is much closer to the true distribution. But again, we generated the data from the ordered beta distribution so it’s not surprising that the continuous Bernoulli estimate is different. It might take some time to figure out exactly where and when the distributions will differ. For this relatively simple example, the marginal effects of both distributions are fairly close. We might expect beta regression to differ more widely from the continuous Bernoulli when there are more extreme values in the beta distribution (high dispersion).</p>
 <p>In any case, though, there are clearly alternatives to fractional logit, and it is safe to let the model go. If the fractional logit specification is preferred, than the continuous Bernoulli (as implemented in the code above) is a correct distribution. I still think ordered beta (or the beta variants in general) are preferable as they don’t have a strange discontinuity in the middle of the function and their properties are well-known.</p>
+</div>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>With some positive probability, yes.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
