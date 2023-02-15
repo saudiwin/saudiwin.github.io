@@ -42,6 +42,8 @@ Importantly, recent work has resolved this issue with fractional logit and provi
 
 I know this will be controversial for some, but I do not see any point in beating around the bush. This model just doesn't have a clear purpose anymore given known biases and alternatives that are both useful and unbiased.
 
+If you want the code for this post, you can see the [full Rmarkdown file here](https://github.com/saudiwin/saudiwin.github.io/blob/sources/content/post/frac_logit.Rmd).
+
 ![](/img/reaction-stop-it-01.gif)
 
 ## The Problem: What a Probability Is
@@ -52,13 +54,13 @@ $$
 ll(y_i) = G(x_i\beta)^{y_i}(1-G(x_i\beta))^{(1 - y_i)}
 $$ To get the intuition behind this model, the definition is in fact the same for the Bernoulli distribution. The only difference is that instead of $y_i$ being a binary variable with values of 0 or 1, $y_i$ could be anything from 0 to 1, including 0.2, 0.4, etc. Inserting these continuous values into a discrete distribution is the neat trick that Papke and Wooldridge came up with and labeled fractional for a fraction of 0 and 1. They also showed that it was possible to find a maximum to the likelihood function and obtain estimates for the regression coefficients $\beta$ on the logit scale.
 
-This model represented a substantial step forward from what was available at the time, mainly OLS. There were plenty of GLMs but not for a fractional or proportional responses. No one was using beta regression as that model would not be proposed until 2004. For these reasons, fractional logit became very popular and has almmost 5,000 citations according to Google Scholar.
+This model represented a substantial step forward from what was available at the time, mainly OLS. There were plenty of GLMs but not for a fractional or proportional response. No one was using beta regression as that model would not be proposed until 2004. For these reasons, fractional logit became very popular and has almost 5,000 citations according to Google Scholar.
 
 However, this might lead to some head-scratching--sticking continuous data in a discrete distribution is, at a minimum, kind of odd. It turns out, after much additional research, that it is indeed not a great idea. The reason is that the distribution above is not a true probability distribution--it does not integrate to 1.
 
 You may have some vague idea about integration and probability density functions (PDFs) from stats classes, but if you do you likely aren't entirely sure what it's necessary. Thinking about integrals isn't easy for anybody, so instead I'll use a discrete example.
 
-Imagine that we are considering the probability of college basketball teams winning the March Madness tournament. Right now, it seems the top 3 teams are $G$onzaga (#1), $A$rizona (#2) and $K$ansas (#3). Let's examine a simple binary probability that each of these three of these teams will make it into the final four $Pr(F=1)$?
+Imagine that we are considering the probability of college basketball teams winning the March Madness tournament. Right now, it seems the top 3 teams are Gonzaga (#1), Arizona (#2) and Kansas (#3). Let's examine a simple binary probability as to which of these three of these teams will make it into the final four $Pr(FF=1)$.
 
 The question is, how do we want to calculate that probability? We could calculate it as being proportional to the number of games they won in the regular season. Given the teams' conference records, suppose we have the following ranking for most likely to make it to the final four:
 
@@ -68,7 +70,7 @@ The question is, how do we want to calculate that probability? We could calculat
 
 Gonzaga won the most games compared to losing games. But we might be concerned about the different number of games in different conferences. Gonzaga only played 12 conference games, Arizona played 15, and Kansas played 13. The question is here: which denominator do we use to weight the number of games? Without such a denominator, we don't have probabilities that sum to 1.
 
-We could consider wins as a share of the total number of games. In that case, we have the following ranking:
+We could consider wins as a share of the total number of games played in their conference season. In that case, we have the following ranking:
 
 1.  Arizona: `r 11/(10 + 11 + 9)`
 2.  Gonzaga: `r 10/(10 + 11 + 9)`
@@ -84,9 +86,9 @@ The work of figuring out the denominator is what is called normalizing to get pr
 
 ## OK So What?
 
-The reader at this point might think, OK, so I've broken a statistical taboo. What's going to happen to me, the statistical gods will strike me with lightning?[^1 With some positive probability, yes.] Well, weird things start happening when you lack a normalizing constant as fractional logit does. In [my paper on ordered beta regression](https://www.cambridge.org/core/journals/political-analysis/article/ordered-beta-regression-a-parsimonious-wellfitting-model-for-continuous-data-with-lower-and-upper-bounds/89F4141DA16D4FC217809B5EB45EEE83), I simulated data and compared fractional logit with beta regression, OLS, and other alternatives, and its performance varied wildly. For that reason I did not recommend it as an alternative, but that was just one simulation (if a very big one).
+The reader at this point might think, OK, so I've broken a statistical taboo. What's going to happen to me, the statistical gods will strike me with lightning?[^With some positive probability, yes.] Well, weird things start happening when you lack a normalizing constant as fractional logit does. In [my paper on ordered beta regression](https://www.cambridge.org/core/journals/political-analysis/article/ordered-beta-regression-a-parsimonious-wellfitting-model-for-continuous-data-with-lower-and-upper-bounds/89F4141DA16D4FC217809B5EB45EEE83), I simulated data and compared fractional logit with beta regression, OLS, and other alternatives, and its performance varied wildly. For that reason I did not recommend it as an alternative, but that was just one simulation (if a very big one).
 
-However, there is more thorough research on this topic by people working in the machine learning literature. [Gabriel Loaiza-Ganem and John Cunningham looked at variational auto-encoders](https://arxiv.org/pdf/1907.06845.pdf), which are models for pixels that make up images. Apparently people using these models had been employing fractional logit, and they were likewise concerned about the lack of normalization. They went as far as identifying what the normalization constant is, which turns out to be the following for a given average value of the outcome $\mu$ (see their eqn (7)):
+However, there is more thorough research on this topic by people working in the machine learning literature. [Gabriel Loaiza-Ganem and John Cunningham looked at variational auto-encoders](https://arxiv.org/pdf/1907.06845.pdf), which are models for pixels that make up images. Apparently people using these models had been employing fractional logit, and they were likewise concerned about the lack of normalization. They went as far as identifying what the normalization constant is, which turns out to be the following for a given value of the linear predictor $G(X\beta)$, which I denote as $\mu$ (see their eqn (7)):
 
 $$
 C(\mu) = \begin{cases}
@@ -99,7 +101,7 @@ This thing, to be honest, is kind of ugly, and has a discontinuity when the prop
 
 [![Figure 1 from Loaiza-Ganem and Cunningham (2019)](/img/Screen%20Shot%202023-02-15%20at%205.09.55%20PM.png){width="1000"}](https://arxiv.org/pdf/1907.06845.pdf)
 
-Essentially, the distribution allows for mildly sloping lines across 0 to 1 that can be either upward or downward. The value of the normalizing constant $C(y_i)$ in the leftward panel is much bigger towards the boundaries of the distribution, which intuitively makes sense. As the distribution moves towards extreme values, the denominator has to change to take into account the non-linearity in the outcome.
+Essentially, the distribution allows for mildly sloping lines across 0 to 1 that can be either upward or downward. The value of the normalizing constant $C(\mu)$ in the leftward panel is much bigger towards the boundaries of the distribution, which intuitively makes sense. As the distribution moves towards extreme values, the denominator has to change to take into account the non-linearity in the outcome.
 
 Furthermore, they show in the paper that the lack of normalization has a clear impact on performance. They use an image-learning task and examine how continuous Bernoulli without normalization (i.e., fractional logit) compares to continuous Bernoulli with normalization. Again, I'll copy and paste their key result here:
 
@@ -233,7 +235,7 @@ library(marginaleffects)
 avg_slopes(fit_c_bern)
 ```
 
-The `avg_slopes` function from the `marginaleffects` package gives the marginal effect of the parameter back-transformed to 0/1. The continuous Bernoulli estimates a very big marginal effect for `X` equivalent to approximately 0.59. We can plot the posterior predictive distribution:
+The `avg_slopes` function from the `marginaleffects` package gives the marginal effect of the parameter back-transformed to 0/1. The continuous Bernoulli estimates a very big marginal effect for `X` (it is not the same as the true coefficient because that was on the logit scale, not the true scale). We can plot the posterior predictive distribution:
 
 ```{r pp_check}
 pp_check(fit_c_bern)
@@ -256,6 +258,6 @@ pp_check(fit_ordbeta)
 
 ```
 
-The marginal effect of X is fairly close at 0.57, and the posterior distribution is very close to the true distribution. But again, we generated the data from the ordered beta distribution so it's not surprising that the continuous Bernoulli estimate is different. It might take some time to figure out exactly where and when the distributions will differ. For this relatively simple example, the marginal effects of both distributions are fairly close. We might expect beta regression to differ more widely from the continuous Bernoulli when there are more extreme values in the beta distribution (high dispersion).
+The marginal effect of X is fairly close to the continuous Bernoulli's, and the posterior distribution is much closer to the true distribution. But again, we generated the data from the ordered beta distribution so it's not surprising that the continuous Bernoulli estimate is different. It might take some time to figure out exactly where and when the distributions will differ. For this relatively simple example, the marginal effects of both distributions are fairly close. We might expect beta regression to differ more widely from the continuous Bernoulli when there are more extreme values in the beta distribution (high dispersion).
 
 In any case, though, there are clearly alternatives to fractional logit, and it is safe to let the model go. If the fractional logit specification is preferred, than the continuous Bernoulli (as implemented in the code above) is a correct distribution. I still think ordered beta (or the beta variants in general) are preferable as they don't have a strange discontinuity in the middle of the function and their properties are well-known.
