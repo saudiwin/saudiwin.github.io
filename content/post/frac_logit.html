@@ -16,8 +16,8 @@ categories: ["R"]
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>This post focuses on one of the more curious models in contemporary statistics, a specification for proportions that is either called the continuous Bernoulli or fractional logit. While in most cases in statistics, the evaluation of a model necessarily involves trade-offs in which a model is best applied to certain cases but not others, in this case the fractional logit is simply the wrong model. The reason is that it is not a statistical distribution due to missing a so-called normalizing constant, which in essence means that it doesn’t divide by the total to make a true probability. While this distinction may seem esoteric, I use examples in this blog post to indicate why this is a quite serious problem.</p>
-<p>However, the issue with fractional logit is superseded by the fact that 1) the model <em>can</em> be fixed, resulting in a true statistical distribution but 2) if that is done, the supposed utility of the model appears to vanish, especially when compared to alternatives like beta regression. For this reason, there is no reason to use fractional logit anymore, hence the title of this post.</p>
+<p>This post focuses on one of the more curious models in contemporary statistics, a specification for proportions that is either called fractional logit or quasi-Binomial. While in most cases in statistics, the evaluation of a model necessarily involves trade-offs in which a model is best applied to certain cases but not others, in this case fractional logit is simply the wrong model. The reason is that fractional logit is missing a normalizing constant, which in essence means that it doesn’t divide by the total to make a true probability. While this distinction may seem esoteric, I use examples in this blog post to indicate why this is a quite serious problem.</p>
+<p>Importantly, recent work has resolved this issue with fractional logit and provides alternatives. It turns out based on recent machine learning research that the model <em>can</em> be fixed, resulting in a true statistical distribution but 2) if that is done, the supposed utility of the model appears to vanish, especially when compared to alternatives like beta regression. For this reason, there is no reason to use fractional logit anymore, hence the title of this post.</p>
 <p>I know this will be controversial for some, but I do not see any point in beating around the bush. This model just doesn’t have a clear purpose anymore given known biases and alternatives that are both useful and unbiased.</p>
 <p><img src="/img/reaction-stop-it-01.gif" /></p>
 <div id="the-problem-what-a-probability-is" class="section level2">
@@ -26,10 +26,10 @@ categories: ["R"]
 <p><span class="math display">\[
 ll(y_i) = G(x_i\beta)^{y_i}(1-G(x_i\beta))^{(1 - y_i)}
 \]</span> To get the intuition behind this model, the definition is in fact the same for the Bernoulli distribution. The only difference is that instead of <span class="math inline">\(y_i\)</span> being a binary variable with values of 0 or 1, <span class="math inline">\(y_i\)</span> could be anything from 0 to 1, including 0.2, 0.4, etc. Inserting these continuous values into a discrete distribution is the neat trick that Papke and Wooldridge came up with and labeled fractional for a fraction of 0 and 1. They also showed that it was possible to find a maximum to the likelihood function and obtain estimates for the regression coefficients <span class="math inline">\(\beta\)</span> on the logit scale.</p>
-<p>This model represented a substantial step forward from what was available at the time, mainly OLS. There were plenty of GLMs but not for a fractional or proportional response. No one was using Beta regression as that model would not be proposed until 2004. For these reasons, it became very popular and has almmost 5,000 citations according to Google Scholar.</p>
-<p>However, this might lead to some head-scratching–sticking continuous data in a discrete distribution is at the minimum kind of odd. It turns out, after much additional research, that it is indeed not a great idea. The reason is that the distribution above is not a true probability distribution–it does not integrate to 1.</p>
+<p>This model represented a substantial step forward from what was available at the time, mainly OLS. There were plenty of GLMs but not for a fractional or proportional responses. No one was using beta regression as that model would not be proposed until 2004. For these reasons, fractional logit became very popular and has almmost 5,000 citations according to Google Scholar.</p>
+<p>However, this might lead to some head-scratching–sticking continuous data in a discrete distribution is, at a minimum, kind of odd. It turns out, after much additional research, that it is indeed not a great idea. The reason is that the distribution above is not a true probability distribution–it does not integrate to 1.</p>
 <p>You may have some vague idea about integration and probability density functions (PDFs) from stats classes, but if you do you likely aren’t entirely sure what it’s necessary. Thinking about integrals isn’t easy for anybody, so instead I’ll use a discrete example.</p>
-<p>Imagine that we are considering the probability of college basketball teams winning the March Madness tournament. Right now, it seems the top 3 teams are <span class="math inline">\(G\)</span>onzaga (#1), <span class="math inline">\(A\)</span>rizona (#2) and <span class="math inline">\(K\)</span>ansas (#3). Let’s examine a simple binary probability that each of these three of these teams will make it into the final four <span class="math inline">\(Pr(F=1|G,A,K)\)</span>?</p>
+<p>Imagine that we are considering the probability of college basketball teams winning the March Madness tournament. Right now, it seems the top 3 teams are <span class="math inline">\(G\)</span>onzaga (#1), <span class="math inline">\(A\)</span>rizona (#2) and <span class="math inline">\(K\)</span>ansas (#3). Let’s examine a simple binary probability that each of these three of these teams will make it into the final four <span class="math inline">\(Pr(F=1)\)</span>?</p>
 <p>The question is, how do we want to calculate that probability? We could calculate it as being proportional to the number of games they won in the regular season. Given the teams’ conference records, suppose we have the following ranking for most likely to make it to the final four:</p>
 <ol style="list-style-type: decimal">
 <li>Gonzaga: 10 (W) - 2 (L)</li>
@@ -53,11 +53,11 @@ ll(y_i) = G(x_i\beta)^{y_i}(1-G(x_i\beta))^{(1 - y_i)}
 </div>
 <div id="ok-so-what" class="section level2">
 <h2>OK So What?</h2>
-<p>The reader at this point might think, OK, so I’ve broken a statistical taboo. What’s going to happen to me, the statistical gods will strike me with lightning?[^1 With some positive probability, yes.] Well, weird things start happening when you lack a normalizing constant as fractional logit does. In <a href="https://www.cambridge.org/core/journals/political-analysis/article/ordered-beta-regression-a-parsimonious-wellfitting-model-for-continuous-data-with-lower-and-upper-bounds/89F4141DA16D4FC217809B5EB45EEE83">my paper on ordered beta regression</a>, I simulated data and compared fractional logit with beta regression, OLS, and other alternatives, and its performance varied wildly. For that reason I did not recommend it as an alternative, but you might think that was just the result of one simulation.</p>
-<p>However, there is more thorough research on this topic by people working in the machine learning literature. Gabriel Loaiza-Ganem and John Cunningham looked at variational auto-encoders, which are models for pixels that make up images. Apparently people using these models had been employing fractional logit, and they were likewise concerned about the lack of normalization. They went as far as identifying what the normalization constant is, which turns out to be the following (see their eqn (7)):</p>
+<p>The reader at this point might think, OK, so I’ve broken a statistical taboo. What’s going to happen to me, the statistical gods will strike me with lightning?[^1 With some positive probability, yes.] Well, weird things start happening when you lack a normalizing constant as fractional logit does. In <a href="https://www.cambridge.org/core/journals/political-analysis/article/ordered-beta-regression-a-parsimonious-wellfitting-model-for-continuous-data-with-lower-and-upper-bounds/89F4141DA16D4FC217809B5EB45EEE83">my paper on ordered beta regression</a>, I simulated data and compared fractional logit with beta regression, OLS, and other alternatives, and its performance varied wildly. For that reason I did not recommend it as an alternative, but that was just one simulation (if a very big one).</p>
+<p>However, there is more thorough research on this topic by people working in the machine learning literature. <a href="https://arxiv.org/pdf/1907.06845.pdf">Gabriel Loaiza-Ganem and John Cunningham looked at variational auto-encoders</a>, which are models for pixels that make up images. Apparently people using these models had been employing fractional logit, and they were likewise concerned about the lack of normalization. They went as far as identifying what the normalization constant is, which turns out to be the following for a given average value of the outcome <span class="math inline">\(\mu\)</span> (see their eqn (7)):</p>
 <p><span class="math display">\[
-C(y_i) = \begin{cases}
-  \frac{2 \text{tanh}^{-1}(1 - 2y_i)}{1 - 2y_i}  &amp; \text{if } y_i \ne 0.5 \\
+C(\mu) = \begin{cases}
+  \frac{2 \text{tanh}^{-1}(1 - 2\mu)}{1 - 2\mu}  &amp; \text{if } \mu \ne 0.5 \\
   2 &amp; \text{otherwise}
 \end{cases}
 \]</span></p>
@@ -159,7 +159,17 @@ posterior_predict_c_bernoulli &lt;- function(i, prep, ...) {
 posterior_epred_c_bernoulli &lt;- function(prep) {
   
   # expected value
-  brms::get_dpar(prep, &quot;mu&quot;)
+  mu &lt;- brms::get_dpar(prep, &quot;mu&quot;)
+  
+  if(mu==0.5) {
+    
+    return(0.5)
+    
+  } else {
+    
+    (mu / (2 * mu - 1)) + (1 / (2*atanh(1 - 2*mu)))
+    
+  }
   
 }
 
@@ -183,11 +193,11 @@ fit_c_bern &lt;- brm(
 avg_slopes(fit_c_bern)</code></pre>
 <pre><code>## 
 ##  Term Estimate  2.5 % 97.5 %
-##     X   0.8695 0.7594 0.9455
+##     X   0.5085 0.4429 0.5669
 ## 
 ## Prediction type:  response 
 ## Columns: type, term, estimate, conf.low, conf.high</code></pre>
-<p>The <code>avg_slopes</code> function from the <code>marginaleffects</code> package gives the marginal effect of the parameter back-transformed to 0/1. The continuous Bernoulli estimates a very big marginal effect for <code>X</code> equivalent to nearly +0.95, though it is still bounded and strictly below 1. We can plot the posterior predictive distribution:</p>
+<p>The <code>avg_slopes</code> function from the <code>marginaleffects</code> package gives the marginal effect of the parameter back-transformed to 0/1. The continuous Bernoulli estimates a very big marginal effect for <code>X</code> equivalent to approximately 0.59. We can plot the posterior predictive distribution:</p>
 <pre class="r"><code>pp_check(fit_c_bern)</code></pre>
 <p><img src="/post/frac_logit_files/figure-html/pp_check-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>It’s a bit off, but pretty close, and we probably shouldn’t expect it to be perfect given that the data was generated from the ordered beta distribution, not the continuous Bernoulli.</p>
@@ -199,8 +209,8 @@ avg_slopes(fit_c_bern)</code></pre>
 )</code></pre>
 <pre><code>## Running MCMC with 4 sequential chains...
 ## 
-## Chain 1 finished in 2.4 seconds.
-## Chain 2 finished in 2.4 seconds.
+## Chain 1 finished in 2.5 seconds.
+## Chain 2 finished in 2.5 seconds.
 ## Chain 3 finished in 2.5 seconds.
 ## Chain 4 finished in 2.5 seconds.
 ## 
@@ -216,6 +226,6 @@ avg_slopes(fit_c_bern)</code></pre>
 ## Columns: type, term, estimate, conf.low, conf.high</code></pre>
 <pre class="r"><code>pp_check(fit_ordbeta)</code></pre>
 <p><img src="/post/frac_logit_files/figure-html/fit_ordbeta-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>The marginal effect of X seems like a more realistic 0.57, and the posterior distribution is very close to the true distribution. But again, we generated the data from the ordered beta distribution so it’s not surprising that the continuous Bernoulli estimate is different. It might take some time to figure out exactly where and when the distributions will differ. However it is clear from this simulation that there are substantial differences between the two models.</p>
+<p>The marginal effect of X seems like a more realistic 0.57, and the posterior distribution is very close to the true distribution. But again, we generated the data from the ordered beta distribution so it’s not surprising that the continuous Bernoulli estimate is different. It might take some time to figure out exactly where and when the distributions will differ. For this relatively simple example, the marginal effects of both distributions are fairly close. We might expect beta regression to differ more widely from the continuous Bernoulli when there are more extreme values in the beta distribution (high dispersion).</p>
 <p>In any case, though, there are clearly alternatives to fractional logit, and it is safe to let the model go. If the fractional logit specification is preferred, than the continuous Bernoulli (as implemented in the code above) is a correct distribution. I still think ordered beta (or the beta variants in general) are preferable as they don’t have a strange discontinuity in the middle of the function and their properties are well-known.</p>
 </div>
