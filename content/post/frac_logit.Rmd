@@ -42,7 +42,7 @@ However, the issue with fractional logit is superseded by the fact that 1) the m
 
 I know this will be controversial for some, but I do not see any point in beating around the bush. This model just doesn't have a clear purpose anymore given known biases and alternatives that are both useful and unbiased.
 
-![](img/reaction-stop-it-01.gif)
+![](/img/reaction-stop-it-01.gif)
 
 ## The Problem: What a Probability Is
 
@@ -97,13 +97,13 @@ $$
 
 This thing, to be honest, is kind of ugly, and has a discontinuity when the proportion is equal to 0.5 or 50%. The authors figured out how to sample from this distribution by using a Taylor-series approximation around the discontinuity, which is pretty cool, and they decided to name it the continuous Bernoulli distribution. I am cutting and pasting their Figure 1 to show what the distribution looks like:
 
-[![Figure 1 from Loaiza-Ganem and Cunningham (2019)](img/Screen%20Shot%202023-02-15%20at%205.09.55%20PM.png){width="1000"}](https://arxiv.org/pdf/1907.06845.pdf)
+[![Figure 1 from Loaiza-Ganem and Cunningham (2019)](/img/Screen%20Shot%202023-02-15%20at%205.09.55%20PM.png){width="1000"}](https://arxiv.org/pdf/1907.06845.pdf)
 
 Essentially, the distribution allows for mildly sloping lines across 0 to 1 that can be either upward or downward. The value of the normalizing constant $C(y_i)$ in the leftward panel is much bigger towards the boundaries of the distribution, which intuitively makes sense. As the distribution moves towards extreme values, the denominator has to change to take into account the non-linearity in the outcome.
 
 Furthermore, they show in the paper that the lack of normalization has a clear impact on performance. They use an image-learning task and examine how continuous Bernoulli without normalization (i.e., fractional logit) compares to continuous Bernoulli with normalization. Again, I'll copy and paste their key result here:
 
-![](img/Screen%20Shot%202023-02-15%20at%205.25.24%20PM.png)
+![](/img/Screen%20Shot%202023-02-15%20at%205.25.24%20PM.png)
 
 In this figure, CB represents continuous Bernoulli and B is the fractional logit. As can be seen, the images are much sharper with continuous Bernoulli (normalized) than fractional logit. The authors point out that this is likely due to the normalizing constant becoming so large towards the extremes of the distribution: the un-normalized distribution has a hard time knowing where the boundaries are. Or, as in our basketball analogy, understanding what the relative comparison point is. It still gets fairly close to the average value but it can't take into account the full distribution.
 

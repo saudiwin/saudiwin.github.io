@@ -19,7 +19,7 @@ categories: ["R"]
 <p>This post focuses on one of the more curious models in contemporary statistics, a specification for proportions that is either called the continuous Bernoulli or fractional logit. While in most cases in statistics, the evaluation of a model necessarily involves trade-offs in which a model is best applied to certain cases but not others, in this case the fractional logit is simply the wrong model. The reason is that it is not a statistical distribution due to missing a so-called normalizing constant, which in essence means that it doesn’t divide by the total to make a true probability. While this distinction may seem esoteric, I use examples in this blog post to indicate why this is a quite serious problem.</p>
 <p>However, the issue with fractional logit is superseded by the fact that 1) the model <em>can</em> be fixed, resulting in a true statistical distribution but 2) if that is done, the supposed utility of the model appears to vanish, especially when compared to alternatives like beta regression. For this reason, there is no reason to use fractional logit anymore, hence the title of this post.</p>
 <p>I know this will be controversial for some, but I do not see any point in beating around the bush. This model just doesn’t have a clear purpose anymore given known biases and alternatives that are both useful and unbiased.</p>
-<p><img src="img/reaction-stop-it-01.gif" /></p>
+<p><img src="/img/reaction-stop-it-01.gif" /></p>
 <div id="the-problem-what-a-probability-is" class="section level2">
 <h2>The Problem: What a Probability Is</h2>
 <p>We can first start with the definition of the model, which comes from a <a href="https://onlinelibrary.wiley.com/doi/10.1002/%28SICI%291099-1255%28199611%2911%3A6%3C619%3A%3AAID-JAE418%3E3.0.CO%3B2-1">1996 paper by Papke and Wooldridge</a>. Given a linear model <span class="math inline">\(X\beta\)</span>, a link function <span class="math inline">\(G(\cdot)\)</span> (logit), and an outcome <span class="math inline">\(y_i\)</span> that can take on any value between 0 and 1, we have a likelihood as follows:</p>
@@ -62,10 +62,10 @@ C(y_i) = \begin{cases}
 \end{cases}
 \]</span></p>
 <p>This thing, to be honest, is kind of ugly, and has a discontinuity when the proportion is equal to 0.5 or 50%. The authors figured out how to sample from this distribution by using a Taylor-series approximation around the discontinuity, which is pretty cool, and they decided to name it the continuous Bernoulli distribution. I am cutting and pasting their Figure 1 to show what the distribution looks like:</p>
-<p><a href="https://arxiv.org/pdf/1907.06845.pdf"><img src="img/Screen%20Shot%202023-02-15%20at%205.09.55%20PM.png" width="1000" alt="Figure 1 from Loaiza-Ganem and Cunningham (2019)" /></a></p>
+<p><a href="https://arxiv.org/pdf/1907.06845.pdf"><img src="/img/Screen%20Shot%202023-02-15%20at%205.09.55%20PM.png" width="1000" alt="Figure 1 from Loaiza-Ganem and Cunningham (2019)" /></a></p>
 <p>Essentially, the distribution allows for mildly sloping lines across 0 to 1 that can be either upward or downward. The value of the normalizing constant <span class="math inline">\(C(y_i)\)</span> in the leftward panel is much bigger towards the boundaries of the distribution, which intuitively makes sense. As the distribution moves towards extreme values, the denominator has to change to take into account the non-linearity in the outcome.</p>
 <p>Furthermore, they show in the paper that the lack of normalization has a clear impact on performance. They use an image-learning task and examine how continuous Bernoulli without normalization (i.e., fractional logit) compares to continuous Bernoulli with normalization. Again, I’ll copy and paste their key result here:</p>
-<p><img src="img/Screen%20Shot%202023-02-15%20at%205.25.24%20PM.png" /></p>
+<p><img src="/img/Screen%20Shot%202023-02-15%20at%205.25.24%20PM.png" /></p>
 <p>In this figure, CB represents continuous Bernoulli and B is the fractional logit. As can be seen, the images are much sharper with continuous Bernoulli (normalized) than fractional logit. The authors point out that this is likely due to the normalizing constant becoming so large towards the extremes of the distribution: the un-normalized distribution has a hard time knowing where the boundaries are. Or, as in our basketball analogy, understanding what the relative comparison point is. It still gets fairly close to the average value but it can’t take into account the full distribution.</p>
 <p>So there you have it. There is no reason to use fractional logit anymore because someone fixed it. On the other hand, you could use my ordered beta regression model, which did not exist at the time of this paper but does essentially the same thing (and doesn’t have issues with discontinuities that require Taylor series expansion). Still, the authors’ accomplishment is remarkable in creating a statistical distribution ex nihilo.</p>
 </div>
@@ -199,14 +199,14 @@ avg_slopes(fit_c_bern)</code></pre>
 )</code></pre>
 <pre><code>## Running MCMC with 4 sequential chains...
 ## 
-## Chain 1 finished in 2.5 seconds.
+## Chain 1 finished in 2.4 seconds.
 ## Chain 2 finished in 2.4 seconds.
 ## Chain 3 finished in 2.5 seconds.
 ## Chain 4 finished in 2.5 seconds.
 ## 
 ## All 4 chains finished successfully.
 ## Mean chain execution time: 2.5 seconds.
-## Total execution time: 10.1 seconds.</code></pre>
+## Total execution time: 10.2 seconds.</code></pre>
 <pre class="r"><code>avg_slopes(fit_ordbeta)</code></pre>
 <pre><code>## 
 ##  Term Estimate  2.5 % 97.5 %
