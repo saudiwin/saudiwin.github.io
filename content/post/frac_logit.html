@@ -1,11 +1,11 @@
 ---
-title: "Stop Using Fractional Logit"
+title: "Fixing Fractional Logit"
 subtitle: "The fractional logit model is not a statistical distribution, leading it to produce biased results. There are much better alternatives."
 author: "Robert Kubinec"
 date: "2023-02-14T06:00:00"
 output: blogdown::html_page
 header:
-  title: "Stop Using Fractional Logit"
+  title: "Fixing Fractional Logit"
   summary: "The fractional logit model is not a statistical distribution, leading it to produce biased results. There are much better alternatives."
   image: "headers/stop.jpeg"
   date: "2023-02-14T06:00:00"
@@ -19,7 +19,6 @@ categories: ["R"]
 <p>This post focuses on one of the more curious models in contemporary statistics, a specification for proportions that is either called fractional logit or quasi-Binomial. While in most cases in statistics, the evaluation of a model necessarily involves trade-offs in which a model is best applied to certain cases but not others, in this case fractional logit is simply the wrong model. The reason is that fractional logit is missing a normalizing constant, which in essence means that it doesn’t divide by the total to make a true probability. While this distinction may seem esoteric, I use examples in this blog post to indicate why this is a quite serious problem.</p>
 <p>Importantly, recent work has resolved this issue with fractional logit and provides alternatives. It turns out based on recent machine learning research that the model <em>can</em> be fixed, resulting in a true statistical distribution, albeit a much more complicated one. Furthermore, there are excellent other alternatives like (ordered) beta regression that are more flexible and straightforward to estimate. For this reason, there is no reason to use fractional logit anymore, hence the title of this post.</p>
 <p>I know this will be controversial for some, but I do not see any point in beating around the bush. This model just doesn’t have a clear purpose anymore given known biases and alternatives that are both useful and unbiased.</p>
-<p><img src="/img/reaction-stop-it-01.gif" /></p>
 <p>If you want the code for this post, you can see the <a href="https://github.com/saudiwin/saudiwin.github.io/blob/sources/content/post/frac_logit.Rmd">full Rmarkdown file here</a>.</p>
 <div id="the-problem-what-a-probability-is" class="section level2">
 <h2>The Problem: What a Probability Is</h2>
@@ -184,7 +183,7 @@ fit_c_bern &lt;- brm(
 ## Chain 1 finished in 0.9 seconds.
 ## Chain 2 finished in 0.9 seconds.
 ## Chain 3 finished in 0.9 seconds.
-## Chain 4 finished in 0.8 seconds.
+## Chain 4 finished in 0.9 seconds.
 ## 
 ## All 4 chains finished successfully.
 ## Mean chain execution time: 0.9 seconds.
@@ -210,13 +209,13 @@ avg_slopes(fit_c_bern)</code></pre>
 )</code></pre>
 <pre><code>## Running MCMC with 4 sequential chains...
 ## 
-## Chain 1 finished in 2.5 seconds.
+## Chain 1 finished in 2.4 seconds.
 ## Chain 2 finished in 2.4 seconds.
 ## Chain 3 finished in 2.5 seconds.
 ## Chain 4 finished in 2.5 seconds.
 ## 
 ## All 4 chains finished successfully.
-## Mean chain execution time: 2.5 seconds.
+## Mean chain execution time: 2.4 seconds.
 ## Total execution time: 10.2 seconds.</code></pre>
 <pre class="r"><code>avg_slopes(fit_ordbeta)</code></pre>
 <pre><code>## 

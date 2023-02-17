@@ -1,11 +1,11 @@
 ---
-title: "Stop Using Fractional Logit"
+title: "Fixing Fractional Logit"
 subtitle: "The fractional logit model is not a statistical distribution, leading it to produce biased results. There are much better alternatives."
 author: "Robert Kubinec"
 date: "2023-02-14T06:00:00"
 output: blogdown::html_page
 header:
-  title: "Stop Using Fractional Logit"
+  title: "Fixing Fractional Logit"
   summary: "The fractional logit model is not a statistical distribution, leading it to produce biased results. There are much better alternatives."
   image: "headers/stop.jpeg"
   date: "2023-02-14T06:00:00"
@@ -41,8 +41,6 @@ This post focuses on one of the more curious models in contemporary statistics, 
 Importantly, recent work has resolved this issue with fractional logit and provides alternatives. It turns out based on recent machine learning research that the model *can* be fixed, resulting in a true statistical distribution, albeit a much more complicated one. Furthermore, there are excellent other alternatives like (ordered) beta regression that are more flexible and straightforward to estimate. For this reason, there is no reason to use fractional logit anymore, hence the title of this post.
 
 I know this will be controversial for some, but I do not see any point in beating around the bush. This model just doesn't have a clear purpose anymore given known biases and alternatives that are both useful and unbiased.
-
-![](/img/reaction-stop-it-01.gif)
 
 If you want the code for this post, you can see the [full Rmarkdown file here](https://github.com/saudiwin/saudiwin.github.io/blob/sources/content/post/frac_logit.Rmd).
 
