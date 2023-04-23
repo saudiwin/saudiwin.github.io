@@ -49,10 +49,10 @@ If you want the code for this post, you can see the [full Rmarkdown file here](h
 
 ## The Problem: What a Proportion Is
 
-We can first start with the definition of the specification that is primarily used for fractional logit (abbreviated FL from here on), which comes from a [1996 paper by Papke and Wooldridge](https://onlinelibrary.wiley.com/doi/10.1002/%28SICI%291099-1255%28199611%2911%3A6%3C619%3A%3AAID-JAE418%3E3.0.CO%3B2-1). Given a linear model $X\beta$, a link function $G(\cdot)$ (logit), and an outcome $Y_i$ that can take on any value between 0 and 1, we have a likelihood as follows:
+We can first start with the definition of the specification that is primarily used for fractional logit (abbreviated FL from here on), which comes from a [1996 paper by Papke and Wooldridge](https://onlinelibrary.wiley.com/doi/10.1002/%28SICI%291099-1255%28199611%2911%3A6%3C619%3A%3AAID-JAE418%3E3.0.CO%3B2-1). Given a linear model $X\beta$, a link function $g(\cdot)$ (logit), and an outcome $Y_i$ that can take on any value between 0 and 1, we have a likelihood as follows:
 
 $$
-L(Y_i) = G(x_i\beta)^{Y_i}(1-G(x_i\beta))^{(1 - Y_i)}
+L(Y_i) = g(x_i\beta)^{Y_i}(1-g(x_i\beta))^{(1 - Y_i)}
 $$ 
 
 This is not the only likelihood or estimation possible for FL. Technically, the model is defined as the following:

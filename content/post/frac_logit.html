@@ -23,9 +23,9 @@ categories: ["R"]
 <p>If you want the code for this post, you can see the <a href="https://github.com/saudiwin/saudiwin.github.io/blob/sources/content/post/frac_logit.Rmd">full Rmarkdown file here</a>.</p>
 <div id="the-problem-what-a-proportion-is" class="section level2">
 <h2>The Problem: What a Proportion Is</h2>
-<p>We can first start with the definition of the specification that is primarily used for fractional logit (abbreviated FL from here on), which comes from a <a href="https://onlinelibrary.wiley.com/doi/10.1002/%28SICI%291099-1255%28199611%2911%3A6%3C619%3A%3AAID-JAE418%3E3.0.CO%3B2-1">1996 paper by Papke and Wooldridge</a>. Given a linear model <span class="math inline">\(X\beta\)</span>, a link function <span class="math inline">\(G(\cdot)\)</span> (logit), and an outcome <span class="math inline">\(Y_i\)</span> that can take on any value between 0 and 1, we have a likelihood as follows:</p>
+<p>We can first start with the definition of the specification that is primarily used for fractional logit (abbreviated FL from here on), which comes from a <a href="https://onlinelibrary.wiley.com/doi/10.1002/%28SICI%291099-1255%28199611%2911%3A6%3C619%3A%3AAID-JAE418%3E3.0.CO%3B2-1">1996 paper by Papke and Wooldridge</a>. Given a linear model <span class="math inline">\(X\beta\)</span>, a link function <span class="math inline">\(g(\cdot)\)</span> (logit), and an outcome <span class="math inline">\(Y_i\)</span> that can take on any value between 0 and 1, we have a likelihood as follows:</p>
 <p><span class="math display">\[
-L(Y_i) = G(x_i\beta)^{Y_i}(1-G(x_i\beta))^{(1 - Y_i)}
+L(Y_i) = g(x_i\beta)^{Y_i}(1-g(x_i\beta))^{(1 - Y_i)}
 \]</span></p>
 <p>This is not the only likelihood or estimation possible for FL. Technically, the model is defined as the following:</p>
 <p><span class="math display">\[
