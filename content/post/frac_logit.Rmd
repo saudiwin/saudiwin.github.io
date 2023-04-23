@@ -49,13 +49,21 @@ If you want the code for this post, you can see the [full Rmarkdown file here](h
 
 ## The Problem: What a Proportion Is
 
-We can first start with the definition of the model, which comes from a [1996 paper by Papke and Wooldridge](https://onlinelibrary.wiley.com/doi/10.1002/%28SICI%291099-1255%28199611%2911%3A6%3C619%3A%3AAID-JAE418%3E3.0.CO%3B2-1). Given a linear model $X\beta$, a link function $G(\cdot)$ (logit), and an outcome $y_i$ that can take on any value between 0 and 1, we have a likelihood as follows:
+We can first start with the definition of the specification that is primarily used for fractional logit (abbreviated FL from here on), which comes from a [1996 paper by Papke and Wooldridge](https://onlinelibrary.wiley.com/doi/10.1002/%28SICI%291099-1255%28199611%2911%3A6%3C619%3A%3AAID-JAE418%3E3.0.CO%3B2-1). Given a linear model $X\beta$, a link function $G(\cdot)$ (logit), and an outcome $Y_i$ that can take on any value between 0 and 1, we have a likelihood as follows:
 
 $$
-L(y_i) = G(x_i\beta)^{y_i}(1-G(x_i\beta))^{(1 - y_i)}
+L(Y_i) = G(x_i\beta)^{Y_i}(1-G(x_i\beta))^{(1 - Y_i)}
 $$ 
 
-To get the intuition behind this model, the definition is in fact the same for the Bernoulli distribution. The only difference is that instead of $y_i$ being a binary variable with values of 0 or 1, $y_i$ could be anything from 0 to 1, including 0.2, 0.4, etc. Inserting these continuous values into a discrete distribution is the neat trick that Papke and Wooldridge came up with and labeled fractional for a fraction of 0 and 1. They also showed that it was possible to find a maximum to the likelihood function and obtain estimates for the regression coefficients $\beta$ on the logit scale.
+This is not the only likelihood or estimation possible for FL. Technically, the model is defined as the following:
+
+$$
+E(Y|X) = g(X\beta)
+$$
+
+In other words, it only *has* to make an assumption about how we determine the expected value (average response) of the outcome $Y$. That assumption is that the expected value is equal to a linear model ($X\beta$) scaled by the logit function to map on to a proportion (strictly between 0 and 1). I'll discuss more below what this means in practice. For my purposes, I'll stick with the likelihood above as that is what has been primmarily used to get estimates of the regression coefficients $\beta$.
+
+To get the intuition behind the likelihood, the definition is in fact the same for the Bernoulli distribution. The only difference is that instead of $y_i$ being a binary variable with values of 0 or 1, $y_i$ could be anything from 0 to 1, including 0.2, 0.4, etc. Inserting these continuous values into a discrete distribution is the clever method that Papke and Wooldridge came up with and labeled fractional for a fraction of 0 and 1. They also showed that it was possible to find a maximum to the likelihood function and obtain estimates for the regression coefficients $\beta$ on the logit scale.
 
 This model represented a substantial step forward from what was available at the time, mainly OLS. There were plenty of GLMs but not for a fractional or proportional response. No one was using beta regression as that model would not be proposed until 2004. For these reasons, fractional logit became very popular and has almost 5,000 citations according to Google Scholar.
 
