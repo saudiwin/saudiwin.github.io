@@ -81,7 +81,7 @@ GSS <- mutate(GSS,
 
 ```
 
-*Interested in more social science on contemporary issues? [Check out my just-released book with Cambridge University Press](https://www.cambridge.org/core_title/gb/591431), and use discount code KUBINEC23 to get 20% off.*
+*Interested in more social science on contemporary issues? [Check out my just-released book with Cambridge University Press](https://www.cambridge.org/core_title/gb/591431) and use discount code KUBINEC23 to get 20% off.*
 
 There has been plenty of discussion about declining fertility rates and patterns of marriage among people in the United States following the news that the [US birth rate declined to its lowest since the Great Depression](https://www.nytimes.com/2021/05/05/us/us-birthrate-falls-covid.html). There are a lot of debates about why this is the case, whether it be the expense of raising children, the lack of flexible options for women with careers, or a loss of societal values favoring larger families. Part of the backdrop of this demographic change, of course, are changes in how Americans identify themselves, particularly in terms of religion. For the last several decades, Americans have moved away from traditional religious categories like Christianity towards so-called unaffiliated status.
 

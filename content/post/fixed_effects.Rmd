@@ -29,6 +29,7 @@ knitr::opts_chunk$set(warning=F,message=F)
 
 ```
 
+*Interested in more social science on contemporary issues? [Check out my just-released book with Cambridge University Press](https://www.cambridge.org/core_title/gb/591431), and use discount code KUBINEC23 to get 20% off.*
 
 We've all been in that seminar where the author puts up a slide containing regression coefficients, and buried in the bottom line of the table we can see little Ys and Ns indicating the kind of panel data model employed. Quite often, these brief descriptions of models are taken as a mere statistical ritual, believed to be efficacious at appeasing the mercurial statistical deities, but rarely if ever investigated more thoroughly. Furthermore, no one wants to be in the difficult position of discussing panel data models, which inevitably boils down to a conversation laced with econometric terms generating more heat than light. 
 

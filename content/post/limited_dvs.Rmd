@@ -30,6 +30,8 @@ theme_tufte2 <- theme_tufte() +
 set.seed(07012022)
 ```
 
+*Interested in more social science on contemporary issues? [Check out my just-released book with Cambridge University Press](https://www.cambridge.org/core_title/gb/591431) and use discount code KUBINEC23 to get 20% off.*
+
 # Introduction
 
 Limited dependent variables, or continuous variables with lower and upper bounds, are quite common in the social sciences but do not fit easily with existing statistical models. In this Rmarkdown document, I show why these issues are important to consider when modeling your data, discuss existing R packages useful for fitting these models, and also present `ordbetareg`, [an R package](https://cran.r-project.org/web/packages/ordbetareg/index.html) with a new variant of Beta regression that builds on and simplifies existing approaches (see [paper here](https://osf.io/preprints/socarxiv/2sx6y/) that is forthcoming in **Political Analysis**). In essence, `ordbetareg` offers a drop-in replacement for OLS that respects the bounds of a dependent variable. 

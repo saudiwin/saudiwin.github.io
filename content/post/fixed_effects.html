@@ -14,9 +14,9 @@ tags: ["R","Panel Data", "Fixed Effects","Data Science"]
 categories: ["R"]
 ---
 
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
+<p><em>Interested in more social science on contemporary issues? <a href="https://www.cambridge.org/core_title/gb/591431">Check out my just-released book with Cambridge University Press</a>, and use discount code KUBINEC23 to get 20% off.</em></p>
 <p>We’ve all been in that seminar where the author puts up a slide containing regression coefficients, and buried in the bottom line of the table we can see little Ys and Ns indicating the kind of panel data model employed. Quite often, these brief descriptions of models are taken as a mere statistical ritual, believed to be efficacious at appeasing the mercurial statistical deities, but rarely if ever investigated more thoroughly. Furthermore, no one wants to be in the difficult position of discussing panel data models, which inevitably boils down to a conversation laced with econometric terms generating more heat than light.</p>
 <p>So what if I told you … panel data, or data with two dimensions, such as repeated observations on multiple cases over time, is really not that complicated. In fact, there are only two basic ways to analyze panel data, which I will explain briefly in this piece, just as every panel dataset has two basic dimensions (cases and time). However, when we confuse these dimensions, bad things can happen. In fact, one of the most popular panel data models, the two-way fixed effects model–widely used in the social sciences–is in fact statistical nonsense because it does not clearly distinguish between these two dimensions. This statement should sound implausible to you–really?, but it’s quite easy to demonstrate, as I’ll show you in this post.</p>
 <p>This blog post is based on a recent publication with Jonathan Kropko which you can <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0231349">access here</a>. In this post I provide a more reader-friendly overview of the article, dropping the academic-ese and focusing on substance as I think there are important issues for many people doing research.</p>
@@ -146,7 +146,7 @@ gen_data &lt;- tw_data(N=50,
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.2476 on 2449 degrees of freedom
-## Multiple R-squared:  0.9173, Adjusted R-squared:  0.9156 
+## Multiple R-squared:  0.9173,	Adjusted R-squared:  0.9156 
 ## F-statistic: 543.2 on 50 and 2449 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>We can see in the regression coefficient above that the coefficient for <span class="math inline">\(x\)</span> is almost exactly +1.</p>
 <p>Next we can fit a model with cases/intercepts for time points (cross-sectional variation):</p>
@@ -216,7 +216,7 @@ gen_data &lt;- tw_data(N=50,
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.2476 on 2449 degrees of freedom
-## Multiple R-squared:  0.9173, Adjusted R-squared:  0.9156 
+## Multiple R-squared:  0.9173,	Adjusted R-squared:  0.9156 
 ## F-statistic: 543.4 on 50 and 2449 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Again, the estimated coefficient is almost exactly what we generated. Success!</p>
 <p>However, this brings us back to one of the questions we started with. We know the within-case relationship and the cross-sectional relationship, so what happens if we put dummies/intercepts on both cases and time? Well let’s find out:</p>
@@ -335,7 +335,7 @@ gen_data &lt;- tw_data(N=50,
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.2479 on 2401 degrees of freedom
-## Multiple R-squared:  0.9187, Adjusted R-squared:  0.9154 
+## Multiple R-squared:  0.9187,	Adjusted R-squared:  0.9154 
 ## F-statistic:   277 on 98 and 2401 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>You might expect that perhaps the two-way coefficient would be somewhere between the cross-sectional and within-case coefficients. Nope. It’s equal in this simulation to roughly 1, but that depends on how much variance there is in the cross-section and the within-case components of the dataset as they are now being combined in a non-linear fashion (if you can’t wrap your mind around this, don’t worry, it’s nearly impossible to do and unfruitful if you do accomplish it). However, the coefficient is still equal to a value that appears reasonable, although it is much less precise, and we might be willing to traipse along with it. However, you should pay attention to what happened in the model summary above–one of the time dummies (<code>factor(time)50</code>) came back with a missing (<code>NA</code>) coefficient! What is that about?</p>
 <p>I’m so glad you asked. As we mentioned earlier, R has the ability to check for multi-collinearity in the predictor variables to avoid getting errors when attempting to estimate linear regression. Multi-collinearity can arise for reasons that have nothing to do with fixed effects, such as accidentally including variables that are sums of each other, etc. It often happens in fixed effects regression models when people try to include variables that only vary in the cross-section when using case fixed effects (a symptom of the Cheeseburger Syndrome mentioned previously). In this instance, though, there is no reason to think that there is multi-collinearity as we <em>generated</em> the data with two continuous variables (<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>). The data are perfect with no missingness. So how could this happen?</p>
@@ -345,7 +345,7 @@ gen_data &lt;- tw_data(N=50,
 y &lt;- gen_data$data$y
 try(solve(t(X)%*%X)%*%t(X)%*%y)</code></pre>
 <pre><code>## Error in solve.default(t(X) %*% X) : 
-##   system is computationally singular: reciprocal condition number = 5.63975e-19</code></pre>
+##   system is computationally singular: reciprocal condition number = 5.58323e-19</code></pre>
 <p>You can see the error message: the system (matrix computation of OLS regression) is computationally singular. You’ll need to see the paper for how this all breaks down, but essentially the question you are putting to R is nonsensical. You simply cannot estimate a single joint effect while including all the variables. Instead, you need to drop one, which essentially means the effect is relative to the whichever intercept happened to be dropped (in this case time point 50). The coefficient could change if we simply re-arrange the labeling of the time fixed effects, as in the following:</p>
 <pre class="r"><code>gen_data$data$time &lt;- as.numeric(factor(gen_data$data$time,levels=sample(unique(gen_data$data$time))))
 summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
@@ -463,7 +463,7 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.2479 on 2401 degrees of freedom
-## Multiple R-squared:  0.9187, Adjusted R-squared:  0.9154 
+## Multiple R-squared:  0.9187,	Adjusted R-squared:  0.9154 
 ## F-statistic:   277 on 98 and 2401 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>As you can see, the coefficient changed because we arbitrarily swapped the order of the time fixed effects, and as R will drop the last one in the case of multi-collinearity, the estimate changed.</p>
 <p>At this point, <strong>you should be concerned.</strong> One of our frustrations with this piece is that although the working paper has been in circulation for years, no one seems to have cared about this <em>apparently quite important problem.</em></p>
@@ -563,7 +563,7 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 1.009 on 930 degrees of freedom
-## Multiple R-squared:  0.9625, Adjusted R-squared:  0.9598 
+## Multiple R-squared:  0.9625,	Adjusted R-squared:  0.9598 
 ## F-statistic: 346.3 on 69 and 930 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Bada bing bada boom. Now there are no missing coefficients. However, the coefficient on <span class="math inline">\(x\)</span> isn’t any easier to interpret, and in fact it is in even less transparent as it involves taking averages of averages of coefficients in the cross-section and within-case variation (say that five times fast). It is also peculiar that the model can only be fit with this kind of variation in the <em>slopes</em>, as opposed to the intercepts, as might appear more logical. The models with fixed effects only for cases or time points do not have this problem at all.</p>
 <p>What makes this lack of identification particularly malicious is that it is virtually impossible to identify unless someone takes the trouble as we did to generate data from scratch. Visually, the dataset with single coefficients for cross-sectional/within-case variation appears pristine. It is only deep under the hood that the problem appears. The fact that R (and Stata has similar behavior) can magically make the problem go away by changing the data only makes it less likely that the problem will ever be identified. We simply do not know how many papers in the literature have been affected by this problem (or by similar situations where the regression slopes are almost fixed across cases or time points).</p>
@@ -574,6 +574,6 @@ summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))</code></pre>
 <p>In summary, fixed effects models are very useful for panel data as they help isolate dimensions of variation that matter for research questions. They are not magical tools for causal inference, but rather frameworks for understanding data. It is important to think about which dimension (cross-section or within-case) is more relevant, and then go with that dimension. All other concerns, including modeling spatial or time autocorrelation, omitted variables and endogeneity are all secondary to this first and most important point, which is what comparisons can be drawn from the data?</p>
 <p>One important area that this can be applied to is allowing people to fit more models with fixed effects on <em>time points</em> rather than cases. There are many questions that can be best understood by comparing cases to each other rather than cases to themselves over time. Studying long-run institutions like electoral systems, for example, can only be understood in terms of cross-sectional variation. There is nothing unique or special about the within-case model.</p>
 <p>Some claim that within-case variation is better because cases have less heterogeneity than the cross-section. However, there is no way this can be true a priori. If minimizing heterogeneity is the aim, then it is important to consider the time frame and how units change over time. For example, if we have a very long time series, say 200 years, and we are comparing the U.S. and Canada, then we might believe that the comparison of the U.S. of 1800 to the Canada of 1800 (the cross-section) has less noise than a comparison of the U.S. of 1800 to the U.S. of 2020 (within-case variation). We need to think more about our data and what it represents rather than taking the short-cut of employing the same model everyone else uses.</p>
-<p>While we did not discuss random effects/hierarchical models in this post, the same principles apply even if “partial pooling” is used rather than “no pooling.” Intercepts are designed to draw comparisons, and however the intercepts are modeled, it is important to think about what they are saying about the data, and whether that statement makes any sense.</p>
+<p>While we did not discuss random effects/hierarchical models in this post, the same principles apply even if “partial pooling” is used rather than “no pooling”. Intercepts are designed to draw comparisons, and however the intercepts are modeled, it is important to think about what they are saying about the data, and whether that statement makes any sense.</p>
 <p>So if you don’t want to eat that cheeseburger… we release you. Go enjoy your tofu-based meat alternative with relish.</p>
 </div>

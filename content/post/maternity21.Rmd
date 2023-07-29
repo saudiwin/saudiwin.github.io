@@ -29,7 +29,7 @@ knitr::opts_chunk$set(warning=F,message=F,fig.align = "center")
 
 ```
 
-*Interested in more writing on the shady dealings of big business? [Check out my just-released book with Cambridge University Press](https://www.cambridge.org/core_title/gb/591431), and use discount code KUBINEC23 to get 20% off.*
+*Interested in more writing on the shady dealings of big business? [Check out my just-released book with Cambridge University Press](https://www.cambridge.org/core_title/gb/591431) and use discount code KUBINEC23 to get 20% off.*
 
 
 My wife and I have been faced with a decision in our pregnancies that has always caused me some consternation: should we take the MaterniT 21 test to see if our baby might have Down's syndrome (trisomy 21) or other genetic abnormalities? This test, marketed by the company LabCorp, offers a way to analyze the blood of a pregnant woman for DNA markers that could indicate genetic problems. While non-invasive, it isn't cheap (at least in the United States), and if it returns a positive result, it could be used for more invasive procedures like amniocentesis that could be harmful to the fetus. 

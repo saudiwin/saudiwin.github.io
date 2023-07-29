@@ -1,0 +1,33 @@
+﻿State,Year,office,type,result,vote_change,perc_change
+Colorado,2000,State Education Board,Automatic,Upheld,"1,121",0.0730000
+Florida,2000,President,Automatic,Upheld,"1,247",0.0210000
+Montana,2000,Superintendent of Public Instruction,Requested,Upheld,3,0.0050000
+Washington,2000,Secretary of State,Automatic,Upheld,267,0.0120000
+Washington,2000,U.S. Senate,Automatic,Upheld,276,0.0120000
+Alabama,2004,Amendment 2,Automatic,Upheld,4,0.0000000
+Alaska,2004,U.S. Senate,Requested,Upheld,219,0.0760000
+Georgia,2004,Court of Appeals Judge,Automatic,Upheld,15,0.0040000
+Washington,2004,Governor,Automatic,Overturned,390,0.0140000
+Wyoming,2004,Amendment C,Automatic,Upheld,50,0.0210000
+Wyoming,2004,Amendment A,Automatic,Upheld,55,0.0250000
+Virginia,2005,Attorney General,Requested,Upheld,37,0.0020000
+Alabama,2006,Constitutional Amendment,Automatic,Upheld,508,0.0620000
+North Carolina,2006,Court of Appeals Judge,Requested,Upheld,50,0.0030000
+Vermont,2006,Auditor of Accounts,Requested,Overturned,239,0.1070000
+Minnesota,2008,U.S. Senate,Automatic,Overturned,440,0.0180000
+Oregon,2008,Measure 53,Automatic,Upheld,131,0.0130000
+Pennsylvania,2009,Superior court Race,Requested,Upheld,281,0.0150000
+Arizona,2010,Proposition 112,Automatic,Upheld,66,0.0040000
+Minnesota,2010,Governor,Automatic,Upheld,86,0.0050000
+North Carolina,2010,Court of Appeals,Requested,Upheld,667,0.0620000
+Wisconsin,2011,Supreme Court election,Requested,Upheld,312,0.0210000
+Virginia,2013,Attorney General,Requested,Upheld,742,0.0340000
+Missouri,2014,Constitutional Amendment,Requested,Upheld,308,0.0310000
+New Mexico,2014,Public Land Commissioner,Automatic,Upheld,48,0.0100000
+North Carolina,2014,State Supreme Court,Requested,Upheld,17,0.0010000
+Oregon,2014,Ballot Initiative,Automatic,Upheld,35,0.0020000
+Wisconsin,2016,President,Requested,Upheld,571,0.0200000
+Florida,2018,Governor,Automatic,Upheld,"1,137",0.0140000
+Florida,2018,Agriculture Commissioner,Automatic,Upheld,"1,427",0.0180000
+Florida,2018,Senator,Automatic,Upheld,"2,567",0.0310000
+,,,,,,

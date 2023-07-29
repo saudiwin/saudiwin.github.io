@@ -13,9 +13,9 @@ tags: ["R", "Proportions","Beta Regression"]
 categories: ["R"]
 ---
 
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
+<p><em>Interested in more social science on contemporary issues? <a href="https://www.cambridge.org/core_title/gb/591431">Check out my just-released book with Cambridge University Press</a> and use discount code KUBINEC23 to get 20% off.</em></p>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p>Limited dependent variables, or continuous variables with lower and upper bounds, are quite common in the social sciences but do not fit easily with existing statistical models. In this Rmarkdown document, I show why these issues are important to consider when modeling your data, discuss existing R packages useful for fitting these models, and also present <code>ordbetareg</code>, <a href="https://cran.r-project.org/web/packages/ordbetareg/index.html">an R package</a> with a new variant of Beta regression that builds on and simplifies existing approaches (see <a href="https://osf.io/preprints/socarxiv/2sx6y/">paper here</a> that is forthcoming in <strong>Political Analysis</strong>). In essence, <code>ordbetareg</code> offers a drop-in replacement for OLS that respects the bounds of a dependent variable.</p>
@@ -166,13 +166,12 @@ vdem &lt;- vdem %&gt;%
 <p>The plot shows that most scores are equal to 100, indicating all seats are elected via popular vote. There are some legislatures, though, where everyone is appointed, and some where there are some who are appointed and elected. These countries include the following:</p>
 <pre class="r"><code>filter(vdem, appoint_chamber&gt;0, appoint_chamber&lt;100) %&gt;% 
   pull(country_name)</code></pre>
-<pre><code>##  [1] &quot;Burma/Myanmar&quot; &quot;Egypt&quot;         &quot;Colombia&quot;      &quot;Bangladesh&quot;   
-##  [5] &quot;India&quot;         &quot;Kenya&quot;         &quot;Tanzania&quot;      &quot;Uganda&quot;       
-##  [9] &quot;Zambia&quot;        &quot;Zimbabwe&quot;      &quot;Botswana&quot;      &quot;Burundi&quot;      
-## [13] &quot;Iran&quot;          &quot;Lesotho&quot;       &quot;Qatar&quot;         &quot;Sierra Leone&quot; 
-## [17] &quot;The Gambia&quot;    &quot;Kazakhstan&quot;    &quot;Rwanda&quot;        &quot;Eswatini&quot;     
-## [21] &quot;Comoros&quot;       &quot;Guyana&quot;        &quot;Hong Kong&quot;     &quot;Kuwait&quot;       
-## [25] &quot;Singapore&quot;     &quot;Zanzibar&quot;</code></pre>
+<pre><code>##  [1] &quot;Egypt&quot;        &quot;Colombia&quot;     &quot;Bangladesh&quot;   &quot;India&quot;        &quot;Kenya&quot;       
+##  [6] &quot;Tanzania&quot;     &quot;Uganda&quot;       &quot;Zambia&quot;       &quot;Zimbabwe&quot;     &quot;Botswana&quot;    
+## [11] &quot;Burundi&quot;      &quot;Iran&quot;         &quot;Iraq&quot;         &quot;Qatar&quot;        &quot;Sierra Leone&quot;
+## [16] &quot;The Gambia&quot;   &quot;Kazakhstan&quot;   &quot;Rwanda&quot;       &quot;Eswatini&quot;     &quot;Comoros&quot;     
+## [21] &quot;Guyana&quot;       &quot;Hong Kong&quot;    &quot;Kuwait&quot;       &quot;Mauritius&quot;    &quot;Singapore&quot;   
+## [26] &quot;Zanzibar&quot;</code></pre>
 <p>As can be seen, there are 26 countries that have these mixed legislatures. Some of these countries, such as India and Kenya, are known to have distinct ethnic minorities that might want to have protected representation.</p>
 <p>The covariate that might predict this variation, the power of social groups, is a continuous measure with significant dispersion:</p>
 <pre class="r"><code>hist(vdem$power_groups)</code></pre>
@@ -191,20 +190,20 @@ summary(lm_est)</code></pre>
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -0.97355  0.00544  0.01664  0.05348  0.37402 
+## -0.98621  0.01050  0.02107  0.04426  0.42570 
 ## 
 ## Coefficients:
 ##                    Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)        0.918486   0.019981  45.968  &lt; 2e-16 ***
-## power_groups       0.085394   0.014485   5.895 1.96e-08 ***
-## I(power_groups^2) -0.023359   0.008881  -2.630  0.00932 ** 
+## (Intercept)        0.915557   0.020367  44.953  &lt; 2e-16 ***
+## power_groups       0.084800   0.014874   5.701 5.16e-08 ***
+## I(power_groups^2) -0.023844   0.008821  -2.703  0.00757 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.1888 on 170 degrees of freedom
+## Residual standard error: 0.1904 on 170 degrees of freedom
 ##   (6 observations deleted due to missingness)
-## Multiple R-squared:   0.17,  Adjusted R-squared:  0.1602 
-## F-statistic: 17.41 on 2 and 170 DF,  p-value: 1.324e-07</code></pre>
+## Multiple R-squared:  0.1605,	Adjusted R-squared:  0.1507 
+## F-statistic: 16.26 on 2 and 170 DF,  p-value: 3.465e-07</code></pre>
 <p>Our intuitions could be partly confirmed: as social groups become more powerful, seats are more likely to be elected, but only up to a point. Above that point, they in fact become more likely to be appointed. To figure out what the relationship looks like, we can use <code>lm</code>’s <code>predict</code> function for varying values of <code>power_groups</code>, and plot the result:</p>
 <pre class="r"><code>ex_data &lt;- seq(min(vdem$power_groups),
                max(vdem$power_groups),length.out=100)
@@ -229,9 +228,9 @@ Figure 1: OLS Predicted Values of Elected Lower Chamber Seats Given Power of Soc
 </p>
 </div>
 <p>The plot shows that when the power of social groups is equal to +2, most seats are elected, but when the power of social groups is equal to +3, fewer than all seats are elected. So in other words, when social groups are the most powerful, at least some seats are appointed. When social groups have little if any power, all seats are likely to be appointed.</p>
-<p>One issue is that this prediction is close to the maximum of the scale: 0.9965308. While OLS doesn’t predict out of bounds in this example, the confidence interval of the prediction is likely to exceed zero. We can test that by examining the maximum of the confidence interval:</p>
+<p>One issue is that this prediction is close to the maximum of the scale: 0.99095. While OLS doesn’t predict out of bounds in this example, the confidence interval of the prediction is likely to exceed zero. We can test that by examining the maximum of the confidence interval:</p>
 <pre class="r"><code>max(lm_pred$fit + 2*lm_pred$se.fit)</code></pre>
-<pre><code>## [1] 1.090463</code></pre>
+<pre><code>## [1] 1.078942</code></pre>
 <p>We can see that high end of the high end 5% to 95% confidence interval reaches 1.09. In other words, OLS predicts that when social groups are moderately powerful, 109% of seats will be elected. This possibility, of course, is ridiculous, and makes no sense given our scale. Again, OLS can’t respect bounds, which means that we can get intervals that can’t be mapped on to the underlying scale in a meaningful sense.</p>
 </div>
 <div id="fractional-logit-1" class="section level3">
@@ -247,20 +246,20 @@ summary(frac_logit_est)</code></pre>
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.6579   0.1180   0.2022   0.2796   1.0095  
+## -2.7573   0.1521   0.2167   0.2910   1.1460  
 ## 
 ## Coefficients:
 ##                   Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)        2.55122    0.32664   7.810 5.61e-13 ***
-## power_groups       1.09770    0.24532   4.475 1.40e-05 ***
-## I(power_groups^2)  0.04801    0.17938   0.268    0.789    
+## (Intercept)        2.52514    0.34266   7.369 7.13e-12 ***
+## power_groups       0.96934    0.22620   4.285 3.05e-05 ***
+## I(power_groups^2) -0.02123    0.16389  -0.130    0.897    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## (Dispersion parameter for quasibinomial family taken to be 0.4991649)
+## (Dispersion parameter for quasibinomial family taken to be 0.5776907)
 ## 
-##     Null deviance: 62.490  on 172  degrees of freedom
-## Residual deviance: 46.982  on 170  degrees of freedom
+##     Null deviance: 62.802  on 172  degrees of freedom
+## Residual deviance: 49.055  on 170  degrees of freedom
 ##   (6 observations deleted due to missingness)
 ## AIC: NA
 ## 
@@ -287,7 +286,7 @@ Figure 2: Fractional Logit Predicted Values of Elected Lower Chamber Seats Given
 </div>
 <p>As can be seen, this model is not identical to OLS. However, it does have the property that it will stay within the bounds, as can be seen with the curvature to the prediction. As the prediction gets closer to the boundary, it shrinks in size. This is a feature of the logit link function used in the model. We can also check for the maximum value of the confidence interval:</p>
 <pre class="r"><code>max(pred_power_groups_frac$fit + 2*pred_power_groups_frac$se.fit)</code></pre>
-<pre><code>## [1] 1.006779</code></pre>
+<pre><code>## [1] 1.012264</code></pre>
 <p>The max confidence interval isn’t exactly one, but very close. The small increase above 1 is due to the limits of the Normal approximation used to calculate the confidence interval. Compared to OLS, the fractional logit does respect the boundaries. However, compared to the beta regression variants that we turn to next, it is not as powerful a tool. There is no easy way, for example, to know why the estimated coefficients are so different than OLS because we cannot simulate data from the fractional logit “quasi-likelihood” as we can with the other distributions.</p>
 </div>
 <div id="vanilla-beta-regression" class="section level3">
@@ -301,7 +300,7 @@ fit_beta_reg &lt;- gam(appoint_chamber ~ power_groups + I(power_groups^2),data=v
 
 summary(fit_beta_reg)</code></pre>
 <pre><code>## 
-## Family: Beta regression(1.337) 
+## Family: Beta regression(1.32) 
 ## Link function: logit 
 ## 
 ## Formula:
@@ -309,15 +308,15 @@ summary(fit_beta_reg)</code></pre>
 ## 
 ## Parametric coefficients:
 ##                   Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)        1.63443    0.11906  13.727  &lt; 2e-16 ***
-## power_groups       0.30982    0.08946   3.463 0.000534 ***
-## I(power_groups^2) -0.09022    0.05375  -1.679 0.093226 .  
+## (Intercept)        1.60730    0.12066  13.321  &lt; 2e-16 ***
+## power_groups       0.29192    0.09131   3.197  0.00139 ** 
+## I(power_groups^2) -0.07902    0.05310  -1.488  0.13669    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## 
-## R-sq.(adj) =  0.133   Deviance explained = 56.4%
-## -REML = -426.95  Scale est. = 1         n = 173</code></pre>
+## R-sq.(adj) =  0.121   Deviance explained = 56.1%
+## -REML = -426.27  Scale est. = 1         n = 173</code></pre>
 <p>Interestingly, we do now see some similarities to OLS in terms of a marginally declining effect of <code>power_groups</code> at very high levels of <code>power_groups</code>. We can also look at predicted values, which of course will be in the transformed (nudged) outcome scale:</p>
 <pre class="r"><code>pred_beta_reg &lt;- predict(fit_beta_reg,type=&quot;response&quot;,se.fit=T,
                                   newdata=tibble(power_groups=ex_data))
@@ -361,19 +360,19 @@ Figure 3: Beta Regression Predicted Values of Elected Lower Chamber Seats Given 
 ## 
 ## Population-Level Effects: 
 ##                     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept               1.92      0.26     1.40     2.40 1.00     1012      767
-## zoi_Intercept           1.32      0.31     0.74     1.90 1.00     1638      820
-## coi_Intercept           2.81      0.56     1.78     3.94 1.00     1141      574
-## power_groups            0.31      0.14     0.01     0.61 1.01      772      577
-## Ipower_groupsE2        -0.16      0.13    -0.40     0.10 1.00      857      696
-## zoi_power_groups        0.50      0.19     0.13     0.87 1.00      836      680
-## zoi_Ipower_groupsE2     0.14      0.17    -0.16     0.49 1.00     1089      642
-## coi_power_groups        1.35      0.46     0.62     2.37 1.00      701      401
-## coi_Ipower_groupsE2     0.10      0.29    -0.41     0.70 1.00      628      443
+## Intercept               2.00      0.26     1.50     2.48 1.00     1097      731
+## zoi_Intercept           1.05      0.29     0.50     1.64 1.00     2333      837
+## coi_Intercept           2.83      0.57     1.79     3.99 1.00     1257      729
+## power_groups            0.18      0.16    -0.16     0.50 1.00      972      617
+## Ipower_groupsE2        -0.32      0.15    -0.60    -0.03 1.01      682      715
+## zoi_power_groups        0.37      0.23    -0.12     0.79 1.00      862      720
+## zoi_Ipower_groupsE2     0.37      0.19     0.02     0.77 1.00      943      646
+## coi_power_groups        1.21      0.39     0.51     2.09 1.00      768      605
+## coi_Ipower_groupsE2     0.03      0.25    -0.43     0.53 1.00      895      612
 ## 
 ## Family Specific Parameters: 
 ##     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## phi     9.24      2.61     4.77    14.64 1.00      868      585
+## phi     8.64      2.53     4.51    14.02 1.00      865      815
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -412,22 +411,22 @@ Figure 4: OLS Predicted Values of Elected Lower Chamber Seats Given Power of Soc
 <pre class="r"><code>summary(fit_ord_est)</code></pre>
 <pre><code>##  Family: ord_beta_reg 
 ##   Links: mu = identity; phi = identity; cutzero = identity; cutone = identity 
-## Formula: appoint_chamber ~ 0 + Intercept + +power_groups + I(power_groups^2) 
+## Formula: appoint_chamber ~ power_groups + I(power_groups^2) 
 ##    Data: data (Number of observations: 173) 
 ##   Draws: 1 chains, each with iter = 2000; warmup = 1000; thin = 1;
 ##          total post-warmup draws = 1000
 ## 
 ## Population-Level Effects: 
 ##                 Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept           1.83      0.21     1.39     2.23 1.00      473      554
-## power_groups        0.55      0.12     0.33     0.80 1.00      824      501
-## Ipower_groupsE2    -0.03      0.09    -0.20     0.17 1.00      565      499
+## Intercept           1.68      0.21     1.26     2.07 1.00      851      650
+## power_groups        0.51      0.13     0.26     0.78 1.00      982      674
+## Ipower_groupsE2    -0.02      0.10    -0.22     0.19 1.00      905      499
 ## 
 ## Family Specific Parameters: 
 ##         Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## phi         9.58      2.45     5.42    14.84 1.00      724      499
-## cutzero    -1.22      0.40    -2.11    -0.50 1.00      552      573
-## cutone      0.59      0.18     0.24     0.92 1.00      479      501
+## phi         7.76      2.20     4.17    12.85 1.00      910      557
+## cutzero    -1.33      0.43    -2.26    -0.53 1.00      451      542
+## cutone      0.58      0.20     0.20     0.97 1.00      659      351
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
