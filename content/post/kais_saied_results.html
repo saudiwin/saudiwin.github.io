@@ -1,0 +1,876 @@
+---
+title: "What Do Tunisians Really Think About President Kais Saied?"
+author: "Robert Kubinec and Amr Yakout"
+date: "2023-08-16T15:00:00"
+output: 
+  blogdown::html_page:
+    toc: true
+header:
+  title: "What Do Tunisians Really Think About President Kais Saied?"
+  summary: "I reproduce results from our recent survey experiment showing that people are opposed to President Kais Saied but prefer not to report their opposition directly."
+  image: "headers/saied.jpeg"
+  date: "2023-08-16T15:00:00"
+tags: ["R", "Tunisia", "Democracy"]
+categories: ["R"]
+bibliography: references.bib
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#robustness-check-time-of-completion" id="toc-robustness-check-time-of-completion">Robustness check: time of completion</a></li>
+<li><a href="#survey-design" id="toc-survey-design">Survey Design</a></li>
+<li><a href="#sensitivity-estimates" id="toc-sensitivity-estimates">Sensitivity Estimates</a></li>
+<li><a href="#alternative-estimation-rrreg" id="toc-alternative-estimation-rrreg">Alternative Estimation: RRreg</a></li>
+<li><a href="#alternative-estimator-rr" id="toc-alternative-estimator-rr">Alternative Estimator: rr</a></li>
+<li><a href="#brms-model" id="toc-brms-model">BRMS Model</a></li>
+<li><a href="#adjustment-with-mrp" id="toc-adjustment-with-mrp">Adjustment with MRP</a>
+<ul>
+<li><a href="#gender" id="toc-gender">Gender</a></li>
+<li><a href="#age" id="toc-age">Age</a></li>
+<li><a href="#region" id="toc-region">Region</a></li>
+</ul></li>
+<li><a href="#simulation-comparison-univariate-vs.-regression" id="toc-simulation-comparison-univariate-vs.-regression">Simulation Comparison: Univariate Vs. Regression</a></li>
+<li><a href="#references" id="toc-references">References</a></li>
+</ul>
+</div>
+
+<p>This Rmarkdown document contains code and data for the Kais Saied survey experiment by Robert Kubinec and Amr Yakout. This survey was fielded using an online panel in Tunisia during August of 2023. The survey experiment involved providing half the sample a direct question about whether they supported Kais Saied’s move to suspend parliament and centralize power in his hands, and the other half of the sample had a randomized response question designed to allow them to answer truthfully without being identified. This experiment was pre-registered and the pre-registration can be accessed from <a href="https://www.robertkubinec.com/files/preregistration_tunisia_imf_survey.pdf">this link</a>.</p>
+<p>This document was drafted to allow people to verify our results using the raw data. The survey data included has been stripped of any identifying information about respondents, but it does include the actual answers from the survey so that all analyses can be reproduced. You can access the code file and the raw data from this Github repository: <a href="https://github.com/saudiwin/saudiwin.github.io/tree/sources/content/post" class="uri">https://github.com/saudiwin/saudiwin.github.io/tree/sources/content/post</a> (file is entitled <code>kais_saied_results.Rmd</code> and the data file is in the <code>data/</code> subfolder). The survey data can be found in the <code>data/</code> folder as <code>kais_saied_survey.csv</code>.</p>
+<p>This Quarto document includes embedded R code that loads the survey data and estimates the Stan model for proportion of people who support Kais Saied, and compares it to the direct question to see if there is sensitive survey bias. At present there are a total of 830 completed responses.</p>
+<p>All questions about the analysis should be directed to Robert Kubinec at <a href="mailto:rmk7@nyu.edu">rmk7@nyu.edu</a>.</p>
+<div id="robustness-check-time-of-completion" class="section level2">
+<h2>Robustness check: time of completion</h2>
+<p>In this section I show some general statistics for the data. In particular, I look at how long it takes people to complete the survey. In the plot below I show the average duration in minutes over time for each survey response. The plot shows that most people took the survey in about 10 to 30 minutes:</p>
+<pre class="r"><code>survey_data %&gt;% 
+  filter(`Duration (in seconds)`&lt;10000) %&gt;% 
+  mutate(Duration=`Duration (in seconds)`/60) %&gt;% 
+  ggplot(aes(y=Duration,x=StartDate)) +
+  geom_point() +
+  scale_y_log10() +
+  geom_smooth()</code></pre>
+<p><img src="/post/kais_saied_results_files/figure-html/completion_time-1.png" width="672" /></p>
+<p>The plot also shows that data collection started in late July and continued until mid-August. Data came in fairly regularly on a daily basis.</p>
+</div>
+<div id="survey-design" class="section level2">
+<h2>Survey Design</h2>
+<p>In the survey we implemented a form of a randomized response question that is designed to help people report answers on a survey that they may be embarrassed about or in danger if they report. The question was originally developed for private medical information like abortion or HIV infections, and has been extended to cover crime, drug use and corruption reporting. See <span class="citation">Hout and Heijden (<a href="#ref-vandenhout2002">2002</a>)</span>, <span class="citation">Gingerich et al. (<a href="#ref-gingerich2016">2016</a>)</span> and <span class="citation">Blair, Imai, and Zhou (<a href="#ref-blair2015">2015</a>)</span> for more information.</p>
+<p>The theory behind a randomized response is to inject randomness into the survey question. Theoretically it is similar to approaches in cryptography that use <a href="https://en.wikipedia.org/wiki/Applications_of_randomness">random numbers to encode online data using keys</a>. In our case, we used naturally ocurring randomness related to people’s birthdays. Because we did not ask for respondents’ birth dates, and the month in which one is born is essentially random, we can use that naturally occurring randomness to encode their responses.</p>
+<p>To test for how much we could encourage people to respond truthfully, we randomly assigned each respondent to receive one of the two questions below:</p>
+<p>Direct Question</p>
+<ol style="list-style-type: decimal">
+<li>Do you oppose President Kais Saied’s moves to change Tunisia’s constitution and close the parliament?
+<ol style="list-style-type: decimal">
+<li>Yes</li>
+<li>No</li>
+</ol></li>
+</ol>
+<p>Randomized Response</p>
+<p>We understand that politics in Tunisia is sensitive right now. This question is worded so that you can tell us what you think but still protect your privacy. Because we don’t know when your mother was born, we also won’t know for sure your political opinion.</p>
+<ol style="list-style-type: decimal">
+<li>My mother’s birth date is in January, February or March.</li>
+<li>I oppose President Kais Saied’s moves to change Tunisia’s constitution and close the parliament.</li>
+</ol>
+<p>Please pick the answer that best represents whether these statements are true of you:</p>
+<ol style="list-style-type: decimal">
+<li>Both statements are true OR neither is true.</li>
+<li>One of the two statements is true.</li>
+</ol>
+<p>While explaining how this question works is beyond the scope of this note, we again refer to the linked paper above for the statistical mechanics. As long as the respondent reads and follows the instructions, they can report their opposition (or support) for Kais Saied’s power grab without us being able to know their true response. Essentially, we can’t separate their answer from whether their mother’s birthday is in a given month, and as a result, the individual answers are encoded. For any respondent, we have no idea whether they oppose Saied or not.</p>
+<p>However, the beauty of this method is that even though we don’t know any one person’s response, we <em>can</em> estimate how many in people in total support or oppose Saied. When we aggregate responses, we can take into account that on average <span class="math inline">\(\frac{1}{4}\)</span> of our respondents will have mothers who were born in those months. Using statistical models that we estimate below, we can find out how many people truly oppose Saied, and also how many people appear to be under-reporting their opposition relative to the direct question.</p>
+</div>
+<div id="sensitivity-estimates" class="section level2">
+<h2>Sensitivity Estimates</h2>
+<p>In this section we show several different ways that we calculate the true number of people who are opposed to Kais Saied. We first use a simple Bayesian calculation based on the beta distribution that was specified in the pre-registration linked above. We then look at other existing R packages that are used for randomized response questions and then we implement a custom Bayesian model that allows us to jointly model both the randomized response and the direct question. We also use this custom model to allow us to adjust for biases in using online panels that may not be fully representative.</p>
+<pre class="r"><code># proportion selecting birthday response
+
+lambda &lt;- table(survey_data$kais_rr)
+lambda &lt;- lambda[2]/sum(lambda)
+
+N &lt;- sum(as.numeric(!is.na(survey_data$kais_rr) &amp; survey_data$FL_63_DO_saied_sensitive==1))
+
+to_stan_data &lt;- list(success_cm=N*((lambda - .75)/(-.5)),
+                     fail_cm= N*(1-((lambda - .75)/-.5)),
+                     success_d=sum(as.numeric(survey_data$kais_direct==&quot;Yes&quot; &amp; survey_data$FL_63_DO_saied_nonsensitive==1),na.rm=T),
+                     fail_d=sum(as.numeric(survey_data$kais_direct==&quot;No&quot; &amp; survey_data$FL_63_DO_saied_nonsensitive==1),na.rm=T))
+
+fit_mod &lt;- sen_mod$sample(chains=4, cores=4, data=to_stan_data,refresh=0)</code></pre>
+<pre><code>## Running MCMC with 4 parallel chains...
+## 
+## Chain 1 finished in 0.0 seconds.
+## Chain 2 finished in 0.0 seconds.
+## Chain 3 finished in 0.0 seconds.
+## Chain 4 finished in 0.0 seconds.
+## 
+## All 4 chains finished successfully.
+## Mean chain execution time: 0.0 seconds.
+## Total execution time: 0.2 seconds.</code></pre>
+<pre class="r"><code>fit_mod$summary()</code></pre>
+<pre><code>## # A tibble: 5 × 10
+##   variable           mean   median     sd    mad       q5      q95  rhat ess_b…¹
+##   &lt;chr&gt;             &lt;num&gt;    &lt;num&gt;  &lt;num&gt;  &lt;num&gt;    &lt;num&gt;    &lt;num&gt; &lt;num&gt;   &lt;num&gt;
+## 1 lp__           -785.    -784.    1.19   1.01   -787.    -783.     1.00   2266.
+## 2 pi_hat            0.518    0.518 0.0251 0.0249    0.476    0.560  1.00   3743.
+## 3 d_hat             0.316    0.315 0.0229 0.0230    0.279    0.354  1.00   3613.
+## 4 d_hat_binomial    0.316    0.316 0.0228 0.0231    0.279    0.354  1.00   4637.
+## 5 estimand          0.202    0.203 0.0344 0.0348    0.145    0.259  1.00   3588.
+## # … with 1 more variable: ess_tail &lt;num&gt;, and abbreviated variable name
+## #   ¹​ess_bulk</code></pre>
+<p>We can plot the estimated bias as the difference between the average proportion of those responding affirmative to the direct question and the calculated level of opposition to Saied from the randomized response question:</p>
+<pre class="r"><code>estimand &lt;- c(fit_mod$draws(&quot;estimand&quot;))
+
+mcmc_dens(fit_mod$draws(&quot;estimand&quot;)) + 
+  theme_tufte()</code></pre>
+<p><img src="/post/kais_saied_results_files/figure-html/plot_bias-1.png" width="672" /></p>
+<p>Our basic model shows that approximately 20.3% of respondents reported anti-Saied preferences in the randomized response method versus the direct question. The 5% - 95% uncertainty interval is from 14.5 to 25.9 .</p>
+<p>The full posterior density of the bias-corrected estimate is:</p>
+<pre class="r"><code>mcmc_dens(fit_mod$draws(&quot;pi_hat&quot;)) + theme_tufte()</code></pre>
+<p><img src="/post/kais_saied_results_files/figure-html/plot_true-1.png" width="672" /></p>
+<p>Comparing the two estimates as intervals (<code>pi_hat</code> is the true level of opposition to Saied and <code>d_hat</code> is the proportion from the direct question):</p>
+<pre class="r"><code>mcmc_intervals(fit_mod$draws(c(&quot;pi_hat&quot;,&quot;d_hat&quot;))) + theme_tufte()</code></pre>
+<p><img src="/post/kais_saied_results_files/figure-html/compare_interval-1.png" width="672" /></p>
+</div>
+<div id="alternative-estimation-rrreg" class="section level2">
+<h2>Alternative Estimation: RRreg</h2>
+<p>In this section we use the R package <code>RRreg</code> to check these calculations using a more traditional means for estimating sensitive proportions.</p>
+<pre class="r"><code>est_rreg &lt;- RRuni(response=as.numeric(comp_data_rr$kais_rr==&quot;Both statements are true OR neither is true.&quot; &amp; comp_data_rr$FL_63_DO_saied_sensitive==1),
+                  p=.25,
+                  model=&quot;Crosswise&quot;,MLest = TRUE)
+
+summary(est_rreg)</code></pre>
+<pre><code>## Crosswise Model with p = 0.25
+## Sample size: 389
+## 
+##    Estimate   StdErr      z  Pr(&gt;|z|)    
+## pi 0.517995 0.050759 10.205 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>s1 &lt;- summary(est_rreg)</code></pre>
+<p>Let’s compare these estimates with plots:</p>
+<pre class="r"><code>est_beta &lt;- fit_mod$summary()
+
+est_data &lt;- tibble(estimate=c(s1$coefficients[,1],
+                              est_beta$median[est_beta$variable==&quot;pi_hat&quot;]),
+                   low=c(s1$coefficients[,1]-1.96*(s1$coefficients[,2]),
+                         est_beta$q5[est_beta$variable==&quot;pi_hat&quot;]),
+                   high=c(s1$coefficients[,1]+1.96*(s1$coefficients[,2]),
+                         est_beta$q95[est_beta$variable==&quot;pi_hat&quot;]),
+                   estimator=c(&quot;RRreg&quot;,&quot;Bayes&quot;))
+
+est_data %&gt;% 
+  ggplot(aes(y=estimate,x=estimator)) +
+  geom_linerange(aes(ymin=low,
+                     ymax=high)) +
+  geom_point() +
+   theme_tufte()</code></pre>
+<p><img src="/post/kais_saied_results_files/figure-html/compare_est-1.png" width="672" /></p>
+<p>We can see that they are similar estimates, although the R package has higher uncertainty than the simple Bayesian estimate.</p>
+</div>
+<div id="alternative-estimator-rr" class="section level2">
+<h2>Alternative Estimator: rr</h2>
+<p>We can also use the R package <code>rr</code> which uses the EM algorithm as opposed to <code>RRreg</code> which uses more conventional optimization.</p>
+<pre class="r"><code>comp_data_rr$gender_two &lt;- factor(comp_data_rr$gender,
+                                  exclude=&quot;Other:&quot;)
+comp_data_rr &lt;- filter(comp_data_rr, !is.na(gender_two))
+# need to switch the outcome
+comp_data_rr$kais_rr_num_switch &lt;- 1 - comp_data_rr$kais_rr_num
+rr_est &lt;- rrreg(kais_rr_num_switch ~ as.character(gender_two), 
+                data=comp_data_rr,
+                      p=.75,
+                      design=&#39;mirrored&#39;)
+
+# predict sensitive trait
+
+pred_rr &lt;- predict(rr_est,quasi.bayes = T)
+mean(pred_rr$est)</code></pre>
+<pre><code>## [1] 0.5134105</code></pre>
+<pre class="r"><code>mean(pred_rr$est[comp_data_rr$gender_two==&quot;Male&quot;],na.rm=T)</code></pre>
+<pre><code>## [1] 0.5125252</code></pre>
+<pre class="r"><code>mean(pred_rr$est[comp_data_rr$gender_two==&quot;Female&quot;],na.rm=T)</code></pre>
+<pre><code>## [1] 0.5147941</code></pre>
+<pre class="r"><code>pred_rr_mean &lt;- predict(rr_est,quasi.bayes = T,avg=T)</code></pre>
+<p>This number seems very close to our other estimators. Again, the uncertainty seems larger than the simple Bayesian method. Minimal gender differences over who is more or less likely to oppose Saied.</p>
+<p>We can plot this estimate against the others:</p>
+<pre class="r"><code>est_data &lt;- tibble(estimate=c(s1$coefficients[,1],
+                              est_beta$median[est_beta$variable==&quot;pi_hat&quot;],
+                              pred_rr_mean$est),
+                   low=c(s1$coefficients[,1]-1.96*(s1$coefficients[,2]),
+                         est_beta$q5[est_beta$variable==&quot;pi_hat&quot;],
+                         pred_rr_mean$ci.lower),
+                   high=c(s1$coefficients[,1]+1.96*(s1$coefficients[,2]),
+                         est_beta$q95[est_beta$variable==&quot;pi_hat&quot;],
+                         pred_rr_mean$ci.upper),
+                   estimator=c(&quot;RRreg&quot;,&quot;Bayes&quot;,&quot;EM&quot;))
+
+est_data %&gt;% 
+  ggplot(aes(y=estimate,x=estimator)) +
+  geom_linerange(aes(ymin=low,
+                     ymax=high)) +
+  geom_point() + theme_tufte()</code></pre>
+<p><img src="/post/kais_saied_results_files/figure-html/est_compare_three-1.png" width="672" /></p>
+</div>
+<div id="brms-model" class="section level2">
+<h2>BRMS Model</h2>
+<p>Finally, we define a brms custom family for the randomized response model using the confusion matrix approach of <span class="citation">Hout and Heijden (<a href="#ref-vandenhout2002">2002</a>)</span>. This model is a variety of the Bernoulli distribution that takes into account the known probabilities of obtaining the true response. It jointly models both the randomized response model and the direct question, allowing us to estimate the bias directly rather than post-estimation. By implementing it in <code>brms</code>, we can make use of <code>brms</code> features like multilevel regression to allow us to do post-stratification adjustment of the survey responses with population data from Tunisia’s 2014 census. This is our preferred specification.</p>
+<pre class="r"><code>library(brms)
+
+stan_funs &lt;- &#39;
+  real sens_reg_lpmf(int y, real mu, real bias, matrix P, int T) {
+  
+    // generalized RR model from van der Hout and van der Heijden (2002)
+    // also see R package RRreg
+    
+    real out;
+    // need to impose a constraint on bias where it cannot be larger than mu
+    real bias_trans = mu * bias;
+    
+    if(T==1) {
+    
+      // treatment distribution (crosswise model)
+      
+      if(y==1) {
+      
+        out = P[2,1] * (1 - mu) + P[2,2] * mu;
+      
+      } else if(y==0) {
+      
+       out = P[1,1]*(1-mu) + P[1,2]*mu;
+      
+      }
+
+    } else if (T==0) {
+    
+      // control = direct question
+    
+      if(y==1) {
+      
+        out = mu - bias_trans;
+      
+      } else if(y==0) {
+      
+        out = (1 - mu) + bias_trans;
+      
+      }
+    
+    }
+    
+    return log(out); 
+
+  }
+  
+  int sens_reg_rng(real mu, real bias, matrix P, int T) {
+  
+    real bias_trans = mu*bias;
+  
+    if(T==1) {
+    
+      return bernoulli_rng(P[2,1] * (1 - mu) + P[2,2] * mu);
+      
+    } else {
+    
+      return bernoulli_rng(mu - bias_trans);
+    
+    }
+
+  }&#39;
+
+# define custom family
+
+family_sens_reg &lt;- custom_family(&quot;sens_reg&quot;,
+                                 dpars=c(&quot;mu&quot;,&quot;bias&quot;),
+                                 links=c(&quot;logit&quot;,&quot;logit&quot;),
+                                 type=&quot;int&quot;,
+                                 lb=c(NA,NA),
+                                 ub=c(NA,NA),
+                                 vars=c(&quot;P&quot;,&quot;vint1[n]&quot;))
+
+# define log-likelihood
+
+log_lik_sens_reg &lt;- function(i, prep) {
+  mu &lt;- brms::get_dpar(prep, &quot;mu&quot;, i = i)
+  y &lt;- prep$data$Y[i]
+  treatment &lt;- prep$data$vint1[i]
+  bias &lt;- brms::get_dpar(prep, &quot;bias&quot;, i = i)
+  
+  bias_trans &lt;- bias*mu
+  
+  if(treatment==1) {
+    
+    if(y==1) {
+    
+      return(log(P[2,1] * (1 - mu) + P[2,2] * mu))
+  
+    } else {
+      
+      return(log(P[1,1]*(1-mu) + P[1,2]*mu))
+    
+    }
+    
+  } else {
+    
+    if(y==1) {
+      
+      return(log(mu - bias_trans))
+      
+    } else {
+      
+      return(log((1 - mu) + bias_trans))
+      
+    }
+    
+  }
+  
+
+}
+
+# define posterior predictions
+
+posterior_predict_sens_reg &lt;- function(i, prep, ...) {
+  
+  mu &lt;- brms::get_dpar(prep, &quot;mu&quot;, i = i)
+  bias &lt;- brms::get_dpar(prep, &quot;bias&quot;, i = i)
+  y &lt;- prep$data$Y[i]
+  treatment &lt;- prep$data$vint1[i]
+  
+  bias_trans &lt;- mu*bias
+
+  if(treatment==1) {
+    
+    out &lt;- rbinom(n=length(mu),size=1,prob=P[2,1] * (1 - mu) + P[2,2] * mu)
+    
+  } else {
+    
+    out &lt;- rbinom(n=length(mu),size=1,prob=mu - bias_trans)
+    
+  }
+  
+  return(out)
+  
+}
+
+# define posterior expectation (equal to latent variable pi)
+
+posterior_epred_sens_reg &lt;- function(prep,...) {
+
+  mu &lt;- brms::get_dpar(prep, &quot;mu&quot;)
+  bias &lt;- brms::get_dpar(prep, &quot;bias&quot;)
+
+  mu
+
+}
+
+posterior_epred_bias_sens_reg &lt;- function(prep,...) {
+
+  mu &lt;- brms::get_dpar(prep, &quot;mu&quot;)
+  bias &lt;- brms::get_dpar(prep, &quot;bias&quot;)
+
+  bias*mu
+
+}
+
+P &lt;- getPW(&quot;Warner&quot;,p=.25)
+
+all_stanvars &lt;- stanvar(x=P,block = &quot;data&quot;) + 
+  stanvar(scode=stan_funs,block=&quot;functions&quot;)
+
+survey_data$age_cat_order &lt;- ordered(survey_data$age_cat)
+
+fit1 &lt;- brm(bf(kais_combined | vint(treatment) ~ gender*mo(age_cat_order) + (1|gov)), 
+            data=survey_data,
+            family=family_sens_reg,
+            stanvars=all_stanvars,
+            prior=prior(beta(1,1),class=&quot;bias&quot;) + 
+              prior(normal(0,5), class=&quot;b&quot;),
+            chains=2,cores=2,control=list(max_treedepth=11,
+                                          adapt_delta=0.95),
+            backend = &quot;cmdstanr&quot;)
+
+pp_check(fit1, type=&quot;bars&quot;,ndraws=500)</code></pre>
+<p><img src="/post/kais_saied_results_files/figure-html/define_brms_rr-1.png" width="672" /></p>
+<pre class="r"><code>loo(fit1)</code></pre>
+<pre><code>## 
+## Computed from 2000 by 799 log-likelihood matrix
+## 
+##          Estimate   SE
+## elpd_loo   -530.8  7.8
+## p_loo        10.1  0.4
+## looic      1061.5 15.6
+## ------
+## Monte Carlo SE of elpd_loo is 0.1.
+## 
+## All Pareto k estimates are good (k &lt; 0.5).
+## See help(&#39;pareto-k-diagnostic&#39;) for details.</code></pre>
+<pre class="r"><code>gov_cats &lt;- ranef(fit1,groups = &quot;gov&quot;)$gov[,,1] %&gt;% as_tibble %&gt;% 
+  mutate(level=row.names(ranef(fit1,groups = &quot;gov&quot;)$gov[,,1]))</code></pre>
+<p>Plot this additional type of estimation:</p>
+<pre class="r"><code>get_latent_draws &lt;- posterior_epred(fit1)
+
+get_latent_est &lt;- tibble(median=median(get_latent_draws),
+                         high=quantile(apply(get_latent_draws, 1, median),.95),
+                         low=quantile(apply(get_latent_draws, 1, median),.05))
+
+# get estimate of bias
+
+prep_bias &lt;- prepare_predictions(fit1)
+
+bias_trans &lt;- posterior_epred_bias_sens_reg(prep_bias)
+
+bias_trans_est &lt;- tibble(bias_est_low=quantile(apply(bias_trans,1,median),.05),
+                         bias_est=median(apply(bias_trans,1,median)),
+                         bias_est_high=quantile(apply(bias_trans,1,median),.95))
+
+est_data &lt;- tibble(estimate=c(s1$coefficients[,1],
+                              est_beta$median[est_beta$variable==&quot;pi_hat&quot;],
+                              pred_rr_mean$est,
+                              get_latent_est$median),
+                   low=c(s1$coefficients[,1]-1.96*(s1$coefficients[,2]),
+                         est_beta$q5[est_beta$variable==&quot;pi_hat&quot;],
+                         pred_rr_mean$ci.lower,
+                         get_latent_est$low),
+                   high=c(s1$coefficients[,1]+1.96*(s1$coefficients[,2]),
+                         est_beta$q95[est_beta$variable==&quot;pi_hat&quot;],
+                         pred_rr_mean$ci.upper,
+                         get_latent_est$high),
+                   estimator=c(&quot;RRreg&quot;,&quot;Bayes&quot;,&quot;EM&quot;,&quot;Bayes_Reg&quot;))
+
+est_data %&gt;% 
+  ggplot(aes(y=estimate,x=estimator)) +
+  geom_linerange(aes(ymin=low,
+                     ymax=high)) +
+  geom_point() + theme_tufte()</code></pre>
+<p><img src="/post/kais_saied_results_files/figure-html/all_plot-1.png" width="672" /></p>
+<pre class="r"><code>knitr::kable(bias_trans_est)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">bias_est_low</th>
+<th align="right">bias_est</th>
+<th align="right">bias_est_high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.1301606</td>
+<td align="right">0.2252916</td>
+<td align="right">0.3202995</td>
+</tr>
+</tbody>
+</table>
+<p>Again, we see that all of the estimates are quite similar. In the last section we compare them directly with a simulation, which shows that the two Bayesian estimators are both accurate and have good coverage, while <code>RRreg</code> is accurate but understates uncertainty in general.</p>
+</div>
+<div id="adjustment-with-mrp" class="section level2">
+<h2>Adjustment with MRP</h2>
+<p>Given that the data come from an online panel, we want to use Tunisian 2014 census data to adjust these findings by age, sex and governorate. This will account for a considerable (though not all) amount of sample selection bias due to the online survey frame. We will use random effects to model the influence of the sample frame on the outcome.</p>
+<pre class="r"><code>head(census)</code></pre>
+<pre><code>## # A tibble: 6 × 6
+##   gender gov     pop age_cat age_cat_order    prop
+##   &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;fct&gt;   &lt;ord&gt;           &lt;dbl&gt;
+## 1 Male   Tunis 17446 15-19   15-19         0.00120
+## 2 Female Tunis 16984 15-19   15-19         0.00117
+## 3 Male   Tunis 54142 20-24   20-24         0.00373
+## 4 Female Tunis 51111 20-24   20-24         0.00352
+## 5 Male   Tunis 48773 25-29   25-29         0.00336
+## 6 Female Tunis 45668 25-29   25-29         0.00315</code></pre>
+<p>We will predict the sensitive trait for each census category, then stratify by summing over the proportion of population in each cell from the census data. We then plot this adjusted estimate.</p>
+<pre class="r"><code># do for each condition, then average
+
+census_treat &lt;- mutate(census, treatment=1)
+census_notreat &lt;- mutate(census, treatment=0)
+
+pred_data &lt;- bind_rows(census_treat,
+                       census_notreat) %&gt;% 
+  mutate(prop=prop/2)
+
+tunisia_pred &lt;- posterior_epred(fit1, newdata=pred_data) %&gt;% 
+  as_tibble %&gt;% 
+  mutate(draw=1:n()) %&gt;% 
+  gather(key=&quot;key&quot;,
+         value=&quot;estimate&quot;,-draw) %&gt;% 
+  mutate(draw=paste0(&quot;V&quot;,draw)) %&gt;% 
+  spread(key=&quot;draw&quot;,value=&quot;estimate&quot;) %&gt;% 
+  mutate(key=as.numeric(stringr::str_remove(key, &quot;V&quot;)))
+
+tunisia_pred &lt;- left_join(tunisia_pred, 
+                          mutate(pred_data, key=1:n())) %&gt;% 
+  left_join(census) %&gt;% 
+  gather(key = &quot;draw&quot;,
+         value= &quot;estimate&quot;,
+         matches(&quot;V&quot;,ignore.case=F))
+
+# aggregate to highest level
+
+agg_est &lt;- tunisia_pred %&gt;% 
+  group_by(draw) %&gt;% 
+  summarize(est_adj = sum(estimate * prop))
+
+agg_est %&gt;% 
+  ggplot(aes(x=est_adj)) +
+  geom_histogram() + theme_tufte()</code></pre>
+<p><img src="/post/kais_saied_results_files/figure-html/mrp_adjust-1.png" width="672" /></p>
+<pre class="r"><code>quantile(agg_est$est_adj, c(0.05,.5,.95))</code></pre>
+<pre><code>##        5%       50%       95% 
+## 0.4329374 0.5187004 0.6094622</code></pre>
+<p>A difference of approximately 1 percent between the adjusted estimate and the naive number:</p>
+<pre class="r"><code>quantile(apply(get_latent_draws, 1, mean),c(0.05,.5,.95))</code></pre>
+<pre><code>##        5%       50%       95% 
+## 0.4464505 0.5336098 0.6183535</code></pre>
+<p>Next we can aggregate these results to look at gender, age and governorate in terms of relative levels of Saied support. Given that there is substantial uncertainty due to the sensitive question design, these results are somewhat noisy and should be interpreted with caution.</p>
+<div id="gender" class="section level3">
+<h3>Gender</h3>
+<p>When we aggregate to the level of gender, we see that men are approximately 5% more likely than women to report opposition President Kais Saied.</p>
+<pre class="r"><code># merge in census data
+tunisia_pred %&gt;% 
+  group_by(gender,draw) %&gt;% 
+  mutate(prop_gender=pop/sum(pop)) %&gt;% 
+  summarize(est_gender=sum(estimate*prop_gender)) %&gt;% 
+  group_by(gender) %&gt;% 
+  summarize(median_gender=median(est_gender),
+            low_gender=quantile(est_gender,.05),
+            high_gender=quantile(est_gender,.95)) %&gt;% 
+  ggplot(aes(y=median_gender,
+             x=gender)) +
+  geom_pointrange(aes(ymin=low_gender,
+                      ymax=high_gender)) +
+  scale_y_continuous(labels=scales::percent) +
+    labs(&quot;% Opposing Saied&quot;) +
+  theme_tufte()</code></pre>
+<p><img src="/post/kais_saied_results_files/figure-html/gender_support-1.png" width="672" /></p>
+</div>
+<div id="age" class="section level3">
+<h3>Age</h3>
+<p>The plot below shows aggregated opposition by age. Approximately 60 percent of the youngest age category (18 to 19 year olds) oppose President Saied while only 40 percent of the oldest age category (80 and over) oppose President Saied. This pattern is noticeably stronger than that for gender, though there is still considerable uncertainty.</p>
+<pre class="r"><code>tunisia_pred %&gt;% 
+  group_by(age_cat,draw) %&gt;% 
+  mutate(prop_age_cat=pop/sum(pop)) %&gt;% 
+  summarize(est_age_cat=sum(estimate*prop_age_cat)) %&gt;% 
+  group_by(age_cat) %&gt;% 
+  summarize(median_age_cat=median(est_age_cat),
+            low_age_cat=quantile(est_age_cat,.05),
+            high_age_cat=quantile(est_age_cat,.95)) %&gt;% 
+  ggplot(aes(y=median_age_cat,
+             x=age_cat)) +
+  geom_pointrange(aes(ymin=low_age_cat,
+                      ymax=high_age_cat)) +
+    scale_y_continuous(labels=scales::percent) +
+  labs(&quot;% Opposing Saied&quot;) +
+   theme_tufte() +
+  theme(axis.text.x = element_text(angle=90))</code></pre>
+<p><img src="/post/kais_saied_results_files/figure-html/age_support-1.png" width="672" /></p>
+</div>
+<div id="region" class="section level3">
+<h3>Region</h3>
+<p>Finally, the plot below shows predicted opposition by region. In general, more rural districts like Kebili, Beja and Kairouan report more opposition, but these differences are quite noisy. Differences between regions are not especially pronounced in the data.</p>
+<pre class="r"><code>tunisia_pred %&gt;% 
+  group_by(gov,draw) %&gt;% 
+  mutate(prop_gov=pop/sum(pop)) %&gt;% 
+  summarize(est_gov=sum(estimate*prop_gov)) %&gt;% 
+  group_by(gov) %&gt;% 
+  summarize(median_gov=median(est_gov),
+            low_gov=quantile(est_gov,.05),
+            high_gov=quantile(est_gov,.95)) %&gt;% 
+  ggplot(aes(y=median_gov,
+             x=reorder(gov,median_gov))) +
+  coord_flip() +
+    labs(&quot;% Opposing Saied&quot;) +
+  geom_pointrange(aes(ymin=low_gov,
+                      ymax=high_gov)) + theme_tufte()</code></pre>
+<p><img src="/post/kais_saied_results_files/figure-html/support_by_region-1.png" width="672" /></p>
+</div>
+</div>
+<div id="simulation-comparison-univariate-vs.-regression" class="section level2">
+<h2>Simulation Comparison: Univariate Vs. Regression</h2>
+<p>In this simulation we test the coverage and unbiasedness of the estimators, including our preferred Bayesian specification. The simulation shows that the estimators perform quite well at recovering the sensitive trait, and our Bayesian models have excellent coverage (the uncertainty they report is reasonable). We’ll use the regression spec as the DGP along with our observed parameters for this study.</p>
+<pre class="r"><code>library(parallel)
+
+# confusion matrix
+
+P &lt;- getPW(&quot;Warner&quot;,.25)
+
+# assume N = 500, small sensitivity of 0.05
+
+theta &lt;- 0.3
+N &lt;- 800
+bias &lt;- 0.1
+
+sims &lt;- 500
+
+if(run_sim) {
+  
+  over_sims &lt;- lapply(1:sims, function(s) {
+  
+  # assign half to treatment, half to control
+  
+  treatment &lt;- as.numeric(runif(N)&gt;0.5)
+  
+  obs_response &lt;- ifelse(treatment==1,
+                         as.numeric((P[2,1] * (1 - theta) + P[2,2]*theta)&gt;runif(N)),
+                         as.numeric((theta - bias)&gt;runif(N)))
+  
+  out_data &lt;- tibble(y = obs_response,
+                     treatment=treatment)
+  
+  # define custom family as being upper and lower bounded for bias
+  
+  family_sens_reg &lt;- custom_family(&quot;sens_reg&quot;,
+                                 dpars=c(&quot;mu&quot;,&quot;bias&quot;),
+                                 links=c(&quot;logit&quot;,&quot;logit&quot;),
+                                 type=&quot;int&quot;,
+                                 lb=c(NA,0),
+                                 ub=c(NA,1),
+                                 vars=c(&quot;P&quot;,&quot;vint1[n]&quot;))
+  
+  # estimate model with brms
+
+  est_mod_brms &lt;- brm(y | vint(treatment) ~ 1,
+                      family=family_sens_reg,
+                      stanvars=all_stanvars,
+                      data=out_data,
+                      #prior=prior(normal(0,10),class=&quot;bias&quot;),
+                      prior=prior(beta(1,1),class=&quot;bias&quot;) +
+                        prior(normal(-0.84,10),class=&quot;Intercept&quot;),
+                      chains=1,
+                      cores=1,
+                      iter=1000,
+            backend = &quot;cmdstanr&quot;)
+  
+  get_est_brms &lt;- posterior::summarise_draws(as_draws(est_mod_brms, &quot;b_Intercept&quot;),
+                                             estimate=~median(plogis(.x)),
+                                             high=~quantile(plogis(.x),.95),
+                                             low=~quantile(plogis(.x),.05)) %&gt;% 
+    mutate(param=&quot;mu&quot;) 
+  
+  # calculate bias transformed
+  
+  bias_est &lt;- as_draws_matrix(est_mod_brms, &quot;bias&quot;)
+  
+  mu_trans &lt;- posterior_epred(est_mod_brms) %&gt;% apply(1,median)
+
+  bias_trans_est &lt;- tibble(`95%`=quantile(bias_est * mu_trans,.95),
+                         estimate=median(bias_est * mu_trans),
+                         `5%`=quantile(bias_est * mu_trans,.05)) %&gt;% 
+    mutate(param=&quot;bias&quot;)
+  
+  get_est_brms &lt;- bind_rows(get_est_brms, bias_trans_est) %&gt;% 
+    mutate(model=&quot;Bayes BRMS&quot;)
+  
+  # compare with RRreg
+  
+  est_freq &lt;- RRuni(response=obs_response[treatment==1],
+                  p=.25,
+                  model=&quot;Crosswise&quot;,MLest = TRUE)
+  
+  this_sum &lt;- summary(est_freq)
+  
+  # now do cheap Bayes
+  
+  lambda &lt;- mean(obs_response[treatment==1])
+  
+  sim_data2 &lt;- list(success_cm=(sum(treatment))*((lambda - .75)/(-.5)),
+                     fail_cm= (sum(treatment))*(1-((lambda - .75)/-.5)),
+                     success_d=sum(obs_response[treatment==0]),
+                     fail_d=sum(1 - obs_response[treatment==0]))
+
+  fit_simple &lt;- sen_mod$sample(chains=1, cores=1, data=sim_data2,refresh=0)
+  
+  simple_sum &lt;- fit_simple$summary()
+  
+  mu &lt;- try(tibble(estimates=c(simple_sum$median[simple_sum$variable==&quot;pi_hat&quot;],
+                     this_sum$coefficients[1,1],
+                     get_est_brms$estimate[get_est_brms$param==&quot;mu&quot;]),
+         q5=c(simple_sum$q5[simple_sum$variable==&quot;pi_hat&quot;],
+                     this_sum$coefficients[1,1] - 1.96*this_sum$coefficients[1,2],
+              get_est_brms$`5%`[get_est_brms$param==&quot;mu&quot;]),
+         q95=c(simple_sum$q95[simple_sum$variable==&quot;pi_hat&quot;],
+                     this_sum$coefficients[1,1] + 1.96*this_sum$coefficients[1,2],
+               get_est_brms$`95%`[get_est_brms$param==&quot;mu&quot;]),
+         models=c(&quot;RRreg&quot;,&quot;Bayes Simple&quot;,&quot;Bayes BRMS&quot;),
+         param=&quot;mu&quot;) %&gt;% 
+    mutate(cov=theta &gt; q5 &amp; theta &lt; q95,
+           sim=s))
+  
+  bias_est &lt;- try(filter(get_est_brms, param==&quot;bias&quot;) %&gt;% 
+    select(estimates=&quot;estimate&quot;,
+           q5=&quot;5%&quot;,
+           q95=&quot;95%&quot;) %&gt;% 
+    mutate(cov=bias &gt; q5 &amp; bias &lt; q95,
+           sim=s,
+           param=&quot;bias&quot;,
+           models=&quot;brms&quot;))
+  
+  try(bind_rows(mu, bias_est))
+   
+  
+}) %&gt;% bind_rows
+  
+  saveRDS(over_sims, &quot;data/over_sims.rds&quot;)
+  
+} else {
+  
+  over_sims &lt;- readRDS(&quot;data/over_sims.rds&quot;)
+  
+}
+
+
+
+over_sims %&gt;% group_by(models,param) %&gt;% 
+  summarize(mean_cov=mean(cov)) %&gt;% 
+  knitr::kable(caption=&quot;Coverage&quot;)</code></pre>
+<table>
+<caption><span id="tab:simbetasens">Table 1: </span>Coverage</caption>
+<thead>
+<tr class="header">
+<th align="left">models</th>
+<th align="left">param</th>
+<th align="right">mean_cov</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bayes BRMS</td>
+<td align="left">mu</td>
+<td align="right">0.906</td>
+</tr>
+<tr class="even">
+<td align="left">Bayes Simple</td>
+<td align="left">mu</td>
+<td align="right">0.956</td>
+</tr>
+<tr class="odd">
+<td align="left">RRreg</td>
+<td align="left">mu</td>
+<td align="right">0.568</td>
+</tr>
+<tr class="even">
+<td align="left">brms</td>
+<td align="left">bias</td>
+<td align="right">0.908</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>over_sims %&gt;% group_by(models,param) %&gt;% 
+  summarize(spread_CIs=sum(q95 - q5)) %&gt;% 
+  knitr::kable(caption=&quot;Total Variance&quot;)</code></pre>
+<table>
+<caption><span id="tab:simbetasens">Table 1: </span>Total Variance</caption>
+<thead>
+<tr class="header">
+<th align="left">models</th>
+<th align="left">param</th>
+<th align="right">spread_CIs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bayes BRMS</td>
+<td align="left">mu</td>
+<td align="right">71.44307</td>
+</tr>
+<tr class="even">
+<td align="left">Bayes Simple</td>
+<td align="left">mu</td>
+<td align="right">96.11747</td>
+</tr>
+<tr class="odd">
+<td align="left">RRreg</td>
+<td align="left">mu</td>
+<td align="right">37.30712</td>
+</tr>
+<tr class="even">
+<td align="left">brms</td>
+<td align="left">bias</td>
+<td align="right">73.93706</td>
+</tr>
+</tbody>
+</table>
+<p>Now let’s check bias.</p>
+<pre class="r"><code>#RMSE
+
+over_sims %&gt;% group_by(models,param) %&gt;% 
+  summarize(mean_rmse=switch(unique(param),
+                             mu=sqrt(mean((estimates - theta)^2)),
+                             bias=sqrt(mean((estimates - bias)^2)))) %&gt;% 
+  knitr::kable(caption = &quot;RMSE&quot;)</code></pre>
+<table>
+<caption><span id="tab:bias">Table 2: </span>RMSE</caption>
+<thead>
+<tr class="header">
+<th align="left">models</th>
+<th align="left">param</th>
+<th align="right">mean_rmse</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bayes BRMS</td>
+<td align="left">mu</td>
+<td align="right">0.0419459</td>
+</tr>
+<tr class="even">
+<td align="left">Bayes Simple</td>
+<td align="left">mu</td>
+<td align="right">0.0485183</td>
+</tr>
+<tr class="odd">
+<td align="left">RRreg</td>
+<td align="left">mu</td>
+<td align="right">0.0487269</td>
+</tr>
+<tr class="even">
+<td align="left">brms</td>
+<td align="left">bias</td>
+<td align="right">0.0459833</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>over_sims %&gt;% group_by(models,param) %&gt;% 
+  summarize(abs_bias=switch(unique(param),
+                             mu=mean(abs(estimates - theta)),
+                             bias=mean(abs(estimates - bias)))) %&gt;% 
+  knitr::kable(caption = &quot;Mean Absolute Bias&quot;)</code></pre>
+<table>
+<caption><span id="tab:bias">Table 2: </span>Mean Absolute Bias</caption>
+<thead>
+<tr class="header">
+<th align="left">models</th>
+<th align="left">param</th>
+<th align="right">abs_bias</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bayes BRMS</td>
+<td align="left">mu</td>
+<td align="right">0.0341473</td>
+</tr>
+<tr class="even">
+<td align="left">Bayes Simple</td>
+<td align="left">mu</td>
+<td align="right">0.0388322</td>
+</tr>
+<tr class="odd">
+<td align="left">RRreg</td>
+<td align="left">mu</td>
+<td align="right">0.0390247</td>
+</tr>
+<tr class="even">
+<td align="left">brms</td>
+<td align="left">bias</td>
+<td align="right">0.0377768</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-blair2015" class="csl-entry">
+Blair, Graeme, Kosuke Imai, and Yang-Yang Zhou. 2015. <span>“Design and Analysis of the Randomized Response Technique.”</span> <em>Journal of the American Statistical Association</em> 110 (511): 1304–19. <a href="https://doi.org/10.1080/01621459.2015.1050028">https://doi.org/10.1080/01621459.2015.1050028</a>.
+</div>
+<div id="ref-gingerich2016" class="csl-entry">
+Gingerich, Daniel W., Virginia Oliveros, Ana Corbacho, and Mauricio Ruiz-Vega. 2016. <span>“When to Protect? Using the Crosswise Model to Integrate Protected and Direct Responses in Surveys of Sensitive Behavior.”</span> <em>Political Analysis</em> 24 (2): 132–56. <a href="https://doi.org/10.1093/pan/mpv034">https://doi.org/10.1093/pan/mpv034</a>.
+</div>
+<div id="ref-vandenhout2002" class="csl-entry">
+Hout, Ardo van den, and Peter G. M. van der Heijden. 2002. <span>“Randomized Response, Statistical Disclosure Control and Misclassification: A Review.”</span> <em>International Statistical Review / Revue Internationale de Statistique</em> 70 (2): 269–88. <a href="https://doi.org/10.2307/1403910">https://doi.org/10.2307/1403910</a>.
+</div>
+</div>
+</div>

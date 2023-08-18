@@ -1,0 +1,831 @@
+gender,kais_direct,kais_rr,Duration (in seconds),StartDate,FL_63_DO_saied_sensitive,FL_63_DO_saied_nonsensitive,ResponseId,ExternalReference
+Male,NA,Both statements are true OR neither is true.,1455,2023-07-14,1,NA,R_1OPKNyVL9VLZOpk,R_erHRiDrpVtKiM5r
+Male,No,NA,538,2023-07-14,NA,1,R_5dK4GQeGXmRrrLX,R_4GkgHBIbR7girQJ
+Female,NA,Both statements are true OR neither is true.,503,2023-07-14,1,NA,R_30v4yyh6jEcXydI,R_2TBgAdF42ygropn
+Male,No,NA,1433,2023-07-14,NA,1,R_3iPU0Luau1zHOr8,R_2fHCjHWl4Vvjk3X
+Male,NA,Both statements are true OR neither is true.,1080,2023-07-14,1,NA,R_32JWBqoRC9HeRYL,R_2fJLSDzmp6vZFNJ
+Male,NA,Both statements are true OR neither is true.,1810,2023-07-14,1,NA,R_3iXdLfFP4AxiLib,R_1OxgOjcyQ639vOR
+Female,Yes,NA,1407,2023-07-14,NA,1,R_26aoCPhGInQAk36,R_RfpFTipDPTADNOV
+Female,NA,Both statements are true OR neither is true.,622,2023-07-14,1,NA,R_2ScZbt1ClNQml5e,R_2g8IUOBDUqnNQ6l
+Female,No,NA,1197,2023-07-14,NA,1,R_O0UfR3vWzzyhwNH,R_1Eb2nJVplTkapjU
+Male,Yes,NA,1482,2023-07-14,NA,1,R_BFAGqGy78YNd1MR,R_25SYc4qx9oNMryL
+Male,NA,NA,1549,2023-07-14,1,NA,R_1nZy4GDJndSptXg,R_2VF1aVb6Q9GA0Lq
+Male,NA,Both statements are true OR neither is true.,591,2023-07-15,1,NA,R_1K28pYfkac2ksKY,R_231fhy5rmFdZVIS
+Male,NA,One of the two statements is true.,1183,2023-07-15,1,NA,R_33wpcj6MmAAselC,R_pzMoqcBGelcdqsp
+Male,NA,NA,1016,2023-07-15,1,NA,R_3Lc2pYT1t8UqohE,R_2TXFYVVKGk8lNke
+Male,NA,One of the two statements is true.,650,2023-07-15,1,NA,R_eCYe8nMgLeV2iUF,R_22txoFfF3dLsEag
+Male,NA,One of the two statements is true.,1754,2023-07-15,1,NA,R_22ZtQk9M5LpFz1f,R_UJu37SB2yKkO9ot
+Female,NA,Both statements are true OR neither is true.,783,2023-07-15,1,NA,R_5b4I2Zv3q9jS3W9,R_1QfTeLYSsH54wFz
+Male,Yes,NA,969,2023-07-15,NA,1,R_3ee5ZI1GEvMOimA,R_1fdAAfCImA02qaN
+Male,NA,One of the two statements is true.,1672,2023-07-15,1,NA,R_3EFofUSFenWrBUi,R_3GDrQ3tMNmOxEvq
+Female,NA,Both statements are true OR neither is true.,1439,2023-07-15,1,NA,R_2wNaczIlZ4t3jVl,R_2V1GnGJTE5Gj8LE
+Male,No,NA,2629,2023-07-16,NA,1,R_2TLUOQ7V1f1xqza,R_2uUQMnQjMKQscx2
+Female,NA,Both statements are true OR neither is true.,482,2023-07-18,1,NA,R_27VRo6QIstamunE,R_3qR4vsQV9bFkrf3
+Male,Yes,NA,711,2023-07-18,NA,1,R_77KpY5rTjBi5lPX,R_qWQQ3khnQ0rXyM1
+Male,NA,Both statements are true OR neither is true.,2729,2023-07-18,1,NA,R_RXDinq93maPwK3v,R_25N5yboG0mril1s
+Female,No,NA,1437,2023-07-18,NA,1,R_27jL1tdlyir3YUd,R_2fdEH5Ipzzw3bsN
+Male,Yes,NA,803,2023-07-18,NA,1,R_2uR75wLb901S9TS,R_3GrXkxx8lZZ9dSi
+Male,NA,Both statements are true OR neither is true.,605,2023-07-19,1,NA,R_22xkBcUTnJFcN5Y,R_RgnjGgxo6U6sUUh
+Female,No,NA,296,2023-07-19,NA,1,R_aguigCgHtGC9gf7,R_2EzAcIcOof7zXxf
+Female,No,NA,516,2023-07-19,NA,1,R_3I5EwzpT1BiqVuQ,R_1ooH3R56jhurWC8
+Male,Yes,NA,695,2023-07-19,NA,1,R_qXEl8yiwD6DOL7P,R_2Bmwxi5xdzct6eg
+Female,No,NA,1423,2023-07-19,NA,1,R_3mghFBXOAMYUXVi,R_2z6koW5S5dUZfmB
+Male,Yes,NA,842,2023-07-19,NA,1,R_2WH9UYL4Lt9ZWer,R_24u8t0QPuU6uKmL
+Male,NA,Both statements are true OR neither is true.,1176,2023-07-19,1,NA,R_RlZ1wmNBru7McAF,R_2EB0xameC7Kkpoa
+Male,NA,Both statements are true OR neither is true.,2173,2023-07-19,1,NA,R_2YFYisD1NZMusw1,R_SUFHGSdY07yafGF
+Female,No,NA,747,2023-07-19,NA,1,R_3CK4MLRZUjtWtem,R_2S65qrcJOGJyrQD
+Male,NA,Both statements are true OR neither is true.,695,2023-07-19,1,NA,R_3PFRkwwDDAESQEM,R_1gtMVmwdaOo3EF5
+Female,Yes,NA,737,2023-07-19,NA,1,R_UuslD5VV8Yxa3fj,R_3h4JuRabggEDbap
+Female,Yes,NA,955,2023-07-19,NA,1,R_3nBqo4NKAeNXXsZ,R_2B5uQWvvaxZxVUj
+Female,Yes,NA,1701,2023-07-19,NA,1,R_2bVs72BZDANNlrh,R_ezgYJSiLZKmnbI5
+Male,NA,One of the two statements is true.,797,2023-07-19,1,NA,R_2YkXiCstBz4hIWh,R_YPJUoC6koOpsoQp
+Male,No,NA,30257,2023-07-19,NA,1,R_2zSfFm6IzpsC5yz,R_31uzVmpeklZKA94
+Male,NA,One of the two statements is true.,1639,2023-07-19,1,NA,R_2R24GBPFcqcCVOB,R_1I9NcBJX2s5WT6F
+Male,Yes,NA,1127,2023-07-19,NA,1,R_D2h2HVy6xHEdp4J,R_1gbTo0wqdgLHb4i
+Female,NA,Both statements are true OR neither is true.,83207,2023-07-18,1,NA,R_A7iCU6BQXkpFMGd,R_2fd39eaTiuitUIT
+Male,Yes,NA,317,2023-07-19,NA,1,R_3j9fPeJb5QJIOmW,R_yknEdKhuB2LW90Z
+Male,No,NA,1180,2023-07-20,NA,1,R_2woRdEYCA4BMAPD,R_1r1w7btZfYpnfXW
+Female,NA,Both statements are true OR neither is true.,578,2023-07-20,1,NA,R_1F95qI2EBVJlZVk,R_27V9VJ61LwXqhLT
+Male,NA,One of the two statements is true.,1333,2023-07-20,1,NA,R_2Qt8HjMZSDGIgFS,R_T1mGy2XHzndEy09
+Female,NA,Both statements are true OR neither is true.,1506,2023-07-20,1,NA,R_PuECxTCuRwUeDPX,R_3qjxs2DvuKYx9Kg
+Male,No,NA,1452,2023-07-20,NA,1,R_Y9p8s8vXR7RZcJz,R_1Q3F2SsN0qVexw7
+Female,No,NA,1664,2023-07-20,NA,1,R_sRxddoQJuJf3uo1,R_2Qo0I3J1kH3Uhfc
+Female,Yes,NA,1230,2023-07-20,NA,1,R_116qNvQMUxEeAD3,R_D5VQnsCF1q1JTuV
+Male,NA,One of the two statements is true.,7388,2023-07-20,1,NA,R_2dRvcCcwjZH7yXE,R_2fC1SwfGPVqlKif
+Male,NA,Both statements are true OR neither is true.,516,2023-07-20,1,NA,R_VIFmRJv2KQvpkNH,R_Rlb4nKRpz43fgfD
+Male,No,NA,604,2023-07-20,NA,1,R_1S3FWLd1INtMqe5,R_W8vav4qQdMttuoh
+Female,No,NA,1049,2023-07-20,NA,1,R_1CrNDGbISA1DoQc,R_vOGDWsQYSpU6IcV
+Female,No,NA,2315,2023-07-20,NA,1,R_qI8zWOag9ZGhp1D,R_2UauBOfcofeTzJq
+Female,No,NA,979,2023-07-20,NA,1,R_22mgzehWLjTFinn,R_6kQBJetyfXflk6l
+Female,Yes,NA,764,2023-07-20,NA,1,R_2Tt0i5HfNB2yqTI,R_2aQ3mFg5tXikWiZ
+Male,NA,One of the two statements is true.,172377,2023-07-18,1,NA,R_2sT2HGzzDbP1fDC,R_2ASyBTJJwVZIN6D
+Male,No,NA,98577,2023-07-19,NA,1,R_O9b24cASO2YuKjv,R_1Kg68sKeMTJjBhS
+Male,NA,One of the two statements is true.,1388,2023-07-21,1,NA,R_22srXh7La5C4wMR,R_1JXFAXKkGkSl6zL
+Male,NA,One of the two statements is true.,11291,2023-07-21,1,NA,R_2V9YxeQWKrAp2uG,R_3NJvJ5aJcIytXUE
+Male,NA,One of the two statements is true.,643,2023-07-24,1,NA,R_2zB02ZXVNwepSFK,R_272VmfLJbDllWEI
+Female,No,NA,759,2023-07-24,NA,1,R_1eWXYbvefuCUZ4n,R_1rGMH81Wn6fHgeR
+Female,NA,Both statements are true OR neither is true.,833,2023-07-24,1,NA,R_2pRJHtqgQMMUP8a,R_3q7JpzDb7n3MoGE
+Male,NA,Both statements are true OR neither is true.,795,2023-07-24,1,NA,R_3juhYqklb8JUyI1,R_3lxeJ6m8a6iHSdR
+Male,NA,Both statements are true OR neither is true.,947,2023-07-24,1,NA,R_2tyDNIDS8spyfa3,R_1OZBEAPTTC0f64f
+Male,No,NA,1047,2023-07-24,NA,1,R_2Vpzfm17kKQiJv5,R_21zbyJnkihPXe85
+Male,No,NA,480,2023-07-24,NA,1,R_1hAyc11zQ0O9qej,R_3I4dj5sJmJsXb39
+Male,No,NA,690,2023-07-24,NA,1,R_1dKdBZiEjI5BH3U,R_cON3szL6VfidLDX
+Male,NA,One of the two statements is true.,2218,2023-07-24,1,NA,R_qyyj06jx6oZyeDn,R_3PAG8O040NarcIz
+Male,NA,One of the two statements is true.,911,2023-07-24,1,NA,R_URR1xMPGQkYogEh,R_OCG7LYDlmasZj2x
+Male,NA,Both statements are true OR neither is true.,1126,2023-07-24,1,NA,R_32L0t1EscfkFA6r,R_SJHDZR0rhjhe7L3
+Female,No,NA,755,2023-07-24,NA,1,R_pJVZxZJ7pYkPfm9,R_1EgqYx2x12qu5L5
+Male,Yes,NA,849,2023-07-24,NA,1,R_24pjKE2YS4BqBS7,R_1IzsTjdHRLXLNqM
+Male,NA,One of the two statements is true.,988,2023-07-24,1,NA,R_1MPPMxkAQKE5tCg,R_bEFseyWUJCnuZax
+Female,No,NA,429,2023-07-24,NA,1,R_DvspU8WXnhIdPpL,R_2ALkUyfHLMSirSa
+Male,NA,Both statements are true OR neither is true.,642,2023-07-24,1,NA,R_2PoLIROA3ZuHeLT,R_3kNC9D0oUoWq0tU
+Female,NA,Both statements are true OR neither is true.,36108,2023-07-24,1,NA,R_10PFqbziN1BkI8X,R_1FnuDXBpwddLmEN
+Male,NA,One of the two statements is true.,587,2023-07-24,1,NA,R_3Do8rLQj44tuyTH,R_3q9jRHTGEBQ9n8n
+Male,No,NA,782,2023-07-24,NA,1,R_2P5Nthb41W8Ypyo,R_pJKxG5Kk38A4tWx
+Female,No,NA,41617,2023-07-24,NA,1,R_2y4zaMQ6UqXnctM,R_3g4JmrjgffRdpEW
+Female,NA,NA,1276,2023-07-24,1,NA,R_paUe2BZBLUi1809,R_1n1lHe4Ff9tTZDd
+Female,NA,Both statements are true OR neither is true.,540,2023-07-24,1,NA,R_1eyOUEoQw1cf5MW,R_2zirdZdrv6KsYSD
+Female,NA,NA,1704,2023-07-24,NA,1,R_3nNPmea4scyllWG,R_31ZVO0TVMYB1kiq
+Male,NA,One of the two statements is true.,1080,2023-07-24,1,NA,R_29idBysklsz4zJT,R_3W2IzkeZDgmEH1T
+Female,No,NA,1101,2023-07-24,NA,1,R_3k4x4W8E33kzsi4,R_39NwLiZAbZfjgnT
+Male,Yes,NA,564,2023-07-25,NA,1,R_3QGy03aq3V2pVtQ,R_22txoFfF3dLsEag
+Male,NA,Both statements are true OR neither is true.,1037,2023-07-25,1,NA,R_3QS2DZ5qe4iqchC,R_2zMGNvQynsA6Nf5
+Male,Yes,NA,560,2023-07-25,NA,1,R_0lz8sR7dQlgLwvn,R_1d51x4GvnF2Brwk
+Female,NA,One of the two statements is true.,1611,2023-07-25,1,NA,R_302Gil5XHcNvMQg,R_umDVYHebAjxiC9r
+Female,No,NA,278,2023-07-25,NA,1,R_3KH2SZ3vSOFcgGl,R_CesYd3rZBNTDtlv
+Female,NA,One of the two statements is true.,139226,2023-07-24,1,NA,R_31aWaM9GsgW1yuK,R_C8QkCkKwLor3AeR
+Male,NA,One of the two statements is true.,504,2023-07-25,1,NA,R_yk0eUWJy56OZlmx,R_31Y2s0gz1eoJ2No
+Male,No,NA,576,2023-07-25,NA,1,R_2AQe3UV8uuffhyZ,R_2zNPTzWaGQLcFLl
+Female,No,NA,638,2023-07-25,NA,1,R_26mCR1yWIredblM,R_3PvnO7m6ks6l8MT
+Female,No,NA,639,2023-07-25,NA,1,R_2qyGb1UhoNoh8j4,R_10PIlJBCK4TGkoN
+Male,Yes,NA,861,2023-07-25,NA,1,R_3ErQ6UjyJgVmZqp,R_28TWEyDrp6FUVVN
+Male,No,NA,951,2023-07-25,NA,1,R_1Qa8rRntLTtlNZB,R_2EaXyCtihhM9k8v
+Female,NA,One of the two statements is true.,951,2023-07-25,1,NA,R_tMRRKegXuvAYMWR,R_YboQSiiZCbtVpeh
+Male,NA,Both statements are true OR neither is true.,843,2023-07-25,1,NA,R_12mfbR9jlNLw2sy,R_2S63IzSMXyMZxVZ
+Female,No,NA,1093,2023-07-25,NA,1,R_31cm6G1EadhSSQI,R_DcnEiIbQf8TjcUF
+Female,Yes,NA,1095,2023-07-25,NA,1,R_2qeMnapknsq6w3I,R_3qKIDY6EEgZ4dv3
+Female,No,NA,1259,2023-07-25,NA,1,R_3hijhAT2PvdE3EA,R_2BsV7tputjW5woI
+Female,NA,One of the two statements is true.,434,2023-07-25,1,NA,R_1dbjoPDbPTHfjPq,R_2yr5KPp9mYievGB
+Male,NA,One of the two statements is true.,798,2023-07-25,1,NA,R_3312cKrx31w0gpk,R_pGWcinefOw7ZXRT
+Female,NA,Both statements are true OR neither is true.,1241,2023-07-25,1,NA,R_UcIubUOi0gKBiuZ,R_2SuXW0LWxgQKQRu
+Male,No,NA,954,2023-07-25,NA,1,R_21EUu9kvy4GI89F,R_3RpU0Uu96DGKaZX
+Male,No,NA,942,2023-07-25,NA,1,R_2E4doZhC26qRVvp,R_1MMqbqsW5TTEBde
+Male,No,NA,1436,2023-07-25,NA,1,R_CdcWUFmTHtFkbIt,R_2BhvYfnBgxiMB12
+Male,No,NA,988,2023-07-25,NA,1,R_3q7MkoPQdF2VYhc,R_1Km7LflIBdunFNL
+Male,NA,Both statements are true OR neither is true.,1094,2023-07-25,1,NA,R_3r381WkeCcgLjsU,R_1rJHs7B7lHQLK7F
+Male,Yes,NA,1757,2023-07-25,NA,1,R_NX8vBauLIJjZpNn,R_UW0JszqAn80n7Tb
+Male,No,NA,452,2023-07-25,NA,1,R_2CQAeORrkbgSfBW,R_vU1s59P4RMJrCE1
+Male,No,NA,862,2023-07-25,NA,1,R_3EuxiOUY373LFDK,R_25sYoQLQrfvuIg1
+Female,NA,One of the two statements is true.,931,2023-07-25,1,NA,R_3g7tjOXP5CGUB4m,R_1omZKncpPj1oYMB
+Male,NA,One of the two statements is true.,713,2023-07-25,1,NA,R_SBMWOo70zzwIJ7r,R_2YGrbWIdISXPmS4
+Male,NA,One of the two statements is true.,863,2023-07-25,1,NA,R_2AFiiq0iy7e01ER,R_2uUqn3EAbE7CAZ2
+Female,NA,One of the two statements is true.,1478,2023-07-25,1,NA,R_2BtCKmVst1GBiks,R_s75qnCuVCfRthfj
+Female,No,NA,766,2023-07-25,NA,1,R_1mXib1MgcdvbpRC,R_27d13cA4CoWJM4P
+Female,No,NA,713,2023-07-25,NA,1,R_1kUpIkF5HollDPE,R_3ISNbHKeCHq7L6A
+Female,NA,Both statements are true OR neither is true.,1943,2023-07-25,1,NA,R_1Hi6FK3WBKOYY0k,R_2uU2XKZLqj4VpDV
+Male,NA,One of the two statements is true.,16665,2023-07-25,1,NA,R_3q8urowKRLASqSK,R_24A8rGvEyc8qu9Q
+Male,NA,One of the two statements is true.,19909,2023-07-25,1,NA,R_pMolijCjIaaX5qp,R_30vLqUMjK827elq
+Male,No,NA,721,2023-07-25,NA,1,R_1QLaKtGEUpm2kMn,R_WljKY4MUYmcfsv7
+Male,No,NA,18720,2023-07-25,NA,1,R_1gpwRFktTqCPTT7,R_2XczKu5B2ga26U8
+Female,NA,Both statements are true OR neither is true.,20972,2023-07-25,1,NA,R_2s7nv8HPUkkDzFg,R_1K8dfed1pQiCdRu
+Male,No,NA,1035,2023-07-25,NA,1,R_vdJz7WWENdwcErn,R_2tqZ8MGXwZ7KEZH
+Male,NA,NA,758,2023-07-25,1,NA,R_3Km0uDzSRKJhgHf,R_cBnJyskVVXt4tVL
+Male,NA,One of the two statements is true.,922,2023-07-25,1,NA,R_3p2MPllZ96R5mc9,R_3kEWajPs71S4xhx
+Female,NA,One of the two statements is true.,25051,2023-07-25,1,NA,R_5tnTv1YEmRANtmx,R_1JF1sPEzdgwwcC3
+Male,Yes,NA,7425,2023-07-25,NA,1,R_3CNqazrBGcCDqTM,R_3COEAzyIFiUyzUD
+Male,Yes,NA,795,2023-07-26,NA,1,R_1H2lKNYJy4FYMCj,R_z12lqzkThl8rAhb
+Male,Yes,NA,818,2023-07-26,NA,1,R_3FUP7kQHpQJGgk4,R_21ixqfyYLywkaAR
+Male,NA,Both statements are true OR neither is true.,482,2023-07-26,1,NA,R_3eq4ZKFGAcuEYNw,R_2yjcERs67LS20eM
+Male,NA,Both statements are true OR neither is true.,1165,2023-07-26,1,NA,R_ywGm7S6OkihbX8J,R_1lltn84Mb0A8vOx
+Male,NA,Both statements are true OR neither is true.,29910,2023-07-25,1,NA,R_24Bp59yB9RcV8FG,R_23a9dZ8iBmtXBWv
+Female,NA,Both statements are true OR neither is true.,4057,2023-07-26,1,NA,R_1DBDusrfuwD5QuK,R_12LPMsBxmAque4y
+Male,Yes,NA,2179,2023-07-26,NA,1,R_XnsU6mwQ7tu2k5b,R_sArmIvv4CXsW6hX
+Female,NA,One of the two statements is true.,245,2023-07-26,1,NA,R_e4A16cH1hv396Uh,R_3PS8L9A8dzXtUAF
+Male,NA,One of the two statements is true.,2935,2023-07-26,1,NA,R_9BlfhA3t7g77vax,R_uyTzWv8ExWq0qad
+Male,No,NA,478,2023-07-26,NA,1,R_0kRjH8jI7ywjiGB,R_C2G5owc3XnPGfoR
+Female,NA,Both statements are true OR neither is true.,356,2023-07-26,1,NA,R_322wJNQ7p4u2srS,R_OMSBimUnJ9UpHuV
+Male,No,NA,1071,2023-07-26,NA,1,R_sonv0SWQ9sm21yN,R_3iF6fayqLcpc9cu
+Female,NA,One of the two statements is true.,1567,2023-07-26,1,NA,R_1f28kiwL9soatuE,R_7URb31IsGuWo4fL
+Male,No,NA,1124,2023-07-26,NA,1,R_2Et5MGSBgRQJAEL,R_2f3vW3o2LkKB1vR
+Female,NA,One of the two statements is true.,761,2023-07-26,1,NA,R_3gMIORSAurqptIQ,R_3m9L2TomtCBCckI
+Male,Yes,NA,933,2023-07-26,NA,1,R_3L7rmcVjJV3EjzQ,R_2RVLiOj0vZacGEJ
+Female,NA,Both statements are true OR neither is true.,933,2023-07-26,1,NA,R_2Ucr1uIHiMHU1Pz,R_2zZu72JDams7qo6
+Male,NA,One of the two statements is true.,640,2023-07-26,1,NA,R_32WwHFi7MfC6W6k,R_1BR77DlJ7caY0bd
+Female,NA,One of the two statements is true.,1042,2023-07-26,1,NA,R_2ClvZ7j1moFqYUg,R_3PzBt0we77TgxNT
+Male,NA,One of the two statements is true.,1281,2023-07-26,1,NA,R_2QlHdEZvbf5VXKT,R_12R8zmSOOnNFsMH
+Male,NA,One of the two statements is true.,521,2023-07-26,1,NA,R_37PKM6YPCf13MUp,R_2yei3AfS0p1cftY
+Male,No,NA,1150,2023-07-26,NA,1,R_21EsMsNzjp1FETQ,R_2X5m2KxUpSYwpud
+Male,No,NA,2299,2023-07-26,NA,1,R_sdvDe5qoeqjmBtD,R_3iX4DrzsFCUynS1
+Female,Yes,NA,1043,2023-07-26,NA,1,R_2ByeorwxH2h4KDS,R_332XaWjfp2X2S39
+Male,NA,One of the two statements is true.,1779,2023-07-26,1,NA,R_265xozlzjQ4aFOy,R_2ZQtyRwRBpyKHSM
+Male,NA,Both statements are true OR neither is true.,1043,2023-07-26,1,NA,R_214n9dqRLQUGofb,R_2BsoOxzjevxgqvx
+Male,Yes,NA,1143,2023-07-26,NA,1,R_uta27TjVCFWdCwh,R_2cAuReOzoVyYOfJ
+Male,Yes,NA,713,2023-07-26,NA,1,R_21nDIfh6lyczdnb,R_WuK3XHmIAkUNSlr
+Female,NA,One of the two statements is true.,958,2023-07-26,1,NA,R_1E542UWNfWS0eai,R_3Mfbn47iCHswyL2
+Female,NA,One of the two statements is true.,7880,2023-07-26,1,NA,R_3Muhr44dGLRwbwl,R_2s4JLQcY0wgmQhP
+Female,NA,One of the two statements is true.,356,2023-07-26,1,NA,R_3h4th9eaoEcyqQs,R_2fnY4Aweve89aBH
+Female,NA,One of the two statements is true.,575,2023-07-26,1,NA,R_2OSIoidzCCmRvpV,R_1QfTxjRR0WeICjk
+Male,NA,One of the two statements is true.,534,2023-07-26,1,NA,R_10MX34obwnzadCu,R_1pKVnoilKvDnQLc
+Other:,No,NA,763,2023-07-26,NA,1,R_2c1qe9gNNfngPPE,R_2wAh0TdcKr8Rxot
+Male,NA,NA,1364,2023-07-26,1,NA,R_2TXZ8MPYcWdY1Rp,R_2pPjJoRnbpSGzCT
+Female,Yes,NA,960,2023-07-26,NA,1,R_1PT7Sq3ZJ3I3so8,R_ze77BN86xjCh4vT
+Female,No,NA,2243,2023-07-26,NA,1,R_UxOYQLM08yFUQh3,R_2VaJohVjCRzmF91
+Female,NA,One of the two statements is true.,18399,2023-07-26,1,NA,R_1rcspKJ7Kz7p4wE,R_2qz7FwchPHTJPKS
+Female,No,NA,696,2023-07-26,NA,1,R_4MIGgehgXbO66gV,R_1gNKzTgcxynUFWh
+Female,NA,One of the two statements is true.,7904,2023-07-26,1,NA,R_12nxx7DWl9eaAGC,R_1Cg62bJKhQRC845
+Male,No,NA,656,2023-07-26,NA,1,R_2uO3202arjkTYO9,R_3il1hUAO5IzWL0x
+Male,Yes,NA,1699,2023-07-27,NA,1,R_12QLg1UsLhEt9Ca,R_2CxktozfWv3ONHw
+Female,NA,NA,32002,2023-07-26,1,NA,R_2s0wYYcAqlFiYTC,R_8equSkVzzrJrb21
+Male,NA,Both statements are true OR neither is true.,1246,2023-07-27,1,NA,R_pcT96uTG3AsHQBj,R_126gZ23lprfL4bF
+Female,NA,Both statements are true OR neither is true.,612,2023-07-27,1,NA,R_3kCgFyRozQQs6Rt,R_tJR8cJWxIM6tFst
+Male,NA,One of the two statements is true.,1797,2023-07-27,1,NA,R_Cm16dro1Xp5p8E9,R_1LnTnokvObpe4nE
+Male,No,NA,1562,2023-07-27,NA,1,R_2VlNHb5BnWTbn7O,R_3J5aPe988xdBpW5
+Male,No,NA,673,2023-07-27,NA,1,R_2QgHvkpGAjzTyz4,R_2OUX9r4JWuz2E5P
+Male,NA,Both statements are true OR neither is true.,814,2023-07-27,1,NA,R_1Q5gAZZ9Qjt3YRl,R_2czwWE6JIaK3ZFj
+Female,No,NA,744,2023-07-27,NA,1,R_3IbeaybBTW4iwmm,R_7WFf7PtP3ZtTWsp
+Male,No,NA,2752,2023-07-27,NA,1,R_9Ets7Rkq8MCe1Dr,R_AnWmZJqkJSYk3sd
+Male,NA,One of the two statements is true.,1463,2023-07-27,1,NA,R_2VI5bp7A4ZHEFiB,R_3LbZA2Ohp6UnGkg
+Female,NA,One of the two statements is true.,600,2023-07-27,1,NA,R_3kvP9nesRSzZbvR,R_2ah1V2nLcEHyqqx
+Female,No,NA,1293,2023-07-27,NA,1,R_VPgi42x0ndeIUx3,R_2bIBO0t1CBZqiYg
+Male,NA,One of the two statements is true.,646,2023-07-27,1,NA,R_wQUOGi4hQbxIiuB,R_3DbcoJRFPcePFf2
+Male,Yes,NA,581,2023-07-27,NA,1,R_3s00OYEW9XB510H,R_1LGUSU7J0AYglSZ
+Female,No,NA,1467,2023-07-27,NA,1,R_1DAUyZqx5H2fo6W,R_z3daQ9zhggTcGCl
+Male,NA,One of the two statements is true.,89583,2023-07-26,1,NA,R_DrbsDOTVce7FFgl,R_1Ff6zgBOTzkOYF7
+Male,No,NA,392,2023-07-27,NA,1,R_2XcHt7q8em9nYWU,R_1ln9uxEUUqIomoS
+Female,Yes,NA,95894,2023-07-26,NA,1,R_1NrAP6SGLVsfJqd,R_2fq8aB5s8Jk6SR9
+Male,NA,One of the two statements is true.,53898,2023-07-27,1,NA,R_24ph6OFMFSqhsn0,R_1GTH7oFSxzeRoWm
+Female,NA,One of the two statements is true.,696,2023-07-28,1,NA,R_2YW0bfRILbSuhFJ,R_2t37pkCbUM1697H
+Male,NA,One of the two statements is true.,663,2023-07-28,1,NA,R_ZrRBhyFqJCjdvnH,R_2BfXrBKvx18eqZE
+Female,Yes,NA,579,2023-07-28,NA,1,R_3qfIUqAZNc8n2DF,R_3iEeFjGTyC1XyBE
+Male,No,NA,690,2023-07-28,NA,1,R_2rA3B2JcW2hqBnC,R_3rSuRmhoeQ8xn3c
+Male,No,NA,724,2023-07-28,NA,1,R_3rSWI64G34y77JK,R_bIBEwDNM2SX0cRb
+Female,NA,Both statements are true OR neither is true.,2367,2023-07-28,1,NA,R_3EF59rJOGhhTj5T,R_31QRJrWL0RaWNGI
+Male,No,NA,695,2023-07-28,NA,1,R_1LkEDV9YntC3HfL,R_29bLWZMBXJf8ESq
+Male,NA,One of the two statements is true.,830,2023-07-28,1,NA,R_YWbLnvEF14aINSF,R_3ltUqfSa77x9lYm
+Female,Yes,NA,287,2023-07-28,NA,1,R_1f6JUlv4U3XdIsp,R_1mvZWkF4v0UlLac
+Male,NA,Both statements are true OR neither is true.,702,2023-07-28,1,NA,R_11awKlAY6yNmdr3,R_WD7SC3SF5I8M0Kt
+Male,Yes,NA,817,2023-07-28,NA,1,R_1d5j8Y3HjCqF2P6,R_2EoPW6GY60PVGbD
+Male,No,NA,566,2023-07-28,NA,1,R_2e5zp8pU82d4t7S,R_2wNC5zbIuzWsG3D
+Male,No,NA,1013,2023-07-28,NA,1,R_1CpiMwRQ2XwpDJj,R_3lSuSGluQWWNLmu
+Male,NA,Both statements are true OR neither is true.,1238,2023-07-28,1,NA,R_eLovE4kDzd2oQE1,R_3RrRcP7zLlY1drW
+Male,NA,Both statements are true OR neither is true.,1601,2023-07-28,1,NA,R_roJ3RQhR7PqON7r,R_1digKnfC08Mtxqu
+Female,Yes,NA,655,2023-07-28,NA,1,R_qWKsuWYE9EBShqh,R_1jdf91s4zrn1Z3A
+Male,Yes,NA,173,2023-07-28,NA,1,R_1IcJB1AVe7YMHJb,R_3RlOEUeLRKvaerU
+Male,NA,One of the two statements is true.,1593,2023-07-28,1,NA,R_3EfBLvluL2Ojrng,R_3EgpnmCVzePhLPa
+Female,No,NA,828,2023-07-28,NA,1,R_2ZOCWYgsNZUCoK5,R_43l1BTJpIveFeJH
+Female,NA,One of the two statements is true.,631,2023-07-28,1,NA,R_1mDEjncK98QqHiA,R_vCCNk5bC62ZBFAZ
+Male,NA,Both statements are true OR neither is true.,39796,2023-07-28,1,NA,R_3lzaFpeS6uzwp3W,R_xltluewMLFypJbH
+Female,NA,One of the two statements is true.,233,2023-07-29,1,NA,R_2xzqGSuRNT2AcER,R_uxqtJRWihJVS7Zv
+Male,NA,One of the two statements is true.,798,2023-07-29,1,NA,R_DRW99vc1VPF9Ll7,R_302KDLNMP5cM669
+Male,NA,Both statements are true OR neither is true.,1467,2023-07-29,1,NA,R_1jrLCJtNRKKIyd1,R_3dYRGeiI3QeAcEC
+Male,NA,Both statements are true OR neither is true.,1246,2023-07-29,1,NA,R_31hZiIdHZk9VQW9,R_27lLCnaA1NAslCL
+Female,No,NA,736,2023-07-29,NA,1,R_eWMozOJiS60b1Bv,R_poqWnfbjmhZ9bsB
+Female,No,NA,823,2023-07-29,NA,1,R_3QMoOS9mLMWE9rn,R_3m2bsTkEqmGRnBt
+Male,No,NA,345,2023-07-29,NA,1,R_122OoVCtMjUGkBl,R_b4lqJFLt4cw03yV
+Female,NA,Both statements are true OR neither is true.,1604,2023-07-29,1,NA,R_8dX86uYvV0wctDX,R_1IrUP8bCxj5kXp8
+Female,No,NA,843,2023-07-29,NA,1,R_zYa2IvmZuqQ19qp,R_3kBZ5sNhUkhhVoR
+Male,NA,One of the two statements is true.,1313,2023-07-29,1,NA,R_1dgfuEAwi8Po9AF,R_2rC7g0fvlEeBqC2
+Female,NA,Both statements are true OR neither is true.,1187,2023-07-29,1,NA,R_3n2UyO7le3YvcU7,R_1jTkOn2K226E60y
+Male,NA,One of the two statements is true.,1122,2023-07-29,1,NA,R_2Vs9BbCOhEowWSw,R_6S5NPSminY9nPLX
+Female,NA,One of the two statements is true.,950,2023-07-29,1,NA,R_2agZD98jVnjjjnQ,R_1imSSfaEa69ULcs
+Male,No,NA,3100,2023-07-29,NA,1,R_3irSHaNJ9IKKWyx,R_bw0d4eloUMXwx9v
+Male,NA,One of the two statements is true.,2077,2023-07-29,1,NA,R_T0nV0Zjf2FJ3yXn,R_22G5Nj1OQjFbXva
+Male,NA,NA,4382,2023-07-29,1,NA,R_3PLvc4P60R2ZxnT,R_tM5UUcQ6JmFLKtH
+Male,No,NA,2661,2023-07-29,NA,1,R_vr7WyRTwUH13MWt,R_2Cy0M4FX4ZhZpFf
+Female,No,NA,444,2023-07-29,NA,1,R_1IlRTytOvEqx0wv,R_O85BtbaWJZbiqGJ
+Male,NA,One of the two statements is true.,928,2023-07-29,1,NA,R_2tlFEjSjTc0Ucbb,R_26liObATQRVL77m
+Male,Yes,NA,720,2023-07-29,NA,1,R_2attPLl1MPcL4Mf,R_3nveCIzTCiE2TxB
+Male,No,NA,1091,2023-07-29,NA,1,R_3JF2Vg1pyIxK6qm,R_1d62lerTlUQreww
+Male,No,NA,978,2023-07-29,NA,1,R_1H5zgle2PTwv8Hw,R_7W1ZUd3KEmmGrQJ
+Male,NA,Both statements are true OR neither is true.,1665,2023-07-29,1,NA,R_BukSpwqIb5Q8Vz3,R_2DUJIq8GNa1E26t
+Female,No,NA,891,2023-07-29,NA,1,R_2pMpTcILK74M160,R_2UhYgpSK224H7FT
+Female,No,NA,800,2023-07-29,NA,1,R_tSQrYnJhjYXgJZn,R_2y47CoTOgMBgv6J
+Male,NA,One of the two statements is true.,2907,2023-07-29,1,NA,R_2woveTi5sEJkrRk,R_3NxQglHZVLk3zyc
+Male,NA,One of the two statements is true.,639,2023-07-29,1,NA,R_2dYHnBxlIl3JlDR,R_3IahvH28Sx4PUMa
+Male,Yes,NA,939,2023-07-29,NA,1,R_27WFr2dHXrOJDaA,R_1DVhpqieTksuO1h
+Female,No,NA,31313,2023-07-29,NA,1,R_3qJsyKjdLhjPjFA,R_1BRS4jItZiWMO1K
+Male,NA,Both statements are true OR neither is true.,11866,2023-07-29,1,NA,R_3NFfTL5KaIzgkr8,R_3s1g1skxZemGIHd
+Male,Yes,NA,1282,2023-07-30,NA,1,R_1cYvJigGlZW52fH,R_22XngR62FMsSHq8
+Other:,NA,One of the two statements is true.,922,2023-07-30,1,NA,R_zUsgYoddUZf6z1n,R_2mgy3N1vYA0gd3j
+Male,Yes,NA,6202,2023-07-30,NA,1,R_1GDIZdY1IV0WhVW,R_1K23AhuwN8aDnrS
+Female,NA,Both statements are true OR neither is true.,15674,2023-07-29,1,NA,R_25TrQxYBoU1SBQi,R_2dgakHINr53eb3r
+Male,NA,Both statements are true OR neither is true.,786,2023-07-30,1,NA,R_2SoVjwT2zaEyi87,R_sp6SKJB9gGK5EEV
+Male,Yes,NA,1044,2023-07-30,NA,1,R_b88nUQ6d99mmITL,R_01ZNHxRatm9JhU5
+Female,No,NA,1634,2023-07-30,NA,1,R_3ISGEBfumaXl6Cf,R_07AeeKCVuveGTRv
+Female,No,NA,193,2023-07-30,NA,1,R_2CHv4IGWjc7FvzI,R_2AKLSISE8l3nYFT
+Male,No,NA,1440,2023-07-30,NA,1,R_1msH8yDG6nPMwWh,R_22Juc4CbMbmDx20
+Male,No,NA,1831,2023-07-30,NA,1,R_Qgl4OgxYXr1eitP,R_29sQpXU4fVQ7wV7
+Male,NA,One of the two statements is true.,544,2023-07-30,1,NA,R_27QAcP5UpmOjJzy,R_7UnOibNxft80mxb
+Male,No,NA,404,2023-07-30,NA,1,R_3KI0EM31GaONE31,R_3fHmJwtVcxCtz2S
+Male,No,NA,600,2023-07-30,NA,1,R_3F4FWjEjblxj6WB,R_1GDZObZW7L75W0n
+Female,No,NA,387,2023-07-30,NA,1,R_7VZr4wMV0It03Qd,R_1NlbH76p18J5mtL
+Female,NA,Both statements are true OR neither is true.,1028,2023-07-30,1,NA,R_2PzHIcY2f0kkimy,R_27fmYimJIWUBvci
+Male,NA,One of the two statements is true.,1377,2023-07-30,1,NA,R_263HdCtAYrUMpIM,R_3Jeld03e4Qc2IQ1
+Male,Yes,NA,366,2023-07-30,NA,1,R_cGtfGwIoWXzN2Qp,R_22txoFfF3dLsEag
+Male,NA,One of the two statements is true.,815,2023-07-30,1,NA,R_1r7GMfg1uzeArV9,R_2PzgVIye0NRVKzO
+Male,NA,One of the two statements is true.,454,2023-07-30,1,NA,R_3kmMhPhhKqUuxvz,R_1LujerFglQtdZEp
+Male,Yes,NA,1280,2023-07-30,NA,1,R_2zJ67pqZANn4N11,R_338bWR66eS8oQBY
+Male,NA,One of the two statements is true.,1650,2023-07-30,1,NA,R_2SDO07bI24cVwLQ,R_6XL97uocUyhHJ5v
+Male,Yes,NA,1638,2023-07-30,NA,1,R_VIKvrK2Yg9s8nfz,R_rezJCq7Xss901AR
+Male,No,NA,2911,2023-07-30,NA,1,R_2ZJjlD57OMxy9rd,R_6WN2Qc8VY7KUluF
+Male,No,NA,1280,2023-07-30,NA,1,R_r9IzlDPnmejlRkd,R_1hzfHbbgekLAxNe
+Male,No,NA,1119,2023-07-30,NA,1,R_3MuEQjROW6kPuP6,R_tGRk9nlXXWf2byV
+Male,NA,Both statements are true OR neither is true.,716,2023-07-31,1,NA,R_3HNQSiIVoHFWp1o,R_1jHOVZm881Xh1J3
+Male,NA,NA,1958,2023-07-31,1,NA,R_2XhQU04UJ5rZcDS,R_ANZPOXeJwhENqfv
+Male,NA,Both statements are true OR neither is true.,1576,2023-07-31,1,NA,R_12FmtrQbl97px8N,R_8ek51HHTLjOE2rL
+Male,NA,Both statements are true OR neither is true.,676,2023-07-31,1,NA,R_vSMJwtg79yBPJeN,R_33BvW4bmR8TwT3H
+Male,NA,Both statements are true OR neither is true.,1079,2023-07-31,1,NA,R_scgdLv6CLlO4fcZ,R_1N2NVkeDodphxQq
+Male,NA,One of the two statements is true.,1492,2023-07-31,1,NA,R_3MMuGDv1IKnk0Kw,R_0cgrp8DwIPanpDz
+Male,NA,One of the two statements is true.,1140,2023-07-31,1,NA,R_21oXFDnxi1bQrZC,R_UECv5fKazMwnzNf
+Female,No,NA,1050,2023-07-31,NA,1,R_2s0IsQX9Z0aFv5P,R_0vae3Xy2ugsMbvj
+Male,NA,Both statements are true OR neither is true.,33265,2023-07-31,1,NA,R_2AX4jwY4c9XtgWi,R_1q1Uz9wRLHnynWZ
+Female,No,NA,865,2023-07-31,NA,1,R_1rxhrSKPHDy9qlC,R_2ab1ki6ltzGBD7h
+Male,NA,Both statements are true OR neither is true.,853,2023-07-31,1,NA,R_1CBBhpOeTF3QGlV,R_3p0g3ff4R8mOrAc
+Male,NA,Both statements are true OR neither is true.,545,2023-07-31,1,NA,R_1kMKGw3LcB4AmJq,R_2amETzqtJH2bJGL
+Female,NA,One of the two statements is true.,549,2023-07-31,1,NA,R_ewzPNFsIUwpnSs9,R_1QilMaYPwGvMdiN
+Female,NA,Both statements are true OR neither is true.,1467,2023-07-31,1,NA,R_3rG2H8Meep3WRG4,R_3oAtRmjqEMJdZYO
+Male,NA,Both statements are true OR neither is true.,1217,2023-07-31,1,NA,R_3HIDGXKBEWpnIl7,R_1DD6gzAgcmZL2aa
+Male,No,NA,1170,2023-07-31,NA,1,R_2S2ZQsvcJl2A8Fd,R_1Gv7lIGa2pcSjOS
+Male,NA,Both statements are true OR neither is true.,1371,2023-07-31,1,NA,R_psmaafpoCqxScnv,R_3iPEwsBau60IRG1
+Female,No,NA,1218,2023-07-31,NA,1,R_2ylRHjkUEM5oWWm,R_1pXKSnQEn6xelW6
+Male,No,NA,4700,2023-07-31,NA,1,R_29fUu8l6ubRZoGa,R_3jd3KcoXWguitm6
+Male,NA,Both statements are true OR neither is true.,1202,2023-07-31,1,NA,R_1k0P0gEA3qvnFRC,R_2pSQtKdvyQG3ZSU
+Male,No,NA,424559,2023-07-26,NA,1,R_1guoSUyD49DY9LZ,R_3IbOQ0plcAFXpqy
+Male,NA,One of the two statements is true.,1102,2023-07-31,1,NA,R_3me1XkQVp8aL8tW,R_2tKmYpTuQvGIMEJ
+Female,NA,One of the two statements is true.,591,2023-07-31,1,NA,R_2uPN7aljVpCax9E,R_2wLTHrne7Ts30yx
+Male,NA,Both statements are true OR neither is true.,800,2023-07-31,1,NA,R_1IxQ2nESyEfJNhA,R_Q0xHsWIotG0oHYd
+Male,No,NA,1455058,2023-07-14,NA,1,R_2ckACFr6ZZ1pXyD,R_eeq3eOJXohIlPtT
+Male,NA,Both statements are true OR neither is true.,650,2023-07-31,1,NA,R_AyOzlc0KbudqbGF,R_2qsdTaKLMgqGW6R
+Female,NA,One of the two statements is true.,860,2023-07-31,1,NA,R_21pkNxX6vrRlj7W,R_3RfPN0Ij2JUkhRf
+Male,NA,One of the two statements is true.,873,2023-07-31,1,NA,R_ptJ4uUUGJrU29Fv,R_s4JGwGzjsk4I2Yh
+Male,NA,Both statements are true OR neither is true.,1062,2023-07-31,1,NA,R_2Vg1ZXLpaSyN8MI,R_3PpLObsylM4yQUS
+Male,No,NA,626358,2023-07-24,NA,1,R_1Ns2ut4BUOvVkab,R_31N55hrgjFmInSM
+Male,NA,One of the two statements is true.,16606,2023-07-31,1,NA,R_3NQHUSsEcIM4kmP,R_3koFyh0445wgLp9
+Female,NA,Both statements are true OR neither is true.,1268,2023-08-01,1,NA,R_1F8OkhOvaYfQ8QY,R_XB3S5PcnwvpBv8d
+Male,NA,One of the two statements is true.,81388,2023-07-31,1,NA,R_1JUAIcJMBzHmOJS,R_PBqzPgNhc2I8diN
+Female,NA,One of the two statements is true.,69844,2023-07-31,1,NA,R_rfJXbAnVZE1mLUl,R_1MKjzUXWb82UKk3
+Female,Yes,NA,2415,2023-08-01,NA,1,R_eA0ehPKn7gdfu5X,R_2wQQKhrWHBqoPcN
+Male,No,NA,470,2023-08-01,NA,1,R_3L2dtSvirsYrAIG,R_2UgVQ2uvWvSsmXD
+Female,No,NA,656,2023-08-01,NA,1,R_1KyhKMtrFLBC2o4,R_20Z0sO89cCgnD72
+Male,Yes,NA,491,2023-08-01,NA,1,R_29iVPbZFUq7oybl,R_2Wxpirle7k2tM1A
+Male,NA,One of the two statements is true.,565,2023-08-01,1,NA,R_1FnuX2GSs1bVf4q,R_3htkVgBA7rd8MVJ
+Male,No,NA,1115,2023-08-01,NA,1,R_1JCHa4SRac2zqd0,R_2qdxqwite0Ztxj8
+Female,Yes,NA,375,2023-08-01,NA,1,R_NVHYif4bGN1IICd,R_3HM4gJFqv0G5OxV
+Male,Yes,NA,986,2023-08-01,NA,1,R_2CqQ91frlm4uK0L,R_6xIulXYl0sDtZBf
+Female,No,NA,833,2023-08-01,NA,1,R_PB4zoymVkpi8S9X,R_1BmQc9wzGEviCTT
+Female,NA,One of the two statements is true.,457,2023-08-01,1,NA,R_ex1CBxrXxmRBAs1,R_eCGEghfg739GUBb
+Male,No,NA,877,2023-08-01,NA,1,R_56kRrM68C49EAYp,R_AFEg5kqINA3dTBD
+Male,NA,Both statements are true OR neither is true.,2144,2023-08-01,1,NA,R_3G2MrjdYIcVGR5Y,R_3PG1Qc2TFVErjj9
+Female,No,NA,2287,2023-08-01,NA,1,R_2AXuzumMFL0MzoJ,R_3O8PWJgOJF8QIqi
+Female,NA,One of the two statements is true.,371,2023-08-01,1,NA,R_1hWEzZUnmLDc7U0,R_2t5OomYJvB0fXWf
+Female,No,NA,581,2023-08-01,NA,1,R_32JAzTgqYdshOJz,R_3QJiX4q8Vk5j9gT
+Male,NA,One of the two statements is true.,757274,2023-07-24,1,NA,R_sFLYDro7B4G5ypP,R_2uwFy2Gau2s3bxl
+Male,Yes,NA,76723,2023-07-31,NA,1,R_2tyafWUjKb7c2Yg,R_2rNI84tfnFPoyhH
+Male,NA,One of the two statements is true.,560,2023-08-01,1,NA,R_1hzfSzfKBd9XZvv,R_1P1Pf5s3q2lyunB
+Female,Yes,NA,292,2023-08-01,NA,1,R_12lpM239ZlqhtVN,R_2uCH1oPmQGN27oo
+Female,No,NA,1127,2023-08-01,NA,1,R_3ptB5eLcuBWsWih,R_3hmr4e5NSfyriQ8
+Male,NA,Both statements are true OR neither is true.,25053,2023-08-01,1,NA,R_1FfZnRDlGmwSSht,R_xrN63inoWef1hrb
+Female,NA,Both statements are true OR neither is true.,492,2023-08-02,1,NA,R_2QWlr0duarTRXC6,R_Rl62i3NvAQufRCh
+Female,No,NA,339947,2023-07-29,NA,1,R_270SjMzgiGnzoEb,R_DpCWlfYCKxxxBv3
+Female,Yes,NA,798,2023-08-02,NA,1,R_2U5fpu0cbPgNT2N,R_6Vj2VMOG0Tp0SZP
+Male,NA,Both statements are true OR neither is true.,1233,2023-08-02,1,NA,R_9AIVjUp1afEEiAx,R_26fIfuc3H8RmfSN
+Male,NA,Both statements are true OR neither is true.,925,2023-08-02,1,NA,R_26o26GkXZgJGV8r,R_1AYpMISPuzzFYkN
+Male,NA,Both statements are true OR neither is true.,702,2023-08-02,1,NA,R_1CCkv8xgK6SMa0t,R_1Cp7YfvpPtR80ui
+Male,NA,Both statements are true OR neither is true.,808,2023-08-02,1,NA,R_1Ov67ejShexOdDK,R_SMNjG0O2iO0N5nz
+Female,Yes,NA,629,2023-08-02,NA,1,R_2EhrVDsmIN24YBL,R_322Q1qOzOUBtyJf
+Male,NA,Both statements are true OR neither is true.,678,2023-08-02,1,NA,R_3q99fKyYXSGsz4B,R_pPE2kqjkd6rlOdb
+Female,Yes,NA,502,2023-08-02,NA,1,R_32X771y2T7bQaVn,R_27VDooUtmZ3r7uM
+Male,No,NA,1745,2023-08-02,NA,1,R_2VPBHxsJwJe4xwh,R_3O1zmBN6685MQtX
+Female,NA,Both statements are true OR neither is true.,1070,2023-08-02,1,NA,R_2BznQ0upRF3IIn9,R_2A0AcN3kbXCKcmF
+Female,No,NA,3203,2023-08-02,NA,1,R_2Si6FcADGEO8ySL,R_2nP1PZv0kFaxzPz
+Female,Yes,NA,3074,2023-08-02,NA,1,R_UZ5ahraVjBovncl,R_XvP1drZNxSgvQM9
+Female,No,NA,1003,2023-08-02,NA,1,R_3fcuhl77izQhnrz,R_2zewRh4QeL4oHbs
+Female,Yes,NA,418,2023-08-02,NA,1,R_RwSTV5t2TAWc63L,R_1r0y4kLUScYmH9s
+Female,No,NA,4316,2023-08-02,NA,1,R_2rJdQZn3gWQ6RAp,R_2ZW7wrifYdZTEcH
+Male,NA,Both statements are true OR neither is true.,2265,2023-08-02,1,NA,R_1CrL4AHB4QrsrK9,R_1dm02HNZvA9X9ja
+Male,NA,Both statements are true OR neither is true.,860,2023-08-02,1,NA,R_5uM4EOFEqz03lpn,R_12Q25glANYWyuzv
+Female,No,NA,2105,2023-08-02,NA,1,R_beYmt8vZy8CeqK5,R_1mOUbO5CJnGASvu
+Male,NA,Both statements are true OR neither is true.,159837,2023-07-31,1,NA,R_UuVD3im9w0U2zBf,R_21H6Jl1nsclHKi2
+Female,No,NA,6516,2023-08-02,NA,1,R_vTTAFGcJptYd1gB,R_OPuIh3mfPnH3AsN
+Male,No,NA,335,2023-08-02,NA,1,R_1JPY5yyUgalwgMu,R_3lLWHgnGhOV3Jhv
+Female,NA,One of the two statements is true.,664,2023-08-02,1,NA,R_3eqvUl4YBpBzljz,R_1kIhx20gH4z8qaa
+Male,No,NA,1027,2023-08-02,NA,1,R_3RfQazMnLVIqR7S,R_qWtgngjSLyxP8Pf
+Female,NA,One of the two statements is true.,1279,2023-08-02,1,NA,R_3qau3refKD1MmOA,R_1g1PFrWnpOyR9iH
+Female,NA,Both statements are true OR neither is true.,1620,2023-08-02,1,NA,R_1K0GT9NZKmz2aay,R_1N2LbQvY0Xy6BQo
+Male,NA,Both statements are true OR neither is true.,1099,2023-08-02,1,NA,R_28GMpClcb0ENcGQ,R_3HzF6QPtehcUB8S
+Female,No,NA,761,2023-08-02,NA,1,R_1oBxqQ2BSI3vsCl,R_1mypwwCQgR5Lk4q
+Female,Yes,NA,747,2023-08-02,NA,1,R_2axJu7E7a0alRNX,R_1Hk19xAvErwh79b
+Male,NA,One of the two statements is true.,517,2023-08-02,1,NA,R_ewAW3U2EbGCM2JP,R_UJQNdUSki2J0yNb
+Female,NA,NA,512,2023-08-02,NA,1,R_1DAQosfWtZkiR3f,R_3Kx6QbKqycLBVe6
+Male,No,NA,4151,2023-08-02,NA,1,R_12r65NP0dRKpVF0,R_2ALoMxtaCpKCoFY
+Male,No,NA,784,2023-08-02,NA,1,R_2dKgCKQWzlzcYPe,R_1P4PmEGn0cBvNSV
+Male,NA,Both statements are true OR neither is true.,7354,2023-08-02,1,NA,R_rewFdwYkb7NVE2Z,R_3lS7TQ4BZ39p8Hy
+Female,No,NA,365,2023-08-02,NA,1,R_2916l6uof62NSGE,R_30k59PtCNZ6CvcA
+Male,Yes,NA,368,2023-08-02,NA,1,R_Z34DDy2qAxEEHQt,R_2XnvIMHe7R1dw68
+Male,NA,Both statements are true OR neither is true.,1279,2023-08-02,1,NA,R_aVJeWjCEalyhEid,R_2ea7xs7HCeinESd
+Male,NA,One of the two statements is true.,1484,2023-08-02,1,NA,R_6ETUliYn4kL9Pt7,R_1LTFqHiUvMETGAS
+Male,NA,One of the two statements is true.,350,2023-08-02,1,NA,R_1rHV3dPg6VTJayN,R_1jPcrDz2TuTA1K1
+Male,NA,Both statements are true OR neither is true.,399,2023-08-02,1,NA,R_22yNajHeTxULLet,R_2TzMa1kmF9vzxc5
+Male,Yes,NA,321,2023-08-02,NA,1,R_xE3gDotMu3PopLH,R_3KQ7gtdvpsSjGQ8
+Female,NA,Both statements are true OR neither is true.,181,2023-08-02,1,NA,R_3psXDiyA7sJEjB4,R_1jvMxzfnx6bZqMt
+Male,NA,One of the two statements is true.,1573,2023-08-02,1,NA,R_3JDVHx6vUgnNlh2,R_1DqFq1lNI2105IQ
+Male,NA,Both statements are true OR neither is true.,386,2023-08-02,1,NA,R_2dLny3uDWTPANXa,R_3HkmM6oiO5ERO8i
+Male,Yes,NA,223,2023-08-02,NA,1,R_3OfsqkKXMZkJZgn,R_3LbVtTnCsgKT3Rk
+Male,NA,Both statements are true OR neither is true.,9751,2023-08-02,1,NA,R_33CofjDfy2LifUy,R_11gqWwAmEeb6l0a
+Male,No,NA,286,2023-08-02,NA,1,R_sUtpvxOAaCe6MX7,R_3fTelPoMhdbDqsg
+Female,Yes,NA,280,2023-08-02,NA,1,R_2b1zmiV1ASGfEju,R_R9vO2szQAG9ZPCp
+Female,Yes,NA,270,2023-08-02,NA,1,R_pH22iGvzi5izBLz,R_1kMrtEJGaGUwWgi
+Female,No,NA,27191,2023-08-02,NA,1,R_ezGQKf79IbSGr7P,R_21AkTHE39D0WJDH
+Male,Yes,NA,668,2023-08-02,NA,1,R_1GTxQBfPFovMJdJ,R_11cNpltDzVeiXgR
+Male,NA,Both statements are true OR neither is true.,261,2023-08-02,1,NA,R_25u6xsRtTT22zog,R_31aPNBcUpQMsRzq
+Male,No,NA,1236,2023-08-02,NA,1,R_2uajj8BIW2MzlFn,R_2diP1n7jer84OhU
+Male,NA,One of the two statements is true.,543,2023-08-03,1,NA,R_29lYhiACeA1lydh,R_R9WhgwcUKDE92eZ
+Female,No,NA,219,2023-08-03,NA,1,R_1ltPbFpyem48pxl,R_xbwW04yriqglTHz
+Male,NA,NA,181,2023-08-03,1,NA,R_2ATgDBCc4R1Hk2G,R_24NxP8xp6EL68FU
+Male,No,NA,878,2023-08-03,NA,1,R_2fy6vJzskL7lWTK,R_27IF7ZfdiqvgW66
+Male,NA,One of the two statements is true.,75705,2023-08-02,1,NA,R_1F4D4noFB34bEmR,R_1NfVjKs4aui7P6K
+Male,No,NA,583,2023-08-03,NA,1,R_333g42okCxzqMSn,R_3nH3VxXfUXnhxol
+Male,No,NA,874,2023-08-03,NA,1,R_1K7QAmteihZfAJX,R_23TtimwED8aQnyW
+Male,Yes,NA,1242,2023-08-03,NA,1,R_1oq0RE9nFuF50oF,R_3NBPz1FeWBWgSL6
+Male,NA,NA,1148,2023-08-03,1,NA,R_1IKU52rHg6PdE8U,R_1mXgUAYSsSGCHgs
+Male,NA,One of the two statements is true.,226,2023-08-03,1,NA,R_3O193zpEh1gS9iT,R_PwxRwK4EgMBWp6F
+Male,No,NA,919,2023-08-03,NA,1,R_DvnX0ioqRZDMumB,R_ClezXOgszN26cIp
+Female,NA,One of the two statements is true.,1066,2023-08-03,1,NA,R_3ksORTQCyT5LHma,R_1f7MpLgmgQsgPhq
+Male,NA,Both statements are true OR neither is true.,903,2023-08-03,1,NA,R_DSMoWSjWCxArrq1,R_27fIMz22MdD9ANE
+Male,NA,One of the two statements is true.,1121,2023-08-03,1,NA,R_2rw5PajpzKG4q0O,R_2qdw4ZDadZ6IdN1
+Male,No,NA,140532,2023-08-01,NA,1,R_1ILrP3yEJhZBtr6,R_1dEK1WXDfTgMGOn
+Male,Yes,NA,809,2023-08-03,NA,1,R_3svOyiD7yYUlz3d,R_1duX9CWyXrTHmWG
+Female,NA,One of the two statements is true.,620,2023-08-03,1,NA,R_V3VsO1qsP6L13zj,R_3JlrVwRxKlSVeCK
+Female,Yes,NA,136331,2023-08-01,NA,1,R_3CO5IMsbewLHQ74,R_2QDnNKmuPnduZaM
+Male,No,NA,416,2023-08-03,NA,1,R_3dYa27Bd4dXKkI6,R_3L1gWJvy5bsifuj
+Female,NA,Both statements are true OR neither is true.,189,2023-08-03,1,NA,R_2q4VTVUyYWRGXIt,R_27Vbpq65JjqnDaF
+Male,NA,One of the two statements is true.,10337,2023-08-03,1,NA,R_12KJUuknHwkOqJX,R_xmBCsSRfVkTyGlz
+Male,NA,One of the two statements is true.,1171,2023-08-03,1,NA,R_21gh7l6HNbqki96,R_1dyKG9te9LQr0I9
+Male,No,NA,1134,2023-08-03,NA,1,R_1ovYfd9RnXi6wZW,R_3MQE1O53TGJXqFa
+Male,NA,Both statements are true OR neither is true.,543,2023-08-03,1,NA,R_VOkEAzI93xnq4jn,R_3NWHAawkFOi4hhU
+Male,Yes,NA,445,2023-08-03,NA,1,R_r0vVuEwGbJmqO09,R_XOg3rE52ilUxdcd
+Female,NA,One of the two statements is true.,531,2023-08-03,1,NA,R_1n1lzTO659iwAHL,R_vGNTiaWqReEoEHT
+Male,NA,Both statements are true OR neither is true.,332,2023-08-03,1,NA,R_6EREBuRERvo2IZX,R_1OCfOLPCapvFOc3
+Male,No,NA,544,2023-08-03,NA,1,R_28CyxYH7XRT6O4I,R_2wKxN8wAOphVHEH
+Male,No,NA,361,2023-08-03,NA,1,R_3ffSRhMtySVe61m,R_3Jx8tsCMq9kaR0Q
+Male,NA,Both statements are true OR neither is true.,1188,2023-08-03,1,NA,R_11X8EIPXVFXyJGf,R_3rSA1Qrcnm5TjWd
+Female,NA,Both statements are true OR neither is true.,518,2023-08-03,1,NA,R_2OUAZ5emNprhF89,R_OASIiTna6BuTMrL
+Female,No,NA,3355,2023-08-03,NA,1,R_3QLiHZ6jimmPBRf,R_1Hdc7L3bl0EgzC1
+Female,No,NA,1124,2023-08-03,NA,1,R_qI5EidZ63auXqaB,R_27rFssLdCvJLl20
+Female,Yes,NA,103585,2023-08-02,NA,1,R_1hGwHSfaQI8r0mD,R_2WHmNq19QBqRZrz
+Male,NA,Both statements are true OR neither is true.,1469,2023-08-03,1,NA,R_w5hFGCw04W4cUsV,R_3QLcktKutCbodDO
+Female,No,NA,234,2023-08-04,NA,1,R_71YClQajUdwTKj7,R_2TBh1Iu0h1cyvur
+Male,Yes,NA,738,2023-08-04,NA,1,R_3L83iijlkMd8BdP,R_1N4YEQeENEpt6Es
+Male,NA,NA,180,2023-08-04,1,NA,R_2tWfMj6kKALdzmp,R_3J97smpmTg0verN
+Male,NA,One of the two statements is true.,1859,2023-08-04,1,NA,R_3IXogaFWoMp2ey1,R_XMKbMdIguGL6N33
+Female,No,NA,468,2023-08-04,NA,1,R_YQAuAjMyfKlUpeF,R_C4E3DPiNAqCTLR7
+Male,NA,One of the two statements is true.,2628,2023-08-04,1,NA,R_1JORrT7UHFG2HUK,R_1CekX4j70QNqyWx
+Male,No,NA,567,2023-08-04,NA,1,R_1JCussfl5VdPRna,R_1pzZOpD59ZOiw07
+Female,NA,One of the two statements is true.,843,2023-08-04,1,NA,R_1ooOL4S3qKbd1iu,R_23f528rGhTgpBiP
+Male,NA,NA,1633,2023-08-04,1,NA,R_tGycP5ikA6X9PJD,R_zdO0F8PpbJL4Lm1
+Female,No,NA,513,2023-08-04,NA,1,R_cA90VQgTj8PI2CR,R_1H7Vrm8McgELX3C
+Male,Yes,NA,727,2023-08-04,NA,1,R_3lLkhQrOXNBI1w4,R_2SvlYZZD1Yd1YvN
+Male,NA,One of the two statements is true.,370,2023-08-04,1,NA,R_3jeX0BASKkMdVau,R_2dEVSTJnFk5JDDi
+Male,NA,Both statements are true OR neither is true.,5513,2023-08-04,1,NA,R_1Ow2ySQAjmWAaAO,R_4UuvNLvoT0SQNSF
+Male,No,NA,262,2023-08-04,NA,1,R_1dKBvthhiEffBaq,R_3r3enO4hsMR0YDC
+Male,NA,One of the two statements is true.,924,2023-08-04,1,NA,R_29p2JT6OjRORvYU,R_271D9waTzBiqLhi
+Male,No,NA,546,2023-08-04,NA,1,R_3ke8h3Uih7fbWhN,R_2Crp53gJSzBgvQ6
+Male,No,NA,1011,2023-08-04,NA,1,R_DwPt7c8SZ2HTl0R,R_eV5gOjFv4aaHX0d
+Male,No,NA,180757,2023-08-02,NA,1,R_3kj3r3KtyfVS81I,R_BSBzhVEMqb4AQqB
+Female,No,NA,12184,2023-08-04,NA,1,R_12LtpHxatIQcgJe,R_3Igo9Yw57NbH4Nr
+Male,NA,Both statements are true OR neither is true.,655,2023-08-04,1,NA,R_1DuKxdDTFYplVMo,R_2cnZa2VhF2pfSFz
+Female,NA,One of the two statements is true.,6468,2023-08-04,1,NA,R_w0Q8rZAmiHX9Xt7,R_1dug9aEoAvdlEND
+Male,No,NA,555,2023-08-04,NA,1,R_x2QEBGKKYaPenYt,R_2upJ9LC0Wye2633
+Male,NA,One of the two statements is true.,1332,2023-08-04,1,NA,R_XAn44qAgIStp4lj,R_2scL8INuNMIiPRK
+Male,Yes,NA,648,2023-08-04,NA,1,R_4TIbgd3U25CZLuF,R_vrc6pL7H1vJCuLD
+Female,NA,NA,703,2023-08-04,NA,1,R_3LiFIGw6ApZI5Zm,R_2QWjJ8XulOygmKY
+Female,Yes,NA,826,2023-08-04,NA,1,R_1FOJOmq7ywo1MJ0,R_3VgZzpo4rApFyTv
+Male,NA,Both statements are true OR neither is true.,635,2023-08-04,1,NA,R_2rGtU5iWpRzBFEH,R_1pnUoHmI8nm8UZM
+Male,No,NA,496,2023-08-04,NA,1,R_2TZzhOOKY7xN7zX,R_1dMOU0nMVDa8gIZ
+Female,No,NA,802,2023-08-04,NA,1,R_3lW8yIbET0m6EEV,R_3CUw1inxB867XNy
+Male,No,NA,180,2023-08-04,NA,1,R_2Bg65e2HvFWq0fh,R_1QsgoC8Rnw5OVIL
+Male,No,NA,422,2023-08-04,NA,1,R_1eWBOFocPDMXcuT,R_To4FynNPV2eH1Hb
+Female,NA,One of the two statements is true.,2913,2023-08-04,1,NA,R_VVBX4XGuP06mmfn,R_3ND5TNErL9oUVHy
+Male,NA,One of the two statements is true.,653,2023-08-04,1,NA,R_9tcraULa6WbZaCt,R_bJWxldsyVDBlqxj
+Male,NA,One of the two statements is true.,199,2023-08-05,1,NA,R_2TQMqySEuetSizG,R_wNscCfzmoZWYwZr
+Male,No,NA,670,2023-08-05,NA,1,R_2SIbZvQeNTbxwiy,R_eJY0MgIit7GwUDL
+Male,NA,NA,348,2023-08-05,1,NA,R_TpUQaEu9R2HtGLL,R_3iEm3DXWRFfD1MD
+Female,No,NA,656,2023-08-05,NA,1,R_3EZugLRMrHSx8lM,R_3J5dHRNlu1l942m
+Female,NA,One of the two statements is true.,577,2023-08-05,1,NA,R_2gwSaCD97p4BGeZ,R_1OUHqBdR48St1m8
+Male,No,NA,188,2023-08-05,NA,1,R_2dmtmhoGyBLx92G,R_1mXl3f9oyL5ZTnA
+Female,Yes,NA,617,2023-08-05,NA,1,R_2qsbKawHr6Kq7af,R_21yutx5qp707m21
+Male,NA,One of the two statements is true.,746,2023-08-05,1,NA,R_1OSTAAEBxsm9P4Q,R_ZvOmuCeLj3DVXRT
+Male,NA,Both statements are true OR neither is true.,626,2023-08-05,1,NA,R_2SIX0vGz9eFIMaC,R_30i5M6OqfCgcov8
+Male,No,NA,12325,2023-08-04,NA,1,R_1QLCGWlZM8jsOyp,R_2CxrOZT3zYYVH39
+Male,NA,One of the two statements is true.,972,2023-08-05,1,NA,R_3kAF76Iqk8iix8Y,R_82MfQmzxQbgD6iB
+Female,Yes,NA,6342,2023-08-05,NA,1,R_1EbN1pUcDydKUtT,R_3iW5kztNi3iXp5x
+Male,NA,Both statements are true OR neither is true.,727,2023-08-05,1,NA,R_28NgkKMJql4cdEQ,R_2Swb7ez5yl1WM6p
+Male,NA,Both statements are true OR neither is true.,819,2023-08-05,1,NA,R_3sv2dxTcw3PpFES,R_US0xueqT5KbHXlD
+Male,NA,NA,440,2023-08-05,1,NA,R_WkAh2LjPeIjiBnX,R_27PbpCxdfYwqHXf
+Female,NA,Both statements are true OR neither is true.,511,2023-08-05,1,NA,R_RxFdWsbTsElDCyl,R_1BPNv4EcIH6hsA3
+Male,Yes,NA,945,2023-08-05,NA,1,R_usTWbljRM6w1r5D,R_3ET2S3VgD3Rgdok
+Female,NA,Both statements are true OR neither is true.,354,2023-08-05,1,NA,R_3HzSPvh9qEHEuFv,R_2A0c98ISbV5Ks6u
+Female,NA,Both statements are true OR neither is true.,272,2023-08-05,1,NA,R_2Brf1QZZPYIGDSS,R_2QSz8RmPKlBjxDO
+Male,Yes,NA,211,2023-08-05,NA,1,R_295P3Tm4zPt2qnK,R_3Rxzgi7kT6x8JZL
+Male,NA,One of the two statements is true.,323,2023-08-05,1,NA,R_30uTazFMyNJmfkM,R_W0wBv5ZR02x8sZX
+Male,Yes,NA,624,2023-08-05,NA,1,R_SOul3xNW5Rj7TRT,R_tX4MZwnztiijHfH
+Male,NA,Both statements are true OR neither is true.,1713,2023-08-05,1,NA,R_qLBEYiP0YohqF2x,R_2wjHTY9nZ3hp61V
+Male,NA,Both statements are true OR neither is true.,201,2023-08-05,1,NA,R_2D60lpdGsp4W4AE,R_6u7KRyq8JugEpk5
+Female,Yes,NA,7981,2023-08-05,NA,1,R_2TAAF25z7YlnfVn,R_Pw9NJNaXYyjvm2R
+Female,No,NA,238457,2023-08-02,NA,1,R_1MYi5C2Z200VZy9,R_vTUgbxmYL4ndvIl
+Male,NA,One of the two statements is true.,433,2023-08-05,1,NA,R_3OdZev7i5S462TZ,R_pxQyPkQHsdPcHBL
+Male,NA,One of the two statements is true.,486,2023-08-05,1,NA,R_QbHRjduQAdZuNLr,R_3Or9Zzqh43OSRoZ
+Male,No,NA,700,2023-08-05,NA,1,R_1roh5Wknt0Do8Ls,R_22QW2QSYBay5Fu5
+Male,Yes,NA,1179,2023-08-05,NA,1,R_AbKHcBXFd3vNvC9,R_5pCRoXstEW7hEMp
+Male,NA,Both statements are true OR neither is true.,225,2023-08-05,1,NA,R_1BVCZv9NNkGIzPZ,R_tDPghjaqq17EpTX
+Female,NA,Both statements are true OR neither is true.,311,2023-08-05,1,NA,R_tYVO121S4pkLXZD,R_3Rf3MVf3gk4OMRr
+Female,NA,One of the two statements is true.,876,2023-08-05,1,NA,R_1n3FuvEldbSI2Dz,R_2UYO5FryvcPvgz5
+Male,NA,Both statements are true OR neither is true.,412,2023-08-05,1,NA,R_2DOA94XqEI9OnvI,R_2CCepnhDSVZ4BCx
+Male,NA,One of the two statements is true.,405,2023-08-05,1,NA,R_RaYRjLISsVtljBT,R_1OrXHWVWt5HIJYI
+Female,NA,NA,5030,2023-08-05,1,NA,R_XFhvT6bBpH8ic8h,R_W3yR0AHp6Zx83WV
+Male,NA,Both statements are true OR neither is true.,1640,2023-08-05,1,NA,R_2sZxf2718SGjMg9,R_2QxOtEAVUTXCLbt
+Male,NA,NA,168,2023-08-05,NA,1,R_248XHQVWilfeGSI,R_1lo7ut3SNsuj90Z
+Male,NA,One of the two statements is true.,670,2023-08-05,1,NA,R_3NNZQDIIiU8Qcpt,R_V3apU7pUV7BqSs1
+Female,NA,Both statements are true OR neither is true.,364,2023-08-05,1,NA,R_2WBS9fteCwtgJ8T,R_yyAo2ppDtacEo0x
+Female,No,NA,238,2023-08-05,NA,1,R_3L5b6qUC3qWlmKy,R_2AKLTKFEQFTX0qN
+Male,No,NA,524,2023-08-05,NA,1,R_1DopVywClnFIPkc,R_8oZRTXhg9oL7d1n
+Female,No,NA,477,2023-08-05,NA,1,R_1nTGTqOh8meVBAZ,R_29h4a8RRUnnJCVx
+Female,NA,Both statements are true OR neither is true.,706,2023-08-05,1,NA,R_3PB6dwNlM4SxclK,R_1Ka4aJtEoLmOcKB
+Female,NA,One of the two statements is true.,781,2023-08-05,1,NA,R_3m8crYo0eKdKBGd,R_3oGVHzgi6J8XsGs
+Female,No,NA,726,2023-08-05,NA,1,R_3QGJHltMJOaNdkQ,R_3ltwCwTMSLjJbGJ
+Female,No,NA,669,2023-08-05,NA,1,R_24CS3eDgdIqe2SQ,R_20MSjmlRRVBeHzS
+Female,NA,One of the two statements is true.,643,2023-08-05,1,NA,R_2zr8otsVUMMc1uh,R_1I78DaPmo4eQLBg
+Male,No,NA,440,2023-08-05,NA,1,R_OjTwU4A48U5SfHX,R_bw8HXvPtEhuIbD3
+Male,NA,One of the two statements is true.,276,2023-08-06,1,NA,R_3EcMNXzTwgBXaMs,R_pzMQDFCeDEImlP3
+Male,NA,One of the two statements is true.,1072,2023-08-06,1,NA,R_2asCYnHlqXcDyle,R_1iri91bMoz3N2yL
+Female,No,NA,448,2023-08-06,NA,1,R_2cAu3mTZuyxj1d7,R_1osVx4YUOAgIceJ
+Male,Yes,NA,6947,2023-08-05,NA,1,R_3MuPIckCYftbyJg,R_1kTDim3iYhPMkxM
+Male,NA,One of the two statements is true.,270,2023-08-06,1,NA,R_1IBf30DVUS1WUjF,R_pGbaiVS2kFvhoo9
+Female,NA,Both statements are true OR neither is true.,907,2023-08-06,1,NA,R_1d046Aqv7YxRt4n,R_1g1NRrnnbuOWjHt
+Female,NA,One of the two statements is true.,982962,2023-07-25,1,NA,R_vrwvauNLDJQSQet,R_3mgTxmcYPnyJ6QN
+Male,No,NA,1602,2023-08-06,NA,1,R_3saGiyBLWDctdPc,R_BM0HlCpNHXQwr85
+Female,NA,Both statements are true OR neither is true.,772,2023-08-06,1,NA,R_2PjsKfN77mVKD3o,R_51q2Ail8PXxnFlf
+Male,NA,Both statements are true OR neither is true.,709,2023-08-06,1,NA,R_2A0EGZ2zXAlehPz,R_1kYo4Q7oFkmubfo
+Male,NA,One of the two statements is true.,2113,2023-08-06,1,NA,R_74odB8fMmsFHD2N,R_1EWjNSrHxLgO2cV
+Male,NA,Both statements are true OR neither is true.,1050,2023-08-06,1,NA,R_83bp68WNBdqZpWV,R_2pMM0OLsS25kGHs
+Female,No,NA,494,2023-08-06,NA,1,R_3PLBJCEN2HYy40y,R_8hPn2pIqsMTHSmZ
+Male,Yes,NA,848,2023-08-06,NA,1,R_OHm0VX2OJx3Qs1z,R_3Oc3FYtM0WArtRo
+Male,NA,One of the two statements is true.,936,2023-08-06,1,NA,R_1HqQ49kEOTgR9k1,R_w6SElQ2pQM4fjsB
+Male,No,NA,494,2023-08-06,NA,1,R_1f2XzJq16sb6qHY,R_2zTKeY5tfvaGNuA
+Male,No,NA,1289,2023-08-06,NA,1,R_3LjaJQvbzVnUznE,R_3GvrOaSutrdCBky
+Male,No,NA,34596,2023-08-06,NA,1,R_2WGMPxc4Jar1DHK,R_2Pp6RbLtMBD9Bgu
+Female,NA,One of the two statements is true.,463,2023-08-06,1,NA,R_31pwMzG35bEKgg2,R_XiYSMNtlURqXNS1
+Male,No,NA,481,2023-08-06,NA,1,R_1dNxZVu8CompRqN,R_veHMZyAjlvzpS9P
+Male,NA,Both statements are true OR neither is true.,424,2023-08-06,1,NA,R_09dI5HZYO4T3wM9,R_1rMtJ2AThVrE9uP
+Female,NA,One of the two statements is true.,715,2023-08-06,1,NA,R_31Zsg2I7uTTLSBw,R_1jOOWiR6lLohy84
+Female,No,NA,430,2023-08-06,NA,1,R_xsduansDWRVOXlv,R_4OAdXgwurk9CTRL
+Male,No,NA,745,2023-08-06,NA,1,R_OHi4XVOGotkmCZP,R_3g0DWdX2sZ9vmQS
+Male,NA,One of the two statements is true.,1377,2023-08-06,1,NA,R_1dgX8DHf85CoqSH,R_1iqwjZw7Izpxw86
+Female,No,NA,486,2023-08-06,NA,1,R_1K2nUctkrK2sdmt,R_27BQRsc7Olw9Ij7
+Male,No,NA,898,2023-08-06,NA,1,R_3luI5uBBurpJ2lE,R_3HtpJ4dy5GTPT1Z
+Male,No,NA,168,2023-08-06,NA,1,R_2s1MIEY2Hdknt0j,R_1K2YoyajhDtLgVY
+Male,Yes,NA,544,2023-08-06,NA,1,R_32OMvkpR1nHnkom,R_1mWzUVatahwBRo5
+Male,Yes,NA,932,2023-08-06,NA,1,R_1IHmlxUc2OKdEjs,R_3j0ejqqsSfKaRKo
+Male,No,NA,1011,2023-08-06,NA,1,R_3QKNoyNUZvymMLR,R_2sWNG0RXNqeqd1R
+Female,NA,One of the two statements is true.,675,2023-08-06,1,NA,R_2foFqtQXMPBFYmu,R_1FFHt58rpLEo5ra
+Male,No,NA,933,2023-08-06,NA,1,R_DBMXN415NQAKq09,R_2TZ3TIyTEbfK1Dp
+Male,Yes,NA,332,2023-08-06,NA,1,R_2q2gwbCToFthvka,R_2ZUf6sKexabYQYw
+Female,No,NA,173,2023-08-06,NA,1,R_2dn1xcZWiKS0FrY,R_3rNdDAANn6bSo0S
+Male,NA,Both statements are true OR neither is true.,563,2023-08-06,1,NA,R_1PTQiMRSh4Ns8l9,R_1K6LmmhSzdBDAte
+Female,Yes,NA,570,2023-08-06,NA,1,R_232DWvupgbthBRa,R_OCeiZmZNx3SEP4Z
+Male,Yes,NA,704,2023-08-06,NA,1,R_RKyvXqG6cgyhEhH,R_shU22waoKzwDkWZ
+Male,No,NA,1078,2023-08-06,NA,1,R_cMZSdPcKpPEipKF,R_1F39bDb5lPJtjQs
+Male,No,NA,392,2023-08-06,NA,1,R_1OpIjlid5OTTmzJ,R_2rwuJG9PSnEZWJt
+Female,NA,Both statements are true OR neither is true.,238,2023-08-06,1,NA,R_1lueNlzk67Aw2Sa,R_3QJKZgeWZ6RpPmw
+Female,No,NA,896,2023-08-06,NA,1,R_3dSRYauQnC2Q1au,R_6E7wOGkUIF6MQwN
+Male,NA,One of the two statements is true.,655,2023-08-06,1,NA,R_u7BC1z8ZSHWIG41,R_2pWydKtxlwxsIDt
+Female,Yes,NA,398,2023-08-06,NA,1,R_2WURY3e3bIN1K4q,R_1jBcJg8PQ5cnxOY
+Female,No,NA,305,2023-08-06,NA,1,R_3gZ716p41F2qzwN,R_xszskTjpsjWpu0h
+Male,NA,NA,175,2023-08-06,1,NA,R_3fHwY6m4v9PBfbl,R_1ozsfqp4o0T41bo
+Female,No,NA,391,2023-08-06,NA,1,R_30kvjZK761I7yYy,R_XLkSxyN58oGyXXX
+Male,NA,One of the two statements is true.,640,2023-08-06,1,NA,R_2zYivkacHwOIOpr,R_2ymdQO9VPlAxLk5
+Female,NA,Both statements are true OR neither is true.,842,2023-08-06,1,NA,R_1gTI5Tw5ezUQVmZ,R_00N4I7BzBeDtRxD
+Female,No,NA,891,2023-08-06,NA,1,R_2TH05m4puim5KA1,R_2pLv5ADunWbA3sh
+Male,Yes,NA,593,2023-08-06,NA,1,R_yUDAdz6Ra2tJb4R,R_3ekUwZCBldGjNVX
+Male,NA,One of the two statements is true.,219,2023-08-07,1,NA,R_uzehm9OIavj31fz,R_1KpVB9SXJCQ0KBV
+Male,Yes,NA,458,2023-08-07,NA,1,R_1LhQLPAYj8QazUW,R_V2PKOuvSTIDCKdz
+Female,NA,Both statements are true OR neither is true.,270,2023-08-07,1,NA,R_1LcfRNJINI5c8JC,R_2CJ0zaBDzHMW1g9
+Male,No,NA,1536,2023-08-07,NA,1,R_Tdd6Assc3RVfY1r,R_3KPGQcp3I7zp2UQ
+Male,No,NA,439,2023-08-07,NA,1,R_3HvFTzEm6ePIWts,R_2RPN5mtSS1LxBo7
+Female,NA,One of the two statements is true.,231,2023-08-07,1,NA,R_2eOKCbhxqm1hF11,R_1i4EZjk55k0M4PC
+Male,NA,One of the two statements is true.,505,2023-08-07,1,NA,R_ZrhpHR603oaknqp,R_3MxPDo4DDNuaiZL
+Male,Yes,NA,212,2023-08-07,NA,1,R_OBZVPJldkfzYERr,R_yWIDIBu0xhXhqZb
+Female,NA,One of the two statements is true.,517,2023-08-07,1,NA,R_3huVDULdR6IYl4b,R_2Y2GPMEMIRHaWjD
+Female,NA,One of the two statements is true.,664,2023-08-07,1,NA,R_6ze6MyicXAmVm9z,R_qyyFoWUg8JMX0ch
+Male,NA,One of the two statements is true.,266,2023-08-07,1,NA,R_6yPk9t6A6vJxt6N,R_3NE6CAv1swYLoHO
+Male,No,NA,417,2023-08-07,NA,1,R_2zx9c5JZ99cEc3c,R_10wusUqZcbq2eec
+Male,NA,Both statements are true OR neither is true.,1391,2023-08-07,1,NA,R_vJEH3iPkqyBeRr3,R_2WUuQr1x7SR1seE
+Male,No,NA,140,2023-08-07,NA,1,R_1rHSio5F6PDXCEi,R_3R7bNQOXxpSOnrH
+Male,Yes,NA,240,2023-08-07,NA,1,R_3fdxLojMCeisJ4V,R_1g5eCWdM4nGvYqa
+Male,No,NA,545,2023-08-07,NA,1,R_diN9HIKqebIsp4B,R_3L0xKQcBESfKIOi
+Male,NA,Both statements are true OR neither is true.,691,2023-08-07,1,NA,R_yW2ETrAvTxEFWWR,R_3PjKpuGQ72D0An4
+Male,No,NA,513,2023-08-07,NA,1,R_1hDYli4A4cM1yit,R_WojoqNBCuqcaG0F
+Female,NA,One of the two statements is true.,754,2023-08-07,1,NA,R_2tLskj9xukCnqi1,R_2e8TsR4qEbOt7GU
+Female,No,NA,299,2023-08-07,NA,1,R_1jIp7yptxJGWRdQ,R_3hGaAaIm9zKObGa
+Male,NA,One of the two statements is true.,181,2023-08-07,1,NA,R_uev8YKT0qjPKT3b,R_25z1xlrmyKpb3sN
+Male,No,NA,448,2023-08-07,NA,1,R_OcZQHCY1arCCuSB,R_2AF1zeeGEXXZ3sc
+Female,NA,One of the two statements is true.,541,2023-08-07,1,NA,R_1Gv5QgImQudEeTn,R_1MPRkllIERyLTRP
+Male,No,NA,550,2023-08-07,NA,1,R_2SJCTyO6ctt9YiR,R_2fuR44Qb5JCUwYc
+Male,NA,Both statements are true OR neither is true.,695,2023-08-07,1,NA,R_BYz9A1lLj935PDr,R_3MG2QJPFJ3gU7v2
+Female,No,NA,639,2023-08-07,NA,1,R_poeUWjsjbXfnDs5,R_yC1m8sFrFA89SG5
+Male,NA,Both statements are true OR neither is true.,1431,2023-08-07,1,NA,R_1PSqFMYjMpQNoPY,R_ZIF4IYZWLW81cT7
+Female,No,NA,2398,2023-08-07,NA,1,R_UuUxeAdPpeJkalj,R_1FRLawhiymBlVrU
+Male,NA,Both statements are true OR neither is true.,243,2023-08-07,1,NA,R_2t6kCfzdBn40BLh,R_1jp98ynX3vdVfku
+Female,No,NA,428,2023-08-07,NA,1,R_2c1xNPINwg3OkVq,R_3jYEBChsaqPHogp
+Male,Yes,NA,129,2023-08-07,NA,1,R_1CDa9WQhQC1ooqV,R_2DRD3rhoWizMCnd
+Female,Yes,NA,4702,2023-08-07,NA,1,R_3EtpaOkUt9AkJPU,R_1MSqYzXWCjPRDYW
+Male,Yes,NA,617,2023-08-07,NA,1,R_Z4QpQDFFnsgaqf7,R_3rMyyaeqmAB6qci
+Female,No,NA,300,2023-08-07,NA,1,R_1Iu75z71k4Ic7PU,R_2320tLk4BJL3JB5
+Female,NA,One of the two statements is true.,256,2023-08-07,1,NA,R_02K4WZaxYhh6TPb,R_SNLikUQXx9bJwBz
+Female,NA,One of the two statements is true.,213,2023-08-07,1,NA,R_TuWscfFouiFHSxP,R_2WtXfbNP5Cin0k8
+Male,No,NA,2951,2023-08-07,NA,1,R_2z6JJoWfBklXfbl,R_2rwhFfPKursLACA
+Male,No,NA,957,2023-08-07,NA,1,R_3L0Vncbi1OG6YVP,R_28N8nja96ZAfCRd
+Male,NA,One of the two statements is true.,287,2023-08-07,1,NA,R_DTran9A7aXYJmhj,R_1lzamLrk97HlnJG
+Male,NA,One of the two statements is true.,643,2023-08-07,1,NA,R_3QKuCpWT4xeaAo8,R_vD353i0ObYEMufD
+Male,No,NA,181,2023-08-07,NA,1,R_234e0rVMTuo4Xr6,R_OALyxTcaSbJ4CcN
+Male,NA,Both statements are true OR neither is true.,19574,2023-08-07,1,NA,R_e2nBadpYc2787ip,R_1jJLIBCClbhaiiR
+Female,No,NA,2119,2023-08-07,NA,1,R_3nSnlv052VZqB4K,R_2Bs1wibXDiFaj3r
+Male,No,NA,203,2023-08-07,NA,1,R_3IWTGFvwuxt6uQe,R_1Hq1I3QOkyImVN0
+Male,NA,NA,234,2023-08-07,1,NA,R_1ItjDLZHcdB6kPX,R_R4wD4Zj50H7gEfL
+Female,NA,Both statements are true OR neither is true.,296,2023-08-07,1,NA,R_2fed35fvsQ1aAj3,R_1Nntw8MomD8uA6R
+Female,NA,Both statements are true OR neither is true.,679,2023-08-07,1,NA,R_r9chwMEmuDAbe37,R_21dldKsP3oYEayb
+Male,NA,One of the two statements is true.,806,2023-08-07,1,NA,R_3KVfGYQsNUvAvdq,R_1f30JCSge0SUs4z
+Female,No,NA,356,2023-08-07,NA,1,R_1d1fvYaZVTapgW2,R_1nTvpm3sLPYeFLC
+Male,NA,Both statements are true OR neither is true.,273,2023-08-07,1,NA,R_RKyk6oH0eXjZ14t,R_2alYrP8mBV6APNc
+Male,Yes,NA,46483,2023-08-07,NA,1,R_3PtdrTNh04tMW7Q,R_6EyAM5eNzubobN7
+Male,NA,Both statements are true OR neither is true.,457,2023-08-07,1,NA,R_shQSNNnqbNXzJn3,R_2CrDFfSm1mHMkTv
+Female,Yes,NA,656,2023-08-07,NA,1,R_2rNiQ0BbsXZKRXl,R_1lnUmkBy2RHDLBS
+Male,NA,Both statements are true OR neither is true.,241,2023-08-07,1,NA,R_2X1M1l3QCwTOYXG,R_295ha5z249tDx55
+Male,NA,Both statements are true OR neither is true.,225,2023-08-07,1,NA,R_3Jq2TWjDW6pJZlw,R_1gA8ciYPf142NNR
+Female,No,NA,565,2023-08-07,NA,1,R_cuR0WFrerMfoTjr,R_2SltLkF1uAokDOv
+Female,Yes,NA,165,2023-08-07,NA,1,R_2rVCJUN1pSgsIjn,R_1LOjieXTyEeYhiQ
+Female,No,NA,484,2023-08-07,NA,1,R_1d1gLcZjhUfdff9,R_2e5ApQ6SQNScJz0
+Male,NA,One of the two statements is true.,1447,2023-08-07,1,NA,R_2rOumwP96KYfgVl,R_11grhNz8zLMc8cH
+Male,NA,Both statements are true OR neither is true.,2680,2023-08-07,1,NA,R_1E6hlLt2B4gOXmi,R_1nZSC9FfQ2USW0C
+Female,NA,Both statements are true OR neither is true.,22053,2023-08-07,1,NA,R_1LbU9IyqXYTMziM,R_sNMmdRCB2SjQhuF
+Female,No,NA,234,2023-08-07,NA,1,R_2SJNBfryLBpaq6Z,R_2QEtqLEHkl9q3sm
+Female,NA,NA,252029,2023-08-04,1,NA,R_3068LOy6QNf3GRH,R_1gCtauyA14vwjXz
+Male,NA,Both statements are true OR neither is true.,980,2023-08-07,1,NA,R_33roZig70esgoMD,R_1BPjqJw4NQlrtl2
+Male,Yes,NA,1836,2023-08-07,NA,1,R_27m4ETrgfKJRcWK,R_sFD80ELIrVdKgKt
+Female,NA,Both statements are true OR neither is true.,501,2023-08-07,1,NA,R_33C4BIiYtrUa4LF,R_10o7mbAzy1Y8SjQ
+Male,No,NA,1771,2023-08-07,NA,1,R_21FfKPSYMgRCgQm,R_1IubF4wZ2rkO7V6
+Female,NA,NA,368,2023-08-07,1,NA,R_3pa3y7F8WSgoLHq,R_1GOfISDOu89VVL4
+Female,NA,NA,614,2023-08-07,NA,1,R_3fTw1xi4yTLcOOr,R_1eFV98Ki5WghcAy
+Female,No,NA,652,2023-08-07,NA,1,R_3D6IBFsbxuSkgKZ,R_p4dAizGALdFQTaF
+Male,NA,NA,173,2023-08-07,1,NA,R_21uFTk73MZ1uYat,R_2qkKGoawwR6tiuu
+Male,NA,One of the two statements is true.,177,2023-08-07,1,NA,R_Z3PEv77fbWUq0wh,R_AnaTBYCkjFFD2Df
+Male,NA,One of the two statements is true.,28209,2023-08-07,1,NA,R_3MR67pRudmORHcD,R_24jeKXfFAZKh5xL
+Female,NA,Both statements are true OR neither is true.,730,2023-08-07,1,NA,R_56eJCOWQpcHH8pX,R_2zSa6K0hZ6tvtwQ
+Female,NA,Both statements are true OR neither is true.,688,2023-08-07,1,NA,R_3GpPm4AA2cNbeyR,R_1qeuJXcv73lsRSo
+Female,NA,Both statements are true OR neither is true.,326,2023-08-07,1,NA,R_339XsPbM1XFEEWp,R_1f2ThrbunlCxGXf
+Male,No,NA,384,2023-08-07,NA,1,R_O1GNpu5toNoNm7v,R_1CHEi5vqvxz0izp
+Female,Yes,NA,442,2023-08-07,NA,1,R_Ua5HXKahOt1dxkt,R_2U4O1IufO6SVTs6
+Female,NA,Both statements are true OR neither is true.,343,2023-08-07,1,NA,R_3L4FE2tKWE0kxEj,R_1mxt6272wgCEIO9
+Male,No,NA,810,2023-08-07,NA,1,R_3JK60EG4LHEI39y,R_pH7ZZxsAGzcaveh
+Male,NA,Both statements are true OR neither is true.,428,2023-08-07,1,NA,R_2bZBmlmfw6CGeyc,R_pKkHolKfTuhdOiR
+Female,NA,One of the two statements is true.,572,2023-08-07,1,NA,R_27Dmmox4ywzbhEl,R_3QJlOEnJlH44erL
+Male,Yes,NA,471,2023-08-07,NA,1,R_25SkqVTLP0PifVb,R_1rD16ULgia4KMvM
+Male,No,NA,179,2023-08-07,NA,1,R_4VMJ0jw18GWeDPr,R_3P7ULf2om0sTocB
+Male,No,NA,629,2023-08-07,NA,1,R_Wd2m8tpI3rj4AmJ,R_2DMK99QQAiL4ETx
+Female,NA,One of the two statements is true.,426,2023-08-07,1,NA,R_3KwlDkSA6dVaOzE,R_3RraVu4WTHVjlUJ
+Male,NA,One of the two statements is true.,9625,2023-08-07,1,NA,R_1eRENFYebCVNdff,R_3PzqmT2vMbdDSPQ
+Female,NA,Both statements are true OR neither is true.,1274,2023-08-08,1,NA,R_2Y5nkHC2PDopFjD,R_W2NbaLw4Vc3oFnr
+Male,NA,Both statements are true OR neither is true.,774,2023-08-08,1,NA,R_1IvjE8PnBGnUMed,R_2RQRfp8ePyUHKSC
+Male,No,NA,859,2023-08-08,NA,1,R_1dc1rd2vs0IoUQ5,R_3jZGrApvjNe1Okb
+Male,No,NA,767,2023-08-08,NA,1,R_2qgy32GFHUY5uHP,R_1o6HZwqTyiy6S0r
+Female,No,NA,936,2023-08-08,NA,1,R_A0Doivrj0moB85j,R_OeXqf8EVl4Fg4tr
+Male,No,NA,859,2023-08-08,NA,1,R_z5Lmf0QRONcVqCd,R_PLrrbY5N6gDalW1
+Female,No,NA,1043,2023-08-08,NA,1,R_1mI4mnAgJfK06FP,R_2tqWupb46W1v2W5
+Male,NA,Both statements are true OR neither is true.,1731,2023-08-08,1,NA,R_usqa0IA452t8irv,R_PFFVzfQfGSXzSQV
+Male,NA,Both statements are true OR neither is true.,927,2023-08-08,1,NA,R_2dW4ryXP4lwyPK4,R_1H0rzueS9EgHIz4
+Male,NA,Both statements are true OR neither is true.,901,2023-08-08,1,NA,R_3fDnsuaR7nF5Aao,R_2dKYXMhmeD21DSO
+Female,Yes,NA,48662,2023-08-08,NA,1,R_1rDEEuDCZWyhkic,R_1pyV2pRq0t1uIue
+Female,NA,Both statements are true OR neither is true.,846,2023-08-08,1,NA,R_3I3KaecewMBfvVd,R_2gBfpeOYNti9A1X
+Male,NA,One of the two statements is true.,676,2023-08-08,1,NA,R_9yGc4ha8CTJXhUl,R_1IyfwYShoUHEW9o
+Male,No,NA,1327,2023-08-08,NA,1,R_PtzeQd9wwOL7ZS1,R_3iCsq75Vdf1m9Rm
+Female,No,NA,335,2023-08-08,NA,1,R_3dKufZ0vhkyPMHZ,R_RFaYBs41zxStmU1
+Male,Yes,NA,1074,2023-08-08,NA,1,R_7aOkd4InXCv5e01,R_3sgkfeP0Uf6xSQC
+Male,No,NA,1194,2023-08-08,NA,1,R_111iZDyKMAfx2eW,R_3KT9HLoVtGTC9A7
+Female,Yes,NA,31312,2023-08-08,NA,1,R_1Dvfs9QCoxR2j1q,R_22MnfQnXkuNmYDN
+Male,NA,Both statements are true OR neither is true.,1002650,2023-07-28,1,NA,R_0k8H96fLKJAJnsB,R_1LSx5eZeJdq8rPm
+Female,NA,Both statements are true OR neither is true.,1355,2023-08-09,1,NA,R_eX1dt1BJEvRw7Lj,R_1OiAUdTxbYHRSuh
+Male,No,NA,1254,2023-08-09,NA,1,R_OrroD3wy8sKidHj,R_1M0sJhvGtR1adlO
+Female,NA,One of the two statements is true.,637,2023-08-09,1,NA,R_2BaZDCV1p9poIou,R_1jZdP8ekl8f6hgj
+Female,No,NA,896,2023-08-09,NA,1,R_1M8vHj3YLhfTPZn,R_3GBW6Lsj5nnmWq8
+Male,Yes,NA,1063,2023-08-09,NA,1,R_3Du9wEIhN1VQpqx,R_2DTvL3xq6gA4Wju
+Male,No,NA,540,2023-08-09,NA,1,R_01EELYAnYRga8Ex,R_TvYAB3gMmv2ZPbP
+Female,NA,Both statements are true OR neither is true.,159843,2023-08-07,1,NA,R_3PpSXq3nnINBbMd,R_1K26mjZW5JMAKov
+Male,Yes,NA,1878,2023-08-09,NA,1,R_2YlZYGkwd0ajr6o,R_1Kdpx54vYIPDbrd
+Female,No,NA,1370,2023-08-09,NA,1,R_d6XB9gh1WJibk8p,R_TnK6yYk1aygKRGN
+Female,No,NA,405,2023-08-09,NA,1,R_3kNUannqjXkF50m,R_2q3KOhHR6sgMUtw
+Female,NA,One of the two statements is true.,1147,2023-08-09,1,NA,R_3Ow5c1Y85hg0G2Z,R_9mY5NZ4n4c1vdxT
+Male,NA,One of the two statements is true.,901,2023-08-09,1,NA,R_23UkDTvhA5OvBNF,R_1mq1K8e1TfOtEMB
+Female,NA,One of the two statements is true.,655,2023-08-09,1,NA,R_27Hgb9KHyqMXn6k,R_3CIoWNnMWT9YqJK
+Female,Yes,NA,395,2023-08-09,NA,1,R_1JRNZYCaNO1g6xC,R_3NyRwRwwF9u1BdG
+Female,NA,One of the two statements is true.,80539,2023-08-08,1,NA,R_2BkwQwmHwq26HDa,R_2dvet9dfO2woeQS
+Male,No,NA,1095,2023-08-09,NA,1,R_3DeHOtzN3jbCfg5,R_1qVrcJGwyA12L9I
+Female,No,NA,421,2023-08-09,NA,1,R_2fHdUWiFrKhtwpP,R_2qmUDcV5dVr4zpY
+Female,Yes,NA,1103,2023-08-09,NA,1,R_2ztIGOnX90r6nC4,R_pfIk1fVuU7z6Qvf
+Female,No,NA,686,2023-08-09,NA,1,R_2t395xGh68zuNtc,R_1eEHA7XeB5ACabo
+Female,No,NA,361,2023-08-09,NA,1,R_YVUjK4bshoA5nAl,R_3J3mQRK1uGtrmZn
+Female,Yes,NA,593,2023-08-09,NA,1,R_qUEIqs5GqMSpalH,R_aaAL0IXI41VQrhD
+Female,NA,One of the two statements is true.,5267,2023-08-09,1,NA,R_2YlXez7hZrPa2FX,R_1ZCExmbO677IceZ
+Female,NA,Both statements are true OR neither is true.,991,2023-08-09,1,NA,R_1obzBm6Q1E2N729,R_3iP6SnH3Ve3QkBf
+Female,NA,One of the two statements is true.,968,2023-08-09,1,NA,R_2zSUKjNgttNiatr,R_28MuDCgIxJBsnNU
+Female,NA,NA,21599,2023-08-09,1,NA,R_3QX0dtE7wItd3gB,R_1OZu1f7nOl2lsNO
+Female,No,NA,1069,2023-08-09,NA,1,R_8x2U7it7QI7bxwB,R_3m2Xv7yixwwu3iJ
+Female,NA,One of the two statements is true.,935,2023-08-09,1,NA,R_1GBpIjfxzmOuSL3,R_242UG4aCecaXSrd
+Male,No,NA,709,2023-08-10,NA,1,R_1isnbu5eT2gzUrQ,R_U9BVpJah6vI5aj7
+Male,NA,One of the two statements is true.,163,2023-08-10,1,NA,R_74J9TbZswUhR0l3,R_3PhFdGw3eLDe7Ld
+Female,No,NA,969,2023-08-10,NA,1,R_2rp6Rhv4LaH77hC,R_3Mcha49CkouWLyv
+Female,NA,One of the two statements is true.,719,2023-08-10,1,NA,R_1jvuDrra8WHlq73,R_12uadewkpd6suS7
+Female,NA,One of the two statements is true.,657,2023-08-10,1,NA,R_2tniOmJwWmPIE5A,R_1our51VpPNS2399
+Male,NA,One of the two statements is true.,981,2023-08-10,1,NA,R_A6STTbc6LlXOnN7,R_8ANNsQXlHZwaUCt
+Male,NA,Both statements are true OR neither is true.,3296,2023-08-10,1,NA,R_sT0B1XNS2VNs081,R_2E5FQkJnzjZXLSI
+Male,No,NA,2073,2023-08-10,NA,1,R_1M5teeNaQZjcn7P,R_2yrxtIN1oJTJt1W
+Male,Yes,NA,5885,2023-08-10,NA,1,R_2dW8eLOnzpp78Oo,R_3dGQq4fQPakUSXd
+Female,NA,NA,1676,2023-08-10,NA,1,R_3syKVsZT2g7Wd2W,R_3qmrvaPjLLNU0H4
+Female,No,NA,380,2023-08-10,NA,1,R_rebfo0ioU7agcW5,R_3egnp9HjtgSTw9x
+Female,NA,One of the two statements is true.,1098,2023-08-10,1,NA,R_25RVUMLGY9krNll,R_1oBxRkN8GNPoLzg
+Male,No,NA,1268,2023-08-10,NA,1,R_2dWPmX6vACmBNhb,R_9tPX3kim1VbL0lj
+Male,NA,One of the two statements is true.,604,2023-08-10,1,NA,R_24M0i3zwQnSPYzM,R_1i3YgKzSz97SJGo
+Male,No,NA,349,2023-08-10,NA,1,R_3EG7OAa7xWWqIWQ,R_3JjWaNmnqZEr5iq
+Male,No,NA,2422,2023-08-10,NA,1,R_1gHMfSWjLVm2PDT,R_10utKXpMtlWqcHS
+Male,Yes,NA,842,2023-08-10,NA,1,R_24uWfaVWyAhnvnA,R_1FRkqpfljBX1E50
+Male,No,NA,556,2023-08-10,NA,1,R_1jAJsVFsbB5obtY,R_8vamtTqttKeIqiZ
+Female,No,NA,1123,2023-08-11,NA,1,R_1FE89QT6Ef2MYma,R_3FXmh1Uj2rMTzEZ
+Male,NA,Both statements are true OR neither is true.,293,2023-08-11,1,NA,R_Xv8qnqUsajPFJbr,R_1CqCGj4WXjBx0fD
+Male,No,NA,1541,2023-08-11,NA,1,R_Di9SHszI6jAY5Vv,R_28YEik5pJOpx17T
+Male,Yes,NA,211,2023-08-11,NA,1,R_YPRL06mvgJaEKHv,R_3QQmJ1z6tnpRmjL
+Female,NA,Both statements are true OR neither is true.,1891,2023-08-11,1,NA,R_10N70APOf0Pt4V7,R_3kiyvHYAUSL8Vtj
+Male,NA,Both statements are true OR neither is true.,777659,2023-08-02,1,NA,R_3JEPMV0XUYZ4RZD,R_1nNoWcZYtXB6CBJ
+Female,NA,Both statements are true OR neither is true.,540,2023-08-11,1,NA,R_3jVhheLfgZezd3S,R_ufyZMdo0UaDSQtH
+Female,NA,Both statements are true OR neither is true.,590,2023-08-11,1,NA,R_3nTcfVyKlz049cp,R_qEZDV7EywH2y5nH
+Female,NA,Both statements are true OR neither is true.,36674,2023-08-11,1,NA,R_3ezA5bDqNOueBPj,R_31WX9dyqTAi5unD
+Female,No,NA,595,2023-08-11,NA,1,R_3ptBlKi7RiyJGdW,R_2c8FHJDOZdQ9Oqw
+Male,No,NA,671,2023-08-11,NA,1,R_2waAAEE3TiMEdn4,R_269JFJ0DSldHL7H
+Female,NA,One of the two statements is true.,290,2023-08-11,1,NA,R_WiEyW30yKSYMXeN,R_VL6GLss0gwrrGBb
+Male,No,NA,2478,2023-08-12,NA,1,R_3Pz8lpm97kHebSN,R_3qqciFYY2N4EBSL
+Female,NA,One of the two statements is true.,322,2023-08-12,1,NA,R_OPDCcANNRkFHMdz,R_2DZDq78ngzwIvcs
+Male,NA,One of the two statements is true.,1601,2023-08-12,1,NA,R_3MbY1cREsrTUb3i,R_bO3WDXBDnp2GbCN
+Female,No,NA,1008,2023-08-12,NA,1,R_Qo9emFS3NbcDv8J,R_1LAM7HSGEwm02PH
+Male,NA,NA,238,2023-08-12,1,NA,R_2QRqXGg2odTUjHD,R_31TT6PQZQWpTM0B
+Male,NA,NA,248,2023-08-12,1,NA,R_2XdLuGcLGn2FNX0,R_1cU1lb6TQU5JoSp
+Male,No,NA,51471,2023-08-12,NA,1,R_2ahmEIUHbNMXtXo,R_1QnDkwMZtd1ovvk
+Female,NA,One of the two statements is true.,1481,2023-08-12,1,NA,R_UJGxM3ECC1QRJ3r,R_2Ubn3eJKaUdFCDl
+Female,NA,Both statements are true OR neither is true.,1051,2023-08-12,1,NA,R_1Fa2vmj9WHUVdby,R_2Cd2ObGTpwMp6tp
+Male,NA,Both statements are true OR neither is true.,1828,2023-08-12,1,NA,R_1Kyc6JS5CCZltD2,R_3Ja4fHKGfV8PZ6u
+Female,NA,Both statements are true OR neither is true.,556,2023-08-12,1,NA,R_Qm32AsQWnTe0Sg9,R_Bt81EXvvn5pLYk1
+Male,NA,Both statements are true OR neither is true.,1801,2023-08-12,1,NA,R_d5cmGVbnZWmm4lH,R_1F930dFXuajTSH7
+Male,No,NA,942,2023-08-12,NA,1,R_3D5T9yAks07T7LX,R_27J67YjUKbiH5jt
+Female,NA,Both statements are true OR neither is true.,712,2023-08-13,1,NA,R_1OId4d39SLOOpu0,R_eE9i0MVs0dAZqXn
+Female,Yes,NA,660,2023-08-13,NA,1,R_2cpDF0x0hCbVaay,R_2afVsl5t9FkPC0d
+Male,NA,Both statements are true OR neither is true.,169,2023-08-13,1,NA,R_2AFmtYkBha1Upvu,R_20STRQ6sfIClQCP
+Female,No,NA,180368,2023-08-11,NA,1,R_r8z4IbxOW4g7EJP,R_1Kwea7DFACedwoi
+Female,Yes,NA,3556,2023-08-13,NA,1,R_2rA9p0ClGtY0LRq,R_1F9W8sbbaiJQkAL
+Male,NA,One of the two statements is true.,1815,2023-08-13,1,NA,R_1Ol7m5VxjLD4XLN,R_uypNPZPRFJsk19f
+Female,NA,NA,325,2023-08-13,1,NA,R_wQMNnbJXM0qd92F,R_2rr2Damgrsun7xF
+Male,No,NA,844,2023-08-13,NA,1,R_Pv6cVmVOg5flyhP,R_3DoTyi3RLz2pICb
+Female,No,NA,466,2023-08-13,NA,1,R_2pWZDvSkwiocWbE,R_2D7AkoNqIvGofaA
+Male,No,NA,247,2023-08-14,NA,1,R_30idwr5A05gvxTX,R_12KekIr4SBfW5y8
+Female,NA,Both statements are true OR neither is true.,591,2023-08-14,1,NA,R_1pXUXWGSDXeTa7f,R_1Qnpb80DDgLWA1q
+Female,NA,Both statements are true OR neither is true.,1741,2023-08-14,1,NA,R_3PXYiwHXxm1acQH,R_2TvG1PFXGidBlf3
+Female,No,NA,408,2023-08-14,NA,1,R_Zf1rzQTHyF3VL69,R_dmv9HFEG9lAQe8p
+Male,NA,One of the two statements is true.,312,2023-08-14,1,NA,R_21H8R8ObXlrdxh0,R_3fuWnOmELdB9Sut
+Male,No,NA,574,2023-08-14,NA,1,R_3em1rqYdy4QMsir,R_3Pz5JpJV0zCpGuE
+Male,No,NA,1382,2023-08-14,NA,1,R_2dgVP5bqe8tlZVw,R_1rwAvsRMUk9Tt6g
+Female,No,NA,527,2023-08-14,NA,1,R_2uIhDhYiHhQENcc,R_1Kkd7A8NV0jzEyg
+Female,Yes,NA,93328,2023-08-13,NA,1,R_10Z71zvoVslNr1m,R_25XCV324k4R6iYq
+Male,No,NA,2246,2023-08-14,NA,1,R_1eUKaV8VwjRukQ1,R_2162Gp77NwbFG64
+Female,No,NA,2222,2023-08-14,NA,1,R_2BfAY0WJQ5858BY,R_1Q3KH9KRG5hHOAI
+Female,NA,Both statements are true OR neither is true.,955,2023-08-14,1,NA,R_2CPSlOG68f6Dzon,R_YWUWVvmKRgawZnr
+Female,NA,One of the two statements is true.,739,2023-08-14,1,NA,R_1kZlIUSjUkXgrku,R_1dKtK3vd7IRcgiJ
+Male,No,NA,585937,2023-08-07,NA,1,R_1H06YV34JLZM7fR,R_1Fs5FbGoNyIVNuu
+Female,NA,One of the two statements is true.,1178,2023-08-14,1,NA,R_1CBhXHYtgSpidXP,R_1IbdMd0WkqxnpZv
+Male,NA,One of the two statements is true.,1218,2023-08-14,1,NA,R_cO2VL7Pkc2TdYAh,R_RqKeArueczopVGp
+Male,NA,Both statements are true OR neither is true.,564,2023-08-14,1,NA,R_1f0Aa8qUU61BrCt,R_2SdzeacnUbVK1yH
+Male,Yes,NA,1271,2023-08-14,NA,1,R_bC76CgfAf4iVlLP,R_2D2hBDtn2acitbO
+Male,No,NA,599,2023-08-14,NA,1,R_23Wv20K8LyhtJob,R_4I4ALAqcD2tGOIh
+Male,No,NA,1056693,2023-08-02,NA,1,R_1laGA6Nt1cypWjS,R_2tsvoBG8XFWsgjm
+Male,NA,One of the two statements is true.,530,2023-08-14,1,NA,R_3oZuQZdq7igUDi3,R_2ePyL9pRMW0DLfQ
+Female,NA,One of the two statements is true.,527302,2023-08-08,1,NA,R_2fp3V2nmXjhoHPC,R_1PcvUb8rXul3EQK
+Female,NA,Both statements are true OR neither is true.,973,2023-08-14,1,NA,R_1JKNU653IJ5adkO,R_2ClJrM8nozuAoO5
+Male,NA,Both statements are true OR neither is true.,446,2023-08-14,1,NA,R_2dFO7VLupffNwOd,R_31LYcb3w2DTCAep
+Male,No,NA,558899,2023-08-08,NA,1,R_AifA8rTiPcbaIKd,R_2c6KFUCulaWxf00
+Male,No,NA,1586,2023-08-14,NA,1,R_21zVL0SHr6kQuQw,R_22zAUqiOCnmXDVh
+Male,NA,One of the two statements is true.,5776,2023-08-14,1,NA,R_2WZvBQLzWEbFtJ2,R_2gZv9MIEfKaBrLX
+Male,No,NA,4111,2023-08-14,NA,1,R_2zpWsOGP7T54ksj,R_1OE34yAAPj41OrA
+Male,No,NA,7542,2023-08-14,NA,1,R_25yV8F6jRB9cmgH,R_2S7RttOku6kBHNf
+Male,Yes,NA,1152,2023-08-14,NA,1,R_31Xj9pdSIF15LQA,R_4GgZL2CtexEKe5z
+Male,Yes,NA,1238,2023-08-14,NA,1,R_3PBTIRmGsuqizIL,R_1nNr0tb3kigGFoK
+Male,No,NA,529,2023-08-14,NA,1,R_uaEmjwbn67WSdGh,R_1Dqmj7sUGW6w3vy
+Male,Yes,NA,153949,2023-08-13,NA,1,R_3Ge2QlphsIu5qpy,R_vjImXKIc7JbxshH
+Male,No,NA,979,2023-08-14,NA,1,R_1IoeyZ4THMAZRro,R_2uF0m7gCNbl8wdB
+Female,Yes,NA,651,2023-08-14,NA,1,R_3nJeF6okzKWyYX2,R_25Rzt4LHG5tcPcL
+Female,NA,One of the two statements is true.,1229,2023-08-15,1,NA,R_2aDoqKin8xxpNsJ,R_3NSx5d04ydvBhvj
+Female,NA,Both statements are true OR neither is true.,1276,2023-08-15,1,NA,R_2xDh5WcVrBYwZ58,R_1FaMEtTmGaREhtG
+Male,NA,Both statements are true OR neither is true.,483,2023-08-15,1,NA,R_1FgNTV8xRCcaGie,R_1OqQXweLeG1DUOv
+Female,NA,One of the two statements is true.,1778005,2023-07-25,1,NA,R_410bXAz3zIuGBYl,R_1OizkP9ClyvDrV3
+Female,NA,NA,198,2023-08-15,1,NA,R_eJWj6oQxPAUSbjH,R_2cbwTW0hmHrGgqv
+Male,No,NA,576,2023-08-15,NA,1,R_2PzmVmKDnDW2elH,R_0dYyt3wWPvy1eOR
+Other:,No,NA,515,2023-08-15,NA,1,R_3KVjieTDlVVJjJ3,R_2qzckGZ7fvmeZAP
+Male,NA,Both statements are true OR neither is true.,1040,2023-08-15,1,NA,R_3MigVrwL6Q6qzUb,R_1IiS4IPdmKvAlF6
+Male,Yes,NA,416,2023-08-15,NA,1,R_3pEr61i2sAB70AN,R_2aP0jFGmHW6OgE0
+Female,No,NA,642190,2023-08-08,NA,1,R_VPBAnrBT7Ez7Ra9,R_2R9RXXWU6lEnZJ8
+Male,NA,One of the two statements is true.,238640,2023-08-12,1,NA,R_1plCChiF5CK3mcD,R_271Dk0yFr2tLbVU
+Male,NA,One of the two statements is true.,516,2023-08-15,1,NA,R_3iz2bjCeNTYXebK,R_3scP9qCVcZ5qu8R
+Male,No,NA,569314,2023-08-08,NA,1,R_2ts4ogIY8ljbT4a,R_570V4Zfea1DqBEZ
+Male,NA,Both statements are true OR neither is true.,916,2023-08-15,1,NA,R_vMiDXbEVYymHIv7,R_22tbrqj62gkYYCz
+Male,Yes,NA,484,2023-08-15,NA,1,R_1lcLFAbvQiEb8ih,R_1QyBCGjkiXSjVyL
+Male,No,NA,776,2023-08-15,NA,1,R_2UXGJpPjGfoVGpl,R_3lDfAcCB9PNS6mI
+Male,No,NA,5418,2023-08-15,NA,1,R_2BhXC7kqJi9KURn,R_yWQ4cYYwu4qfzbz
+Female,NA,One of the two statements is true.,675,2023-08-15,1,NA,R_2Bh7773Mx40ciNk,R_XyTepZpleh7etpv
+Female,No,NA,328,2023-08-15,NA,1,R_2fCMeDWmt99PHtr,R_sNeGlTAaKPj32dr
+Female,Yes,NA,331,2023-08-15,NA,1,R_3p5SzmM8dAqJCDk,R_3MiD4L78QVODOfT
+Male,Yes,NA,4193,2023-08-15,NA,1,R_3Mi0oyQUxKI5MPu,R_2xXJMztTI4JkqjL
+Male,No,NA,3260,2023-08-15,NA,1,R_1Gwh10d0JfPaule,R_tQGcWQ9xf8Feqfn
+Male,NA,One of the two statements is true.,11796,2023-08-15,1,NA,R_1I779b9tRyi8syi,R_ef9qcs6MZyLJYJz
+Male,No,NA,18856,2023-08-15,NA,1,R_3EMDC6SRVGynLGJ,R_1pPZ9AF3FDT3h3X
+Male,No,NA,557,2023-08-15,NA,1,R_1jSXyDlNkC3K8FB,R_3MKcmhebr4rCNlK
+Female,Yes,NA,338,2023-08-15,NA,1,R_XproUW3ihLeiRsR,R_20U7wF6Z8c4pZzE
+Female,NA,One of the two statements is true.,1417,2023-08-15,1,NA,R_32UWIFkd8VPRj7f,R_804CMod9sC3RTup
+Male,NA,One of the two statements is true.,24749,2023-08-15,1,NA,R_4NJB92hxyLsfjs5,R_UXQUnhXjdFzN4hb
+Male,No,NA,149155,2023-08-14,NA,1,R_sd6zoO6rnWFiAF3,R_2rUAhASfIPIMRpm
+Female,NA,Both statements are true OR neither is true.,1035305,2023-08-03,1,NA,R_PvWGYoKwSmLiHbb,R_2ypFDLQ9zP6SASA
+Female,No,NA,19881,2023-08-15,NA,1,R_23fcHC749fqKu9P,R_3EtGJAl9SFhxiw5
+Female,No,NA,1157,2023-08-15,NA,1,R_2pW6zkDp4jT0WFI,R_339l44O4JhdShf9
+Female,NA,One of the two statements is true.,403,2023-08-16,1,NA,R_yZQYtoAuIQqYyE9,R_3mlz7qdcQ9sSNVo
+Male,No,NA,380,2023-08-16,NA,1,R_3GCcfXc7daM7SF0,R_1QtopIDTQ5f0wLq
+Male,NA,One of the two statements is true.,1147,2023-08-16,1,NA,R_2zTsXYCbR0N57Dy,R_Z1ZA6raQCCx1MRz
+Female,Yes,NA,306,2023-08-16,NA,1,R_7aHtz2CuQahz1YZ,R_zfqpad2HrtMuEKd
+Male,No,NA,1363,2023-08-16,NA,1,R_28VdN8lwfplpRXY,R_12bUKgAyVmaAUAI
+Female,NA,Both statements are true OR neither is true.,18331,2023-08-15,1,NA,R_T5fQ6eYnMibLTSp,R_1IaPDzwc0FqniLE
+Male,No,NA,1664,2023-08-16,NA,1,R_1mrTaMaMTDn2jVn,R_3G9d8cPIMpEqCzG
+Female,NA,Both statements are true OR neither is true.,340,2023-08-16,1,NA,R_2YD5hwOQYhOFrP4,R_C3sjDMtf0nUxcSB
+Male,Yes,NA,989,2023-08-16,NA,1,R_VWK1CxFEg8KVX69,R_2vcaGVCsbnh7Ywy
+Male,No,NA,785,2023-08-16,NA,1,R_3j6g6hfVeX0EUyL,R_CkNkc7LhELoC4al
+Female,No,NA,292,2023-08-16,NA,1,R_2TBpPNTSv6se7Pe,R_3qfWSEkkjOSnr4e
+Female,NA,One of the two statements is true.,1013,2023-08-16,1,NA,R_1LIMEPjMuknYVDU,R_1PbJJ75V8XqRAeY
+Female,NA,Both statements are true OR neither is true.,553,2023-08-16,1,NA,R_33dPxSZhM5B3I4c,R_x9jvFyKOHtrjuQV
+Female,NA,Both statements are true OR neither is true.,878,2023-08-16,1,NA,R_12bupbiqavYGjrf,R_2rOpXzNChj0n9M1
+Male,Yes,NA,1139,2023-08-16,NA,1,R_brLZBuVhLhiyoRr,R_39Qkw8njNndjc53
+Male,NA,One of the two statements is true.,900,2023-08-16,1,NA,R_1FG6gOqFvkjMi2s,R_094gMZjlW8FyNWN
+Male,Yes,NA,1539659,2023-07-29,NA,1,R_1mXBtK3B1B2M8cJ,R_22o80VlMO8fEoPj
+Male,NA,Both statements are true OR neither is true.,97304,2023-08-15,1,NA,R_XLJ2c0dTjKTW717,R_3iR6uxpeyzrMFHr
+Other:,NA,Both statements are true OR neither is true.,1373,2023-08-17,1,NA,R_1r8Q2fZ94itk71v,R_2s5fl5j4JD0f3QU
+Female,NA,Both statements are true OR neither is true.,3538,2023-08-17,1,NA,R_2fdFjc7gNT9NsFa,R_2ZKvbF1fBy2LpGs
+Female,No,NA,495,2023-08-17,NA,1,R_ex61Vdv6AYbgTAZ,R_2WxmsKKw7NilW1L
+Male,NA,Both statements are true OR neither is true.,1677,2023-08-17,1,NA,R_2doSulN1k2AmNXQ,R_3BIrVzSg6Xt8Cdj
+Female,NA,One of the two statements is true.,435,2023-08-17,1,NA,R_1JVlUeWdpZKtGR8,R_5A3X7tGiUjkZYQ1
+Female,Yes,NA,961,2023-08-17,NA,1,R_sGPJbGV0CDoYqsh,R_3PbGUA1tZNqk1NB
+Female,NA,Both statements are true OR neither is true.,41703,2023-08-17,1,NA,R_1LzXmkNmRnrjUoI,R_3rPl6jfNDjD3qN3
+Male,NA,Both statements are true OR neither is true.,1370,2023-08-18,1,NA,R_269l3m1YyHaQpcX,R_2YENn49RPFiGuOT
+Female,No,NA,849,2023-08-18,NA,1,R_3ZV3mgwY4gquSgp,R_3lsFARaIIKLesUo
+Female,NA,One of the two statements is true.,900,2023-08-18,1,NA,R_1oHKg4knamtGmmO,R_2SxlMab2Vb6csDL
+Male,NA,Both statements are true OR neither is true.,758,2023-08-18,1,NA,R_2awBewMdcxCPqy4,R_2wc6g4F1Bl2uWsT
+Male,NA,One of the two statements is true.,2562577,2023-07-19,1,NA,R_6r3PBdvzWYBgkRb,R_1n6o1Tu8n8N7sMA
+Male,NA,Both statements are true OR neither is true.,1231,2023-08-18,1,NA,R_3irNn9dMzhhvH4W,R_W267UQHVz4Uu0tH

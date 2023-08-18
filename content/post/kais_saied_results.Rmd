@@ -1,0 +1,857 @@
+---
+title: "What Do Tunisians Really Think About President Kais Saied?"
+author: "Robert Kubinec and Amr Yakout"
+date: "2023-08-16T15:00:00"
+output: 
+  blogdown::html_page:
+    toc: true
+header:
+  title: "What Do Tunisians Really Think About President Kais Saied?"
+  summary: "I reproduce results from our recent survey experiment showing that people are opposed to President Kais Saied but prefer not to report their opposition directly."
+  image: "headers/saied.jpeg"
+  date: "2023-08-16T15:00:00"
+tags: ["R", "Tunisia", "Democracy"]
+categories: ["R"]
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(qualtRics)
+library(ggplot2)
+library(lubridate)
+library(forcats)
+library(cmdstanr)
+library(bayesplot)
+library(ggthemes)
+library(RRreg)
+library(rr)
+library(readxl)
+library(gt)
+
+knitr::opts_chunk$set(message = F,warning = F)
+
+run_sim <- F
+
+set.seed(7364001)
+
+# load census data
+
+census <- read_xls("data/tunisia_pop_census_2014.xls") %>% 
+  select(gender="Sex: Name",
+         gov="Regions: Name",
+         pop="Facts: Value",
+         age_cat="Age group: Name") %>% 
+  filter(!(gov %in% c("Tunisia","North East",
+                         "North West","Center East",
+                         "Center West","South East",
+                         "South West"))) %>% 
+    filter(!(age_cat %in% c("0-4","5-9","10-14"))) %>% 
+  mutate(gov=str_remove(gov, "Governorate of "),
+         gov=factor(gov),
+         age_cat=factor(age_cat,
+                        levels=c("15-19",
+                                 "20-24","25-29","30-34",
+                                 "35-39","40-44","45-49",
+                                 "50-54","55-59",
+                                 "60-64","65-69","70-74",
+                                 "75-79","80 year and more")),
+         age_cat_order=ordered(age_cat),
+         gov=case_match(gov,
+                        'Medenine'~"Médenine",
+                        'Gabes'~"Gabès",
+                        'du Kef'~"Le Kef",
+                        'Beja'~"Béja",
+                        'Manouba'~"Mannouba",
+                        .default=gov),
+         pop=ifelse(age_cat=="15-19",pop*(2/5),pop),
+         prop=pop/sum(pop))
+
+# load survey data
+
+survey_data <- read_csv("data/kais_survey.csv") %>% 
+      mutate(kais_rr=factor(kais_rr, exclude=NA),
+         kais_direct=factor(kais_direct, exclude=NA)) %>% 
+    mutate(kais_rr=factor(kais_rr,
+                        levels=c("One of the two statements is true.",
+                                 "Both statements are true OR neither is true.")),
+                        kais_rr_num=as.numeric(kais_rr)-1,
+           kais_direct=factor(kais_direct,levels=c("No","Yes")),
+           kais_direct_num=as.numeric(kais_direct)-1,
+           kais_combined=coalesce(kais_rr_num,kais_direct_num),
+         duration=scale(`Duration (in seconds)`),
+         start_date_num=scale(StartDate),
+         treatment=as.numeric(!is.na(FL_63_DO_saied_sensitive)))
+
+# load screener data
+
+screener_data <- read_csv("data/kais_screener_survey.csv") %>% 
+  select(ExternalReference="ResponseId",
+         age_cat,gov,gender_screener="gender")
+
+screener_data <- mutate(screener_data,
+                        age_cat=factor(age_cat,
+                                       labels=levels(census$age_cat)),
+                        age_cat_order=ordered(age_cat))
+
+survey_data <- left_join(survey_data,screener_data,by="ExternalReference") %>% 
+  mutate(gender=coalesce(as.character(gender), 
+                         as.character(gender_screener)),
+         gender=ordered(gender, levels=c("Male","Female","Other:")))
+
+# load cmdstan model
+
+sen_mod <- cmdstan_model("data/beta_mod.stan")
+
+# need complete dataset
+
+comp_data_rr <- survey_data %>% 
+  mutate(gender=factor(gender, exclude=NA)) %>% 
+  filter(!is.na(gender),!is.na(kais_rr)) %>% 
+  mutate(kais_rr=factor(kais_rr,
+                        levels=c("One of the two statements is true.",
+                                 "Both statements are true OR neither is true.")),
+                        kais_rr_num=as.numeric(kais_rr)-1,
+         duration=scale(`Duration (in seconds)`),
+         start_date_num=scale(StartDate))
+
+comp_data_direct <- survey_data %>% 
+  filter(!is.na(gender),!is.na(kais_direct))
+
+```
+
+This Rmarkdown document contains code and data for the Kais Saied survey experiment by Robert Kubinec and Amr Yakout. This survey was fielded using an online panel in Tunisia during August of 2023. The survey experiment involved providing half the sample a direct question about whether they supported Kais Saied's move to suspend parliament and centralize power in his hands, and the other half of the sample had a randomized response question designed to allow them to answer truthfully without being identified. This experiment was pre-registered and the pre-registration can be accessed from [this link](https://www.robertkubinec.com/files/preregistration_tunisia_imf_survey.pdf).
+
+This document was drafted to allow people to verify our results using the raw data. The survey data included has been stripped of any identifying information about respondents, but it does include the actual answers from the survey so that all analyses can be reproduced. You can access the code file and the raw data from this Github repository: <https://github.com/saudiwin/saudiwin.github.io/tree/sources/content/post> (file is entitled `kais_saied_results.Rmd` and the data file is in the `data/` subfolder). The survey data can be found in the `data/` folder as `kais_saied_survey.csv`.
+
+This Quarto document includes embedded R code that loads the survey data and estimates the Stan model for proportion of people who support Kais Saied, and compares it to the direct question to see if there is sensitive survey bias. At present there are a total of `r nrow(survey_data)` completed responses.
+
+All questions about the analysis should be directed to Robert Kubinec at [rmk7\@nyu.edu](mailto:rmk7@nyu.edu).
+
+## Robustness check: time of completion
+
+In this section I show some general statistics for the data. In particular, I look at how long it takes people to complete the survey. In the plot below I show the average duration in minutes over time for each survey response. The plot shows that most people took the survey in about 10 to 30 minutes:
+
+```{r completion_time}
+
+survey_data %>% 
+  filter(`Duration (in seconds)`<10000) %>% 
+  mutate(Duration=`Duration (in seconds)`/60) %>% 
+  ggplot(aes(y=Duration,x=StartDate)) +
+  geom_point() +
+  scale_y_log10() +
+  geom_smooth()
+
+```
+
+The plot also shows that data collection started in late July and continued until mid-August. Data came in fairly regularly on a daily basis.
+
+## Survey Design
+
+In the survey we implemented a form of a randomized response question that is designed to help people report answers on a survey that they may be embarrassed about or in danger if they report. The question was originally developed for private medical information like abortion or HIV infections, and has been extended to cover crime, drug use and corruption reporting. See @vandenhout2002, @gingerich2016 and @blair2015 for more information.
+
+The theory behind a randomized response is to inject randomness into the survey question. Theoretically it is similar to approaches in cryptography that use [random numbers to encode online data using keys](https://en.wikipedia.org/wiki/Applications_of_randomness). In our case, we used naturally ocurring randomness related to people's birthdays. Because we did not ask for respondents' birth dates, and the month in which one is born is essentially random, we can use that naturally occurring randomness to encode their responses.
+
+To test for how much we could encourage people to respond truthfully, we randomly assigned each respondent to receive one of the two questions below:
+
+Direct Question
+
+1.  Do you oppose President Kais Saied's moves to change Tunisia's constitution and close the parliament?
+    1.  Yes
+    2.  No
+
+Randomized Response
+
+We understand that politics in Tunisia is sensitive right now. This question is worded so that you can tell us what you think but still protect your privacy. Because we don't know when your mother was born, we also won't know for sure your political opinion.
+
+1.  My mother's birth date is in January, February or March.
+2.  I oppose President Kais Saied's moves to change Tunisia's constitution and close the parliament.
+
+Please pick the answer that best represents whether these statements are true of you:
+
+1.  Both statements are true OR neither is true.
+2.  One of the two statements is true.
+
+While explaining how this question works is beyond the scope of this note, we again refer to the linked paper above for the statistical mechanics. As long as the respondent reads and follows the instructions, they can report their opposition (or support) for Kais Saied's power grab without us being able to know their true response. Essentially, we can't separate their answer from whether their mother's birthday is in a given month, and as a result, the individual answers are encoded. For any respondent, we have no idea whether they oppose Saied or not.
+
+However, the beauty of this method is that even though we don't know any one person's response, we *can* estimate how many in people in total support or oppose Saied. When we aggregate responses, we can take into account that on average $\frac{1}{4}$ of our respondents will have mothers who were born in those months. Using statistical models that we estimate below, we can find out how many people truly oppose Saied, and also how many people appear to be under-reporting their opposition relative to the direct question.
+
+## Sensitivity Estimates
+
+In this section we show several different ways that we calculate the true number of people who are opposed to Kais Saied. We first use a simple Bayesian calculation based on the beta distribution that was specified in the pre-registration linked above. We then look at other existing R packages that are used for randomized response questions and then we implement a custom Bayesian model that allows us to jointly model both the randomized response and the direct question. We also use this custom model to allow us to adjust for biases in using online panels that may not be fully representative.
+
+```{r fit_model}
+
+# proportion selecting birthday response
+
+lambda <- table(survey_data$kais_rr)
+lambda <- lambda[2]/sum(lambda)
+
+N <- sum(as.numeric(!is.na(survey_data$kais_rr) & survey_data$FL_63_DO_saied_sensitive==1))
+
+to_stan_data <- list(success_cm=N*((lambda - .75)/(-.5)),
+                     fail_cm= N*(1-((lambda - .75)/-.5)),
+                     success_d=sum(as.numeric(survey_data$kais_direct=="Yes" & survey_data$FL_63_DO_saied_nonsensitive==1),na.rm=T),
+                     fail_d=sum(as.numeric(survey_data$kais_direct=="No" & survey_data$FL_63_DO_saied_nonsensitive==1),na.rm=T))
+
+fit_mod <- sen_mod$sample(chains=4, cores=4, data=to_stan_data,refresh=0)
+
+fit_mod$summary()
+```
+
+We can plot the estimated bias as the difference between the average proportion of those responding affirmative to the direct question and the calculated level of opposition to Saied from the randomized response question:
+
+```{r plot_bias}
+
+estimand <- c(fit_mod$draws("estimand"))
+
+mcmc_dens(fit_mod$draws("estimand")) + 
+  theme_tufte()
+
+```
+
+Our basic model shows that approximately `r round(median(estimand)*100,1)`% of respondents reported anti-Saied preferences in the randomized response method versus the direct question. The 5% - 95% uncertainty interval is from `r round(quantile(estimand,.05)*100,1)` to `r round(quantile(estimand,.95)*100,1)` .
+
+The full posterior density of the bias-corrected estimate is:
+
+```{r plot_true}
+
+mcmc_dens(fit_mod$draws("pi_hat")) + theme_tufte()
+
+```
+
+Comparing the two estimates as intervals (`pi_hat` is the true level of opposition to Saied and `d_hat` is the proportion from the direct question):
+
+```{r compare_interval}
+
+mcmc_intervals(fit_mod$draws(c("pi_hat","d_hat"))) + theme_tufte()
+
+```
+
+## Alternative Estimation: RRreg
+
+In this section we use the R package `RRreg` to check these calculations using a more traditional means for estimating sensitive proportions.
+
+```{r rreg_est}
+
+est_rreg <- RRuni(response=as.numeric(comp_data_rr$kais_rr=="Both statements are true OR neither is true." & comp_data_rr$FL_63_DO_saied_sensitive==1),
+                  p=.25,
+                  model="Crosswise",MLest = TRUE)
+
+summary(est_rreg)
+
+s1 <- summary(est_rreg)
+
+```
+
+Let's compare these estimates with plots:
+
+```{r compare_est}
+
+est_beta <- fit_mod$summary()
+
+est_data <- tibble(estimate=c(s1$coefficients[,1],
+                              est_beta$median[est_beta$variable=="pi_hat"]),
+                   low=c(s1$coefficients[,1]-1.96*(s1$coefficients[,2]),
+                         est_beta$q5[est_beta$variable=="pi_hat"]),
+                   high=c(s1$coefficients[,1]+1.96*(s1$coefficients[,2]),
+                         est_beta$q95[est_beta$variable=="pi_hat"]),
+                   estimator=c("RRreg","Bayes"))
+
+est_data %>% 
+  ggplot(aes(y=estimate,x=estimator)) +
+  geom_linerange(aes(ymin=low,
+                     ymax=high)) +
+  geom_point() +
+   theme_tufte()
+
+```
+
+We can see that they are similar estimates, although the R package has higher uncertainty than the simple Bayesian estimate.
+
+## Alternative Estimator: rr
+
+We can also use the R package `rr` which uses the EM algorithm as opposed to `RRreg` which uses more conventional optimization.
+
+```{r rr_est}
+
+comp_data_rr$gender_two <- factor(comp_data_rr$gender,
+                                  exclude="Other:")
+comp_data_rr <- filter(comp_data_rr, !is.na(gender_two))
+# need to switch the outcome
+comp_data_rr$kais_rr_num_switch <- 1 - comp_data_rr$kais_rr_num
+rr_est <- rrreg(kais_rr_num_switch ~ as.character(gender_two), 
+                data=comp_data_rr,
+                      p=.75,
+                      design='mirrored')
+
+# predict sensitive trait
+
+pred_rr <- predict(rr_est,quasi.bayes = T)
+mean(pred_rr$est)
+mean(pred_rr$est[comp_data_rr$gender_two=="Male"],na.rm=T)
+mean(pred_rr$est[comp_data_rr$gender_two=="Female"],na.rm=T)
+pred_rr_mean <- predict(rr_est,quasi.bayes = T,avg=T)
+```
+
+This number seems very close to our other estimators. Again, the uncertainty seems larger than the simple Bayesian method. Minimal gender differences over who is more or less likely to oppose Saied.
+
+We can plot this estimate against the others:
+
+```{r est_compare_three}
+
+est_data <- tibble(estimate=c(s1$coefficients[,1],
+                              est_beta$median[est_beta$variable=="pi_hat"],
+                              pred_rr_mean$est),
+                   low=c(s1$coefficients[,1]-1.96*(s1$coefficients[,2]),
+                         est_beta$q5[est_beta$variable=="pi_hat"],
+                         pred_rr_mean$ci.lower),
+                   high=c(s1$coefficients[,1]+1.96*(s1$coefficients[,2]),
+                         est_beta$q95[est_beta$variable=="pi_hat"],
+                         pred_rr_mean$ci.upper),
+                   estimator=c("RRreg","Bayes","EM"))
+
+est_data %>% 
+  ggplot(aes(y=estimate,x=estimator)) +
+  geom_linerange(aes(ymin=low,
+                     ymax=high)) +
+  geom_point() + theme_tufte()
+
+```
+
+## BRMS Model
+
+Finally, we define a brms custom family for the randomized response model using the confusion matrix approach of @vandenhout2002. This model is a variety of the Bernoulli distribution that takes into account the known probabilities of obtaining the true response. It jointly models both the randomized response model and the direct question, allowing us to estimate the bias directly rather than post-estimation. By implementing it in `brms`, we can make use of `brms` features like multilevel regression to allow us to do post-stratification adjustment of the survey responses with population data from Tunisia's 2014 census. This is our preferred specification.
+
+```{r define_brms_rr}
+
+library(brms)
+
+stan_funs <- '
+  real sens_reg_lpmf(int y, real mu, real bias, matrix P, int T) {
+  
+    // generalized RR model from van der Hout and van der Heijden (2002)
+    // also see R package RRreg
+    
+    real out;
+    // need to impose a constraint on bias where it cannot be larger than mu
+    real bias_trans = mu * bias;
+    
+    if(T==1) {
+    
+      // treatment distribution (crosswise model)
+      
+      if(y==1) {
+      
+        out = P[2,1] * (1 - mu) + P[2,2] * mu;
+      
+      } else if(y==0) {
+      
+       out = P[1,1]*(1-mu) + P[1,2]*mu;
+      
+      }
+
+    } else if (T==0) {
+    
+      // control = direct question
+    
+      if(y==1) {
+      
+        out = mu - bias_trans;
+      
+      } else if(y==0) {
+      
+        out = (1 - mu) + bias_trans;
+      
+      }
+    
+    }
+    
+    return log(out); 
+
+  }
+  
+  int sens_reg_rng(real mu, real bias, matrix P, int T) {
+  
+    real bias_trans = mu*bias;
+  
+    if(T==1) {
+    
+      return bernoulli_rng(P[2,1] * (1 - mu) + P[2,2] * mu);
+      
+    } else {
+    
+      return bernoulli_rng(mu - bias_trans);
+    
+    }
+
+  }'
+
+# define custom family
+
+family_sens_reg <- custom_family("sens_reg",
+                                 dpars=c("mu","bias"),
+                                 links=c("logit","logit"),
+                                 type="int",
+                                 lb=c(NA,NA),
+                                 ub=c(NA,NA),
+                                 vars=c("P","vint1[n]"))
+
+# define log-likelihood
+
+log_lik_sens_reg <- function(i, prep) {
+  mu <- brms::get_dpar(prep, "mu", i = i)
+  y <- prep$data$Y[i]
+  treatment <- prep$data$vint1[i]
+  bias <- brms::get_dpar(prep, "bias", i = i)
+  
+  bias_trans <- bias*mu
+  
+  if(treatment==1) {
+    
+    if(y==1) {
+    
+      return(log(P[2,1] * (1 - mu) + P[2,2] * mu))
+  
+    } else {
+      
+      return(log(P[1,1]*(1-mu) + P[1,2]*mu))
+    
+    }
+    
+  } else {
+    
+    if(y==1) {
+      
+      return(log(mu - bias_trans))
+      
+    } else {
+      
+      return(log((1 - mu) + bias_trans))
+      
+    }
+    
+  }
+  
+
+}
+
+# define posterior predictions
+
+posterior_predict_sens_reg <- function(i, prep, ...) {
+  
+  mu <- brms::get_dpar(prep, "mu", i = i)
+  bias <- brms::get_dpar(prep, "bias", i = i)
+  y <- prep$data$Y[i]
+  treatment <- prep$data$vint1[i]
+  
+  bias_trans <- mu*bias
+
+  if(treatment==1) {
+    
+    out <- rbinom(n=length(mu),size=1,prob=P[2,1] * (1 - mu) + P[2,2] * mu)
+    
+  } else {
+    
+    out <- rbinom(n=length(mu),size=1,prob=mu - bias_trans)
+    
+  }
+  
+  return(out)
+  
+}
+
+# define posterior expectation (equal to latent variable pi)
+
+posterior_epred_sens_reg <- function(prep,...) {
+
+  mu <- brms::get_dpar(prep, "mu")
+  bias <- brms::get_dpar(prep, "bias")
+
+  mu
+
+}
+
+posterior_epred_bias_sens_reg <- function(prep,...) {
+
+  mu <- brms::get_dpar(prep, "mu")
+  bias <- brms::get_dpar(prep, "bias")
+
+  bias*mu
+
+}
+
+P <- getPW("Warner",p=.25)
+
+all_stanvars <- stanvar(x=P,block = "data") + 
+  stanvar(scode=stan_funs,block="functions")
+
+survey_data$age_cat_order <- ordered(survey_data$age_cat)
+
+fit1 <- brm(bf(kais_combined | vint(treatment) ~ gender*mo(age_cat_order) + (1|gov)), 
+            data=survey_data,
+            family=family_sens_reg,
+            stanvars=all_stanvars,
+            prior=prior(beta(1,1),class="bias") + 
+              prior(normal(0,5), class="b"),
+            chains=2,cores=2,control=list(max_treedepth=11,
+                                          adapt_delta=0.95),
+            backend = "cmdstanr")
+
+pp_check(fit1, type="bars",ndraws=500)
+loo(fit1)
+
+gov_cats <- ranef(fit1,groups = "gov")$gov[,,1] %>% as_tibble %>% 
+  mutate(level=row.names(ranef(fit1,groups = "gov")$gov[,,1]))
+
+```
+
+Plot this additional type of estimation:
+
+```{r all_plot}
+
+get_latent_draws <- posterior_epred(fit1)
+
+get_latent_est <- tibble(median=median(get_latent_draws),
+                         high=quantile(apply(get_latent_draws, 1, median),.95),
+                         low=quantile(apply(get_latent_draws, 1, median),.05))
+
+# get estimate of bias
+
+prep_bias <- prepare_predictions(fit1)
+
+bias_trans <- posterior_epred_bias_sens_reg(prep_bias)
+
+bias_trans_est <- tibble(bias_est_low=quantile(apply(bias_trans,1,median),.05),
+                         bias_est=median(apply(bias_trans,1,median)),
+                         bias_est_high=quantile(apply(bias_trans,1,median),.95))
+
+est_data <- tibble(estimate=c(s1$coefficients[,1],
+                              est_beta$median[est_beta$variable=="pi_hat"],
+                              pred_rr_mean$est,
+                              get_latent_est$median),
+                   low=c(s1$coefficients[,1]-1.96*(s1$coefficients[,2]),
+                         est_beta$q5[est_beta$variable=="pi_hat"],
+                         pred_rr_mean$ci.lower,
+                         get_latent_est$low),
+                   high=c(s1$coefficients[,1]+1.96*(s1$coefficients[,2]),
+                         est_beta$q95[est_beta$variable=="pi_hat"],
+                         pred_rr_mean$ci.upper,
+                         get_latent_est$high),
+                   estimator=c("RRreg","Bayes","EM","Bayes_Reg"))
+
+est_data %>% 
+  ggplot(aes(y=estimate,x=estimator)) +
+  geom_linerange(aes(ymin=low,
+                     ymax=high)) +
+  geom_point() + theme_tufte()
+
+knitr::kable(bias_trans_est)
+
+```
+
+Again, we see that all of the estimates are quite similar. In the last section we compare them directly with a simulation, which shows that the two Bayesian estimators are both accurate and have good coverage, while `RRreg` is accurate but understates uncertainty in general.
+
+## Adjustment with MRP
+
+Given that the data come from an online panel, we want to use Tunisian 2014 census data to adjust these findings by age, sex and governorate. This will account for a considerable (though not all) amount of sample selection bias due to the online survey frame. We will use random effects to model the influence of the sample frame on the outcome.
+
+```{r load_census_data}
+
+head(census)
+
+```
+
+We will predict the sensitive trait for each census category, then stratify by summing over the proportion of population in each cell from the census data. We then plot this adjusted estimate.
+
+```{r mrp_adjust}
+
+# do for each condition, then average
+
+census_treat <- mutate(census, treatment=1)
+census_notreat <- mutate(census, treatment=0)
+
+pred_data <- bind_rows(census_treat,
+                       census_notreat) %>% 
+  mutate(prop=prop/2)
+
+tunisia_pred <- posterior_epred(fit1, newdata=pred_data) %>% 
+  as_tibble %>% 
+  mutate(draw=1:n()) %>% 
+  gather(key="key",
+         value="estimate",-draw) %>% 
+  mutate(draw=paste0("V",draw)) %>% 
+  spread(key="draw",value="estimate") %>% 
+  mutate(key=as.numeric(stringr::str_remove(key, "V")))
+
+tunisia_pred <- left_join(tunisia_pred, 
+                          mutate(pred_data, key=1:n())) %>% 
+  left_join(census) %>% 
+  gather(key = "draw",
+         value= "estimate",
+         matches("V",ignore.case=F))
+
+# aggregate to highest level
+
+agg_est <- tunisia_pred %>% 
+  group_by(draw) %>% 
+  summarize(est_adj = sum(estimate * prop))
+
+agg_est %>% 
+  ggplot(aes(x=est_adj)) +
+  geom_histogram() + theme_tufte()
+
+quantile(agg_est$est_adj, c(0.05,.5,.95))
+```
+
+A difference of approximately 1 percent between the adjusted estimate and the naive number:
+
+```{r naive_num}
+
+quantile(apply(get_latent_draws, 1, mean),c(0.05,.5,.95))
+
+```
+
+Next we can aggregate these results to look at gender, age and governorate in terms of relative levels of Saied support. Given that there is substantial uncertainty due to the sensitive question design, these results are somewhat noisy and should be interpreted with caution.
+
+### Gender
+
+When we aggregate to the level of gender, we see that men are approximately 5% more likely than women to report opposition President Kais Saied.
+
+```{r gender_support}
+
+# merge in census data
+tunisia_pred %>% 
+  group_by(gender,draw) %>% 
+  mutate(prop_gender=pop/sum(pop)) %>% 
+  summarize(est_gender=sum(estimate*prop_gender)) %>% 
+  group_by(gender) %>% 
+  summarize(median_gender=median(est_gender),
+            low_gender=quantile(est_gender,.05),
+            high_gender=quantile(est_gender,.95)) %>% 
+  ggplot(aes(y=median_gender,
+             x=gender)) +
+  geom_pointrange(aes(ymin=low_gender,
+                      ymax=high_gender)) +
+  scale_y_continuous(labels=scales::percent) +
+    labs("% Opposing Saied") +
+  theme_tufte()
+```
+
+### Age
+
+The plot below shows aggregated opposition by age. Approximately 60 percent of the youngest age category (18 to 19 year olds) oppose President Saied while only 40 percent of the oldest age category (80 and over) oppose President Saied. This pattern is noticeably stronger than that for gender, though there is still considerable uncertainty.
+
+```{r age_support}
+
+tunisia_pred %>% 
+  group_by(age_cat,draw) %>% 
+  mutate(prop_age_cat=pop/sum(pop)) %>% 
+  summarize(est_age_cat=sum(estimate*prop_age_cat)) %>% 
+  group_by(age_cat) %>% 
+  summarize(median_age_cat=median(est_age_cat),
+            low_age_cat=quantile(est_age_cat,.05),
+            high_age_cat=quantile(est_age_cat,.95)) %>% 
+  ggplot(aes(y=median_age_cat,
+             x=age_cat)) +
+  geom_pointrange(aes(ymin=low_age_cat,
+                      ymax=high_age_cat)) +
+    scale_y_continuous(labels=scales::percent) +
+  labs("% Opposing Saied") +
+   theme_tufte() +
+  theme(axis.text.x = element_text(angle=90))
+```
+
+### Region
+
+Finally, the plot below shows predicted opposition by region. In general, more rural districts like Kebili, Beja and Kairouan report more opposition, but these differences are quite noisy. Differences between regions are not especially pronounced in the data.
+
+```{r support_by_region}
+
+tunisia_pred %>% 
+  group_by(gov,draw) %>% 
+  mutate(prop_gov=pop/sum(pop)) %>% 
+  summarize(est_gov=sum(estimate*prop_gov)) %>% 
+  group_by(gov) %>% 
+  summarize(median_gov=median(est_gov),
+            low_gov=quantile(est_gov,.05),
+            high_gov=quantile(est_gov,.95)) %>% 
+  ggplot(aes(y=median_gov,
+             x=reorder(gov,median_gov))) +
+  coord_flip() +
+    labs("% Opposing Saied") +
+  geom_pointrange(aes(ymin=low_gov,
+                      ymax=high_gov)) + theme_tufte()
+
+```
+
+## Simulation Comparison: Univariate Vs. Regression
+
+In this simulation we test the coverage and unbiasedness of the estimators, including our preferred Bayesian specification. The simulation shows that the estimators perform quite well at recovering the sensitive trait, and our Bayesian models have excellent coverage (the uncertainty they report is reasonable). We'll use the regression spec as the DGP along with our observed parameters for this study.
+
+```{r simbetasens}
+
+library(parallel)
+
+# confusion matrix
+
+P <- getPW("Warner",.25)
+
+# assume N = 500, small sensitivity of 0.05
+
+theta <- 0.3
+N <- 800
+bias <- 0.1
+
+sims <- 500
+
+if(run_sim) {
+  
+  over_sims <- lapply(1:sims, function(s) {
+  
+  # assign half to treatment, half to control
+  
+  treatment <- as.numeric(runif(N)>0.5)
+  
+  obs_response <- ifelse(treatment==1,
+                         as.numeric((P[2,1] * (1 - theta) + P[2,2]*theta)>runif(N)),
+                         as.numeric((theta - bias)>runif(N)))
+  
+  out_data <- tibble(y = obs_response,
+                     treatment=treatment)
+  
+  # define custom family as being upper and lower bounded for bias
+  
+  family_sens_reg <- custom_family("sens_reg",
+                                 dpars=c("mu","bias"),
+                                 links=c("logit","logit"),
+                                 type="int",
+                                 lb=c(NA,0),
+                                 ub=c(NA,1),
+                                 vars=c("P","vint1[n]"))
+  
+  # estimate model with brms
+
+  est_mod_brms <- brm(y | vint(treatment) ~ 1,
+                      family=family_sens_reg,
+                      stanvars=all_stanvars,
+                      data=out_data,
+                      #prior=prior(normal(0,10),class="bias"),
+                      prior=prior(beta(1,1),class="bias") +
+                        prior(normal(-0.84,10),class="Intercept"),
+                      chains=1,
+                      cores=1,
+                      iter=1000,
+            backend = "cmdstanr")
+  
+  get_est_brms <- posterior::summarise_draws(as_draws(est_mod_brms, "b_Intercept"),
+                                             estimate=~median(plogis(.x)),
+                                             high=~quantile(plogis(.x),.95),
+                                             low=~quantile(plogis(.x),.05)) %>% 
+    mutate(param="mu") 
+  
+  # calculate bias transformed
+  
+  bias_est <- as_draws_matrix(est_mod_brms, "bias")
+  
+  mu_trans <- posterior_epred(est_mod_brms) %>% apply(1,median)
+
+  bias_trans_est <- tibble(`95%`=quantile(bias_est * mu_trans,.95),
+                         estimate=median(bias_est * mu_trans),
+                         `5%`=quantile(bias_est * mu_trans,.05)) %>% 
+    mutate(param="bias")
+  
+  get_est_brms <- bind_rows(get_est_brms, bias_trans_est) %>% 
+    mutate(model="Bayes BRMS")
+  
+  # compare with RRreg
+  
+  est_freq <- RRuni(response=obs_response[treatment==1],
+                  p=.25,
+                  model="Crosswise",MLest = TRUE)
+  
+  this_sum <- summary(est_freq)
+  
+  # now do cheap Bayes
+  
+  lambda <- mean(obs_response[treatment==1])
+  
+  sim_data2 <- list(success_cm=(sum(treatment))*((lambda - .75)/(-.5)),
+                     fail_cm= (sum(treatment))*(1-((lambda - .75)/-.5)),
+                     success_d=sum(obs_response[treatment==0]),
+                     fail_d=sum(1 - obs_response[treatment==0]))
+
+  fit_simple <- sen_mod$sample(chains=1, cores=1, data=sim_data2,refresh=0)
+  
+  simple_sum <- fit_simple$summary()
+  
+  mu <- try(tibble(estimates=c(simple_sum$median[simple_sum$variable=="pi_hat"],
+                     this_sum$coefficients[1,1],
+                     get_est_brms$estimate[get_est_brms$param=="mu"]),
+         q5=c(simple_sum$q5[simple_sum$variable=="pi_hat"],
+                     this_sum$coefficients[1,1] - 1.96*this_sum$coefficients[1,2],
+              get_est_brms$`5%`[get_est_brms$param=="mu"]),
+         q95=c(simple_sum$q95[simple_sum$variable=="pi_hat"],
+                     this_sum$coefficients[1,1] + 1.96*this_sum$coefficients[1,2],
+               get_est_brms$`95%`[get_est_brms$param=="mu"]),
+         models=c("RRreg","Bayes Simple","Bayes BRMS"),
+         param="mu") %>% 
+    mutate(cov=theta > q5 & theta < q95,
+           sim=s))
+  
+  bias_est <- try(filter(get_est_brms, param=="bias") %>% 
+    select(estimates="estimate",
+           q5="5%",
+           q95="95%") %>% 
+    mutate(cov=bias > q5 & bias < q95,
+           sim=s,
+           param="bias",
+           models="brms"))
+  
+  try(bind_rows(mu, bias_est))
+   
+  
+}) %>% bind_rows
+  
+  saveRDS(over_sims, "data/over_sims.rds")
+  
+} else {
+  
+  over_sims <- readRDS("data/over_sims.rds")
+  
+}
+
+
+
+over_sims %>% group_by(models,param) %>% 
+  summarize(mean_cov=mean(cov)) %>% 
+  knitr::kable(caption="Coverage")
+
+over_sims %>% group_by(models,param) %>% 
+  summarize(spread_CIs=sum(q95 - q5)) %>% 
+  knitr::kable(caption="Total Variance")
+```
+
+Now let's check bias.
+
+```{r bias}
+
+#RMSE
+
+over_sims %>% group_by(models,param) %>% 
+  summarize(mean_rmse=switch(unique(param),
+                             mu=sqrt(mean((estimates - theta)^2)),
+                             bias=sqrt(mean((estimates - bias)^2)))) %>% 
+  knitr::kable(caption = "RMSE")
+
+over_sims %>% group_by(models,param) %>% 
+  summarize(abs_bias=switch(unique(param),
+                             mu=mean(abs(estimates - theta)),
+                             bias=mean(abs(estimates - bias)))) %>% 
+  knitr::kable(caption = "Mean Absolute Bias")
+
+```
+
+# References
+
