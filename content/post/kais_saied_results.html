@@ -37,7 +37,7 @@ bibliography: references.bib
 
 <p>This Rmarkdown document contains code and data for the Kais Saied survey experiment by Robert Kubinec and Amr Yakout. This survey was fielded using an online panel in Tunisia during August of 2023. The survey experiment involved providing half the sample a direct question about whether they supported Kais Saied’s move to suspend parliament and centralize power in his hands, and the other half of the sample had a randomized response question designed to allow them to answer truthfully without being identified. This experiment was pre-registered and the pre-registration can be accessed from <a href="https://www.robertkubinec.com/files/preregistration_tunisia_imf_survey.pdf">this link</a>.</p>
 <p>This document was drafted to allow people to verify our results using the raw data. The survey data included has been stripped of any identifying information about respondents, but it does include the actual answers from the survey so that all analyses can be reproduced. You can access the code file and the raw data from this Github repository: <a href="https://github.com/saudiwin/saudiwin.github.io/tree/sources/content/post" class="uri">https://github.com/saudiwin/saudiwin.github.io/tree/sources/content/post</a> (file is entitled <code>kais_saied_results.Rmd</code> and the data file is in the <code>data/</code> subfolder). The survey data can be found in the <code>data/</code> folder as <code>kais_saied_survey.csv</code>.</p>
-<p>This Quarto document includes embedded R code that loads the survey data and estimates the Stan model for proportion of people who support Kais Saied, and compares it to the direct question to see if there is sensitive survey bias. At present there are a total of 835 completed responses.</p>
+<p>This Quarto document includes embedded R code that loads the survey data and estimates the Stan model for proportion of people who support Kais Saied, and compares it to the direct question to see if there is sensitive survey bias. At present there are a total of 913 completed responses.</p>
 <p>All questions about the analysis should be directed to Robert Kubinec at <a href="mailto:rmk7@nyu.edu">rmk7@nyu.edu</a>.</p>
 <div id="robustness-check-time-of-completion" class="section level2">
 <h2>Robustness check: time of completion</h2>
@@ -109,11 +109,11 @@ fit_mod &lt;- sen_mod$sample(chains=4, cores=4, data=to_stan_data,refresh=0)</co
 <pre><code>## # A tibble: 5 × 10
 ##   variable           mean   median     sd    mad       q5      q95  rhat ess_b…¹
 ##   &lt;chr&gt;             &lt;num&gt;    &lt;num&gt;  &lt;num&gt;  &lt;num&gt;    &lt;num&gt;    &lt;num&gt; &lt;num&gt;   &lt;num&gt;
-## 1 lp__           -790.    -790.    1.21   1.00   -792.    -789.     1.00   2093.
-## 2 pi_hat            0.512    0.512 0.0248 0.0244    0.471    0.553  1.00   4310.
-## 3 d_hat             0.316    0.316 0.0227 0.0227    0.279    0.353  1.00   4612.
-## 4 d_hat_binomial    0.315    0.315 0.0233 0.0238    0.277    0.353  1.00   4161.
-## 5 estimand          0.196    0.196 0.0332 0.0337    0.142    0.251  1.00   4350.
+## 1 lp__           -852.    -852.    1.24   0.960  -855.    -851.     1.00   2067.
+## 2 pi_hat            0.507    0.507 0.0244 0.0247    0.468    0.548  1.00   4363.
+## 3 d_hat             0.297    0.297 0.0212 0.0212    0.262    0.333  1.00   4369.
+## 4 d_hat_binomial    0.298    0.297 0.0210 0.0216    0.265    0.331  1.00   4168.
+## 5 estimand          0.210    0.209 0.0324 0.0323    0.157    0.262  1.00   4326.
 ## # … with 1 more variable: ess_tail &lt;num&gt;, and abbreviated variable name
 ## #   ¹​ess_bulk</code></pre>
 <p>We can plot the estimated bias as the difference between the average proportion of those responding affirmative to the direct question and the calculated level of opposition to Saied from the randomized response question:</p>
@@ -122,7 +122,7 @@ fit_mod &lt;- sen_mod$sample(chains=4, cores=4, data=to_stan_data,refresh=0)</co
 mcmc_dens(fit_mod$draws(&quot;estimand&quot;)) + 
   theme_tufte()</code></pre>
 <p><img src="/post/kais_saied_results_files/figure-html/plot_bias-1.png" width="672" /></p>
-<p>Our basic model shows that approximately 19.6% of respondents reported anti-Saied preferences in the randomized response method versus the direct question. The 5% - 95% uncertainty interval is from 14.2 to 25.1 .</p>
+<p>Our basic model shows that approximately 20.9% of respondents reported anti-Saied preferences in the randomized response method versus the direct question. The 5% - 95% uncertainty interval is from 15.7 to 26.2 .</p>
 <p>The full posterior density of the bias-corrected estimate is:</p>
 <pre class="r"><code>mcmc_dens(fit_mod$draws(&quot;pi_hat&quot;)) + theme_tufte()</code></pre>
 <p><img src="/post/kais_saied_results_files/figure-html/plot_true-1.png" width="672" /></p>
@@ -139,10 +139,10 @@ mcmc_dens(fit_mod$draws(&quot;estimand&quot;)) +
 
 summary(est_rreg)</code></pre>
 <pre><code>## Crosswise Model with p = 0.25
-## Sample size: 391
+## Sample size: 425
 ## 
 ##    Estimate   StdErr      z  Pr(&gt;|z|)    
-## pi 0.512788 0.050633 10.128 &lt; 2.2e-16 ***
+## pi 0.507059 0.048563 10.441 &lt; 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>s1 &lt;- summary(est_rreg)</code></pre>
@@ -183,11 +183,11 @@ rr_est &lt;- rrreg(kais_rr_num_switch ~ as.character(gender_two),
 
 pred_rr &lt;- predict(rr_est,quasi.bayes = T)
 mean(pred_rr$est)</code></pre>
-<pre><code>## [1] 0.5083205</code></pre>
+<pre><code>## [1] 0.5006138</code></pre>
 <pre class="r"><code>mean(pred_rr$est[comp_data_rr$gender_two==&quot;Male&quot;],na.rm=T)</code></pre>
-<pre><code>## [1] 0.5125389</code></pre>
+<pre><code>## [1] 0.5191125</code></pre>
 <pre class="r"><code>mean(pred_rr$est[comp_data_rr$gender_two==&quot;Female&quot;],na.rm=T)</code></pre>
-<pre><code>## [1] 0.5018136</code></pre>
+<pre><code>## [1] 0.4720857</code></pre>
 <pre class="r"><code>pred_rr_mean &lt;- predict(rr_est,quasi.bayes = T,avg=T)</code></pre>
 <p>This number seems very close to our other estimators. Again, the uncertainty seems larger than the simple Bayesian method. Minimal gender differences over who is more or less likely to oppose Saied.</p>
 <p>We can plot this estimate against the others:</p>
@@ -389,19 +389,19 @@ pp_check(fit1, type=&quot;bars&quot;,ndraws=500)</code></pre>
 <p><img src="/post/kais_saied_results_files/figure-html/define_brms_rr-1.png" width="672" /></p>
 <pre class="r"><code>loo(fit1)</code></pre>
 <pre><code>## 
-## Computed from 2000 by 804 log-likelihood matrix
+## Computed from 2000 by 880 log-likelihood matrix
 ## 
 ##          Estimate   SE
-## elpd_loo   -534.4  7.8
-## p_loo        10.9  0.4
-## looic      1068.9 15.6
+## elpd_loo   -577.2  8.9
+## p_loo        11.0  0.5
+## looic      1154.3 17.9
 ## ------
 ## Monte Carlo SE of elpd_loo is 0.1.
 ## 
 ## Pareto k diagnostic values:
 ##                          Count Pct.    Min. n_eff
-## (-Inf, 0.5]   (good)     803   99.9%   702       
-##  (0.5, 0.7]   (ok)         1    0.1%   1529      
+## (-Inf, 0.5]   (good)     879   99.9%   979       
+##  (0.5, 0.7]   (ok)         1    0.1%   1390      
 ##    (0.7, 1]   (bad)        0    0.0%   &lt;NA&gt;      
 ##    (1, Inf)   (very bad)   0    0.0%   &lt;NA&gt;      
 ## 
@@ -457,9 +457,9 @@ est_data %&gt;%
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.1155721</td>
-<td align="right">0.2164725</td>
-<td align="right">0.3187978</td>
+<td align="right">0.1387014</td>
+<td align="right">0.229108</td>
+<td align="right">0.3255208</td>
 </tr>
 </tbody>
 </table>
@@ -516,11 +516,11 @@ agg_est %&gt;%
 <p><img src="/post/kais_saied_results_files/figure-html/mrp_adjust-1.png" width="672" /></p>
 <pre class="r"><code>quantile(agg_est$est_adj, c(0.05,.5,.95))</code></pre>
 <pre><code>##        5%       50%       95% 
-## 0.4198164 0.5116073 0.6027915</code></pre>
+## 0.4192154 0.5005318 0.5846272</code></pre>
 <p>A difference of approximately 1 percent between the adjusted estimate and the naive number:</p>
 <pre class="r"><code>quantile(apply(get_latent_draws, 1, mean),c(0.05,.5,.95))</code></pre>
 <pre><code>##        5%       50%       95% 
-## 0.4337994 0.5237461 0.6165752</code></pre>
+## 0.4406487 0.5194984 0.6057402</code></pre>
 <p>Next we can aggregate these results to look at gender, age and governorate in terms of relative levels of Saied support. Given that there is substantial uncertainty due to the sensitive question design, these results are somewhat noisy and should be interpreted with caution.</p>
 <div id="gender" class="section level3">
 <h3>Gender</h3>
