@@ -207,7 +207,13 @@ We can plot the estimated bias as the difference between the average proportion 
 estimand <- c(fit_mod$draws("estimand"))
 
 mcmc_dens(fit_mod$draws("estimand")) + 
-  theme_tufte()
+  theme_tufte() +
+  labs(x="Percent Increase Over Direct Question") +
+  scale_x_continuous(labels=scales::percent_format()) + 
+  ggtitle("Difference Between Direct Question and Encrypted Question",
+          subtitle="Opposition to Saied's Coup")
+
+ggsave("bias_calc.png",width=5,height=4)
 
 ```
 
@@ -600,10 +606,22 @@ agg_est <- tunisia_pred %>%
 
 agg_est %>% 
   ggplot(aes(x=est_adj)) +
-  geom_histogram() + theme_tufte()
+  geom_density(fill="blue",alpha=0.5,
+               colour=NA) + theme_tufte() +
+  labs(y="",x="Percent Opposing Saied's Coup") +
+  scale_x_continuous(labels=scales::percent_format()) +
+  geom_vline(aes(xintercept=mean(est_adj)),linetype=2) +
+   ggtitle("Estimated Number Who Oppose Saied's 2021 Coup",
+          subtitle="Based on Statistical Analysis of Randomized Response Question") +
+  annotate("text",
+           x=.52,y=4,label=paste0("Most likely number: ",round(mean(agg_est$est_adj),
+                                                               3)*100,"%"),
+           hjust=0)
 
-quantile(agg_est$est_adj, c(0.05,.5,.95))
+ggsave("num_oppose.png",width=5,height=3)
 ```
+
+`{quantile(agg_est$est_adj, c(0.05,.5,.95))}`
 
 A difference of approximately 1 percent between the adjusted estimate and the naive number:
 
@@ -653,14 +671,19 @@ tunisia_pred %>%
   summarize(median_age_cat=median(est_age_cat),
             low_age_cat=quantile(est_age_cat,.05),
             high_age_cat=quantile(est_age_cat,.95)) %>% 
+  mutate(age_cat=recode(age_cat, `80 year and more`="80+")) %>% 
   ggplot(aes(y=median_age_cat,
              x=age_cat)) +
   geom_pointrange(aes(ymin=low_age_cat,
                       ymax=high_age_cat)) +
     scale_y_continuous(labels=scales::percent) +
-  labs("% Opposing Saied") +
-   theme_tufte() +
-  theme(axis.text.x = element_text(angle=90))
+  scale_x_discrete(guide = guide_axis(n.dodge = 2))+
+  labs(y="% Opposing Saied",x="") +
+  ggtitle("Number Opposing Saied by Age Category",
+         subtitle="Encrypted (Randomized) Response Question") +
+   theme_tufte()
+
+ggsave("age_cat.png",width=5,height=3)
 ```
 
 ### Region
