@@ -2,7 +2,7 @@
 title: "New Survey Research on Tunisia and the IMF Deal"
 subtitle: "Tunisian Public More Open to the IMF than Its Leaders"
 author: "Robert Kubinec and Sujeong Shim"
-date: "2022-04-02T15:00:00"
+date: "2023-09-25T15:00:00"
 output: blogdown::html_page
 header:
   title: "New Survey Research on Tunisia and the IMF Deal"
