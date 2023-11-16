@@ -104,6 +104,8 @@ comp_data_direct <- survey_data %>%
 
 # plot of direct responses
 
+write_csv(select(comp_data_direct,x="kais_direct"), "direct_response_Q.csv")
+
 comp_data_direct %>%
   ggplot(aes(x=kais_direct)) +
   geom_bar() +
@@ -115,6 +117,8 @@ comp_data_direct %>%
 ggsave("direct_response.png",scale=0.7)
 
 # plot of randomized responses
+
+write_csv(select(comp_data_rr,x="kais_rr"), "responses_randomized_Q.csv")
 
 comp_data_rr %>%
   ggplot(aes(x=kais_rr)) +

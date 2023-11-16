@@ -640,14 +640,23 @@ When we aggregate to the level of gender, we see that men are approximately 5% m
 ```{r gender_support}
 
 # merge in census data
-tunisia_pred %>% 
+plot_data_gender <- tunisia_pred %>% 
   group_by(gender,draw) %>% 
   mutate(prop_gender=pop/sum(pop)) %>% 
   summarize(est_gender=sum(estimate*prop_gender)) %>% 
   group_by(gender) %>% 
   summarize(median_gender=median(est_gender),
             low_gender=quantile(est_gender,.05),
-            high_gender=quantile(est_gender,.95)) %>% 
+            high_gender=quantile(est_gender,.95))
+
+select(plot_data_gender,
+       y="median_gender",
+       x="gender",
+       high_y="high_gender",
+       low_y="low_gender") %>% 
+  write_csv("plot_data_gender.csv")
+
+  plot_data_gender %>% 
   ggplot(aes(y=median_gender,
              x=gender)) +
   geom_pointrange(aes(ymin=low_gender,
@@ -663,7 +672,7 @@ The plot below shows aggregated opposition by age. Approximately 60 percent of t
 
 ```{r age_support}
 
-tunisia_pred %>% 
+plot_data_age <- tunisia_pred %>% 
   group_by(age_cat,draw) %>% 
   mutate(prop_age_cat=pop/sum(pop)) %>% 
   summarize(est_age_cat=sum(estimate*prop_age_cat)) %>% 
@@ -671,7 +680,16 @@ tunisia_pred %>%
   summarize(median_age_cat=median(est_age_cat),
             low_age_cat=quantile(est_age_cat,.05),
             high_age_cat=quantile(est_age_cat,.95)) %>% 
-  mutate(age_cat=recode(age_cat, `80 year and more`="80+")) %>% 
+  mutate(age_cat=recode(age_cat, `80 year and more`="80+")) 
+  
+  select(plot_data_age,
+       y="median_age_cat",
+       x="age_cat",
+       high_y="high_age_cat",
+       low_y="low_age_cat") %>% 
+  write_csv("plot_data_age.csv")
+
+  plot_data_age %>% 
   ggplot(aes(y=median_age_cat,
              x=age_cat)) +
   geom_pointrange(aes(ymin=low_age_cat,
@@ -692,14 +710,24 @@ Finally, the plot below shows predicted opposition by region. In general, more r
 
 ```{r support_by_region}
 
-tunisia_pred %>% 
+plot_data_region <- tunisia_pred %>% 
   group_by(gov,draw) %>% 
   mutate(prop_gov=pop/sum(pop)) %>% 
   summarize(est_gov=sum(estimate*prop_gov)) %>% 
   group_by(gov) %>% 
   summarize(median_gov=median(est_gov),
             low_gov=quantile(est_gov,.05),
-            high_gov=quantile(est_gov,.95)) %>% 
+            high_gov=quantile(est_gov,.95))
+
+
+select(plot_data_region,
+       x="median_gov",
+       y="gov",
+       high_x="high_gov",
+       low_x="low_gov") %>% 
+  write_csv("plot_data_region.csv")
+
+plot_data_region %>% 
   ggplot(aes(y=median_gov,
              x=reorder(gov,median_gov))) +
   coord_flip() +
