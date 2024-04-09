@@ -177,7 +177,7 @@ To understand this, we can return back to our analogies of maps. The maps that w
 
 As a result, when we trace a flight path on a flat map, the plane's journey is always curved as in the picture below:
 
-![](img/flight_route.gif)
+![](../../img/flight_route.gif)
 
 This flight path--which happens to be for a very long flight from Paris to Tahiti--seems bizarrely roundabout on the map. You would think that the straightest path between Paris and Tahiti would be a straight line. This would be true *if the Earth were flat, but it's not*. The Earth is round, and the map is a *linear* projection of a 3-D object onto a 2-D surface. When we do that and calculate the most direct route, we end up with this weird bend-y shape: *just like our logit plot above*.
 
