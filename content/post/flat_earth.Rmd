@@ -33,7 +33,7 @@ I'm also going to argue based on this analogy that people who assiduously avoid 
 
 ## B Is For Bernoulli
 
-I'll start first with a review of what a logit model actually is and there is some confusion on this score. Logit is actually the wrong name for what most people are estimating; the model is in fact the Bernoulli distribution. This distribution has the following form for a variable $Y$ that takes on two values, i.e. 0 or 1:
+I'll start first with a review of what a logit model actually is as there is some confusion on this score. Logit is the wrong name for what most people are estimating; the model is in fact the Bernoulli distribution. This distribution has the following form for a variable $Y$ that takes on two values, i.e. 0 or 1:
 
 $$
 P(Y = k) = \begin{cases} p, & \text{if } k=1, \\1-p, & \text{if } k=0. \end{cases}
