@@ -106,11 +106,11 @@ $$
 
 This is a handy dandy trick to allow $\beta$ to equal 0 without having the probability of $Y$ to be equal to 0 as well. Say $\alpha$ is 0.35\--then if $\beta$ is 0, 35% of people would still vote Biden. $\alpha$ could be thought of as a baseline rate---without considering the effect of age, how many people vote for Biden? Once we add $\alpha$, this equation is the same as the slope of a line (good ol' $mx + b$), which makes it a *linear* model (linear means a straight line).
 
-We now have a linear model we want to stick in $p$ to model the relationship between age ($X$) and voting for Biden ($Y$). We've made progress, but we're still gonna have issues squashing $X$ into a proportion. The trick is that we need $\alpha + \beta X$ to always output a number between 0 and 1. We can't have a proportion greater than 1 or less than 0. For these reasons, to use this model we have to pick specific values for $\alpha$ and $\beta$ that allow us to keep within those bounds. For example, we could set $\alpha$ to 0.1 (a baseline rate of 10% of 1s) and $\beta$ to 0.3. Let's simulate some data with those numbers and plot it:
+We now have a linear model we want to stick in $p$ to model the relationship between age ($X$) and voting for Biden ($Y$). We've made progress, but we're still gonna have issues squashing $X$ into a proportion. The trick is that we need $\alpha + \beta X$ to always output a number between 0 and 1. We can't have a proportion greater than 1 or less than 0. For these reasons, to use this model we have to pick specific values for $\alpha$ and $\beta$ that allow us to keep within those bounds. For example, we could set $\alpha$ to 0.1 (a baseline rate of 10% of 1s) and $\beta$ to 0.5. Let's simulate some data with those numbers and plot it:
 
 ```{r sim_mod}
 
-Y <- as.numeric(runif(length(X))<(0.1 + 0.3*(X/100)))
+Y <- as.numeric(runif(length(X))<(0.1 + .5*(X/100)))
 
 ggplot(data=tibble(Y,X),aes(y=Y,x=X/100)) +
   geom_point(alpha=0.5) +
@@ -140,7 +140,7 @@ Yikes! Now we're only getting values for $Y$ that are equal to 1. What happened 
 
 We now have two options. We can keep on guessing what values might work for $\alpha$ and $\beta$, or... we could get a map. A map that would allow us to *translate* or *transform* our linear model $\alpha + \beta X$ into the cramped space of $p$. Like the teleporter in Star Trek, we need something that can move our value of $\alpha + \beta X$ to the right spot on $p$ without going over 1 and under 0.
 
-This is where our good friend logit comes in. Logit is a function that can take in *any* number--literally any number--and *magically* transform it to a number that is strictly between 0 and 1. It's a magical map that let's us move from the world of ages and to the world of proportions between 0 and 1.
+This is where our good friend logit comes in. Logit is a function that can take in *any* number--literally any number--and *magically* transform it to a number that is strictly between 0 and 1. It's a magical map that let's us move from the world of ages and to the world of proportions between 0 and 1. **NB: Technically this is not the logit function but rather the inverse logit function. But everyone calls the model "logit" so I'll just use that term.**
 
 The function itself is a bit ugly, but I'll include it here along with our linear model as the input and $p$ as the output:
 
@@ -173,7 +173,7 @@ If you notice, though, while the line curves, it never changes the direction. Wh
 
 Often people get confused or suspicious at this point. What's up with this weird S-curve thing? Linear models are nice and straight. Why do we need the bend-y thing?
 
-To understand this, we can return back to our analogies of maps. The maps that we use are all two-dimensional: we can put them on a table and they lie flat. However, we know that they aren't completely accurate because the earth is not flat, it's round. A globe is the truly accurate representation of the earth. A flattened map is going to inevitably cause distortions.
+To understand this, we can return back to our analogies of maps. The maps that we use are all two-dimensional: we can put them on a table and they lie flat. However, we know that they aren't completely accurate because the Earth is not flat, it's round. A globe is the truly accurate representation of the Earth. A flattened map is going to inevitably cause distortions.
 
 As a result, when we trace a flight path on a flat map, the plane's journey is always curved as in the picture below:
 
@@ -208,7 +208,7 @@ What is logit then? A handy dandy *scaling* function that maps a linear model to
 
 There are people who *really* don't like logit. Usually it's something to do with how the function complicates things and makes these bend-y shapes. It does require some thinking as we have to think a bit about what our linear model coefficient $\beta$ means. The linear model is a straight line, but the space it is passing through changes as $p$ changes. What that means substantively is that $\beta$, or the effect of age on the proportion voting for Biden, *will vary depending on how big or small the proportion voting for Biden is*. If that proportion is small, a big value of $\beta$ will result in much smaller movement in voting than when the proportion voting is closer to 50%.
 
-It is this bend-y (or non-linear) nature of logit that leads some people to just ignore the Bernoulli and use a linear model. That is an easy way to deal with the problem, but unfortunately, we cannot simply ignore this transformation. Like flat earthers, if we ignore the fact that the earth is round, we won't be able to calculate distances accurately. If we have a linear model that can get larger or smaller than 0% or 100%, then we will end up with nonsensical predictions from our linear model like a plane that ends up at the wrong airport because the pilot believed the Earth was flat.
+It is this bend-y (or non-linear) nature of logit that leads some people to just ignore the Bernoulli and use a linear model. That is an easy way to deal with the problem, but unfortunately, we cannot simply ignore this transformation. Like flat earthers, if we ignore the fact that the Earth is round, we won't be able to calculate distances accurately. If we have a linear model that can get larger or smaller than 0% or 100%, then we will end up with nonsensical predictions from our linear model like a plane that ends up at the wrong airport because the pilot believed the Earth was flat.
 
 So how do you interpret a logit model coefficients? There are two ways once you understand what the logit function does:
 
