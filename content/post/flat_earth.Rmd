@@ -45,14 +45,14 @@ What is important to remember, though, is that $p$ is a proportion, so it can't 
 
 You've probably noticed that so far we haven't mentioned the word "logit" at all. Where does this tricky little monster come in?
 
-Well if all we want to do is calculate the average proportion of 1s in $Y$ then all we need is $p$. But what if we want to see if there is a relationship between some covariate $X$, say how old a person is, and a binary variable like $Y$? For example, suppose we want to know if older people are more likely to vote for Biden: voting can take on two values, either voting (1) or not voting (0). As an example, I'll generate some plausible-looking age data a bunch of citizens that we'll call our covariate $X$:
+Well if all we want to do is calculate the average proportion of 1s in $Y$ then all we need is $p$. But what if we want to see if there is a relationship between some covariate $X$, say how old a person is, and a binary variable like $Y$? For example, suppose we want to know if older people are more likely to vote for Biden: voting can take on two values, either voting (1) or not voting (0). As an example, I'll generate some plausible-looking age data for a bunch of citizens that we'll call our covariate $X$:
 
 ```{r age}
 X <- rpois(1000, 45)
 ggplot(tibble(x=X),aes(x=x)) + geom_histogram() + theme_barbie()
 ```
 
-We see that the average person in our data is about 45 years old and the age range is between roughly 20 and 60. What we want to understand is whether on average older (or younger) people tend to vote for Biden. But we have a problem - $p$ in the Bernoulli distribution cannot be any bigger than 1 or less than 0, but our age variable $X$ goes from 20 to 70. Yikes! We can't just pop $X$ into $p$ and see what happens.
+We see that the average person in our data is about 45 years old and the age range is between roughly 20 and 60. What we want to understand is whether on average older (or younger) people tend to vote more for Biden. But we have a problem - $p$ in the Bernoulli distribution cannot be any bigger than 1 or less than 0, and our age variable $X$ goes from 20 to 70. Yikes! We can't just pop $X$ into $p$ and without going way outside that range.
 
 If you take a look at $X$, you might think, "OK, well, just divide $X$ by 100 and it'll be between 0 and 1." Great thought! Let's do that and plot $X$ again:
 
@@ -70,7 +70,7 @@ Here we simply replaced $p$ with our covariate $X$. Very nice! We can even gener
 
 1.  Draw a random number between 0 and 1.
 
-2.  If the random number is greater than $X$, set $Y$ equal to 1, and 0 otherwise.
+2.  If the random number is less than $X$, set $Y$ equal to 1, and 0 otherwise.
 
 Here's what our random data $Y$ look like compared to $X$:
 
