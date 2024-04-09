@@ -19,7 +19,7 @@ library(ggplot2)
 library(tidyverse)
 library(ThemePark)
 
-knitr::opts_chunk$set(warning=FALSE,message=FALSE,echo=TRUE,fig.align = "center",echo=FALSE)
+knitr::opts_chunk$set(warning=FALSE,message=FALSE,echo=TRUE,fig.align = "center")
 
 set.seed(04072024)
 
@@ -217,7 +217,7 @@ So how do you interpret a logit model coefficients? There are two ways once you 
 
 There are plenty of vignettes about how to calculate marginal effects on the R package `marginaleffects` [website](https://marginaleffects.com/vignettes/slopes.html). Here I'll show how to calculate a marginal effect of $X$ on $Y$ with our linear model coefficients of $\alpha=-10$ and $\beta=0.2$. To do so I'll first simulate data with these values and then fit a logit (i.e. Bernoulli) model with the R function `glm`:
 
-```{r logitfit1}
+```{r logitfit1,echo=TRUE}
 
 # simulate our outcome Y given our linear model parameters
 
