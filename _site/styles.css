@@ -1,0 +1,22 @@
+/* css styles */
+
+.research {
+
+    .project-categories {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0.35em 0 0.35em;
+        padding-top: 0.35em;
+        padding-left: 0.5em;
+        padding-bottom: 0;
+        row-gap: 0.4em;
+        column-gap: 0.4em;
+        font-family: $headings-font-family;
+
+        .project-category {
+            padding: 0.25em 0.75em 0.25em 0em;
+            font-size: 0.7em;
+            text-transform: uppercase;
+        }
+    }
+}

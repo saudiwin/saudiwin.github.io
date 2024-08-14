@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.53">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Robert Kubinec and Sujeong Shim">
+<meta name="dcterms.date" content="2023-09-25">
+<meta name="description" content="The logit model for binary outcomes is poorly understood because it involves thinking in non-linear spaces. In this post, I illustrate what logit is using maps–and why people who resist logit are a bit like flat earthers.">
+
+<title>Lost in Transformation: The Horror and Wonder of Logit – Robert Kubinec</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BHP1PJ9LEX"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Robert Kubinec</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/saudiwin"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/rmkubinec"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Lost in Transformation: The Horror and Wonder of Logit</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Lost in Transformation: The Horror and Wonder of Logit</h1>
+            <p class="subtitle lead">Once You See What Logit Is, You’ll Love It Too</p>
+                  <div>
+        <div class="description">
+          The logit model for binary outcomes is poorly understood because it involves thinking in non-linear spaces. In this post, I illustrate what logit is using maps–and why people who resist logit are a bit like flat earthers.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Statistics</div>
+                <div class="quarto-category">Proportions</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Robert Kubinec and Sujeong Shim </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 25, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Punk Rock Poli Sci</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../files/Robert_Kubinec_CV_full.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CV</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../research/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../consulting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consulting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ordbetareg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ordbetareg</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../idealstan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">idealstan</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>Perhaps no other subject in applied statistics and machine learning has caused people as much trouble as the humble logit model. Most people who learn either subject start off with some form of linear regression, and having grasped it, are then told that if they have a variable with only two values, none of the rules apply. Horror of horrors: logit is a <em>non-linear</em> model, a doom from which few escape unscathed. Interpreting logit coefficients is a fraught exercise as not only applied researchers but also statisticians have endless arguments about how this should be done.</p>
+<p>In this post I de-mystify logit—and show why it’s such a useful model—by using maps. Yes, non-linear spaces can be tricky to understand, but as humans we can think reasonably well in up to three dimensions. If you know what the difference between a map and a globe is, then you can run and interpret logit just fine.</p>
+<p>I’m also going to argue based on this analogy that people who assiduously avoid logit are not so dissimilar from flat earthers. It’s true that moving from a map to a globe induces additional complications, but the alternative is run into <em>significant</em> problems in navigation. Similarly, applying the workhouse OLS model to a binary outcome isn’t wrong, but it can lead you astray when you want to figure out the distance between two points. Once you read this post, I hope you’ll see why logit is not all that complicated and should be the preferred model with a binary outcome.</p>
+<section id="b-is-for-bernoulli" class="level2">
+<h2 class="anchored" data-anchor-id="b-is-for-bernoulli">B Is For Bernoulli</h2>
+<p>I’ll start first with a review of what a logit model actually is as there is some confusion on this score. Logit is the wrong name for what most people are estimating; the model is in fact the Bernoulli distribution. This distribution has the following form for a variable <span class="math inline">\(Y\)</span> that takes on two values, i.e.&nbsp;0 or 1:</p>
+<p><span class="math display">\[
+P(Y = k) = \begin{cases} p, &amp; \text{if } k=1, \\1-p, &amp; \text{if } k=0. \end{cases}
+\]</span></p>
+<p>As soon as the math appears, of course, it looks complicated. This formula is actually the simplest statistical distribution once you break it down. What it says is that, on average, the probability that a variable <span class="math inline">\(Y\)</span> is equal to 1 is determined by the parameter <span class="math inline">\(p\)</span>, which represents a probability or a proportion. Suppose that <span class="math inline">\(Y\)</span> has 10 values, 30% of which are zeroes (0s) and 70% of which are 1s. In that case, <span class="math inline">\(p\)</span> would be equal to 0.7 or 70% because 70% of the time <span class="math inline">\(Y\)</span> is equal to 1. The probability of 0s is then <span class="math inline">\(1-p\)</span> or 100% - 70% = 30%. Easy peezy.</p>
+<p>What is important to remember, though, is that <span class="math inline">\(p\)</span> is a proportion, so it can’t be greater than 1 or less than 0. (That’s why the Bernoulli and Beta distributions are connected, which I discuss in my other <a href="https://www.robertkubinec.com/post/limited_dvs/">post on the topic</a>). You can’t have <span class="math inline">\(Y\)</span> be equal to 1 more than 100% of the time or less than 0% of the time; that’s nonsensical.</p>
+<p>You’ve probably noticed that so far we haven’t mentioned the word “logit” at all. Where does this tricky little monster come in?</p>
+<p>Well if all we want to do is calculate the average proportion of 1s in <span class="math inline">\(Y\)</span> then all we need is <span class="math inline">\(p\)</span>. But what if we want to see if there is a relationship between some covariate <span class="math inline">\(X\)</span>, say how old a person is, and a binary variable like <span class="math inline">\(Y\)</span>? For example, suppose we want to know if older people are more likely to vote for Biden: voting can take on two values, either voting (1) or not voting (0). As an example, I’ll generate some plausible-looking age data for a bunch of citizens that we’ll call our covariate <span class="math inline">\(X\)</span>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1000</span>, <span class="dv">45</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">tibble</span>(<span class="at">x=</span>X),<span class="fu">aes</span>(<span class="at">x=</span>x)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">theme_barbie</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/age-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We see that the average person in our data is about 45 years old and the age range is between roughly 20 and 60. What we want to understand is whether on average older (or younger) people tend to vote more for Biden. But we have a problem - <span class="math inline">\(p\)</span> in the Bernoulli distribution cannot be any bigger than 1 or less than 0, and our age variable <span class="math inline">\(X\)</span> goes from 20 to 70. Yikes! We can’t just pop <span class="math inline">\(X\)</span> into <span class="math inline">\(p\)</span> and without going way outside that range.</p>
+<p>If you take a look at <span class="math inline">\(X\)</span>, you might think, “OK, well, just divide <span class="math inline">\(X\)</span> by 100 and it’ll be between 0 and 1.” Great thought! Let’s do that and plot <span class="math inline">\(X\)</span> again:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">tibble</span>(<span class="at">x=</span>X<span class="sc">/</span><span class="dv">100</span>),<span class="fu">aes</span>(<span class="at">x=</span>x)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">theme_barbie</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/age2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We just squashed <span class="math inline">\(X\)</span> to be small enough that we could just pop it into the Bernoulli distribution:</p>
+<p><span class="math display">\[
+P(Y = k) = \begin{cases} X, &amp; \text{if } k=1, \\1-X, &amp; \text{if } k=0. \end{cases}
+\]</span></p>
+<p>Here we simply replaced <span class="math inline">\(p\)</span> with our covariate <span class="math inline">\(X\)</span>. Very nice! We can even generate random data using a simple algorithm from this function:</p>
+<ol type="1">
+<li><p>Draw a random number between 0 and 1.</p></li>
+<li><p>If the random number is less than <span class="math inline">\(X\)</span>, set <span class="math inline">\(Y\)</span> equal to 1, and 0 otherwise.</p></li>
+</ol>
+<p>Here’s what our random data <span class="math inline">\(Y\)</span> look like compared to <span class="math inline">\(X\)</span>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">runif</span>(<span class="fu">length</span>(X))<span class="sc">&lt;</span>(X<span class="sc">/</span><span class="dv">100</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">tibble</span>(Y,X),<span class="fu">aes</span>(<span class="at">y=</span>Y,<span class="at">x=</span>X<span class="sc">/</span><span class="dv">100</span>)) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>() <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_barbie</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/simXY-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What our plot shows is that when X is high, we tend to get more 1s in <span class="math inline">\(Y\)</span>, and when <span class="math inline">\(X\)</span> is low, we tend to get more 0s. The blue line shows what the average value of <span class="math inline">\(Y\)</span> is for a given age. When age is quite high, about 0.65 or 65 years, then <span class="math inline">\(Y\)</span> is about 0.65 or 65% on average (as we expect given the 1:1 relationship).</p>
+<p>If you look at this formula, though, you might think something is a bit off. Do we think that someone’s age as a fraction will be exactly equal to their probability of voting for Biden? Will voters who are 70 years old have an exactly 70% chance of voting for him? We only have one option for describing that relationship, and a 1:1 correspondence seems very limiting. So what do we do if we think this relationship is more nuanced?</p>
+<p>To allow the relationship to be less exact, we’ll take a page out of linear regression and add a coefficient to multiply <span class="math inline">\(X\)</span>, which we’ll call <span class="math inline">\(\beta\)</span>. We’ll add <span class="math inline">\(\beta\)</span> to our little formula:</p>
+<p><span class="math display">\[
+P(Y = k) = \begin{cases} \beta X, &amp; \text{if } k=1, \\1-\beta X, &amp; \text{if } k=0. \end{cases}
+\]</span></p>
+<p>Now let’s say <span class="math inline">\(\beta\)</span> is equal to 0.5. Then, the probability that someone will vote for Biden if they are 70 years old is only 35%. If <span class="math inline">\(\beta\)</span> goes up, then that relationship would be stronger. Adding a coefficient allows us to express the relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> with a lot more nuance.</p>
+<p>You might see some further issues, though. What if <span class="math inline">\(\beta\)</span> is equal to 0? In that case, the probability that someone votes for Biden is also equal to exactly 0%. In probability world, that’s not a good thing—we can’t be 100% certain that someone will or will not vote for Biden. We’ll get around this problem by adding another parameter called the intercept, <span class="math inline">\(\alpha\)</span>:</p>
+<p><span class="math display">\[
+P(Y = k) = \begin{cases} \alpha + \beta X, &amp; \text{if } k=1, \\1-(\alpha + \beta X), &amp; \text{if } k=0. \end{cases}
+\]</span></p>
+<p>This is a handy dandy trick to allow <span class="math inline">\(\beta\)</span> to equal 0 without having the probability of <span class="math inline">\(Y\)</span> to be equal to 0 as well. Say <span class="math inline">\(\alpha\)</span> is 0.35–then if <span class="math inline">\(\beta\)</span> is 0, 35% of people would still vote Biden. <span class="math inline">\(\alpha\)</span> could be thought of as a baseline rate—without considering the effect of age, how many people vote for Biden? Once we add <span class="math inline">\(\alpha\)</span>, this equation is the same as the slope of a line (good ol’ <span class="math inline">\(mx + b\)</span>), which makes it a <em>linear</em> model (linear means a straight line).</p>
+<p>We now have a linear model we want to stick in <span class="math inline">\(p\)</span> to model the relationship between age (<span class="math inline">\(X\)</span>) and voting for Biden (<span class="math inline">\(Y\)</span>). We’ve made progress, but we’re still gonna have issues squashing <span class="math inline">\(X\)</span> into a proportion. The trick is that we need <span class="math inline">\(\alpha + \beta X\)</span> to always output a number between 0 and 1. We can’t have a proportion greater than 1 or less than 0. For these reasons, to use this model we have to pick specific values for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> that allow us to keep within those bounds. For example, we could set <span class="math inline">\(\alpha\)</span> to 0.1 (a baseline rate of 10% of 1s) and <span class="math inline">\(\beta\)</span> to 0.5. Let’s simulate some data with those numbers and plot it:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">runif</span>(<span class="fu">length</span>(X))<span class="sc">&lt;</span>(<span class="fl">0.1</span> <span class="sc">+</span> .<span class="dv">5</span><span class="sc">*</span>(X<span class="sc">/</span><span class="dv">100</span>)))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">tibble</span>(Y,X),<span class="fu">aes</span>(<span class="at">y=</span>Y,<span class="at">x=</span>X<span class="sc">/</span><span class="dv">100</span>)) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>() <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_barbie</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/sim_mod-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We now have a much weaker relationship between age and voting: voting for Biden increases a bit as people age, but not much. But we do now have a much more nuanced relationship than we started out with by using the divide by 100 method. Very cool!</p>
+<p>However, you might be wondering—what if we want even more diverse relationships? What if <span class="math inline">\(\beta\)</span> were greater than 1? Or 3? Or 10? Let’s plot what happens when we set <span class="math inline">\(\alpha\)</span> = 0.1 and <span class="math inline">\(\beta\)</span>=3:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">runif</span>(<span class="fu">length</span>(X))<span class="sc">&lt;</span>(<span class="fl">0.1</span> <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>(X<span class="sc">/</span><span class="dv">100</span>)))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">tibble</span>(Y,X),<span class="fu">aes</span>(<span class="at">y=</span>Y,<span class="at">x=</span>X<span class="sc">/</span><span class="dv">100</span>)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>() <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_barbie</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/sim_mod2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Yikes! Now we’re only getting values for <span class="math inline">\(Y\)</span> that are equal to 1. What happened to all the 0s? When we multiply <span class="math inline">\(X\)</span> by 3, we now get values way bigger than 100%. For an age of 50, <span class="math inline">\(X/100\)</span> = 0.5, and <span class="math inline">\(3\cdot X=1.5\)</span> or 150%. Shucks! This means we can’t just pick whatever values we want for <span class="math inline">\(\beta\)</span> or <span class="math inline">\(\alpha\)</span>. That’s frustrating especially if we think that relationship could be really strong and we want <span class="math inline">\(\beta\)</span> to be large.</p>
+</section>
+<section id="not-all-heroes-are-linear" class="level2">
+<h2 class="anchored" data-anchor-id="not-all-heroes-are-linear">Not All Heroes Are Linear</h2>
+<p>We now have two options. We can keep on guessing what values might work for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, or… we could get a map. A map that would allow us to <em>translate</em> or <em>transform</em> our linear model <span class="math inline">\(\alpha + \beta X\)</span> into the cramped space of <span class="math inline">\(p\)</span>. Like the teleporter in Star Trek, we need something that can move our value of <span class="math inline">\(\alpha + \beta X\)</span> to the right spot on <span class="math inline">\(p\)</span> without going over 1 and under 0.</p>
+<p>This is where our good friend logit comes in. Logit is a function that can take in <em>any</em> number–literally any number–and <em>magically</em> transform it to a number that is strictly between 0 and 1. It’s a magical map that let’s us move from the world of ages and to the world of proportions between 0 and 1. <strong>NB: Technically this is not the logit function but rather the inverse logit function. But everyone calls the model “logit” so I’ll just use that term.</strong></p>
+<p>The function itself is a bit ugly, but I’ll include it here along with our linear model as the input and <span class="math inline">\(p\)</span> as the output:</p>
+<p><span class="math display">\[
+p = \frac{1}{1 + e^{-(\alpha + \beta X)}}
+\]</span></p>
+<p>I won’t spend a lot of time on explaining the function other than to note that it has the number <span class="math inline">\(e\)</span>, which is where a lot of the magic comes from. We can test whether it can really do these transformations by plotting a range of numbers for our linear model and seeing what the logit function spits out:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> .<span class="dv">2</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">10</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>logit <span class="ot">&lt;-</span> <span class="cf">function</span>(x)  { <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>(x))) }</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">linear_model=</span>alpha <span class="sc">+</span> beta <span class="sc">*</span> X) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p=</span><span class="fu">logit</span>(linear_model)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>p, <span class="at">x=</span>linear_model)) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_barbie</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/logitsim-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>On the bottom you can see all the values for our linear model when <span class="math inline">\(\alpha=-10\)</span> and <span class="math inline">\(\beta=0.2\)</span>. Across the range of ages, the linear model runs from -2.5 to 2.5 or way outside the bounds of <span class="math inline">\(p\)</span>. But our logit function spits out a number for <span class="math inline">\(p\)</span> that is between 0 and 1. It also has this cool bend-y shape, or what’s known as a sigmoid. Basically, the line is straight or linear right around the midpoint of <span class="math inline">\(p\)</span> or 0.5. When it gets close to the end points of <span class="math inline">\(p\)</span>, or proportions that are very high or very low, it starts to bend like a driver avoiding a barrier in a car.</p>
+<p>If you notice, though, while the line curves, it never changes the direction. When the linear model goes up, so does <span class="math inline">\(p\)</span>. That’s why we can use this function–we will learn about the direction and magnitude of the relationship between age and voting. We just learn that information while respecting the bounds of proportions <strong>and</strong> the full range of our covariates. Pretty cool!</p>
+</section>
+<section id="a-whole-new-world" class="level2">
+<h2 class="anchored" data-anchor-id="a-whole-new-world">A Whole New World</h2>
+<p>Often people get confused or suspicious at this point. What’s up with this weird S-curve thing? Linear models are nice and straight. Why do we need the bend-y thing?</p>
+<p>To understand this, we can return back to our analogies of maps. The maps that we use are all two-dimensional: we can put them on a table and they lie flat. However, we know that they aren’t completely accurate because the Earth is not flat, it’s round. A globe is the truly accurate representation of the Earth. A flattened map is going to inevitably cause distortions.</p>
+<p>As a result, when we trace a flight path on a flat map, the plane’s journey is always curved as in the picture below:</p>
+<p><img src="../../img/flight_route.gif" class="img-fluid"></p>
+<p>This flight path–which happens to be for a very long flight from Paris to Tahiti–seems bizarrely roundabout on the map. You would think that the straightest path between Paris and Tahiti would be a straight line. This would be true <em>if the Earth were flat, but it’s not</em>. The Earth is round, and the map is a <em>linear</em> projection of a 3-D object onto a 2-D surface. When we do that and calculate the most direct route, we end up with this weird bend-y shape: <em>just like our logit plot above</em>.</p>
+<p>By the same analogy, our linear model is our simplified version of reality that allows us to understand the relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Logit is the <em>transformation</em> that takes us from this simplified world to the real world of <span class="math inline">\(Y\)</span> via <span class="math inline">\(p\)</span>. It does that by warping the space that the straight line of our linear model travels. To see this, let’s take another look at our logit plot:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> .<span class="dv">2</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">10</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>logit <span class="ot">&lt;-</span> <span class="cf">function</span>(x)  { <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>(x))) }</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">linear_model=</span>alpha <span class="sc">+</span> beta <span class="sc">*</span> X) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p=</span><span class="fu">logit</span>(linear_model)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>p, <span class="at">x=</span>linear_model)) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_barbie</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/logitsim2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When the linear model is 0–or <span class="math inline">\(p\)</span> is around 0.5–the logit function allows <span class="math inline">\(p\)</span> to change relatively quickly as the linear model changes. However, when the linear model gets very low or very high–i.e., <span class="math inline">\(p\)</span> is close to 0 or 1–the logit function only lets <span class="math inline">\(p\)</span> change slowly as the linear model changes. To get from a <span class="math inline">\(p\)</span> of 0.1 to almost 0 requires the linear model to move about -2 points on the <span class="math inline">\(x\)</span> axis, but to get from a <span class="math inline">\(p\)</span> of 0.5 to a <span class="math inline">\(p\)</span> of 0.25 only requires a movement of about -0.5 in the linear model space.</p>
+<p>The magical part of logit is that it creates more space as the linear model gets very big or very small. The linear model keeps moving at the same rate (<span class="math inline">\(\beta\)</span>) but <span class="math inline">\(p\)</span>, the proportion, does not. <span class="math inline">\(p\)</span> slows down as though more and more space kept appearing. Like Jim Carrey in the Truman Show who can never escape from his artificial world, the linear model can never escape the bounds of <span class="math inline">\(p\)</span>. The closer it gets to the bounds, the farther it has to travel–the more warped the linear model space becomes relative to <span class="math inline">\(p\)</span>. In other words, at the edges the linear model map is less accurate and so we see a stronger bend in the logit function to compensate.</p>
+</section>
+<section id="flat-earthers-and-the-logit-function" class="level2">
+<h2 class="anchored" data-anchor-id="flat-earthers-and-the-logit-function">Flat Earthers and the Logit Function</h2>
+<p>What is logit then? A handy dandy <em>scaling</em> function that maps a linear model to a proportion between 0 and 1. That’s all it does. The actual distribution is the Bernoulli (though sadly, no one calls it that). A logit function isn’t special—there are other similar functions, just as there are a lot of map coordinate transformations (talk to a GIS person sometime; it’ll bore you to tears).</p>
+<p>There are people who <em>really</em> don’t like logit. Usually it’s something to do with how the function complicates things and makes these bend-y shapes. It does require some thinking as we have to think a bit about what our linear model coefficient <span class="math inline">\(\beta\)</span> means. The linear model is a straight line, but the space it is passing through changes as <span class="math inline">\(p\)</span> changes. What that means substantively is that <span class="math inline">\(\beta\)</span>, or the effect of age on the proportion voting for Biden, <em>will vary depending on how big or small the proportion voting for Biden is</em>. If that proportion is small, a big value of <span class="math inline">\(\beta\)</span> will result in much smaller movement in voting than when the proportion voting is closer to 50%.</p>
+<p>It is this bend-y (or non-linear) nature of logit that leads some people to just ignore the Bernoulli and use a linear model. That is an easy way to deal with the problem, but unfortunately, we cannot simply ignore this transformation. Like flat earthers, if we ignore the fact that the Earth is round, we won’t be able to calculate distances accurately. If we have a linear model that can get larger or smaller than 0% or 100%, then we will end up with nonsensical predictions from our linear model like a plane that ends up at the wrong airport because the pilot believed the Earth was flat.</p>
+<p>So how do you interpret a logit model coefficients? There are two ways once you understand what the logit function does:</p>
+<ol type="1">
+<li>Leave it as it is. The coefficient <span class="math inline">\(\beta\)</span> is the relationship of the covariate (<span class="math inline">\(X\)</span>) to the outcome (<span class="math inline">\(Y\)</span>) in the linear or “flat” space. The larger <span class="math inline">\(\beta\)</span> is, the stronger the relationship is between the covariate and the outcome. No, we don’t know exactly how much the proportion will change as <span class="math inline">\(X\)</span> changes, but we can still interpret <span class="math inline">\(\beta\)</span> as expressing what that change looks like in the simple space of the linear model.</li>
+<li>Convert it to changes in <span class="math inline">\(Y\)</span> via the proportion <span class="math inline">\(p\)</span>. Just like a plane figuring out distances using transformation of coordinates, we can figure out the average change in a proportion <span class="math inline">\(p\)</span> by averaging (or marginalizing) over different logit functions for a given <span class="math inline">\(\beta\)</span>. I won’t go into the technical details, but we have very handy R packages to calculate what are called <em>marginal effects:</em> how much does the “real world” <span class="math inline">\(p\)</span> change as our linear model coefficient <span class="math inline">\(\beta\)</span> changes?</li>
+</ol>
+<p>There are plenty of vignettes about how to calculate marginal effects on the R package <code>marginaleffects</code> <a href="https://marginaleffects.com/vignettes/slopes.html">website</a>. Here I’ll show how to calculate a marginal effect of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span> with our linear model coefficients of <span class="math inline">\(\alpha=-10\)</span> and <span class="math inline">\(\beta=0.2\)</span>. To do so I’ll first simulate data with these values and then fit a logit (i.e.&nbsp;Bernoulli) model with the R function <code>glm</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate our outcome Y given our linear model parameters</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">runif</span>(<span class="fu">length</span>(X))<span class="sc">&lt;</span><span class="fu">logit</span>(alpha <span class="sc">+</span> beta<span class="sc">*</span>X))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># make a dataset and fit the model for Y and X</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># note that glm says the family is "Binomial"</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Bernoulli is a special case of the Binomial</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># and our link (scaling) function is logit!</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>sim_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Y=</span>Y, <span class="at">X=</span>X)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>logit_fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(Y <span class="sc">~</span> X,<span class="at">data=</span>sim_data,<span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span><span class="st">"logit"</span>))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logit_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Y ~ X, family = binomial(link = "logit"), data = sim_data)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.2091  -0.7986  -0.4686   0.8678   2.5201  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -9.78933    0.70117  -13.96   &lt;2e-16 ***
+X            0.19578    0.01484   13.20   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1250.71  on 999  degrees of freedom
+Residual deviance:  998.47  on 998  degrees of freedom
+AIC: 1002.5
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
+<p>Above we see the output of the <code>glm</code> command that shows us the values of <span class="math inline">\(\alpha\)</span> (the intercept, as noted in the command output) and <span class="math inline">\(\beta\)</span>, which is listed as the <code>Estimate</code> for <code>X</code>. These are the values of these parameters <em>in the linear</em>, or simple, space. There is nothing wrong with these coefficients: they tell you how much <span class="math inline">\(X\)</span> is changing with respect to <span class="math inline">\(Y\)</span> in the linear space. How much actual change in <span class="math inline">\(Y\)</span> happens, though, depends on exactly where we are (or how high or low the proportion of 1s is in <span class="math inline">\(Y\)</span>).</p>
+<p>If we want to convert these relationships to the distances/effects in the outcome <span class="math inline">\(Y\)</span> (i.e.&nbsp;changes in the proportion <span class="math inline">\(p\)</span>), we can use the <code>avg_slopes</code> function from <code>marginaleffects</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(marginaleffects)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">avg_slopes</span>(logit_fit,<span class="at">variables=</span><span class="st">"X"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Term Estimate Std. Error    z Pr(&gt;|z|)  2.5 % 97.5 %
+    X   0.0324    0.00158 20.5   &lt;0.001 0.0293 0.0355
+
+Columns: term, estimate, std.error, statistic, p.value, conf.low, conf.high </code></pre>
+</div>
+</div>
+<p>Note that this <code>Estimate</code> is way smaller than the <code>Estimate</code> for <span class="math inline">\(\beta\)</span> from the <code>glm</code> command. That estimate was from the linear space and so is much bigger. The <code>marginaleffects</code> command is telling us how much <span class="math inline">\(p\)</span>, or the proportion of 1s in <span class="math inline">\(Y\)</span>, changed as our covariate <span class="math inline">\(X\)</span> increased. It did this by averaging over different logit functions given changes in <span class="math inline">\(X\)</span> (you can see the package info for more technical details). On average, as age increased by 1 year, the proportion voting for Biden increased by 0.0325 or 3.25% with a confidence interval of (2.93%, 3.56%).</p>
+<p>Very cool! Now that you understand logit models and how to interpret linear model coefficients in both the linear space and via marginal effects, you know pretty much everything you need to know about this wonderful little function logit. Next time you have a binary outcome like voting for Biden, or anything else, give logit a go! It’s your map to a whole new world.</p>
+<div class="tenor-gif-embed" data-postid="19525174" data-share-method="host" data-aspect-ratio="1.77778" data-width="100%">
+<p><a href="https://tenor.com/view/all-by-myself-jasmine-gif-19525174">All By Myself Jasmine GIF</a>from <a href="https://tenor.com/search/all+by+myself-gifs">All By Myself GIFs</a></p>
+</div>
+<script type="text/javascript" async="" src="https://tenor.com/embed.js"></script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

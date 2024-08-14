@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.53">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Robert Kubinec">
+<meta name="dcterms.date" content="2019-02-11">
+<meta name="description" content="R code that shows how to simulate a conjoint experiment using Monte Carlo techniques to produce power curves and test for the effect of clustering in standard errors.">
+
+<title>Simulating Conjoint Survey Experiments – Robert Kubinec</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BHP1PJ9LEX"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
+</script>
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Robert Kubinec</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/saudiwin"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/rmkubinec"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Simulating Conjoint Survey Experiments</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Simulating Conjoint Survey Experiments</h1>
+            <p class="subtitle lead">Power Curves, Clustered Errors, Type S and Type M Error Rates</p>
+                  <div>
+        <div class="description">
+          R code that shows how to simulate a conjoint experiment using Monte Carlo techniques to produce power curves and test for the effect of clustering in standard errors.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Experiments</div>
+                <div class="quarto-category">Causal Inference</div>
+                <div class="quarto-category">Data Science</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Robert Kubinec </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 11, 2019</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../files/Robert_Kubinec_CV_full.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CV</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../research/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../consulting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consulting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ordbetareg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ordbetareg</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../idealstan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">idealstan</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>Conjoint survey experiments have become more popular in political science since the publication of <a href="http://hdl.handle.net/1721.1/84064">Hainmueller, Hopkins and Yamamoto (2014)</a>. However, analysis of the statistical of power of conjoint experiments is difficult using standard parametric techniques because of the use of multiple treatments, interaction effects and paired vignettes. To that end, I have conducted the following simulation experiment to demonstrate the statistical properties of the conjoint experiment for my online survey experiment “Politically-Connected Firms and the Military-Clientelist Complex in North Africa” (see <a href="https://osf.io/preprints/socarxiv/mrfcu/">SocArchiv Draft</a>). I employ both traditional power measures and newer statistics from <a href="http://journals.sagepub.com/doi/abs/10.1177/1745691614551642">Gelman and Carlin (2014)</a> reflecting inferential errors that are particularly apt for experiments in the social sciences.This simulation also incorporates measurement error in the treatment variable by using a hierarchical distribution for the conjoint treatment effects (i.e., heterogeneous treatments).</p>
+<p>The original Rmarkdown and saved simulation files can be downloaded from the <a href="https://github.com/saudiwin/saudiwin.github.io/tree/sources/content">site’s Github</a>.</p>
+<p>The packages required to run this simulation are listed in the code block below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Required packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(tidyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(multiwayvcov)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(lmtest)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(stringr)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(kableExtra)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># package MASS also used but not loaded</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># != Note this simulation uses a version of mclapply for windows. You must have R package parallelsugar installed to use it if you are running windows.</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># to install parallelsugar:</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages('devtools')</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># library(devtools)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># install_github('nathanvan/parallelsugar')</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># If using Windows, parallelfunc comes from parallesugar, otherwise the standard mclapply is used</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(.Platform<span class="sc">$</span>OS.type<span class="sc">==</span><span class="st">'windows'</span>) {</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  parallelfunc <span class="ot">&lt;-</span> parallelsugar<span class="sc">::</span>mclapply_socket</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  parallelfunc <span class="ot">&lt;-</span> parallel<span class="sc">::</span>mclapply</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="simulation-set-up" class="level2">
+<h2 class="anchored" data-anchor-id="simulation-set-up">Simulation Set-up</h2>
+<p>The following parameters control the range of coefficients tested and the number of simulations. The survey experiment design employs vignettes in which appeals and the actors making appeals are allowed to vary between respondents. Any one vignette has one actor and one appeal. The probability of assignment is assumed to be a simple random fraction of the number of appeal-actor combinations (14). If <code>run_sim</code> is set to <code>TRUE</code>, the simulation is run, otherwise the simulation results are loaded from an RDS file and plotted. Running the simulation will take approximately 6 to 12 hours depending on the number of cores and speed of the CPU.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Actually run the simulation or just load the data and look at it?</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>run_sim <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Max number of respondents fixed at 2700</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>num_resp <span class="ot">&lt;-</span> <span class="dv">2700</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of iterations (breaks in sample size)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>num_breaks <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of simulations to run per iteration</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">&lt;-</span> <span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I then create a grid of all possible actor-appeal combinations as I am using simple randomization of profiles before presenting them to respondents. There are two vectors of treatments (actors and appeals) that each have 7 separate treatments for a total of 14 separate possible treatments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Two treatment variables producing a cross-product of 7x7</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>treatments1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'military'</span>,<span class="st">'MOI'</span>,<span class="st">'president'</span>,<span class="st">'MOJ'</span>,<span class="st">'parliament'</span>,<span class="st">'municipality'</span>,<span class="st">'government'</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>treatments2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'exprop.firm'</span>,<span class="st">'exprop.income'</span>,<span class="st">'permit.reg'</span>,<span class="st">'contracts.supply'</span>,<span class="st">'permit.export'</span>,<span class="st">'permit.import'</span>,<span class="st">'reforms'</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>total_treat <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">c</span>(treatments1,treatments2))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>grid_pair <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">expand.grid</span>(treatments1,treatments2))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(grid_pair))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Var1           Var2         
+[1,] "military"     "exprop.firm"
+[2,] "MOI"          "exprop.firm"
+[3,] "president"    "exprop.firm"
+[4,] "MOJ"          "exprop.firm"
+[5,] "parliament"   "exprop.firm"
+[6,] "municipality" "exprop.firm"</code></pre>
+</div>
+</div>
+</section>
+<section id="simulation" class="level2">
+<h2 class="anchored" data-anchor-id="simulation">Simulation</h2>
+<p>To simulate the data, I first sample 14 coefficients <span class="math inline">\(\beta_j\)</span> (one for each treatment <span class="math inline">\(J\)</span>) from a normal distribution with mean zero and standard deviation one. I then randomly sample from two profile combinations for each of the <span class="math inline">\(I\)</span> respondents in accordance with simple random sampling. Two profile combinations, for a total of four tasks <span class="math inline">\(T\)</span>, are selected to reflect the fact that paired vignettes will be shown to each respondent as in the study design. I also sample a pre-treatment covariate <span class="math inline">\(Z_I\)</span> that is a random binomial vector with probability of 0.2 (thus 20% of respondents will fall into this cell). A treatment interaction effect <span class="math inline">\(\beta_z\)</span> is sampled from a normal distribution with mean 0.5 and standard deviation of 0.3 to provide a sampling distribution for the true effect, instead of assuming that the true effect is a fixed population value. Adding a distribution for <span class="math inline">\(\beta_j\)</span> reflects additional uncertainty beyond standard sampling distribution uncertainty. In this case, it represents additional measurement error between the true concept and the indicators used in the survey design.</p>
+<p>I also post-stratify some estimates with a pre-treatment covariate <span class="math inline">\(Q_I\)</span> from a binomial distribution of probability .5 that has a constant effect on <span class="math inline">\(Y_{it}\)</span> of <span class="math inline">\(+1\)</span> (representing a fixed effect).</p>
+<p>I then randomly sample a pair of outcomes, for a total of four tasks <span class="math inline">\(T\)</span>, for <span class="math inline">\(Y_{it}\)</span> in the range of <span class="math inline">\([1,10]\)</span> by drawing a number from a multivariate normal distribution. The mean <span class="math inline">\(\mu_{it}\)</span> of this normal distribution is equal to a linear model with an intercept of 5, the 14 dummy variables for treatment indicators <span class="math inline">\(X_j\)</span> with associated coefficients <span class="math inline">\(\beta_j\)</span>, the interaction <span class="math inline">\(\beta_z\)</span> between the pre-treatment covariate <span class="math inline">\(Z_i\)</span> and <span class="math inline">\(X_{ij}\)</span>, and a post-stratification covariate <span class="math inline">\(Q_i\)</span>. To simplify matters, <span class="math inline">\(Z_i\)</span> is not given its own constituent term as I am not interested in the unconditional effect of <span class="math inline">\(Z_i\)</span> on <span class="math inline">\(Y_{it}\)</span>, only the effect of <span class="math inline">\(X_{ijt}\)</span> on <span class="math inline">\(Y_{it}\)</span> given <span class="math inline">\(Z_{i}\)</span>. Finally, I draw correlated errors from a multivariate normal distribution with mean of zero and length of 4 (equal to the number of tasks per respondent) to produce a <span class="math inline">\(4 \times 4\)</span> variance matrix <span class="math inline">\(\varSigma_i\)</span> with a diagonal of 4 and intra-respondent covariation of 1 (correlation of 0.5).</p>
+<p><span class="math display">\[
+\begin{aligned}
+X_{ITJ} &amp;\sim  \mathrm{B} \Big( \frac{1}{J \times 2} \Big)\\
+B_{J} &amp;\sim  \mathrm{N}(0,2)\\
+\beta_z &amp;\sim \mathrm{N}(0.5,0.3)\\
+Z_I &amp;\sim  \mathrm{B}(0.2)\\
+Q_I &amp;\sim  \mathrm{B}(0.5)\\
+\mu_{it} &amp;=  5 + \sum_{j=1}^{J} \sum_{t=1}^{T} \beta_j * X_{itj} + \beta_z * X_{it1} *Z_i + Q_i\\
+Y_{it} &amp;\sim  \mathrm{N}(\mu_{it},\varSigma_i)
+\end{aligned}
+\]</span></p>
+<p>This process will produce some numbers outside the <span class="math inline">\([1,10]\)</span> range; however, it is better to leave these values in as explicit truncation will violate the assumptions of the underlying causal model.</p>
+<p>I run 1000 simulations for each of 300 sequential sample sizes ranging from 100 to 2700. I then take the mean significant effect and report that as the likely significant effect size for that sample size. I also record the ratio of draws for which the effect is significant (the power). However, given that the true effect is not fixed, I interpret power as the ability detect a true effect greater than zero. I record both unadjusted p-values and p-values adjusted using the <code>cluster.vcov</code> function from the multiwayvcov package by clustering around respondent ID to reflect the pairing of vignettes. I also use separate results when post-stratifying on a pre-treatment covariate <span class="math inline">\(Q_I\)</span>.</p>
+<p>In addition, I included M-errors (error of absolute magnitude of significant coefficients) and S-errors (incorrect sign of significant coefficients). M-errors provide an estimate of publication bias given that the <span class="math inline">\(p=0.05\)</span> threshold is a hard boundary and will necessarily result in smaller effects being reported as statistically insignificant when in fact they are greater than zero. S-errors help determine the probability that an estimated effect is the correct sign even if it is significant. S-errors are particularly problematic in small samples when sampling error can produce large negative deviations that may be statistically significant.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(run_sim<span class="sc">==</span><span class="cn">TRUE</span>) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.create</span>(<span class="st">'output_log.txt'</span>,<span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Need to randomize over the simulations so that parallelization works correctly on windows</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    sampled_seq <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">100</span>,num_resp,<span class="at">length.out =</span> num_breaks))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  all_sims <span class="ot">&lt;-</span> <span class="fu">parallelfunc</span>(sampled_seq,<span class="cf">function</span>(x) {</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    out_probs <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n_sims</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">"Now running simulation on data sample size "</span>,x),<span class="at">file=</span><span class="st">'output_log.txt'</span>,<span class="at">sep=</span><span class="st">'</span><span class="sc">\n</span><span class="st">'</span>,<span class="at">append=</span><span class="cn">TRUE</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    out_data <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>n_sims, <span class="cf">function</span>(j) {</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>      total_probs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>x,<span class="cf">function</span>(x) {</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        treat_rows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(grid_pair),<span class="dv">4</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        treatments_indiv <span class="ot">&lt;-</span> <span class="fu">c</span>(grid_pair[treat_rows,])</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(treatments_indiv)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>      by_resp <span class="ot">&lt;-</span> <span class="fu">t</span>(total_probs)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>      by_resp <span class="ot">&lt;-</span> <span class="fu">as_data_frame</span>(by_resp)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">names</span>(by_resp) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">'actor.'</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="st">"_cluster"</span>,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)),<span class="fu">paste0</span>(<span class="st">'gift.'</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="st">"_cluster"</span>,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)))</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>      by_resp<span class="sc">$</span>respondent <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">'Respondent_'</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(by_resp))</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>      by_resp <span class="ot">&lt;-</span> <span class="fu">gather</span>(by_resp,attribute,indicator,<span class="sc">-</span>respondent) <span class="sc">%&gt;%</span> <span class="fu">separate</span>(attribute,<span class="at">into=</span><span class="fu">c</span>(<span class="st">'attribute'</span>,<span class="st">'cluster'</span>),<span class="at">sep=</span><span class="st">'_'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">separate</span>(attribute,<span class="at">into=</span><span class="fu">c</span>(<span class="st">'attribute'</span>,<span class="st">'task'</span>)) <span class="sc">%&gt;%</span> <span class="fu">spread</span>(attribute,indicator)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Assign true coefficients for treatments</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>      <span class="co">#Beta_js</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>      coefs <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(<span class="at">coef_val=</span><span class="fu">rnorm</span>(<span class="at">n=</span><span class="fu">length</span>(<span class="fu">c</span>(treatments1,treatments2)),<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>),</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>                          <span class="at">treat_label=</span><span class="fu">c</span>(treatments1,treatments2))</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Create cluster covariance in the errors</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>      sigma_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">2</span>,<span class="at">nrow=</span><span class="dv">4</span>,<span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>      <span class="fu">diag</span>(sigma_matrix) <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Add on the outcome as a normal draw, treatment coefficients, interaction coefficient, group errors/interaction by respondent</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>      by_resp <span class="ot">&lt;-</span> <span class="fu">gather</span>(by_resp,treatment,appeal_type,actor,gift) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>        <span class="fu">left_join</span>(coefs,<span class="at">by=</span><span class="fu">c</span>(<span class="st">'appeal_type'</span><span class="ot">=</span><span class="st">'treat_label'</span>))</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Record interaction coefficient (true estimate of interest)</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>      true_effect <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">1</span>,<span class="at">mean=</span><span class="fl">0.5</span>,<span class="at">sd=</span><span class="fl">0.3</span>)</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>      by_resp <span class="ot">&lt;-</span> <span class="fu">select</span>(by_resp,<span class="sc">-</span>treatment) <span class="sc">%&gt;%</span> <span class="fu">spread</span>(appeal_type,coef_val) <span class="sc">%&gt;%</span>  <span class="fu">group_by</span>(respondent) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">error=</span>MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="dv">1</span>,<span class="at">mu=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>),<span class="at">Sigma=</span>sigma_matrix)) <span class="sc">%&gt;%</span> ungroup</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>      <span class="co"># interaction coefficient only in function if military==TRUE</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>      by_resp <span class="ot">&lt;-</span> <span class="fu">mutate</span>(by_resp,<span class="at">int_coef=</span>true_effect<span class="sc">*</span><span class="fu">rbinom</span>(<span class="at">n =</span> <span class="fu">n</span>(),<span class="at">prob =</span> <span class="fl">0.2</span>,<span class="at">size=</span><span class="dv">1</span>),</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>                        <span class="at">int_coef=</span><span class="fu">if_else</span>(military<span class="sc">!=</span><span class="dv">0</span>,int_coef,<span class="dv">0</span>))</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>      by_resp <span class="ot">&lt;-</span> <span class="fu">lapply</span>(by_resp, <span class="cf">function</span>(x) {</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(<span class="fu">is.double</span>(x)) {</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>          x[<span class="fu">is.na</span>(x)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(x)</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>      }) <span class="sc">%&gt;%</span> as_data_frame</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>      <span class="co"># To make the outcome, need to turn the dataset long</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>      <span class="co"># However, we now need to drop the reference categories</span></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Drop one dummy from actor/gift to prevent multicollinearity = reforms + government combination</span></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>      out_var <span class="ot">&lt;-</span> <span class="fu">gather</span>(by_resp,var_name,var_value,<span class="sc">-</span>respondent,<span class="sc">-</span>task,<span class="sc">-</span>cluster) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(<span class="sc">!</span>(var_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'reforms'</span>,<span class="st">'government'</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(respondent,task) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">outcome=</span><span class="fu">sum</span>(var_value)<span class="sc">+</span><span class="dv">5</span>)</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>      combined_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(out_var,by_resp,<span class="at">by=</span><span class="fu">c</span>(<span class="st">'respondent'</span>,<span class="st">'task'</span>))</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Re-estimate with a blocking variable</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>      combined_data<span class="sc">$</span>Q <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="fu">floor</span>(<span class="fu">nrow</span>(combined_data)<span class="sc">/</span><span class="dv">2</span>)),</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">ceiling</span>(<span class="fu">nrow</span>(combined_data)<span class="sc">/</span><span class="dv">2</span>)))</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>      combined_data<span class="sc">$</span>outcome <span class="ot">&lt;-</span> <span class="fu">if_else</span>(combined_data<span class="sc">$</span>Q<span class="sc">==</span><span class="dv">1</span>,combined_data<span class="sc">$</span>outcome<span class="sc">+</span><span class="dv">1</span>,</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>                                       combined_data<span class="sc">$</span>outcome)</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>      <span class="co"># # Create data predictor matrix and estimate coefficients from the simulated dataset</span></span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>      <span class="co"># </span></span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>      to_lm <span class="ot">&lt;-</span> <span class="fu">ungroup</span>(combined_data) <span class="sc">%&gt;%</span> <span class="fu">select</span>(contracts.supply<span class="sc">:</span>reforms,int_coef,Q)</span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>      to_lm <span class="ot">&lt;-</span> <span class="fu">mutate_all</span>(to_lm,<span class="fu">funs</span>(<span class="fu">if_else</span>(.<span class="sc">!=</span><span class="dv">0</span>,<span class="dv">1</span>,.))) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">outcome=</span>combined_data<span class="sc">$</span>outcome)</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>      <span class="co">#No post-stratification</span></span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>      <span class="co"># I don't estimate a constituent term for int_coef because it is assumed to be zero</span></span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>      results <span class="ot">&lt;-</span> <span class="fu">lm</span>(outcome<span class="sc">~</span>contracts.supply <span class="sc">+</span> exprop.firm <span class="sc">+</span> exprop.income <span class="sc">+</span> military <span class="sc">+</span> MOI <span class="sc">+</span> MOJ <span class="sc">+</span> municipality <span class="sc">+</span></span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>                      parliament <span class="sc">+</span> permit.export <span class="sc">+</span> permit.import <span class="sc">+</span> permit.reg <span class="sc">+</span> president <span class="sc">+</span> </span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>                      int_coef<span class="sc">:</span>military,<span class="at">data=</span>to_lm)</span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a>      results_clust <span class="ot">&lt;-</span> <span class="fu">cluster.vcov</span>(results,<span class="at">cluster =</span> combined_data<span class="sc">$</span>respondent)</span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>      pvals_adj <span class="ot">&lt;-</span> <span class="fu">coeftest</span>(results,<span class="at">vcov.=</span>results_clust)[<span class="sc">-</span><span class="dv">1</span>,<span class="dv">4</span>]<span class="sc">&lt;</span><span class="fl">0.05</span></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>      pvals_orig <span class="ot">&lt;-</span> <span class="fu">coeftest</span>(results)[<span class="sc">-</span><span class="dv">1</span>,<span class="dv">4</span>]<span class="sc">&lt;</span><span class="fl">0.05</span></span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>      total_sig_orig <span class="ot">&lt;-</span> <span class="fu">mean</span>(pvals_orig)</span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>      total_sig_adj <span class="ot">&lt;-</span> <span class="fu">mean</span>(pvals_adj)</span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>      int_sig_orig <span class="ot">&lt;-</span> pvals_orig[<span class="st">'military:int_coef'</span>]</span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>      int_sig_adj <span class="ot">&lt;-</span> pvals_adj[<span class="st">'military:int_coef'</span>]</span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Now run the poststratification model</span></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>      results_ps <span class="ot">&lt;-</span> <span class="fu">lm</span>(outcome<span class="sc">~</span>contracts.supply <span class="sc">+</span> exprop.firm <span class="sc">+</span> exprop.income <span class="sc">+</span> military <span class="sc">+</span> MOI <span class="sc">+</span> MOJ <span class="sc">+</span> municipality <span class="sc">+</span></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>                      parliament <span class="sc">+</span> permit.export <span class="sc">+</span> permit.import <span class="sc">+</span> permit.reg <span class="sc">+</span> president <span class="sc">+</span> </span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>                      int_coef<span class="sc">:</span>military <span class="sc">+</span> Q,<span class="at">data=</span>to_lm)</span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>      results_clust <span class="ot">&lt;-</span> <span class="fu">cluster.vcov</span>(results,<span class="at">cluster =</span> combined_data<span class="sc">$</span>respondent)</span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a>      pvals_adj <span class="ot">&lt;-</span> <span class="fu">coeftest</span>(results_ps,<span class="at">vcov.=</span>results_clust)[<span class="sc">-</span><span class="dv">1</span>,<span class="dv">4</span>]<span class="sc">&lt;</span><span class="fl">0.05</span></span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>      pvals_orig <span class="ot">&lt;-</span> <span class="fu">coeftest</span>(results_ps)[<span class="sc">-</span><span class="dv">1</span>,<span class="dv">4</span>]<span class="sc">&lt;</span><span class="fl">0.05</span></span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>      total_sig_orig_blocker <span class="ot">&lt;-</span> <span class="fu">mean</span>(pvals_orig)</span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a>      total_sig_adj_blocker <span class="ot">&lt;-</span> <span class="fu">mean</span>(pvals_adj)</span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a>      int_sig_orig_blocker <span class="ot">&lt;-</span> pvals_orig[<span class="st">'military:int_coef'</span>]</span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>      int_sig_adj_blocker <span class="ot">&lt;-</span> pvals_adj[<span class="st">'military:int_coef'</span>]</span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a>      out_results <span class="ot">&lt;-</span> <span class="fu">data_frame</span>(int_sig_adj,int_sig_orig,int_sig_adj_blocker,int_sig_orig_blocker,</span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>                                total_sig_adj,total_sig_orig,total_sig_adj_blocker,</span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a>                                total_sig_orig_blocker,<span class="at">abs_true_effect=</span><span class="fu">abs</span>(true_effect),</span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a>                                <span class="at">true_effect=</span>true_effect,</span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a>                                <span class="at">est_effect=</span><span class="fu">coef</span>(results)[<span class="st">'military:int_coef'</span>],</span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a>                                <span class="at">est_effect_ps=</span><span class="fu">coef</span>(results)[<span class="st">'military:int_coef'</span>])</span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a>    out_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(out_data)</span>
+<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(out_data)</span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a>  },<span class="at">mc.cores=</span>parallel<span class="sc">::</span><span class="fu">detectCores</span>(),<span class="at">mc.preschedule=</span><span class="cn">FALSE</span>)</span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a>  <span class="co">#save the data for inspection</span></span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a>  all_sims_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(all_sims) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">sample_size=</span><span class="fu">rep</span>(sampled_seq,<span class="at">each=</span>n_sims),</span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">iter=</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>n_sims,<span class="at">times=</span>num_breaks))</span>
+<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(run_sim<span class="sc">==</span><span class="cn">TRUE</span>) {</span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> all_sims_data,<span class="at">file=</span><span class="st">'all_sims_data.rds'</span>)</span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a>  all_sims_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">'all_sims_data.rds'</span>)</span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This simulation yields a row with the significant effect of the interaction term for that simulation for a total of <code>n_sims</code> draws. From this raw data I am able to calculate all of the necessary statistics mentioned above.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add in different calculations</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>all_sims_data <span class="ot">&lt;-</span> <span class="fu">group_by</span>(all_sims_data,sample_size)  <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">sigeffVorig=</span><span class="fu">ifelse</span>(int_sig_orig,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                                                                     est_effect,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                                                                     <span class="cn">NA</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">sigeffVadj=</span><span class="fu">ifelse</span>(int_sig_adj,est_effect,<span class="cn">NA</span>),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">sigeffVps_orig=</span><span class="fu">ifelse</span>(int_sig_orig_blocker,est_effect_ps,<span class="cn">NA</span>),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">sigeffVps_adj=</span><span class="fu">ifelse</span>(int_sig_adj_blocker,est_effect_ps,<span class="cn">NA</span>),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">powerVorig=</span>int_sig_orig <span class="sc">&amp;</span> (true_effect<span class="sc">&gt;</span><span class="dv">0</span>),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">powerVadj=</span>int_sig_adj <span class="sc">&amp;</span> (true_effect<span class="sc">&gt;</span><span class="dv">0</span>),</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">powerVps_orig=</span>int_sig_orig_blocker <span class="sc">&amp;</span> (true_effect <span class="sc">&gt;</span> <span class="dv">0</span>),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">powerVps_adj=</span>int_sig_adj_blocker <span class="sc">&amp;</span> (true_effect <span class="sc">&gt;</span> <span class="dv">0</span>),</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">SerrVorig=</span><span class="fu">ifelse</span>(int_sig_orig,<span class="dv">1</span><span class="sc">-</span>(<span class="fu">sign</span>(est_effect)<span class="sc">==</span><span class="fu">sign</span>(true_effect)),<span class="cn">NA</span>),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">SerrVadj=</span><span class="fu">ifelse</span>(int_sig_adj,<span class="dv">1</span><span class="sc">-</span>(<span class="fu">sign</span>(est_effect)<span class="sc">==</span><span class="fu">sign</span>(true_effect)),<span class="cn">NA</span>),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="at">SerrVps_orig=</span><span class="fu">ifelse</span>(int_sig_orig_blocker,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">1</span><span class="sc">-</span>(<span class="fu">sign</span>(est_effect_ps)<span class="sc">==</span><span class="fu">sign</span>(true_effect)),<span class="cn">NA</span>),</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="at">SerrVps_adj=</span><span class="fu">ifelse</span>(int_sig_adj_blocker,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                   <span class="dv">1</span><span class="sc">-</span>(<span class="fu">sign</span>(est_effect_ps)<span class="sc">==</span><span class="fu">sign</span>(true_effect)),<span class="cn">NA</span>),</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="at">MerrVorig=</span><span class="fu">ifelse</span>(int_sig_orig,<span class="fu">abs</span>(est_effect)<span class="sc">/</span>abs_true_effect,<span class="cn">NA</span>),</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="at">MerrVadj=</span><span class="fu">ifelse</span>(int_sig_adj,<span class="fu">abs</span>(est_effect)<span class="sc">/</span>abs_true_effect,<span class="cn">NA</span>),</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="at">MerrVps_orig=</span><span class="fu">ifelse</span>(int_sig_orig_blocker,<span class="fu">abs</span>(est_effect_ps)<span class="sc">/</span>abs_true_effect,<span class="cn">NA</span>),</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="at">MerrVps_adj=</span><span class="fu">ifelse</span>(int_sig_adj_blocker,<span class="fu">abs</span>(est_effect_ps)<span class="sc">/</span>abs_true_effect,<span class="cn">NA</span>))</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> <span class="fu">select</span>(all_sims_data,<span class="fu">matches</span>(<span class="st">'V|sample|iter'</span>)) <span class="sc">%&gt;%</span> <span class="fu">gather</span>(effect_type,result,<span class="sc">-</span>sample_size,<span class="sc">-</span>iter) <span class="sc">%&gt;%</span> <span class="fu">separate</span>(effect_type,<span class="at">into=</span><span class="fu">c</span>(<span class="st">'estimate'</span>,<span class="st">'estimation'</span>),<span class="at">sep=</span><span class="st">'V'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estimate=</span><span class="fu">factor</span>(estimate,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">'sigeff'</span>,<span class="st">'power'</span>,<span class="st">'Serr'</span>,<span class="st">'Merr'</span>),</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>                         <span class="at">labels=</span><span class="fu">c</span>(<span class="st">'Mean</span><span class="sc">\n</span><span class="st">Significant</span><span class="sc">\n</span><span class="st">Effect'</span>,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">'Mean</span><span class="sc">\n</span><span class="st">Power'</span>,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">'S-Error</span><span class="sc">\n</span><span class="st">Rate'</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">'M-Error</span><span class="sc">\n</span><span class="st">Rate'</span>)),</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>         <span class="at">estimation=</span><span class="fu">factor</span>(estimation,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">'adj'</span>,<span class="st">'orig'</span>,<span class="st">'ps_adj'</span>,<span class="st">'ps_orig'</span>),</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>                           <span class="at">labels=</span><span class="fu">c</span>(<span class="st">'No Post-Stratification</span><span class="sc">\n</span><span class="st">Clustered Errors</span><span class="sc">\n</span><span class="st">'</span>,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'No Post-Stratification</span><span class="sc">\n</span><span class="st">Un-clustered Errors</span><span class="sc">\n</span><span class="st">'</span>,</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Post-Stratification</span><span class="sc">\n</span><span class="st">Clustered Errors</span><span class="sc">\n</span><span class="st">'</span>,</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Post-Stratification</span><span class="sc">\n</span><span class="st">Un-clustered Errors</span><span class="sc">\n</span><span class="st">'</span>)))</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>long_data_treatment <span class="ot">&lt;-</span> <span class="fu">select</span>(all_sims_data,<span class="fu">matches</span>(<span class="st">'total|iter|sample'</span>)) <span class="sc">%&gt;%</span> <span class="fu">gather</span>(effect_type,result,<span class="sc">-</span>sample_size,<span class="sc">-</span>iter) <span class="sc">%&gt;%</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">effect_type=</span><span class="fu">factor</span>(effect_type,<span class="at">levels=</span><span class="fu">c</span>(<span class="st">'total_sig_adj'</span>,</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'total_sig_orig'</span>,</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'total_sig_adj_blocker'</span>,</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">'total_sig_orig_blocker'</span>),</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>                          <span class="at">labels=</span><span class="fu">c</span>(<span class="st">'No Post-Stratification</span><span class="sc">\n</span><span class="st">Clustered Errors</span><span class="sc">\n</span><span class="st">'</span>,</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">'No Post-Stratification</span><span class="sc">\n</span><span class="st">Un-clustered Errors</span><span class="sc">\n</span><span class="st">'</span>,</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">'Post-Stratification</span><span class="sc">\n</span><span class="st">Clustered Errors</span><span class="sc">\n</span><span class="st">'</span>,</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">'Post-Stratification</span><span class="sc">\n</span><span class="st">Un-clustered Errors</span><span class="sc">\n</span><span class="st">'</span>)))</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a sample of the data (too big to display all of it)</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>long_data <span class="sc">%&gt;%</span> ungroup <span class="sc">%&gt;%</span> </span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>estimation) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estimate=</span><span class="fu">str_replace</span>(estimate,<span class="st">"</span><span class="sc">\\</span><span class="st">n"</span>,<span class="st">" "</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(.) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">sample_size</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">iter</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1334.783</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Mean Significant Effect</td>
+<td style="text-align: right;">0.6298429</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1334.783</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Mean Significant Effect</td>
+<td style="text-align: right;">0.3874088</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1334.783</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Mean Significant Effect</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1334.783</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Mean Significant Effect</td>
+<td style="text-align: right;">1.1438379</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1334.783</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Mean Significant Effect</td>
+<td style="text-align: right;">0.5653086</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1334.783</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Mean Significant Effect</td>
+<td style="text-align: right;">1.2689594</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1334.783</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Mean Significant Effect</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1334.783</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Mean Significant Effect</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1334.783</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Mean Significant Effect</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1334.783</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Mean Significant Effect</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="plotting" class="level2">
+<h2 class="anchored" data-anchor-id="plotting">Plotting</h2>
+<p>I use the <code>gam</code> function in the ggplot2 package to plot a smoothed regression line of the simulation draws for each sample size.</p>
+<p>First we can look at the difference that clustered errors makes across the different statistics. The only noticeable differences are at sample sizes smaller than 500. Clustering on respondents tends to result in smaller average significant effects, but it also results in increases in sign errors. This finding differs from the literature that considers clustering important to control for intra-respondent correlation, which in this simulation was fixed at 0.5. At sample sizes larger than 500, there does not appear to be any difference between clustered and un-clustered estimates.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>g_title <span class="ot">&lt;-</span> <span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">''</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(long_data,<span class="fu">grepl</span>(<span class="st">'No Post'</span>,estimation)) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>result,<span class="at">x=</span>sample_size,<span class="at">linetype=</span>estimation)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">colour=</span><span class="st">'red'</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Sample Size'</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>estimate,<span class="at">scales=</span><span class="st">'free'</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.grid.minor.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">'Accent'</span>) <span class="sc">+</span> <span class="fu">guides</span>(<span class="at">colour=</span>g_title,<span class="at">linetype=</span>g_title) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'bottom'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="conjoint_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">'clust_err.png'</span>,<span class="at">units=</span><span class="st">'in'</span>,<span class="at">width=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next I look at post-stratification as an option to improve the precision of estimates. For unclustered errors reported below, post-stratified estimates do have higher power and slightly lower average significant effects, and importantly, the post-stratified estimates worsen neither type S nor type M errors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>g_title <span class="ot">&lt;-</span> <span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">''</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(long_data,<span class="fu">grepl</span>(<span class="st">'Un-clustered'</span>,estimation)) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>result,<span class="at">x=</span>sample_size,<span class="at">linetype=</span>estimation)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">colour=</span><span class="st">'red'</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Sample Size'</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>estimate,<span class="at">scales=</span><span class="st">'free'</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.grid.minor.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">'Accent'</span>) <span class="sc">+</span> <span class="fu">guides</span>(<span class="at">colour=</span>g_title,<span class="at">linetype=</span>g_title) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'bottom'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="conjoint_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">'post_unclust_err.png'</span>,<span class="at">units=</span><span class="st">'in'</span>,<span class="at">width=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Post-stratification appears to have a similar effect on clustered error estimations, although the differences are smaller. In smaller samples, post-stratified estimates do have smaller M-errors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>g_title <span class="ot">&lt;-</span> <span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">''</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(long_data,<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">'Un-clustered'</span>,estimation)) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>result,<span class="at">x=</span>sample_size,<span class="at">linetype=</span>estimation)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">colour=</span><span class="st">'red'</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Sample Size'</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>estimate,<span class="at">scales=</span><span class="st">'free'</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.grid.minor.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">'Accent'</span>) <span class="sc">+</span> <span class="fu">guides</span>(<span class="at">colour=</span>g_title,<span class="at">linetype=</span>g_title) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'bottom'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="conjoint_files/figure-html/unclustered_plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">'post_clust_err.png'</span>,<span class="at">units=</span><span class="st">'in'</span>,<span class="at">width=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, I also report average numbers of significant coefficients for the 14 treatments. Given that the 14 treatments were sampled from a normal distribution with prior density in the positive values with a meaan of 0.5, in expectation 95% of estimates should be statisticall significant. While that upper limit is reached only in high sample numbers, it looks like the ratio for treatment effects reaches an acceptable level of 70 percent at about 500 sample respondents. Also, post-stratifying un-clustered models results in effects that are reported as significant at much higher rates, as would follow from the previous results about post-stratification.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>g_title <span class="ot">&lt;-</span> <span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">''</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(long_data_treatment,<span class="fu">aes</span>(<span class="at">y=</span>result,<span class="at">x=</span>sample_size,<span class="at">linetype=</span>effect_type,<span class="at">colour=</span>effect_type)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>() <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Sample Size'</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(<span class="at">panel.grid.minor.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">'Dark2'</span>) <span class="sc">+</span> <span class="fu">guides</span>(<span class="at">linetype=</span>g_title,<span class="at">colour=</span>g_title) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">'bottom'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="conjoint_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">'all_treat_rate.png'</span>,<span class="at">units=</span><span class="st">'in'</span>,<span class="at">width=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This simulation study shows that a sample size of approximately 1,000 respondents is enough to obtain high power while also lowering both the S and M-error rates for treatment interaction effects in this conjoint experiment. The treatment effects themselves are generally of high quality once the sample size reaches 500 because the total number of respondents in each treatment cell is considerably higher than in an interaction. Post-stratification appears to be a useful strategy to increase precision without inducing S or M errors; at the very least, post-stratification does not appear to have any adverse effects on the estimation.</p>
+<p>On the other hand, it appears that clustering errors increases the S-error rate at small sample sizes, a surprising finding considering that clustering methods are designed to inflate, not deflate, standard errors. Given that the S-error rate reveals the likelihood of making an error about the sign of the treatment effect, this is a potentially serious problem. For that reason I intend to report both clustered and un-clustered estimates in my analysis.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
