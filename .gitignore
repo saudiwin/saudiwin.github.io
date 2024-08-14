@@ -1,5 +1,6 @@
-_site
 .sass-cache
 .Rproj.user
 did_est.rds
 U.S._State_and*
+
+/.quarto/
