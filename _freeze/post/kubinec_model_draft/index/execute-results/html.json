@@ -1,0 +1,15 @@
+{
+  "hash": "dfe99500fc1d372400bb7da153ab1e39",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"A Proposed Model for Partial Identification of SARS-CoV2 Infection Rates Given Observed Tests and Cases\"\nsubtitle: \"Helping us understand what the observed numbers of cases and tests mean for COVID-19 spread.\"\nauthor: \"Robert Kubinec\"\ndate: \"2020-03-28T15:00:00\"\nbibliography: \"../../files/BibTexDatabase.bib\"\nimage: \"../../files/img/headers/coronavirus.jpg\"\ncategories: [\"R\",\"Measurement\", \"Bayesian\",\"Data Science\"]\ndescription: \"A model that shows how to estimate the effect of suppression measures on the SARS-CoV2 without knowing the true infection rate.\"\n---\n\n\n\n\n\n\nFor an up to date version of this model, please see our paper at https://osf.io/preprints/socarxiv/jp4wk/.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,67 @@
+---
+title: "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings"
+date: 2023-07-01
+author:
+  - name: Robert Kubinec
+    url: http://www.robertkubinec.com/
+    orcid: 0000-0003-3506-7590
+    affiliation: University of South Carolina
+categories: 
+  - Political Economy
+  - Corruption
+  - Middle East Politics
+  - Online Experiments
+  - Causal Graphs
+pub-info:
+  reference: >-
+    Kubinec, Robert. <em>Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings.</em> Cambridge University Press: 2023. doi: <a href="https://doi.org/10.1017/9781009273541"><code>10.1017/9781009273541</code></a>
+  links:
+    - name: Preprint
+      url: https://osf.io/preprints/socarxiv/mrfcu
+      icon: fa-solid fa-file-pdf
+      local: false
+    - name: Final version
+      url: https://doi.org/10.1017/9781009273541
+      icon: fa-solid fa-scroll
+    - name: Code & Data
+      url: https://github.com/saudiwin/crony_book
+      icon: fa-brands fa-github
+    - name: Add to Zotero
+      url: https://www.zotero.org/save?type=doi&q=10.1017/9781009273541
+      icon: ai ai-zotero
+doi: 10.1017/9781009273541
+toc: false
+---
+
+![Preregistered](preregistered_large_color.png) ![Open data](data_large_color.png)  ![Open](materials_large_color.png)
+
+## Important links
+
+-   [Podcast about the book](https://pomeps.org/making-democracy-safe-for-business-apsa-virtual-posters-s-13-ep-1)
+-   [Online Article Draft](https://osf.io/preprints/socarxiv/mrfcu)
+-   [GitHub repository with code and data](https://github.com/saudiwin/crony_book)
+
+## Abstract
+
+Businesses in the Middle East and North Africa have failed to bring sustainable development despite decades of investment from the private and public sectors. Yet we still know little about why the Arab Uprisings failed to usher in more transparent government that could break this enduring cycle of corruption and mismanagement. Examining posttransition politics in Egypt and Tunisia, Kubinec employs interviews and quantitative surveys to map out the corrupting influence of businesses on politics. He argues that businesses must respond to changes in how perks and privileges are distributed after political transitions, either by forming political coalitions or creating new informal connections to emerging politicians. Employing detailed case studies and original experiments, Making Democracy Safe for Business advances our empirical understanding of the study of the durability of corruption in general and the dismal results of the Arab Uprisings in particular.
+
+## Data and code
+
+The analyses in the book can be reproduced with R code and data [available at GitHub](https://github.com/saudiwin/crony_book). 
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.1017/9781009273541">{{< ai zotero >}} Add to Zotero {{< fa square-arrow-up-right >}}</a>
+
+</p>
+
+``` bibtex
+@book{kubinec2023democracy,
+    Author = {Robert Kubinec},
+    Doi = {10.1017/9781009273541},
+    Publisher = {Cambridge University Press},
+    Title = {Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings},
+    Year = {2023}}
+```

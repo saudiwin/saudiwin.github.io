@@ -1,0 +1,144 @@
+---
+title: "A More Realistic P-Value for the Pfizer Vaccine Report"
+subtitle: "Modeling the Vaccine Study Using the Beta-Binomial Distribution"
+author: "Robert Kubinec"
+date: "2020-11-19T15:00:00"
+bibliography: "../../files/BibTexDatabase.bib"
+image: "../../files/img/headers/ft_header.png"
+categories: ["R","Causal Inferece", "COVID-19","Data Science"]
+description: "The clinical pre-registration for the Moderna vaccine defines clearly what statistic we should use to evaluate their trial, in contrast to their press release."
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(dplyr)
+require(tidyr)
+require(ggplot2)
+require(cmdstanr)
+require(tidybayes)
+require(posterior)
+require(ggthemes)
+
+set.seed(662817)
+
+knitr::opts_chunk$set(warning=F,message=F,fig.align = "center")
+
+
+```
+
+I start with [Eric Novik's excellent blog post](https://rpubs.com/ericnovik/692460) on how to calculate the relevant statistics for the vaccine, i.e. vaccine efficacy (VE). This is defined as:
+
+$$
+VE = 1 - \frac{p_t}{p_c}
+$$
+
+Where $p_t$ is the proportion of cases in the treatment (vaccinated) group with COVID-19 and $p_c$ is the proportion of cases in the control (un-vaccinated) group). This is kind of an odd statistic as it would seem to make more sense to simply report the ratio rather than one minus the ratio, although subtracting one means a null ratio (difference of 1) equals zero. I am not sure a general audience is very aware of the distinction and what VE in fact means. In essence, if we assume the vaccinated group will have no more cases than the control group, this statistic will converge to 1 as $p_t$ goes to zero, so VE of 100% would be a case in which there are no cases in the treatment group.
+
+As Eric Novik shows, the VE is actually a calculated quantity and isn't modeled directly. The [clinical pre-registration](https://pfe-pfizercom-d8-prod.s3.amazonaws.com/2020-09/C4591001_Clinical_Protocol.pdf) says they will use a beta-binomial model. The put a prior on a transformation of the VE (vaccine efficacy) of $Beta(0.700102, 1)$. We can get an idea of what that looks like by examining the distribution of these values:
+
+```{r prior}
+
+prior_VE <- rbeta(10000,.700102,1)
+
+round(quantile((2*prior_VE - 1)/(prior_VE - 1),probs=seq(0,1,by=.05)),5)
+```
+
+This prior puts significant mass at negative VEs which would suggest that the vaccine actually makes things worse for the treatment group than for the control group. While this would seem unrealistic, it also suggests that very high VEs, such as above 90%, are relatively unlikely. We can see that the prior suggests it is about as likely that the VE is negative (the vaccine causes the virus) as it is likely that the VE is greater than 80%.
+
+Given this conservative but weakly informative prior, we can then calculate a p-value for what they pre-register in their study, which is the probability that the VE (vaccine efficacy) is greater than 30%. We can then fit a Bayesian beta-binomial model with these priors by modifying Eric Novik's original code:
+
+```{r code}
+# from Eric Novik, changed the prior per pre-reg
+
+vac_model <- "data {
+  int<lower=1> r_c; // num events, control
+  int<lower=1> r_t; // num events, treatment
+  int<lower=1> n_c; // num cases, control
+  int<lower=1> n_t; // num cases, treatment
+  array[2] real a;   // prior values for treatment effect
+  
+}
+parameters {
+  real<lower=0, upper=1> p_c; // binomial p for control
+  real<lower=0, upper=1> p_t; // binomial p for treatment 
+}
+transformed parameters {
+  real VE       = 1 - p_t / p_c;  // vaccine effectiveness
+}
+model {
+  (VE - 1)/(VE - 2) ~ beta(a[1], a[2]); // prior for treatment effect
+  r_c ~ binomial(n_c, p_c); // likelihood for control
+  r_t ~ binomial(n_t, p_t); // likelihood for treatment
+}
+generated quantities {
+  real effect   = p_t - p_c;      // treatment effect
+  real log_odds = log(p_t / (1 - p_t)) -
+                  log(p_c / (1 - p_c));
+}"
+
+to_stan <- cmdstan_model(write_stan_file(vac_model))
+
+n <- 4.4e4  # number of volunteers
+r_c <- 162  # number of events in control
+r_t <- 8    # number of events in vaccine group
+
+stan_data <- list(n=n,r_c=r_c,r_t=r_t,
+                  n_c=n/2,n_t=n/2,
+                  a=c(.700102,1))
+
+```
+
+Then we can sample and plot the results. We'll draw a lot of samples so we can get good estimates in the tails (i.e. very low p-values).
+
+```{r sample,warning=F}
+
+pfizer_est <- to_stan$sample(data=stan_data,chains=1,iter_warmup=500,iter_sampling=100000,refresh=50000,show_messages=F)
+
+draws <- pfizer_est$draws() %>% as_draws_df
+
+```
+
+Here's a plot of the VE as reported in the press release with the dotted line as the average estimate:
+
+```{r veplot}
+
+mean_ve <- mean(draws$VE)
+
+draws %>% 
+  ggplot(aes(x=VE)) +
+  geom_density(fill="blue",alpha=0.5)+
+  theme_tufte() +
+  ylab("") +
+  scale_x_continuous(labels=scales::percent_format(accuracy = 1)) +
+  geom_vline(aes(xintercept=mean(VE)),linetype=2) +
+  annotate("text",x=mean_ve,y=12,label=paste0("  VE = ",round(mean_ve*100,1),"%"))
+ 
+```
+
+This estimate matches the press release. So let's calculate the p-value:
+
+```{r vep30}
+
+mean(1 - as.numeric(draws$VE>.3))
+
+```
+
+Virtually nil.
+
+However, we can also test some other thresholds, such as the FDA value of 50% VE:
+
+```{r vep50}
+
+mean(1 - as.numeric(draws$VE>.5))
+
+```
+
+Still vanishingly small. We can try something a bit closer, such as whether VE exceeds 90%:
+
+```{r vep90}
+
+mean(1 - as.numeric(draws$VE>.9))
+
+```
+
+This p-value is at least reportable at 0.02. As this is a Bayesian model, this can be interpreted directly that the probability that the vaccine efficacy is less than 90% is quite small, less than a 2% chance.

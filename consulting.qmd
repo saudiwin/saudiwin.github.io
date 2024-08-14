@@ -1,0 +1,7 @@
+---
+title: "Consulting"
+about:
+  template: jolla
+---
+
+I have been a consultant to non-profits and private companies about statistics, especially Bayesian statistics, applied data science, and online survey research & experiments. If you are interested in having me consult for your organization, please contact me via email at rkubinec\@mailbox.sc.edu.

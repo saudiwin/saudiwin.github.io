@@ -1,0 +1,9 @@
+---
+title: "ordbetareg"
+about:
+  template: jolla
+---
+
+The `ordbetareg` R package implements ordered beta regression models, ideal for modeling continuous variables constrained by upper and lower bounds, such as survey responses or dose-response relationships. It serves as a front-end to the `brms` package, enabling a variety of regression specifications, including hierarchical and multivariate models. The package integrates well with popular R packages like `dplyr`, `ggplot2`, and `tidyr` and provides additional tools for model summarization and visualization. It was developed and maintained by Robert Kubinec.
+
+For more details, visit the [CRAN page](https://cran.r-project.org/web/packages/ordbetareg/index.html).

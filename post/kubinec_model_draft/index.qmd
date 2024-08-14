@@ -1,0 +1,38 @@
+---
+title: "A Proposed Model for Partial Identification of SARS-CoV2 Infection Rates Given Observed Tests and Cases"
+subtitle: "Helping us understand what the observed numbers of cases and tests mean for COVID-19 spread."
+author: "Robert Kubinec"
+date: "2020-03-28T15:00:00"
+bibliography: "../../files/BibTexDatabase.bib"
+image: "../../files/img/headers/coronavirus.jpg"
+categories: ["R","Measurement", "Bayesian","Data Science"]
+description: "A model that shows how to estimate the effect of suppression measures on the SARS-CoV2 without knowing the true infection rate."
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(dplyr)
+require(tidyr)
+require(ggplot2)
+require(rstan)
+require(stringr)
+require(lubridate)
+require(bayesplot)
+require(historydata)
+require(readr)
+require(datasets)
+require(extraDistr)
+
+set.seed(662817)
+
+rstan_options(auto_write=T)
+
+knitr::opts_chunk$set(warning=F,message=F)
+
+# whether to run model (it will take a few hours) or load saved model from disk
+
+run_model <- F
+
+```
+
+For an up to date version of this model, please see the published version at <https://academic.oup.com/jrsssa/advance-article-abstract/doi/10.1093/jrsssa/qnae040/7666105> and an ungated version at <https://osf.io/preprints/socarxiv/jp4wk/>

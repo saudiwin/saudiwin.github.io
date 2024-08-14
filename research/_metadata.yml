@@ -1,0 +1,15 @@
+# Date format
+date-format: "MMMM YYYY"
+
+# Default for table of contents
+toc: true
+toc-title: Publication Type
+toc-location: left
+
+# Default knitr options
+execute:
+  echo: false
+  message: false
+  warning: false
+
+include-back-link: true

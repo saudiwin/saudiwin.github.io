@@ -1,0 +1,209 @@
+---
+title: "What Panel Data Is Really All About"
+subtitle: "It's not as confusing as it first appears, but it's also frequently misused and poorly understood."
+author: "Robert Kubinec"
+date: "2020-04-22T15:00:00"
+bibliography: "../../files/BibTexDatabase.bib"
+image: "../../files/img/headers/ft_header.png"
+categories: ["R","Panel Data", "Fixed Effects","Data Science"]
+description: "In this post I talk about my recent publication with Jonathan Kropko about panel data. We de-mistify panel data, expose some serious weaknesses in common models like two-way fixed effects (2-way FE), and in general help people use panel data with (more) confidence."
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(dplyr)
+require(tidyr)
+require(ggplot2)
+require(panelsim)
+
+
+set.seed(662817)
+
+knitr::opts_chunk$set(warning=F,message=F)
+
+
+```
+
+*Interested in more social science on contemporary issues? [Check out my just-released book with Cambridge University Press](https://www.cambridge.org/core_title/gb/591431), and use discount code KUBINEC23 to get 20% off.*
+
+We've all been in that seminar where the author puts up a slide containing regression coefficients, and buried in the bottom line of the table we can see little Ys and Ns indicating the kind of panel data model employed. Quite often, these brief descriptions of models are taken as a mere statistical ritual, believed to be efficacious at appeasing the mercurial statistical deities, but rarely if ever investigated more thoroughly. Furthermore, no one wants to be in the difficult position of discussing panel data models, which inevitably boils down to a conversation laced with econometric terms generating more heat than light.
+
+So what if I told you ... panel data, or data with two dimensions, such as repeated observations on multiple cases over time, is really not that complicated. In fact, there are only two basic ways to analyze panel data, which I will explain briefly in this piece, just as every panel dataset has two basic dimensions (cases and time). However, when we confuse these dimensions, bad things can happen. In fact, one of the most popular panel data models, the two-way fixed effects model--widely used in the social sciences--is in fact statistical nonsense because it does not clearly distinguish between these two dimensions. This statement should sound implausible to you--really?, but it's quite easy to demonstrate, as I'll show you in this post.
+
+This blog post is based on a recent publication with Jonathan Kropko which you can [access here](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0231349). In this post I provide a more reader-friendly overview of the article, dropping the academic-ese and focusing on substance as I think there are important issues for many people doing research.
+
+In short: **there are an untold number of analyses of panel data affected by an issue that is almost impossible to identify because R and Stata obscure the problem.** Thanks to multi-collinearity checks that automatically drop predictors in regression models, a two-way fixed effects model can produce sensible-looking results that are not just irrelevant to the question at hand, but practically nonsense. Instead, we would all be better served by using simpler 1-way fixed effects models (intercepts on time points or cases/subjects, but not both).
+
+## How We Think About Panel Data
+
+Panel data is one of the richest resources we have for observational inference in the social and even natural sciences. By comparing cases to each other as they change over time, such as countries and gross domestic product (GDP), we can learn much more than we can by only examining isolated cases. However, researchers for decades have been told by econometricians and applied statisticians that they *must* use a certain kind of panel data model or risk committing grave inferential errors. As a result, probably the most common panel data model is to include case fixed effects, or a unique intercept (i.e. a dummy variable) for every case in the panel data model. The second most likely is to include a fixed effect or intercept for every time point *and* case in the data. The belief is that including all these intercepts will control for omitted variables because there are factors unique to cases or time points that will be "controlled for" by these intercepts.
+
+The result of this emphasis on the lurking dangers of panel data inference results in what I have decided to call the Cheeseburger Syndrome. This phenomenon was first studied by Saturday Night Live in a classic 1980s skit:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/puJePACBoIo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+
+</iframe>
+
+Applied researchers are in the position of customers in the video, continually asking for models that will analyze the variation in their panel data which actually exists. Applied statisticians are often the cooks, informing customers that regardless of what particular dataset they have, they will only ever be able to get a "cheeseburger." As a result, there is remarkable uniformity of application of panel data models in the social sciences, even if these models don't always fit the data very well.
+
+What we put forward in our piece linked above is that any statistical model should have, as its first requirement, that it match the researcher's question. Problems of omitted variables are important, but necessarily secondary. It does not matter how good the cheeseburger is if the researcher really wants eggs easy over.
+
+In addition, fixed effects models *do not* control for omitted variables. What fixed effect models do is isolate one dimension of variance in the model. As a result, any variables that don't vary on that dimension are by definition removed from the model. This side-effect is trumpeted as the great inferential benefit of fixed effect models, but it has nothing to do with inference. Fixed effects (or their cousin, random effects/hierarchical models) are simply about selecting which part of the panel dataset is most germane to the analysis.
+
+The rule of thumb that we put forward in our paper is that fixed effects/dummy variables/intercepts on cases correspond to the following research question:
+
+> How much does a case change in relation to itself over time?
+
+While fixed effects/dummy variables/intercepts on time points correspond to the following research question:
+
+> How much does a case change relative to other cases?
+
+Some questions are fruitfully asked when comparing cases to themselves over time. For example, if a case is a human being, we might want to know whether obtaining more education leads to higher earnings. Conversely, if a case is a country, we might want to know if wealthier countries tend to be more democratic than poorer countries. Some questions primarily employ within-case variation, while others look at cross-sectional variation. Both are present in any panel dataset, and both are potentially interesting.
+
+If fixed effects enable *comparisons*, then what happens if we have dummy variables/intercepts for every case and time point (the so-called two-way fixed effects model)? What comparison are we then making? As it turns out, the answer to this question is not very clear at all. I refer you to the paper above for a full exposition, but in essence, because cases and time points are nested, we end up making comparisons across both dimensions simultaneously, and this is just as obtuse as it sounds. There is no clear research question that matches this model.
+
+Furthermore, if the original aim was to remove omitted variables, these omitted variables inevitably end up in the estimate again because a two-way estimate necessarily relates to both dimensions of variance simultaneously. As a result, it is not very clear what the point is. The one known use of the model is for difference-in-difference estimation, but only with two time points (see our paper for more detail).
+
+## Exposition with Data
+
+This all may sound to you like a nice story. But how can you really know we are telling the truth? There are plenty of equations in our paper, but there is nothing like being able to see the data. One of the contributions of our paper is to create a simulation for panel data where we can control the within-case and cross-sectional variation separately for the same panel data set. This allows us to compare all of the possible panel data models with the same dataset while including or excluding omitted variables and other issues.
+
+To show you how this works, I will generate a dataset with a single covariate in which the effect of that covariate is +1 for within-case comparisons and -3 for cross-sectional comparisons. There is noise in the data, but the effect is the same for all cases and for all cross-sections. The following code simulates fifty cases and fifty time points using our `panelsim` package (currently available only via [Github](http://www.github.com/saudiwin/panelsim)):
+
+```{r gensim}
+
+# to install this package, use 
+# remotes::install_github("saudiwin/panelsim")
+
+require(panelsim)
+
+# generate dataset with fixed coefficients within cases and cross-section
+# no variation in effects across cases or time
+
+gen_data <- tw_data(N=50,
+                    T=50,
+                    case.eff.mean = 1,
+                    cross.eff.mean = -3,
+                    cross.eff.sd = 0,
+                    case.eff.sd = 0,
+                    noise.sd=.25)
+
+```
+
+Because there is only one covariate, we can pretty easily visualize the relationships in the cross sectional and within-case variation. First, the value of the outcome/response $y$ is shown for five cases, where one dot represents the value of $x$ for each time point for that case:
+
+```{r case_out}
+
+gen_data$data %>%
+  filter(case<5) %>% 
+  ggplot(aes(x=x,y=y)) +
+           geom_point() +
+           stat_smooth(method="lm") +
+           facet_wrap(~case,scales="free") +
+  theme_minimal()
+  
+
+```
+
+As can be seen, there is a consistent positive relationship of approximately +1 between $x$ and $y$ within cases. We can also examine the relationship for the cross-section by subsetting the data to each time point and plotting the cases for five of the time points:
+
+```{r time_out}
+
+gen_data$data %>%
+  filter(time<5) %>% 
+  ggplot(aes(x=x,y=y)) +
+           geom_point() +
+           stat_smooth(method="lm") +
+           facet_wrap(~time,scales="free") +
+  theme_minimal()
+  
+
+```
+
+There is a separate and quite distinct relationship in the cross section between $x$ and $y$. Both components are present in the outcome. To find the actual coefficient, we can simply fit linear regression models on the generated data, first with intercepts/dummies for cases:
+
+```{r case_mod}
+summary(lm(y ~ x + factor(case),data=gen_data$data))
+```
+
+We can see in the regression coefficient above that the coefficient for $x$ is almost exactly +1.
+
+Next we can fit a model with cases/intercepts for time points (cross-sectional variation):
+
+```{r time_mod}
+
+summary(lm(y ~ x + factor(time),data=gen_data$data))
+
+```
+
+Again, the estimated coefficient is almost exactly what we generated. Success!
+
+However, this brings us back to one of the questions we started with. We know the within-case relationship and the cross-sectional relationship, so what happens if we put dummies/intercepts on both cases and time? Well let's find out:
+
+```{r 2waymod}
+summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))
+```
+
+You might expect that perhaps the two-way coefficient would be somewhere between the cross-sectional and within-case coefficients. Nope. It's equal in this simulation to roughly 1, but that depends on how much variance there is in the cross-section and the within-case components of the dataset as they are now being combined in a non-linear fashion (if you can't wrap your mind around this, don't worry, it's nearly impossible to do and unfruitful if you do accomplish it). However, the coefficient is still equal to a value that appears reasonable, although it is much less precise, and we might be willing to traipse along with it. However, you should pay attention to what happened in the model summary above--one of the time dummies (`factor(time)50`) came back with a missing (`NA`) coefficient! What is that about?
+
+I'm so glad you asked. As we mentioned earlier, R has the ability to check for multi-collinearity in the predictor variables to avoid getting errors when attempting to estimate linear regression. Multi-collinearity can arise for reasons that have nothing to do with fixed effects, such as accidentally including variables that are sums of each other, etc. It often happens in fixed effects regression models when people try to include variables that only vary in the cross-section when using case fixed effects (a symptom of the Cheeseburger Syndrome mentioned previously). In this instance, though, there is no reason to think that there is multi-collinearity as we *generated* the data with two continuous variables ($x$ and $y$). The data are perfect with no missingness. So how could this happen?
+
+This discovery is one of the central contributions of our paper. Whenever panel data has a single effect for the cross-section and for within-case variation--as is the dominant way of thinking about panel data--the two-way fixed effects coefficient is statistically unidentified. That is, trying to estimate it is equivalent to saying `2 + 2 = 5` or the earth is as round as a square. As we show in the paper, it algebraically reduces to dividing by zero. R magically saved the day by dropping a variable, but we can show what would happen if R had not intervened.
+
+In the code below I manually estimate a regression using the matrix inversion formula, $(X^TX)^{-1}X^Ty$, where $X$ in this case is all of our predictor variables, including the case/time dummies:
+
+```{r matinvert}
+
+X <- model.matrix(y~x + factor(case) + factor(time),data=gen_data$data)
+y <- gen_data$data$y
+try(solve(t(X)%*%X)%*%t(X)%*%y)
+
+```
+
+You can see the error message: the system (matrix computation of OLS regression) is computationally singular. You'll need to see the paper for how this all breaks down, but essentially the question you are putting to R is nonsensical. You simply cannot estimate a single joint effect while including all the variables. Instead, you need to drop one, which essentially means the effect is relative to the whichever intercept happened to be dropped (in this case time point 50). The coefficient could change if we simply re-arrange the labeling of the time fixed effects, as in the following:
+
+```{r rearrange}
+gen_data$data$time <- as.numeric(factor(gen_data$data$time,levels=sample(unique(gen_data$data$time))))
+summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))
+```
+
+As you can see, the coefficient changed because we arbitrarily swapped the order of the time fixed effects, and as R will drop the last one in the case of multi-collinearity, the estimate changed.
+
+At this point, **you should be concerned.** One of our frustrations with this piece is that although the working paper has been in circulation for years, no one seems to have cared about this *apparently quite important problem.*
+
+You might wonder though that you've seen two-way fixed effects models where this didn't happen. As we show in the paper, the two-way FE model *is* identified if we generate the data differently. What we have to do is use a different *effect* of $x$ on $y$ for each time point/case, or what can be called a *varying slopes* model (slope for regression coefficient). We are not varying the fixed effects/intercepts themselves, rather we are varying the relationship between $x$ and $y$ across time points and cases. We must do this to prevent the two-way FE model from being unidentified.
+
+To demonstrate this, we will generate new data except the coefficients will vary across case and time points randomly:
+
+```{r}
+
+# make the slopes vary with the .sd parameters
+gen_data <- tw_data(N=20,
+                    T=50,
+                    case.eff.mean = 1,
+                    cross.eff.mean = -1,
+                    cross.eff.sd =.25,
+                    case.eff.sd =1,
+                    noise.sd=1)
+
+summary(lm(y~x + factor(case) + factor(time),data=gen_data$data))
+
+```
+
+Bada bing bada boom. Now there are no missing coefficients. However, the coefficient on $x$ isn't any easier to interpret, and in fact it is in even less transparent as it involves taking averages of averages of coefficients in the cross-section and within-case variation (say that five times fast). It is also peculiar that the model can only be fit with this kind of variation in the *slopes*, as opposed to the intercepts, as might appear more logical. The models with fixed effects only for cases or time points do not have this problem at all.
+
+What makes this lack of identification particularly malicious is that it is virtually impossible to identify unless someone takes the trouble as we did to generate data from scratch. Visually, the dataset with single coefficients for cross-sectional/within-case variation appears pristine. It is only deep under the hood that the problem appears. The fact that R (and Stata has similar behavior) can magically make the problem go away by changing the data only makes it less likely that the problem will ever be identified. We simply do not know how many papers in the literature have been affected by this problem (or by similar situations where the regression slopes are almost fixed across cases or time points).
+
+There is one important caveat to this post. The two-way fixed effects model *can* be a difference-in -differences model, but *only* if there are exactly two (2) time points. It is not possible to run a two-way FE model with many time points and call it difference-in-difference as there are the same difficulties in interpretation. We discuss this more in the paper.
+
+## Summary
+
+In summary, fixed effects models are very useful for panel data as they help isolate dimensions of variation that matter for research questions. They are not magical tools for causal inference, but rather frameworks for understanding data. It is important to think about which dimension (cross-section or within-case) is more relevant, and then go with that dimension. All other concerns, including modeling spatial or time autocorrelation, omitted variables and endogeneity are all secondary to this first and most important point, which is what comparisons can be drawn from the data?
+
+One important area that this can be applied to is allowing people to fit more models with fixed effects on *time points* rather than cases. There are many questions that can be best understood by comparing cases to each other rather than cases to themselves over time. Studying long-run institutions like electoral systems, for example, can only be understood in terms of cross-sectional variation. There is nothing unique or special about the within-case model.
+
+Some claim that within-case variation is better because cases have less heterogeneity than the cross-section. However, there is no way this can be true a priori. If minimizing heterogeneity is the aim, then it is important to consider the time frame and how units change over time. For example, if we have a very long time series, say 200 years, and we are comparing the U.S. and Canada, then we might believe that the comparison of the U.S. of 1800 to the Canada of 1800 (the cross-section) has less noise than a comparison of the U.S. of 1800 to the U.S. of 2020 (within-case variation). We need to think more about our data and what it represents rather than taking the short-cut of employing the same model everyone else uses.
+
+While we did not discuss random effects/hierarchical models in this post, the same principles apply even if "partial pooling" is used rather than "no pooling". Intercepts are designed to draw comparisons, and however the intercepts are modeled, it is important to think about what they are saying about the data, and whether that statement makes any sense.
+
+So if you don't want to eat that cheeseburger... we release you. Go enjoy your tofu-based meat alternative with relish.

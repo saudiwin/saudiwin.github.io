@@ -1,0 +1,76 @@
+---
+title: "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria's Hirak"
+date: 2023-04-01
+author:
+  - name: Robert Kubinec
+    url: http://www.robertkubinec.com/
+    orcid: 0000-0003-3506-7590
+    affiliation: University of South Carolina
+  - name: Helen Milner
+    url: https://hvmilner.scholar.princeton.edu/
+    affiliation: Princeton University
+categories: 
+  - Political Economy
+  - Middle East Politics
+  - Online Experiments
+  - Bayesian Statistics
+pub-info:
+  reference: >-
+    Robert Kubinec and Helen Milner, “Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria's Hirak,” <em>World Politics</em> 76, no. 2 (April 2024): 294-333, doi: <a href="https://doi.org/10.1353/wp.2024.a924508"><code>10.1353/wp.2024.a924508</code></a>
+  links:
+    - name: Preprint
+      url: https://osf.io/preprints/socarxiv/hu3vq
+      icon: fa-solid fa-file-pdf
+      local: local
+    - name: Final version
+      url: https://doi.org/10.1353/wp.2024.a924508
+      icon: fa-solid fa-scroll
+    - name: Code & Data
+      url: https://github.com/saudiwin/algiers_replication
+      icon: fa-brands fa-github
+    - name: Add to Zotero
+      url: https://www.zotero.org/save?type=doi&q=10.1111/1758-5899.12984
+      icon: ai ai-zotero
+doi: 10.1353/wp.2024.a924508
+---
+
+![Preregistered](preregistered_large_color.png) ![Open data](data_large_color.png) ![Open](materials_large_color.png)
+
+## Important links
+
+-   [Paper (preprint)](https://osf.io/preprints/socarxiv/hu3vq)
+-   [GitHub repository](https://github.com/saudiwin/algiers_replication)
+
+## Abstract
+
+This article examines the rentier thesis that a government's control over oil resources should help it to resist pressures for democratization. The authors' online survey experiment, implemented during a nationwide mobilization for regime change in Algeria known as the Hirak, used interactive experimental treatments to provide information about the Algerian government's subsidies for fuel resources and low value-added taxes. Based on a sample of 9,721 Algerians, the authors find that when Algerians learn about their country's relatively high level of fuel subsidies and low level of taxes, their assessments of the government's performance improve. However, the treatment has null effects for outcomes involving demands for representation, such as intentions to join protest movements. An analysis of treatment heterogeneity in terms of wealth shows that the wealthy became much more supportive of the regime in response to the treatment while in some cases the poor became much less so. This treatment heterogeneity appears to be related to divergent views among the wealthy and the poor concerning the goals of the protest movement, with the wealthy favoring institutional reforms while the poor prioritized redistributive justice.
+
+## Data and code
+
+The project is reproducible with R code and data [available at GitHub](https://github.com/saudiwin/algiers_replication).
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.1111/1758-5899.12984">{{< ai zotero >}} Add to Zotero {{< fa square-arrow-up-right >}}</a>
+
+</p>
+
+``` bibtex
+@article{kubinec_taxes_2024,
+	title = {Taxes in the {Time} of {Revolution}: {An} {Experimental} {Test} of the {Rentier} {State} during {Algeria}'s {Hirak}},
+	volume = {76},
+	issn = {1086-3338},
+	shorttitle = {Taxes in the {Time} of {Revolution}},
+	url = {https://muse.jhu.edu/pub/1/article/924508},
+	abstract = {This article examines the rentier thesis that a government's control over oil resources should help it to resist pressures for democratization. The authors' online survey experiment, implemented during a nationwide mobilization for regime change in Algeria known as the Hirak, used interactive experimental treatments to provide information about the Algerian government's subsidies for fuel resources and low value-added taxes. Based on a sample of 9,721 Algerians, the authors find that when Algerians learn about their country's relatively high level of fuel subsidies and low level of taxes, their assessments of the government's performance improve. However, the treatment has null effects for outcomes involving demands for representation, such as intentions to join protest movements. An analysis of treatment heterogeneity in terms of wealth shows that the wealthy became much more supportive of the regime in response to the treatment while in some cases the poor became much less so. This treatment heterogeneity appears to be related to divergent views among the wealthy and the poor concerning the goals of the protest movement, with the wealthy favoring institutional reforms while the poor prioritized redistributive justice.},
+	number = {2},
+	urldate = {2024-08-14},
+	journal = {World Politics},
+	author = {Kubinec, Robert and Milner, Helen V.},
+	year = {2024},
+	note = {Publisher: Johns Hopkins University Press},
+	pages = {294--333},
+}
+```
