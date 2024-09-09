@@ -25,6 +25,8 @@ website:
         href: https://github.com/saudiwin
       - icon: twitter
         href: https://twitter.com/rmkubinec
+      - text: CV
+        href: files/Robert_Kubinec_CV_full.pdf
 format:
   html:
     theme: lux
