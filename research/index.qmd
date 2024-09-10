@@ -11,19 +11,19 @@ listing:
     sort: "date desc"
     template: ../html/research/listing.ejs
     categories: true
-  - id: working-papers
-    contents: "working-papers/*/index.qmd"
-    sort: "date desc"
-    template: ../html/research/listing.ejs
-    categories: true
-  - id: reviews
-    contents: "reviews/*/index.qmd"
-    sort: "date desc"
-    template: ../html/research/listing.ejs
-  - id: essays
-    contents: "essays/*/index.qmd"
-    sort: "date desc"
-    template: ../html/research/listing.ejs
+  # - id: working-papers
+  #   contents: "working-papers/*/index.qmd"
+  #   sort: "date desc"
+  #   template: ../html/research/listing.ejs
+  #   categories: true
+  # - id: reviews
+  #   contents: "reviews/*/index.qmd"
+  #   sort: "date desc"
+  #   template: ../html/research/listing.ejs
+  #- id: essays
+  #  contents: "essays/*/index.qmd"
+  #  sort: "date desc"
+  #  template: ../html/research/listing.ejs
 page-layout: full
 include-back-link: false
 toc-location: left

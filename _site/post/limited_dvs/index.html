@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.53">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2022-06-26">
 <meta name="description" content="I discuss the available approaches in R for handling proportional/fractional outcomes, and present my new R package ordbetareg as a synthesis of the best of what is currently available.">
 
-<title>What To Do (And Not to Do) with Modeling Proportions/Fractional Outcomes – Robert Kubinec</title>
+<title>Robert Kubinec - What To Do (And Not to Do) with Modeling Proportions/Fractional Outcomes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -36,7 +36,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -113,7 +113,7 @@ gtag('js', new Date());
 gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -158,7 +158,7 @@ window.Quarto = {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -173,19 +173,23 @@ window.Quarto = {
 </i> 
 <span class="menu-text"></span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../files/Robert_Kubinec_CV_full.pdf" aria-current="page"> 
+<span class="menu-text">CV</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">What To Do (And Not to Do) with Modeling Proportions/Fractional Outcomes</li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -235,6 +239,12 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Punk Rock Poli Sci</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../files/Robert_Kubinec_CV_full.pdf" class="sidebar-item-text sidebar-link">
@@ -516,12 +526,15 @@ f(y_i|\alpha,\gamma,\delta,\mu,\phi) = \left\{\begin{array}{lr}
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(vdem, appoint_chamber<span class="sc">&gt;</span><span class="dv">0</span>, appoint_chamber<span class="sc">&lt;</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(country_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Egypt"        "Colombia"     "Bangladesh"   "India"        "Kenya"       
- [6] "Tanzania"     "Uganda"       "Zambia"       "Zimbabwe"     "Botswana"    
-[11] "Burundi"      "Iran"         "Iraq"         "Qatar"        "Sierra Leone"
-[16] "The Gambia"   "Kazakhstan"   "Rwanda"       "Eswatini"     "Comoros"     
-[21] "Guyana"       "Hong Kong"    "Kuwait"       "Mauritius"    "Singapore"   
-[26] "Zanzibar"    </code></pre>
+<pre><code> [1] "Egypt"                "Colombia"             "Bangladesh"          
+ [4] "India"                "Kenya"                "Tanzania"            
+ [7] "Uganda"               "Zambia"               "Zimbabwe"            
+[10] "Botswana"             "Burundi"              "Iran"                
+[13] "Iraq"                 "Qatar"                "Sierra Leone"        
+[16] "The Gambia"           "Kazakhstan"           "Rwanda"              
+[19] "Eswatini"             "Comoros"              "Guyana"              
+[22] "Hong Kong"            "Kuwait"               "Mauritius"           
+[25] "Singapore"            "United Arab Emirates" "Zanzibar"            </code></pre>
 </div>
 </div>
 <p>As can be seen, there are 26 countries that have these mixed legislatures. Some of these countries, such as India and Kenya, are known to have distinct ethnic minorities that might want to have protected representation.</p>
@@ -554,20 +567,20 @@ lm(formula = appoint_chamber ~ power_groups + I(power_groups^2),
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.98621  0.01050  0.02107  0.04426  0.42570 
+-0.98167  0.01211  0.02436  0.04901  0.38783 
 
 Coefficients:
                    Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)        0.915557   0.020367  44.953  &lt; 2e-16 ***
-power_groups       0.084800   0.014874   5.701 5.16e-08 ***
-I(power_groups^2) -0.023844   0.008821  -2.703  0.00757 ** 
+(Intercept)        0.912202   0.020567  44.353  &lt; 2e-16 ***
+power_groups       0.077946   0.014646   5.322 3.23e-07 ***
+I(power_groups^2) -0.019882   0.008681  -2.290   0.0232 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.1904 on 170 degrees of freedom
-  (6 observations deleted due to missingness)
-Multiple R-squared:  0.1605,    Adjusted R-squared:  0.1507 
-F-statistic: 16.26 on 2 and 170 DF,  p-value: 3.465e-07</code></pre>
+Residual standard error: 0.1879 on 169 degrees of freedom
+  (7 observations deleted due to missingness)
+Multiple R-squared:  0.1437,    Adjusted R-squared:  0.1336 
+F-statistic: 14.18 on 2 and 169 DF,  p-value: 2.023e-06</code></pre>
 </div>
 </div>
 <p>Our intuitions could be partly confirmed: as social groups become more powerful, seats are more likely to be elected, but only up to a point. Above that point, they in fact become more likely to be appointed. To figure out what the relationship looks like, we can use <code>lm</code>’s <code>predict</code> function for varying values of <code>power_groups</code>, and plot the result:</p>
@@ -598,11 +611,11 @@ F-statistic: 16.26 on 2 and 170 DF,  p-value: 3.465e-07</code></pre>
 </div>
 </div>
 <p>The plot shows that when the power of social groups is equal to +2, most seats are elected, but when the power of social groups is equal to +3, fewer than all seats are elected. So in other words, when social groups are the most powerful, at least some seats are appointed. When social groups have little if any power, all seats are likely to be appointed.</p>
-<p>One issue is that this prediction is close to the maximum of the scale: 0.99095. While OLS doesn’t predict out of bounds in this example, the confidence interval of the prediction is likely to exceed zero. We can test that by examining the maximum of the confidence interval:</p>
+<p>One issue is that this prediction is close to the maximum of the scale: 0.9885877. While OLS doesn’t predict out of bounds in this example, the confidence interval of the prediction is likely to exceed zero. We can test that by examining the maximum of the confidence interval:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(lm_pred<span class="sc">$</span>fit <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>lm_pred<span class="sc">$</span>se.fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.078942</code></pre>
+<pre><code>[1] 1.095932</code></pre>
 </div>
 </div>
 <p>We can see that high end of the high end 5% to 95% confidence interval reaches 1.09. In other words, OLS predicts that when social groups are moderately powerful, 109% of seats will be elected. This possibility, of course, is ridiculous, and makes no sense given our scale. Again, OLS can’t respect bounds, which means that we can get intervals that can’t be mapped on to the underlying scale in a meaningful sense.</p>
@@ -620,23 +633,19 @@ Call:
 glm(formula = appoint_chamber ~ power_groups + I(power_groups^2), 
     family = quasibinomial, data = vdem)
 
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--2.7573   0.1521   0.2167   0.2910   1.1460  
-
 Coefficients:
                   Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)        2.52514    0.34266   7.369 7.13e-12 ***
-power_groups       0.96934    0.22620   4.285 3.05e-05 ***
-I(power_groups^2) -0.02123    0.16389  -0.130    0.897    
+(Intercept)       2.452975   0.350523   6.998 5.82e-11 ***
+power_groups      0.904496   0.215441   4.198 4.34e-05 ***
+I(power_groups^2) 0.004464   0.166477   0.027    0.979    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for quasibinomial family taken to be 0.5776907)
+(Dispersion parameter for quasibinomial family taken to be 0.5591972)
 
-    Null deviance: 62.802  on 172  degrees of freedom
-Residual deviance: 49.055  on 170  degrees of freedom
-  (6 observations deleted due to missingness)
+    Null deviance: 60.415  on 171  degrees of freedom
+Residual deviance: 48.359  on 169  degrees of freedom
+  (7 observations deleted due to missingness)
 AIC: NA
 
 Number of Fisher Scoring iterations: 7</code></pre>
@@ -670,7 +679,7 @@ Number of Fisher Scoring iterations: 7</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(pred_power_groups_frac<span class="sc">$</span>fit <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>pred_power_groups_frac<span class="sc">$</span>se.fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.012264</code></pre>
+<pre><code>[1] 1.012364</code></pre>
 </div>
 </div>
 <p>The max confidence interval isn’t exactly one, but very close. The small increase above 1 is due to the limits of the Normal approximation used to calculate the confidence interval. Compared to OLS, the fractional logit does respect the boundaries. However, compared to the beta regression variants that we turn to next, it is not as powerful a tool. There is no easy way, for example, to know why the estimated coefficients are so different than OLS because we cannot simulate data from the fractional logit “quasi-likelihood” as we can with the other distributions.</p>
@@ -688,7 +697,7 @@ Number of Fisher Scoring iterations: 7</code></pre>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_beta_reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Family: Beta regression(1.32) 
+Family: Beta regression(1.414) 
 Link function: logit 
 
 Formula:
@@ -696,15 +705,15 @@ appoint_chamber ~ power_groups + I(power_groups^2)
 
 Parametric coefficients:
                   Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)        1.60730    0.12066  13.321  &lt; 2e-16 ***
-power_groups       0.29192    0.09131   3.197  0.00139 ** 
-I(power_groups^2) -0.07902    0.05310  -1.488  0.13669    
+(Intercept)        1.65637    0.12239  13.534  &lt; 2e-16 ***
+power_groups       0.26403    0.08988   2.937  0.00331 ** 
+I(power_groups^2) -0.06480    0.05225  -1.240  0.21486    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
-R-sq.(adj) =  0.121   Deviance explained = 56.1%
--REML = -426.27  Scale est. = 1         n = 173</code></pre>
+R-sq.(adj) =  0.102   Deviance explained = 53.6%
+-REML = -423.08  Scale est. = 1         n = 172</code></pre>
 </div>
 </div>
 <p>Interestingly, we do now see some similarities to OLS in terms of a marginally declining effect of <code>power_groups</code> at very high levels of <code>power_groups</code>. We can also look at predicted values, which of course will be in the transformed (nudged) outcome scale:</p>
@@ -752,25 +761,25 @@ R-sq.(adj) =  0.121   Deviance explained = 56.1%
 Formula: appoint_chamber ~ power_groups + I(power_groups^2) 
          zoi ~ power_groups + I(power_groups^2)
          coi ~ power_groups + I(power_groups^2)
-   Data: vdem (Number of observations: 173) 
+   Data: vdem (Number of observations: 172) 
   Draws: 1 chains, each with iter = 2000; warmup = 1000; thin = 1;
          total post-warmup draws = 1000
 
 Regression Coefficients:
                     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept               2.01      0.25     1.53     2.50 1.00     1399      821
-zoi_Intercept           1.04      0.30     0.46     1.61 1.00     1602      841
-coi_Intercept           2.79      0.56     1.78     3.96 1.00      933      778
-power_groups            0.18      0.15    -0.10     0.49 1.00     1073      638
-Ipower_groupsE2        -0.32      0.15    -0.61    -0.03 1.00     1233      522
-zoi_power_groups        0.37      0.24    -0.10     0.81 1.00     1373      838
-zoi_Ipower_groupsE2     0.37      0.19     0.03     0.76 1.01      845      735
-coi_power_groups        1.25      0.38     0.59     2.07 1.00      535      495
-coi_Ipower_groupsE2     0.04      0.26    -0.46     0.60 1.00      643      550
+Intercept               1.54      0.29     0.96     2.11 1.00     1129      832
+zoi_Intercept           0.87      0.29     0.29     1.43 1.00     1531      745
+coi_Intercept           3.15      0.69     1.96     4.70 1.00     1380      744
+power_groups            0.13      0.21    -0.33     0.50 1.00     1107      763
+Ipower_groupsE2        -0.12      0.16    -0.43     0.20 1.00      762      802
+zoi_power_groups        0.25      0.26    -0.28     0.72 1.00     1169      762
+zoi_Ipower_groupsE2     0.50      0.20     0.12     0.94 1.00      829      547
+coi_power_groups        1.11      0.35     0.51     1.88 1.00      717      552
+coi_Ipower_groupsE2    -0.09      0.26    -0.57     0.42 1.01     1136      719
 
 Further Distributional Parameters:
     Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-phi     8.60      2.38     4.72    13.78 1.00      965      800
+phi     4.80      1.38     2.53     7.91 1.00      821      507
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -820,21 +829,21 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <pre><code> Family: ord_beta_reg 
   Links: mu = identity; phi = identity; cutzero = identity; cutone = identity 
 Formula: appoint_chamber ~ power_groups + I(power_groups^2) 
-   Data: data (Number of observations: 173) 
+   Data: data (Number of observations: 172) 
   Draws: 1 chains, each with iter = 2000; warmup = 1000; thin = 1;
          total post-warmup draws = 1000
 
 Regression Coefficients:
                 Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept           1.68      0.22     1.24     2.08 1.00      930      868
-power_groups        0.51      0.13     0.26     0.77 1.00      848      768
-Ipower_groupsE2    -0.02      0.10    -0.20     0.18 1.01      859      612
+Intercept           1.31      0.23     0.87     1.75 1.00      839      743
+power_groups        0.47      0.14     0.19     0.74 1.00      792      585
+Ipower_groupsE2     0.08      0.11    -0.11     0.30 1.00      882      598
 
 Further Distributional Parameters:
         Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-phi         7.64      2.13     4.11    12.37 1.00      680      604
-cutzero    -1.31      0.42    -2.18    -0.52 1.00      561      560
-cutone      0.58      0.18     0.22     0.93 1.00      732      539
+phi         4.93      1.21     2.90     7.60 1.00      838      814
+cutzero    -1.64      0.44    -2.54    -0.82 1.00      766      526
+cutone      0.64      0.19     0.24     1.01 1.00      893      629
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -1001,7 +1010,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1033,29 +1053,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1063,7 +1061,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
