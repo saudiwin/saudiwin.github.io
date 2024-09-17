@@ -5,6 +5,12 @@ project:
 
 website:
   title: "Robert Kubinec"
+  announcement: 
+    icon: info-circle
+    dismissable: true
+    content: "My novel *The Bayesian Hitman* is now available on [Amazon](https://www.amazon.com/Bayesian-Hitman-Robert-M-Kubinec/dp/B0D6M4WNRZ/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=&sr=)."
+    type: dark
+    position: below-navbar
   sidebar:
     style: "docked"
     contents:
