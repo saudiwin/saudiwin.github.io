@@ -11,6 +11,6 @@ page-layout: full
 title-block-banner: true
 ---
 
-I am a political economist at the University of South Carolina where I study broken political and economic institutions in the non-Western world. This website hosts papers, code and data from my [research](research/index.qmd) projects and also my blog, *Punk Rock Poli Sci,* that mixes poli sci (the politics of economic development) with a splash of punk rock (rethinking methods for scientific research in the 21st century).
+I am a political economist at the University of South Carolina where I study broken political and economic institutions in the non-Western world. This website hosts papers, code and data from my [research](research/index.qmd) projects and also my blog, *Punk Rock Poli Sci,* that mixes poli sci (the politics of economic development) with a splash of punk rock (rethinking methods for scientific research in the 21st century). You can find my [CV here](files/Robert_Kubinec_CV_full.pdf).
 
-You can subscribe to get email notifications about new blog posts [here](https://docs.google.com/forms/d/e/1FAIpQLScgbBPHF1uAjhTFQ2CUxmQ75gSsLsnl-wja2Blx2ZyOxQQITg/viewform?usp=sf_link).  If you'd like to contribute a blog post, feel free to email me (hint: see email in [CV](files/Robert_Kubinec_CV_full.pdf)).
+You can subscribe to get email notifications about new blog posts [here](https://docs.google.com/forms/d/e/1FAIpQLScgbBPHF1uAjhTFQ2CUxmQ75gSsLsnl-wja2Blx2ZyOxQQITg/viewform?usp=sf_link).  If you'd like to contribute a blog post, feel free to [email me](mailto:rkubinec@mailbox.sc.edu).
