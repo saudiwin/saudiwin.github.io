@@ -10,7 +10,7 @@ Proportion data--percentiles, slider scales, visual-analog scales--have long puz
 
 To address this issue, I developed the ordered beta regression model that combines two things: beta regression, which is defined for any bounded continuous scale, and ordered logit, which works for discrete categories. By doing this, you can fit an ordered beta regression for any percentile/proportion for *both* the middle continuous part and the bounds of the scale. This model can also predict within this scale as well.
 
-For more detail on the inner workings of the model, I refer you to the paper:
+I describe the model and how to do this type of [modeling in this blog post](https://www.robertkubinec.com/post/limited_dvs/). For more detail on the inner workings of the model, I refer you to the paper:
 
 Kubinec, Robert. 2023. “Ordered Beta Regression: A Parsimonious, Well-Fitting Model for Continuous Data with Lower and Upper Bounds.” Political Analysis 31(4): 519–36. doi: <http://doi.org/10.1017/pan.2022.20>.
 
