@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Robert Kubinec - ordbetareg</title>
+<title>Ordered Beta Regression – Robert Kubinec</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -91,7 +91,7 @@ gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -112,20 +112,23 @@ gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ordbetareg.html">ordbetareg</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ordbetareg.html">Ordered Beta Regression</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
+  <div id="quarto-announcement" data-announcement-id="49c5ceee25639e4ac43a8a1663a84566" class="alert alert-dark hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>My novel <em>The Bayesian Hitman</em> is now available on <a href="https://www.amazon.com/Bayesian-Hitman-Robert-M-Kubinec/dp/B0D6M4WNRZ/ref=tmm_pap_swatch_0?_encoding=UTF8&amp;qid=&amp;sr=">Amazon</a>.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
@@ -160,7 +163,7 @@ gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ordbetareg.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">ordbetareg</span></a>
+ <span class="menu-text">Ordered Beta Regression</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -176,18 +179,57 @@ gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
 <!-- margin-sidebar -->
     
 <!-- main -->
-<div class="quarto-about-jolla content">
+<div class="quarto-about-jolla">
  <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ordbetareg</h1>
+<h1 class="title">Ordered Beta Regression</h1>
 </div>
 <div class="quarto-title-meta">
   </div>
 </header><main class="content" id="quarto-document-content">
-<p>The <code>ordbetareg</code> R package implements ordered beta regression models, ideal for modeling continuous variables constrained by upper and lower bounds, such as survey responses or dose-response relationships. It serves as a front-end to the <code>brms</code> package, enabling a variety of regression specifications, including hierarchical and multivariate models. The package integrates well with popular R packages like <code>dplyr</code>, <code>ggplot2</code>, and <code>tidyr</code> and provides additional tools for model summarization and visualization. It was developed and maintained by Robert Kubinec.</p>
-<p>For more details, visit the <a href="https://cran.r-project.org/web/packages/ordbetareg/index.html">CRAN page</a>.</p>
+<section id="about-the-model" class="level2">
+<h2 data-anchor-id="about-the-model">About the Model</h2>
+<p>Proportion data–percentiles, slider scales, visual-analog scales–have long puzzled statisticians because they combine two things: a continuous measure (the proportion) and a discrete measure (the top value of 1 or 100% and the bottom value of 0 or 0%). Conventional statistical models like the oft-used OLS regression implicitly assume these boundaries do not exist; this means an OLS regression can predict to absurd values like 115% of patients being sick or -5% of legislators being elected.</p>
+<p>To address this issue, I developed the ordered beta regression model that combines two things: beta regression, which is defined for any bounded continuous scale, and ordered logit, which works for discrete categories. By doing this, you can fit an ordered beta regression for any percentile/proportion for <em>both</em> the middle continuous part and the bounds of the scale. This model can also predict within this scale as well.</p>
+<p>For more detail on the inner workings of the model, I refer you to the paper:</p>
+<p>Kubinec, Robert. 2023. “Ordered Beta Regression: A Parsimonious, Well-Fitting Model for Continuous Data with Lower and Upper Bounds.” Political Analysis 31(4): 519–36. doi: <a href="http://doi.org/10.1017/pan.2022.20" class="uri">http://doi.org/10.1017/pan.2022.20</a>.</p>
+<p>For an ungated version of the article, see the pre-publication draft on OSF:</p>
+<p><a href="https://osf.io/preprints/socarxiv/2sx6y" class="uri">https://osf.io/preprints/socarxiv/2sx6y</a></p>
+</section>
+<section id="impact-of-ordered-beta-regression" class="level2">
+<h2 data-anchor-id="impact-of-ordered-beta-regression">Impact of Ordered Beta Regression</h2>
+<p>As of September 21st, 2024, the ordered beta regression paper above has been cited 24 times in <a href="https://www.crossref.org/">Crossref.</a> The package has been used across the biomedical and social sciences, including studies of <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/gcb.17422">endangered species populations</a>, <a href="https://journals.sagepub.com/doi/full/10.1177/08902070241239834">cognitive psychology</a>, <a href="https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2023.1214485/full">hearing loss</a>, <a href="https://www.sciencedirect.com/science/article/pii/S0048969723041505">bumblebee habitat</a>, and <a href="https://www.thelancet.com/journals/lanam/article/PIIS2667-193X(23)00160-6/fulltext">emergency response</a>, just to name a few. For a complete list, <a href="https://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;cites=12622905908472194521,9984294780194075871&amp;as_sdt=5">see the Google Scholar citation page</a>.</p>
+</section>
+<section id="how-to-use-the-model" class="level2">
+<h2 data-anchor-id="how-to-use-the-model">How to Use the Model</h2>
+<p>At present, ordered beta regression is available in Stan (<a href="#sec-stan" class="quarto-xref">Section&nbsp;3.5</a>), R (<a href="#sec-r" class="quarto-xref">Section&nbsp;3.1</a>), Python (<a href="#sec-python" class="quarto-xref">Section&nbsp;3.2</a>), Stata (<a href="#sec-stata" class="quarto-xref">Section&nbsp;3.3</a>), and Julia (<a href="#sec-julia" class="quarto-xref">Section&nbsp;3.4</a>). R has the strongest support for the model with multiple implementations, but it is perfectly usable in other statistical frameworks. Below I briefly describe the available packages.</p>
+<section id="sec-r" class="level3">
+<h3 data-anchor-id="sec-r">R</h3>
+<p>Ordered beta regression is currently available in R in two different packages: <a href="https://cran.r-project.org/web/packages/ordbetareg/index.html"><code>ordbetareg</code></a> and <a href="https://cran.r-project.org/web/packages/glmmTMB/index.html"><code>glmmTMB</code></a>. The primary difference between these two packages is estimation method and the number of ordered beta-specific functions. <code>ordbetareg</code> is a package that estimates a Bayesian implementation as described in the paper above by using <code>brms</code>, a powerful R package for Bayesian regression. <code>ordbetareg</code> is maintained by me and you can see the full source code here on <a href="https://github.com/saudiwin/ordbetareg_pack">Github</a> (and report <a href="https://github.com/saudiwin/ordbetareg_pack/issues">an issue with the package</a> if you have one). The package includes auxiliary functions like power analysis and plots that are specific to proportion responses—check out <a href="https://cran.r-project.org/web/packages/ordbetareg/index.html">the package vignette</a> for more details.</p>
+<p><code>glmmTMB</code>, by contrast, is a general purpose regression package that specializes in mixed multilevel models. It implements a broad array of regression models using maximum likelihood. This means that a model estimated in <code>glmmTMB</code> will almost certainly be faster than <code>ordbetareg</code> (although if you set up <code>ordbetareg</code> to use <a href="https://mc-stan.org/cmdstanr/"><code>cmdstanr</code></a> it can get pretty fast). On the other hand, maximum likelihood estimation has some limitations. Arguably the most important one is that it can be tricky to fit a model that doesn’t have observations at the bounds, i.e.&nbsp;either 0 (0%) or 1 (100%). The Bayesian implementation in <code>ordbetareg</code> has no problem doing this.</p>
+<p>That being said, I think <code>glmmTMB</code> is a fine package and believe it works fine for many scholars’ problems. <code>brms</code>, which <code>ordbetareg</code> is based on, offers a lot more features, including native support for multiple imputation, time series modeling and even latent variable/factor analysis modeling, but it does require more setup and the models are generally slower.</p>
+<p>For either package, I highly recommend using <a href="https://marginaleffects.com/"><code>marginaleffects</code></a>, and in particular the <code>avg_slopes</code> function, to convert the coefficient estimates in the package to the bounded scale (i.e.&nbsp;between 0 and 1). This function allows you to then interpret your model estimates as the effect of a covariate in terms of percentage change/proportion change in the bounded response/outcome. <code>marginaleffects</code> is available <a href="https://cran.r-project.org/web/packages/marginaleffects/index.html">on CRAN</a> and works great with both <code>ordbetareg</code> and <code>glmmTMB</code>.</p>
+<p>With both of these packages available, ordered beta regression has <strong>very strong</strong> support in R. If you don’t have a preference for a particular software package and want to use this model, I would recommend R.</p>
+</section>
+<section id="sec-python" class="level3">
+<h3 data-anchor-id="sec-python">Python</h3>
+<p>Ordered beta regression is implemented using the <code>scipy</code> package with maximum likelihood estimation. At present, you’ll need to clone (i.e., download) this <a href="https://github.com/saudiwin/ordbetareg_py">Github repository</a> to install the package as it is not yet available with <code>pip</code> or <code>conda forge</code>. The package includes plotting functions specific to proportion outcomes and reports coefficient values in the untransformed (logit) scale. <code>marginaleffects</code> support for this package is coming soon.</p>
+</section>
+<section id="sec-stata" class="level3">
+<h3 data-anchor-id="sec-stata">Stata</h3>
+<p>There is initial support for Stata as a set of .ado files that can be downloaded and installed in the <code>ado</code> folder in your Stata machine. More details are available on the <a href="https://github.com/saudiwin/ordbetareg_stata">Github repository</a>. This package supports using the <code>margins</code> command to convert coefficients to the bounded outcome scale, although it does not support all Stata features as of yet. There are plans to make this package available via SSC in the near future.</p>
+</section>
+<section id="sec-julia" class="level3">
+<h3 data-anchor-id="sec-julia">Julia</h3>
+<p>Ordered beta regression is available via the <a href="https://github.com/DominiqueMakowski/SubjectiveScalesModels.jl/tree/825f3fc089e64361e72e1a336003ea78320dc496"><code>SubjectiveScalesModels.jl</code></a> package, which offers support for a variety of regression models useful in cognitive psychology and other fields with sliders/visual analog scales. The package includes neat visualizations and is maintained by <a href="https://dominiquemakowski.github.io/">Dominique Makowksi</a>.</p>
+</section>
+<section id="sec-stan" class="level3">
+<h3 data-anchor-id="sec-stan">Stan</h3>
+<p>As is evident in the paper, the original model was written in Stan code. While I no longer am maintaining the Stan code, <a href="https://github.com/saudiwin/ordbetareg/blob/master/beta_logit.stan">it is available in the paper repository</a> and works great. If you want to incorporate the likelihood or other Stan code into your Stan model, feel free!</p>
 
 
+</section>
+</section>
 </main>  
 </div>
  <!-- /main -->
@@ -219,18 +261,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -262,7 +293,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -270,7 +323,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
