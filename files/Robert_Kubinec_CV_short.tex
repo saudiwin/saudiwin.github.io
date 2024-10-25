@@ -1,0 +1,111 @@
+%------------------------------------
+% Dario Taraborelli
+% Typesetting your academic CV in LaTeX
+%
+% URL: http://nitens.org/taraborelli/cvtex
+% DISCLAIMER: This template is provided for free and without any guarantee
+% that it will correctly compile on your system if you have a non-standard
+% configuration.
+% Some rights reserved: http://creativecommons.org/licenses/by-sa/3.0/
+%------------------------------------
+
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt, a4paper]{article}
+\usepackage{fontspec}
+
+
+% DOCUMENT LAYOUT
+\usepackage{geometry}
+\geometry{a4paper, textwidth=5.5in, textheight=8.5in, marginparsep=7pt, marginparwidth=.6in}
+\setlength\parindent{0in}
+
+% FONTS
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\defaultfontfeatures{Mapping=tex-text} % converts LaTeX specials (``quotes'' --- dashes etc.) to unicode
+\setromanfont [Ligatures={Common}, BoldFont={Gentium Basic Bold}, ItalicFont={Gentium Basic Italic}]{Gentium Basic}
+\setmonofont[Scale=0.8]{Monaco}
+% ---- CUSTOM AMPERSAND
+\newcommand{\amper}{{\fontspec[Scale=.95]{Gentium Basic Italic}\selectfont\itshape\&}}
+% ---- MARGIN YEARS
+\usepackage{marginnote}
+\newcommand{\years}[1]{\marginnote{\scriptsize #1}}
+\renewcommand*{\raggedleftmarginnote}{}
+\setlength{\marginparsep}{7pt}
+\reversemarginpar
+
+% HEADINGS
+\usepackage{sectsty}
+\usepackage[normalem]{ulem}
+\sectionfont{\rmfamily\mdseries\upshape\Large}
+\subsectionfont{\rmfamily\bfseries\upshape\normalsize}
+\subsubsectionfont{\rmfamily\mdseries\upshape\normalsize}
+
+% PDF SETUP
+% ---- FILL IN HERE THE DOC TITLE AND AUTHOR
+\usepackage[bookmarks, colorlinks, breaklinks, pdftitle={Robert Kubinec - vita},pdfauthor={Robert Kubinec}]{hyperref}
+\hypersetup{linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
+\usepackage{doi}
+
+% DOCUMENT
+\begin{document}
+{\LARGE Robert Kubinec}\\[1cm]
+University of South Carolina\\
+Columbia, South Carolina\\[.2cm]
+Email: \href{mailto:rkubinec@mailbox.sc.edu}{rkubinec@mailbox.sc.edu}\\
+\textsc{url}: \href{http://www.robertkubinec.com}{www.robertkubinec.com}\\
+
+%%\hrule
+\section*{Current position}
+\noindent
+\years{2024-}\emph{Assistant Professor of Political Science}, Department of Political Science, University of South Carolina\\
+
+\section*{Previous positions}
+\noindent
+\years{2019-2024}\emph{Assistant Professor of Political Science}, Social Sciences Division, New York University Abu Dhabi\\
+\years{2018-2019}\emph{Postdoctoral Research Scholar}, Niehaus Center for Globalization and Governance, Princeton University\\
+
+%\hrule
+\section*{Education}
+\noindent
+\years{2018}\textsc{PhD} in Foreign Affairs, University of Virginia\\
+\years{2010}\textsc{MA} in Middle East Studies, George Washington University\\
+\years{2008}\textsc{BA} in International Relations, Wheaton College
+
+\section*{Publications}
+
+\subsection*{Books}
+
+\years{2023} Kubinec, Robert. \emph{\href{https://www.cambridge.org/gb/academic/subjects/politics-international-relations/political-economy/making-democracy-safe-business-corporate-politics-during-arab-uprisings?format=HB}{Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings}}. Cambridge University Press.
+ 
+\subsection*{Journal Articles}
+
+\years{2024} Kubinec, Robert; Carvalho, Luiz Max; Barcelo, Joan; Cheng, Cindy; Messerschmidt, Luca; Cottrell, Matthew Sean and Duba, Derek. ``A Bayesian Latent Variable Model for the Optimal Identification of Disease Incidence Rates Given Information Constraints." \emph{Journal of the Royal Statistical Society Series A}. Forthcoming. \doi{10.1093/jrsssa/qnae040}\\
+
+\years{2024} Kubinec, Robert; Barcelo, Joan; Goldszmidt, Rafael; Grujic, Vanja; Model, Timothy; Schenk, Caress; Cheng, Cindy; Hale, Thomas; Spencer Hartnett; Allison, Messerschmidt, Luca; Petherick, Anna, and Thorvaldsdottir, Svanhildur. ``Cross-National Measures of the Intensity of COVID-19 Public Health Policies." Accepted at the \emph{Journal of Politics}. \doi{10.31235/osf.io/rn9xk}.\\
+
+\years{2024} Cheng, Cindy; Messerschmidt, Luca; Bravo, Isaac; Waldbauer, Marco; Bhavikatti, Rohan; Schenck, Caress; Grujic, Vanja; Model, Tim, and Kubinec, Robert. ``Harmonizing Government Responses to the COVID-19 Pandemic." \emph{Scientific Data}. \doi{10.1038/s41597-023-02881-x}.\\
+
+\years{2023} Cheng, Cindy; Messerschmidt, Luca; Bravo, Isaac; Waldbauer, Marco; Bhavikatti, Rohan; Schenck, Caress; Grujic, Vanja; Model, Tim, and Kubinec, Robert. ``A General Primer for Harmonizing Data." \emph{Scientific Data}. \doi{10.1038/s41597-024-02956-3j}.\\
+
+\years{2023} Kubinec, Robert and Milner, Helen. ``Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria's Hirak." \emph{World Politics}. \doi{10.1353/wp.2024.a924508}.\\
+
+\years{2023} Kubinec, Robert; Lee, Haillie and Tomashevskiy, Andrey. ``Why Corporate Political Connections Can Impede Investment." \emph{Comparative Political Studies} \doi{10.1177/00104140231204227}.\\
+
+\years{2022} Kilavuz, Tahir; Grewal, Sharan and Kubinec, Robert. ``Ghosts of the Black Decade: How Legacies of Violence Shaped Algeria's Hirak Protests." \emph{Journal of Peace Research} \doi{10.1177/00223433221137613}.\\
+
+\years{2022}  Kubinec, Robert.``Ordered Beta Regression: A Parsimonious, Well-Fitting Model for Continuous Data with Lower and Upper Bounds." \textit{Political Analysis} \doi{10.1017/pan.2022.20}.\\
+
+\years{2022}Barcelo, Joan; Kubinec, Robert; Cheng, Cindy; Hoye Rahn, Tiril; and Messerschmidt, Luca. ``Windows of Repression: Using COVID-19 Policies against Political Dissidents?"  \textit{Journal of Peace Research} \doi{10.1177/00223433211062389}.\\
+
+\years{2021}Kubinec, Robert; Lee, Haillie and Tomashevskiy, Andrey. ``Politically-Connected Companies Are Less Likely to Shutdown Due to COVID-19 Restrictions." \textit{Social Science Quarterly}. \doi{10.1111/ssqu.13040}.\\
+
+\years{2020}Kubinec, Robert and Owen, John. ``When Groups Fall Apart: Identifying Transnational Polarization with Twitter from the Arab Uprisings." \textit{Political Analysis} \doi{10.1017/pan.2020.46}. \\
+
+\years{2020}Cheng, Cindy; Barcelo, Joan; Hartnett, Allison; Kubinec, Robert and Messerschmidt, Luca. ``COVID-19 Government Response Event Dataset (CoronaNet v.1.0)." \textit{Nature Human Behavior}. \doi{10.1038/s41562-020-0909-7}.\\
+
+\years{2020}Kropko, Jonathan and Kubinec, Robert. ``Why the Two-way Fixed Effects Model is Difficult to Interpret, and What to Do About It." \textit{PLOS One}. \doi{10.1371/journal.pone.0231349}
+
+\end{document}
