@@ -29,8 +29,8 @@ website:
     right:
       - icon: github
         href: https://github.com/saudiwin
-      - icon: twitter
-        href: https://twitter.com/rmkubinec
+      - text: "{{< iconify simple-icons bluesky >}}"
+        href: https://bsky.app/profile/rmkubinec.bsky.social
       - text: CV
         href: files/Robert_Kubinec_CV_full.pdf
 format:
