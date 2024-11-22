@@ -22,7 +22,8 @@ website:
         file: research/index.qmd
       - consulting.qmd
       - ordbetareg.qmd
-      - idealstan.qmd
+      - text: "`idealstan`"
+        href: https://saudiwin.github.io/idealstan/
   google-analytics: 
     tracking-id: "G-BHP1PJ9LEX"
   navbar:
