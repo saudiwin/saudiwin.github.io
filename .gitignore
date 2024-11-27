@@ -2,5 +2,8 @@
 .Rproj.user
 did_est.rds
 U.S._State_and*
-
+*.log
+*.aux
+*.synctex.gz
 /.quarto/
+*DS_Store
