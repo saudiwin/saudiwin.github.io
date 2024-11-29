@@ -22,24 +22,9 @@ For an ungated version of the article, see the pre-publication draft on OSF:
 
 If you've enjoyed using the package, consider buying some `ordbetareg` swag! Click the image below to go to the online store (I receive a few dollars from each order).
 
-[![](images/Screenshot 2024-11-29 at 4.41.29 PM.png){fig-align="center" width="2in"}](https://rmk-designs.printify.me/product/15852280/this-is-not-normal-ordbetareg-t-shirt)
+[![](screen1.png){fig-align="center" width="2in"}](https://rmk-designs.printify.me/product/15852280/this-is-not-normal-ordbetareg-t-shirt)
 
-[![](images/Screenshot 2024-11-29 at 4.51.08 PM.png){fig-align="center" width="2in"}](https://rmk-designs.printify.me/product/15852502/this-is-not-normal-ordbetareg-coffee-mug)
-
-## Impact of Ordered Beta Regression
-
-```{r}
-#| echo: false
-#| label: crossref
-
-library(rcrossref)
-
-ordbetareg_cite_count <- cr_citation_count(doi="10.1017/pan.2022.20",
-                                           key="bobkubinec@gmail.com")
-
-```
-
-As of `r lubridate::stamp("January 1st, 2020")(lubridate::today())`, the ordered beta regression paper above has been cited `r ordbetareg_cite_count$count` times in [Crossref.](https://www.crossref.org/) The package has been used across the biomedical and social sciences, including studies of [endangered species populations](https://onlinelibrary.wiley.com/doi/full/10.1111/gcb.17422), [cognitive psychology](https://journals.sagepub.com/doi/full/10.1177/08902070241239834), [hearing loss](https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2023.1214485/full), [bumblebee habitat](https://www.sciencedirect.com/science/article/pii/S0048969723041505), and [emergency response](https://www.thelancet.com/journals/lanam/article/PIIS2667-193X(23)00160-6/fulltext), just to name a few. For a complete list, [see the Google Scholar citation page](https://scholar.google.com/scholar?oi=bibs&hl=en&cites=12622905908472194521,9984294780194075871&as_sdt=5).
+[![](screen2.png){fig-align="center" width="2in"}](https://rmk-designs.printify.me/product/15852502/this-is-not-normal-ordbetareg-coffee-mug)
 
 ## How to Use the Model
 
