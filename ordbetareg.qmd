@@ -22,9 +22,15 @@ For an ungated version of the article, see the pre-publication draft on OSF:
 
 If you've enjoyed using the package, consider buying some `ordbetareg` swag! Click the image below to go to the online store (I receive a few dollars from each order).
 
+::: {layout-ncol=2}
 [![](screen1.png){fig-align="center" width="2in"}](https://rmk-designs.printify.me/product/15852280/this-is-not-normal-ordbetareg-t-shirt)
 
 [![](screen2.png){fig-align="center" width="2in"}](https://rmk-designs.printify.me/product/15852502/this-is-not-normal-ordbetareg-coffee-mug)
+:::
+
+
+
+
 
 ## How to Use the Model
 
