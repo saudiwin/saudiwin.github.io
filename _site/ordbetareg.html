@@ -196,13 +196,27 @@ gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
 <p>For an ungated version of the article, see the pre-publication draft on OSF:</p>
 <p><a href="https://osf.io/preprints/socarxiv/2sx6y" class="uri">https://osf.io/preprints/socarxiv/2sx6y</a></p>
 </section>
+<section id="support-ordbetareg" class="level2">
+<h2 data-anchor-id="support-ordbetareg">Support ordbetareg</h2>
+<p>If you’ve enjoyed using the package, consider buying some <code>ordbetareg</code> swag! Click the image below to go to the online store (I receive a few dollars from each order).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://rmk-designs.printify.me/product/15852280/this-is-not-normal-ordbetareg-t-shirt"><img src="images/Screenshot 2024-11-29 at 4.41.29 PM.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:2in"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://rmk-designs.printify.me/product/15852502/this-is-not-normal-ordbetareg-coffee-mug"><img src="images/Screenshot 2024-11-29 at 4.51.08 PM.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:2in"></a></p>
+</figure>
+</div>
+</section>
 <section id="impact-of-ordered-beta-regression" class="level2">
 <h2 data-anchor-id="impact-of-ordered-beta-regression">Impact of Ordered Beta Regression</h2>
-<p>As of November 27st, 2024, the ordered beta regression paper above has been cited 30 times in <a href="https://www.crossref.org/">Crossref.</a> The package has been used across the biomedical and social sciences, including studies of <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/gcb.17422">endangered species populations</a>, <a href="https://journals.sagepub.com/doi/full/10.1177/08902070241239834">cognitive psychology</a>, <a href="https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2023.1214485/full">hearing loss</a>, <a href="https://www.sciencedirect.com/science/article/pii/S0048969723041505">bumblebee habitat</a>, and <a href="https://www.thelancet.com/journals/lanam/article/PIIS2667-193X(23)00160-6/fulltext">emergency response</a>, just to name a few. For a complete list, <a href="https://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;cites=12622905908472194521,9984294780194075871&amp;as_sdt=5">see the Google Scholar citation page</a>.</p>
+<p>As of November 29st, 2024, the ordered beta regression paper above has been cited 29 times in <a href="https://www.crossref.org/">Crossref.</a> The package has been used across the biomedical and social sciences, including studies of <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/gcb.17422">endangered species populations</a>, <a href="https://journals.sagepub.com/doi/full/10.1177/08902070241239834">cognitive psychology</a>, <a href="https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2023.1214485/full">hearing loss</a>, <a href="https://www.sciencedirect.com/science/article/pii/S0048969723041505">bumblebee habitat</a>, and <a href="https://www.thelancet.com/journals/lanam/article/PIIS2667-193X(23)00160-6/fulltext">emergency response</a>, just to name a few. For a complete list, <a href="https://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;cites=12622905908472194521,9984294780194075871&amp;as_sdt=5">see the Google Scholar citation page</a>.</p>
 </section>
 <section id="how-to-use-the-model" class="level2">
 <h2 data-anchor-id="how-to-use-the-model">How to Use the Model</h2>
-<p>At present, ordered beta regression is available in Stan (<a href="#sec-stan" class="quarto-xref">Section&nbsp;3.5</a>), R (<a href="#sec-r" class="quarto-xref">Section&nbsp;3.1</a>), Python (<a href="#sec-python" class="quarto-xref">Section&nbsp;3.2</a>), Stata (<a href="#sec-stata" class="quarto-xref">Section&nbsp;3.3</a>), and Julia (<a href="#sec-julia" class="quarto-xref">Section&nbsp;3.4</a>). R has the strongest support for the model with multiple implementations, but it is perfectly usable in other statistical frameworks. Below I briefly describe the available packages.</p>
+<p>At present, ordered beta regression is available in Stan (<a href="#sec-stan" class="quarto-xref">Section&nbsp;4.5</a>), R (<a href="#sec-r" class="quarto-xref">Section&nbsp;4.1</a>), Python (<a href="#sec-python" class="quarto-xref">Section&nbsp;4.2</a>), Stata (<a href="#sec-stata" class="quarto-xref">Section&nbsp;4.3</a>), and Julia (<a href="#sec-julia" class="quarto-xref">Section&nbsp;4.4</a>). R has the strongest support for the model with multiple implementations, but it is perfectly usable in other statistical frameworks. Below I briefly describe the available packages.</p>
 <section id="sec-r" class="level3">
 <h3 data-anchor-id="sec-r">R</h3>
 <p>Ordered beta regression is currently available in R in two different packages: <a href="https://cran.r-project.org/web/packages/ordbetareg/index.html"><code>ordbetareg</code></a> and <a href="https://cran.r-project.org/web/packages/glmmTMB/index.html"><code>glmmTMB</code></a>. The primary difference between these two packages is estimation method and the number of ordered beta-specific functions. <code>ordbetareg</code> is a package that estimates a Bayesian implementation as described in the paper above by using <code>brms</code>, a powerful R package for Bayesian regression. <code>ordbetareg</code> is maintained by me and you can see the full source code here on <a href="https://github.com/saudiwin/ordbetareg_pack">Github</a> (and report <a href="https://github.com/saudiwin/ordbetareg_pack/issues">an issue with the package</a> if you have one). The package includes auxiliary functions like power analysis and plots that are specific to proportion responses—check out <a href="https://cran.r-project.org/web/packages/ordbetareg/index.html">the package vignette</a> for more details.</p>

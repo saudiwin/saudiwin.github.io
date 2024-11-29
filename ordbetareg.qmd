@@ -18,6 +18,14 @@ For an ungated version of the article, see the pre-publication draft on OSF:
 
 <https://osf.io/preprints/socarxiv/2sx6y>
 
+## Support ordbetareg
+
+If you've enjoyed using the package, consider buying some `ordbetareg` swag! Click the image below to go to the online store (I receive a few dollars from each order).
+
+[![](images/Screenshot 2024-11-29 at 4.41.29 PM.png){fig-align="center" width="2in"}](https://rmk-designs.printify.me/product/15852280/this-is-not-normal-ordbetareg-t-shirt)
+
+[![](images/Screenshot 2024-11-29 at 4.51.08 PM.png){fig-align="center" width="2in"}](https://rmk-designs.printify.me/product/15852502/this-is-not-normal-ordbetareg-coffee-mug)
+
 ## Impact of Ordered Beta Regression
 
 ```{r}
