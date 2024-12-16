@@ -24,6 +24,8 @@ website:
       - ordbetareg.qmd
       - text: "`idealstan`"
         href: https://saudiwin.github.io/idealstan/
+      - text: "CoronaNet"
+        href: https://coronanet-project.org/
   google-analytics: 
     tracking-id: "G-BHP1PJ9LEX"
   navbar:

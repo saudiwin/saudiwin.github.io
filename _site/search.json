@@ -213,6 +213,160 @@
     "text": "MIT License\nCopyright (c) 2016-present George Cushen\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
   },
   {
+    "objectID": "research/books/kubinec-2023/index.html#important-links",
+    "href": "research/books/kubinec-2023/index.html#important-links",
+    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
+    "section": "Important links",
+    "text": "Important links\n\nPodcast about the book\nOnline Article Draft\nGitHub repository with code and data"
+  },
+  {
+    "objectID": "research/books/kubinec-2023/index.html#abstract",
+    "href": "research/books/kubinec-2023/index.html#abstract",
+    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
+    "section": "Abstract",
+    "text": "Abstract\nBusinesses in the Middle East and North Africa have failed to bring sustainable development despite decades of investment from the private and public sectors. Yet we still know little about why the Arab Uprisings failed to usher in more transparent government that could break this enduring cycle of corruption and mismanagement. Examining posttransition politics in Egypt and Tunisia, Kubinec employs interviews and quantitative surveys to map out the corrupting influence of businesses on politics. He argues that businesses must respond to changes in how perks and privileges are distributed after political transitions, either by forming political coalitions or creating new informal connections to emerging politicians. Employing detailed case studies and original experiments, Making Democracy Safe for Business advances our empirical understanding of the study of the durability of corruption in general and the dismal results of the Arab Uprisings in particular."
+  },
+  {
+    "objectID": "research/books/kubinec-2023/index.html#data-and-code",
+    "href": "research/books/kubinec-2023/index.html#data-and-code",
+    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
+    "section": "Data and code",
+    "text": "Data and code\nThe analyses in the book can be reproduced with R code and data available at GitHub."
+  },
+  {
+    "objectID": "research/books/kubinec-2023/index.html#citation",
+    "href": "research/books/kubinec-2023/index.html#citation",
+    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
+    "section": "Citation",
+    "text": "Citation\n\n Add to Zotero \n\n@book{kubinec2023democracy,\n    Author = {Robert Kubinec},\n    Doi = {10.1017/9781009273541},\n    Publisher = {Cambridge University Press},\n    Title = {Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings},\n    Year = {2023}}"
+  },
+  {
+    "objectID": "research/chapters/johnson-heiss-2018/index.html",
+    "href": "research/chapters/johnson-heiss-2018/index.html",
+    "title": "Liberal Institutionalism",
+    "section": "",
+    "text": "Liberal institutionalism presumes that domestic and international institutions play central roles in facilitating cooperation and peace between states. But currently, this influential approach to thinking and practice appears to be in jeopardy. The United Kingdom seeks to be the first state ever to withdraw from the European Union (EU). The United States threatens to renegotiate or leave several international arrangements that it has recently signed or long supported. Meanwhile, China hints that it would be happy to take on greater global leadership if the United States retreats from this traditional role."
+  },
+  {
+    "objectID": "research/chapters/johnson-heiss-2018/index.html#abstract",
+    "href": "research/chapters/johnson-heiss-2018/index.html#abstract",
+    "title": "Liberal Institutionalism",
+    "section": "",
+    "text": "Liberal institutionalism presumes that domestic and international institutions play central roles in facilitating cooperation and peace between states. But currently, this influential approach to thinking and practice appears to be in jeopardy. The United Kingdom seeks to be the first state ever to withdraw from the European Union (EU). The United States threatens to renegotiate or leave several international arrangements that it has recently signed or long supported. Meanwhile, China hints that it would be happy to take on greater global leadership if the United States retreats from this traditional role."
+  },
+  {
+    "objectID": "research/chapters/johnson-heiss-2018/index.html#citation",
+    "href": "research/chapters/johnson-heiss-2018/index.html#citation",
+    "title": "Liberal Institutionalism",
+    "section": "Citation",
+    "text": "Citation\n\n Add to Zotero \n\n@incollection{JohnsonHeiss:2018,\n    Address = {London},\n    Author = {Tana Johnson and Andrew Heiss},\n    Booktitle = {International Organization and Global Governance},\n    Chapter = {8},\n    Doi = {10.4324/9781315301914},\n    Edition = {2},\n    Editor = {Thomas G. Weiss and Rorden Wilkinson},\n    Pages = {123--34},\n    Publisher = {Routledge},\n    Title = {Liberal Institutionalism},\n    Year = {2018}}"
+  },
+  {
+    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html",
+    "href": "research/chapters/heiss-ngo-ir-2019/index.html",
+    "title": "NGOs and Authoritarianism",
+    "section": "",
+    "text": "Authoritarian restrictions on domestic and international civil society have increased over the past decade, but authoritarian states continue to allow—and even invite—NGOs to work in their countries. Though the services and advocacy provided by NGOs can challenge the legitimacy and power of authoritarian regimes, the majority of autocratic states allow NGO activities, and NGOs in turn continue to work in these countries in spite of the heavy legal restrictions and attempts to limit their activities. This chapter examines the theories about and the experiences of domestic and international NGOs working in authoritarian countries. The review is premised on the theory of authoritarian institutions: dictators delegate political authority to democratic-appearing institutions in order to remain in power and maintain stability. After providing a brief overview of authoritarian institutionalism and balancing, I discuss how domestic and international NGOs fit into authoritarian stability-seeking calculus. I then look at three forms of state–NGO relationships in the context of authoritarianism and explore how autocrats have addressed and regulated international NGOs in particular. Finally, I conclude with suggestions for future research on NGOs and their relationship with and role in authoritarian regimes."
+  },
+  {
+    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#abstract",
+    "href": "research/chapters/heiss-ngo-ir-2019/index.html#abstract",
+    "title": "NGOs and Authoritarianism",
+    "section": "",
+    "text": "Authoritarian restrictions on domestic and international civil society have increased over the past decade, but authoritarian states continue to allow—and even invite—NGOs to work in their countries. Though the services and advocacy provided by NGOs can challenge the legitimacy and power of authoritarian regimes, the majority of autocratic states allow NGO activities, and NGOs in turn continue to work in these countries in spite of the heavy legal restrictions and attempts to limit their activities. This chapter examines the theories about and the experiences of domestic and international NGOs working in authoritarian countries. The review is premised on the theory of authoritarian institutions: dictators delegate political authority to democratic-appearing institutions in order to remain in power and maintain stability. After providing a brief overview of authoritarian institutionalism and balancing, I discuss how domestic and international NGOs fit into authoritarian stability-seeking calculus. I then look at three forms of state–NGO relationships in the context of authoritarianism and explore how autocrats have addressed and regulated international NGOs in particular. Finally, I conclude with suggestions for future research on NGOs and their relationship with and role in authoritarian regimes."
+  },
+  {
+    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#figure",
+    "href": "research/chapters/heiss-ngo-ir-2019/index.html#figure",
+    "title": "NGOs and Authoritarianism",
+    "section": "Figure",
+    "text": "Figure\nFigure 2: Civil society repression and regulations\n\n\n\nFigure 2: Civil society repression and regulations"
+  },
+  {
+    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#citation",
+    "href": "research/chapters/heiss-ngo-ir-2019/index.html#citation",
+    "title": "NGOs and Authoritarianism",
+    "section": "Citation",
+    "text": "Citation\n\n Add to Zotero \n\n@incollection{Heiss:2019,\n    Address = {London},\n    Author = {Andrew Heiss},\n    Booktitle = {Routledge Handbook of {NGOs} and International Relations},\n    Editor = {Thomas Davies},\n    Publisher = {Routledge},\n    Title = {{NGOs} and Authoritarianism},\n    Chapter = {38},\n    Year = {2019}}"
+  },
+  {
+    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html",
+    "href": "research/chapters/chaudhry-heiss-closing-space/index.html",
+    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
+    "section": "",
+    "text": "Figure 1: 2017 CIVICUS Monitor civic space ratings\n\n\n\nFigure 1: 2017 CIVICUS Monitor civic space ratings"
+  },
+  {
+    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html#important-figure",
+    "href": "research/chapters/chaudhry-heiss-closing-space/index.html#important-figure",
+    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
+    "section": "",
+    "text": "Figure 1: 2017 CIVICUS Monitor civic space ratings\n\n\n\nFigure 1: 2017 CIVICUS Monitor civic space ratings"
+  },
+  {
+    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html#citation",
+    "href": "research/chapters/chaudhry-heiss-closing-space/index.html#citation",
+    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
+    "section": "Citation",
+    "text": "Citation\n\n Add to Zotero \n\n@incollection{ChaudhryHeiss:2022,\n    Address = {Tuscaloosa, AL},\n    Author = {Suparna Chaudhry and Andrew Heiss},\n    Booktitle = {Beyond the Boomerang: New Patterns in Transcalar Advocacy},\n    Editor = {Christopher L. Pallas and Elizabeth Bloodgood},\n    Publisher = {University of Alabama Press},\n    Title = {Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on {NGOs}},\n    Chapter = {2},\n    Year = {2022}}"
+  },
+  {
+    "objectID": "research/chapters/heiss-causal-inference-2021/index.html",
+    "href": "research/chapters/heiss-causal-inference-2021/index.html",
+    "title": "Causal Inference",
+    "section": "",
+    "text": "One of the most repeated phrases in any introductory statistics class is the warning that “correlation is not causation.” This chapter presents new non-statistical language for creating, measuring, and evaluating causal stories and relationships using observational (i.e. non-experimental) data. It introduces the concept of causal directed acyclic graphs (DAGs) that allow us to formally encode our understanding of causal stories. With well-crafted DAGs, one can use a set of rules called do-calculus to make specific adjustments to statistical models and isolate or identify causal relationships between variables of interest. Edges (or arrows) transmit associations between nodes. Following the fundamental problem of causal inference, answering causal questions without an experiment appears impossible. The chapter explores different methods of making adjustments using synthetic data. Instead of throwing away potentially useful data, one can use other methods to create matches that are less discrete and more informative."
+  },
+  {
+    "objectID": "research/chapters/heiss-causal-inference-2021/index.html#abstract",
+    "href": "research/chapters/heiss-causal-inference-2021/index.html#abstract",
+    "title": "Causal Inference",
+    "section": "",
+    "text": "One of the most repeated phrases in any introductory statistics class is the warning that “correlation is not causation.” This chapter presents new non-statistical language for creating, measuring, and evaluating causal stories and relationships using observational (i.e. non-experimental) data. It introduces the concept of causal directed acyclic graphs (DAGs) that allow us to formally encode our understanding of causal stories. With well-crafted DAGs, one can use a set of rules called do-calculus to make specific adjustments to statistical models and isolate or identify causal relationships between variables of interest. Edges (or arrows) transmit associations between nodes. Following the fundamental problem of causal inference, answering causal questions without an experiment appears impossible. The chapter explores different methods of making adjustments using synthetic data. Instead of throwing away potentially useful data, one can use other methods to create matches that are less discrete and more informative."
+  },
+  {
+    "objectID": "research/chapters/heiss-causal-inference-2021/index.html#important-figures",
+    "href": "research/chapters/heiss-causal-inference-2021/index.html#important-figures",
+    "title": "Causal Inference",
+    "section": "Important figures",
+    "text": "Important figures\nFigure 6: More complicated DAG showing the relationship between campaign spending and votes won in an election\n\n\n\nFigure 6: More complicated DAG showing the relationship between campaign spending and votes won in an election\n\n\nFigure 17: Adjustment set to identify the relationship between mosquito net use and malaria risk\n\n\n\nFigure 17: Adjustment set to identify the relationship between mosquito net use and malaria risk"
+  },
+  {
+    "objectID": "research/chapters/heiss-causal-inference-2021/index.html#citation",
+    "href": "research/chapters/heiss-causal-inference-2021/index.html#citation",
+    "title": "Causal Inference",
+    "section": "Citation",
+    "text": "Citation\n\n Add to Zotero \n\n@incollection{Heiss:2021,\n    address = {Boca Raton, Florida},\n    author = {Andrew Heiss},\n    booktitle = {R for Political Data Science: A Practical Guide},\n    chapter = {10},\n    doi = {10.1201/9781003010623-10},\n    editor = {Francisco Urdinez and Andr{\\'e}s Cruz},\n    pages = {235--274},\n    publisher = {{Chapman and Hall} / CRC},\n    title = {Causal Inference},\n    year = {2021}}"
+  },
+  {
+    "objectID": "research/articles/kubinec-milner-2024/index.html#important-links",
+    "href": "research/articles/kubinec-milner-2024/index.html#important-links",
+    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
+    "section": "Important links",
+    "text": "Important links\n\nPaper (preprint)\nGitHub repository"
+  },
+  {
+    "objectID": "research/articles/kubinec-milner-2024/index.html#abstract",
+    "href": "research/articles/kubinec-milner-2024/index.html#abstract",
+    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
+    "section": "Abstract",
+    "text": "Abstract\nThis article examines the rentier thesis that a government’s control over oil resources should help it to resist pressures for democratization. The authors’ online survey experiment, implemented during a nationwide mobilization for regime change in Algeria known as the Hirak, used interactive experimental treatments to provide information about the Algerian government’s subsidies for fuel resources and low value-added taxes. Based on a sample of 9,721 Algerians, the authors find that when Algerians learn about their country’s relatively high level of fuel subsidies and low level of taxes, their assessments of the government’s performance improve. However, the treatment has null effects for outcomes involving demands for representation, such as intentions to join protest movements. An analysis of treatment heterogeneity in terms of wealth shows that the wealthy became much more supportive of the regime in response to the treatment while in some cases the poor became much less so. This treatment heterogeneity appears to be related to divergent views among the wealthy and the poor concerning the goals of the protest movement, with the wealthy favoring institutional reforms while the poor prioritized redistributive justice."
+  },
+  {
+    "objectID": "research/articles/kubinec-milner-2024/index.html#data-and-code",
+    "href": "research/articles/kubinec-milner-2024/index.html#data-and-code",
+    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
+    "section": "Data and code",
+    "text": "Data and code\nThe project is reproducible with R code and data available at GitHub."
+  },
+  {
+    "objectID": "research/articles/kubinec-milner-2024/index.html#citation",
+    "href": "research/articles/kubinec-milner-2024/index.html#citation",
+    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
+    "section": "Citation",
+    "text": "Citation\n\n Add to Zotero \n\n@article{kubinec_taxes_2024,\n    title = {Taxes in the {Time} of {Revolution}: {An} {Experimental} {Test} of the {Rentier} {State} during {Algeria}'s {Hirak}},\n    volume = {76},\n    issn = {1086-3338},\n    shorttitle = {Taxes in the {Time} of {Revolution}},\n    url = {https://muse.jhu.edu/pub/1/article/924508},\n    abstract = {This article examines the rentier thesis that a government's control over oil resources should help it to resist pressures for democratization. The authors' online survey experiment, implemented during a nationwide mobilization for regime change in Algeria known as the Hirak, used interactive experimental treatments to provide information about the Algerian government's subsidies for fuel resources and low value-added taxes. Based on a sample of 9,721 Algerians, the authors find that when Algerians learn about their country's relatively high level of fuel subsidies and low level of taxes, their assessments of the government's performance improve. However, the treatment has null effects for outcomes involving demands for representation, such as intentions to join protest movements. An analysis of treatment heterogeneity in terms of wealth shows that the wealthy became much more supportive of the regime in response to the treatment while in some cases the poor became much less so. This treatment heterogeneity appears to be related to divergent views among the wealthy and the poor concerning the goals of the protest movement, with the wealthy favoring institutional reforms while the poor prioritized redistributive justice.},\n    number = {2},\n    urldate = {2024-08-14},\n    journal = {World Politics},\n    author = {Kubinec, Robert and Milner, Helen V.},\n    year = {2024},\n    note = {Publisher: Johns Hopkins University Press},\n    pages = {294--333},\n}"
+  },
+  {
     "objectID": "research/index.html",
     "href": "research/index.html",
     "title": "Research",
@@ -271,167 +425,6 @@
     "crumbs": [
       "Research"
     ]
-  },
-  {
-    "objectID": "research/articles/kubinec-milner-2024/index.html#important-links",
-    "href": "research/articles/kubinec-milner-2024/index.html#important-links",
-    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
-    "section": "Important links",
-    "text": "Important links\n\nPaper (preprint)\nGitHub repository"
-  },
-  {
-    "objectID": "research/articles/kubinec-milner-2024/index.html#abstract",
-    "href": "research/articles/kubinec-milner-2024/index.html#abstract",
-    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
-    "section": "Abstract",
-    "text": "Abstract\nThis article examines the rentier thesis that a government’s control over oil resources should help it to resist pressures for democratization. The authors’ online survey experiment, implemented during a nationwide mobilization for regime change in Algeria known as the Hirak, used interactive experimental treatments to provide information about the Algerian government’s subsidies for fuel resources and low value-added taxes. Based on a sample of 9,721 Algerians, the authors find that when Algerians learn about their country’s relatively high level of fuel subsidies and low level of taxes, their assessments of the government’s performance improve. However, the treatment has null effects for outcomes involving demands for representation, such as intentions to join protest movements. An analysis of treatment heterogeneity in terms of wealth shows that the wealthy became much more supportive of the regime in response to the treatment while in some cases the poor became much less so. This treatment heterogeneity appears to be related to divergent views among the wealthy and the poor concerning the goals of the protest movement, with the wealthy favoring institutional reforms while the poor prioritized redistributive justice."
-  },
-  {
-    "objectID": "research/articles/kubinec-milner-2024/index.html#data-and-code",
-    "href": "research/articles/kubinec-milner-2024/index.html#data-and-code",
-    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
-    "section": "Data and code",
-    "text": "Data and code\nThe project is reproducible with R code and data available at GitHub."
-  },
-  {
-    "objectID": "research/articles/kubinec-milner-2024/index.html#citation",
-    "href": "research/articles/kubinec-milner-2024/index.html#citation",
-    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@article{kubinec_taxes_2024,\n    title = {Taxes in the {Time} of {Revolution}: {An} {Experimental} {Test} of the {Rentier} {State} during {Algeria}'s {Hirak}},\n    volume = {76},\n    issn = {1086-3338},\n    shorttitle = {Taxes in the {Time} of {Revolution}},\n    url = {https://muse.jhu.edu/pub/1/article/924508},\n    abstract = {This article examines the rentier thesis that a government's control over oil resources should help it to resist pressures for democratization. The authors' online survey experiment, implemented during a nationwide mobilization for regime change in Algeria known as the Hirak, used interactive experimental treatments to provide information about the Algerian government's subsidies for fuel resources and low value-added taxes. Based on a sample of 9,721 Algerians, the authors find that when Algerians learn about their country's relatively high level of fuel subsidies and low level of taxes, their assessments of the government's performance improve. However, the treatment has null effects for outcomes involving demands for representation, such as intentions to join protest movements. An analysis of treatment heterogeneity in terms of wealth shows that the wealthy became much more supportive of the regime in response to the treatment while in some cases the poor became much less so. This treatment heterogeneity appears to be related to divergent views among the wealthy and the poor concerning the goals of the protest movement, with the wealthy favoring institutional reforms while the poor prioritized redistributive justice.},\n    number = {2},\n    urldate = {2024-08-14},\n    journal = {World Politics},\n    author = {Kubinec, Robert and Milner, Helen V.},\n    year = {2024},\n    note = {Publisher: Johns Hopkins University Press},\n    pages = {294--333},\n}"
-  },
-  {
-    "objectID": "research/chapters/heiss-causal-inference-2021/index.html",
-    "href": "research/chapters/heiss-causal-inference-2021/index.html",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "One of the most repeated phrases in any introductory statistics class is the warning that “correlation is not causation.” This chapter presents new non-statistical language for creating, measuring, and evaluating causal stories and relationships using observational (i.e. non-experimental) data. It introduces the concept of causal directed acyclic graphs (DAGs) that allow us to formally encode our understanding of causal stories. With well-crafted DAGs, one can use a set of rules called do-calculus to make specific adjustments to statistical models and isolate or identify causal relationships between variables of interest. Edges (or arrows) transmit associations between nodes. Following the fundamental problem of causal inference, answering causal questions without an experiment appears impossible. The chapter explores different methods of making adjustments using synthetic data. Instead of throwing away potentially useful data, one can use other methods to create matches that are less discrete and more informative."
-  },
-  {
-    "objectID": "research/chapters/heiss-causal-inference-2021/index.html#abstract",
-    "href": "research/chapters/heiss-causal-inference-2021/index.html#abstract",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "One of the most repeated phrases in any introductory statistics class is the warning that “correlation is not causation.” This chapter presents new non-statistical language for creating, measuring, and evaluating causal stories and relationships using observational (i.e. non-experimental) data. It introduces the concept of causal directed acyclic graphs (DAGs) that allow us to formally encode our understanding of causal stories. With well-crafted DAGs, one can use a set of rules called do-calculus to make specific adjustments to statistical models and isolate or identify causal relationships between variables of interest. Edges (or arrows) transmit associations between nodes. Following the fundamental problem of causal inference, answering causal questions without an experiment appears impossible. The chapter explores different methods of making adjustments using synthetic data. Instead of throwing away potentially useful data, one can use other methods to create matches that are less discrete and more informative."
-  },
-  {
-    "objectID": "research/chapters/heiss-causal-inference-2021/index.html#important-figures",
-    "href": "research/chapters/heiss-causal-inference-2021/index.html#important-figures",
-    "title": "Causal Inference",
-    "section": "Important figures",
-    "text": "Important figures\nFigure 6: More complicated DAG showing the relationship between campaign spending and votes won in an election\n\n\n\nFigure 6: More complicated DAG showing the relationship between campaign spending and votes won in an election\n\n\nFigure 17: Adjustment set to identify the relationship between mosquito net use and malaria risk\n\n\n\nFigure 17: Adjustment set to identify the relationship between mosquito net use and malaria risk"
-  },
-  {
-    "objectID": "research/chapters/heiss-causal-inference-2021/index.html#citation",
-    "href": "research/chapters/heiss-causal-inference-2021/index.html#citation",
-    "title": "Causal Inference",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@incollection{Heiss:2021,\n    address = {Boca Raton, Florida},\n    author = {Andrew Heiss},\n    booktitle = {R for Political Data Science: A Practical Guide},\n    chapter = {10},\n    doi = {10.1201/9781003010623-10},\n    editor = {Francisco Urdinez and Andr{\\'e}s Cruz},\n    pages = {235--274},\n    publisher = {{Chapman and Hall} / CRC},\n    title = {Causal Inference},\n    year = {2021}}"
-  },
-  {
-    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html",
-    "href": "research/chapters/chaudhry-heiss-closing-space/index.html",
-    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
-    "section": "",
-    "text": "Figure 1: 2017 CIVICUS Monitor civic space ratings\n\n\n\nFigure 1: 2017 CIVICUS Monitor civic space ratings"
-  },
-  {
-    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html#important-figure",
-    "href": "research/chapters/chaudhry-heiss-closing-space/index.html#important-figure",
-    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
-    "section": "",
-    "text": "Figure 1: 2017 CIVICUS Monitor civic space ratings\n\n\n\nFigure 1: 2017 CIVICUS Monitor civic space ratings"
-  },
-  {
-    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html#citation",
-    "href": "research/chapters/chaudhry-heiss-closing-space/index.html#citation",
-    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@incollection{ChaudhryHeiss:2022,\n    Address = {Tuscaloosa, AL},\n    Author = {Suparna Chaudhry and Andrew Heiss},\n    Booktitle = {Beyond the Boomerang: New Patterns in Transcalar Advocacy},\n    Editor = {Christopher L. Pallas and Elizabeth Bloodgood},\n    Publisher = {University of Alabama Press},\n    Title = {Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on {NGOs}},\n    Chapter = {2},\n    Year = {2022}}"
-  },
-  {
-    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html",
-    "href": "research/chapters/heiss-ngo-ir-2019/index.html",
-    "title": "NGOs and Authoritarianism",
-    "section": "",
-    "text": "Authoritarian restrictions on domestic and international civil society have increased over the past decade, but authoritarian states continue to allow—and even invite—NGOs to work in their countries. Though the services and advocacy provided by NGOs can challenge the legitimacy and power of authoritarian regimes, the majority of autocratic states allow NGO activities, and NGOs in turn continue to work in these countries in spite of the heavy legal restrictions and attempts to limit their activities. This chapter examines the theories about and the experiences of domestic and international NGOs working in authoritarian countries. The review is premised on the theory of authoritarian institutions: dictators delegate political authority to democratic-appearing institutions in order to remain in power and maintain stability. After providing a brief overview of authoritarian institutionalism and balancing, I discuss how domestic and international NGOs fit into authoritarian stability-seeking calculus. I then look at three forms of state–NGO relationships in the context of authoritarianism and explore how autocrats have addressed and regulated international NGOs in particular. Finally, I conclude with suggestions for future research on NGOs and their relationship with and role in authoritarian regimes."
-  },
-  {
-    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#abstract",
-    "href": "research/chapters/heiss-ngo-ir-2019/index.html#abstract",
-    "title": "NGOs and Authoritarianism",
-    "section": "",
-    "text": "Authoritarian restrictions on domestic and international civil society have increased over the past decade, but authoritarian states continue to allow—and even invite—NGOs to work in their countries. Though the services and advocacy provided by NGOs can challenge the legitimacy and power of authoritarian regimes, the majority of autocratic states allow NGO activities, and NGOs in turn continue to work in these countries in spite of the heavy legal restrictions and attempts to limit their activities. This chapter examines the theories about and the experiences of domestic and international NGOs working in authoritarian countries. The review is premised on the theory of authoritarian institutions: dictators delegate political authority to democratic-appearing institutions in order to remain in power and maintain stability. After providing a brief overview of authoritarian institutionalism and balancing, I discuss how domestic and international NGOs fit into authoritarian stability-seeking calculus. I then look at three forms of state–NGO relationships in the context of authoritarianism and explore how autocrats have addressed and regulated international NGOs in particular. Finally, I conclude with suggestions for future research on NGOs and their relationship with and role in authoritarian regimes."
-  },
-  {
-    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#figure",
-    "href": "research/chapters/heiss-ngo-ir-2019/index.html#figure",
-    "title": "NGOs and Authoritarianism",
-    "section": "Figure",
-    "text": "Figure\nFigure 2: Civil society repression and regulations\n\n\n\nFigure 2: Civil society repression and regulations"
-  },
-  {
-    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#citation",
-    "href": "research/chapters/heiss-ngo-ir-2019/index.html#citation",
-    "title": "NGOs and Authoritarianism",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@incollection{Heiss:2019,\n    Address = {London},\n    Author = {Andrew Heiss},\n    Booktitle = {Routledge Handbook of {NGOs} and International Relations},\n    Editor = {Thomas Davies},\n    Publisher = {Routledge},\n    Title = {{NGOs} and Authoritarianism},\n    Chapter = {38},\n    Year = {2019}}"
-  },
-  {
-    "objectID": "research/chapters/johnson-heiss-2018/index.html",
-    "href": "research/chapters/johnson-heiss-2018/index.html",
-    "title": "Liberal Institutionalism",
-    "section": "",
-    "text": "Liberal institutionalism presumes that domestic and international institutions play central roles in facilitating cooperation and peace between states. But currently, this influential approach to thinking and practice appears to be in jeopardy. The United Kingdom seeks to be the first state ever to withdraw from the European Union (EU). The United States threatens to renegotiate or leave several international arrangements that it has recently signed or long supported. Meanwhile, China hints that it would be happy to take on greater global leadership if the United States retreats from this traditional role."
-  },
-  {
-    "objectID": "research/chapters/johnson-heiss-2018/index.html#abstract",
-    "href": "research/chapters/johnson-heiss-2018/index.html#abstract",
-    "title": "Liberal Institutionalism",
-    "section": "",
-    "text": "Liberal institutionalism presumes that domestic and international institutions play central roles in facilitating cooperation and peace between states. But currently, this influential approach to thinking and practice appears to be in jeopardy. The United Kingdom seeks to be the first state ever to withdraw from the European Union (EU). The United States threatens to renegotiate or leave several international arrangements that it has recently signed or long supported. Meanwhile, China hints that it would be happy to take on greater global leadership if the United States retreats from this traditional role."
-  },
-  {
-    "objectID": "research/chapters/johnson-heiss-2018/index.html#citation",
-    "href": "research/chapters/johnson-heiss-2018/index.html#citation",
-    "title": "Liberal Institutionalism",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@incollection{JohnsonHeiss:2018,\n    Address = {London},\n    Author = {Tana Johnson and Andrew Heiss},\n    Booktitle = {International Organization and Global Governance},\n    Chapter = {8},\n    Doi = {10.4324/9781315301914},\n    Edition = {2},\n    Editor = {Thomas G. Weiss and Rorden Wilkinson},\n    Pages = {123--34},\n    Publisher = {Routledge},\n    Title = {Liberal Institutionalism},\n    Year = {2018}}"
-  },
-  {
-    "objectID": "research/books/kubinec-2023/index.html#important-links",
-    "href": "research/books/kubinec-2023/index.html#important-links",
-    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
-    "section": "Important links",
-    "text": "Important links\n\nPodcast about the book\nOnline Article Draft\nGitHub repository with code and data"
-  },
-  {
-    "objectID": "research/books/kubinec-2023/index.html#abstract",
-    "href": "research/books/kubinec-2023/index.html#abstract",
-    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
-    "section": "Abstract",
-    "text": "Abstract\nBusinesses in the Middle East and North Africa have failed to bring sustainable development despite decades of investment from the private and public sectors. Yet we still know little about why the Arab Uprisings failed to usher in more transparent government that could break this enduring cycle of corruption and mismanagement. Examining posttransition politics in Egypt and Tunisia, Kubinec employs interviews and quantitative surveys to map out the corrupting influence of businesses on politics. He argues that businesses must respond to changes in how perks and privileges are distributed after political transitions, either by forming political coalitions or creating new informal connections to emerging politicians. Employing detailed case studies and original experiments, Making Democracy Safe for Business advances our empirical understanding of the study of the durability of corruption in general and the dismal results of the Arab Uprisings in particular."
-  },
-  {
-    "objectID": "research/books/kubinec-2023/index.html#data-and-code",
-    "href": "research/books/kubinec-2023/index.html#data-and-code",
-    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
-    "section": "Data and code",
-    "text": "Data and code\nThe analyses in the book can be reproduced with R code and data available at GitHub."
-  },
-  {
-    "objectID": "research/books/kubinec-2023/index.html#citation",
-    "href": "research/books/kubinec-2023/index.html#citation",
-    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@book{kubinec2023democracy,\n    Author = {Robert Kubinec},\n    Doi = {10.1017/9781009273541},\n    Publisher = {Cambridge University Press},\n    Title = {Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings},\n    Year = {2023}}"
-  },
-  {
-    "objectID": "idealstan.html",
-    "href": "idealstan.html",
-    "title": "idealstan",
-    "section": "",
-    "text": "The idealstan R package is designed to implement generalized ideal point models, offering flexible tools for analyzing social choice processes, especially in political science. It supports inference for time-varying ideal points, handles non-ignorable missing data through a two-stage selection model, and accommodates mixed data types (binary, ordinal, continuous). The package is particularly suited for large datasets, employing efficient Bayesian inference techniques like variational inference and MCMC parallelization. The models can be used to assess latent traits in various social contexts, beyond traditional legislative analysis.\nAt present this R package is under active development and a new stable version will be released soon. The current version can be accessed via the develop branch of the package Github repo: https://github.com/saudiwin/idealstan/tree/develop."
   },
   {
     "objectID": "consulting.html",

@@ -1,9 +1,0 @@
----
-title: "idealstan"
-about:
-  template: jolla
----
-
-The `idealstan` R package is designed to implement generalized ideal point models, offering flexible tools for analyzing social choice processes, especially in political science. It supports inference for time-varying ideal points, handles non-ignorable missing data through a two-stage selection model, and accommodates mixed data types (binary, ordinal, continuous). The package is particularly suited for large datasets, employing efficient Bayesian inference techniques like variational inference and MCMC parallelization. The models can be used to assess latent traits in various social contexts, beyond traditional legislative analysis.
-
-At present this R package is under active development and a new stable version will be released soon. The current version can be accessed via the `develop` branch of the package Github repo: <https://github.com/saudiwin/idealstan/tree/develop>.
