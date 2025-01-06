@@ -9,7 +9,7 @@ website:
   announcement: 
     icon: info-circle
     dismissable: true
-    content: "My novel *The Bayesian Hitman* is now available on [Amazon](https://www.amazon.com/Bayesian-Hitman-Robert-M-Kubinec/dp/B0D6M4WNRZ/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=&sr=)."
+    content: "Read my latest on the overthrow of Bashar al-Assad's Syrian regime in [*The Bulwark*](https://www.thebulwark.com/p/aleppo-fell-the-rest-of-the-middle-east-is-wobbling)."
     type: dark
     position: below-navbar
   sidebar:
