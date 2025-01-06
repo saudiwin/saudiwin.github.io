@@ -4,7 +4,8 @@ project:
     - "files/"
 
 website:
-  title: "Robert Kubinec"
+  title: "Robert Kubinec Homepage"
+  reader-mode: true
   announcement: 
     icon: info-circle
     dismissable: true
@@ -14,10 +15,10 @@ website:
   sidebar:
     style: "docked"
     contents:
-      - text: "Punk Rock Poli Sci"
-        href: index.qmd
       - text: CV
         href: files/Robert_Kubinec_CV_full.pdf
+      - text: "Blog"
+        href: index.qmd
       - text: "Research"
         file: research/index.qmd
       - consulting.qmd
@@ -29,6 +30,7 @@ website:
   google-analytics: 
     tracking-id: "G-BHP1PJ9LEX"
   navbar:
+    logo: files/img/formal_cropped_profile_cirle.png
     right:
       - icon: github
         href: https://github.com/saudiwin

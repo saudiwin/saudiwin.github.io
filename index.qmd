@@ -1,5 +1,5 @@
 ---
-title: "Punk Rock Poli Sci"
+title: "Intro & Blog"
 listing:
   contents: post
   sort: "date desc"
@@ -11,6 +11,14 @@ page-layout: full
 title-block-banner: true
 ---
 
+:::: {.columns}
+
+::: {.column width="25%"}
+![Robert Kubinec<br>Assistant Professor<br>University of South Carolina](files/img/more_direct_camera_profile_cropped.jpg){width="90%"}
+:::
+
+::: {.column width="75%"}
+
 I am a political economist at the University of South Carolina where I study broken political and economic institutions in the non-Western world. This website hosts papers, code and data from my [research](research/index.qmd) projects and also my blog, *Punk Rock Poli Sci,* that mixes poli sci (the politics of economic development) with a splash of punk rock (rethinking methods for scientific research in the 21st century). You can find my [CV here](files/Robert_Kubinec_CV_full.pdf).
 
 I am the author of two books:
@@ -20,3 +28,9 @@ I am the author of two books:
 [The Bayesian Hitman](https://www.amazon.com/Bayesian-Hitman-Robert-M-Kubinec/dp/B0D6M4WNRZ)
 
 You can subscribe to get email notifications about new blog posts [here](https://docs.google.com/forms/d/e/1FAIpQLScgbBPHF1uAjhTFQ2CUxmQ75gSsLsnl-wja2Blx2ZyOxQQITg/viewform?usp=sf_link).
+
+:::
+
+::::
+
+
