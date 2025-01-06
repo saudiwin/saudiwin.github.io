@@ -4,7 +4,7 @@ project:
     - "files/"
 
 website:
-  title: "Robert Kubinec Homepage"
+  title: "Homepage"
   reader-mode: true
   announcement: 
     icon: info-circle
