@@ -30,7 +30,6 @@ website:
   google-analytics: 
     tracking-id: "G-BHP1PJ9LEX"
   navbar:
-    logo: files/img/formal_cropped_profile_cirle.png
     right:
       - icon: github
         href: https://github.com/saudiwin
