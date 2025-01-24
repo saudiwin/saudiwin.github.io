@@ -9,7 +9,7 @@ website:
   announcement: 
     icon: info-circle
     dismissable: true
-    content: "Read my latest on on how we can use political science to help rebuild Syria in [*The Conversation*](https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203)."
+    content: "Read my latest on 5 lessons from political science to help rebuild Syria in [*The Conversation*](https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203)."
     type: dark
     position: below-navbar
   sidebar:
