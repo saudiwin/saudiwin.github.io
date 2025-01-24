@@ -9,7 +9,7 @@ website:
   announcement: 
     icon: info-circle
     dismissable: true
-    content: "Read my latest on the overthrow of Bashar al-Assad's Syrian regime in [*The Bulwark*](https://www.thebulwark.com/p/aleppo-fell-the-rest-of-the-middle-east-is-wobbling)."
+    content: "Read my latest on on how we can use political science to help rebuild Syria in [*The Conversation*](https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203)."
     type: dark
     position: below-navbar
   sidebar:
