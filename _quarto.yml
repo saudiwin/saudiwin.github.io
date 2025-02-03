@@ -22,7 +22,8 @@ website:
       - text: "Research"
         file: research/index.qmd
       - consulting.qmd
-      - ordbetareg.qmd
+      - text: "Ordered Beta Regression"
+        href: https://saudiwin.github.io/ordbetareg_pack/
       - text: "`idealstan`"
         href: https://saudiwin.github.io/idealstan/
       - text: "CoronaNet"

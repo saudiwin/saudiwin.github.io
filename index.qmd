@@ -17,7 +17,7 @@ title-block-banner: true
 :::
 
 ::: {.column width="75%"}
-I am a political economist who studies the effects of broken political and economic institutions in the non-Western world. This website hosts papers, code and data from my [research](research/index.qmd) projects and also my blog, *Punk Rock Poli Sci,* that mixes poli sci (the politics of economic development) with a splash of punk rock (rethinking methods for scientific research in the 21st century). You can find my [CV here](files/Robert_Kubinec_CV_full.pdf). If you want to contact me, send me an email at rkubinec\@mailbox.sc.edu.
+I am a political economist who studies the effects of broken political and economic institutions in the non-Western world. This website hosts papers, code and data from my [research](research/index.qmd) projects and also my blog, *Punk Rock Poli Sci,* that mixes poli sci (the politics of economic development) with a splash of punk rock (rethinking methods for scientific research in the 21st century). You can find my [CV here](files/Robert_Kubinec_CV_full.pdf). If you want to contact me, send me an email at `rkubinec@mailbox.sc.edu`.
 
 I am the author of two books:
 
