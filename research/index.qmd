@@ -35,11 +35,13 @@ On this page you can see a list of my articles, books, and other published works
 
 -   How do businesspeople become successful entrepreneurs in countries where personal and political relationships are necessary to grow their firm?
 
--   What are the prospects for democratization and political stability in the Middle East and North Africa?
+-   How can we use Bayesian statistical methods to make robust inferences with complex datasets?
 
 -   How can scientists develop robust measures of concepts they care about and make credible causal inferences that take into account diverse forms of data and evidence?
 
-Often these questions overlap, such as when I use new statistical tools I develop to study corruption in the MENA region and elsewhere. My R packages, [ordbetareg](../ordbetareg.qmd) and [idealstan](https://saudiwin.github.io/idealstan/), both came out of my research in studying online experiments and legislature behavior, and have also been used in other studies to date. I am both a skeptic of data science & AI and a developer of data-scientific methods because I see great promise *and* peril in quantification.
+Often these questions overlap, such as when I use new statistical tools I develop to study corruption in the MENA region and elsewhere. My R packages, [ordbetareg](https://saudiwin.github.io/ordbetareg_pack/) and [idealstan](https://saudiwin.github.io/idealstan/), both came out of my research in studying online experiments and legislature behavior, and have also been used in other studies to date. I am both a skeptic of data science & AI and a developer of data-scientific methods because I see great promise *and* peril in quantification.
+
+Please see below for a list of recent publications, though please note that not all of the publications on my CV are listed here as of yet.
 
 ## Books
 

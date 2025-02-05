@@ -241,74 +241,32 @@
     "text": "Citation\n\n Add to Zotero \n\n@book{kubinec2023democracy,\n    Author = {Robert Kubinec},\n    Doi = {10.1017/9781009273541},\n    Publisher = {Cambridge University Press},\n    Title = {Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings},\n    Year = {2023}}"
   },
   {
-    "objectID": "research/chapters/johnson-heiss-2018/index.html",
-    "href": "research/chapters/johnson-heiss-2018/index.html",
-    "title": "Liberal Institutionalism",
-    "section": "",
-    "text": "Liberal institutionalism presumes that domestic and international institutions play central roles in facilitating cooperation and peace between states. But currently, this influential approach to thinking and practice appears to be in jeopardy. The United Kingdom seeks to be the first state ever to withdraw from the European Union (EU). The United States threatens to renegotiate or leave several international arrangements that it has recently signed or long supported. Meanwhile, China hints that it would be happy to take on greater global leadership if the United States retreats from this traditional role."
+    "objectID": "research/articles/kubinec-milner-2024/index.html#important-links",
+    "href": "research/articles/kubinec-milner-2024/index.html#important-links",
+    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
+    "section": "Important links",
+    "text": "Important links\n\nPaper (preprint)\nGitHub repository"
   },
   {
-    "objectID": "research/chapters/johnson-heiss-2018/index.html#abstract",
-    "href": "research/chapters/johnson-heiss-2018/index.html#abstract",
-    "title": "Liberal Institutionalism",
-    "section": "",
-    "text": "Liberal institutionalism presumes that domestic and international institutions play central roles in facilitating cooperation and peace between states. But currently, this influential approach to thinking and practice appears to be in jeopardy. The United Kingdom seeks to be the first state ever to withdraw from the European Union (EU). The United States threatens to renegotiate or leave several international arrangements that it has recently signed or long supported. Meanwhile, China hints that it would be happy to take on greater global leadership if the United States retreats from this traditional role."
+    "objectID": "research/articles/kubinec-milner-2024/index.html#abstract",
+    "href": "research/articles/kubinec-milner-2024/index.html#abstract",
+    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
+    "section": "Abstract",
+    "text": "Abstract\nThis article examines the rentier thesis that a government’s control over oil resources should help it to resist pressures for democratization. The authors’ online survey experiment, implemented during a nationwide mobilization for regime change in Algeria known as the Hirak, used interactive experimental treatments to provide information about the Algerian government’s subsidies for fuel resources and low value-added taxes. Based on a sample of 9,721 Algerians, the authors find that when Algerians learn about their country’s relatively high level of fuel subsidies and low level of taxes, their assessments of the government’s performance improve. However, the treatment has null effects for outcomes involving demands for representation, such as intentions to join protest movements. An analysis of treatment heterogeneity in terms of wealth shows that the wealthy became much more supportive of the regime in response to the treatment while in some cases the poor became much less so. This treatment heterogeneity appears to be related to divergent views among the wealthy and the poor concerning the goals of the protest movement, with the wealthy favoring institutional reforms while the poor prioritized redistributive justice."
   },
   {
-    "objectID": "research/chapters/johnson-heiss-2018/index.html#citation",
-    "href": "research/chapters/johnson-heiss-2018/index.html#citation",
-    "title": "Liberal Institutionalism",
+    "objectID": "research/articles/kubinec-milner-2024/index.html#data-and-code",
+    "href": "research/articles/kubinec-milner-2024/index.html#data-and-code",
+    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
+    "section": "Data and code",
+    "text": "Data and code\nThe project is reproducible with R code and data available at GitHub."
+  },
+  {
+    "objectID": "research/articles/kubinec-milner-2024/index.html#citation",
+    "href": "research/articles/kubinec-milner-2024/index.html#citation",
+    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
     "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@incollection{JohnsonHeiss:2018,\n    Address = {London},\n    Author = {Tana Johnson and Andrew Heiss},\n    Booktitle = {International Organization and Global Governance},\n    Chapter = {8},\n    Doi = {10.4324/9781315301914},\n    Edition = {2},\n    Editor = {Thomas G. Weiss and Rorden Wilkinson},\n    Pages = {123--34},\n    Publisher = {Routledge},\n    Title = {Liberal Institutionalism},\n    Year = {2018}}"
-  },
-  {
-    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html",
-    "href": "research/chapters/heiss-ngo-ir-2019/index.html",
-    "title": "NGOs and Authoritarianism",
-    "section": "",
-    "text": "Authoritarian restrictions on domestic and international civil society have increased over the past decade, but authoritarian states continue to allow—and even invite—NGOs to work in their countries. Though the services and advocacy provided by NGOs can challenge the legitimacy and power of authoritarian regimes, the majority of autocratic states allow NGO activities, and NGOs in turn continue to work in these countries in spite of the heavy legal restrictions and attempts to limit their activities. This chapter examines the theories about and the experiences of domestic and international NGOs working in authoritarian countries. The review is premised on the theory of authoritarian institutions: dictators delegate political authority to democratic-appearing institutions in order to remain in power and maintain stability. After providing a brief overview of authoritarian institutionalism and balancing, I discuss how domestic and international NGOs fit into authoritarian stability-seeking calculus. I then look at three forms of state–NGO relationships in the context of authoritarianism and explore how autocrats have addressed and regulated international NGOs in particular. Finally, I conclude with suggestions for future research on NGOs and their relationship with and role in authoritarian regimes."
-  },
-  {
-    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#abstract",
-    "href": "research/chapters/heiss-ngo-ir-2019/index.html#abstract",
-    "title": "NGOs and Authoritarianism",
-    "section": "",
-    "text": "Authoritarian restrictions on domestic and international civil society have increased over the past decade, but authoritarian states continue to allow—and even invite—NGOs to work in their countries. Though the services and advocacy provided by NGOs can challenge the legitimacy and power of authoritarian regimes, the majority of autocratic states allow NGO activities, and NGOs in turn continue to work in these countries in spite of the heavy legal restrictions and attempts to limit their activities. This chapter examines the theories about and the experiences of domestic and international NGOs working in authoritarian countries. The review is premised on the theory of authoritarian institutions: dictators delegate political authority to democratic-appearing institutions in order to remain in power and maintain stability. After providing a brief overview of authoritarian institutionalism and balancing, I discuss how domestic and international NGOs fit into authoritarian stability-seeking calculus. I then look at three forms of state–NGO relationships in the context of authoritarianism and explore how autocrats have addressed and regulated international NGOs in particular. Finally, I conclude with suggestions for future research on NGOs and their relationship with and role in authoritarian regimes."
-  },
-  {
-    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#figure",
-    "href": "research/chapters/heiss-ngo-ir-2019/index.html#figure",
-    "title": "NGOs and Authoritarianism",
-    "section": "Figure",
-    "text": "Figure\nFigure 2: Civil society repression and regulations\n\n\n\nFigure 2: Civil society repression and regulations"
-  },
-  {
-    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#citation",
-    "href": "research/chapters/heiss-ngo-ir-2019/index.html#citation",
-    "title": "NGOs and Authoritarianism",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@incollection{Heiss:2019,\n    Address = {London},\n    Author = {Andrew Heiss},\n    Booktitle = {Routledge Handbook of {NGOs} and International Relations},\n    Editor = {Thomas Davies},\n    Publisher = {Routledge},\n    Title = {{NGOs} and Authoritarianism},\n    Chapter = {38},\n    Year = {2019}}"
-  },
-  {
-    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html",
-    "href": "research/chapters/chaudhry-heiss-closing-space/index.html",
-    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
-    "section": "",
-    "text": "Figure 1: 2017 CIVICUS Monitor civic space ratings\n\n\n\nFigure 1: 2017 CIVICUS Monitor civic space ratings"
-  },
-  {
-    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html#important-figure",
-    "href": "research/chapters/chaudhry-heiss-closing-space/index.html#important-figure",
-    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
-    "section": "",
-    "text": "Figure 1: 2017 CIVICUS Monitor civic space ratings\n\n\n\nFigure 1: 2017 CIVICUS Monitor civic space ratings"
-  },
-  {
-    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html#citation",
-    "href": "research/chapters/chaudhry-heiss-closing-space/index.html#citation",
-    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@incollection{ChaudhryHeiss:2022,\n    Address = {Tuscaloosa, AL},\n    Author = {Suparna Chaudhry and Andrew Heiss},\n    Booktitle = {Beyond the Boomerang: New Patterns in Transcalar Advocacy},\n    Editor = {Christopher L. Pallas and Elizabeth Bloodgood},\n    Publisher = {University of Alabama Press},\n    Title = {Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on {NGOs}},\n    Chapter = {2},\n    Year = {2022}}"
+    "text": "Citation\n\n Add to Zotero \n\n@article{kubinec_taxes_2024,\n    title = {Taxes in the {Time} of {Revolution}: {An} {Experimental} {Test} of the {Rentier} {State} during {Algeria}'s {Hirak}},\n    volume = {76},\n    issn = {1086-3338},\n    shorttitle = {Taxes in the {Time} of {Revolution}},\n    url = {https://muse.jhu.edu/pub/1/article/924508},\n    abstract = {This article examines the rentier thesis that a government's control over oil resources should help it to resist pressures for democratization. The authors' online survey experiment, implemented during a nationwide mobilization for regime change in Algeria known as the Hirak, used interactive experimental treatments to provide information about the Algerian government's subsidies for fuel resources and low value-added taxes. Based on a sample of 9,721 Algerians, the authors find that when Algerians learn about their country's relatively high level of fuel subsidies and low level of taxes, their assessments of the government's performance improve. However, the treatment has null effects for outcomes involving demands for representation, such as intentions to join protest movements. An analysis of treatment heterogeneity in terms of wealth shows that the wealthy became much more supportive of the regime in response to the treatment while in some cases the poor became much less so. This treatment heterogeneity appears to be related to divergent views among the wealthy and the poor concerning the goals of the protest movement, with the wealthy favoring institutional reforms while the poor prioritized redistributive justice.},\n    number = {2},\n    urldate = {2024-08-14},\n    journal = {World Politics},\n    author = {Kubinec, Robert and Milner, Helen V.},\n    year = {2024},\n    note = {Publisher: Johns Hopkins University Press},\n    pages = {294--333},\n}"
   },
   {
     "objectID": "research/chapters/heiss-causal-inference-2021/index.html",
@@ -339,30 +297,100 @@
     "text": "Citation\n\n Add to Zotero \n\n@incollection{Heiss:2021,\n    address = {Boca Raton, Florida},\n    author = {Andrew Heiss},\n    booktitle = {R for Political Data Science: A Practical Guide},\n    chapter = {10},\n    doi = {10.1201/9781003010623-10},\n    editor = {Francisco Urdinez and Andr{\\'e}s Cruz},\n    pages = {235--274},\n    publisher = {{Chapman and Hall} / CRC},\n    title = {Causal Inference},\n    year = {2021}}"
   },
   {
-    "objectID": "research/articles/kubinec-milner-2024/index.html#important-links",
-    "href": "research/articles/kubinec-milner-2024/index.html#important-links",
-    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
+    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html",
+    "href": "research/chapters/chaudhry-heiss-closing-space/index.html",
+    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
+    "section": "",
+    "text": "Figure 1: 2017 CIVICUS Monitor civic space ratings\n\n\n\nFigure 1: 2017 CIVICUS Monitor civic space ratings"
+  },
+  {
+    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html#important-figure",
+    "href": "research/chapters/chaudhry-heiss-closing-space/index.html#important-figure",
+    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
+    "section": "",
+    "text": "Figure 1: 2017 CIVICUS Monitor civic space ratings\n\n\n\nFigure 1: 2017 CIVICUS Monitor civic space ratings"
+  },
+  {
+    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html#citation",
+    "href": "research/chapters/chaudhry-heiss-closing-space/index.html#citation",
+    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
+    "section": "Citation",
+    "text": "Citation\n\n Add to Zotero \n\n@incollection{ChaudhryHeiss:2022,\n    Address = {Tuscaloosa, AL},\n    Author = {Suparna Chaudhry and Andrew Heiss},\n    Booktitle = {Beyond the Boomerang: New Patterns in Transcalar Advocacy},\n    Editor = {Christopher L. Pallas and Elizabeth Bloodgood},\n    Publisher = {University of Alabama Press},\n    Title = {Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on {NGOs}},\n    Chapter = {2},\n    Year = {2022}}"
+  },
+  {
+    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html",
+    "href": "research/chapters/heiss-ngo-ir-2019/index.html",
+    "title": "NGOs and Authoritarianism",
+    "section": "",
+    "text": "Authoritarian restrictions on domestic and international civil society have increased over the past decade, but authoritarian states continue to allow—and even invite—NGOs to work in their countries. Though the services and advocacy provided by NGOs can challenge the legitimacy and power of authoritarian regimes, the majority of autocratic states allow NGO activities, and NGOs in turn continue to work in these countries in spite of the heavy legal restrictions and attempts to limit their activities. This chapter examines the theories about and the experiences of domestic and international NGOs working in authoritarian countries. The review is premised on the theory of authoritarian institutions: dictators delegate political authority to democratic-appearing institutions in order to remain in power and maintain stability. After providing a brief overview of authoritarian institutionalism and balancing, I discuss how domestic and international NGOs fit into authoritarian stability-seeking calculus. I then look at three forms of state–NGO relationships in the context of authoritarianism and explore how autocrats have addressed and regulated international NGOs in particular. Finally, I conclude with suggestions for future research on NGOs and their relationship with and role in authoritarian regimes."
+  },
+  {
+    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#abstract",
+    "href": "research/chapters/heiss-ngo-ir-2019/index.html#abstract",
+    "title": "NGOs and Authoritarianism",
+    "section": "",
+    "text": "Authoritarian restrictions on domestic and international civil society have increased over the past decade, but authoritarian states continue to allow—and even invite—NGOs to work in their countries. Though the services and advocacy provided by NGOs can challenge the legitimacy and power of authoritarian regimes, the majority of autocratic states allow NGO activities, and NGOs in turn continue to work in these countries in spite of the heavy legal restrictions and attempts to limit their activities. This chapter examines the theories about and the experiences of domestic and international NGOs working in authoritarian countries. The review is premised on the theory of authoritarian institutions: dictators delegate political authority to democratic-appearing institutions in order to remain in power and maintain stability. After providing a brief overview of authoritarian institutionalism and balancing, I discuss how domestic and international NGOs fit into authoritarian stability-seeking calculus. I then look at three forms of state–NGO relationships in the context of authoritarianism and explore how autocrats have addressed and regulated international NGOs in particular. Finally, I conclude with suggestions for future research on NGOs and their relationship with and role in authoritarian regimes."
+  },
+  {
+    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#figure",
+    "href": "research/chapters/heiss-ngo-ir-2019/index.html#figure",
+    "title": "NGOs and Authoritarianism",
+    "section": "Figure",
+    "text": "Figure\nFigure 2: Civil society repression and regulations\n\n\n\nFigure 2: Civil society repression and regulations"
+  },
+  {
+    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#citation",
+    "href": "research/chapters/heiss-ngo-ir-2019/index.html#citation",
+    "title": "NGOs and Authoritarianism",
+    "section": "Citation",
+    "text": "Citation\n\n Add to Zotero \n\n@incollection{Heiss:2019,\n    Address = {London},\n    Author = {Andrew Heiss},\n    Booktitle = {Routledge Handbook of {NGOs} and International Relations},\n    Editor = {Thomas Davies},\n    Publisher = {Routledge},\n    Title = {{NGOs} and Authoritarianism},\n    Chapter = {38},\n    Year = {2019}}"
+  },
+  {
+    "objectID": "research/chapters/johnson-heiss-2018/index.html",
+    "href": "research/chapters/johnson-heiss-2018/index.html",
+    "title": "Liberal Institutionalism",
+    "section": "",
+    "text": "Liberal institutionalism presumes that domestic and international institutions play central roles in facilitating cooperation and peace between states. But currently, this influential approach to thinking and practice appears to be in jeopardy. The United Kingdom seeks to be the first state ever to withdraw from the European Union (EU). The United States threatens to renegotiate or leave several international arrangements that it has recently signed or long supported. Meanwhile, China hints that it would be happy to take on greater global leadership if the United States retreats from this traditional role."
+  },
+  {
+    "objectID": "research/chapters/johnson-heiss-2018/index.html#abstract",
+    "href": "research/chapters/johnson-heiss-2018/index.html#abstract",
+    "title": "Liberal Institutionalism",
+    "section": "",
+    "text": "Liberal institutionalism presumes that domestic and international institutions play central roles in facilitating cooperation and peace between states. But currently, this influential approach to thinking and practice appears to be in jeopardy. The United Kingdom seeks to be the first state ever to withdraw from the European Union (EU). The United States threatens to renegotiate or leave several international arrangements that it has recently signed or long supported. Meanwhile, China hints that it would be happy to take on greater global leadership if the United States retreats from this traditional role."
+  },
+  {
+    "objectID": "research/chapters/johnson-heiss-2018/index.html#citation",
+    "href": "research/chapters/johnson-heiss-2018/index.html#citation",
+    "title": "Liberal Institutionalism",
+    "section": "Citation",
+    "text": "Citation\n\n Add to Zotero \n\n@incollection{JohnsonHeiss:2018,\n    Address = {London},\n    Author = {Tana Johnson and Andrew Heiss},\n    Booktitle = {International Organization and Global Governance},\n    Chapter = {8},\n    Doi = {10.4324/9781315301914},\n    Edition = {2},\n    Editor = {Thomas G. Weiss and Rorden Wilkinson},\n    Pages = {123--34},\n    Publisher = {Routledge},\n    Title = {Liberal Institutionalism},\n    Year = {2018}}"
+  },
+  {
+    "objectID": "research/articles/kubinec-et-al-jop-2024/index.html#important-links",
+    "href": "research/articles/kubinec-et-al-jop-2024/index.html#important-links",
+    "title": "Cross-National Measures of the Intensity of COVID-19 Public Health Policies",
     "section": "Important links",
     "text": "Important links\n\nPaper (preprint)\nGitHub repository"
   },
   {
-    "objectID": "research/articles/kubinec-milner-2024/index.html#abstract",
-    "href": "research/articles/kubinec-milner-2024/index.html#abstract",
-    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
+    "objectID": "research/articles/kubinec-et-al-jop-2024/index.html#abstract",
+    "href": "research/articles/kubinec-et-al-jop-2024/index.html#abstract",
+    "title": "Cross-National Measures of the Intensity of COVID-19 Public Health Policies",
     "section": "Abstract",
     "text": "Abstract\nThis article examines the rentier thesis that a government’s control over oil resources should help it to resist pressures for democratization. The authors’ online survey experiment, implemented during a nationwide mobilization for regime change in Algeria known as the Hirak, used interactive experimental treatments to provide information about the Algerian government’s subsidies for fuel resources and low value-added taxes. Based on a sample of 9,721 Algerians, the authors find that when Algerians learn about their country’s relatively high level of fuel subsidies and low level of taxes, their assessments of the government’s performance improve. However, the treatment has null effects for outcomes involving demands for representation, such as intentions to join protest movements. An analysis of treatment heterogeneity in terms of wealth shows that the wealthy became much more supportive of the regime in response to the treatment while in some cases the poor became much less so. This treatment heterogeneity appears to be related to divergent views among the wealthy and the poor concerning the goals of the protest movement, with the wealthy favoring institutional reforms while the poor prioritized redistributive justice."
   },
   {
-    "objectID": "research/articles/kubinec-milner-2024/index.html#data-and-code",
-    "href": "research/articles/kubinec-milner-2024/index.html#data-and-code",
-    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
+    "objectID": "research/articles/kubinec-et-al-jop-2024/index.html#data-and-code",
+    "href": "research/articles/kubinec-et-al-jop-2024/index.html#data-and-code",
+    "title": "Cross-National Measures of the Intensity of COVID-19 Public Health Policies",
     "section": "Data and code",
     "text": "Data and code\nThe project is reproducible with R code and data available at GitHub."
   },
   {
-    "objectID": "research/articles/kubinec-milner-2024/index.html#citation",
-    "href": "research/articles/kubinec-milner-2024/index.html#citation",
-    "title": "Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria’s Hirak",
+    "objectID": "research/articles/kubinec-et-al-jop-2024/index.html#citation",
+    "href": "research/articles/kubinec-et-al-jop-2024/index.html#citation",
+    "title": "Cross-National Measures of the Intensity of COVID-19 Public Health Policies",
     "section": "Citation",
     "text": "Citation\n\n Add to Zotero \n\n@article{kubinec_taxes_2024,\n    title = {Taxes in the {Time} of {Revolution}: {An} {Experimental} {Test} of the {Rentier} {State} during {Algeria}'s {Hirak}},\n    volume = {76},\n    issn = {1086-3338},\n    shorttitle = {Taxes in the {Time} of {Revolution}},\n    url = {https://muse.jhu.edu/pub/1/article/924508},\n    abstract = {This article examines the rentier thesis that a government's control over oil resources should help it to resist pressures for democratization. The authors' online survey experiment, implemented during a nationwide mobilization for regime change in Algeria known as the Hirak, used interactive experimental treatments to provide information about the Algerian government's subsidies for fuel resources and low value-added taxes. Based on a sample of 9,721 Algerians, the authors find that when Algerians learn about their country's relatively high level of fuel subsidies and low level of taxes, their assessments of the government's performance improve. However, the treatment has null effects for outcomes involving demands for representation, such as intentions to join protest movements. An analysis of treatment heterogeneity in terms of wealth shows that the wealthy became much more supportive of the regime in response to the treatment while in some cases the poor became much less so. This treatment heterogeneity appears to be related to divergent views among the wealthy and the poor concerning the goals of the protest movement, with the wealthy favoring institutional reforms while the poor prioritized redistributive justice.},\n    number = {2},\n    urldate = {2024-08-14},\n    journal = {World Politics},\n    author = {Kubinec, Robert and Milner, Helen V.},\n    year = {2024},\n    note = {Publisher: Johns Hopkins University Press},\n    pages = {294--333},\n}"
   },
@@ -371,7 +399,7 @@
     "href": "research/index.html",
     "title": "Research",
     "section": "",
-    "text": "On this page you can see a list of my articles, books, and other published works (see table of contents on the left) along with associated code and datasets. You can view my CV here. My research has focused on the following questions that span the political economy of development, data science, causal inference and Middle East politics:\nOften these questions overlap, such as when I use new statistical tools I develop to study corruption in the MENA region and elsewhere. My R packages, ordbetareg and idealstan, both came out of my research in studying online experiments and legislature behavior, and have also been used in other studies to date. I am both a skeptic of data science & AI and a developer of data-scientific methods because I see great promise and peril in quantification.",
+    "text": "On this page you can see a list of my articles, books, and other published works (see table of contents on the left) along with associated code and datasets. You can view my CV here. My research has focused on the following questions that span the political economy of development, data science, causal inference and Middle East politics:\nOften these questions overlap, such as when I use new statistical tools I develop to study corruption in the MENA region and elsewhere. My R packages, ordbetareg and idealstan, both came out of my research in studying online experiments and legislature behavior, and have also been used in other studies to date. I am both a skeptic of data science & AI and a developer of data-scientific methods because I see great promise and peril in quantification.\nPlease see below for a list of recent publications, though please note that not all of the publications on my CV are listed here as of yet.",
     "crumbs": [
       "Research"
     ]
@@ -391,7 +419,7 @@
     "href": "research/index.html#journal-articles",
     "title": "Research",
     "section": "Journal articles",
-    "text": "Journal articles\n\n\n\n    \n        \n            \n                Robert Kubinec and Helen Milner, “Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria's Hirak,” World Politics 76, no. 2 (April 2024): 294-333, doi: 10.1353/wp.2024.a924508\n            \n\n            \n            \n                \n                    \n                            Political Economy\n                        \n                    \n                    \n                            Middle East Politics\n                        \n                    \n                    \n                            Online Experiments\n                        \n                    \n                    \n                            Bayesian Statistics\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Final version\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Code & Data\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n\n\n\nNo matching items",
+    "text": "Journal articles\n\n\n\n    \n        \n            \n                Robert Kubinec, Joan Barcelo, Rafael Goldszmidt, Vanja Grujic, Timothy Model, Caress Schenk, Cindy Cheng, Thomas Hale, Luca Messerschmidt, and Anna Petherick, “Cross-National Measures of the Intensity of COVID-19 Public Health Policies,” Journal of Politics Forthcoming, doi: 10.1086/734241\n            \n\n            \n            \n                \n                    \n                            COVID-19\n                        \n                    \n                    \n                            idealstan\n                        \n                    \n                    \n                            Bayesian Statistics\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Final version\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Code & Data\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n        \n            \n                Robert Kubinec and Helen Milner, “Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria's Hirak,” World Politics 76, no. 2 (April 2024): 294-333, doi: 10.1353/wp.2024.a924508\n            \n\n            \n            \n                \n                    \n                            Political Economy\n                        \n                    \n                    \n                            Middle East Politics\n                        \n                    \n                    \n                            Online Experiments\n                        \n                    \n                    \n                            Bayesian Statistics\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Final version\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Code & Data\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n\n\n\nNo matching items",
     "crumbs": [
       "Research"
     ]
