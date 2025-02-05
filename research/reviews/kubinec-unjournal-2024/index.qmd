@@ -1,0 +1,43 @@
+---
+title: 'Evaluation 1 of "Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China"'
+date: 2023-08-11
+author:
+  - name: Robert Kubinec
+    url: http://www.robertkubinec.com/
+    affiliation: University of South Carolina
+categories: 
+  - Political Economy
+  - Environment
+  - Political Connections
+  - Experiments
+pub-info:
+  reference: >-
+    Kubinec, Robert. "Evaluation 1 of 'Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China.'" August 11, 2023. <em>Public Evaluation</em>, doi: <a href="https://doi.org/10.21428/d28e8e57.22756671"><code>10.21428/d28e8e57.22756671</code></a>
+  links:
+    - name: Evaluation
+      url: https://doi.org/10.21428/d28e8e57.22756671
+      icon: fa-solid fa-file-pdf
+      local: local
+    - name: Add to Zotero
+      url: https://www.zotero.org/save?type=doi&q=10.21428/d28e8e57.22756671
+      icon: ai ai-zotero
+doi: 10.21428/d28e8e57.22756671
+---
+
+![Open](materials_large_color.png)
+
+## Important links
+
+-   [Evaluation](https://doi.org/10.21428/d28e8e57.22756671)
+
+## Abstract
+
+This is an evaluation of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”, involving an RCT investigating the effects of citizen participation through social media on environmental policy enforcement. The evaluation praises the RCT as ambitious and well-execute. It highlights the sophistication of the experimental design and the importance of the findings for both academic and policy circles. However, it also critiques the handling of over-time dynamics and the panel data specifications used in the analysis, suggesting alternative methodologies for clearer interpretation. The evaluation considers the external validity of the findings, discussing the potential impact and limitations of applying the Weibo intervention in different contexts. It underscores the importance of policymakers’ utility calculus and the institutional framework in determining the intervention’s effectiveness. It concludes by acknowledging the study’s contribution to understanding the role of social media in influencing government behavior towards environmental concerns, while also cautioning about generalizing the findings.
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.21428/d28e8e57.22756671">{{< ai zotero >}} Add to Zotero {{< fa square-arrow-up-right >}}</a>
+
+</p>
