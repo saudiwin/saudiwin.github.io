@@ -1,0 +1,56 @@
+---
+title: "Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences"
+date: 2025-02-04
+author:
+  - name: Robert Kubinec
+    url: http://www.robertkubinec.com/
+    affiliation: University of South Carolina
+categories: 
+  - Bayesian statistics
+  - idealstan
+  - measurement
+pub-info:
+  reference: >-
+    Kubinec, Robert. "Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences." February 4, 2025. <em>Working Paper</em> Forthcoming, doi: <a href="https://doi.org/10.31219/osf.io/8j2bt_v1"><code>10.31219/osf.io/8j2bt_v1</code></a>
+  links:
+    - name: Preprint
+      url: https://doi.org/10.31219/osf.io/8j2bt_v1
+      icon: fa-solid fa-file-pdf
+      local: local
+    - name: Add to Zotero
+      url: https://www.zotero.org/save?type=doi&q=10.31219/osf.io/8j2bt_v1
+      icon: ai ai-zotero
+doi: 10.31219/osf.io/8j2bt_v1
+---
+
+![Preregistered](preregistered_large_color.png) ![Open](materials_large_color.png)
+
+## Important links
+
+-   [Paper (preprint)](https://doi.org/10.31219/osf.io/8j2bt_v1)
+
+## Abstract
+
+This paper presents a measurement tool for diverse social science data that leverages advances in Bayesian computation to develop a model that can handle mixed distributions, novel time series processes, parallelization for large datasets, and a two-stage adjustment for non-ignorable missing data. Additionally, I introduce a new estimand for the effect of covariates on latent scales, ideal point marginal effects, which reveals how an external covariate affects observable indicators via the mediation of the latent variable. I apply this model to rollcall data from the U.S. House and responses from a voter-candidate survey in Japan. For surveys, the incorporation of non-ignorable missing data can significantly change estimated latent positions of respondents. For legislative data, new time series models enable the estimation of monthly changes in Congressperson ideological trajectories from 1990 to 2018. All models are implemented in the R package idealstan, which is built on the Stan framework for Hamiltonian Markov Chain Monte Carlo inference.
+
+## Data and code
+
+The project is reproducible with R code and data available [in this repository](https://github.com/saudiwin/idalstan_compare).
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=110.31219/osf.io/8j2bt_v1">{{< ai zotero >}} Add to Zotero {{< fa square-arrow-up-right >}}</a>
+
+</p>
+
+``` bibtex
+@article{kubinec2025idealstan,
+  title={Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences},
+  author={Kubinec, Robert},
+  journal={Working Paper},
+  year={2025},
+  note={Preprint available at \url{https://doi.org/10.31219/osf.io/8j2bt_v1}}
+}
+```

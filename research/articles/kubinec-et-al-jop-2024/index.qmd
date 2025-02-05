@@ -57,7 +57,7 @@ pub-info:
 doi: 10.1086/734241
 ---
 
-![Open data](data_large_color.png) ![Open](materials_large_color.png)
+![Preregistered](preregistered_large_color.png) ![Open data](data_large_color.png) ![Open](materials_large_color.png)
 
 ## Important links
 

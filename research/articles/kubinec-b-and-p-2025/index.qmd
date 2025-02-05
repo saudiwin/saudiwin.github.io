@@ -1,0 +1,67 @@
+---
+title: 'Tariffs and Corporate Political Activity: A Survey Experiment on U.S. Businesses'
+date: 2024-05-29
+author:
+  - name: Lindsay R. Dolan
+    affiliation: Wesleyan University
+    url: https://lindsayrdolan.com/
+  - name: Robert Kubinec
+    url: http://www.robertkubinec.com/
+    affiliation: University of South Carolina
+  - name: Daniel Nielson
+    affiliation: University of Texas at Austin
+    url: https://liberalarts.utexas.edu/government/faculty/dn5373
+  - name: Jiakun Zhang
+    affiliation: University of Kansas
+    url: https://kups.ku.edu/people/jack-zhang
+categories: 
+  - Political Economy
+  - Trade
+  - China
+  - Experiments
+pub-info:
+  reference: >-
+    Dolan, Lindsay R., Robert M. Kubinec, Daniel L. Nielson, and Jiakun J. Zhang. A Field Experiment on Business Opposition to the U.S.-China Trade War. 2025. <em>Business and Politics</em>, Forthcoming. doi: <a href="https://doi.org/10.31235/osf.io/435u9"><code>10.31235/osf.io/435u9</code></a>
+  links:
+    - name: Preprint
+      url: https://doi.org/10.31235/osf.io/435u9
+      icon: fa-solid fa-file-pdf
+      local: local
+    - name: Code & Data
+      url: https://doi.org/10.7910/DVN/GWIS7G
+      icon: fa-brands fa-github
+    - name: Add to Zotero
+      url: https://www.zotero.org/save?type=doi&q=10.31235/osf.io/435u9
+      icon: ai ai-zotero
+doi: 10.31235/osf.io/435u9
+---
+
+![Open](materials_large_color.png)
+
+## Important links
+
+-   [Paper (preprint)](https://doi.org/10.31235/osf.io/435u9)
+-   [Harvard Dataverse code repo](https://doi.org/10.7910/DVN/GWIS7G)
+
+## Abstract
+
+ The trade war with China has cost U.S. producers and consumers hundreds of billions of dollars since 2018. Yet relatively few U.S. businesses took action to oppose it. This study reports the results of an elite survey experiment on business political activity toward trade policy. Researchers presented business managers with information about the input costs of the new tariffs to their bottom line—information that most subjects acknowledged that they lacked—and invited them to take political action to express support or opposition to these tariffs. The results suggest that the novel information on costs did not significantly increase managers' propensity to contact members of Congress, donate to political campaigns, sign petitions, or join social media groups. We also found that the firm's political culture (liberal or conservative) did not significantly influence the effectiveness of the treatment. However, descriptive analysis showed that firm political culture was strongly related to the company's support for the trade war, suggesting that these pre-existing political beliefs were resistant to new information provided in our experiment even if that information could affect the company's bottom line.
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.31235/osf.io/435u9">{{< ai zotero >}} Add to Zotero {{< fa square-arrow-up-right >}}</a>
+
+</p>
+
+``` bibtex
+@workingpaper{dolan2021tradewar,
+  title={A Field Experiment on Business Opposition to the U.S.-China Trade War},
+  author={Dolan, Lindsay R. and Kubinec, Robert M. and Nielson, Daniel L. and Zhang, Jiakun J.},
+  year={2021},
+  journal={SocArchiv},
+  note={Working Paper},
+  doi={https://doi.org/10.31235/osf.io/435u9}
+}
+```
