@@ -125,6 +125,62 @@ ul.task-list li input[type="checkbox"] {
       window['quarto-listing-loaded']();
     }
   })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-working-papers .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-working-papers'] = new List('listing-working-papers', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-reviews .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-reviews'] = new List('listing-reviews', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
   </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BHP1PJ9LEX"></script>
 
@@ -289,7 +345,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Bayesian Statistics">Bayesian Statistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="COVID-19">COVID-19 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Causal Graphs">Causal Graphs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Corruption">Corruption <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Middle East Politics">Middle East Politics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Online Experiments">Online Experiments <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Political Economy">Political Economy <span class="quarto-category-count">(2)</span></div><div class="category" data-category="idealstan">idealstan <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Africa">Africa <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Bayesian Statistics">Bayesian Statistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="COVID-19">COVID-19 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Causal Graphs">Causal Graphs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Corruption">Corruption <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Experiments">Experiments <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Middle East">Middle East <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Middle East Politics">Middle East Politics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Online Experiments">Online Experiments <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Political Connections">Political Connections <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Political Economy">Political Economy <span class="quarto-category-count">(4)</span></div><div class="category" data-category="idealstan">idealstan <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content column-body" id="quarto-document-content">
 
@@ -568,8 +624,102 @@ No matching items
 </section>
 <section id="working-papers" class="level2">
 <h2 class="anchored" data-anchor-id="working-papers">Working papers</h2>
-<div id="working-papers">
-
+<div id="listing-working-papers" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="Political Economy,Middle East,Africa,Political Connections,Experiments" data-listing-date-sort="1716955200000" data-listing-file-modified-sort="1738784040600" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="276">
+<div class="thumbnail">
+<p><a href="../research/working-papers/kubinec-bhandari-experiment-2025/index.html" class="no-external"></a></p><a href="../research/working-papers/kubinec-bhandari-experiment-2025/index.html" class="no-external">
+<p class="card-img-top"><img src="working-papers/kubinec-bhandari-experiment-2025/preregistered_large_color.png" alt="Preregistered"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../research/working-papers/kubinec-bhandari-experiment-2025/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../research/working-papers/kubinec-bhandari-experiment-2025/index.html" class="no-external">The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../research/working-papers/kubinec-bhandari-experiment-2025/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Political Economy'); return false;">
+Political Economy
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Middle East'); return false;">
+Middle East
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Africa'); return false;">
+Africa
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Political Connections'); return false;">
+Political Connections
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Experiments'); return false;">
+Experiments
+</div>
+</div>
+<div class="listing-description">
+<a href="../research/working-papers/kubinec-bhandari-experiment-2025/index.html" class="no-external"> </a>
+</div>
+</div>
+<div class="metadata">
+<a href="../research/working-papers/kubinec-bhandari-experiment-2025/index.html" class="no-external">
+<div class="listing-date">
+May 2024
+</div>
+<div class="listing-author">
+Robert Kubinec, Abhit Bhandari, Sekou Jabateh, Hamza Mighri
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="Political Economy,Middle East,Africa,Political Connections,Experiments" data-listing-date-sort="1716955200000" data-listing-file-modified-sort="1738784040600" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="276">
+<div class="thumbnail">
+<p><a href="../research/working-papers/kubinec-idealstan-2025/index.html" class="no-external"></a></p><a href="../research/working-papers/kubinec-idealstan-2025/index.html" class="no-external">
+<p class="card-img-top"><img src="working-papers/kubinec-idealstan-2025/preregistered_large_color.png" alt="Preregistered"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../research/working-papers/kubinec-idealstan-2025/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../research/working-papers/kubinec-idealstan-2025/index.html" class="no-external">The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../research/working-papers/kubinec-idealstan-2025/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Political Economy'); return false;">
+Political Economy
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Middle East'); return false;">
+Middle East
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Africa'); return false;">
+Africa
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Political Connections'); return false;">
+Political Connections
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Experiments'); return false;">
+Experiments
+</div>
+</div>
+<div class="listing-description">
+<a href="../research/working-papers/kubinec-idealstan-2025/index.html" class="no-external"> </a>
+</div>
+</div>
+<div class="metadata">
+<a href="../research/working-papers/kubinec-idealstan-2025/index.html" class="no-external">
+<div class="listing-date">
+May 2024
+</div>
+<div class="listing-author">
+Robert Kubinec, Abhit Bhandari, Sekou Jabateh, Hamza Mighri
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
 </div>
 </section>
 <section id="essays-and-op-eds" class="level2">
@@ -580,8 +730,13 @@ No matching items
 </section>
 <section id="open-peer-reviews" class="level2">
 <h2 class="anchored" data-anchor-id="open-peer-reviews">Open Peer Reviews</h2>
-<div id="reviews">
+<div id="listing-reviews" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
 
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
 </div>
 
 
