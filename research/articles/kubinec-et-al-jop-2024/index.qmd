@@ -52,7 +52,7 @@ pub-info:
       url: https://github.com/CoronaNetDataScience/corona_index
       icon: fa-brands fa-github
     - name: Add to Zotero
-      url: https://www.zotero.org/save?type=doi&q=10.1111/1758-5899.12984
+      url: https://www.zotero.org/save?type=doi&q=10.1086/734241
       icon: ai ai-zotero
 doi: 10.1086/734241
 ---
@@ -77,7 +77,7 @@ The project is reproducible with R code and data [available at GitHub](https://g
 
 <p class="buttons" style="text-align:center;">
 
-<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.1111/1758-5899.12984">{{< ai zotero >}} Add to Zotero {{< fa square-arrow-up-right >}}</a>
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.1086/734241">{{< ai zotero >}} Add to Zotero {{< fa square-arrow-up-right >}}</a>
 
 </p>
 

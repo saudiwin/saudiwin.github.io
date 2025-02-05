@@ -1,0 +1,67 @@
+---
+title: "The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal"
+date: 2024-05-29
+author:
+  - name: Robert Kubinec
+    url: http://www.robertkubinec.com/
+    affiliation: University of South Carolina
+  - name: Abhit Bhandari
+    url: https://www.abhitbhandari.com/
+    affiliation: Vanderbilt University
+  - name: Sekou Jabateh
+    url: https://polisci.berkeley.edu/people/person/sekou-jabateh
+    affiliation: University of California Berkeley
+  - name: Hamza Mighri
+    affiliation: International Monetary Fund
+categories: 
+  - Political Economy
+  - Middle East
+  - Africa
+  - Political Connections
+  - Experiments
+pub-info:
+  reference: >-
+    Kubinec, Robert, Abhit Bhandari, Sekou Jabateh, and Hamza Mighri. "The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal." May 29, 2024. <em>Working Paper</em> Forthcoming, doi: <a href="https://doi.org/10.31219/osf.io/unby5"><code>10.31219/osf.io/unby5</code></a>
+  links:
+    - name: Preprint
+      url: https://doi.org/10.31219/osf.io/unby5
+      icon: fa-solid fa-file-pdf
+      local: local
+    - name: Add to Zotero
+      url: https://www.zotero.org/save?type=doi&q=10.31219/osf.io/unby5
+      icon: ai ai-zotero
+doi: 10.31219/osf.io/unby5
+---
+
+![Preregistered](preregistered_large_color.png) ![Open](materials_large_color.png)
+
+## Important links
+
+-   [Paper (preprint)](https://doi.org/10.31219/osf.io/unby5)
+
+## Abstract
+
+Although our understanding of the important role of broken institutions in economic development has grown significantly, we still lack a strong understanding of the mechanisms by which exclusionary political-economic arrangements reproduce themselves over time. To better understand this problem, we conducted online and offline experiments about political connections and early-stage career choices in a national sample of college-educated young people in Tunisia and Senegal. We first administered surveys with embedded conjoint experiments to 1,110 young people to assess the determinants of entrepreneurial intention. Next, we recruited a randomized subsample of survey respondents to participate in entrepreneurship training sessions in Tunis and Dakar in which government officials offered advice to young entrepreneurs. The survey results reveal that young people are uncertain whether connections will affect their career prospects, yet rate connections to political parties as the most valuable attribute a prospective entrepreneur could possess. Randomized training sessions increased entrepreneurs’ intention to create businesses, with 10-17% of this effect mediated by an exogenous increase in political connections. By demonstrating the powerful impact of political connections on desires to enter the business world, these results suggest that entrepreneurship promotion efforts will be of limited value without providing access to relevant policymakers.
+
+
+## Data and code
+
+The project is reproducible with R code and data that will be released upon publication.
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.31219/osf.io/unby5">{{< ai zotero >}} Add to Zotero {{< fa square-arrow-up-right >}}</a>
+
+</p>
+
+``` bibtex
+@article{kubinec2024entrepreneurship,
+  title={The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal},
+  author={Kubinec, Robert and Bhandari, Abhit and Jabateh, Sekou and Mighri, Hamza},
+  journal={Working Paper},
+  year={2024},
+  note={Preprint available at \url{https://doi.org/10.31219/osf.io/unby5}}
+}
+```
