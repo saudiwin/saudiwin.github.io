@@ -181,6 +181,34 @@ ul.task-list li input[type="checkbox"] {
       window['quarto-listing-loaded']();
     }
   })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-essays .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-website','listing-format','listing-editor','listing-language','listing-date-format','listing-toc','listing-toc-title','listing-toc-location','listing-execute','listing-include-back-link','listing-title','listing-date','listing-author','listing-categories','listing-pub-info','listing-path','listing-outputHref','listing-date-modified','listing-description','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-website","listing-format","listing-editor","listing-language","listing-date-format","listing-toc","listing-toc-title","listing-toc-location","listing-execute","listing-include-back-link","listing-title","listing-date","listing-author","listing-categories","listing-pub-info","listing-path","listing-outputHref","listing-date-modified","listing-description","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-essays'] = new List('listing-essays', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
   </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BHP1PJ9LEX"></script>
 
@@ -345,7 +373,7 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="Africa">Africa <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Bayesian Statistics">Bayesian Statistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Bayesian statistics">Bayesian statistics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="COVID-19">COVID-19 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Causal Graphs">Causal Graphs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="China">China <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Corruption">Corruption <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Environment">Environment <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Experiments">Experiments <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Middle East">Middle East <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Middle East Politics">Middle East Politics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Online Experiments">Online Experiments <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Political Connections">Political Connections <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Political Economy">Political Economy <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Trade">Trade <span class="quarto-category-count">(1)</span></div><div class="category" data-category="idealstan">idealstan <span class="quarto-category-count">(2)</span></div><div class="category" data-category="measurement">measurement <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(8)</span></div><div class="category" data-category="Africa">Africa <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Bayesian Statistics">Bayesian Statistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Bayesian statistics">Bayesian statistics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="COVID-19">COVID-19 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Causal Graphs">Causal Graphs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="China">China <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Corruption">Corruption <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Democratic Transitions">Democratic Transitions <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Environment">Environment <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Experiments">Experiments <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Middle East">Middle East <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Middle East Politics">Middle East Politics <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Online Experiments">Online Experiments <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Political Connections">Political Connections <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Political Economy">Political Economy <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Syria">Syria <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Trade">Trade <span class="quarto-category-count">(1)</span></div><div class="category" data-category="idealstan">idealstan <span class="quarto-category-count">(2)</span></div><div class="category" data-category="measurement">measurement <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content column-body" id="quarto-document-content">
 
@@ -816,8 +844,64 @@ No matching items
 </section>
 <section id="essays-and-op-eds" class="level2">
 <h2 class="anchored" data-anchor-id="essays-and-op-eds">Essays and Op-eds</h2>
-<div id="essays">
+<div id="listing-essays" class="quarto-listing quarto-listing-container-custom">
+<div class="research project-list">
+<ul class="list">
+    
+        <li class="project" data-index="0" data-categories="Middle East Politics,Syria,Democratic Transitions,Corruption" data-listing-date-sort="1737694800000" data-listing-file-modified-sort="1738807260539" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="175">
+            <div class="project-content listing-pub-info">
+                <p>Kubinec, Robert. "As Syria ponders a democratic future: 5 lessons from the Arab Spring". January 24, 2025. <em>The Conversationn</em>, link: <a href="https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203?utm_source=clipboard&amp;utm_medium=bylinecopy_url_button"><code>https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203?utm_source=clipboard&amp;utm_medium=bylinecopy_url_button</code></a></p>
+            </div>
 
+            
+            <div class="project-categories">
+                
+                    <div class="project-category"><a href="#category=Middle East Politics">
+                            Middle East Politics
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=Syria">
+                            Syria
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=Democratic Transitions">
+                            Democratic Transitions
+                        </a></div>
+                    
+                    <div class="project-category"><a href="#category=Corruption">
+                            Corruption
+                        </a></div>
+                    
+            </div>
+            
+            
+            <div class="project-details-listing">
+                <ul class="project-links">
+                    <li class="project-link details">
+                        <a href="../research/essays/kubinec-conversation-2025/index.html" class="listing-name">
+                            <i class="fa-solid fa-circle-info"></i> Full details »
+                        </a>
+                    </li>
+                    
+                        
+                    <li class="project-link">
+                        
+                        <a href="../research/essays/kubinec-conversation-2025/https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203">
+                        
+                            <i class="fa-solid fa-file-pdf"></i> Essay
+                        </a>
+                    </li>
+                        
+                    
+                </ul>
+            </div>
+        </li>
+        
+</ul>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
 </div>
 </section>
 <section id="open-peer-reviews" class="level2">
