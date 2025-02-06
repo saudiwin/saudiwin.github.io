@@ -21,7 +21,7 @@ categories:
   - Experiments
 pub-info:
   reference: >-
-    Kubinec, Robert, Abhit Bhandari, Sekou Jabateh, and Hamza Mighri. "The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal." May 29, 2024. <em>Working Paper</em> Forthcoming, doi: <a href="https://doi.org/10.31219/osf.io/unby5"><code>10.31219/osf.io/unby5</code></a>
+    Kubinec, Robert, Abhit Bhandari, Sekou Jabateh, and Hamza Mighri. "The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal." May 29, 2024. <em>Working Paper</em>  doi: <a href="https://doi.org/10.31219/osf.io/unby5"><code>10.31219/osf.io/unby5</code></a>
   links:
     - name: Preprint
       url: https://doi.org/10.31219/osf.io/unby5
@@ -42,7 +42,6 @@ doi: 10.31219/osf.io/unby5
 ## Abstract
 
 Although our understanding of the important role of broken institutions in economic development has grown significantly, we still lack a strong understanding of the mechanisms by which exclusionary political-economic arrangements reproduce themselves over time. To better understand this problem, we conducted online and offline experiments about political connections and early-stage career choices in a national sample of college-educated young people in Tunisia and Senegal. We first administered surveys with embedded conjoint experiments to 1,110 young people to assess the determinants of entrepreneurial intention. Next, we recruited a randomized subsample of survey respondents to participate in entrepreneurship training sessions in Tunis and Dakar in which government officials offered advice to young entrepreneurs. The survey results reveal that young people are uncertain whether connections will affect their career prospects, yet rate connections to political parties as the most valuable attribute a prospective entrepreneur could possess. Randomized training sessions increased entrepreneurs’ intention to create businesses, with 10-17% of this effect mediated by an exogenous increase in political connections. By demonstrating the powerful impact of political connections on desires to enter the business world, these results suggest that entrepreneurship promotion efforts will be of limited value without providing access to relevant policymakers.
-
 
 ## Data and code
 

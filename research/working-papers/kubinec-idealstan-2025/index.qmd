@@ -11,7 +11,7 @@ categories:
   - measurement
 pub-info:
   reference: >-
-    Kubinec, Robert. "Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences." February 4, 2025. <em>Working Paper</em> Forthcoming, doi: <a href="https://doi.org/10.31219/osf.io/8j2bt_v1"><code>10.31219/osf.io/8j2bt_v1</code></a>
+    Kubinec, Robert. "Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences." February 4, 2025. <em>Working Paper</em> doi: <a href="https://doi.org/10.31219/osf.io/8j2bt_v1"><code>10.31219/osf.io/8j2bt_v1</code></a>
   links:
     - name: Preprint
       url: https://doi.org/10.31219/osf.io/8j2bt_v1
