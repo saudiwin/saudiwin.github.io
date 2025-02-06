@@ -213,60 +213,120 @@
     "text": "MIT License\nCopyright (c) 2016-present George Cushen\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
   },
   {
-    "objectID": "research/working-papers/kubinec-idealstan-2025/index.html#important-links",
-    "href": "research/working-papers/kubinec-idealstan-2025/index.html#important-links",
-    "title": "Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences",
+    "objectID": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#important-links",
+    "href": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#important-links",
+    "title": "The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal",
     "section": "Important links",
     "text": "Important links\n\nPaper (preprint)"
   },
   {
-    "objectID": "research/working-papers/kubinec-idealstan-2025/index.html#abstract",
-    "href": "research/working-papers/kubinec-idealstan-2025/index.html#abstract",
-    "title": "Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences",
+    "objectID": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#abstract",
+    "href": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#abstract",
+    "title": "The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal",
     "section": "Abstract",
-    "text": "Abstract\nThis paper presents a measurement tool for diverse social science data that leverages advances in Bayesian computation to develop a model that can handle mixed distributions, novel time series processes, parallelization for large datasets, and a two-stage adjustment for non-ignorable missing data. Additionally, I introduce a new estimand for the effect of covariates on latent scales, ideal point marginal effects, which reveals how an external covariate affects observable indicators via the mediation of the latent variable. I apply this model to rollcall data from the U.S. House and responses from a voter-candidate survey in Japan. For surveys, the incorporation of non-ignorable missing data can significantly change estimated latent positions of respondents. For legislative data, new time series models enable the estimation of monthly changes in Congressperson ideological trajectories from 1990 to 2018. All models are implemented in the R package idealstan, which is built on the Stan framework for Hamiltonian Markov Chain Monte Carlo inference."
+    "text": "Abstract\nAlthough our understanding of the important role of broken institutions in economic development has grown significantly, we still lack a strong understanding of the mechanisms by which exclusionary political-economic arrangements reproduce themselves over time. To better understand this problem, we conducted online and offline experiments about political connections and early-stage career choices in a national sample of college-educated young people in Tunisia and Senegal. We first administered surveys with embedded conjoint experiments to 1,110 young people to assess the determinants of entrepreneurial intention. Next, we recruited a randomized subsample of survey respondents to participate in entrepreneurship training sessions in Tunis and Dakar in which government officials offered advice to young entrepreneurs. The survey results reveal that young people are uncertain whether connections will affect their career prospects, yet rate connections to political parties as the most valuable attribute a prospective entrepreneur could possess. Randomized training sessions increased entrepreneurs’ intention to create businesses, with 10-17% of this effect mediated by an exogenous increase in political connections. By demonstrating the powerful impact of political connections on desires to enter the business world, these results suggest that entrepreneurship promotion efforts will be of limited value without providing access to relevant policymakers."
   },
   {
-    "objectID": "research/working-papers/kubinec-idealstan-2025/index.html#data-and-code",
-    "href": "research/working-papers/kubinec-idealstan-2025/index.html#data-and-code",
-    "title": "Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences",
+    "objectID": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#data-and-code",
+    "href": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#data-and-code",
+    "title": "The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal",
     "section": "Data and code",
-    "text": "Data and code\nThe project is reproducible with R code and data available in this repository."
+    "text": "Data and code\nThe project is reproducible with R code and data that will be released upon publication."
   },
   {
-    "objectID": "research/working-papers/kubinec-idealstan-2025/index.html#citation",
-    "href": "research/working-papers/kubinec-idealstan-2025/index.html#citation",
-    "title": "Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences",
+    "objectID": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#citation",
+    "href": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#citation",
+    "title": "The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal",
     "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@article{kubinec2025idealstan,\n  title={Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences},\n  author={Kubinec, Robert},\n  journal={Working Paper},\n  year={2025},\n  note={Preprint available at \\url{https://doi.org/10.31219/osf.io/8j2bt_v1}}\n}"
+    "text": "Citation\n\n Add to Zotero \n\n@article{kubinec2024entrepreneurship,\n  title={The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal},\n  author={Kubinec, Robert and Bhandari, Abhit and Jabateh, Sekou and Mighri, Hamza},\n  journal={Working Paper},\n  year={2024},\n  note={Preprint available at \\url{https://doi.org/10.31219/osf.io/unby5}}\n}"
   },
   {
-    "objectID": "research/books/kubinec-2023/index.html#important-links",
-    "href": "research/books/kubinec-2023/index.html#important-links",
-    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
+    "objectID": "research/index.html",
+    "href": "research/index.html",
+    "title": "Research",
+    "section": "",
+    "text": "On this page you can see a list of my articles, books, and other published works (see table of contents on the left) along with associated code and datasets. You can view my CV here. My research has focused on the following questions that span the political economy of development, data science, causal inference and Middle East politics:\nOften these questions overlap, such as when I use new statistical tools I develop to study corruption in the MENA region and elsewhere. My R packages, ordbetareg and idealstan, both came out of my research in studying online experiments and legislature behavior, and have also been used in other studies to date. I am both a skeptic of data science & AI and a developer of data-scientific methods because I see great promise and peril in quantification.\nPlease see below for a list of recent publications, though please note that not all of the publications on my CV are listed here as of yet.",
+    "crumbs": [
+      "Research"
+    ]
+  },
+  {
+    "objectID": "research/index.html#books",
+    "href": "research/index.html#books",
+    "title": "Research",
+    "section": "Books",
+    "text": "Books\n\n\n\n    \n        \n            \n                Kubinec, Robert. Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings. Cambridge University Press: 2023. doi: 10.1017/9781009273541\n            \n\n            \n            \n                \n                    \n                            Political Economy\n                        \n                    \n                    \n                            Corruption\n                        \n                    \n                    \n                            Middle East Politics\n                        \n                    \n                    \n                            Online Experiments\n                        \n                    \n                    \n                            Causal Graphs\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Final version\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Code & Data\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n\n\n\nNo matching items",
+    "crumbs": [
+      "Research"
+    ]
+  },
+  {
+    "objectID": "research/index.html#journal-articles",
+    "href": "research/index.html#journal-articles",
+    "title": "Research",
+    "section": "Journal articles",
+    "text": "Journal articles\n\n\n\n    \n        \n            \n                Robert Kubinec, Joan Barcelo, Rafael Goldszmidt, Vanja Grujic, Timothy Model, Caress Schenk, Cindy Cheng, Thomas Hale, Luca Messerschmidt, and Anna Petherick, “Cross-National Measures of the Intensity of COVID-19 Public Health Policies,” Journal of Politics Forthcoming, doi: 10.1086/734241\n            \n\n            \n            \n                \n                    \n                            COVID-19\n                        \n                    \n                    \n                            idealstan\n                        \n                    \n                    \n                            Bayesian Statistics\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Final version\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Code & Data\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n        \n            \n                Dolan, Lindsay R., Robert M. Kubinec, Daniel L. Nielson, and Jiakun J. Zhang. A Field Experiment on Business Opposition to the U.S.-China Trade War. 2025. Business and Politics, Forthcoming. doi: 10.31235/osf.io/435u9\n            \n\n            \n            \n                \n                    \n                            Political Economy\n                        \n                    \n                    \n                            Trade\n                        \n                    \n                    \n                            China\n                        \n                    \n                    \n                            Experiments\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Code & Data\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n        \n            \n                Robert Kubinec and Helen Milner, “Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria's Hirak,” World Politics 76, no. 2 (April 2024): 294-333, doi: 10.1353/wp.2024.a924508\n            \n\n            \n            \n                \n                    \n                            Political Economy\n                        \n                    \n                    \n                            Middle East Politics\n                        \n                    \n                    \n                            Online Experiments\n                        \n                    \n                    \n                            Bayesian Statistics\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Final version\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Code & Data\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n\n\n\nNo matching items",
+    "crumbs": [
+      "Research"
+    ]
+  },
+  {
+    "objectID": "research/index.html#working-papers",
+    "href": "research/index.html#working-papers",
+    "title": "Research",
+    "section": "Working papers",
+    "text": "Working papers\n\n\n\n    \n        \n            \n                Kubinec, Robert. \"Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences.\" February 4, 2025. Working Paper Forthcoming, doi: 10.31219/osf.io/8j2bt_v1\n            \n\n            \n            \n                \n                    \n                            Bayesian statistics\n                        \n                    \n                    \n                            idealstan\n                        \n                    \n                    \n                            measurement\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n        \n            \n                Kubinec, Robert, Abhit Bhandari, Sekou Jabateh, and Hamza Mighri. \"The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal.\" May 29, 2024. Working Paper Forthcoming, doi: 10.31219/osf.io/unby5\n            \n\n            \n            \n                \n                    \n                            Political Economy\n                        \n                    \n                    \n                            Middle East\n                        \n                    \n                    \n                            Africa\n                        \n                    \n                    \n                            Political Connections\n                        \n                    \n                    \n                            Experiments\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n\n\n\nNo matching items",
+    "crumbs": [
+      "Research"
+    ]
+  },
+  {
+    "objectID": "research/index.html#essays-and-op-eds",
+    "href": "research/index.html#essays-and-op-eds",
+    "title": "Research",
+    "section": "Essays and Op-eds",
+    "text": "Essays and Op-eds\n\n\n\n    \n        \n            \n                Kubinec, Robert. \"As Syria ponders a democratic future: 5 lessons from the Arab Spring\". January 24, 2025. The Conversationn, link: https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203?utm_source=clipboard&utm_medium=bylinecopy_url_button\n            \n\n            \n            \n                \n                    \n                            Middle East Politics\n                        \n                    \n                    \n                            Syria\n                        \n                    \n                    \n                            Democratic Transitions\n                        \n                    \n                    \n                            Corruption\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Essay\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n\n\n\nNo matching items",
+    "crumbs": [
+      "Research"
+    ]
+  },
+  {
+    "objectID": "research/index.html#open-peer-reviews",
+    "href": "research/index.html#open-peer-reviews",
+    "title": "Research",
+    "section": "Open Peer Reviews",
+    "text": "Open Peer Reviews\n\n\n\n    \n        \n            \n                Kubinec, Robert. \"Evaluation 1 of 'Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China.'\" August 11, 2023. Public Evaluation, doi: 10.21428/d28e8e57.22756671\n            \n\n            \n            \n                \n                    \n                            Political Economy\n                        \n                    \n                    \n                            Environment\n                        \n                    \n                    \n                            Political Connections\n                        \n                    \n                    \n                            Experiments\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Evaluation\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n\n\n\nNo matching items",
+    "crumbs": [
+      "Research"
+    ]
+  },
+  {
+    "objectID": "research/articles/kubinec-et-al-jop-2024/index.html#important-links",
+    "href": "research/articles/kubinec-et-al-jop-2024/index.html#important-links",
+    "title": "Cross-National Measures of the Intensity of COVID-19 Public Health Policies",
     "section": "Important links",
-    "text": "Important links\n\nPodcast about the book\nOnline Article Draft\nGitHub repository with code and data"
+    "text": "Important links\n\nPaper (published)\nPaper (preprint)\nGitHub repository"
   },
   {
-    "objectID": "research/books/kubinec-2023/index.html#abstract",
-    "href": "research/books/kubinec-2023/index.html#abstract",
-    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
+    "objectID": "research/articles/kubinec-et-al-jop-2024/index.html#abstract",
+    "href": "research/articles/kubinec-et-al-jop-2024/index.html#abstract",
+    "title": "Cross-National Measures of the Intensity of COVID-19 Public Health Policies",
     "section": "Abstract",
-    "text": "Abstract\nBusinesses in the Middle East and North Africa have failed to bring sustainable development despite decades of investment from the private and public sectors. Yet we still know little about why the Arab Uprisings failed to usher in more transparent government that could break this enduring cycle of corruption and mismanagement. Examining posttransition politics in Egypt and Tunisia, Kubinec employs interviews and quantitative surveys to map out the corrupting influence of businesses on politics. He argues that businesses must respond to changes in how perks and privileges are distributed after political transitions, either by forming political coalitions or creating new informal connections to emerging politicians. Employing detailed case studies and original experiments, Making Democracy Safe for Business advances our empirical understanding of the study of the durability of corruption in general and the dismal results of the Arab Uprisings in particular."
+    "text": "Abstract\nWe present six new indices that measure the intensity of government responses to COVID-19 within distinct policy domains: social distancing, schools, businesses, health monitoring, health resources and mask wearing. We create these measures by combining two of the most comprehensive COVID-19 datasets, the CoronaNet COVID-19 Government Response Event Dataset and the Oxford COVID-19 Government Response Tracker, using a Bayesian time-varying measurement model. Our daily indices track policymakers’ policy intensity to each of these policy domains from 1 January, 2020 to 14 January, 2021, for over 180 countries. In creating these measures, we are able to provide aggregate summaries of policy-making activities which captures the intensity of a country’s government response to COVID-19 in a given policy domain. Using these measures, we are able to clarify findings on the role of lockdowns in preventing infections in the early pandemic period. In terms of policy adoption, we show that more democratic countries and countries with greater levels of economic interdependence tend to have less intense policy responses to the pandemic."
   },
   {
-    "objectID": "research/books/kubinec-2023/index.html#data-and-code",
-    "href": "research/books/kubinec-2023/index.html#data-and-code",
-    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
+    "objectID": "research/articles/kubinec-et-al-jop-2024/index.html#data-and-code",
+    "href": "research/articles/kubinec-et-al-jop-2024/index.html#data-and-code",
+    "title": "Cross-National Measures of the Intensity of COVID-19 Public Health Policies",
     "section": "Data and code",
-    "text": "Data and code\nThe analyses in the book can be reproduced with R code and data available at GitHub."
+    "text": "Data and code\nThe project is reproducible with R code and data available at GitHub."
   },
   {
-    "objectID": "research/books/kubinec-2023/index.html#citation",
-    "href": "research/books/kubinec-2023/index.html#citation",
-    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
+    "objectID": "research/articles/kubinec-et-al-jop-2024/index.html#citation",
+    "href": "research/articles/kubinec-et-al-jop-2024/index.html#citation",
+    "title": "Cross-National Measures of the Intensity of COVID-19 Public Health Policies",
     "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@book{kubinec2023democracy,\n    Author = {Robert Kubinec},\n    Doi = {10.1017/9781009273541},\n    Publisher = {Cambridge University Press},\n    Title = {Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings},\n    Year = {2023}}"
+    "text": "Citation\n\n Add to Zotero \n\n@article{kubinec2025covid,\n  title={Cross-National Measures of the Intensity of COVID-19 Public Health Policies},\n  author={Kubinec, Robert and Barcel{\\'o}, Joan and Goldszmidt, Rafael and Gruji{\\'c}, Vanja and Model, Timothy and Schenk, Caress and Cheng, Cindy and Hale, Thomas and Messerschmidt, Luca and Petherick, Anna},\n  journal={Journal of Politics},\n  year={2025},\n  note={Available at: \\url{https://doi.org/10.1086/734241}}\n}"
   },
   {
     "objectID": "research/articles/kubinec-milner-2024/index.html#important-links",
@@ -395,120 +455,116 @@
     "text": "Citation\n\n Add to Zotero \n\n@incollection{JohnsonHeiss:2018,\n    Address = {London},\n    Author = {Tana Johnson and Andrew Heiss},\n    Booktitle = {International Organization and Global Governance},\n    Chapter = {8},\n    Doi = {10.4324/9781315301914},\n    Edition = {2},\n    Editor = {Thomas G. Weiss and Rorden Wilkinson},\n    Pages = {123--34},\n    Publisher = {Routledge},\n    Title = {Liberal Institutionalism},\n    Year = {2018}}"
   },
   {
-    "objectID": "research/articles/kubinec-et-al-jop-2024/index.html#important-links",
-    "href": "research/articles/kubinec-et-al-jop-2024/index.html#important-links",
-    "title": "Cross-National Measures of the Intensity of COVID-19 Public Health Policies",
-    "section": "Important links",
-    "text": "Important links\n\nPaper (published)\nPaper (preprint)\nGitHub repository"
-  },
-  {
-    "objectID": "research/articles/kubinec-et-al-jop-2024/index.html#abstract",
-    "href": "research/articles/kubinec-et-al-jop-2024/index.html#abstract",
-    "title": "Cross-National Measures of the Intensity of COVID-19 Public Health Policies",
-    "section": "Abstract",
-    "text": "Abstract\nWe present six new indices that measure the intensity of government responses to COVID-19 within distinct policy domains: social distancing, schools, businesses, health monitoring, health resources and mask wearing. We create these measures by combining two of the most comprehensive COVID-19 datasets, the CoronaNet COVID-19 Government Response Event Dataset and the Oxford COVID-19 Government Response Tracker, using a Bayesian time-varying measurement model. Our daily indices track policymakers’ policy intensity to each of these policy domains from 1 January, 2020 to 14 January, 2021, for over 180 countries. In creating these measures, we are able to provide aggregate summaries of policy-making activities which captures the intensity of a country’s government response to COVID-19 in a given policy domain. Using these measures, we are able to clarify findings on the role of lockdowns in preventing infections in the early pandemic period. In terms of policy adoption, we show that more democratic countries and countries with greater levels of economic interdependence tend to have less intense policy responses to the pandemic."
-  },
-  {
-    "objectID": "research/articles/kubinec-et-al-jop-2024/index.html#data-and-code",
-    "href": "research/articles/kubinec-et-al-jop-2024/index.html#data-and-code",
-    "title": "Cross-National Measures of the Intensity of COVID-19 Public Health Policies",
-    "section": "Data and code",
-    "text": "Data and code\nThe project is reproducible with R code and data available at GitHub."
-  },
-  {
-    "objectID": "research/articles/kubinec-et-al-jop-2024/index.html#citation",
-    "href": "research/articles/kubinec-et-al-jop-2024/index.html#citation",
-    "title": "Cross-National Measures of the Intensity of COVID-19 Public Health Policies",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@article{kubinec2025covid,\n  title={Cross-National Measures of the Intensity of COVID-19 Public Health Policies},\n  author={Kubinec, Robert and Barcel{\\'o}, Joan and Goldszmidt, Rafael and Gruji{\\'c}, Vanja and Model, Timothy and Schenk, Caress and Cheng, Cindy and Hale, Thomas and Messerschmidt, Luca and Petherick, Anna},\n  journal={Journal of Politics},\n  year={2025},\n  note={Available at: \\url{https://doi.org/10.1086/734241}}\n}"
-  },
-  {
-    "objectID": "research/index.html",
-    "href": "research/index.html",
-    "title": "Research",
+    "objectID": "research/articles/kubinec-b-and-p-2025/index.html",
+    "href": "research/articles/kubinec-b-and-p-2025/index.html",
+    "title": "Tariffs and Corporate Political Activity: A Survey Experiment on U.S. Businesses",
     "section": "",
-    "text": "On this page you can see a list of my articles, books, and other published works (see table of contents on the left) along with associated code and datasets. You can view my CV here. My research has focused on the following questions that span the political economy of development, data science, causal inference and Middle East politics:\nOften these questions overlap, such as when I use new statistical tools I develop to study corruption in the MENA region and elsewhere. My R packages, ordbetareg and idealstan, both came out of my research in studying online experiments and legislature behavior, and have also been used in other studies to date. I am both a skeptic of data science & AI and a developer of data-scientific methods because I see great promise and peril in quantification.\nPlease see below for a list of recent publications, though please note that not all of the publications on my CV are listed here as of yet.",
-    "crumbs": [
-      "Research"
-    ]
+    "text": "Open"
   },
   {
-    "objectID": "research/index.html#books",
-    "href": "research/index.html#books",
-    "title": "Research",
-    "section": "Books",
-    "text": "Books\n\n\n\n    \n        \n            \n                Kubinec, Robert. Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings. Cambridge University Press: 2023. doi: 10.1017/9781009273541\n            \n\n            \n            \n                \n                    \n                            Political Economy\n                        \n                    \n                    \n                            Corruption\n                        \n                    \n                    \n                            Middle East Politics\n                        \n                    \n                    \n                            Online Experiments\n                        \n                    \n                    \n                            Causal Graphs\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Final version\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Code & Data\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n\n\n\nNo matching items",
-    "crumbs": [
-      "Research"
-    ]
+    "objectID": "research/articles/kubinec-b-and-p-2025/index.html#important-links",
+    "href": "research/articles/kubinec-b-and-p-2025/index.html#important-links",
+    "title": "Tariffs and Corporate Political Activity: A Survey Experiment on U.S. Businesses",
+    "section": "Important links",
+    "text": "Important links\n\nPaper (preprint)\nHarvard Dataverse code repo"
   },
   {
-    "objectID": "research/index.html#journal-articles",
-    "href": "research/index.html#journal-articles",
-    "title": "Research",
-    "section": "Journal articles",
-    "text": "Journal articles\n\n\n\n    \n        \n            \n                Robert Kubinec, Joan Barcelo, Rafael Goldszmidt, Vanja Grujic, Timothy Model, Caress Schenk, Cindy Cheng, Thomas Hale, Luca Messerschmidt, and Anna Petherick, “Cross-National Measures of the Intensity of COVID-19 Public Health Policies,” Journal of Politics Forthcoming, doi: 10.1086/734241\n            \n\n            \n            \n                \n                    \n                            COVID-19\n                        \n                    \n                    \n                            idealstan\n                        \n                    \n                    \n                            Bayesian Statistics\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Final version\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Code & Data\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n        \n            \n                Dolan, Lindsay R., Robert M. Kubinec, Daniel L. Nielson, and Jiakun J. Zhang. A Field Experiment on Business Opposition to the U.S.-China Trade War. 2025. Business and Politics, Forthcoming. doi: 10.31235/osf.io/435u9\n            \n\n            \n            \n                \n                    \n                            Political Economy\n                        \n                    \n                    \n                            Trade\n                        \n                    \n                    \n                            China\n                        \n                    \n                    \n                            Experiments\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Code & Data\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n        \n            \n                Robert Kubinec and Helen Milner, “Taxes in the Time of Revolution: An Experimental Test of the Rentier State during Algeria's Hirak,” World Politics 76, no. 2 (April 2024): 294-333, doi: 10.1353/wp.2024.a924508\n            \n\n            \n            \n                \n                    \n                            Political Economy\n                        \n                    \n                    \n                            Middle East Politics\n                        \n                    \n                    \n                            Online Experiments\n                        \n                    \n                    \n                            Bayesian Statistics\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Final version\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Code & Data\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n\n\n\nNo matching items",
-    "crumbs": [
-      "Research"
-    ]
+    "objectID": "research/articles/kubinec-b-and-p-2025/index.html#abstract",
+    "href": "research/articles/kubinec-b-and-p-2025/index.html#abstract",
+    "title": "Tariffs and Corporate Political Activity: A Survey Experiment on U.S. Businesses",
+    "section": "Abstract",
+    "text": "Abstract\nThe trade war with China has cost U.S. producers and consumers hundreds of billions of dollars since 2018. Yet relatively few U.S. businesses took action to oppose it. This study reports the results of an elite survey experiment on business political activity toward trade policy. Researchers presented business managers with information about the input costs of the new tariffs to their bottom line—information that most subjects acknowledged that they lacked—and invited them to take political action to express support or opposition to these tariffs. The results suggest that the novel information on costs did not significantly increase managers’ propensity to contact members of Congress, donate to political campaigns, sign petitions, or join social media groups. We also found that the firm’s political culture (liberal or conservative) did not significantly influence the effectiveness of the treatment. However, descriptive analysis showed that firm political culture was strongly related to the company’s support for the trade war, suggesting that these pre-existing political beliefs were resistant to new information provided in our experiment even if that information could affect the company’s bottom line."
   },
   {
-    "objectID": "research/index.html#working-papers",
-    "href": "research/index.html#working-papers",
-    "title": "Research",
-    "section": "Working papers",
-    "text": "Working papers\n\n\n\n    \n        \n            \n                Kubinec, Robert. \"Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences.\" February 4, 2025. Working Paper Forthcoming, doi: 10.31219/osf.io/8j2bt_v1\n            \n\n            \n            \n                \n                    \n                            Bayesian statistics\n                        \n                    \n                    \n                            idealstan\n                        \n                    \n                    \n                            measurement\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n        \n            \n                Kubinec, Robert, Abhit Bhandari, Sekou Jabateh, and Hamza Mighri. \"The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal.\" May 29, 2024. Working Paper Forthcoming, doi: 10.31219/osf.io/unby5\n            \n\n            \n            \n                \n                    \n                            Political Economy\n                        \n                    \n                    \n                            Middle East\n                        \n                    \n                    \n                            Africa\n                        \n                    \n                    \n                            Political Connections\n                        \n                    \n                    \n                            Experiments\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Preprint\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n\n\n\nNo matching items",
-    "crumbs": [
-      "Research"
-    ]
+    "objectID": "research/articles/kubinec-b-and-p-2025/index.html#citation",
+    "href": "research/articles/kubinec-b-and-p-2025/index.html#citation",
+    "title": "Tariffs and Corporate Political Activity: A Survey Experiment on U.S. Businesses",
+    "section": "Citation",
+    "text": "Citation\n\n Add to Zotero \n\n@workingpaper{dolan2021tradewar,\n  title={A Field Experiment on Business Opposition to the U.S.-China Trade War},\n  author={Dolan, Lindsay R. and Kubinec, Robert M. and Nielson, Daniel L. and Zhang, Jiakun J.},\n  year={2021},\n  journal={SocArchiv},\n  note={Working Paper},\n  doi={https://doi.org/10.31235/osf.io/435u9}\n}"
   },
   {
-    "objectID": "research/index.html#essays-and-op-eds",
-    "href": "research/index.html#essays-and-op-eds",
-    "title": "Research",
-    "section": "Essays and Op-eds",
-    "text": "Essays and Op-eds",
-    "crumbs": [
-      "Research"
-    ]
+    "objectID": "research/books/kubinec-2023/index.html#important-links",
+    "href": "research/books/kubinec-2023/index.html#important-links",
+    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
+    "section": "Important links",
+    "text": "Important links\n\nPodcast about the book\nOnline Article Draft\nGitHub repository with code and data"
   },
   {
-    "objectID": "research/index.html#open-peer-reviews",
-    "href": "research/index.html#open-peer-reviews",
-    "title": "Research",
-    "section": "Open Peer Reviews",
-    "text": "Open Peer Reviews\n\n\n\n    \n        \n            \n                Kubinec, Robert. \"Evaluation 1 of 'Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China.'\" August 11, 2023. Public Evaluation, doi: 10.21428/d28e8e57.22756671\n            \n\n            \n            \n                \n                    \n                            Political Economy\n                        \n                    \n                    \n                            Environment\n                        \n                    \n                    \n                            Political Connections\n                        \n                    \n                    \n                            Experiments\n                        \n                    \n            \n            \n            \n            \n                \n                    \n                        \n                             Full details »\n                        \n                    \n                    \n                        \n                    \n                        \n                        \n                        \n                             Evaluation\n                        \n                    \n                        \n                    \n                        \n                        \n                        \n                             Add to Zotero\n                        \n                    \n                        \n                    \n                \n            \n        \n        \n\n\n\nNo matching items",
-    "crumbs": [
-      "Research"
-    ]
+    "objectID": "research/books/kubinec-2023/index.html#abstract",
+    "href": "research/books/kubinec-2023/index.html#abstract",
+    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
+    "section": "Abstract",
+    "text": "Abstract\nBusinesses in the Middle East and North Africa have failed to bring sustainable development despite decades of investment from the private and public sectors. Yet we still know little about why the Arab Uprisings failed to usher in more transparent government that could break this enduring cycle of corruption and mismanagement. Examining posttransition politics in Egypt and Tunisia, Kubinec employs interviews and quantitative surveys to map out the corrupting influence of businesses on politics. He argues that businesses must respond to changes in how perks and privileges are distributed after political transitions, either by forming political coalitions or creating new informal connections to emerging politicians. Employing detailed case studies and original experiments, Making Democracy Safe for Business advances our empirical understanding of the study of the durability of corruption in general and the dismal results of the Arab Uprisings in particular."
   },
   {
-    "objectID": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#important-links",
-    "href": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#important-links",
-    "title": "The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal",
+    "objectID": "research/books/kubinec-2023/index.html#data-and-code",
+    "href": "research/books/kubinec-2023/index.html#data-and-code",
+    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
+    "section": "Data and code",
+    "text": "Data and code\nThe analyses in the book can be reproduced with R code and data available at GitHub."
+  },
+  {
+    "objectID": "research/books/kubinec-2023/index.html#citation",
+    "href": "research/books/kubinec-2023/index.html#citation",
+    "title": "Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings",
+    "section": "Citation",
+    "text": "Citation\n\n Add to Zotero \n\n@book{kubinec2023democracy,\n    Author = {Robert Kubinec},\n    Doi = {10.1017/9781009273541},\n    Publisher = {Cambridge University Press},\n    Title = {Making Democracy Safe for Business: Corporate Politics During the Arab Uprisings},\n    Year = {2023}}"
+  },
+  {
+    "objectID": "research/working-papers/kubinec-idealstan-2025/index.html#important-links",
+    "href": "research/working-papers/kubinec-idealstan-2025/index.html#important-links",
+    "title": "Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences",
     "section": "Important links",
     "text": "Important links\n\nPaper (preprint)"
   },
   {
-    "objectID": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#abstract",
-    "href": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#abstract",
-    "title": "The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal",
+    "objectID": "research/working-papers/kubinec-idealstan-2025/index.html#abstract",
+    "href": "research/working-papers/kubinec-idealstan-2025/index.html#abstract",
+    "title": "Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences",
     "section": "Abstract",
-    "text": "Abstract\nAlthough our understanding of the important role of broken institutions in economic development has grown significantly, we still lack a strong understanding of the mechanisms by which exclusionary political-economic arrangements reproduce themselves over time. To better understand this problem, we conducted online and offline experiments about political connections and early-stage career choices in a national sample of college-educated young people in Tunisia and Senegal. We first administered surveys with embedded conjoint experiments to 1,110 young people to assess the determinants of entrepreneurial intention. Next, we recruited a randomized subsample of survey respondents to participate in entrepreneurship training sessions in Tunis and Dakar in which government officials offered advice to young entrepreneurs. The survey results reveal that young people are uncertain whether connections will affect their career prospects, yet rate connections to political parties as the most valuable attribute a prospective entrepreneur could possess. Randomized training sessions increased entrepreneurs’ intention to create businesses, with 10-17% of this effect mediated by an exogenous increase in political connections. By demonstrating the powerful impact of political connections on desires to enter the business world, these results suggest that entrepreneurship promotion efforts will be of limited value without providing access to relevant policymakers."
+    "text": "Abstract\nThis paper presents a measurement tool for diverse social science data that leverages advances in Bayesian computation to develop a model that can handle mixed distributions, novel time series processes, parallelization for large datasets, and a two-stage adjustment for non-ignorable missing data. Additionally, I introduce a new estimand for the effect of covariates on latent scales, ideal point marginal effects, which reveals how an external covariate affects observable indicators via the mediation of the latent variable. I apply this model to rollcall data from the U.S. House and responses from a voter-candidate survey in Japan. For surveys, the incorporation of non-ignorable missing data can significantly change estimated latent positions of respondents. For legislative data, new time series models enable the estimation of monthly changes in Congressperson ideological trajectories from 1990 to 2018. All models are implemented in the R package idealstan, which is built on the Stan framework for Hamiltonian Markov Chain Monte Carlo inference."
   },
   {
-    "objectID": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#data-and-code",
-    "href": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#data-and-code",
-    "title": "The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal",
+    "objectID": "research/working-papers/kubinec-idealstan-2025/index.html#data-and-code",
+    "href": "research/working-papers/kubinec-idealstan-2025/index.html#data-and-code",
+    "title": "Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences",
     "section": "Data and code",
-    "text": "Data and code\nThe project is reproducible with R code and data that will be released upon publication."
+    "text": "Data and code\nThe project is reproducible with R code and data available in this repository."
   },
   {
-    "objectID": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#citation",
-    "href": "research/working-papers/kubinec-bhandari-experiment-2025/index.html#citation",
-    "title": "The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal",
+    "objectID": "research/working-papers/kubinec-idealstan-2025/index.html#citation",
+    "href": "research/working-papers/kubinec-idealstan-2025/index.html#citation",
+    "title": "Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences",
     "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@article{kubinec2024entrepreneurship,\n  title={The Political Nature of Entrepreneurship in Developing Countries: Experimental Evidence from Tunisia and Senegal},\n  author={Kubinec, Robert and Bhandari, Abhit and Jabateh, Sekou and Mighri, Hamza},\n  journal={Working Paper},\n  year={2024},\n  note={Preprint available at \\url{https://doi.org/10.31219/osf.io/unby5}}\n}"
+    "text": "Citation\n\n Add to Zotero \n\n@article{kubinec2025idealstan,\n  title={Generalized Ideal Point Models for Robust Measurement with Dirty Data in the Social Sciences},\n  author={Kubinec, Robert},\n  journal={Working Paper},\n  year={2025},\n  note={Preprint available at \\url{https://doi.org/10.31219/osf.io/8j2bt_v1}}\n}"
+  },
+  {
+    "objectID": "research/reviews/kubinec-unjournal-2024/index.html",
+    "href": "research/reviews/kubinec-unjournal-2024/index.html",
+    "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
+    "section": "",
+    "text": "Open"
+  },
+  {
+    "objectID": "research/reviews/kubinec-unjournal-2024/index.html#important-links",
+    "href": "research/reviews/kubinec-unjournal-2024/index.html#important-links",
+    "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
+    "section": "Important links",
+    "text": "Important links\n\nEvaluation"
+  },
+  {
+    "objectID": "research/reviews/kubinec-unjournal-2024/index.html#abstract",
+    "href": "research/reviews/kubinec-unjournal-2024/index.html#abstract",
+    "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
+    "section": "Abstract",
+    "text": "Abstract\nThis is an evaluation of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”, involving an RCT investigating the effects of citizen participation through social media on environmental policy enforcement. The evaluation praises the RCT as ambitious and well-execute. It highlights the sophistication of the experimental design and the importance of the findings for both academic and policy circles. However, it also critiques the handling of over-time dynamics and the panel data specifications used in the analysis, suggesting alternative methodologies for clearer interpretation. The evaluation considers the external validity of the findings, discussing the potential impact and limitations of applying the Weibo intervention in different contexts. It underscores the importance of policymakers’ utility calculus and the institutional framework in determining the intervention’s effectiveness. It concludes by acknowledging the study’s contribution to understanding the role of social media in influencing government behavior towards environmental concerns, while also cautioning about generalizing the findings."
+  },
+  {
+    "objectID": "research/reviews/kubinec-unjournal-2024/index.html#citation",
+    "href": "research/reviews/kubinec-unjournal-2024/index.html#citation",
+    "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
+    "section": "Citation",
+    "text": "Citation\n\n Add to Zotero"
   },
   {
     "objectID": "consulting.html",
@@ -794,59 +850,24 @@
     "text": "How to Use the Model\nAt present, ordered beta regression is available in Stan (Section 3.5), R (Section 3.1), Python (Section 3.2), Stata (Section 3.3), and Julia (Section 3.4). R has the strongest support for the model with multiple implementations, but it is perfectly usable in other statistical frameworks. Below I briefly describe the available packages.\n\nR\nOrdered beta regression is currently available in R in two different packages: ordbetareg and glmmTMB. The primary difference between these two packages is estimation method and the number of ordered beta-specific functions. ordbetareg is a package that estimates a Bayesian implementation as described in the paper above by using brms, a powerful R package for Bayesian regression. ordbetareg is maintained by me and you can see the full source code here on Github (and report an issue with the package if you have one). The package includes auxiliary functions like power analysis and plots that are specific to proportion responses—check out the package vignette for more details.\nglmmTMB, by contrast, is a general purpose regression package that specializes in mixed multilevel models. It implements a broad array of regression models using maximum likelihood. This means that a model estimated in glmmTMB will almost certainly be faster than ordbetareg (although if you set up ordbetareg to use cmdstanr it can get pretty fast). On the other hand, maximum likelihood estimation has some limitations. Arguably the most important one is that it can be tricky to fit a model that doesn’t have observations at the bounds, i.e. either 0 (0%) or 1 (100%). The Bayesian implementation in ordbetareg has no problem doing this.\nThat being said, I think glmmTMB is a fine package and believe it works fine for many scholars’ problems. brms, which ordbetareg is based on, offers a lot more features, including native support for multiple imputation, time series modeling and even latent variable/factor analysis modeling, but it does require more setup and the models are generally slower.\nFor either package, I highly recommend using marginaleffects, and in particular the avg_slopes function, to convert the coefficient estimates in the package to the bounded scale (i.e. between 0 and 1). This function allows you to then interpret your model estimates as the effect of a covariate in terms of percentage change/proportion change in the bounded response/outcome. marginaleffects is available on CRAN and works great with both ordbetareg and glmmTMB.\nWith both of these packages available, ordered beta regression has very strong support in R. If you don’t have a preference for a particular software package and want to use this model, I would recommend R.\n\n\nPython\nOrdered beta regression is implemented using the scipy package with maximum likelihood estimation. At present, you’ll need to clone (i.e., download) this Github repository to install the package as it is not yet available with pip or conda forge. The package includes plotting functions specific to proportion outcomes and reports coefficient values in the untransformed (logit) scale. marginaleffects support for this package is coming soon.\n\n\nStata\nThere is initial support for Stata as a set of .ado files that can be downloaded and installed in the ado folder in your Stata machine. More details are available on the Github repository. This package supports using the margins command to convert coefficients to the bounded outcome scale, although it does not support all Stata features as of yet. There are plans to make this package available via SSC in the near future.\n\n\nJulia\nOrdered beta regression is available via the SubjectiveScalesModels.jl package, which offers support for a variety of regression models useful in cognitive psychology and other fields with sliders/visual analog scales. The package includes neat visualizations and is maintained by Dominique Makowksi.\n\n\nStan\nAs is evident in the paper, the original model was written in Stan code. While I no longer am maintaining the Stan code, it is available in the paper repository and works great. If you want to incorporate the likelihood or other Stan code into your Stan model, feel free!"
   },
   {
-    "objectID": "research/reviews/kubinec-unjournal-2024/index.html",
-    "href": "research/reviews/kubinec-unjournal-2024/index.html",
+    "objectID": "research/essays/kubinec-conversation-2025/index.html",
+    "href": "research/essays/kubinec-conversation-2025/index.html",
     "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
     "section": "",
     "text": "Open"
   },
   {
-    "objectID": "research/reviews/kubinec-unjournal-2024/index.html#important-links",
-    "href": "research/reviews/kubinec-unjournal-2024/index.html#important-links",
+    "objectID": "research/essays/kubinec-conversation-2025/index.html#important-links",
+    "href": "research/essays/kubinec-conversation-2025/index.html#important-links",
     "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
     "section": "Important links",
-    "text": "Important links\n\nEvaluation"
+    "text": "Important links\n\nLink to Essay"
   },
   {
-    "objectID": "research/reviews/kubinec-unjournal-2024/index.html#abstract",
-    "href": "research/reviews/kubinec-unjournal-2024/index.html#abstract",
+    "objectID": "research/essays/kubinec-conversation-2025/index.html#abstract",
+    "href": "research/essays/kubinec-conversation-2025/index.html#abstract",
     "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
     "section": "Abstract",
-    "text": "Abstract\nThis is an evaluation of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”, involving an RCT investigating the effects of citizen participation through social media on environmental policy enforcement. The evaluation praises the RCT as ambitious and well-execute. It highlights the sophistication of the experimental design and the importance of the findings for both academic and policy circles. However, it also critiques the handling of over-time dynamics and the panel data specifications used in the analysis, suggesting alternative methodologies for clearer interpretation. The evaluation considers the external validity of the findings, discussing the potential impact and limitations of applying the Weibo intervention in different contexts. It underscores the importance of policymakers’ utility calculus and the institutional framework in determining the intervention’s effectiveness. It concludes by acknowledging the study’s contribution to understanding the role of social media in influencing government behavior towards environmental concerns, while also cautioning about generalizing the findings."
-  },
-  {
-    "objectID": "research/reviews/kubinec-unjournal-2024/index.html#citation",
-    "href": "research/reviews/kubinec-unjournal-2024/index.html#citation",
-    "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero"
-  },
-  {
-    "objectID": "research/articles/kubinec-b-and-p-2025/index.html",
-    "href": "research/articles/kubinec-b-and-p-2025/index.html",
-    "title": "Tariffs and Corporate Political Activity: A Survey Experiment on U.S. Businesses",
-    "section": "",
-    "text": "Open"
-  },
-  {
-    "objectID": "research/articles/kubinec-b-and-p-2025/index.html#important-links",
-    "href": "research/articles/kubinec-b-and-p-2025/index.html#important-links",
-    "title": "Tariffs and Corporate Political Activity: A Survey Experiment on U.S. Businesses",
-    "section": "Important links",
-    "text": "Important links\n\nPaper (preprint)\nHarvard Dataverse code repo"
-  },
-  {
-    "objectID": "research/articles/kubinec-b-and-p-2025/index.html#abstract",
-    "href": "research/articles/kubinec-b-and-p-2025/index.html#abstract",
-    "title": "Tariffs and Corporate Political Activity: A Survey Experiment on U.S. Businesses",
-    "section": "Abstract",
-    "text": "Abstract\nThe trade war with China has cost U.S. producers and consumers hundreds of billions of dollars since 2018. Yet relatively few U.S. businesses took action to oppose it. This study reports the results of an elite survey experiment on business political activity toward trade policy. Researchers presented business managers with information about the input costs of the new tariffs to their bottom line—information that most subjects acknowledged that they lacked—and invited them to take political action to express support or opposition to these tariffs. The results suggest that the novel information on costs did not significantly increase managers’ propensity to contact members of Congress, donate to political campaigns, sign petitions, or join social media groups. We also found that the firm’s political culture (liberal or conservative) did not significantly influence the effectiveness of the treatment. However, descriptive analysis showed that firm political culture was strongly related to the company’s support for the trade war, suggesting that these pre-existing political beliefs were resistant to new information provided in our experiment even if that information could affect the company’s bottom line."
-  },
-  {
-    "objectID": "research/articles/kubinec-b-and-p-2025/index.html#citation",
-    "href": "research/articles/kubinec-b-and-p-2025/index.html#citation",
-    "title": "Tariffs and Corporate Political Activity: A Survey Experiment on U.S. Businesses",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@workingpaper{dolan2021tradewar,\n  title={A Field Experiment on Business Opposition to the U.S.-China Trade War},\n  author={Dolan, Lindsay R. and Kubinec, Robert M. and Nielson, Daniel L. and Zhang, Jiakun J.},\n  year={2021},\n  journal={SocArchiv},\n  note={Working Paper},\n  doi={https://doi.org/10.31235/osf.io/435u9}\n}"
+    "text": "Abstract\nThe fall of Bashar Assad’s dictatorship in December 2024 has ushered in a nerve-wracking time of hope and fear for Syrians concerning future governance in the long-war-torn country.\nWhile it’s unclear what exact political path Syria will take, the dilemmas the country faces are similar to the experiences of other Arab countries more than a decade ago. In the winter of 2010, an outbreak of protests in Tunisia spread across the region, toppling several regimes in what became known as the Arab Uprisings.\nWhile some countries – Egypt and Tunisia – became democracies, albeit briefly, others, like Yemen, Libya and Syria, descended into violence.\nIn the intervening years, political science scholars from across the world have examined these political transformations, looking at why so many of Arab Uprising countries failed to continue down the path of democratic reform. As a political scientist with expertise in the region, I have distilled this research into five key lessons that could help guide Syria now, as it seeks to build a stable and democratic state."
   }
 ]

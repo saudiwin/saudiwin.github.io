@@ -1,0 +1,37 @@
+---
+title: 'Evaluation 1 of "Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China"'
+date: 2025-01-24
+author:
+  - name: Robert Kubinec
+    url: http://www.robertkubinec.com/
+    affiliation: University of South Carolina
+categories: 
+  - Middle East Politics
+  - Syria
+  - Democratic Transitions
+  - Corruption
+pub-info:
+  reference: >-
+    Kubinec, Robert. "As Syria ponders a democratic future: 5 lessons from the Arab Spring". January 24, 2025. <em>The Conversationn</em>, link: <a href="https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203?utm_source=clipboard&utm_medium=bylinecopy_url_button"><code>https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203?utm_source=clipboard&utm_medium=bylinecopy_url_button</code></a>
+  links:
+    - name: Essay
+      url: https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203
+      icon: fa-solid fa-file-pdf
+      local: local
+---
+
+![Open](materials_large_color.png)
+
+## Important links
+
+-   [Link to Essay](https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203)
+
+## Abstract
+
+The fall of Bashar Assad’s dictatorship in December 2024 has ushered in a nerve-wracking time of hope and fear for Syrians concerning future governance in the long-war-torn country.
+
+While it’s unclear what exact political path Syria will take, the dilemmas the country faces are similar to the experiences of other Arab countries more than a decade ago. In the winter of 2010, an outbreak of protests in Tunisia spread across the region, toppling several regimes in what became known as the Arab Uprisings.
+
+While some countries – Egypt and Tunisia – became democracies, albeit briefly, others, like Yemen, Libya and Syria, descended into violence.
+
+In the intervening years, political science scholars from across the world have examined these political transformations, looking at why so many of Arab Uprising countries failed to continue down the path of democratic reform. As a political scientist with expertise in the region, I have distilled this research into five key lessons that could help guide Syria now, as it seeks to build a stable and democratic state.
