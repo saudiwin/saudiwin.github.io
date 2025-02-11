@@ -357,102 +357,25 @@
     "text": "Citation\n\n Add to Zotero \n\n@article{kubinec_taxes_2024,\n    title = {Taxes in the {Time} of {Revolution}: {An} {Experimental} {Test} of the {Rentier} {State} during {Algeria}'s {Hirak}},\n    volume = {76},\n    issn = {1086-3338},\n    shorttitle = {Taxes in the {Time} of {Revolution}},\n    url = {https://muse.jhu.edu/pub/1/article/924508},\n    abstract = {This article examines the rentier thesis that a government's control over oil resources should help it to resist pressures for democratization. The authors' online survey experiment, implemented during a nationwide mobilization for regime change in Algeria known as the Hirak, used interactive experimental treatments to provide information about the Algerian government's subsidies for fuel resources and low value-added taxes. Based on a sample of 9,721 Algerians, the authors find that when Algerians learn about their country's relatively high level of fuel subsidies and low level of taxes, their assessments of the government's performance improve. However, the treatment has null effects for outcomes involving demands for representation, such as intentions to join protest movements. An analysis of treatment heterogeneity in terms of wealth shows that the wealthy became much more supportive of the regime in response to the treatment while in some cases the poor became much less so. This treatment heterogeneity appears to be related to divergent views among the wealthy and the poor concerning the goals of the protest movement, with the wealthy favoring institutional reforms while the poor prioritized redistributive justice.},\n    number = {2},\n    urldate = {2024-08-14},\n    journal = {World Politics},\n    author = {Kubinec, Robert and Milner, Helen V.},\n    year = {2024},\n    note = {Publisher: Johns Hopkins University Press},\n    pages = {294--333},\n}"
   },
   {
-    "objectID": "research/chapters/heiss-causal-inference-2021/index.html",
-    "href": "research/chapters/heiss-causal-inference-2021/index.html",
-    "title": "Causal Inference",
+    "objectID": "research/essays/kubinec-conversation-2025/index.html",
+    "href": "research/essays/kubinec-conversation-2025/index.html",
+    "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
     "section": "",
-    "text": "One of the most repeated phrases in any introductory statistics class is the warning that “correlation is not causation.” This chapter presents new non-statistical language for creating, measuring, and evaluating causal stories and relationships using observational (i.e. non-experimental) data. It introduces the concept of causal directed acyclic graphs (DAGs) that allow us to formally encode our understanding of causal stories. With well-crafted DAGs, one can use a set of rules called do-calculus to make specific adjustments to statistical models and isolate or identify causal relationships between variables of interest. Edges (or arrows) transmit associations between nodes. Following the fundamental problem of causal inference, answering causal questions without an experiment appears impossible. The chapter explores different methods of making adjustments using synthetic data. Instead of throwing away potentially useful data, one can use other methods to create matches that are less discrete and more informative."
+    "text": "Open"
   },
   {
-    "objectID": "research/chapters/heiss-causal-inference-2021/index.html#abstract",
-    "href": "research/chapters/heiss-causal-inference-2021/index.html#abstract",
-    "title": "Causal Inference",
-    "section": "",
-    "text": "One of the most repeated phrases in any introductory statistics class is the warning that “correlation is not causation.” This chapter presents new non-statistical language for creating, measuring, and evaluating causal stories and relationships using observational (i.e. non-experimental) data. It introduces the concept of causal directed acyclic graphs (DAGs) that allow us to formally encode our understanding of causal stories. With well-crafted DAGs, one can use a set of rules called do-calculus to make specific adjustments to statistical models and isolate or identify causal relationships between variables of interest. Edges (or arrows) transmit associations between nodes. Following the fundamental problem of causal inference, answering causal questions without an experiment appears impossible. The chapter explores different methods of making adjustments using synthetic data. Instead of throwing away potentially useful data, one can use other methods to create matches that are less discrete and more informative."
+    "objectID": "research/essays/kubinec-conversation-2025/index.html#important-links",
+    "href": "research/essays/kubinec-conversation-2025/index.html#important-links",
+    "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
+    "section": "Important links",
+    "text": "Important links\n\nLink to Essay"
   },
   {
-    "objectID": "research/chapters/heiss-causal-inference-2021/index.html#important-figures",
-    "href": "research/chapters/heiss-causal-inference-2021/index.html#important-figures",
-    "title": "Causal Inference",
-    "section": "Important figures",
-    "text": "Important figures\nFigure 6: More complicated DAG showing the relationship between campaign spending and votes won in an election\n\n\n\nFigure 6: More complicated DAG showing the relationship between campaign spending and votes won in an election\n\n\nFigure 17: Adjustment set to identify the relationship between mosquito net use and malaria risk\n\n\n\nFigure 17: Adjustment set to identify the relationship between mosquito net use and malaria risk"
-  },
-  {
-    "objectID": "research/chapters/heiss-causal-inference-2021/index.html#citation",
-    "href": "research/chapters/heiss-causal-inference-2021/index.html#citation",
-    "title": "Causal Inference",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@incollection{Heiss:2021,\n    address = {Boca Raton, Florida},\n    author = {Andrew Heiss},\n    booktitle = {R for Political Data Science: A Practical Guide},\n    chapter = {10},\n    doi = {10.1201/9781003010623-10},\n    editor = {Francisco Urdinez and Andr{\\'e}s Cruz},\n    pages = {235--274},\n    publisher = {{Chapman and Hall} / CRC},\n    title = {Causal Inference},\n    year = {2021}}"
-  },
-  {
-    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html",
-    "href": "research/chapters/chaudhry-heiss-closing-space/index.html",
-    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
-    "section": "",
-    "text": "Figure 1: 2017 CIVICUS Monitor civic space ratings\n\n\n\nFigure 1: 2017 CIVICUS Monitor civic space ratings"
-  },
-  {
-    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html#important-figure",
-    "href": "research/chapters/chaudhry-heiss-closing-space/index.html#important-figure",
-    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
-    "section": "",
-    "text": "Figure 1: 2017 CIVICUS Monitor civic space ratings\n\n\n\nFigure 1: 2017 CIVICUS Monitor civic space ratings"
-  },
-  {
-    "objectID": "research/chapters/chaudhry-heiss-closing-space/index.html#citation",
-    "href": "research/chapters/chaudhry-heiss-closing-space/index.html#citation",
-    "title": "Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on NGOs",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@incollection{ChaudhryHeiss:2022,\n    Address = {Tuscaloosa, AL},\n    Author = {Suparna Chaudhry and Andrew Heiss},\n    Booktitle = {Beyond the Boomerang: New Patterns in Transcalar Advocacy},\n    Editor = {Christopher L. Pallas and Elizabeth Bloodgood},\n    Publisher = {University of Alabama Press},\n    Title = {Closing Space and the Restructuring of Global Activism: Causes and Consequences of the Global Crackdown on {NGOs}},\n    Chapter = {2},\n    Year = {2022}}"
-  },
-  {
-    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html",
-    "href": "research/chapters/heiss-ngo-ir-2019/index.html",
-    "title": "NGOs and Authoritarianism",
-    "section": "",
-    "text": "Authoritarian restrictions on domestic and international civil society have increased over the past decade, but authoritarian states continue to allow—and even invite—NGOs to work in their countries. Though the services and advocacy provided by NGOs can challenge the legitimacy and power of authoritarian regimes, the majority of autocratic states allow NGO activities, and NGOs in turn continue to work in these countries in spite of the heavy legal restrictions and attempts to limit their activities. This chapter examines the theories about and the experiences of domestic and international NGOs working in authoritarian countries. The review is premised on the theory of authoritarian institutions: dictators delegate political authority to democratic-appearing institutions in order to remain in power and maintain stability. After providing a brief overview of authoritarian institutionalism and balancing, I discuss how domestic and international NGOs fit into authoritarian stability-seeking calculus. I then look at three forms of state–NGO relationships in the context of authoritarianism and explore how autocrats have addressed and regulated international NGOs in particular. Finally, I conclude with suggestions for future research on NGOs and their relationship with and role in authoritarian regimes."
-  },
-  {
-    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#abstract",
-    "href": "research/chapters/heiss-ngo-ir-2019/index.html#abstract",
-    "title": "NGOs and Authoritarianism",
-    "section": "",
-    "text": "Authoritarian restrictions on domestic and international civil society have increased over the past decade, but authoritarian states continue to allow—and even invite—NGOs to work in their countries. Though the services and advocacy provided by NGOs can challenge the legitimacy and power of authoritarian regimes, the majority of autocratic states allow NGO activities, and NGOs in turn continue to work in these countries in spite of the heavy legal restrictions and attempts to limit their activities. This chapter examines the theories about and the experiences of domestic and international NGOs working in authoritarian countries. The review is premised on the theory of authoritarian institutions: dictators delegate political authority to democratic-appearing institutions in order to remain in power and maintain stability. After providing a brief overview of authoritarian institutionalism and balancing, I discuss how domestic and international NGOs fit into authoritarian stability-seeking calculus. I then look at three forms of state–NGO relationships in the context of authoritarianism and explore how autocrats have addressed and regulated international NGOs in particular. Finally, I conclude with suggestions for future research on NGOs and their relationship with and role in authoritarian regimes."
-  },
-  {
-    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#figure",
-    "href": "research/chapters/heiss-ngo-ir-2019/index.html#figure",
-    "title": "NGOs and Authoritarianism",
-    "section": "Figure",
-    "text": "Figure\nFigure 2: Civil society repression and regulations\n\n\n\nFigure 2: Civil society repression and regulations"
-  },
-  {
-    "objectID": "research/chapters/heiss-ngo-ir-2019/index.html#citation",
-    "href": "research/chapters/heiss-ngo-ir-2019/index.html#citation",
-    "title": "NGOs and Authoritarianism",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@incollection{Heiss:2019,\n    Address = {London},\n    Author = {Andrew Heiss},\n    Booktitle = {Routledge Handbook of {NGOs} and International Relations},\n    Editor = {Thomas Davies},\n    Publisher = {Routledge},\n    Title = {{NGOs} and Authoritarianism},\n    Chapter = {38},\n    Year = {2019}}"
-  },
-  {
-    "objectID": "research/chapters/johnson-heiss-2018/index.html",
-    "href": "research/chapters/johnson-heiss-2018/index.html",
-    "title": "Liberal Institutionalism",
-    "section": "",
-    "text": "Liberal institutionalism presumes that domestic and international institutions play central roles in facilitating cooperation and peace between states. But currently, this influential approach to thinking and practice appears to be in jeopardy. The United Kingdom seeks to be the first state ever to withdraw from the European Union (EU). The United States threatens to renegotiate or leave several international arrangements that it has recently signed or long supported. Meanwhile, China hints that it would be happy to take on greater global leadership if the United States retreats from this traditional role."
-  },
-  {
-    "objectID": "research/chapters/johnson-heiss-2018/index.html#abstract",
-    "href": "research/chapters/johnson-heiss-2018/index.html#abstract",
-    "title": "Liberal Institutionalism",
-    "section": "",
-    "text": "Liberal institutionalism presumes that domestic and international institutions play central roles in facilitating cooperation and peace between states. But currently, this influential approach to thinking and practice appears to be in jeopardy. The United Kingdom seeks to be the first state ever to withdraw from the European Union (EU). The United States threatens to renegotiate or leave several international arrangements that it has recently signed or long supported. Meanwhile, China hints that it would be happy to take on greater global leadership if the United States retreats from this traditional role."
-  },
-  {
-    "objectID": "research/chapters/johnson-heiss-2018/index.html#citation",
-    "href": "research/chapters/johnson-heiss-2018/index.html#citation",
-    "title": "Liberal Institutionalism",
-    "section": "Citation",
-    "text": "Citation\n\n Add to Zotero \n\n@incollection{JohnsonHeiss:2018,\n    Address = {London},\n    Author = {Tana Johnson and Andrew Heiss},\n    Booktitle = {International Organization and Global Governance},\n    Chapter = {8},\n    Doi = {10.4324/9781315301914},\n    Edition = {2},\n    Editor = {Thomas G. Weiss and Rorden Wilkinson},\n    Pages = {123--34},\n    Publisher = {Routledge},\n    Title = {Liberal Institutionalism},\n    Year = {2018}}"
+    "objectID": "research/essays/kubinec-conversation-2025/index.html#abstract",
+    "href": "research/essays/kubinec-conversation-2025/index.html#abstract",
+    "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
+    "section": "Abstract",
+    "text": "Abstract\nThe fall of Bashar Assad’s dictatorship in December 2024 has ushered in a nerve-wracking time of hope and fear for Syrians concerning future governance in the long-war-torn country.\nWhile it’s unclear what exact political path Syria will take, the dilemmas the country faces are similar to the experiences of other Arab countries more than a decade ago. In the winter of 2010, an outbreak of protests in Tunisia spread across the region, toppling several regimes in what became known as the Arab Uprisings.\nWhile some countries – Egypt and Tunisia – became democracies, albeit briefly, others, like Yemen, Libya and Syria, descended into violence.\nIn the intervening years, political science scholars from across the world have examined these political transformations, looking at why so many of Arab Uprising countries failed to continue down the path of democratic reform. As a political scientist with expertise in the region, I have distilled this research into five key lessons that could help guide Syria now, as it seeks to build a stable and democratic state."
   },
   {
     "objectID": "research/articles/kubinec-b-and-p-2025/index.html",
@@ -848,26 +771,5 @@
     "title": "Ordered Beta Regression",
     "section": "How to Use the Model",
     "text": "How to Use the Model\nAt present, ordered beta regression is available in Stan (Section 3.5), R (Section 3.1), Python (Section 3.2), Stata (Section 3.3), and Julia (Section 3.4). R has the strongest support for the model with multiple implementations, but it is perfectly usable in other statistical frameworks. Below I briefly describe the available packages.\n\nR\nOrdered beta regression is currently available in R in two different packages: ordbetareg and glmmTMB. The primary difference between these two packages is estimation method and the number of ordered beta-specific functions. ordbetareg is a package that estimates a Bayesian implementation as described in the paper above by using brms, a powerful R package for Bayesian regression. ordbetareg is maintained by me and you can see the full source code here on Github (and report an issue with the package if you have one). The package includes auxiliary functions like power analysis and plots that are specific to proportion responses—check out the package vignette for more details.\nglmmTMB, by contrast, is a general purpose regression package that specializes in mixed multilevel models. It implements a broad array of regression models using maximum likelihood. This means that a model estimated in glmmTMB will almost certainly be faster than ordbetareg (although if you set up ordbetareg to use cmdstanr it can get pretty fast). On the other hand, maximum likelihood estimation has some limitations. Arguably the most important one is that it can be tricky to fit a model that doesn’t have observations at the bounds, i.e. either 0 (0%) or 1 (100%). The Bayesian implementation in ordbetareg has no problem doing this.\nThat being said, I think glmmTMB is a fine package and believe it works fine for many scholars’ problems. brms, which ordbetareg is based on, offers a lot more features, including native support for multiple imputation, time series modeling and even latent variable/factor analysis modeling, but it does require more setup and the models are generally slower.\nFor either package, I highly recommend using marginaleffects, and in particular the avg_slopes function, to convert the coefficient estimates in the package to the bounded scale (i.e. between 0 and 1). This function allows you to then interpret your model estimates as the effect of a covariate in terms of percentage change/proportion change in the bounded response/outcome. marginaleffects is available on CRAN and works great with both ordbetareg and glmmTMB.\nWith both of these packages available, ordered beta regression has very strong support in R. If you don’t have a preference for a particular software package and want to use this model, I would recommend R.\n\n\nPython\nOrdered beta regression is implemented using the scipy package with maximum likelihood estimation. At present, you’ll need to clone (i.e., download) this Github repository to install the package as it is not yet available with pip or conda forge. The package includes plotting functions specific to proportion outcomes and reports coefficient values in the untransformed (logit) scale. marginaleffects support for this package is coming soon.\n\n\nStata\nThere is initial support for Stata as a set of .ado files that can be downloaded and installed in the ado folder in your Stata machine. More details are available on the Github repository. This package supports using the margins command to convert coefficients to the bounded outcome scale, although it does not support all Stata features as of yet. There are plans to make this package available via SSC in the near future.\n\n\nJulia\nOrdered beta regression is available via the SubjectiveScalesModels.jl package, which offers support for a variety of regression models useful in cognitive psychology and other fields with sliders/visual analog scales. The package includes neat visualizations and is maintained by Dominique Makowksi.\n\n\nStan\nAs is evident in the paper, the original model was written in Stan code. While I no longer am maintaining the Stan code, it is available in the paper repository and works great. If you want to incorporate the likelihood or other Stan code into your Stan model, feel free!"
-  },
-  {
-    "objectID": "research/essays/kubinec-conversation-2025/index.html",
-    "href": "research/essays/kubinec-conversation-2025/index.html",
-    "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
-    "section": "",
-    "text": "Open"
-  },
-  {
-    "objectID": "research/essays/kubinec-conversation-2025/index.html#important-links",
-    "href": "research/essays/kubinec-conversation-2025/index.html#important-links",
-    "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
-    "section": "Important links",
-    "text": "Important links\n\nLink to Essay"
-  },
-  {
-    "objectID": "research/essays/kubinec-conversation-2025/index.html#abstract",
-    "href": "research/essays/kubinec-conversation-2025/index.html#abstract",
-    "title": "Evaluation 1 of “Does the Squeaky Wheel Get More Grease? The Direct and Indirect Effects of Citizen Participation on Environmental Governance in China”",
-    "section": "Abstract",
-    "text": "Abstract\nThe fall of Bashar Assad’s dictatorship in December 2024 has ushered in a nerve-wracking time of hope and fear for Syrians concerning future governance in the long-war-torn country.\nWhile it’s unclear what exact political path Syria will take, the dilemmas the country faces are similar to the experiences of other Arab countries more than a decade ago. In the winter of 2010, an outbreak of protests in Tunisia spread across the region, toppling several regimes in what became known as the Arab Uprisings.\nWhile some countries – Egypt and Tunisia – became democracies, albeit briefly, others, like Yemen, Libya and Syria, descended into violence.\nIn the intervening years, political science scholars from across the world have examined these political transformations, looking at why so many of Arab Uprising countries failed to continue down the path of democratic reform. As a political scientist with expertise in the region, I have distilled this research into five key lessons that could help guide Syria now, as it seeks to build a stable and democratic state."
   }
 ]
