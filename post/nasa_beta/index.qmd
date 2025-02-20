@@ -1,0 +1,300 @@
+---
+title: "Modeling Uncertainty in NASA's Asteroid Impact Predictions with the Beta Distribution"
+subtitle: "It's Not Rocket Science... Or Is It?"
+author: "Robert Kubinec"
+date: "2024-02-18T15:00:00"
+image: "../../files/img/planet_crash.jpg"
+categories: ["R", "Astrophysics" ,"Proportions","Beta Regression"]
+description: "I use brms, Gaussian processes, and a time-varying beta distribution to model the uncertainty in how NASA's impact probabilities for the asteroid 2024 YR4 are changing over time."
+execute:
+  cache: true
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning=FALSE,message=FALSE,fig.align = "center")
+library(tidyverse)
+library(ordbetareg)
+library(extraDistr)
+library(brms)
+library(ggthemes)
+library(gam)
+library(mgcv)
+library(sandwich)
+library(cmdstanr)
+library(lubridate)
+library(marginaleffects)
+library(posterior)
+library(ggdist)
+
+set.seed(2152025)
+
+# load data 
+
+nasa_data <- read_csv("sentry_historical.csv") %>% 
+  mutate(date=mdy(date),
+    day_date=as.numeric(date) - mean(as.numeric(date)),
+    day_date=day_date/10)
+
+eu_data <- read_csv("eu_space_historical.csv")
+```
+
+The potential impact of asteroid 2024 YR4 has made major news headlines because it is one of the largest asteroids (possibly a few hundred feet across) to have a high chance of hitting earth—at least according to NASA records. For more background, see this helpful [NASA blog post.](https://blogs.nasa.gov/planetarydefense/2025/02/07/nasa-continues-to-monitor-orbit-of-near-earth-asteroid-2024-yr4/)
+
+I am writing this post because I have noticed that NASA's impact probabilities, which are put out by the [NASA Sentry system](https://cneos.jpl.nasa.gov/sentry/details.html#?des=2024%20YR4), vary over time—but they only share a single probability estimate. This is problematic because sharing a single number suggests over-confidence—i.e., how can the probability be so exact yet change from day to day? I believe this issue is due to unmodeled variation—essentially, NASA measurement error—that isn't included in the estimates and can lead the public to become too sensitive to small changes in these probabilities.
+
+I started writing this post a few days ago when NASA released a much larger number than it had previously—a chance of 2.6%. However, as of today (February 19th, 2025), the number has dropped back down to 1.5%--or almost half as probable. These are big shifts, and I think NASA can do better by providing estimates *with uncertainty*, that is, by giving a range of probabilities of asteroid impacts rather than a single number.
+
+The code for all the analyses in this document, and if you want all the code & data, please see my Github repo.
+
+To do that, I employ the Beta distribution—a distribution of probabilities—along with Bayesian modeling tools with R. One cool thing is that all of the R packages I use were created by social scientists, which shows that "hard" science is a myth. Even NASA can learn from social science 🙌.
+
+Given how important this topic is, I will keep auto-updating this post with new data as it comes in from Sentry. I will also in the future add in predictions from the European Space Agency, which has its own (slightly different) system.
+
+## Background: The Problem with Asteroids
+
+Before getting into the meat of the analysis, I want to be clear that I am not saying that NASA is bad at modeling asteroids. Frankly, I'm a political scientist, so it's really not my place to even say if they are doing things like orbital mechanics right. Rather, the issue I am addressing has to do with how we understand uncertainty. This is an issue that is equally important in the social sciences and "hard" sciences regardless of where we collect our data from.
+
+In addition, NASA makes it possible for me to do this analysis because it is very transparent about how it calculates asteroid impact probabilities. The current system it uses, Sentry, is based on this published paper: <https://iopscience.iop.org/article/10.3847/1538-3881/ac193f>, which is open access (as it should be). Anyone can download it and get into the nitty gritty.
+
+I won't get too into the weeds as that is not my aim, but I did have chatGPT convert some of the math of their model into an R-based simulation (click the "Show the code" button below this paragraph 👇). This is considerably simplified but shows the basics of how NASA tries to simulate an asteroid's impact as a set of ordinary differential equations. As described in the paper, NASA Sentry uses Monte Carlo techniques, that is, they use some random noise to see all the paths an asteroid might take, and then their estimate of probability of impact is determined by the number of paths that intersect Earth 😅.
+
+```{r nasa_sim,eval=FALSE}
+
+library(deSolve)  # For numerical integration
+library(MASS)     # For generating multivariate normal distributions
+
+# Define gravitational constant and Earth parameters
+G <- 6.67430e-11  # m^3/kg/s^2
+M_earth <- 5.972e24  # kg
+R_earth <- 6371e3  # m (radius of Earth)
+mu <- G * M_earth  # Standard gravitational parameter
+
+# Function to simulate asteroid collision
+simulate_asteroid_collision <- function(n_samples = 10000, time_span = 10*365*24*3600) {
+  
+  # Initial mean state vector [x, y, z, vx, vy, vz] (randomly chosen example)
+  mu_init <- c(1.5e11, 0, 0, 0, 30000, 0)  # 1 AU from Earth
+  
+  # Covariance matrix representing orbital uncertainty (example values)
+  sigma_init <- diag(c(1e7, 1e7, 1e7, 10, 10, 10))  # Adjust as needed
+  
+  # Generate Monte Carlo samples from multivariate normal distribution
+  samples <- mvrnorm(n_samples, mu = mu_init, Sigma = sigma_init)
+  
+  # Define equations of motion for numerical integration
+  equations_of_motion <- function(t, state, params) {
+    x <- state[1]
+    y <- state[2]
+    z <- state[3]
+    vx <- state[4]
+    vy <- state[5]
+    vz <- state[6]
+    
+    r <- sqrt(x^2 + y^2 + z^2)
+    ax <- -mu * x / r^3
+    ay <- -mu * y / r^3
+    az <- -mu * z / r^3
+    
+    return(list(c(vx, vy, vz, ax, ay, az)))
+  }
+  
+  # Simulate each trajectory
+  impact_count <- 0
+  for (i in 1:n_samples) {
+    # Initial state for sample
+    state_init <- samples[i,]
+    
+    # Integrate orbit over time_span
+    times <- seq(0, time_span, by = 86400)  # Daily steps
+    traj <- ode(y = state_init, times = times, func = equations_of_motion, parms = NULL, method = "rk4")
+    
+    # Check for impact (if within Earth's radius)
+    distances <- sqrt(traj[,2]^2 + traj[,3]^2 + traj[,4]^2)
+    if (any(distances < R_earth)) {
+      impact_count <- impact_count + 1
+    }
+  }
+  
+  # Estimate impact probability
+  impact_probability <- impact_count / n_samples
+  return(impact_probability)
+}
+
+# Run the simulation
+impact_prob <- simulate_asteroid_collision(n_samples = 10000, time_span = 10*365*24*3600)
+print(paste("Estimated impact probability:", impact_prob))
+
+
+```
+
+What is the main problem with this method? Well, it's hard for NASA to calculate these paths given that these asteroids are small and a lot of other forces/bodies can affect those paths. In addition, NASA is trying to detect really small-probability events. That means you have to run the simulation for a *really* long time. Space is big, after all.
+
+I really don't have any criticisms of the model, and I would note it is remarkably clear as I can understand a fair amount of the paper without having much knowledge of orbital mechanics.
+
+The issue is not with the model, but what we do with the predictions of the model. Each day it produces an estimate of impact probabilities as a proportion of the simulations that have the asteroid slamming into Earth. But that probability will change over time as they get more observations of the asteroid. We can think of this additional variation as amounting to *measurement uncertainty*: we aren't really sure what the asteroid is and what stands in its path to earth.
+
+As a result, the probabilities can go up and down from day to day, which can be confusing for people trying to follow along. As I mentioned, the probability just jumped up to 2.6% and then down to 1.5% in the same week.
+
+I collected the NASA Sentry data using the Wayback Machine (unfortunately, NASA does not have the historical data on its website, only the current day's data). Here's a plot of the estimates of YR 2024 impact probabilities since November 2024:
+
+```{r plot_data}
+
+nasa_data %>% 
+  ggplot(aes(y=sentry_prob,
+             x=date)) +
+  geom_line(linetype=2) +
+  scale_y_continuous(labels = scales::label_percent()) +
+  labs(y="Asteroid Impact Chance",
+       x="",
+       caption=stringr::str_wrap("Plot shows NASA Sentry asteroid impact estimates for YR 2024 as retrieved from the Wayback Machine. The plot starts in November 2024 and continues to February 18, 2025."),title = "NASA Sentry Asteroid Impact Estimates for YR 2024") +
+  ggdark::dark_mode()
+
+```
+
+The probabilities started to increase dramatically in mid-January, and they've kept bouncing around a bit. But NASA only reports this single number—so isn't there some noise with their estimates? Is there any way we can capture that noise so that the estimates don't bounce around so much (and potentially cause unnecessary panic)?
+
+Well, yes we can...
+
+## Beta Distribution to the Rescue
+
+```{r fit_nasa}
+
+# Fit the model
+fit <- brm(bf(
+  sentry_prob ~ gp(day_date),  # GP smooths over time
+  family = Beta()),
+    data = nasa_data,
+  chains = 2, cores = 8, iter = 2000, backend = "cmdstanr",
+  refresh=0
+)
+
+# get estimate of phi (prior sample size)
+
+phi_vec <- as_draws_df(fit, "phi")
+
+
+```
+
+We need to get predictions:
+
+```{r get_predict}
+
+# define over a range that goes 10 days into the future
+
+get_pred <- plot_predictions(fit,by="day_date",
+                                   newdata=datagrid(model=fit,
+                                                    day_date=c(seq(min(nasa_data$day_date),max(nasa_data$day_date),by=.25),
+                                                               seq(max(nasa_data$day_date)+.5,max(nasa_data$day_date)+1,by=.25))),
+                 points=0.5,draw = FALSE)
+
+# reconvert dates
+
+get_pred <- mutate(get_pred,
+                   real_dates=day_date*10 + mean(as.numeric(nasa_data$date)),
+                   real_dates=as.Date(real_dates,
+                                      origin = "1970-01-01"),
+                   in_sample=factor(as.numeric(real_dates >= ymd("2025-02-18")),
+                                    labels=c("Historical",
+                                             "Prediction")))
+
+get_pred %>% 
+  ggplot(aes(y=estimate,
+             x=real_dates)) +
+  geom_line(aes(linetype=in_sample),
+            size=1) +
+  geom_ribbon(aes(ymin=conf.low,
+                  ymax=conf.high),alpha=0.5) +
+  scale_y_continuous(labels=scales::label_percent()) +
+  scale_linetype(name="") +
+  labs(y="Percent Chance of Impact",
+       x="",
+       caption=stringr::str_wrap("Plot shows smoothed estimates of NASA Sentry asteroid impact probabilities using a Gaussian process fit to days and the impact probabilities modeled with the Beta distribution. Red line indicates one week forward prediction.")) +
+  ggdark::dark_mode() +
+  ggtitle("Smoothed Estimated Asteroid Impact Probabilities",
+          subtitle="Based on Beta Regression Model of NASA Sentry Estimates")
+
+
+```
+
+Look at average sample size over time:
+
+```{r avg_sample_size}
+
+phi_vec %>% 
+  ggplot(aes(x=phi)) +
+  geom_dotsinterval() +
+  ggdark::dark_mode() +
+  geom_vline(xintercept=mean(phi_vec$phi),
+             colour="light green",
+             linetype=2) +
+  labs(y="Proportion of Draws",
+       x="Prior Sample Size (Phi)",
+       caption=stringr::str_wrap("Plot shows each posterior draw of phi, or the prior estimated sample size, from the Beta regression fit to the NASA sentry data. The distribution of draws shows the uncertainty in the amount of information used to estimate the asteroid impact probabilities. The green line indicates the average estimate of approximately 1,000.")) +
+  ggtitle(label="Estimated Prior Sample Size in NASA Sentry Estimates (Phi)")
+
+
+
+```
+
+```{r model_capturing_prob}
+
+library(glmmTMB)
+
+simulate_beta_capture <- function(phi_vec, mu_vec, n_samples = 100, n_sim = 1000, threshold = 0.5) {
+  
+  # grid of possible phi/mu values
+  results <- expand.grid(phi = phi_vec, mu = mu_vec)
+  
+  results <- lapply(1:nrow(results), function(i) {
+    phi <- results$phi[i]
+    mu <- results$mu[i]
+    alpha <- mu * phi
+    beta <- (1 - mu) * phi
+    
+    # Generate N beta-distributed samples
+    data <- rbeta(n_samples * n_sim, alpha, beta)
+    
+    # Count how many mu values are higher than the threshold
+    captures <- sum(data > threshold)
+    
+    # Return as a tibble
+    tibble(phi = phi, mu = mu, capture_probability = captures)
+  }) %>% bind_rows
+  
+  return(results)
+}
+
+mu_values <- .02  # true mu
+results <- simulate_beta_capture(phi_vec$phi, mu_values,
+                                 n_samples=nrow(nasa_data),
+                                 threshold=0.05)
+
+# Plot the results
+library(ggplot2)
+ggplot(results, aes(x = phi, y = capture_probability, color =phi)) +
+  geom_point() +
+  labs(title = "Number of Possible Inflated Asteroid Impact Estimates",
+       subtitle="Given a True Impact Chance of 0.02 and\nEstimated Prior Sample Size (Dispersion)",
+       x = "Phi", y = "No. of Over-estimates", color = "Phi",
+       caption=stringr::str_wrap("Plot shows number of times that NASA's Sentry model would return an inflated asteroid impact probability of greater than 0.05 (5%) given a true impact probability of 0.02 (2%) and draws from the estimated Beta dispersion parameter phi. The count is out of the total NASA Sentry estimates collected (36). The dispersion parameter (phi) can be considered a sample size for the probability estimate where a larger sample size provides more power to detect a small effect.")) +
+  stat_smooth(se=FALSE,colour="red",linetype=2) +
+  scale_color_continuous(name="Prior\nSample Size") +
+  geom_vline(xintercept=mean(phi_vec$phi),linetype=3,colour="light green") +
+  annotate(x=mean(phi_vec$phi) + 20,
+           y=15,
+           geom="text",label="Estimated Sample Size",
+           colour="light green") +
+  ggdark::dark_mode()
+
+
+```
+
+```{r fit_eu}
+
+
+
+```
