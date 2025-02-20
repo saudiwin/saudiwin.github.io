@@ -288,7 +288,7 @@ gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
 <p>Before getting into the meat of the analysis, I want to be clear that I am not saying that NASA is bad at modeling asteroids. Frankly, I’m a political scientist, so it’s really not my place to even say if they are doing things like orbital mechanics right. Rather, the issue I am addressing has to do with how we understand uncertainty. This is an issue that is equally important in the social sciences and “hard” sciences regardless of where we collect our data from.</p>
 <p>In addition, NASA makes it possible for me to do this analysis because it is very transparent about how it calculates asteroid impact probabilities. The current system it uses, Sentry, is based on this published paper: <a href="https://iopscience.iop.org/article/10.3847/1538-3881/ac193f" class="uri">https://iopscience.iop.org/article/10.3847/1538-3881/ac193f</a>, which is open access (as it should be). Anyone can download it and get into the nitty gritty.</p>
 <p>I won’t get too into the weeds as that is not my aim, but I did have chatGPT convert some of the math of their model into an R-based simulation (click the “Show the code” button below this paragraph 👇). This simulation is considerably simplified but shows the basics of how NASA tries to simulate an asteroid’s impact as a set of ordinary differential equations. As described in the paper, NASA Sentry uses Monte Carlo techniques, that is, they use some random noise to see all the paths an asteroid might take, and then their estimate of probability of impact is determined by the number of paths that intersect Earth 😅.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(deSolve)  <span class="co"># For numerical integration</span></span>
@@ -361,7 +361,7 @@ gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
 <p>The issue is not with the model, but what we do with the predictions of the model. Each day it produces an estimate of impact probabilities as a proportion of the simulations that have the asteroid slamming into Earth. But that probability will change over time as they get more observations of the asteroid. We can think of this additional variation as amounting to <em>measurement uncertainty</em>: we aren’t really sure what the asteroid is and what stands in its path to earth.</p>
 <p>As a result, the probabilities can go up and down from day to day, which can be confusing for people trying to follow along. As I mentioned, the probability just jumped up to 2.6% and then down to 1.5% in the same week.</p>
 <p>I collected the NASA Sentry data using the Wayback Machine (unfortunately, NASA does not have the historical data on its website, only the current day’s data). Here’s a plot of the estimates of YR 2024 impact probabilities since November 2024 up to February 18, 2025:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nasa_data <span class="sc">%&gt;%</span> </span>
@@ -374,14 +374,10 @@ gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span>stringr<span class="sc">::</span><span class="fu">str_wrap</span>(<span class="st">"Plot shows NASA Sentry asteroid impact estimates for YR 2024 as retrieved from the Wayback Machine. The plot starts in November 2024 and continues to February 18, 2025."</span>),<span class="at">title =</span> <span class="st">"NASA Sentry Asteroid Impact Estimates for YR 2024"</span>) <span class="sc">+</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  ggdark<span class="sc">::</span><span class="fu">dark_mode</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Inverted geom defaults of fill and color/colour.
-To change them back, use invert_geom_defaults().</code></pre>
-</div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/plot_data-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/plot_data-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -396,79 +392,79 @@ To change them back, use invert_geom_defaults().</code></pre>
 <p>We can use the R package <code>brms</code>, which does very advanced Bayesian modeling using the <a href="https://mc-stan.org/">Stan framework</a>, to model the probability of asteroid impact as a <em>time-varying</em> Beta-distributed probability. Incidentally, <code>brms</code> is also a creation of a social scientist, psychologist <a href="https://paulbuerkner.com/">Paul Bürkner</a>.</p>
 <p>Our model starts with the assumption that each day the probability of impact could change somewhat but that it is probably going to be close to what it was on the previous day. To estimate the time trend, we will use a Gaussian process, which is a very powerful “smoother”, i.e., it can estimate both rapidly-changing and slowly-changing time trends.</p>
 <p>The model is fit in the code block below:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">brm</span>(<span class="fu">bf</span>(</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  sentry_prob <span class="sc">~</span> <span class="fu">gp</span>(day_date),  <span class="co"># GP smooths over time</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Beta</span>()),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> nasa_data,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">2</span>, <span class="at">cores =</span> <span class="dv">8</span>, <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh=</span><span class="dv">0</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">adapt_delta=</span><span class="fl">0.99</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_treedepth=</span><span class="dv">12</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">brm</span>(<span class="fu">bf</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  sentry_prob <span class="sc">~</span> <span class="fu">gp</span>(day_date),  <span class="co"># GP smooths over time</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Beta</span>()),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> nasa_data,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">2</span>, <span class="at">cores =</span> <span class="dv">8</span>, <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh=</span><span class="dv">0</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">adapt_delta=</span><span class="fl">0.99</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_treedepth=</span><span class="dv">12</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 chains, at most 8 in parallel...
 
-Chain 2 finished in 45.4 seconds.
-Chain 1 finished in 331.8 seconds.
+Chain 1 finished in 43.6 seconds.
+Chain 2 finished in 48.0 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 188.6 seconds.
-Total execution time: 331.9 seconds.</code></pre>
+Mean chain execution time: 45.8 seconds.
+Total execution time: 48.1 seconds.</code></pre>
 </div>
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get estimate of phi (prior sample size)</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>phi_vec <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(fit, <span class="st">"phi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get estimate of phi (prior sample size)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>phi_vec <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(fit, <span class="st">"phi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>We can then use the R package <code>marginaleffects</code>–just by happenstance, authored by political scientist <a href="https://arelbundock.com/">Vincent Arel-Bundock</a>–to predict the smoothed impact probability for each day–including days for which we don’t have Sentry estimates and even for some days into the future. With these model estimates, we no longer have just a single number but rather a range of estimates that show us what could have been different due to measurement error. These estimates are shown below along with a prediction for what could happen over the next 10 days (up to the end of February):</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define over a range that goes 10 days into the future</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>get_pred <span class="ot">&lt;-</span> <span class="fu">plot_predictions</span>(fit,<span class="at">by=</span><span class="st">"day_date"</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">newdata=</span><span class="fu">datagrid</span>(<span class="at">model=</span>fit,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">day_date=</span><span class="fu">c</span>(<span class="fu">seq</span>(<span class="fu">min</span>(nasa_data<span class="sc">$</span>day_date),<span class="fu">max</span>(nasa_data<span class="sc">$</span>day_date),<span class="at">by=</span>.<span class="dv">25</span>),</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                                                               <span class="fu">seq</span>(<span class="fu">max</span>(nasa_data<span class="sc">$</span>day_date)<span class="sc">+</span>.<span class="dv">5</span>,<span class="fu">max</span>(nasa_data<span class="sc">$</span>day_date)<span class="sc">+</span><span class="dv">1</span>,<span class="at">by=</span>.<span class="dv">25</span>))),</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">points=</span><span class="fl">0.5</span>,<span class="at">draw =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># reconvert dates</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>get_pred <span class="ot">&lt;-</span> <span class="fu">mutate</span>(get_pred,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">real_dates=</span>day_date<span class="sc">*</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">mean</span>(<span class="fu">as.numeric</span>(nasa_data<span class="sc">$</span>date)),</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">real_dates=</span><span class="fu">as.Date</span>(real_dates,</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">origin =</span> <span class="st">"1970-01-01"</span>),</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">in_sample=</span><span class="fu">factor</span>(<span class="fu">as.numeric</span>(real_dates <span class="sc">&gt;=</span> <span class="fu">ymd</span>(<span class="st">"2025-02-18"</span>)),</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Historical"</span>,</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">"Prediction"</span>)))</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>get_pred <span class="sc">%&gt;%</span> </span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>estimate,</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">x=</span>real_dates)) <span class="sc">+</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">linetype=</span>in_sample),</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>conf.low,</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax=</span>conf.high),<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span>scales<span class="sc">::</span><span class="fu">label_percent</span>()) <span class="sc">+</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype</span>(<span class="at">name=</span><span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Percent Chance of Impact"</span>,</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>,</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span>stringr<span class="sc">::</span><span class="fu">str_wrap</span>(<span class="st">"Plot shows smoothed estimates of NASA Sentry asteroid impact probabilities using a Gaussian process fit to days and the impact probabilities modeled with the Beta distribution. Red line indicates one week forward prediction."</span>)) <span class="sc">+</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  ggdark<span class="sc">::</span><span class="fu">dark_mode</span>() <span class="sc">+</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Smoothed Estimated Asteroid Impact Probabilities"</span>,</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle=</span><span class="st">"Based on Beta Regression Model of NASA Sentry Estimates"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define over a range that goes 10 days into the future</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>get_pred <span class="ot">&lt;-</span> <span class="fu">plot_predictions</span>(fit,<span class="at">by=</span><span class="st">"day_date"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">newdata=</span><span class="fu">datagrid</span>(<span class="at">model=</span>fit,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">day_date=</span><span class="fu">c</span>(<span class="fu">seq</span>(<span class="fu">min</span>(nasa_data<span class="sc">$</span>day_date),<span class="fu">max</span>(nasa_data<span class="sc">$</span>day_date),<span class="at">by=</span>.<span class="dv">25</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                                               <span class="fu">seq</span>(<span class="fu">max</span>(nasa_data<span class="sc">$</span>day_date)<span class="sc">+</span>.<span class="dv">5</span>,<span class="fu">max</span>(nasa_data<span class="sc">$</span>day_date)<span class="sc">+</span><span class="dv">1</span>,<span class="at">by=</span>.<span class="dv">25</span>))),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">points=</span><span class="fl">0.5</span>,<span class="at">draw =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># reconvert dates</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>get_pred <span class="ot">&lt;-</span> <span class="fu">mutate</span>(get_pred,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">real_dates=</span>day_date<span class="sc">*</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">mean</span>(<span class="fu">as.numeric</span>(nasa_data<span class="sc">$</span>date)),</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">real_dates=</span><span class="fu">as.Date</span>(real_dates,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">origin =</span> <span class="st">"1970-01-01"</span>),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">in_sample=</span><span class="fu">factor</span>(<span class="fu">as.numeric</span>(real_dates <span class="sc">&gt;=</span> <span class="fu">ymd</span>(<span class="st">"2025-02-18"</span>)),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Historical"</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">"Prediction"</span>)))</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>get_pred <span class="sc">%&gt;%</span> </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>estimate,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">x=</span>real_dates)) <span class="sc">+</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">linetype=</span>in_sample),</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>conf.low,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax=</span>conf.high),<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span>scales<span class="sc">::</span><span class="fu">label_percent</span>()) <span class="sc">+</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype</span>(<span class="at">name=</span><span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Percent Chance of Impact"</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span>stringr<span class="sc">::</span><span class="fu">str_wrap</span>(<span class="st">"Plot shows smoothed estimates of NASA Sentry asteroid impact probabilities using a Gaussian process fit to days and the impact probabilities modeled with the Beta distribution. Red line indicates one week forward prediction."</span>)) <span class="sc">+</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  ggdark<span class="sc">::</span><span class="fu">dark_mode</span>() <span class="sc">+</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Smoothed Estimated Asteroid Impact Probabilities"</span>,</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle=</span><span class="st">"Based on Beta Regression Model of NASA Sentry Estimates"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/get_predict-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/get_predict-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -477,93 +473,86 @@ Total execution time: 331.9 seconds.</code></pre>
 <p>What is fascinating is that the model–which is based only on data up to February 18th–predicts that the probability in future days would go down. In fact, it already has. NASA’s most recent estimate as of February 20th has fallen dramatically to 1.5%, or a decline of 42%. That’s a pretty big drop, and in any case shows that there is substantial uncertainty in these estimates that a single number just isn’t capturing. It really would be better if NASA reported an interval as described above.</p>
 <p>There’s other useful information we can get from the Beta distribution. As mentioned above, NASA’s model is a really complicated simulation. The Beta distribution can help us understand how robust these simulations are to hard-to-capture measurement noise with a parameter known as the <em>prior sample size</em> (also called dispersion or phi). Imagine that NASA could just draw a sample of orbital paths out of a big box of all the potential orbital paths—just like pollsters do by random sampling voters 😎. The larger the prior sample size estimate (assuming it’s a random sample of all possible outcomes), the less uncertainty there is in the impact probability.</p>
 <p>While NASA can’t do random samples—asteroids are pretty far away from us—the Beta distribution can report a number that indicates the level of confidence we should have <em>as if</em> NASA could poll impact events like a pollster. We can plot the <em>estimated prior sample size</em> from our Beta model below where each dot represents one plausible estimate of NASA’s actual sample size undergirding its simulation:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>phi_vec <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>phi)) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotsinterval</span>() <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  ggdark<span class="sc">::</span><span class="fu">dark_mode</span>() <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">mean</span>(phi_vec<span class="sc">$</span>phi),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour=</span><span class="st">"light green"</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Proportion of Draws"</span>,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Prior Sample Size (Phi)"</span>,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span>stringr<span class="sc">::</span><span class="fu">str_wrap</span>(<span class="st">"Plot shows each posterior draw of phi, or the prior estimated sample size, from the Beta regression fit to the NASA sentry data. The distribution of draws shows the uncertainty in the amount of information used to estimate the asteroid impact probabilities. The green line indicates the average estimate of approximately 1,000."</span>)) <span class="sc">+</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="at">label=</span><span class="st">"Estimated Prior Sample Size in NASA Sentry Estimates (Phi)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>phi_vec <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>phi)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotsinterval</span>() <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  ggdark<span class="sc">::</span><span class="fu">dark_mode</span>() <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">mean</span>(phi_vec<span class="sc">$</span>phi),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour=</span><span class="st">"light green"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Proportion of Draws"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Prior Sample Size (Phi)"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span>stringr<span class="sc">::</span><span class="fu">str_wrap</span>(<span class="st">"Plot shows each posterior draw of phi, or the prior estimated sample size, from the Beta regression fit to the NASA sentry data. The distribution of draws shows the uncertainty in the amount of information used to estimate the asteroid impact probabilities. The green line indicates the average estimate of approximately 1,000."</span>)) <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="at">label=</span><span class="st">"Estimated Prior Sample Size in NASA Sentry Estimates (Phi)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/avg_sample_size-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/avg_sample_size-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The green line denotes the most likely estimate from our model, which is a prior sample size of 1,000. This is on the whole pretty good—a survey of 1,000 people, for example, is generally considered useful for fairly precise estimates. On the other hand, NASA is looking at relatively small probabilities, and the smaller they are, the harder it is to get a good estimate. Furthermore, our model isn’t certain of the exact prior sample size from the Sentry data, with estimates ranging from a low of 500 to a high of 2,000. That’s a pretty big range—presumably we could get a more precise answer with more Sentry estimates over time.</p>
 <p>What we we can do with this estimate of prior sample size is examine how likely it is, given this background measurement noise, for NASA to report an inflated estimate of asteroid impact purely by random chance. To do that, in the code block below I simulate asteroid impact probabilities where I assume that the <em>true</em> chance of the asteroid hitting is 2% or 0.02. Over time, we might get estimates above or below that number due to chance, but the real number remains 2%.</p>
-<p>For each iteration of the simulation, I draw the same number of data points I have from the Sentry system—37–and then see how many times we get an asteroid impact probability that is greater than 5% in these 37 data points. We can think of these as “false positives” or “inflated estimates” in that the true chance is 2% but due to background noise, we can get a much bigger number by accident.</p>
-<p>The plot below shows number of over-estimates (up to a max of 37 Sentry estimates) for each plausible value of NASA prior sample size from our model:</p>
-<div class="cell">
+<p>For each iteration of the simulation, I draw the same number of data points I have from the Sentry system—36–and then see how many times we get an asteroid impact probability that is greater than 5% in these 36 data points. We can think of these as “false positives” or “inflated estimates” in that the true chance is 2% but due to background noise, we can get a much bigger number by accident.</p>
+<p>The plot below shows number of over-estimates (up to a max of 36 Sentry estimates) for each plausible value of NASA prior sample size from our model:</p>
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>simulate_beta_capture <span class="ot">&lt;-</span> <span class="cf">function</span>(phi_vec, mu_vec, <span class="at">n_samples =</span> <span class="dv">100</span>, <span class="at">n_sim =</span> <span class="dv">1000</span>, <span class="at">threshold =</span> <span class="fl">0.5</span>) {</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># grid of possible phi/mu values</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">phi =</span> phi_vec, <span class="at">mu =</span> mu_vec)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(results), <span class="cf">function</span>(i) {</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    phi <span class="ot">&lt;-</span> results<span class="sc">$</span>phi[i]</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> results<span class="sc">$</span>mu[i]</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    alpha <span class="ot">&lt;-</span> mu <span class="sc">*</span> phi</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    beta <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> mu) <span class="sc">*</span> phi</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate N beta-distributed samples</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(n_samples <span class="sc">*</span> n_sim, alpha, beta)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Count how many mu values are higher than the threshold</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    captures <span class="ot">&lt;-</span> <span class="fu">sum</span>(data <span class="sc">&gt;</span> threshold)</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return as a tibble</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">phi =</span> phi, <span class="at">mu =</span> mu, <span class="at">capture_probability =</span> captures)</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span> bind_rows</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>mu_values <span class="ot">&lt;-</span> .<span class="dv">02</span>  <span class="co"># true mu</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">simulate_beta_capture</span>(phi_vec<span class="sc">$</span>phi, mu_values,</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n_samples=</span><span class="fu">nrow</span>(nasa_data),</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">threshold=</span><span class="fl">0.05</span>)</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the results</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> phi, <span class="at">y =</span> capture_probability, <span class="at">color =</span>phi)) <span class="sc">+</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Number of Possible Inflated Asteroid Impact Estimates"</span>,</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">"Given a True Impact Chance of 0.02 and</span><span class="sc">\n</span><span class="st">Estimated Prior Sample Size (Dispersion) from Sentry Impact Probabilities"</span>,</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Prior Sample Size"</span>, <span class="at">y =</span> <span class="st">"No. of Over-estimates"</span>, <span class="at">color =</span> <span class="st">"Phi"</span>,</span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span>stringr<span class="sc">::</span><span class="fu">str_wrap</span>(<span class="st">"Plot shows number of times that NASA's Sentry model would return an inflated asteroid impact probability of greater than 0.05 (5%) given a true impact probability of 0.02 (2%) and draws from the estimated Beta dispersion parameter phi. The count is out of the total NASA Sentry estimates collected (36). The dispersion parameter (phi) can be considered a sample size for the probability estimate where a larger sample size provides more power to detect a small effect."</span>)) <span class="sc">+</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>,<span class="at">colour=</span><span class="st">"red"</span>,<span class="at">linetype=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_continuous</span>(<span class="at">name=</span><span class="st">"Prior</span><span class="sc">\n</span><span class="st">Sample Size"</span>) <span class="sc">+</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">mean</span>(phi_vec<span class="sc">$</span>phi),<span class="at">linetype=</span><span class="dv">3</span>,<span class="at">colour=</span><span class="st">"light green"</span>) <span class="sc">+</span></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">x=</span><span class="fu">mean</span>(phi_vec<span class="sc">$</span>phi) <span class="sc">+</span> <span class="dv">20</span>,</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>           <span class="at">y=</span><span class="dv">15</span>,</span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>           <span class="at">geom=</span><span class="st">"text"</span>,<span class="at">label=</span><span class="st">"Most Likely Sample Size"</span>,</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour=</span><span class="st">"light green"</span>) <span class="sc">+</span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>  ggdark<span class="sc">::</span><span class="fu">dark_mode</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>simulate_beta_capture <span class="ot">&lt;-</span> <span class="cf">function</span>(phi_vec, mu_vec, <span class="at">n_samples =</span> <span class="dv">100</span>, <span class="at">n_sim =</span> <span class="dv">1000</span>, <span class="at">threshold =</span> <span class="fl">0.5</span>) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># grid of possible phi/mu values</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">phi =</span> phi_vec, <span class="at">mu =</span> mu_vec)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(results), <span class="cf">function</span>(i) {</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    phi <span class="ot">&lt;-</span> results<span class="sc">$</span>phi[i]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> results<span class="sc">$</span>mu[i]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    alpha <span class="ot">&lt;-</span> mu <span class="sc">*</span> phi</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    beta <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> mu) <span class="sc">*</span> phi</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate N beta-distributed samples</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(n_samples <span class="sc">*</span> n_sim, alpha, beta)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Count how many mu values are higher than the threshold</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    captures <span class="ot">&lt;-</span> <span class="fu">sum</span>(data <span class="sc">&gt;</span> threshold)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return as a tibble</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">phi =</span> phi, <span class="at">mu =</span> mu, <span class="at">capture_probability =</span> captures)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">%&gt;%</span> bind_rows</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>mu_values <span class="ot">&lt;-</span> .<span class="dv">02</span>  <span class="co"># true mu</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">simulate_beta_capture</span>(phi_vec<span class="sc">$</span>phi, mu_values,</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n_samples=</span><span class="fu">nrow</span>(nasa_data),</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">threshold=</span><span class="fl">0.05</span>)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the results</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results, <span class="fu">aes</span>(<span class="at">x =</span> phi, <span class="at">y =</span> capture_probability, <span class="at">color =</span>phi)) <span class="sc">+</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Number of Possible Inflated Asteroid Impact Estimates"</span>,</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">"Given a True Impact Chance of 0.02 and</span><span class="sc">\n</span><span class="st">Estimated Prior Sample Size (Dispersion) from Sentry Impact Probabilities"</span>,</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Prior Sample Size"</span>, <span class="at">y =</span> <span class="st">"No. of Over-estimates"</span>, <span class="at">color =</span> <span class="st">"Phi"</span>,</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span>stringr<span class="sc">::</span><span class="fu">str_wrap</span>(<span class="st">"Plot shows number of times that NASA's Sentry model would return an inflated asteroid impact probability of greater than 0.05 (5%) given a true impact probability of 0.02 (2%) and draws from the estimated Beta dispersion parameter phi. The count is out of the total NASA Sentry estimates collected (36). The dispersion parameter (phi) can be considered a sample size for the probability estimate where a larger sample size provides more power to detect a small effect."</span>)) <span class="sc">+</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>,<span class="at">colour=</span><span class="st">"red"</span>,<span class="at">linetype=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_continuous</span>(<span class="at">name=</span><span class="st">"Prior</span><span class="sc">\n</span><span class="st">Sample Size"</span>) <span class="sc">+</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">mean</span>(phi_vec<span class="sc">$</span>phi),<span class="at">linetype=</span><span class="dv">3</span>,<span class="at">colour=</span><span class="st">"light green"</span>) <span class="sc">+</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">x=</span><span class="fu">mean</span>(phi_vec<span class="sc">$</span>phi) <span class="sc">+</span> <span class="dv">20</span>,</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>           <span class="at">y=</span><span class="dv">15</span>,</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>           <span class="at">geom=</span><span class="st">"text"</span>,<span class="at">label=</span><span class="st">"Most Likely Sample Size"</span>,</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour=</span><span class="st">"light green"</span>) <span class="sc">+</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>  ggdark<span class="sc">::</span><span class="fu">dark_mode</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Inverted geom defaults of fill and color/colour.
-To change them back, use invert_geom_defaults().</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'</code></pre>
-</div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/model_capturing_prob-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/model_capturing_prob-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -575,101 +564,94 @@ To change them back, use invert_geom_defaults().</code></pre>
 <h2 class="anchored" data-anchor-id="current-estimates">Current Estimates</h2>
 <p>As mentioned above, NASA has released more estimates since February 18th. In this section, I re-fit the model and predict for up to 10 days head using all of their Sentry data going back to November 2024. I will keep updating this section on a daily basis as more data comes in.</p>
 <p>This code fits the model to the current data:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load new estimates</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>new_files <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">file_name=</span><span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"."</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">pattern=</span><span class="st">"sentry</span><span class="sc">\\</span><span class="st">_2024"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">file_date=</span><span class="fu">str_extract</span>(file_name,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{2}-</span><span class="sc">\\</span><span class="st">d{2}"</span>),</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">file_date=</span><span class="fu">ymd</span>(file_date),</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">file_id=</span><span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()))</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">lapply</span>(new_files<span class="sc">$</span>file_name,readRDS) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="at">.id=</span><span class="st">"file_id"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="at">x=</span>date, <span class="at">pattern=</span><span class="st">"2032"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(new_files, <span class="at">by=</span><span class="st">"file_id"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">sentry_prob=</span>ip,</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">date=</span><span class="st">"file_date"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day_date=</span>(<span class="fu">as.numeric</span>(date) <span class="sc">-</span> <span class="fu">mean</span>(<span class="fu">as.numeric</span>(nasa_data<span class="sc">$</span>date)))<span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">sentry_prob=</span><span class="fu">as.numeric</span>(sentry_prob))</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>nasa_data_new <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(nasa_data,</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>                           new_data)</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>fit_recent <span class="ot">&lt;-</span> <span class="fu">brm</span>(<span class="fu">bf</span>(</span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  sentry_prob <span class="sc">~</span> <span class="fu">gp</span>(day_date),  <span class="co"># GP smooths over time</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Beta</span>()),</span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> nasa_data_new,</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">2</span>, <span class="at">cores =</span> <span class="dv">8</span>, <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh=</span><span class="dv">0</span>,</span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">adapt_delta=</span><span class="fl">0.99</span>,</span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_treedepth=</span><span class="dv">12</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load new estimates</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>new_files <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">file_name=</span><span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"."</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">pattern=</span><span class="st">"sentry</span><span class="sc">\\</span><span class="st">_2024"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">file_date=</span><span class="fu">str_extract</span>(file_name,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"</span><span class="sc">\\</span><span class="st">d{4}-</span><span class="sc">\\</span><span class="st">d{2}-</span><span class="sc">\\</span><span class="st">d{2}"</span>),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">file_date=</span><span class="fu">ymd</span>(file_date),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">file_id=</span><span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">lapply</span>(new_files<span class="sc">$</span>file_name,readRDS) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="at">.id=</span><span class="st">"file_id"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="at">x=</span>date, <span class="at">pattern=</span><span class="st">"2032"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(new_files, <span class="at">by=</span><span class="st">"file_id"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">sentry_prob=</span>ip,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">date=</span><span class="st">"file_date"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day_date=</span>(<span class="fu">as.numeric</span>(date) <span class="sc">-</span> <span class="fu">mean</span>(<span class="fu">as.numeric</span>(nasa_data<span class="sc">$</span>date)))<span class="sc">/</span><span class="dv">10</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">sentry_prob=</span><span class="fu">as.numeric</span>(sentry_prob))</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>nasa_data_new <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(nasa_data,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                           new_data)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>fit_recent <span class="ot">&lt;-</span> <span class="fu">brm</span>(<span class="fu">bf</span>(</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  sentry_prob <span class="sc">~</span> <span class="fu">gp</span>(day_date),  <span class="co"># GP smooths over time</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">Beta</span>()),</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> nasa_data_new,</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">2</span>, <span class="at">cores =</span> <span class="dv">8</span>, <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">refresh=</span><span class="dv">0</span>,</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">adapt_delta=</span><span class="fl">0.99</span>,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_treedepth=</span><span class="dv">12</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Start sampling</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 chains, at most 8 in parallel...
 
-Chain 2 finished in 60.7 seconds.
-Chain 1 finished in 107.5 seconds.
+Chain 2 finished in 47.6 seconds.
+Chain 1 finished in 62.1 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 84.1 seconds.
-Total execution time: 107.5 seconds.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: 1 of 2000 (0.0%) transitions ended with a divergence.
-See https://mc-stan.org/misc/warnings for details.</code></pre>
+Mean chain execution time: 54.9 seconds.
+Total execution time: 62.2 seconds.</code></pre>
 </div>
 </div>
 <p>And here are the model predictions with 10 days ahead plus fitted estimates to all previous NASA Sentry predictions:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define over a range that goes 10 days into the future</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>get_pred_recent <span class="ot">&lt;-</span> <span class="fu">plot_predictions</span>(fit_recent,<span class="at">by=</span><span class="st">"day_date"</span>,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">newdata=</span><span class="fu">datagrid</span>(<span class="at">model=</span>fit_recent,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">day_date=</span><span class="fu">c</span>(<span class="fu">seq</span>(<span class="fu">min</span>(nasa_data<span class="sc">$</span>day_date),<span class="fu">max</span>(nasa_data<span class="sc">$</span>day_date),<span class="at">by=</span>.<span class="dv">25</span>),</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                                                               <span class="fu">seq</span>(<span class="fu">max</span>(nasa_data<span class="sc">$</span>day_date)<span class="sc">+</span>.<span class="dv">5</span>,<span class="fu">max</span>(nasa_data<span class="sc">$</span>day_date)<span class="sc">+</span><span class="dv">1</span>,<span class="at">by=</span>.<span class="dv">25</span>))),</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">points=</span><span class="fl">0.5</span>,<span class="at">draw =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># reconvert dates</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>get_pred_recent <span class="ot">&lt;-</span> <span class="fu">mutate</span>(get_pred_recent,</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">real_dates=</span>day_date<span class="sc">*</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">mean</span>(<span class="fu">as.numeric</span>(nasa_data_new<span class="sc">$</span>date)),</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">real_dates=</span><span class="fu">as.Date</span>(real_dates,</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">origin =</span> <span class="st">"1970-01-01"</span>),</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">in_sample=</span><span class="fu">factor</span>(<span class="fu">as.numeric</span>(real_dates <span class="sc">&gt;=</span> <span class="fu">ymd</span>(<span class="st">"2025-02-18"</span>)),</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Historical"</span>,</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">"Prediction"</span>)))</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>get_pred_recent <span class="sc">%&gt;%</span> </span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>estimate,</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">x=</span>real_dates)) <span class="sc">+</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">linetype=</span>in_sample),</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>conf.low,</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax=</span>conf.high),<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span>scales<span class="sc">::</span><span class="fu">label_percent</span>()) <span class="sc">+</span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype</span>(<span class="at">name=</span><span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Percent Chance of Impact"</span>,</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>,</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span>stringr<span class="sc">::</span><span class="fu">str_wrap</span>(<span class="st">"Plot shows smoothed estimates of NASA Sentry asteroid impact probabilities using a Gaussian process fit to days and the impact probabilities modeled with the Beta distribution. Red line indicates ten days forward prediction."</span>)) <span class="sc">+</span></span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>  ggdark<span class="sc">::</span><span class="fu">dark_mode</span>() <span class="sc">+</span></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Smoothed Estimated Asteroid Impact Probabilities"</span>,</span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle=</span><span class="st">"Based on Beta Regression Model of NASA Sentry Estimates"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define over a range that goes 10 days into the future</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>get_pred_recent <span class="ot">&lt;-</span> <span class="fu">plot_predictions</span>(fit_recent,<span class="at">by=</span><span class="st">"day_date"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">newdata=</span><span class="fu">datagrid</span>(<span class="at">model=</span>fit_recent,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">day_date=</span><span class="fu">c</span>(<span class="fu">seq</span>(<span class="fu">min</span>(nasa_data<span class="sc">$</span>day_date),<span class="fu">max</span>(nasa_data<span class="sc">$</span>day_date),<span class="at">by=</span>.<span class="dv">25</span>),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                                                               <span class="fu">seq</span>(<span class="fu">max</span>(nasa_data<span class="sc">$</span>day_date)<span class="sc">+</span>.<span class="dv">5</span>,<span class="fu">max</span>(nasa_data<span class="sc">$</span>day_date)<span class="sc">+</span><span class="dv">1</span>,<span class="at">by=</span>.<span class="dv">25</span>))),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">points=</span><span class="fl">0.5</span>,<span class="at">draw =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># reconvert dates</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>get_pred_recent <span class="ot">&lt;-</span> <span class="fu">mutate</span>(get_pred_recent,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">real_dates=</span>day_date<span class="sc">*</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">mean</span>(<span class="fu">as.numeric</span>(nasa_data_new<span class="sc">$</span>date)),</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">real_dates=</span><span class="fu">as.Date</span>(real_dates,</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">origin =</span> <span class="st">"1970-01-01"</span>),</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">in_sample=</span><span class="fu">factor</span>(<span class="fu">as.numeric</span>(real_dates <span class="sc">&gt;=</span> <span class="fu">ymd</span>(<span class="st">"2025-02-18"</span>)),</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Historical"</span>,</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">"Prediction"</span>)))</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>get_pred_recent <span class="sc">%&gt;%</span> </span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>estimate,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">x=</span>real_dates)) <span class="sc">+</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">linetype=</span>in_sample),</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>conf.low,</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax=</span>conf.high),<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span>scales<span class="sc">::</span><span class="fu">label_percent</span>()) <span class="sc">+</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype</span>(<span class="at">name=</span><span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Percent Chance of Impact"</span>,</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>,</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span>stringr<span class="sc">::</span><span class="fu">str_wrap</span>(<span class="st">"Plot shows smoothed estimates of NASA Sentry asteroid impact probabilities using a Gaussian process fit to days and the impact probabilities modeled with the Beta distribution. Red line indicates ten days forward prediction."</span>)) <span class="sc">+</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  ggdark<span class="sc">::</span><span class="fu">dark_mode</span>() <span class="sc">+</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Smoothed Estimated Asteroid Impact Probabilities"</span>,</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">subtitle=</span><span class="st">"Based on Beta Regression Model of NASA Sentry Estimates"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/get_predict_current-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/get_predict_current-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
