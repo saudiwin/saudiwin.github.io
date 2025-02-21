@@ -39,6 +39,7 @@ nasa_data <- read_csv("sentry_historical.csv") %>%
     day_date=as.numeric(date) - mean(as.numeric(date)),
     day_date=day_date/10)
 
+
 eu_data <- read_csv("eu_space_historical.csv")
 ```
 
@@ -200,6 +201,7 @@ We can then use the R package `marginaleffects`--just by happenstance, authored 
 
 ```{r get_predict}
 #| warning: false
+#| message: false
 
 # define over a range that goes 10 days into the future
 
@@ -232,7 +234,7 @@ get_pred %>%
        x="",
        caption=stringr::str_wrap("Plot shows smoothed estimates of NASA Sentry asteroid impact probabilities using a Gaussian process fit to days and the impact probabilities modeled with the Beta distribution. Red line indicates one week forward prediction.")) +
   ggdark::dark_mode() +
-  ggtitle("Smoothed Estimated Asteroid Impact Probabilities",
+  ggtitle("Smoothed Estimated YR 2024 Asteroid Impact Probabilities",
           subtitle="Based on Beta Regression Model of NASA Sentry Estimates")
 
 
@@ -247,6 +249,8 @@ There's other useful information we can get from the Beta distribution. As menti
 While NASA can't do random samples—asteroids are pretty far away from us—the Beta distribution can report a number that indicates the level of confidence we should have *as if* NASA could poll impact events like a pollster. We can plot the *estimated prior sample size* from our Beta model below where each dot represents one plausible estimate of NASA's actual sample size undergirding its simulation:
 
 ```{r avg_sample_size}
+#| warning: false
+#| message: false
 
 phi_vec %>% 
   ggplot(aes(x=phi)) +
@@ -273,6 +277,8 @@ For each iteration of the simulation, I draw the same number of data points I ha
 The plot below shows number of over-estimates (up to a max of `r nrow(nasa_data)` Sentry estimates) for each plausible value of NASA prior sample size from our model:
 
 ```{r model_capturing_prob}
+#| warning: false
+#| message: false
 
 simulate_beta_capture <- function(phi_vec, mu_vec, n_samples = 100, n_sim = 1000, threshold = 0.5) {
   
@@ -373,6 +379,7 @@ And here are the model predictions with 10 days ahead plus fitted estimates to a
 
 ```{r get_predict_current}
 #| warning: false
+#| message: false
 
 # define over a range that goes 10 days into the future
 
@@ -405,7 +412,7 @@ get_pred_recent %>%
        x="",
        caption=stringr::str_wrap("Plot shows smoothed estimates of NASA Sentry asteroid impact probabilities using a Gaussian process fit to days and the impact probabilities modeled with the Beta distribution. Red line indicates ten days forward prediction.")) +
   ggdark::dark_mode() +
-  ggtitle("Smoothed Estimated Asteroid Impact Probabilities",
+  ggtitle("Smoothed Estimated YR 2024 Asteroid Impact Probabilities",
           subtitle="Based on Beta Regression Model of NASA Sentry Estimates")
 
 
