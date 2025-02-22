@@ -144,7 +144,7 @@ The issue is not with the model, but what we do with the predictions of the mode
 
 As a result, the probabilities can go up and down from day to day, which can be confusing for people trying to follow along. As I mentioned, the probability just jumped up to 2.6% and then down to 1.5% in the same week.
 
-I collected the NASA Sentry data using the Wayback Machine (unfortunately, NASA does not have the historical data on its website, only the current day's data). Here's a plot of the estimates of YR 2024 impact probabilities since November 2024 up to February 18, 2025:
+I collected the NASA Sentry data using the Wayback Machine (unfortunately, NASA does not have the historical data on its website, only the current day's data). Here's a plot of the estimates of 2024 YR4 impact probabilities since November 2024 up to February 18, 2025:
 
 ```{r plot_data}
 
@@ -155,7 +155,7 @@ nasa_data %>%
   scale_y_continuous(labels = scales::label_percent()) +
   labs(y="Asteroid Impact Chance",
        x="",
-       caption=stringr::str_wrap("Plot shows NASA Sentry asteroid impact estimates for YR 2024 as retrieved from the Wayback Machine. The plot starts in November 2024 and continues to February 18, 2025."),title = "NASA Sentry Asteroid Impact Estimates for YR 2024") +
+       caption=stringr::str_wrap("Plot shows NASA Sentry asteroid impact estimates for 2024 YR4 as retrieved from the Wayback Machine. The plot starts in November 2024 and continues to February 18, 2025."),title = "NASA Sentry Asteroid Impact Estimates for 2024 YR4") +
   ggdark::dark_mode()
 
 ```
@@ -232,15 +232,15 @@ get_pred %>%
   scale_linetype(name="") +
   labs(y="Percent Chance of Impact",
        x="",
-       caption=stringr::str_wrap("Plot shows smoothed estimates of NASA Sentry asteroid impact probabilities using a Gaussian process fit to days and the impact probabilities modeled with the Beta distribution. Red line indicates one week forward prediction.")) +
+       caption=stringr::str_wrap("Plot shows smoothed estimates of NASA Sentry asteroid impact probabilities using a Gaussian process fit to days and the impact probabilities modeled with the Beta distribution. Dotted line indicates one week forward prediction. Gray interval is the 5% to 95% posterior quantile based on 1,000 MCMC draws.")) +
   ggdark::dark_mode() +
-  ggtitle("Smoothed Estimated YR 2024 Asteroid Impact Probabilities",
+  ggtitle("Smoothed Estimated 2024 YR4 Asteroid Impact Probabilities",
           subtitle="Based on Beta Regression Model of NASA Sentry Estimates")
 
 
 ```
 
-What this plot shows is that our estimated uncertainty was quite low while the Sentry probabilities of YR 2024 impact were small–they didn't change much prior to January. But once YR 2024 impact probability started to increase in January, the Beta distribution shows increasing uncertainty (the gray interval). Our model shows that the last Sentry number in our data, which was NASA's estimate of 2.6% on February 18th that made world-wide headlines—is only one a range of plausible values. Our model reports that the true probability--net of measurement noise--could in fact be anywhere between 1.9% to 3%. Furthermore, the model says that it is quite uncertain what could happen in the next 10 days, with a range of impact probabilities of 0.75% to 6%. In other words, given these trends, it's still pretty uncertain what the real probability of an impact is.
+What this plot shows is that our estimated uncertainty was quite low while the Sentry probabilities of 2024 YR4 impact were small–they didn't change much prior to January. But once 2024 YR4 impact probability started to increase in January, the Beta distribution shows increasing uncertainty (the gray interval). Our model shows that the last Sentry number in our data, which was NASA's estimate of 2.6% on February 18th that made world-wide headlines—is only one a range of plausible values. Our model reports that the true probability--net of measurement noise--could in fact be anywhere between 1.9% to 3%. Furthermore, the model says that it is quite uncertain what could happen in the next 10 days, with a range of impact probabilities of 0.75% to 6%. In other words, given these trends, it's still pretty uncertain what the real probability of an impact is.
 
 What is fascinating is that the model--which is based only on data up to February 18th--predicts that the probability in future days would go down. In fact, it already has. NASA's most recent estimate as of February 20th has fallen dramatically to 1.5%, or a decline of 42%. That's a pretty big drop, and in any case shows that there is substantial uncertainty in these estimates that a single number just isn't capturing. It really would be better if NASA reported an interval as described above.
 
@@ -335,7 +335,7 @@ So for those reasons, I do encourage NASA to consider releasing some kind of unc
 
 ## Current Estimates {#current-estimates}
 
-As mentioned above, NASA has released more estimates since February 18th. In this section, I re-fit the model and predict for up to 10 days head using all of their Sentry data going back to November 2024. I will keep updating this section on a daily basis as more data comes in.
+As mentioned above, NASA has released more estimates since February 18th. In this section, I re-fit the model and predict for up to 10 days head using all of their Sentry data going back to November 2024. I will keep updating this section on a daily basis as more data comes in. The estimates below are current as of **`r format(lubridate::today(),"%A, %B %d, %Y")`**.
 
 This code fits the model to the current data:
 
@@ -381,25 +381,40 @@ And here are the model predictions with 10 days ahead plus fitted estimates to a
 #| warning: false
 #| message: false
 
+# function to convert to dates that are scaled per function
+
+convert_date_func <- function(date_vec,
+                          orig_date_vec=nasa_data_new$date) {
+  
+  date_vec <- (as.numeric(date_vec) - mean(as.numeric(orig_date_vec)))/10
+  
+  return(date_vec)
+  
+}
+
 # define over a range that goes 10 days into the future
+
+date_range <- as.numeric(max(nasa_data_new$date) - min(nasa_data_new$date))
+
+date_predict_range <- seq(min(nasa_data_new$date),max(nasa_data_new$date)+10,length.out=date_range)
+
+date_predict_range_trans <- convert_date_func(date_predict_range)
 
 get_pred_recent <- plot_predictions(fit_recent,by="day_date",
                                    newdata=datagrid(model=fit_recent,
-                                                    day_date=c(seq(min(nasa_data$day_date),max(nasa_data$day_date),by=.25),
-                                                               seq(max(nasa_data$day_date)+.5,max(nasa_data$day_date)+1,by=.25))),
-                 points=0.5,draw = FALSE)
+                                                    day_date=date_predict_range_trans),
+                 points=0.5,draw = FALSE,
+                 nug=1e-07)
 
 # reconvert dates
 
 get_pred_recent <- mutate(get_pred_recent,
-                   real_dates=day_date*10 + mean(as.numeric(nasa_data_new$date)),
-                   real_dates=as.Date(real_dates,
-                                      origin = "1970-01-01"),
-                   in_sample=factor(as.numeric(real_dates >= ymd("2025-02-18")),
+                   real_dates=date_predict_range,
+                   in_sample=factor(as.numeric(real_dates >= lubridate::today()),
                                     labels=c("Historical",
                                              "Prediction")))
 
-get_pred_recent %>% 
+out_plot <- get_pred_recent %>% 
   ggplot(aes(y=estimate,
              x=real_dates)) +
   geom_line(aes(linetype=in_sample),
@@ -410,10 +425,13 @@ get_pred_recent %>%
   scale_linetype(name="") +
   labs(y="Percent Chance of Impact",
        x="",
-       caption=stringr::str_wrap("Plot shows smoothed estimates of NASA Sentry asteroid impact probabilities using a Gaussian process fit to days and the impact probabilities modeled with the Beta distribution. Red line indicates ten days forward prediction.")) +
+       caption=stringr::str_wrap("Plot shows smoothed estimates of NASA Sentry asteroid impact probabilities using a Gaussian process fit to days and the impact probabilities modeled with the Beta distribution. Dotted line indicates ten days forward prediction. Gray interval is the 5% to 95% posterior quantile based on 1,000 MCMC draws.")) +
   ggdark::dark_mode() +
-  ggtitle("Smoothed Estimated YR 2024 Asteroid Impact Probabilities",
+  ggtitle("Smoothed Estimated 2024 YR4 Asteroid Impact Probabilities",
           subtitle="Based on Beta Regression Model of NASA Sentry Estimates")
 
+ggsave(plot = out_plot,filename = "~/website/post/nasa_beta/nasa_sentry_predict.png",
+       width=6,height=6,dpi=600)
 
+out_plot
 ```

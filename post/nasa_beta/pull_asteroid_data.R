@@ -91,3 +91,27 @@ if (status_code(response) == 200) {
   # Print an error message if the request failed
   print(paste("Failed to retrieve data. Status code:", status_code(response)))
 }
+
+# render the file
+
+library(quarto)
+library(git2r)
+
+quarto_render("~/website/post/nasa_beta/",as_job = F,cache = F)
+
+add(path="~/website/_site/post/nasa_beta/index.html")
+add(path="~/website/_site/post/nasa_beta/*.png")
+add(path="~/website/_site/post/nasa_beta/figure-html/*")
+add(path="~/website/_site/post/nasa_beta/index_files/*")
+
+commit(message = paste0("NASA Sentry smoother prediction ",Sys.Date()))
+
+system("git push origin master")
+
+# send bluesky post
+
+library(bskyr)
+
+bs_post(text="(Automated post):\n\nToday's smoothed NASA Sentry impact probabilities for asteroid 2024 YR4 (the big one) plus a 10-day forward prediction.\n\nSee blog post for details: https://www.robertkubinec.com/post/nasa_beta/",
+        images="~/website/post/nasa_beta/nasa_sentry_predict.png",
+        images_alt="Plot shows model smoothing and predictions of NASA Sentry impact probability for the asteroid 2024 YR4.")
