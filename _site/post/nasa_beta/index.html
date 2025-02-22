@@ -409,12 +409,12 @@ gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 chains, at most 8 in parallel...
 
-Chain 1 finished in 57.9 seconds.
-Chain 2 finished in 62.3 seconds.
+Chain 1 finished in 46.4 seconds.
+Chain 2 finished in 51.4 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 60.1 seconds.
-Total execution time: 62.5 seconds.</code></pre>
+Mean chain execution time: 48.9 seconds.
+Total execution time: 51.5 seconds.</code></pre>
 </div>
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -423,7 +423,7 @@ Total execution time: 62.5 seconds.</code></pre>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>phi_vec <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(fit, <span class="st">"phi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>We can then use the R package <code>marginaleffects</code>–just by happenstance, authored by political scientist <a href="https://arelbundock.com/">Vincent Arel-Bundock</a>–to predict the smoothed impact probability for each day–including days for which we don’t have Sentry estimates and even for some days into the future. With these model estimates, we no longer have just a single number but rather a range of estimates that show us what could have been different due to measurement error. These estimates are shown below along with a prediction for what could happen over the next 10 days (up to the end of February) as of Saturday, February 22, 2025:</p>
+<p>We can then use the R package <code>marginaleffects</code>–just by happenstance, authored by political scientist <a href="https://arelbundock.com/">Vincent Arel-Bundock</a>–to predict the smoothed impact probability for each day–including days for which we don’t have Sentry estimates and even for some days into the future. With these model estimates, we no longer have just a single number but rather a range of estimates that show us what could have been different due to measurement error. These estimates are shown below along with a prediction for what could happen over the next 10 days (up to the end of February):</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -562,7 +562,7 @@ Total execution time: 62.5 seconds.</code></pre>
 </section>
 <section id="current-estimates" class="level2">
 <h2 class="anchored" data-anchor-id="current-estimates">Current Estimates</h2>
-<p>As mentioned above, NASA has released more estimates since February 18th. In this section, I re-fit the model and predict for up to 10 days head using all of their Sentry data going back to November 2024. I will keep updating this section on a daily basis as more data comes in.</p>
+<p>As mentioned above, NASA has released more estimates since February 18th. In this section, I re-fit the model and predict for up to 10 days head using all of their Sentry data going back to November 2024. I will keep updating this section on a daily basis as more data comes in. The estimates below are current as of <em>Saturday, February 22, 2025</em>.</p>
 <p>This code fits the model to the current data:</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
@@ -602,12 +602,12 @@ Total execution time: 62.5 seconds.</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 chains, at most 8 in parallel...
 
-Chain 1 finished in 31.1 seconds.
-Chain 2 finished in 31.2 seconds.
+Chain 1 finished in 35.4 seconds.
+Chain 2 finished in 35.5 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 31.1 seconds.
-Total execution time: 31.3 seconds.</code></pre>
+Mean chain execution time: 35.4 seconds.
+Total execution time: 35.6 seconds.</code></pre>
 </div>
 </div>
 <p>And here are the model predictions with 10 days ahead plus fitted estimates to all previous NASA Sentry predictions:</p>
