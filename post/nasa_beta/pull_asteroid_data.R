@@ -103,6 +103,11 @@ add(path="~/website/_site/post/nasa_beta/index.html")
 add(path="~/website/_site/post/nasa_beta/*.png")
 add(path="~/website/_site/post/nasa_beta/figure-html/*")
 add(path="~/website/_site/post/nasa_beta/index_files/*")
+add(path="~/website/post/nasa_beta/sentry*")
+add(path="~/website/post/nasa_beta/index.html")
+add(path="~/website/post/nasa_beta/*.png")
+add(path="~/website/post/nasa_beta/figure-html/*")
+add(path="~/website/post/nasa_beta/index_files/*")
 
 commit(message = paste0("NASA Sentry smoother prediction ",Sys.Date()))
 
