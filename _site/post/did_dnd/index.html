@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Robert Kubinec">
+<meta name="dcterms.date" content="2025-05-05">
+<meta name="description" content="I discuss why DiD is not the panacea for causal inference that it is often claimed–like all assumptions, the assumptions of DiD can only be validated within a certain research design, and there is no guarantee that DiD is more credible than simple panel data models.">
+
+<title>What Difference-in-Differences Has in Common with Dungeons &amp; Dragons – Homepage</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b9099fb3f1246bdcc02181f33f45fe59.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BHP1PJ9LEX"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="What Difference-in-Differences Has in Common with Dungeons &amp; Dragons – Homepage">
+<meta property="og:description" content="I discuss why DiD is not the panacea for causal inference that it is often claimed–like all assumptions, the assumptions of DiD can only be validated within a certain research design, and there is no guarantee that DiD is more credible than simple panel data models.">
+<meta property="og:image" content="../../files/img/headers/diff_in_diff_header.png">
+<meta property="og:site_name" content="Homepage">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Homepage</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/saudiwin"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://bsky.app/profile/rmkubinec.bsky.social"> 
+<span class="menu-text"><iconify-icon role="img" inline="" icon="simple-icons:bluesky" aria-label="Icon bluesky from simple-icons Iconify.design set." title="Icon bluesky from simple-icons Iconify.design set."></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../files/Robert_Kubinec_CV_full.pdf" aria-current="page"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">What Difference-in-Differences Has in Common with Dungeons &amp; Dragons</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+  <div id="quarto-announcement" data-announcement-id="7010543ebe2e1973c23c1707ab1d37d5" class="alert alert-dark hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Read my latest on 5 lessons from political science to help rebuild Syria in <a href="https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203"><em>The Conversation</em></a>.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">What Difference-in-Differences Has in Common with Dungeons &amp; Dragons</h1>
+            <p class="subtitle lead">They both rely on the willing suspension of disbelief.</p>
+                  <div>
+        <div class="description">
+          I discuss why DiD is not the panacea for causal inference that it is often claimed–like all assumptions, the assumptions of DiD can only be validated within a certain research design, and there is no guarantee that DiD is more credible than simple panel data models.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Causal Inference</div>
+                <div class="quarto-category">Panel Data</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Robert Kubinec </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 5, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../files/Robert_Kubinec_CV_full.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CV</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../research/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../consulting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consulting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://saudiwin.github.io/ordbetareg_pack/" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ordered Beta Regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://saudiwin.github.io/idealstan/" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><code>idealstan</code></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://coronanet-project.org/" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CoronaNet</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#wheres-the-beef" id="toc-wheres-the-beef" class="nav-link" data-scroll-target="#wheres-the-beef">Where’s the Beef</a></li>
+  <li><a href="#bobs-really-great-causal-dag-theorem-for-panel-data" id="toc-bobs-really-great-causal-dag-theorem-for-panel-data" class="nav-link" data-scroll-target="#bobs-really-great-causal-dag-theorem-for-panel-data">Bob’s Really Great Causal DAG Theorem* for Panel Data</a></li>
+  <li><a href="#hello-bias-variance-trade-off-my-old-friend" id="toc-hello-bias-variance-trade-off-my-old-friend" class="nav-link" data-scroll-target="#hello-bias-variance-trade-off-my-old-friend">Hello Bias-Variance Trade-off My Old Friend</a></li>
+  <li><a href="#power-analysis-the-bias-variance-trade-off" id="toc-power-analysis-the-bias-variance-trade-off" class="nav-link" data-scroll-target="#power-analysis-the-bias-variance-trade-off">Power Analysis &amp; the Bias-Variance Trade-off</a>
+  <ul class="collapse">
+  <li><a href="#moar-power" id="toc-moar-power" class="nav-link" data-scroll-target="#moar-power">Moar Power</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/diff_in_diff_header.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<p>Difference-in-differences (DiD) is a panel data model specification that is increasingly popular across the social sciences. Dungeons &amp; Dragons (DnD) is a fantasy role-playing game that defined the genre and continues to inspire a horde of countless fans. What could DnD and DiD possibly have in common? (Besides the cute acronyms).</p>
+<p>The dominance of both methods in their respective fields depends on participants who attach meaning to the worlds that they create. For DnD, players must adopt personalities and follow the orders of the dungeon master so that the story can unfold. In DiD, scholars must accept that the assumptions of the model represent objective reality, even though by definition assumptions can never be proven (if they could be, they wouldn’t be assumptions). For that reason, in order for people to enjoy DnD or rely on DiD, groups must accept their central premises as credible. Credible for different reasons—narrative fidelity versus explanatory or predictive fidelity—but group agreement about the <em>willing suspension of disbelief</em> is critical in either case to ensure widespread adoption.</p>
+<p>I doubt many will like me using the term suspension of disbelief to discuss a statistical method. I don’t think that DiD is pure fiction like a Harry Potter novel. But there is remarkably widespread agreement that the assumptions of DiD are somehow weaker or more credible than other, even quite similar, types of models. It is this willingness to overlook a model’s assumptions that I find fascinating. How does a model move from the domain of mathematical definition to a social practice that offers far more than just coefficients? Perhaps I am being somewhat radical, but I think it is worth thinking through <em>why</em> some models end up becoming talismans of certainty.</p>
+<p>The willing suspension of disbelief about DiD’s potential pitfalls is so strong that DiD is sometimes to referred to as a “natural” or “quasi” experiment—that is, a statistical model can, on its own, approximate a situation in which an experimenter went into the world and effected the cause him or herself—just like a DnD troupe believing it is liberating a real dungeon.</p>
+<p>I am not the first to notice the skyrocketing usage of DiD.</p>
+<blockquote class="bluesky-embed blockquote" data-bluesky-uri="at://did:plc:2mzhdtn7n3n7z5apjrzqtd2r/app.bsky.feed.post/3lo4rp57mxs2c" data-bluesky-cid="bafyreigkz2bnen736ls2ypedtxhnyyqqixqlagj6kkdgpftm53u4zv5zki" data-bluesky-embed-color-mode="system">
+<p lang="en">
+</p><p>The average American has 3 friends: DiD, RDD, and IV.<br><br><a href="https://bsky.app/profile/did:plc:2mzhdtn7n3n7z5apjrzqtd2r/post/3lo4rp57mxs2c?ref_src=embed">[image or embed]</a></p>
+<p></p>
+<p>— Khoa (<a href="https://bsky.app/profile/did:plc:2mzhdtn7n3n7z5apjrzqtd2r?ref_src=embed"><span class="citation" data-cites="khoavuumn.bsky.social">(</span></a><a href="#ref-khoavuumn.bsky.social" role="doc-biblioref"><strong>khoavuumn.bsky.social?</strong></a>)) <a href="https://bsky.app/profile/did:plc:2mzhdtn7n3n7z5apjrzqtd2r/post/3lo4rp57mxs2c?ref_src=embed">May 1, 2025 at 12:56 PM</a></p>
+</blockquote>
+<script async="" src="https://embed.bsky.app/static/embed.js" charset="utf-8"></script>
+<p>The subject has become a regular meme topic in academic social media due to the ever-increasing number of potential estimators. How did this panel data specification become the true panel data specification? How did an extraordinary number of empirical findings in the social sciences come to rely on this model?</p>
+<p>And, y’know, is… that a good thing?</p>
+<p>Short answer: no. Living in a co-created fantasy world in which things that can’t be factually verified are treated as true is great for role-playing games. For statistical methods, not so much.</p>
+<p>No, I don’t want to throw the baby out with the bathwater. There is plenty of brilliant DiD research. But if we keepusing only a hammer we may end up destroying a good number of screws. In this blog post I’ll define DiD with causal graphs and then show how to simulate it with the R package <code>DeclareDesign</code> for robust power analyses of experimental and observational designs, so it’s not just a rant. Maybe with better tools we can build a better world 🌍.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>I’ll make the argument in this blog post that DiD isn’t any more likely to be causally identified than any other panel data method—without knowing something about the credibility of the application to the specific research question. If all we have is the math–regardless of how fancy it is–we don’t have a valid reason to prefer DiD over say a generic fixed effects panel data specification. The most that we can say is that we might want DiD over a purely cross-sectional comparison, but even in that case, we should still think about what it is we are trying to measure before we submit to PNAS.</p>
+<p>Which brings me to the big take-away of this blog post: panel data methods are best understood as <em>measurement strategies</em>. A measure that works great in one empirical context will fail in another.</p>
+<p>The exception of course is if we manipulate treatment assignment. For so-called “canonical” DiD, as I show later, this is indeed possible. In that case we can make fairly confident statements about causality without needing more information about the nature of the causal process (well, at least on paper). However, panel data methods are usually employed for observational research in part because their strength is external validity: examining a set of cases or units over a significant period of time. We lack the ability to perform experiments at that scale, but we very much want to know as much as we can about the way the world actually functions. Laboratories are only good for so much.</p>
+<p>To make this argument, I’ll first review the specification for anyone who is not familiar. Feel free to skip this bit if you want to get to the “good” stuff.</p>
+<p>DiD is usually presented in potential outcomes for the “2x2” scenario, i.e., two groups (treatment and control) that are observed at two time points: before and after treatment. However, I’ll start in a different place: DiD as a subset of panel data modeling. (For more background on panel data modeling, see <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0231349">my paper with Jon Kropko</a>).</p>
+<p>If we have a panel data set (multiple units <span class="math inline">\(i\)</span> and multiple measures <span class="math inline">\(t\)</span> for each unit), then we have in principle two basic models for a given time-varying outcome <span class="math inline">\(Y_{it}\)</span>. First, we can run an over-time model with fixed effects (intercepts) <span class="math inline">\(\gamma_i\)</span> for each unit:</p>
+<p><span id="eq-a"><span class="math display">\[
+Y_{it} = \alpha_1 + \gamma_i +  \beta_{U} X_{it} + \epsilon_{it}
+\tag{1}\]</span></span></p>
+<p>This model will return a coefficient of <span class="math inline">\(X_{it}\)</span>, <span class="math inline">\(\beta_U\)</span>, that is the average value of <span class="math inline">\(Y_{it}\)</span> that is first averaged within each unit across the multiple measures <span class="math inline">\(t\)</span> (i.e., a weighted average).</p>
+<p>Alternatively, we can remove the unit/case intercepts and fit a model with intercepts <span class="math inline">\(\delta_t\)</span> for each time point:</p>
+<p><span id="eq-b"><span class="math display">\[
+Y_{it} = \alpha_2 + \delta_t + \beta_{T} X_{it} + \epsilon_{it}
+\tag{2}\]</span></span></p>
+<p>This model will return a value for <span class="math inline">\(\beta_T\)</span> that is equal to the average value of <span class="math inline">\(Y_{it}\)</span> within each unique cross-section <span class="math inline">\(t\)</span>. In that sense, <span class="math inline">\(\beta_T\)</span> is the average cross-sectional effect.</p>
+<p>These two models capture the main dimensions of variation. Unit/case intercepts is equal to the multiple measures of <span class="math inline">\(Y_{it}\)</span> and as such averages <em>over time</em>, while time intercepts average <em>across units</em>, or equivalently in the cross-section. We can think of these as distinct measures we can take from a given panel data set that has both a set of units/cases and multiple time-indexed measures for each unit.</p>
+<p>Differences-in-differences as a panel data model is an interaction between the effect <span class="math inline">\(\beta\)</span> and the time intercept <span class="math inline">\(\delta_t\)</span>, which I will call <span class="math inline">\(\tau\)</span>:</p>
+<p><span id="eq-c"><span class="math display">\[
+Y_{it} = \alpha + \delta_t + \beta_{\tau'} X_{it} + \tau X_{it} \delta_t + \epsilon_{it}
+\tag{3}\]</span></span></p>
+<p>As was previously mentioned, in the case in which <span class="math inline">\(t=2\)</span>, there will only be one possible value for <span class="math inline">\(\tau\)</span> as the first time point <span class="math inline">\(t=1\)</span> is dropped. From a linear modeling perspective, the DiD effect <span class="math inline">\(\tau\)</span> is the “extra” variation in <span class="math inline">\(Y_{it}\)</span> that comes from the cross-section “moving” or varying across from <span class="math inline">\(t=1\)</span> to <span class="math inline">\(t=2\)</span>. This is especially true when <span class="math inline">\(X_{it}\)</span> is a binary variable (i.e., a treatment indicator), which much of the literature assumes.</p>
+<p>This is the “canonical DiD” formulation and equivalent to the following potential outcomes notation, in which we observe a unit <span class="math inline">\(Y\)</span> in treatment ( <span class="math inline">\(Y^1\)</span>) and in control ( <span class="math inline">\(Y^0\)</span>), and the difference between these two values is the average treatment effect, or in the DiD case, the average effect on the treated, mainly because units in control can never receive the treatment. This estimand is defined as:</p>
+<p><span id="eq-d"><span class="math display">\[
+ATT_{DiD} = [Y^1(1) - Y^1(0)] - [Y^0(1) - Y^0(0)]
+\tag{4}\]</span></span></p>
+<p>The number in parentheses denotes the time point, so <span class="math inline">\(Y^1(1)\)</span> is the treated unit after treatment occurs and <span class="math inline">\(Y^1(0)\)</span> is the treated unit before treatment occurs (treatment is assigned, implicitly, between time points 1 and 2). While the control group <span class="math inline">\(Y^0\)</span> can never receive the treatment, we still have two over-time observations for the control group, and the two time periods are differenced in the same way as the treatment group. The key idea is that we should want to look at the differences in pre/post measures because these differences are better than the “raw” over-time variation or cross-sectional variation as in the models mentioned above.</p>
+<p>The DiD model is considered credible whenever the “parallel trends” assumption holds, that is, whether the units in treatment would have the same differenced value as the units in control—if the units in treatment were ever in control (which in observational settings they can’t be).</p>
+<p>So far I haven’t said anything super controversial. But it is interesting that DiD is often presented in potential outcomes notation—but the other panel data methods are not. I sometimes think this is why people have such reverence for DiD as a probably causally-identified method: we can write it in potential outcomes and the parallel trends thing is pretty cool. But no reason we can’t do the same for unit FE or time FE models once we subtract away the unit means <span class="math inline">\(Y_i\)</span> or the time means <span class="math inline">\(Y_t\)</span> :</p>
+<p><span id="eq-e"><span class="math display">\[
+ATT_U = E[ (Y^1 - \bar{Y^1_i}) - (Y^0 - \bar{Y^0_i})]
+\tag{5}\]</span></span></p>
+<p>and</p>
+<p><span id="eq-f"><span class="math display">\[
+ATT_T = E[ (Y^1 - \bar{Y^1_t}) - (Y^0 - \bar{Y^0_t)}]
+\tag{6}\]</span></span></p>
+<p>Here the expectation operator <span class="math inline">\(E[\cdot]\)</span> averages over all the observed units in treatment ( <span class="math inline">\(Y^1\)</span>) and the observed units in control ( <span class="math inline">\(Y^0\)</span>) after the observed means of <span class="math inline">\(Y\)</span> for either units or cases are subtracted away. The formulas look similar to the DiD specification but there are important differences: rather than using discrete time points, we are subtracting away the mean value of <span class="math inline">\(Y_{it}\)</span>, which we denote with a bar. A mean is a single statistic and thus does not change when we increase either the number of units or the number of time points. As such, there is no specific modeling of time as in a DiD model. We could reorder the time points for the either specification and end up with the same average value as it doesn’t matter what order you take the average for a set of numbers.</p>
+</section>
+<section id="wheres-the-beef" class="level2">
+<h2 class="anchored" data-anchor-id="wheres-the-beef">Where’s the Beef</h2>
+<p>Having worked through some of the notation, I want to come back to this post’s premise: why do people think that the DiD is the primus inter pares research design? Again, I’ve read several DiD papers <span class="citation" data-cites="dechaisemartin roth2023 cunningham2021 huntington-klein2021 zeldow2021">(<a href="#ref-dechaisemartin" role="doc-biblioref">Chaisemartin and D’Haultfœuille 2025</a>; <a href="#ref-roth2023" role="doc-biblioref">Roth et al. 2023</a>; <a href="#ref-cunningham2021" role="doc-biblioref">Cunningham 2021</a>; <a href="#ref-huntington-klein2021" role="doc-biblioref">Huntington-Klein 2021</a>; <a href="#ref-zeldow2021" role="doc-biblioref">Zeldow and Hatfield 2021</a>)</span>, and I can’t necessarily find a straight answer for this widely-held belief. If this is DnD, who’s the dungeon master?</p>
+<p>In their forthcoming textbook, which should be the most comprehensive statement about available DiD methods to date, <span class="citation" data-cites="dechaisemartin">Chaisemartin and D’Haultfœuille (<a href="#ref-dechaisemartin" role="doc-biblioref">2025</a>)</span> state that</p>
+<p><img src="images/dech_statement.png" class="img-fluid"></p>
+<p>These are certainly all different identification conditions for simple cross-sectional and over-time comparisons, but it is not clear to me why <span class="citation" data-cites="dechaisemartin">Chaisemartin and D’Haultfœuille (<a href="#ref-dechaisemartin" role="doc-biblioref">2025</a>)</span> believe these assumptions are “weaker.” Why are “evolutions” better than “levels”?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/duck_meme.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>Maybe this is obvious to some, but honestly, I don’t really get it. Just because something changed over time doesn’t make it causally identified. In fact, some things become more difficult to track over time. To give a simple example, when we compare two twins at birth, we can be fairly confident that any big differences in height or weight were due to gestational issues. A similar comparison of the twins at age 30 would have a much more difficult time pinning any differences between them to what happened in the womb.</p>
+<p>I know I’m taking cheap shots at the papers cited above—this particular point is not something they were aiming to address—but I’m trying to illustrate what is a central problem in causal identification. What metric do we use to measure the strength of assumptions when the treatment is not manipulated? Technically, or not so technically, any causal inference analysis without treatment assignment is more or less screwed.</p>
+<p>Unobservable counterfactuals are… unobservable. Actually, any “counterfactual” is by definition unobservable. You can’t approximate something that didn’t happen with any confidence unless you’re… playing DnD.</p>
+<p>Similarly, in <span class="citation" data-cites="roth2023">Roth et al. (<a href="#ref-roth2023" role="doc-biblioref">2023</a>)</span> recent review (remarkably clear and thorough), they do not directly state why we should prefer DiD over other panel methods. They state that “difference-in-differences methods overcome this identification challenge via assumptions that allow us to impute the mean counterfactual untreated outcomes”, and then later that “the parallel trends assumption… intuitively states that the average outcome for the treated and untreated populations would have evolved in parallel if treatment had not occurred.” I agree that the parallel trends assumption is intuitive, but that does not strike me as particularly convincing in terms of the credibility of assumptions. Human intuitions are often flawed when it comes to interpreting statistical findings.</p>
+<p>Also what exactly does it mean to “overcome an identification challenge via assumptions”? I can assume almost anything, including that I know the future. But I don’t know how that overcomes anything.</p>
+<p>I am being somewhat harsh. All of the authors I’ve cited have done outstanding work in this field, and to be clear, I do think it’s useful. It just may not have an a priori reason to believe it’s causally-identified. Towards the end of this piece I will return to the utility of DiD. There is something there–but it is mainly a folk theorem, i.e., we are making educated guesses based on experience. There is something <em>useful</em> about DiD, but nothing <em>magical</em>. Other panel data methods may work better depending on the problem.</p>
+<p>Sadly, DiD is not a +16 fireball attack or a legendary sword item as in DnD.</p>
+<p>Or, as Monty Python puts it…</p>
+<div class="tenor-gif-embed" data-postid="13701305" data-share-method="host" data-aspect-ratio="2.27397" data-width="100%">
+<p><a href="https://tenor.com/view/model-monty-python-and-the-gif-13701305">Model Monty GIF</a>from <a href="https://tenor.com/search/model-gifs">Model GIFs</a></p>
+</div>
+<script type="text/javascript" async="" src="https://tenor.com/embed.js"></script>
+</section>
+<section id="bobs-really-great-causal-dag-theorem-for-panel-data" class="level2">
+<h2 class="anchored" data-anchor-id="bobs-really-great-causal-dag-theorem-for-panel-data">Bob’s Really Great Causal DAG Theorem* for Panel Data</h2>
+<p>*it’s not a theorem, it’s just what I think is probably true</p>
+<p>Models can be quite useful. But all models have a purpose, and no one model can explain every outcome very well. To show how different panel data models–including DiD–can both be and not be causally identified, I put them into the causal graph framework, and then show how to simulate these methods in a way that makes the bias/variance trade-off clear.</p>
+<p>More generally, how should we represent a difference-in-differences model as a causal diagram? This seems pretty important given the prominence of the estimator in the causal inference literature. Oddly, while there are many expositions of DiD, virtually none of them have DAGs. The only one I could find was the following by Nick Huntington-Klein in his (excellent) book <a href="https://theeffectbook.net/ch-DifferenceinDifference.html">The Effect</a>:</p>
+<p><img src="images/img1.png" class="img-fluid"></p>
+<p>Nick argues that Time and Group are omitted variables that can create a back-door path between the treatment and the outcome. In other words, the treatment and the outcome may not have a causal relationship, but one could be present due to either Time or Group’s effect on both.</p>
+<p>I think what Nick is going for here is that both Time and Group (i.e., the cross-section) create different inference challenges, but I find this graph a bit too illustrative for my purposes. Notably, Nick does not derive anything from this graph; his analysis uses the same PO notation as the others.</p>
+<p>One big issue is that it is not clear how Time can be a variable. Yes, time changes, but does time cause anything? Rather, isn’t time a property of variables? As in, at time <span class="math inline">\(t\)</span>, the value of <span class="math inline">\(X\)</span> was 3 while at <span class="math inline">\(t=4\)</span>, <span class="math inline">\(X=5\)</span>. Calling time a variable is like calling “inches” or “meters” a variable. Yes, it has numbers and it varies, but it’s actually a property of variables that we can use for <em>measurement</em>. Group could be a variable depending on whether we want to identify the causal effect of group membership—but it might also just be a way of taking measurements for a diverse set of groups that we are interested in for research purposes.</p>
+<p>So is there a way to generally represent panel data methods like <a href="#eq-a" class="quarto-xref">Equation&nbsp;1</a> in a causal graph? That isn’t tied to any one linear model? I’ve thought about this <em>way</em> too much, and I think I might still be missing something, but what I have I will call:</p>
+<p><strong>Bob’s Really Great Causal DAG Theorem for Panel Data:</strong></p>
+<div id="thm-dag" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1</strong></span> <em>Once a valid panel data transformation (i.e., measurement) is applied to all variables, the variables can be represented on a directed acyclic graph without reference to linear model coefficients.</em></p>
+</div>
+<p>By virtue of <a href="#thm-dag" class="quarto-xref">Theorem&nbsp;1</a>, once we represent variables this way, we can easily show that all standard threats of inference still apply to any given panel data transformation. What do I mean by standard threats of inference? Following Pearl and other DAG masters, these are:</p>
+<ol type="1">
+<li>Omitted variable bias;</li>
+<li>Selection/collider bias;</li>
+<li>Post-treatment bias.</li>
+</ol>
+<p>Panel data transformations (i.e., algorithms like mean-centering) do not on their own solve any of these problems. That does not mean all panel data specifications are equally credible for all research designs–there may be good reasons why a certain specification (or measurement) has less concerns about #1, #2, or #3 <em>in a given empirical context</em>. But in terms of the causal structure, nothing about panel data modeling itself suggests that any of these threats have been resolved.</p>
+<p>For example, take the following standard form of the omitted variable problem for a confounder <span class="math inline">\(Z\)</span>, treatment <span class="math inline">\(T\)</span>, and outcome <span class="math inline">\(Y\)</span>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdag)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>dag_confound <span class="ot">&lt;-</span> <span class="fu">dagify</span>(Y <span class="sc">~</span> Z,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                       <span class="st">`</span><span class="at">T</span><span class="st">`</span> <span class="sc">~</span> Z)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag_confound,<span class="at">layout=</span><span class="st">"circle"</span>) <span class="sc">+</span> <span class="fu">theme_dag_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/dag1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this plot, <span class="math inline">\(T\)</span> and <span class="math inline">\(Y\)</span> have no causal relationship once you condition on <span class="math inline">\(Z\)</span>, the omitted variable. <span class="math inline">\(T\)</span> and <span class="math inline">\(Y\)</span> would be associated without conditioning on <span class="math inline">\(Z\)</span>. Now we examine what this would look for a panel data with intercepts for cases as in <a href="#eq-a" class="quarto-xref">Equation&nbsp;1</a>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdag)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dag_confound <span class="ot">&lt;-</span> <span class="fu">dagify</span>(Y <span class="sc">~</span> Z,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                       <span class="st">`</span><span class="at">T</span><span class="st">`</span> <span class="sc">~</span> Z,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels=</span><span class="fu">c</span>(<span class="at">Y=</span><span class="st">"Y - E[Y_i]"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                                <span class="st">`</span><span class="at">T</span><span class="st">`</span><span class="ot">=</span><span class="st">"T - E[T_i]"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">Z=</span><span class="st">"Z - E[Z_i]"</span>))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag_confound,<span class="at">layout=</span><span class="st">"circle"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">use_labels =</span> <span class="st">"label"</span>,<span class="at">text=</span>F) <span class="sc">+</span> <span class="fu">theme_dag_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/dag2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We have now adjusted our variables so that they are mean-centered around the unit averages. As can be seen, it is still entirely possible that after completing the mean-centering operation that an omitted variable could still affect the outcome. All that is necessary is for the omitted variable to have some variation different from its within-unit expected value.</p>
+<p>The same DAG could represent DiD once we input the specific changes required:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdag)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dag_confound <span class="ot">&lt;-</span> <span class="fu">dagify</span>(Y <span class="sc">~</span> Z,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                       <span class="st">`</span><span class="at">T</span><span class="st">`</span> <span class="sc">~</span> Z,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels=</span><span class="fu">c</span>(<span class="at">Y=</span><span class="st">"Y_t=2 - Y_t=1"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                                <span class="st">`</span><span class="at">T</span><span class="st">`</span><span class="ot">=</span><span class="st">"T_t=2 - T_t=1"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">Z=</span><span class="st">"Z_t=2 - Z_t=1"</span>))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag_confound,<span class="at">layout=</span><span class="st">"circle"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">use_labels =</span> <span class="st">"label"</span>,<span class="at">text=</span>F) <span class="sc">+</span> <span class="fu">theme_dag_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/dag3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What the DAG makes clear is that so long as the confounder <span class="math inline">\(Z\)</span> has variation across both time points, it could confound the <span class="math inline">\(Y\)</span>/<span class="math inline">\(T\)</span> relationship. This would constitute a parallel trends violation, and we could specify exactly what is happening with some of the available diagnoses. But to make it quite general, this DAG explains what is going on.</p>
+<p>Furthermore, we could have DiD with collider/selection bias if <span class="math inline">\(Y\)</span> and <span class="math inline">\(T\)</span> are only related due to being causal ancestors of a selection effect <span class="math inline">\(S\)</span>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dag_confound <span class="ot">&lt;-</span> <span class="fu">dagify</span>(S <span class="sc">~</span> Y,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                       S <span class="sc">~</span> <span class="st">`</span><span class="at">T</span><span class="st">`</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels=</span><span class="fu">c</span>(<span class="at">Y=</span><span class="st">"Y_t=2 - Y_t=1"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                                <span class="st">`</span><span class="at">T</span><span class="st">`</span><span class="ot">=</span><span class="st">"T_t=2 - T_t=1"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">S=</span><span class="st">"S_t=2 - S_t=1"</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag_confound,<span class="at">layout=</span><span class="st">"circle"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">use_labels =</span> <span class="st">"label"</span>,<span class="at">text=</span>F) <span class="sc">+</span> <span class="fu">theme_dag_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/dag4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>So long as the selection (or attrition) process varies across time points 1 and 2, it won’t be differenced out and <span class="math inline">\(Y\)</span> and <span class="math inline">\(T\)</span> could end up with a misleading association.</p>
+<p>This method of representing panel data methods as causal DAGS makes it clear why they cannot, on their own, induce identification. It is always possible omitted variables or collider/selection bias confound the relationship. While I have not shown it, post-treatment bias could also affect results. Because panel data specifications are essentially linear operations on variables, the best way to represent them in a DAG is as the result of these linear operations rather than attempting to coerce the linear operators into variables (like Time or Group). Measures should be distinct from variables.</p>
+<p>This DAG also meets Pearl’s standard that it is independent of any particular statistical distribution or modeling function. We could use any distribution for the variables; we just have to difference them first. A linear panel data specification for DiD as shown above would of course meet this requirement conditional on the outcome being Normally-distributed etc etc.</p>
+</section>
+<section id="hello-bias-variance-trade-off-my-old-friend" class="level2">
+<h2 class="anchored" data-anchor-id="hello-bias-variance-trade-off-my-old-friend">Hello Bias-Variance Trade-off My Old Friend</h2>
+<p>So under what conditions should we pick one of these methods? As Jon Kropko and I have argued for some time, arguably the most important consideration is whether the variation in the data matches your research question <span class="citation" data-cites="kropko2020">(<a href="#ref-kropko2020" role="doc-biblioref">Kropko and Kubinec 2020</a>)</span>. It doesn’t particularly matter if you have something causally identified if it’s irrelevant. I am quite sure that it was my fist that just punched through the first floor window; that causally-identified fact will help me very little when estimating the causal effect of education on crime. Very rarely do I see this issue addressed in either the theoretical or applied DiD/event study literature. Measurement is fundamental to causal inference because without it we cannot answer the question we set out to answer <span class="citation" data-cites="gerring2012">(<a href="#ref-gerring2012" role="doc-biblioref">Gerring 2012</a>)</span>.</p>
+<p>In some cases we may have one specific panel data measurement that is relevant. For many research questions, though, we can plausibly look at multiple sources of variation, such as cross-sectional comparisons, over-time within-unit comparisons, or something like DiD in one of its many flavors. For example, take the research question of the effect of rising wealth on democratization. We could compare countries to themselves—do countries have better democracy when their GDP is higher? Or countries to other countries—do wealthier countries have more democracy than poor countries? Or DiD–when wealth increases in some countries but not in others, do the countries that experienced the increase see greater democracy than those countries that did not? DiD is, as I will show, best understood as an interaction effect in the cross-section (did the cross-sectional relationship change between two time points).</p>
+<p>What advantage does DiD have? Primarily it’s use of <em>time</em>. Time is the most useful property of the universe for estimating causal relationships other than direct manipulation—and is one of the most common ways that people identify causal relations in the “real world.” If I show up to work week and after week and get paid, and then stop coming to work and do not get paid, I have reason to believe that the relationship is causal. Time only moves in one direction, thankfully, so I know that I did not go to work <em>because</em> they first paid me as my attendance preceded my first paycheck. This is why we might prefer DiD over cross-sectional comparisons—but again, this is a folk theorem, not a mathematical proof.</p>
+<p>When we add in a time dimension, a before and after, we can rule out all kinds of hypotheses like non-time-varying selection bias. At least in theory, that’s pretty neat! But to be clear, simply observing things over time doesn’t remove all threats to inference. As I showed previously with DAGs, DiD relationships can still have all the issues of selection bias, omitted variable bias, and the like, so long as these threats to inference also vary from one cross-section in time to the next.</p>
+<p>For these reasons, there are two conditions under which we might want to use DiD over other panel data methods:</p>
+<ol type="1">
+<li>When we have good reason to believe that the threats to inference are less likely to exist in the dimension of variation specified by DiD (i.e., parallel trends holds, etc etc);</li>
+<li>And when the increased variance of DiD is less of a cost than the reduction in bias we hopefully achieve.</li>
+</ol>
+<p>Most of the discussion in the literature focuses on #1. I almost never see #2, though note that recent research has shown that many social science studies, including event studies, are very plausibly under-powered <span class="citation" data-cites="arel-bundock">(<a href="#ref-arel-bundock" role="doc-biblioref">Arel-Bundock et al. 2025</a>)</span>. For these reasons, <em>even when we think DiD might do a better job isolating threats to inference</em>, we should still look at the simpler one-way panel data methods. Why? Suppose that the relationship in a unit FE model is the same as DiD–the unit FE model will be far more precise. There is no reason not to look at the simpler models.</p>
+<p>In addition, there is a condition under which we would <em>want</em> to use a simpler method:</p>
+<ol type="1">
+<li>We should not use DiD when over-time selection leads to pronounced collider/selection bias.</li>
+</ol>
+<p>I imagine it could also be true that DiD has omitted variable bias when the over-time/cross-section panel data methods don’t, but it’s kind of hard to visualize how that could work. For selection bias, though, it’s fairly straightforward. Suppose that there is a process that operates from one time point to the next, but not on the time series as a whole. What could this be? Think of seasonality. If I compare real estate sales in January to March, they will almost always rise. If that rise varies across treatment &amp; control units, I might have a DiD-specific problem. By contrast, if I aggregate over time within units, I won’t have this issue because seasonality is constant across years. In that case, a one-way unit FE model that only looks at difference from the over-time average could be preferable.</p>
+<p>I am sure that other examples exist. There is plenty of discussion of parallel trends and when it could be violated—though very little about whether other panel data methods might actually perform better in those situations. Which method is best will, at the end of the day, come down to the scholar’s judgment, which should take into account everything known about the hypothesized causal process and any knowledge of mechanisms.</p>
+<p>In short, I think DiD is useful–it just can’t pull a rabbit out of a hat or a sword out of a stone. And we would probably make fewer inferential errors, and learn more from our data, if we stopped pretending like DiD is a “causal” method while other panel data measurements are not.</p>
+<p>(Unless you manipulated the treatment, obvi).</p>
+<p>To finish the blog post, I’ll go back to the simulation I created with Jon Kropko in our 2020 article and extend it to difference-in-differences. I’ll show how to use the remarkable <code>DeclareDesign</code> package to simulate and diagnose DiD designs when treatment can be assigned—and when it can’t.</p>
+</section>
+<section id="power-analysis-the-bias-variance-trade-off" class="level2">
+<h2 class="anchored" data-anchor-id="power-analysis-the-bias-variance-trade-off">Power Analysis &amp; the Bias-Variance Trade-off</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/9tis54.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>It is not very easy to simulate realistic panel data due to the multilevel structure. It is always possible to directly generate coefficients from a linear model, but much harder to have those quantities represent something like real-world data. In <span class="citation" data-cites="kropko2020">Kropko and Kubinec (<a href="#ref-kropko2020" role="doc-biblioref">2020</a>)</span>, we solved this problem for the case of two-way and one-way fixed effects models, that is, models where <span class="math inline">\(Y\)</span> varies in the cross-section and within units over time. We did this by combining <a href="#eq-a" class="quarto-xref">Equation&nbsp;1</a> and <a href="#eq-b" class="quarto-xref">Equation&nbsp;2</a> and solving for <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>:</p>
+<p><span id="eq-setup"><span class="math display">\[
+\begin{align}
+Y_{it} &amp;= \alpha_1 + \gamma_i +  \beta_{U} X_{it} + \epsilon_{it}\\
+Y_{it} &amp;= \alpha_2 + \delta_t + \beta_{T} X_{it} + \epsilon_{it}
+\end{align}
+\tag{7}\]</span></span></p>
+<p>and we show that:</p>
+<p><span id="eq-solveit"><span class="math display">\[
+\begin{align}
+X_{it} &amp;= \frac{\gamma_i - \delta_t}{\beta_T - \beta_U}\\
+Y_{it} &amp;= \frac{\beta_T \gamma_i - \beta_U \delta_t}{\beta_T - \beta_U}
+\end{align}
+\tag{8}\]</span></span></p>
+<p>What this equation allows us to do is to simultaneously generate within-case and cross-sectional variation in <span class="math inline">\(Y\)</span>. By doing so, we can allow <span class="math inline">\(X\)</span> to have varying effects on <span class="math inline">\(Y\)</span> depending on whether we including time series intercepts <span class="math inline">\(\delta_t\)</span> or case intercepts <span class="math inline">\(\gamma_i\)</span>. While it is easy to find contrasting 1-way FE effects in real-world panel datasets <span class="citation" data-cites="lipcean2024">(<a href="#ref-lipcean2024" role="doc-biblioref">Lipcean and Casal Bértoa 2024</a>)</span>, it is virtually impossible to generate these types of effects with a single panel data equation (go ahead and try if you want).</p>
+<p>What I did not notice at the time but is now more apparent is that our approach to simulating panel data borrows from simultaneous equation modeling. We essentially have the following DAG:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dag_panel <span class="ot">&lt;-</span> <span class="fu">dagify</span>(Y <span class="sc">~</span> X_U,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                    Y <span class="sc">~</span> X_T)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag_panel</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      ,<span class="at">layout=</span><span class="st">"circle"</span>) <span class="sc">+</span> <span class="fu">theme_dag_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/plot_panel_dag-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>I wouldn’t call this a causal DAG per se—as I’ve argued, these are more appropriately considered measurements of <span class="math inline">\(X\)</span>. However, it is does visualize nicely what our approach amounts to and how it can be extended. We did not consider simulating differences-in-differences in the paper because that particular model had yet to become so popular, although my co-author Jon wrote up a brilliant supplemental analysis of DiD that pre-figured the later skepticism of TWFE as an estimator for DiD (see <a href="https://doi.org/10.1371/journal.pone.0231349.s001">here</a>).</p>
+<p>To extend this simulation to DiD, we need to add in an interaction between the cross-section and a time indicator as a predictor of <span class="math inline">\(Y\)</span>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dag_panel_did <span class="ot">&lt;-</span> <span class="fu">dagify</span>(Y <span class="sc">~</span> X1,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                    Y <span class="sc">~</span> X2,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                    Y <span class="sc">~</span> X3,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="at">X1=</span><span class="st">"X_U"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">X2=</span><span class="st">"X_T"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">X3=</span><span class="st">"X_T(T=t)"</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggdag</span>(dag_panel_did</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      ,<span class="at">layout=</span><span class="st">"circle"</span>,<span class="at">use_labels =</span> <span class="st">"label"</span>) <span class="sc">+</span> <span class="fu">theme_dag_blank</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/plot_panel_dag_int-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This interaction between the cross-sectional variation in <span class="math inline">\(X_{it}\)</span> in <a href="#eq-setup" class="quarto-xref">Equation&nbsp;7</a> and the time indicator <span class="math inline">\(I[t=t']\)</span>, denoted <span class="math inline">\(\beta_{DiD}\)</span> and for completeness, represents a DiD effect. I also added an interaction between the within-unit variation in <span class="math inline">\(X_{it}\)</span> and the case indicator <span class="math inline">\(I[i=i']\)</span>, denoted <span class="math inline">\(\beta_{WiD}\)</span>. To my knowledge no one has ever tried to estimate this model, but it is in principle the converse of DiD.</p>
+<p>With these additional interactions, we now have the following two equations:</p>
+<p><span id="eq-setup2"><span class="math display">\[
+\begin{align}
+Y_{it} &amp;= \alpha_1 + \gamma_i I[i=i'] +  \beta_{U} X_{it} + \beta_{WiD}X_{it}I[i=i'] \epsilon_{it}\\
+Y_{it} &amp;= \alpha_2 + \delta_t I[t=t'] + \beta_{T} X_{it} + \beta_{DiD} X_{it}I[t=t']  \epsilon_{it}
+\end{align}
+\tag{9}\]</span></span></p>
+<p>and solution for <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
+<p><span id="eq-solveit2"><span class="math display">\[
+\begin{align}
+X_{it} &amp;= \frac{\alpha_1 + \gamma_i I[i=i'] - \delta_t I[t=t'] - \alpha_2}{\beta_T + \beta_{DiD}I[t=t'] - \beta_U - \beta_{WiD}I[i=i']}\\
+Y_{it} &amp;= \frac{\beta_T \gamma_iI[i=i'] + \beta_{DiD}\gamma_iI[i=i'] + \beta_T \alpha_1 + \beta_{DiD}I[t=t'] \alpha_1  - \beta_U \delta_tI[t=t'] - \beta_{WiD} [i=i'] \alpha_2 }{\beta_T + \beta_{DiD}I[t=t'] - \beta_U - \beta_{WiD}I[i=i']}
+\end{align}
+\tag{10}\]</span></span></p>
+<p>The addition of the indicator variables complicates the equations, but is necessary for completeness and also to show the interactions. While this formulation has a lot more parameters, it is functionally the same as the original but with interactions added in. There are other ways to simulate DiD, but starting with an interaction between the cross-sectional coefficient and the time point is very helpful because it clarifies what conventional DiD is and isn’t.</p>
+<p>To illustrate, in the code chunk below I simulate panel data with the <code>panelsim</code> package. This package implements our paper simulation and is now expanded with the additional DiD extensions I have just described. You can get the package on Github here: <a href="https://github.com/saudiwin/panelsim" class="uri">https://github.com/saudiwin/panelsim</a> (perhaps one day on CRAN, we’ll see).</p>
+<p>To simulate a panel data set with a fixed DiD coefficient of 1 and exactly 2 time points with 100 cases/units (<span class="math inline">\(N\)</span>) for a total of 2,000 rows of data, I use the <code>tw_data</code> function from <code>panelsim</code> in the code block below. The <code>tw_data</code> has options to generate all of the coefficients in <a href="#eq-solveit2" class="quarto-xref">Equation&nbsp;10</a> as the function documentation shows. For now, I’ll just leave most of those other arguments at their defaults, which will generate a fair amount of heterogeneity in the over-time and cross-sectional variance of <span class="math inline">\(Y\)</span>.</p>
+<p><code>tw_data</code> produces a list with a data frame of simulated panel data along a list with the parameters used to generate it. With this data, I can then identify the DiD coefficient by fitting a linear model specification with an interaction between <span class="math inline">\(X\)</span> and the <code>time</code> indicator. Big win for the OLS fans!</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(panelsim)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># set did.eff.sd = 0 for a homogenous DiD coefficient</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>gen_data <span class="ot">&lt;-</span> <span class="fu">tw_data</span>(<span class="at">did.eff.mean=</span><span class="dv">1</span>,<span class="at">did.eff.sd=</span><span class="dv">0</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">T=</span><span class="dv">2</span>,<span class="at">N=</span><span class="dv">100</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x <span class="sc">*</span> <span class="fu">factor</span>(time),<span class="at">data=</span>gen_data<span class="sc">$</span>data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x * factor(time), data = gen_data$data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.75685 -0.61528 -0.01365  0.58801  2.36132 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     -0.30666    0.09894  -3.099  0.00222 ** 
+x                0.61050    0.00456 133.875  &lt; 2e-16 ***
+factor(time)2   -1.00010    0.14223  -7.032 3.32e-11 ***
+x:factor(time)2  0.94030    0.01155  81.407  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.9894 on 196 degrees of freedom
+Multiple R-squared:  0.9951,    Adjusted R-squared:  0.995 
+F-statistic: 1.323e+04 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>The DiD estimate in the <code>lm</code> model output is the <code>x:factor(time)2</code> coefficient. This number is unlikely to be exactly 1 as this estimate is kind of noisy, as we have already discussed. Indeed, any interaction effect is likely to have power issues, as has become increasingly well-known. It really is amazing how much power is lost by only looking at an interaction between two time points. You need a <em>lot</em> of cases. And what if the coefficients for a “naive” model (1-way time FE or case FE) aren’t in fact any different than DiD? How “bad” does the naive model have to be before you throw away a lot of power and use DiD? The <code>tw_data</code> function can help you answer that question.</p>
+<p>All of the other coefficients were generated by the <code>tw_data</code> function, but we can have more control. For example, we can also fix the constituent term for <code>x</code> (<span class="math inline">\(\beta_T\)</span> in <a href="#eq-setup2" class="quarto-xref">Equation&nbsp;9</a>) to a specific value:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>gen_data <span class="ot">&lt;-</span> <span class="fu">tw_data</span>(<span class="at">did.eff.mean=</span><span class="dv">1</span>,<span class="at">did.eff.sd=</span><span class="dv">0</span>,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cross.eff.mean =</span> <span class="sc">-</span><span class="fl">0.3</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cross.eff.sd =</span> <span class="dv">0</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">T=</span><span class="dv">2</span>,<span class="at">N=</span><span class="dv">1000</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x <span class="sc">*</span> <span class="fu">factor</span>(time),<span class="at">data=</span>gen_data<span class="sc">$</span>data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x * factor(time), data = gen_data$data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.1796 -0.6738 -0.0302  0.6880  3.0093 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     -1.0361074  0.0311875  -33.22   &lt;2e-16 ***
+x               -0.2986184  0.0005474 -545.52   &lt;2e-16 ***
+factor(time)2   -0.6355300  0.0441176  -14.40   &lt;2e-16 ***
+x:factor(time)2  0.9985621  0.0005533 1804.81   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.9862 on 1996 degrees of freedom
+Multiple R-squared:      1, Adjusted R-squared:      1 
+F-statistic: 2.534e+07 on 3 and 1996 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>The coefficient for <code>x</code> in the model output is now close to our simulated value. Intriguingly, the standard error on the interaction effect is now smaller, suggesting that our fixing of the constituent term is a way of “cheating” by increasing power through increased precision. In any case, fixing these parameters is not the default.</p>
+<p>One of the main uses I designed <code>tw_data</code> for is to simulate DiD models and test for power and other issues. The advantage of using <code>tw_data</code> is that there are no restrictions on <span class="math inline">\(X\)</span> or <span class="math inline">\(Y\)</span>: you can have continuous variables on both sides of the equation. However, to make the analysis comparable to the DiD specification in the literature, as well as to make use of existing resources for power analysis, we can also look at the case where <span class="math inline">\(X\)</span> must be equal to 1 or 0, that is, <span class="math inline">\(X\)</span> is a treatment that we can potentially manipulate.</p>
+<section id="moar-power" class="level3">
+<h3 class="anchored" data-anchor-id="moar-power">Moar Power</h3>
+<p>The best existing power analysis package for R–and indeed, for essentially any statistical software in existence–is <code>DeclareDesign</code>. It even has an associated book you can read online: <a href="https://declaredesign.org/" class="uri">https://declaredesign.org/</a>. The software can allow you simulate and diagnose virtually every possible issue in research designs. While it is designed with experiments in mind, the authors also allow for various kinds of observational analyses as well. In fact, they even have a chapter of their book devoted to DiD simulation: <a href="https://book.declaredesign.org/library/observational-causal.html#sec-ch16s3" class="uri">https://book.declaredesign.org/library/observational-causal.html#sec-ch16s3</a>. My one quibble would be that they put it under the non-intuitive chapter heading “Observational: Causal”, meriting DiD with some special favor that I’ve argued isn’t necessarily justified. But anyway.</p>
+<p>Their simulation uses <code>DeclareDesign</code>’s own tools for multilevel analysis, which are quite powerful. At the same time, it can be a bit hard to follow what they are doing if you aren’t intimately familiar with joins and <code>DeclareDesign</code>’s API. In the code below I integrate the <code>tw_data</code> function with <code>DeclareDesign</code> functions, which has the advantage of allowing the user to specify directly the DiD treatment effect and make use of <code>tw_data</code>’s ability to generate realistic values for unit and time heterogeneity (or lack thereof) without needing to do a lot of plumbing.</p>
+<p>In order to make <code>tw_data</code> work with <code>DeclareDesign</code>, I added the option for <code>tw_data</code> to accept a treatment vector of 1s and 0s to the <code>treat_effect</code> argument—that is, to let <span class="math inline">\(X\)</span> be set exogenously by random assignment by the <code>DeclareDesign</code> package. To do so, I simplified <a href="#eq-solveit2" class="quarto-xref">Equation&nbsp;10</a> for the cases where <span class="math inline">\(X=1\)</span> and <span class="math inline">\(X=0\)</span>. Without getting into the weeds, it was an interesting process as it exposed that not all coefficients of the linear model can be independently generated when <span class="math inline">\(X\)</span> is fixed—there are essentially not enough free parameters. However, <code>tw_data</code> is still able to add a lot of heterogeneity in the estimation while controlling most of the relevant effects.</p>
+<p>The code below simulates a two time point DiD model with a true DiD effect of <code>-3.5</code> and an “inquiry” for the ATT (average treated effect on the treated) of the DiD that is defined in potential outcomes notation:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>to_declare_design <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">prior_panel_data=</span><span class="cn">NULL</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">treat_vec=</span><span class="cn">NULL</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">time=</span><span class="cn">NULL</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                              ...) {</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  this_sim <span class="ot">&lt;-</span> <span class="fu">tw_data</span>(<span class="at">prior_true_vals =</span> prior_panel_data,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">treat_effect =</span> treat_vec,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                      ...)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  this_sim<span class="sc">$</span>data<span class="sc">$</span>y</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">T</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>n_cases <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>did_coef<span class="ot">=</span><span class="sc">-</span><span class="fl">3.5</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>main_coef<span class="ot">=</span>.<span class="dv">3</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>within_main_coef<span class="ot">=</span><span class="sc">-</span><span class="fl">0.9</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>panel_data_prior <span class="ot">&lt;-</span> <span class="fu">tw_data</span>(<span class="at">N=</span>n_cases,<span class="at">T=</span><span class="st">`</span><span class="at">T</span><span class="st">`</span>,<span class="at">did.eff.mean =</span> did_coef,<span class="at">did.eff.sd =</span> <span class="dv">0</span>,                                       <span class="at">cross.eff.mean=</span>main_coef,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>                            <span class="at">cross.eff.sd =</span> <span class="dv">0</span>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>did_sim <span class="ot">&lt;-</span> <span class="fu">declare_model</span>(<span class="at">N=</span>n_cases <span class="sc">*</span> <span class="st">`</span><span class="at">T</span><span class="st">`</span>,</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>                         <span class="at">case=</span>panel_data_prior<span class="sc">$</span>data<span class="sc">$</span>case,</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>                         <span class="at">time=</span>panel_data_prior<span class="sc">$</span>data<span class="sc">$</span>time,</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">potential_outcomes</span>(Y <span class="sc">~</span> <span class="fu">to_declare_design</span>(panel_data_prior,X,</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>                                                          <span class="at">T=</span><span class="st">`</span><span class="at">T</span><span class="st">`</span>,</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>                                                          <span class="at">N=</span>n_cases),</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">conditions=</span><span class="fu">list</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)))) <span class="sc">+</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># DEFINITION OF DID ESTIMAND:</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_inquiry</span>(<span class="at">ATT=</span><span class="fu">mean</span>(Y_X_1[time<span class="sc">==</span><span class="dv">2</span>] <span class="sc">-</span> Y_X_1[time<span class="sc">==</span><span class="dv">1</span>]) <span class="sc">-</span> <span class="fu">mean</span>(Y_X_0[time<span class="sc">==</span><span class="dv">2</span>] <span class="sc">-</span> Y_X_0[time<span class="sc">==</span><span class="dv">1</span>])) <span class="sc">+</span> </span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_inquiry</span>(<span class="at">CATE1=</span> <span class="fu">mean</span>(Y_X_1[time<span class="sc">==</span><span class="dv">1</span>] <span class="sc">-</span> Y_X_0[time<span class="sc">==</span><span class="dv">1</span>])) <span class="sc">+</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_inquiry</span>(<span class="at">CATE2=</span> <span class="fu">mean</span>(Y_X_0[time<span class="sc">==</span><span class="dv">1</span>])) <span class="sc">+</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_inquiry</span>(<span class="at">CATE3 =</span> <span class="fu">mean</span>(Y_X_0[time<span class="sc">==</span><span class="dv">2</span>]) <span class="sc">-</span> <span class="fu">mean</span>(Y_X_0[time<span class="sc">==</span><span class="dv">1</span>])) <span class="sc">+</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_assignment</span>(<span class="at">X =</span> <span class="fu">cluster_ra</span>(<span class="at">clusters=</span>case)) <span class="sc">+</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_measurement</span>(<span class="at">Y =</span> <span class="fu">reveal_outcomes</span>(Y <span class="sc">~</span> X)) <span class="sc">+</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_estimator</span>(Y <span class="sc">~</span> X<span class="sc">*</span><span class="fu">factor</span>(time),<span class="at">inquiry=</span><span class="st">"ATT"</span>,</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>                    <span class="at">.method=</span>lm,</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>                    <span class="at">term=</span><span class="st">"X:factor(time)2"</span>,</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>                    <span class="at">label=</span><span class="st">"ATT"</span>) <span class="sc">+</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_estimator</span>(Y <span class="sc">~</span> X<span class="sc">*</span><span class="fu">factor</span>(time),</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>                    <span class="at">.method=</span>lm,<span class="at">inquiry=</span><span class="st">"CATE1"</span>,</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>                    <span class="at">term=</span><span class="st">"X"</span>,<span class="at">label =</span> <span class="st">"Constituent"</span>) <span class="sc">+</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_estimator</span>(Y <span class="sc">~</span> X<span class="sc">*</span><span class="fu">factor</span>(time),</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>                    <span class="at">.method=</span>lm,<span class="at">inquiry=</span><span class="st">"CATE2"</span>,</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>                    <span class="at">term=</span><span class="st">"(Intercept)"</span>,<span class="at">label =</span> <span class="st">"Global Intercept"</span>) <span class="sc">+</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_estimator</span>(Y <span class="sc">~</span> X<span class="sc">*</span><span class="fu">factor</span>(time),</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>                    <span class="at">.method=</span>lm,<span class="at">inquiry=</span><span class="st">"CATE3"</span>,</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>                    <span class="at">term=</span><span class="st">"factor(time)2"</span>,<span class="at">label =</span> <span class="st">"Time Intercept"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>A crucial part of the code is:</p>
+<pre><code>ATT=mean(Y_X_1[time==2] - Y_X_1[time==1]) - mean(Y_X_0[time==2] - Y_X_0[time==1])</code></pre>
+<p>The <code>Y_X_1</code> notation signifies the value of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X=1\)</span>, that is, when <span class="math inline">\(X\)</span> is in treatment. We subset these potential outcomes by vectors of time points generated by <code>tw_data</code> so that we can explicitly compare <span class="math inline">\(X\)</span> in treatment in time 2 versus time 1. This is a non-parametric definition of the DiD coefficient that matches the definition in the literature.</p>
+<p>Given this specification, we can use <code>DeclareDesign</code>’s powerful <code>diagnose_design</code> to see how well the <code>lm</code> function is able to capture the DiD effect from a fitted linear model compared to differencing the potential outcomes:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diagnose_design</span>(did_sim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Research design diagnosis based on 500 simulations. Diagnosis completed in 8 secs. Diagnosand estimates with bootstrapped standard errors in parentheses (100 replicates).
+
+  Design Inquiry        Estimator            Term N Sims Mean Estimand
+ did_sim     ATT              ATT X:factor(time)2    500         -3.49
+                                                                (0.01)
+ did_sim   CATE1      Constituent               X    500          0.30
+                                                                (0.01)
+ did_sim   CATE2 Global Intercept     (Intercept)    500         -1.33
+                                                                (0.00)
+ did_sim   CATE3   Time Intercept   factor(time)2    500         -0.46
+                                                                (0.01)
+ Mean Estimate   Bias SD Estimate   RMSE  Power Coverage
+         -3.48   0.01        0.28   0.20   1.00     1.00
+        (0.01) (0.01)      (0.01) (0.01) (0.00)   (0.00)
+          0.30   0.00        0.20   0.14   0.32     1.00
+        (0.01) (0.01)      (0.01) (0.00) (0.02)   (0.00)
+         -1.33  -0.00        0.14   0.10   1.00     1.00
+        (0.01) (0.00)      (0.00) (0.00) (0.00)   (0.00)
+         -0.47  -0.00        0.20   0.14   0.65     1.00
+        (0.01) (0.01)      (0.01) (0.00) (0.02)   (0.00)</code></pre>
+</div>
+</div>
+<p>As can be seen, <code>lm</code> and the interaction effect of <span class="math inline">\(X\)</span> and <span class="math inline">\(time\)</span> hits the nail on the head–the estimate is almost exactly equal to the true DiD coefficient of -3.5 as well as <code>DeclareDesign</code>’s separate calculation using averages of potential outcomes. Furthermore, the other inquiries listed show other parts of the potential outcome notation that map on to other model coefficients simulated by <code>tw_data</code>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"True DiD/ATT Coefficient:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "True DiD/ATT Coefficient:"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>panel_data_prior<span class="sc">$</span>fixed_params<span class="sc">$</span>did[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -3.5</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"True Constituent Coefficient:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "True Constituent Coefficient:"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>panel_data_prior<span class="sc">$</span>fixed_params<span class="sc">$</span>beta[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"True Global Intercept:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "True Global Intercept:"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>panel_data_prior<span class="sc">$</span>fixed_params<span class="sc">$</span>t.intercept</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.330133</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"True Time Intercept:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "True Time Intercept:"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>panel_data_prior<span class="sc">$</span>fixed_params<span class="sc">$</span>alpha.t[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.452759</code></pre>
+</div>
+</div>
+<p>Pretty cool, right? This code can then be modified to add in whatever other issues might arise in actual research designs. At some point I will also add an explicit function to <code>panelsim</code> that wraps all the helper functions for <code>DeclareDesign</code> modeling &amp; DiD power analysis—but it all works just fine with the code above.</p>
+<p>It’s important to note that so far I have only simulated 2 time point DiDs. The reason for that should be clear with the interactions: if we interact <span class="math inline">\(X\)</span> with a discrete time indicator, each additional time point will result in another <span class="math inline">\(\beta_{DiD}\)</span> coefficient for each time point. Which two time points would we want to compare? We can certainly add more, as the code below does by comparing <span class="math inline">\(t=3\)</span> to <span class="math inline">\(t=1\)</span>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">T</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>n_cases <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>did_coef<span class="ot">=</span><span class="sc">-</span><span class="fl">3.5</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>main_coef<span class="ot">=</span>.<span class="dv">3</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>within_main_coef<span class="ot">=</span><span class="sc">-</span><span class="fl">0.9</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>panel_data_prior <span class="ot">&lt;-</span> <span class="fu">tw_data</span>(<span class="at">N=</span>n_cases,<span class="at">T=</span><span class="st">`</span><span class="at">T</span><span class="st">`</span>,<span class="at">did.eff.mean =</span> did_coef,<span class="at">did.eff.sd =</span> <span class="dv">0</span>,                                       <span class="at">cross.eff.mean=</span>main_coef,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">cross.eff.sd =</span> <span class="dv">0</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>did_sim <span class="ot">&lt;-</span> <span class="fu">declare_model</span>(<span class="at">N=</span>n_cases <span class="sc">*</span> <span class="st">`</span><span class="at">T</span><span class="st">`</span>,</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">case=</span>panel_data_prior<span class="sc">$</span>data<span class="sc">$</span>case,</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">time=</span>panel_data_prior<span class="sc">$</span>data<span class="sc">$</span>time,</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">potential_outcomes</span>(Y <span class="sc">~</span> <span class="fu">to_declare_design</span>(panel_data_prior,X,</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>                                                          <span class="at">T=</span><span class="st">`</span><span class="at">T</span><span class="st">`</span>,</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>                                                          <span class="at">N=</span>n_cases),</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">conditions=</span><span class="fu">list</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)))) <span class="sc">+</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_inquiry</span>(<span class="at">ATT=</span><span class="fu">mean</span>(Y_X_1[time<span class="sc">==</span><span class="dv">3</span>] <span class="sc">-</span> Y_X_1[time<span class="sc">==</span><span class="dv">1</span>]) <span class="sc">-</span> <span class="fu">mean</span>(Y_X_0[time<span class="sc">==</span><span class="dv">3</span>] <span class="sc">-</span> Y_X_0[time<span class="sc">==</span><span class="dv">1</span>])) <span class="sc">+</span> </span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_assignment</span>(<span class="at">X =</span> <span class="fu">cluster_ra</span>(<span class="at">clusters=</span>case)) <span class="sc">+</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_measurement</span>(<span class="at">Y =</span> <span class="fu">reveal_outcomes</span>(Y <span class="sc">~</span> X)) <span class="sc">+</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_estimator</span>(Y <span class="sc">~</span> X<span class="sc">*</span><span class="fu">factor</span>(time),<span class="at">inquiry=</span><span class="st">"ATT"</span>,</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">.method=</span>lm,</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>                    <span class="at">term=</span><span class="st">"X:factor(time)2"</span>,</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>                    <span class="at">label=</span><span class="st">"ATT"</span>)</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>did_sim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Research design declaration summary
+
+Step 1 (model): declare_model(N = n_cases * T, case = panel_data_prior$data$case, time = panel_data_prior$data$time, potential_outcomes(Y ~ to_declare_design(panel_data_prior, X, T = T, N = n_cases), conditions = list(X = c(0, 1)))) 
+
+Step 2 (inquiry): declare_inquiry(ATT = mean(Y_X_1[time == 3] - Y_X_1[time == 1]) - mean(Y_X_0[time == 3] - Y_X_0[time == 1])) 
+
+Step 3 (assignment): declare_assignment(X = cluster_ra(clusters = case)) -------
+
+Step 4 (measurement): declare_measurement(Y = reveal_outcomes(Y ~ X)) ----------
+
+Step 5 (estimator): declare_estimator(Y ~ X * factor(time), inquiry = "ATT", .method = lm, term = "X:factor(time)2", label = "ATT") 
+
+Run of the design:</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> inquiry estimand            term estimator estimate std.error statistic
+     ATT    -3.57 X:factor(time)2       ATT    -3.74     0.292     -12.8
+  p.value conf.low conf.high
+ 4.42e-30    -4.31     -3.16</code></pre>
+</div>
+</div>
+<p>One run of the design shows that we are pretty close to the “true” DiD coefficient, which is because we fixed the DiD coefficient in <code>tw_data</code> to be always equal to -3.5 regardless of how many time points we had. If we set <code>did.eff.sd</code> to a non-zero value, we would have heterogeneous coefficients across time points, which is likely more realistic.</p>
+<p>The potential outcome notation further makes clear that for conventional data, you can only compare two time points at a time with a single difference. You can have as many time points as you want in the simulation, but it’s not obvious how you might aggregate across more than 2 time points and end up with a single estimand. This is what has led rise to the increasingly complex multiple time point DiD <span class="citation" data-cites="dechaisemartin2023 callaway2020 bacon2018">(<a href="#ref-dechaisemartin2023" role="doc-biblioref">de&nbsp;Chaisemartin and D’Haultfœuille 2023</a>; <a href="#ref-callaway2020" role="doc-biblioref">Callaway and Sant’Anna 2020</a>; <a href="#ref-bacon2018" role="doc-biblioref">Goodman-Bacon 2018</a>)</span>, which sadly I do not have the space to address in this blog post (perhaps in the future or if I ever write another panel data paper).</p>
+<p>However, this issue makes it clear why two-way fixed effects–that is, fitting a model with intercepts for case and time along with a single coefficient for <span class="math inline">\(X\)</span>–can capture a DiD coefficient with more than 2 time points. Which year X treatment interaction is specified? And why do you use two-way fixed effects for DiD estimation anyway?</p>
+<p>Well, it’s an odd trick of panel data modeling that fitting this model:</p>
+<p><span id="eq-twfe"><span class="math display">\[
+Y_{it} = \alpha_i I[i=i'] + \alpha_t I[t=t'] + \beta_{TWFE}X_{it} + \epsilon_{it}
+\tag{11}\]</span></span></p>
+<p>will produce a coefficient on <span class="math inline">\(X_{it}\)</span> that is equal to the coefficient on <span class="math inline">\(X_{it}\)</span> in the treatment X time interaction model we’ve been using:</p>
+<p><span id="eq-did-cs"><span class="math display">\[
+Y_{it} = \alpha_t I[t=t'] + \beta_{T}X_{it} + \beta_{DiD} X_{it} I[t=t'] \epsilon_{it}
+\tag{12}\]</span></span></p>
+<p>So long as there are only <em>two</em> time points and we code the treatment vector slightly differently between both specifications.</p>
+<p>Yes, that’s right, <span class="math inline">\(\beta_{TWFE} = \beta_{DiD}\)</span>. 🤯</p>
+<p>How can that be possible? Well, there’s one small condition. When we “assign” units to treatment/control for <a href="#eq-twfe" class="quarto-xref">Equation&nbsp;11</a>, we have to assign a treatment vector of all 0s for control units and a vector of <span class="math inline">\([0,1]\)</span> for units in treatment, that is a 0 for <span class="math inline">\(t=1\)</span> and a 1 for <span class="math inline">\(t=2\)</span>. When we use <a href="#eq-did-cs" class="quarto-xref">Equation&nbsp;12</a>, we instead use a treatment vector of all 1s for the treatment group for both time points, that is, <span class="math inline">\([1,1]\)</span>. With that simple change, the two coefficients are the same.</p>
+<p>Don’t believe me? Below is some code where I change how <code>DeclareDesign</code> assigns the treatment vector and then uses TWFE to get the ATT:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># need a different treatment assignment function</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>twfe_assign <span class="ot">&lt;-</span> <span class="cf">function</span>(case, time,<span class="at">prob=</span><span class="fl">0.5</span>) {</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># first assign units to treatment or control</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    treated <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> <span class="fu">unique</span>(case), <span class="at">size =</span> <span class="fu">floor</span>(<span class="fu">length</span>(case)<span class="sc">*</span><span class="fl">0.5</span>), <span class="at">replace=</span>T)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    treat_vec <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(case <span class="sc">%in%</span> treated)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># assign treatment vectors of [0,1] for units in treatment</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    treat_assign <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(treat_vec<span class="sc">==</span><span class="dv">1</span>,</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">ifelse</span>(time<span class="sc">==</span><span class="dv">1</span>, </span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>                                  <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>                           <span class="dv">0</span>)</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="co"># important distinction: set constituent term on X to 0</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a><span class="co"># otherwise you wil get some bias in the ATT</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>main_coef <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>panel_data_prior <span class="ot">&lt;-</span> <span class="fu">tw_data</span>(<span class="at">N=</span>n_cases,<span class="at">T=</span><span class="st">`</span><span class="at">T</span><span class="st">`</span>,<span class="at">did.eff.mean =</span> did_coef,<span class="at">did.eff.sd =</span> <span class="dv">0</span>,                                       <span class="at">cross.eff.mean=</span>main_coef,</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>                            <span class="at">cross.eff.sd =</span> <span class="dv">0</span>)</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>did_sim_twfe <span class="ot">&lt;-</span> <span class="fu">declare_model</span>(<span class="at">N=</span>n_cases <span class="sc">*</span> <span class="st">`</span><span class="at">T</span><span class="st">`</span>,</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>                         <span class="at">case=</span>panel_data_prior<span class="sc">$</span>data<span class="sc">$</span>case,</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>                         <span class="at">time=</span>panel_data_prior<span class="sc">$</span>data<span class="sc">$</span>time,</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">potential_outcomes</span>(Y <span class="sc">~</span> <span class="fu">to_declare_design</span>(panel_data_prior,X,</span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>                                                          <span class="at">T=</span><span class="st">`</span><span class="at">T</span><span class="st">`</span>,</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>                                                          <span class="at">N=</span>n_cases),</span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">conditions=</span><span class="fu">list</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)))) <span class="sc">+</span></span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_inquiry</span>(<span class="at">ATT=</span><span class="fu">mean</span>(Y_X_1[time<span class="sc">==</span><span class="dv">2</span>] <span class="sc">-</span> Y_X_1[time<span class="sc">==</span><span class="dv">1</span>]) <span class="sc">-</span> <span class="fu">mean</span>(Y_X_0[time<span class="sc">==</span><span class="dv">2</span>] <span class="sc">-</span> Y_X_0[time<span class="sc">==</span><span class="dv">1</span>])) <span class="sc">+</span> </span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">#declare_assignment(X = block_ra(blocks = time)) +</span></span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_assignment</span>(<span class="at">X =</span> <span class="fu">twfe_assign</span>(<span class="at">case=</span>case,<span class="at">time=</span>time)) <span class="sc">+</span></span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_measurement</span>(<span class="at">Y =</span> <span class="fu">reveal_outcomes</span>(Y <span class="sc">~</span> X)) <span class="sc">+</span></span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_estimator</span>(Y <span class="sc">~</span> X <span class="sc">+</span> <span class="fu">factor</span>(time) <span class="sc">+</span> <span class="fu">factor</span>(case),<span class="at">inquiry=</span><span class="st">"ATT"</span>,</span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>                    <span class="at">.method=</span>lm,</span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>                    <span class="at">term=</span><span class="st">"X"</span>,</span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a>                    <span class="at">label=</span><span class="st">"ATT_TWFE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now we can diagnose both designs (TWFE and 1-way time FE) to compare how they do:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diagnose_design</span>(did_sim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Research design diagnosis based on 500 simulations. Diagnosis completed in 8 secs. Diagnosand estimates with bootstrapped standard errors in parentheses (100 replicates).
+
+  Design Inquiry        Estimator            Term N Sims Mean Estimand
+ did_sim     ATT              ATT X:factor(time)2    500         -3.49
+                                                                (0.01)
+ did_sim   CATE1      Constituent               X    500          0.30
+                                                                (0.01)
+ did_sim   CATE2 Global Intercept     (Intercept)    500         -1.33
+                                                                (0.00)
+ did_sim   CATE3   Time Intercept   factor(time)2    500         -0.46
+                                                                (0.01)
+ Mean Estimate   Bias SD Estimate   RMSE  Power Coverage
+         -3.50  -0.00        0.31   0.21   1.00     0.99
+        (0.01) (0.01)      (0.01) (0.01) (0.00)   (0.00)
+          0.30   0.00        0.21   0.14   0.33     0.99
+        (0.01) (0.01)      (0.01) (0.00) (0.02)   (0.00)
+         -1.33  -0.00        0.15   0.10   1.00     0.99
+        (0.01) (0.00)      (0.01) (0.00) (0.00)   (0.00)
+         -0.45   0.00        0.22   0.14   0.58     0.99
+        (0.01) (0.01)      (0.01) (0.00) (0.02)   (0.00)</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Hide the Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diagnose_design</span>(did_sim_twfe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Research design diagnosis based on 500 simulations. Diagnosis completed in 7 secs. Diagnosand estimates with bootstrapped standard errors in parentheses (100 replicates).
+
+       Design Inquiry Estimator Term N Sims Mean Estimand Mean Estimate   Bias
+ did_sim_twfe     ATT  ATT_TWFE    X    500         -3.50         -3.51  -0.01
+                                                   (0.01)        (0.01) (0.01)
+ SD Estimate   RMSE  Power Coverage
+        0.29   0.28   1.00     0.96
+      (0.01) (0.01) (0.00)   (0.01)</code></pre>
+</div>
+</div>
+<p>Interestingly, the 1-way interaction model has lower RMSE and better coverage than the TWFE model, though both appear un-biased. Pretty cool, huh?</p>
+<p>This should make it clear why TWFE had no business being a general purpose DiD model. It was only a neat math trick that let it estimate the DiD coefficient with 2 time points, and even then, it probably was never the optimal specification. With more than 2 time points, TWFE just doesn’t make sense, a point we made in <span class="citation" data-cites="kropko2020">Kropko and Kubinec (<a href="#ref-kropko2020" role="doc-biblioref">2020</a>)</span> that was quite controversial at the time but is now widely accepted.</p>
+<p>There’s a lot more I’d like to do, but this blog post is long enough! Obviously this could be used to examine the newer and more complex DiD models and see how they combine different DiD effects across time points. Also, I hope this code is used for designing and testing DiD models, whether treatment assignment is manipulated or not. It is straightforward to derive a simulated power curve with <code>tw_data</code> alone if you have a continuous <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
+<p>I’d love to write a paper on this, but well, not a lot of time—but if you want to, feel free! 😃. In the meantime, please consider citing my earlier paper with Jon if you use the package/this blog post: <span class="citation" data-cites="kropko2020">Kropko and Kubinec (<a href="#ref-kropko2020" role="doc-biblioref">2020</a>)</span>.</p>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-arel-bundock" class="csl-entry" role="listitem">
+Arel-Bundock, Vincent, Ryan Briggs, Hristos Doucouliagos, Marco Mendoza Aviña, and T. D. Stanley. 2025. <span>“Quantitative Political Science Research Is Greatly Underpowered.”</span> <a href="https://doi.org/10.31219/osf.io/7vy2f">https://doi.org/10.31219/osf.io/7vy2f</a>.
+</div>
+<div id="ref-callaway2020" class="csl-entry" role="listitem">
+Callaway, Brantly, and Pedro H. C. Sant’Anna. 2020. <span>“Difference-in-Differences with Multiple Time Periods.”</span> <em>Journal of Econometrics</em>, December. <a href="https://doi.org/10.1016/j.jeconom.2020.12.001">https://doi.org/10.1016/j.jeconom.2020.12.001</a>.
+</div>
+<div id="ref-dechaisemartin" class="csl-entry" role="listitem">
+Chaisemartin, Clément de, and Xavier D’Haultfœuille. 2025. <span>“Credible Answers to Hard Questions: Differences-in-Differences for Natural Experiments.”</span> <a href="https://doi.org/10.2139/ssrn.4487202">https://doi.org/10.2139/ssrn.4487202</a>.
+</div>
+<div id="ref-cunningham2021" class="csl-entry" role="listitem">
+Cunningham, Scott. 2021. <em>Causal Inference: The Mixtape</em>. Yale university press. <a href="https://books.google.com/books?hl=en&amp;lr=&amp;id=PSEMEAAAQBAJ&amp;oi=fnd&amp;pg=PP1&amp;dq=Causal+Inference+The+Mixtape&amp;ots=YXswoIQ5sD&amp;sig=VAexUIUVvdxJQRaE0A4B3J0P5Ts">https://books.google.com/books?hl=en&amp;lr=&amp;id=PSEMEAAAQBAJ&amp;oi=fnd&amp;pg=PP1&amp;dq=Causal+Inference+The+Mixtape&amp;ots=YXswoIQ5sD&amp;sig=VAexUIUVvdxJQRaE0A4B3J0P5Ts</a>.
+</div>
+<div id="ref-dechaisemartin2023" class="csl-entry" role="listitem">
+de&nbsp;Chaisemartin, Clément, and Xavier D’Haultfœuille. 2023. <span>“Two-Way Fixed Effects and Differences-in-Differences with Heterogeneous Treatment Effects: A Survey.”</span> <em>The Econometrics Journal</em> 26 (3): C1–30. <a href="https://doi.org/10.1093/ectj/utac017">https://doi.org/10.1093/ectj/utac017</a>.
+</div>
+<div id="ref-gerring2012" class="csl-entry" role="listitem">
+Gerring, John. 2012. <em>Social Science Methodology: A Unified Framework</em>. Second. New York: Cambridge University Press.
+</div>
+<div id="ref-bacon2018" class="csl-entry" role="listitem">
+Goodman-Bacon, Andrew. 2018. <span>“Difference-in-Differences with Variation in Treatment Timing.”</span> <em>NBER</em>. <a href="https://www.nber.org/papers/w25018">https://www.nber.org/papers/w25018</a>.
+</div>
+<div id="ref-huntington-klein2021" class="csl-entry" role="listitem">
+Huntington-Klein, Nick. 2021. <em>The Effect: An Introduction to Research Design and Causality</em>. Chapman; Hall/CRC. <a href="https://www.taylorfrancis.com/books/mono/10.1201/9781003226055/effect-nick-huntington-klein">https://www.taylorfrancis.com/books/mono/10.1201/9781003226055/effect-nick-huntington-klein</a>.
+</div>
+<div id="ref-kropko2020" class="csl-entry" role="listitem">
+Kropko, Jonathan, and Robert Kubinec. 2020. <span>“Interpretation and Identification of Within-Unit and Cross-Sectional Variation in Panel Data Models.”</span> <em>PLOS One</em> 15 (4): e0231349.
+</div>
+<div id="ref-lipcean2024" class="csl-entry" role="listitem">
+Lipcean, Sergiu, and Fernando Casal Bértoa. 2024. <span>“Do Political Finance Reforms Really Reduce Corruption? A Replication Study.”</span> <em>Research &amp; Politics</em> 11 (4): 20531680241310002. <a href="https://doi.org/10.1177/20531680241310002">https://doi.org/10.1177/20531680241310002</a>.
+</div>
+<div id="ref-roth2023" class="csl-entry" role="listitem">
+Roth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. <span>“What<span>’</span>s Trending in Difference-in-Differences? A Synthesis of the Recent Econometrics Literature.”</span> <em>Journal of Econometrics</em> 235 (2): 2218–44. <a href="https://doi.org/10.1016/j.jeconom.2023.03.008">https://doi.org/10.1016/j.jeconom.2023.03.008</a>.
+</div>
+<div id="ref-zeldow2021" class="csl-entry" role="listitem">
+Zeldow, Bret, and Laura A. Hatfield. 2021. <span>“Confounding and Regression Adjustment in Difference-in-Differences Studies.”</span> <em>Health Services Research</em> 56 (5): 932–41. <a href="https://doi.org/10.1111/1475-6773.13666">https://doi.org/10.1111/1475-6773.13666</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

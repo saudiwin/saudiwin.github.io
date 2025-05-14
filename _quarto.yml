@@ -6,6 +6,7 @@ project:
 website:
   title: "Homepage"
   reader-mode: true
+  open-graph: true
   announcement: 
     icon: info-circle
     dismissable: true
