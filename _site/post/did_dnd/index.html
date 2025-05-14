@@ -624,24 +624,24 @@ Y_{it} &amp;= \frac{\beta_T \gamma_i - \beta_U \delta_t}{\beta_T - \beta_U}
 </div>
 </div>
 </div>
-<p>This interaction between the cross-sectional variation in <span class="math inline">\(X_{it}\)</span> in <a href="#eq-setup" class="quarto-xref">Equation&nbsp;7</a> and the time indicator <span class="math inline">\(I[t=t']\)</span>, denoted <span class="math inline">\(\beta_{DiD}\)</span> and for completeness, represents a DiD effect. I also added an interaction between the within-unit variation in <span class="math inline">\(X_{it}\)</span> and the case indicator <span class="math inline">\(I[i=i']\)</span>, denoted <span class="math inline">\(\beta_{WiD}\)</span>. To my knowledge no one has ever tried to estimate this model, but it is in principle the converse of DiD.</p>
+<p>This interaction between the cross-sectional variation in <span class="math inline">\(X_{it}\)</span> in <a href="#eq-setup" class="quarto-xref">Equation&nbsp;7</a> and the time indicator <span class="math inline">\(I[t=t']\)</span>, denoted <span class="math inline">\(\beta_{DiD}\)</span>, represents a DiD effect. I also added an interaction between the within-unit variation in <span class="math inline">\(X_{it}\)</span> and the case indicator <span class="math inline">\(I[i=i']\)</span>, denoted <span class="math inline">\(\beta_{WiD}\)</span>. To my knowledge no one has ever tried to estimate this model, but it is in principle the converse of DiD.</p>
 <p>With these additional interactions, we now have the following two equations:</p>
 <p><span id="eq-setup2"><span class="math display">\[
 \begin{align}
-Y_{it} &amp;= \alpha_1 + \gamma_i I[i=i'] +  \beta_{U} X_{it} + \beta_{WiD}X_{it}I[i=i'] \epsilon_{it}\\
-Y_{it} &amp;= \alpha_2 + \delta_t I[t=t'] + \beta_{T} X_{it} + \beta_{DiD} X_{it}I[t=t']  \epsilon_{it}
+Y_{it} &amp;= \alpha_1 + \gamma_i I[i=i'] +  \beta_{U} X_{it} + \beta_{WiD}X_{it}I[i=i'] + \epsilon_{it}\\
+Y_{it} &amp;= \alpha_2 + \delta_t I[t=t'] + \beta_{T} X_{it} + \beta_{DiD} X_{it}I[t=t'] + \epsilon_{it}
 \end{align}
 \tag{9}\]</span></span></p>
 <p>and solution for <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
 <p><span id="eq-solveit2"><span class="math display">\[
 \begin{align}
 X_{it} &amp;= \frac{\alpha_1 + \gamma_i I[i=i'] - \delta_t I[t=t'] - \alpha_2}{\beta_T + \beta_{DiD}I[t=t'] - \beta_U - \beta_{WiD}I[i=i']}\\
-Y_{it} &amp;= \frac{\beta_T \gamma_iI[i=i'] + \beta_{DiD}\gamma_iI[i=i'] + \beta_T \alpha_1 + \beta_{DiD}I[t=t'] \alpha_1  - \beta_U \delta_tI[t=t'] - \beta_{WiD} [i=i'] \alpha_2 }{\beta_T + \beta_{DiD}I[t=t'] - \beta_U - \beta_{WiD}I[i=i']}
+Y_{it} &amp;= \frac{\beta_T \gamma_iI[i=i'] + \beta_{DiD}\gamma_iI[i=i'] + \beta_T \alpha_1 + \beta_{DiD}I[t=t'] \alpha_1  - \beta_U \delta_tI[t=t'] - \beta_{WiD} [i=i'] \alpha_2 }{\beta_T + \beta_{DiD}I[t=t'] - \beta_U - \beta_{WiD}I[i=i']} + \epsilon_{it}
 \end{align}
 \tag{10}\]</span></span></p>
 <p>The addition of the indicator variables complicates the equations, but is necessary for completeness and also to show the interactions. While this formulation has a lot more parameters, it is functionally the same as the original but with interactions added in. There are other ways to simulate DiD, but starting with an interaction between the cross-sectional coefficient and the time point is very helpful because it clarifies what conventional DiD is and isn’t.</p>
 <p>To illustrate, in the code chunk below I simulate panel data with the <code>panelsim</code> package. This package implements our paper simulation and is now expanded with the additional DiD extensions I have just described. You can get the package on Github here: <a href="https://github.com/saudiwin/panelsim" class="uri">https://github.com/saudiwin/panelsim</a> (perhaps one day on CRAN, we’ll see).</p>
-<p>To simulate a panel data set with a fixed DiD coefficient of 1 and exactly 2 time points with 100 cases/units (<span class="math inline">\(N\)</span>) for a total of 2,000 rows of data, I use the <code>tw_data</code> function from <code>panelsim</code> in the code block below. The <code>tw_data</code> has options to generate all of the coefficients in <a href="#eq-solveit2" class="quarto-xref">Equation&nbsp;10</a> as the function documentation shows. For now, I’ll just leave most of those other arguments at their defaults, which will generate a fair amount of heterogeneity in the over-time and cross-sectional variance of <span class="math inline">\(Y\)</span>.</p>
+<p>To simulate a panel data set with a fixed DiD coefficient of 1 and exactly 2 time points with 100 cases/units (<span class="math inline">\(N\)</span>) for a total of 200 rows of data, I use the <code>tw_data</code> function from <code>panelsim</code> in the code block below. The <code>tw_data</code> has options to generate all of the coefficients in <a href="#eq-solveit2" class="quarto-xref">Equation&nbsp;10</a> as the function documentation shows. For now, I’ll just leave most of those other arguments at their defaults, which will generate a fair amount of heterogeneity in the over-time and cross-sectional variance of <span class="math inline">\(Y\)</span>.</p>
 <p><code>tw_data</code> produces a list with a data frame of simulated panel data along a list with the parameters used to generate it. With this data, I can then identify the DiD coefficient by fitting a linear model specification with an interaction between <span class="math inline">\(X\)</span> and the <code>time</code> indicator. Big win for the OLS fans!</p>
 <div class="cell">
 <details open="" class="code-fold">
