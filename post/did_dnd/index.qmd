@@ -69,7 +69,9 @@ And, y'know, is... that a good thing?
 
 Short answer: no. Living in a co-created fantasy world in which things that can't be factually verified are treated as true is great for role-playing games. For statistical methods, not so much.
 
-No, I don't want to throw the baby out with the bathwater. There is plenty of brilliant DiD research. But if we keepusing only a hammer we may end up destroying a good number of screws. In this blog post I'll define DiD with causal graphs and then show how to simulate it with the R package `DeclareDesign` for robust power analyses of experimental and observational designs, so it's not just a rant. Maybe with better tools we can build a better world 🌍.
+No, I don't want to throw the baby out with the bathwater. There is plenty of brilliant DiD research. But if we keep using only a hammer we may end up destroying a good number of screws. In this blog post I'll define DiD with causal graphs and then show how to simulate it with the R package `DeclareDesign` for robust power analyses of experimental and observational designs.
+
+Maybe with a bit of thought and better tools we can build a better, more realistic, world for social science research 🌍🐉🧙. If you want the full R code as a Quarto file for this post, just [click here](https://github.com/saudiwin/saudiwin.github.io/blob/master/post/did_dnd/index.qmd).
 
 ## Setup
 
@@ -101,13 +103,13 @@ This model will return a value for $\beta_T$ that is equal to the average value 
 
 These two models capture the main dimensions of variation. Unit/case intercepts is equal to the multiple measures of $Y_{it}$ and as such averages *over time*, while time intercepts average *across units*, or equivalently in the cross-section. We can think of these as distinct measures we can take from a given panel data set that has both a set of units/cases and multiple time-indexed measures for each unit.
 
-Differences-in-differences as a panel data model is an interaction between the effect $\beta$ and the time intercept $\delta_t$, which I will call $\tau$:
+Differences-in-differences as a panel data model can be thought of as an interaction between the effect $\beta$ and the time intercept $\delta_t$, which I will call $\beta_{DiD}$:
 
 $$
-Y_{it} = \alpha + \delta_t + \beta_{\tau'} X_{it} + \tau X_{it} \delta_t + \epsilon_{it}
+Y_{it} = \alpha + \delta_t + \beta_{T'} X_{it} + \beta_{DiD} X_{it} \delta_t + \epsilon_{it}
 $$ {#eq-c}
 
-As was previously mentioned, in the case in which $t=2$, there will only be one possible value for $\tau$ as the first time point $t=1$ is dropped. From a linear modeling perspective, the DiD effect $\tau$ is the "extra" variation in $Y_{it}$ that comes from the cross-section "moving" or varying across from $t=1$ to $t=2$. This is especially true when $X_{it}$ is a binary variable (i.e., a treatment indicator), which much of the literature assumes.
+As was previously mentioned, in the case in which $t=2$, there will only be one possible value for $\beta_{DiD}$ as the first time point $t=1$ is dropped. From a linear modeling perspective, the DiD effect $\beta_{DiD}$ is the "extra" variation in $Y_{it}$ that comes from the cross-section "moving" or varying across from $t=1$ to $t=2$. This is especially true when $X_{it}$ is a binary variable (i.e., a treatment indicator), which much of the literature assumes.
 
 This is the "canonical DiD" formulation and equivalent to the following potential outcomes notation, in which we observe a unit $Y$ in treatment ( $Y^1$) and in control ( $Y^0$), and the difference between these two values is the average treatment effect, or in the DiD case, the average effect on the treated, mainly because units in control can never receive the treatment. This estimand is defined as:
 
@@ -115,7 +117,7 @@ $$
 ATT_{DiD} = [Y^1(1) - Y^1(0)] - [Y^0(1) - Y^0(0)]
 $$ {#eq-d}
 
-The number in parentheses denotes the time point, so $Y^1(1)$ is the treated unit after treatment occurs and $Y^1(0)$ is the treated unit before treatment occurs (treatment is assigned, implicitly, between time points 1 and 2). While the control group $Y^0$ can never receive the treatment, we still have two over-time observations for the control group, and the two time periods are differenced in the same way as the treatment group. The key idea is that we should want to look at the differences in pre/post measures because these differences are better than the "raw" over-time variation or cross-sectional variation as in the models mentioned above.
+The number in parentheses denotes the time point, so $Y^1(1)$ is the treated unit after treatment occurs and $Y^1(0)$ is the treated unit before treatment occurs (treatment occurs, implicitly, between time points 1 and 2). While the control group $Y^0$ can never receive the treatment, we still have two over-time observations for the control group, and the two time periods are differenced in the same way as the treatment group. The key idea is that we should want to look at the differences in pre/post measures because these differences are better than the "raw" over-time variation or cross-sectional variation as in the models mentioned above.
 
 The DiD model is considered credible whenever the "parallel trends" assumption holds, that is, whether the units in treatment would have the same differenced value as the units in control—if the units in treatment were ever in control (which in observational settings they can't be).
 
@@ -155,7 +157,7 @@ Similarly, in @roth2023 recent review (remarkably clear and thorough), they do n
 
 Also what exactly does it mean to "overcome an identification challenge via assumptions"? I can assume almost anything, including that I know the future. But I don't know how that overcomes anything.
 
-I am being somewhat harsh. All of the authors I've cited have done outstanding work in this field, and to be clear, I do think it's useful. It just may not have an a priori reason to believe it's causally-identified. Towards the end of this piece I will return to the utility of DiD. There is something there–but it is mainly a folk theorem, i.e., we are making educated guesses based on experience. There is something *useful* about DiD, but nothing *magical*. Other panel data methods may work better depending on the problem.
+I am being somewhat harsh. All of the authors I've cited have done outstanding work in this field, and to be clear, I do think DiD is useful. It just may not have an a priori reason to believe DiD is causally-identified. Towards the end of this piece I will return to the utility of DiD. There is something there–but it is mainly a folk theorem, i.e., we are making educated guesses based on experience. There is something *useful* about DiD, but nothing *magical*. Other panel data methods may work better depending on the problem.
 
 Sadly, DiD is not a +16 fireball attack or a legendary sword item as in DnD.
 
@@ -362,14 +364,14 @@ ggdag(dag_panel_did
 
 ```
 
-This interaction between the cross-sectional variation in $X_{it}$ in @eq-setup and the time indicator $I[t=t']$, denoted $\beta_{DiD}$ and for completeness, represents a DiD effect. I also added an interaction between the within-unit variation in $X_{it}$ and the case indicator $I[i=i']$, denoted $\beta_{WiD}$. To my knowledge no one has ever tried to estimate this model, but it is in principle the converse of DiD.
+This interaction between the cross-sectional variation in $X_{it}$ in @eq-setup and the time indicator $I[t=t']$, denoted $\beta_{DiD}$, represents a DiD effect. I also added an interaction between the within-unit variation in $X_{it}$ and the case indicator $I[i=i']$, denoted $\beta_{WiD}$. To my knowledge no one has ever tried to estimate this model, but it is in principle the converse of DiD.
 
 With these additional interactions, we now have the following two equations:
 
 $$
 \begin{align}
-Y_{it} &= \alpha_1 + \gamma_i I[i=i'] +  \beta_{U} X_{it} + \beta_{WiD}X_{it}I[i=i'] \epsilon_{it}\\
-Y_{it} &= \alpha_2 + \delta_t I[t=t'] + \beta_{T} X_{it} + \beta_{DiD} X_{it}I[t=t']  \epsilon_{it}
+Y_{it} &= \alpha_1 + \gamma_i I[i=i'] +  \beta_{U} X_{it} + \beta_{WiD}X_{it}I[i=i'] + \epsilon_{it}\\
+Y_{it} &= \alpha_2 + \delta_t I[t=t'] + \beta_{T} X_{it} + \beta_{DiD} X_{it}I[t=t'] + \epsilon_{it}
 \end{align}
 $$ {#eq-setup2}
 
@@ -378,7 +380,7 @@ and solution for $X$ and $Y$:
 $$
 \begin{align}
 X_{it} &= \frac{\alpha_1 + \gamma_i I[i=i'] - \delta_t I[t=t'] - \alpha_2}{\beta_T + \beta_{DiD}I[t=t'] - \beta_U - \beta_{WiD}I[i=i']}\\
-Y_{it} &= \frac{\beta_T \gamma_iI[i=i'] + \beta_{DiD}\gamma_iI[i=i'] + \beta_T \alpha_1 + \beta_{DiD}I[t=t'] \alpha_1  - \beta_U \delta_tI[t=t'] - \beta_{WiD} [i=i'] \alpha_2 }{\beta_T + \beta_{DiD}I[t=t'] - \beta_U - \beta_{WiD}I[i=i']}
+Y_{it} &= \frac{\beta_T \gamma_iI[i=i'] + \beta_{DiD}\gamma_iI[i=i'] + \beta_T \alpha_1 + \beta_{DiD}I[t=t'] \alpha_1  - \beta_U \delta_tI[t=t'] - \beta_{WiD} [i=i'] \alpha_2 }{\beta_T + \beta_{DiD}I[t=t'] - \beta_U - \beta_{WiD}I[i=i']} + \epsilon_{it}
 \end{align}
 $$ {#eq-solveit2}
 
@@ -386,7 +388,7 @@ The addition of the indicator variables complicates the equations, but is necess
 
 To illustrate, in the code chunk below I simulate panel data with the `panelsim` package. This package implements our paper simulation and is now expanded with the additional DiD extensions I have just described. You can get the package on Github here: <https://github.com/saudiwin/panelsim> (perhaps one day on CRAN, we'll see).
 
-To simulate a panel data set with a fixed DiD coefficient of 1 and exactly 2 time points with 100 cases/units ($N$) for a total of 2,000 rows of data, I use the `tw_data` function from `panelsim` in the code block below. The `tw_data` has options to generate all of the coefficients in @eq-solveit2 as the function documentation shows. For now, I'll just leave most of those other arguments at their defaults, which will generate a fair amount of heterogeneity in the over-time and cross-sectional variance of $Y$.
+To simulate a panel data set with a fixed DiD coefficient of 1 and exactly 2 time points with 100 cases/units ($N$) for a total of 200 rows of data, I use the `tw_data` function from `panelsim` in the code block below. The `tw_data` has options to generate all of the coefficients in @eq-solveit2 as the function documentation shows. For now, I'll just leave most of those other arguments at their defaults, which will generate a fair amount of heterogeneity in the over-time and cross-sectional variance of $Y$.
 
 `tw_data` produces a list with a data frame of simulated panel data along a list with the parameters used to generate it. With this data, I can then identify the DiD coefficient by fitting a linear model specification with an interaction between $X$ and the `time` indicator. Big win for the OLS fans!
 
@@ -503,7 +505,7 @@ diagnose_design(did_sim)
 
 ```
 
-As can be seen, `lm` and the interaction effect of $X$ and $time$ hits the nail on the head--the estimate is almost exactly equal to the true DiD coefficient of -3.5 as well as `DeclareDesign`'s separate calculation using averages of potential outcomes. Furthermore, the other inquiries listed show other parts of the potential outcome notation that map on to other model coefficients simulated by `tw_data`:
+As can be seen, `lm` and the interaction effect of $X$ and $time$ hits the nail on the head--the estimate (`Mean Estimate` in the table) is almost exactly equal to the true DiD coefficient of -3.5 as well as `DeclareDesign`'s separate calculation using averages of potential outcomes (`Mean Estimand`). Furthermore, the other inquiries listed show other parts of the potential outcome notation that map on to other model coefficients simulated by `tw_data`:
 
 ```{r compare_true}
 print("True DiD/ATT Coefficient:")
@@ -554,7 +556,7 @@ One run of the design shows that we are pretty close to the "true" DiD coefficie
 
 The potential outcome notation further makes clear that for conventional data, you can only compare two time points at a time with a single difference. You can have as many time points as you want in the simulation, but it's not obvious how you might aggregate across more than 2 time points and end up with a single estimand. This is what has led rise to the increasingly complex multiple time point DiD [@dechaisemartin2023; @callaway2020; @bacon2018], which sadly I do not have the space to address in this blog post (perhaps in the future or if I ever write another panel data paper).
 
-However, this issue makes it clear why two-way fixed effects--that is, fitting a model with intercepts for case and time along with a single coefficient for $X$--can capture a DiD coefficient with more than 2 time points. Which year X treatment interaction is specified? And why do you use two-way fixed effects for DiD estimation anyway?
+However, this issue makes it clear why two-way fixed effects--that is, fitting a model with intercepts for case and time along with a single coefficient for $X$--won't be able to generally capture a DiD coefficient when there are more than 2 time points. Which year X treatment interaction is specified? And why would you use two-way fixed effects for DiD estimation anyway?
 
 Well, it's an odd trick of panel data modeling that fitting this model:
 
@@ -562,7 +564,7 @@ $$
 Y_{it} = \alpha_i I[i=i'] + \alpha_t I[t=t'] + \beta_{TWFE}X_{it} + \epsilon_{it}
 $$ {#eq-twfe}
 
-will produce a coefficient on $X_{it}$ that is equal to the coefficient on $X_{it}$ in the treatment X time interaction model we've been using:
+will produce a coefficient on $X_{it}$, $\beta_{TWFE}$ that is equal to the coefficient on $X_{it}$, $\beta_{DiD}$, in the treatment X time interaction model we've been using:
 
 $$
 Y_{it} = \alpha_t I[t=t'] + \beta_{T}X_{it} + \beta_{DiD} X_{it} I[t=t'] \epsilon_{it}
@@ -572,7 +574,7 @@ So long as there are only *two* time points and we code the treatment vector sli
 
 Yes, that's right, $\beta_{TWFE} = \beta_{DiD}$. 🤯
 
-How can that be possible? Well, there's one small condition. When we "assign" units to treatment/control for @eq-twfe, we have to assign a treatment vector of all 0s for control units and a vector of $[0,1]$ for units in treatment, that is a 0 for $t=1$ and a 1 for $t=2$. When we use @eq-did-cs, we instead use a treatment vector of all 1s for the treatment group for both time points, that is, $[1,1]$. With that simple change, the two coefficients are the same.
+How can that be possible? Well, there's one small condition. When we "assign" units to treatment/control for @eq-twfe, we have to assign a treatment vector of all 0s for control units and a vector of $[0,1]$ for units in treatment, that is a 0 for $t=1$ and a 1 for $t=2$. When we use @eq-did-cs, we instead use a treatment vector of all 1s for the treatment group for both time points, that is, [1,1]. With that simple change, the two coefficients are the same.
 
 Don't believe me? Below is some code where I change how `DeclareDesign` assigns the treatment vector and then uses TWFE to get the ATT:
 
