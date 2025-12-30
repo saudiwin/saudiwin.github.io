@@ -1,0 +1,85 @@
+---
+title: "Beyond Political Connections : A Measurement Model Approach to Estimating Firm-level Political Influence in 41 Countries"
+date: 2025-09-24
+author:
+  - name: Robert Kubinec
+    url: http://www.robertkubinec.com/
+    orcid: 0000-0003-3506-7590
+    affiliation: University of South Carolina
+  - name: David Francis
+    url: https://blogs.worldbank.org/en/team/d/david-francis
+    affiliation: World Bank
+categories: 
+  - Political Economy
+  - Measurement
+  - Bayesian Statistics
+pub-info:
+  reference: >-
+    David Francis and Robert Kubinec, “Beyond Political Connections : A Measurement Model Approach to Estimating Firm-level Political Influence in 41 Countries,” <em>Political Science Research & Methods</em>, doi: <a href="https://doi.org/10.1017/psrm.2025.10046"><code>10.1017/psrm.2025.10046</code></a>
+  links:
+    - name: Preprint
+      url: https://www.enterprisesurveys.org/content/dam/enterprisesurveys/documents/research-1/Beyond%20Political%20Connections.pdf
+      icon: fa-solid fa-file-pdf
+      local: local
+    - name: Final version
+      url: https://doi.org/10.1017/psrm.2025.10046
+      icon: fa-solid fa-scroll
+    - name: Code & Data
+      url: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/EVVOGS
+      icon: fa-brands fa-github
+    - name: Add to Zotero
+      url: https://www.zotero.org/save?type=doi&q=10.1017/psrm.2025.10046
+      icon: ai ai-zotero
+doi: 10.1017/psrm.2025.10046
+---
+
+![Open data](data_large_color.png) ![Open](materials_large_color.png)
+
+## Important links
+
+-   [Paper](https://www.cambridge.org/core/journals/political-science-research-and-methods/article/beyond-political-connections-a-measurement-model-approach-to-estimating-firmlevel-political-influence-in-41-countries/01615492B1DCA22CF661D5A9694E2DEE)
+-   [Data Access at World Bank Enterprise Surveys](https://login.enterprisesurveys.org/content/sites/financeandprivatesector/en/signin.html) (see note below)
+
+The Harvard Dataverse repository (link: <https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/EVVOGS>) only contains the political influence scores themselves along with secondary data files; the primary firm survey data must be downloaded from the World Bank Enterprise portal. Specifically, the main file with firm survey data + political influence scores can be downloaded from the Enterprise Surveys data portal: <https://login.enterprisesurveys.org/content/sites/financeandprivatesector/en/signin.html> (if you do not have an account, you will need to register first.)
+ 
+Once logged in to the portal, click on the tab `COMBINED DATA`, and then click on the link for the file: `BeyondPoliticalConnections-data.rar` and then proceed to download. To open the compressed file on Mac OS X, use the Unarchiver app (<https://apps.apple.com/us/app/the-unarchiver/id425424353?mt=12>). Inside the compressed folder are two files:
+
+1. `Political Influence_public.dta`: contains the median, 95th percentile, 5th percentile, standard error, and variance of individual index scores. The variable `idstd` is the World Bank unique identifier for companies.
+ 
+Note: users wishing to merge the scores with any external Enterprise Survey data set including `idstd` should first decode (i.e., swap values and labels) the `idstd` variable in `Political Influence_public.dta`.
+ 
+2. `data_for_analysis`: This file contains all the firm survey data mentioned in the paper along with the firm influence scores merged in (as posterior median summaries plus quantiles). `data_for_analysis.dta` can be put into the folders described below to complete replication of the index/paper results. To re-create results, the file should be placed in the `In/Processed data` folder.
+
+`combined_data.dta`: This file contains some additional variables that were used in creation of the index. To re-estimate the index, it should be placed in the `In/` folder.
+
+We will keep these files up to date as we estimate new versions of the scores for future World Bank surveys. Up-to-date political influence scores with the `idstd` variable to merge with World Bank Enterprise Survey data are also available from this repo.
+
+## Abstract
+
+This paper puts forward a theoretically derived measure of firm-level political influence defined over a sample of firms from a diverse set of countries, permitting new inferences into state-business relations. We derive this measure from original surveys of 27,613 firms in 41 countries, which include information on several interactions with political actors. Using a Bayesian item response theory (IRT) measurement model that incorporates non-ignorable missing data, we estimate influence scores that incorporate survey data on diverse mechanisms by which firms attempt to obtain influence. From the measurement model, we learn that membership in a business association contains the most positive information about a firm's influence, while bribes, state ownership, firm size, and a reliance on collective lobbying tend to be substitutes for influence in equilibrium. Empirically, we are able to show for the first time how such influence is distributed across different types of political regimes using a measurement model, leading to intriguing hypotheses about how the costs and benefits of political activity structure corporate influence-seeking.
+
+## Data and code
+
+The project is reproducible with R code and data [available at the Harvard Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/EVVOGS). However, see note above about accessing the data at the World Bank Enterprise Surveys site for the full dataset.
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.1017/psrm.2025.10046">{{< ai zotero >}} Add to Zotero {{< fa square-arrow-up-right >}}</a>
+
+</p>
+
+``` bibtex
+@article{kubinec_francis_polcon_2025,
+    title = {Beyond Political Connections : A Measurement Model Approach to Estimating Firm-level Political Influence in 41 Countries},
+    shorttitle = {Beyond Political Connections},
+    url = {https://www.cambridge.org/core/journals/political-science-research-and-methods/article/beyond-political-connections-a-measurement-model-approach-to-estimating-firmlevel-political-influence-in-41-countries/01615492B1DCA22CF661D5A9694E2DEE},
+    abstract = {This paper puts forward a theoretically derived measure of firm-level political influence defined over a sample of firms from a diverse set of countries, permitting new inferences into state-business relations. We derive this measure from original surveys of 27,613 firms in 41 countries, which include information on several interactions with political actors. Using a Bayesian item response theory measurement model that incorporates non-ignorable missing data, we estimate influence scores that incorporate survey data on diverse mechanisms by which firms attempt to obtain influence. From the measurement model, we learn that membership in a business association contains the most positive information about a firm’s influence, while bribes, state ownership, firm size, and a reliance on collective lobbying tend to be substitutes for influence in equilibrium. Empirically, we are able to show for the first time how such influence is distributed across different types of political regimes using a measurement model, leading to intriguing hypotheses about how the costs and benefits of political activity structure corporate influence-seeking.},
+    urldate = {2025-09-24},
+    journal = {Political Science Research and Methods},
+    author = {Francis, David and Kubinec, Robert},
+    year = {2025},
+    note = {Publisher: Cambridge University Press}
+}
+```

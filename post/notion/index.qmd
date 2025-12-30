@@ -1,0 +1,127 @@
+---
+title: "How to Use Notion for Academic Research"
+subtitle: "The only thing harder than task management is task management software."
+author: "Robert Kubinec"
+date: "2025-12-29T15:00:00"
+image: "../../files/img/headers/notion_header.png"
+categories: ["Research Design","Task Management"]
+description: "I provide some advice for how to use Notion's powerful management software for the unique challenges of academic research."
+format:
+  html:
+    code-fold: show
+    code-summary: "Hide the Code"
+    toc: false
+execute: 
+  cache: true
+  warning: false
+  error: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(dplyr)
+require(tidyr)
+require(ggplot2)
+require(cmdstanr)
+require(tidybayes)
+require(posterior)
+require(ggthemes)
+
+set.seed(662817)
+
+knitr::opts_chunk$set(warning=F,message=F,fig.align = "center")
+
+
+```
+
+![](images/notion_header.png){fig-align="center" width="50%"}
+
+[Notion](https://www.notion.com/) is a powerful cloud-hosted software suite for task and project management. For many academics like me, who always have too many projects to keep track of, this type of tool seems potentially useful. The problem is going from potential to actually useful. I'm sure you've set up other tools like Trello or Asana one time or another, only to abandon them in the end.
+
+I've found Notion to be quite helpful for my workload to the point that I primarily use it for projects--and I've found that when I don't use it, coordination suffers. I'm writing this blog post to show some ways I've found the tool be most useful for academic research projects, which have their own unique challenges. Best of all--everything I describe can be done with Notion's **free** academic plan: see the link [here](https://www.notion.com/help/notion-for-education) to sign up.
+
+## Overview of Notion
+
+Notion has features from a range of online software you may have used before, such as Google Drive and Trello/Asana. What sets Notion apart is its reliance on databases. A database is simply a fancy spreadsheet; Notion allows you to create these with many options and different types of columns. It also lets you summarize these databases and present them in different graphical forms. For that reason, it is more flexible than other project management software options.
+
+It also means that Notion can be used for all kinds of things, from running a website to managing budgets. My main aim in this tutorial is to focus on task and project management within Notion in the way that academics tend to work. There are many other things that Notion can do, and this tutorial only has my idiosyncratic (but hopefully useful) take on what works.
+
+The two most basic components in Notion are pages (think of them like a blank Google Doc) and databases. The former are essentially blank canvases within which you can put anything from text to video to code. Databases are collections of records and can be displayed within other pages (using what are called views) or on their own page in a couple of different formats as I'll show below.
+
+From my experience, pages are mainly useful when you have some big project or idea, and you need a blank canvas where you'll be posting a lot of notes. Otherwise, you can keep most of your notes and ideas on individual task and project records, which are located within databases. Each page you create (or database) will make a new link on your Notion sidebar, and you can even nest pages and databases within categories:
+
+![Notion Sidebar with Pages and Databases](images/notion_sidebar.png){fig-align="center"}
+
+In the image above, the Tasks and Projects items are databases while Facebook Climate is a general page. In practice, you will probably have lots more uses and combinations of these basic items that I can show in this tutorial. For example, you could in theory have one big page and just embed lots of databases inside of it, etc. However, for my purposes, I've found that databases are powerful enough that you can do most of your work within them without the need for additional pages.
+
+For task management, Notion has two general types of databases: a task database in which each row is a separate task, and a project database in which each row is a separate project. Below are two screenshots illustrating what these look like in table (conventional form):
+
+![Projects in Table Form](images/projects_table.png){fig-align="center"}
+
+![Tasks in Table Form](images/tasks_table.png){fig-align="center"}
+
+The columns (or in Notion speak "properties") are defaults that are created whenever you add a database to your Notion account with either the Projects or Tasks templates. You can modify these databases however you want by either adding or removing columns; when you do so, you will add or remove attributes you can include for any of your tasks and/or projects. The Status property is one of the defaults and can be modified by adding or removing types of statuses for a project or task.
+
+The main difference between Tasks and Projects is that Tasks are nested within Projects; or to put it another way, each Project can be made up of many Tasks. To create Projects and Tasks databases that are linked to each other out of the box, you can use the Project & Tasks template from Notion's list of built-in templates (otherwise you have to link them yourself, which isn't that hard but requires learning a bit more about how the databases work). In order to use the template, first make a new blank page (the + button on the sidebar), then click on Templates at the bottom of the page and search for Tasks and Projects. In this way you can create as many separate Tasks/Projects databases as you need that are linked to each other. When you create a fresh Notion account, it should give you at least one of each type of Project/Task database to get you started.
+
+As I mentioned, these tasks and projects are quite powerful. First of all, Notion does not need to display them in a conventional table/spreadsheet form. Each database can be displayed in the classic Kanban Board (if you are familiar with Trello boards) by simply clicking on the Board option:
+
+![Tasks Database in Board form](images/tasks_board.png){fig-align="center"}
+
+You can drag and drop individual tasks from one status category to another, and also re-arrange their order within categories vertically.
+
+The tasks and projects have a lot of potential options in terms of attributes (and of course you can add your own if any are missing). Here is what the basic project template looks like when you click on the row in a project database:
+
+![](images/example_project.png){fig-align="center"}
+
+and the same for a task:
+
+![](images/example_task.png){fig-align="center"}
+
+## How to Use These Things
+
+As I have already mentioned, Notion is extremely powerful. I am sure that you could run large corporation or non-profit with it. However, academics usually do not have projects or tasks that involve nearly as many groups of people. At the same time, we do have projects that are quite intricate and take a long time. Furthermore, we almost always have a large number of discrete tasks--this is often one of the most difficult aspects of managing academic life. An academic must switch rapidly from managing student emails to reading sources to completing a peer review.
+
+Task management can, for that reason, be enormously helpful and stress-relieving. Unfortunately for academics, though, we do not have any professionals to help us manage our tasks. Like entrepreneurs, we have to both plan and execute. While academics (and I am no exception) are happy to roll our eyes at the silly meetings our corporate friends must do on a daily basis, the other side of that reality is that no one helps us to manage the daily balancing of our many projects.
+
+Project management itself takes time, which is I think why these tools do not always have high adoption in academia. If we spend too much time organizing everything we do, then we do not have the time to complete those tasks.
+
+Thankfully, Notion is flexible enough to meet that level of useful–but not overly involved–task management. Also, what I've found is that following a set of principles about how to manage tasks is just as important as fancy software. For academic work, I don't think that anything is necessary beyond the relatively simple Project/Task relation in Notion.
+
+In fact, for much of my work, I just use a simple Tasks database with individual tasks. Remember, each task is also a page (you can add any details to it), and you can also add little check lists to each task. For example, suppose I need to do an R&R, I can create a task, and then within the task make a check list with each R&R comment. I could get more involved and make an R&R project, then a task for each comment–but that would be overkill. Again, it's about finding the right level of complexity—creating that many tasks (and embedding them within a project) would take considerable time and not add a whole lot—at least if I'm working solo.
+
+I've also found that there are a few very important principles to make this workflow useful:
+
+1.  You can only work on tasks that are found in your task board.
+
+You don't want to have phantom tasks that you never write down. That can be a way of avoiding making decisions about how to spend your time. Only let yourself work on tasks that you've put in your board.
+
+2.  You can only work on tasks that are "in progress."
+
+The Status indicator on each task that is shown above is incredibly useful. As an academic, it's overwhelming to have too many tasks, and the reality is that you can only carve your time down into niches that are so small. I think this is one of the reasons that academics feel perpetually overwhelmed. What helps is to have only a few tasks set as "in progress"--those you are actually working on or have time to work on. Keep everything as as "Not Started" until you have time to do it. That can help you focus on *getting things done* rather than always wondering what you should do next.
+
+3.  You should use Priority to determine work order.
+
+Both Projects and Tasks come with a Priority column (Low/Medium/High). I've found this to be very useful for nailing down what I do next. Each task is given a priority, and then within each priority group, I can further order them in terms of what I will do next (i.e., drag and drop to sort them vertically). This ordering might also be determined by what I can do next; some tasks might be waiting on something external even if they are high priority. Then I can follow a simple rule of starting with the first High priority task, then doing the first Medium priority task, and so on. I've found this type of prioritization helps to finally nail down what I should actually do next–and importantly, doesn't take all that much time to do. Just a few minutes in the morning.
+
+So when are the projects more useful than just making individual tasks? I've found project records useful for very long-term agendas such as big surveys, book projects, articles, and the like. A project can have a lot of tasks associated with it, which is nice. You can also add notes to the Project page, which can be helpful for keeping information organized across tasks. The Project database also has a nifty counter for how many tasks you've finished and can have date ranges for when you will do the project. You could go the whole way and make a Gantt chart, but I think those are too involved to be useful for the open-ended research academics do.
+
+In other words, there is no hard and fast rule for when you might want to go the extra mile and make a project versus just a task. You can also embed tasks within tasks, which Notion calls sub-tasks, but I've never found much use for those as they seem unnecesarily complicated (just use a project or add a checklist to the task). My projects are big goals that I want to accomplish, and they help me organize my tasks so I can think about what I need to do next to accomplish the goal. It is cool to click on a project page and see all the tasks I've accomplished or have yet to do.
+
+That is the nuts and bolts of how I've found these tools to be useful for my individual workload. However, academics also collaborate quite a bit, and our collaborations are different than other fields because we are often working with people in different organizations. In the next section I'll discuss how to use Notion with others—which is another strong point for the software.
+
+## Sharing and Collaboration
+
+For each Notion thing, whether a page, a database, or a record in a database (task or project or what have you), you can share that thing with other people. If you register for the academic account I described above, then you can share any individual record with up to a hundred others—almost always more than enough. To do so, just click the Share button at the top of each page/database/record.
+
+Furthermore, once you add people, you can also refer to them when writing comments or text using the convenient `@` shorthand, as in `@bob`. That will send them a notification, though they can also receive notifications every time you edit a task or project that you assign them to (one of the properties/columns in the database). Assigning tasks can be super helpful for managing more complex collaborations like revising a paper; you can break up the workload by assigning people to different tasks with different review instructions. I've also done a similar process for writing big grants.
+
+There is one trick though—you can share an individual task with someone, but for them to see the full database of tasks/projects, then you need to share the full database as well. If you do that, then they can also create tasks & assign them, and you also won't have to share each individual record in order for them to see it. The flip side is that once you share a database, they can see all records, so if you wanted to have private tasks like "Find new collaborators, these ones suck"--yikes.
+
+There is a way to get around this by having record-level sharing permissions, but unfortunately it requires an account upgrade from the free academic account (see <https://www.notion.com/help/guides/assign-custom-database-permissions>). Currently the business account is running at \$24/month, so it's not prohibitive, but obviously an investment. That also gives you access to some fancy AI tools including one that can summarize your Zoom meetings for you (if that's your thing).
+
+As a result, if you want to share a bunch of tasks/projects with people, it might make sense to create a separate database so they can see everything. Conversely, if you just want to do a few tasks, you can always share individual tasks with people so they can see/comment on it. I currently have a private tasks/projects database and an external tasks/projects database, which seems to work fairly well, and I could always use project-specific tasks databases. The challenge with doing so is then integrating those different databases into a single list that you can sort and order, which is why I haven't made all that many different copies so far.
+
+The goal of using tasks/projects for collaboration is to make Notion an email replacement. Academics still use email a lot, but by adding relevant info to task and projects, you can ensure you don't lose valuable conversations in buried email threads. You can add comments to virtually anything in Notion—values in any row in a database or even blocks of text in a page. And helpfully, Notion will give you notifications when people do so. I've found this to be very handy at ensuring I don't lose a conversation with one of my co-authors.
+
+Well that's the long and the short of it—I'm sure there are tools/tricks I'm not aware of, or that another person might find more useful ways of managing Notion. I have found it to be very helpful for me and several teams I'm involved in, and so far I have only used the free academic account. I hope you find it useful as well, and feel free to Bluesky me (<https://bsky.app/profile/rmkubinec.bsky.social>) with any ideas or suggestions.
