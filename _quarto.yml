@@ -7,6 +7,16 @@ website:
   title: "Homepage"
   reader-mode: true
   open-graph: true
+  comments: 
+    giscus:
+      repo: saudiwin/saudiwin.github.io
+      repo-id: MDEwOlJlcG9zaXRvcnk3MTIzOTI2Ng==
+      category: Announcements
+      category-id: DIC_kwDOBD8GYs4C0biv
+      mapping: title
+      theme:
+        light: light
+      input-position: top
   announcement: 
     icon: info-circle
     dismissable: true
