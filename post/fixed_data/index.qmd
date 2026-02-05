@@ -201,14 +201,6 @@ Well let's change our simulation to do just that:
 
 sigma_x <- 0.5
 
-# we'll draw and re-fit our vanilla OLS model to make it comparable to the new simulation
-
-new_X <- rnorm(N, mean=X, sd = sigma_x)
-
-Y_meas_err <- rnorm(N, mean = alpha + beta * X, sd=1)
-
-y_reg_meas_err <- lm(Y_meas_err ~ new_X)
-
 over_sims_rando_X <- lapply(1:1000, function(i) {
     
     # draw a new random X = measurement error from true X
@@ -221,17 +213,14 @@ over_sims_rando_X <- lapply(1:1000, function(i) {
     this_y_reg <- lm(this_y ~ new_X)
 
     tibble(alpha=coef(this_y_reg)['(Intercept)'],
-          beta=coef(this_y_reg)['new_X'])
+          beta=coef(this_y_reg)['new_X'],
+          beta_se=summary(this_y_reg)$coefficients["new_X", "Std. Error"])
     
 }) |> bind_rows()
 
-print(paste0("True SE of the Intercept: ", sd(over_sims_rando_X$alpha)* sqrt(N/(N-2))))
-print(paste0("True SE of Beta: ", sd(over_sims_rando_X$beta)* sqrt(N/(N-2))))
-
-# now get it from the OLS model
-ols_meas_err_ses <- summary(y_reg_meas_err)
-print(paste0("OLS SE of the Intercept: ", ols_meas_err_ses$coefficients[1,'Std. Error']))
-print(paste0("OLS SE of Beta: ", ols_meas_err_ses$coefficients[2,'Std. Error']))
+print(paste0("True SE of the Intercept: ", sd(over_sims_rando_X$alpha)))
+print(paste0("True SE of Beta: ", sd(over_sims_rando_X$beta)))
+print(paste0("OLS SE of Beta: ", mean(over_sims_rando_X$beta_se)))
 
 ```
 
@@ -275,8 +264,8 @@ over_sims_rando_beta <- lapply(1:1000, function(i) {
     
 }) |> bind_rows()
 
-print(paste0("True SE of the Intercept: ", sd(over_sims_rando_beta$alpha)* sqrt(N/(N-2))))
-print(paste0("True SE of Beta: ", sd(over_sims_rando_beta$beta)* sqrt(N/(N-2))))
+print(paste0("True SE of the Intercept: ", sd(over_sims_rando_beta$alpha)))
+print(paste0("True SE of Beta: ", sd(over_sims_rando_beta$beta)))
 
 # now get it from the OLS model
 ols_rand_slope_ses <- summary(y_reg_rand_slope)
@@ -302,7 +291,7 @@ se_pop <- sqrt(vcov(lmer_fit)["X","X"] +
 
 print(paste0("lmer combined SE of Beta: ", se_pop))
 print(paste0("OLS SE of Beta: ", ols_rand_slope_ses$coefficients[2,'Std. Error']))
-print(paste0("True SE of Beta: ", sd(over_sims_rando_beta$beta)* sqrt(N/(N-2))))
+print(paste0("True SE of Beta: ", sd(over_sims_rando_beta$beta)))
 
 ```
 
