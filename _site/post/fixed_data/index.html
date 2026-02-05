@@ -542,49 +542,41 @@ F-statistic:  1278 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>sigma_x <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># we'll draw and re-fit our vanilla OLS model to make it comparable to the new simulation</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>new_X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>X, <span class="at">sd =</span> sigma_x)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>Y_meas_err <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> alpha <span class="sc">+</span> beta <span class="sc">*</span> X, <span class="at">sd=</span><span class="dv">1</span>)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>y_reg_meas_err <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y_meas_err <span class="sc">~</span> new_X)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>over_sims_rando_X <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># draw a new random X = measurement error from true X</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    new_X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>X, <span class="at">sd =</span> sigma_x)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># alpha and beta, true X stay the same</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    this_y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> alpha <span class="sc">+</span> beta <span class="sc">*</span> X, <span class="at">sd=</span><span class="dv">1</span>)</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>over_sims_rando_X <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="cf">function</span>(i) {</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># draw a new random X = measurement error from true X</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    new_X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>X, <span class="at">sd =</span> sigma_x)</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># alpha and beta, true X stay the same</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    this_y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> alpha <span class="sc">+</span> beta <span class="sc">*</span> X, <span class="at">sd=</span><span class="dv">1</span>)</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># measurement error in X vs true X</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    this_y_reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(this_y <span class="sc">~</span> new_X)</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">alpha=</span><span class="fu">coef</span>(this_y_reg)[<span class="st">'(Intercept)'</span>],</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">beta=</span><span class="fu">coef</span>(this_y_reg)[<span class="st">'new_X'</span>],</span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>          <span class="at">beta_se=</span><span class="fu">summary</span>(this_y_reg)<span class="sc">$</span>coefficients[<span class="st">"new_X"</span>, <span class="st">"Std. Error"</span>])</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>()</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of the Intercept: "</span>, <span class="fu">sd</span>(over_sims_rando_X<span class="sc">$</span>alpha)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># measurement error in X vs true X</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    this_y_reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(this_y <span class="sc">~</span> new_X)</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">alpha=</span><span class="fu">coef</span>(this_y_reg)[<span class="st">'(Intercept)'</span>],</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">beta=</span><span class="fu">coef</span>(this_y_reg)[<span class="st">'new_X'</span>],</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">beta_se=</span><span class="fu">summary</span>(this_y_reg)<span class="sc">$</span>coefficients[<span class="st">"new_X"</span>, <span class="st">"Std. Error"</span>])</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>()</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of the Intercept: "</span>, <span class="fu">sd</span>(over_sims_rando_X<span class="sc">$</span>alpha)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "True SE of the Intercept: 0.0526515956549431"</code></pre>
+<pre><code>[1] "True SE of the Intercept: 0.0526329470114415"</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of Beta: "</span>, <span class="fu">sd</span>(over_sims_rando_X<span class="sc">$</span>beta)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "True SE of Beta: 0.0437506109135357"</code></pre>
+<pre><code>[1] "True SE of Beta: 0.0437449558002989"</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of Beta: "</span>, <span class="fu">mean</span>(over_sims_rando_X<span class="sc">$</span>beta_se)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "OLS SE of Beta: 0.0486776957855115"</code></pre>
+<pre><code>[1] "OLS SE of Beta: 0.048675803311139"</code></pre>
 </div>
 </div>
 <p>You can see that the standard error of the <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> parameters for OLS has increased relative to the true SEs for the parameters. Why? Because now each simulation draw we are adding in some Normally-distributed measurement noise, <code>sigma_X</code>, to our “true” data <span class="math inline">\(X\)</span>. That is, our data will vary for each draw (<code>X_new</code>) along with the outcome <span class="math inline">\(Y\)</span>. In this case, the standard OLS estimate of the SE of the parameters will be too high because OLS assumes that <span class="math inline">\(X\)</span> is measured without error (i.e., is true or fixed).</p>
@@ -630,14 +622,14 @@ F-statistic:  1278 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of the Intercept: "</span>, <span class="fu">sd</span>(over_sims_rando_beta<span class="sc">$</span>alpha)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "True SE of the Intercept: 0.03207964863217"</code></pre>
+<pre><code>[1] "True SE of the Intercept: 0.0324035272903685"</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of Beta: "</span>, <span class="fu">sd</span>(over_sims_rando_beta<span class="sc">$</span>beta)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "True SE of Beta: 0.0629543055518233"</code></pre>
+<pre><code>[1] "True SE of Beta: 0.0654945126466577"</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
@@ -646,14 +638,14 @@ F-statistic:  1278 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of the Intercept: "</span>, ols_rand_slope_ses<span class="sc">$</span>coefficients[<span class="dv">1</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "OLS SE of the Intercept: 0.0314816825765908"</code></pre>
+<pre><code>[1] "OLS SE of the Intercept: 0.0332420378886692"</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of Beta: "</span>, ols_rand_slope_ses<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "OLS SE of Beta: 0.0307791347179157"</code></pre>
+<pre><code>[1] "OLS SE of Beta: 0.032500205793772"</code></pre>
 </div>
 </div>
 <p>In this case, OLS <em>underestimates</em> the uncertainty in <span class="math inline">\(\beta\)</span> by assuming <span class="math inline">\(\beta\)</span> is fixed with respect to <span class="math inline">\(Y\)</span>. This additional source of uncertainty is un-modeled because the slope <span class="math inline">\(\beta\)</span> is varying across different groups in the data (even though on average the OLS estimate of <span class="math inline">\(\beta\)</span> is un-biased, or equal to the true value). However, we can use a linear mixed model via the R package <code>lme4</code> with random slopes to capture that uncertainty in <span class="math inline">\(\beta\)</span> a bit better:</p>
@@ -681,14 +673,14 @@ F-statistic:  1278 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of Beta: "</span>, ols_rand_slope_ses<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "OLS SE of Beta: 0.0307791347179157"</code></pre>
+<pre><code>[1] "OLS SE of Beta: 0.032500205793772"</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of Beta: "</span>, <span class="fu">sd</span>(over_sims_rando_beta<span class="sc">$</span>beta)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "True SE of Beta: 0.0629543055518233"</code></pre>
+<pre><code>[1] "True SE of Beta: 0.0654945126466577"</code></pre>
 </div>
 </div>
 <p><code>lme4</code> estimate is a bit bigger than the true value due to some differences in how <code>lme4</code> estimates random slopes–I’ll let the reader explore that one on their own 😁. It would also be possible to adjust the OLS standard errors with clustering around <code>group_id</code> if we want to continue using vanilla OLS.</p>
