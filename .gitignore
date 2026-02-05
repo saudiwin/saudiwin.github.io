@@ -7,6 +7,13 @@ U.S._State_and*
 *.synctex.gz
 /.quarto/
 *DS_Store
-data
-_freeze
+data/
+_freeze/
 *.RData
+asteriod_predict.png
+bad_ols_fit.png
+feb18.png
+sample_sim.png
+smooth_beta.png
+test_hist.py
+esa_risk*
