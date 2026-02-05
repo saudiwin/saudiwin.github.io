@@ -235,7 +235,7 @@ print(paste0("OLS SE of Beta: ", ols_meas_err_ses$coefficients[2,'Std. Error']))
 
 ```
 
-You can see that the standard error of the $\alpha$ and $\beta$ parameters for OLS has increased relative to the true SEs for the parameters. Why? Because now each simulation draw we are adding in some Normally-distributed measurement noise, `sigma_X`, to our "true" data $X$. That is, our data will vary for each draw (`X_new`) along with the outcome $Y$. In this case, the standard OLS estimate of the SE of the parameters will be too low because OLS assumes that $X$ is measured without error (i.e., is true or fixed).
+You can see that the standard error of the $\alpha$ and $\beta$ parameters for OLS has increased relative to the true SEs for the parameters. Why? Because now each simulation draw we are adding in some Normally-distributed measurement noise, `sigma_X`, to our "true" data $X$. That is, our data will vary for each draw (`X_new`) along with the outcome $Y$. In this case, the standard OLS estimate of the SE of the parameters will be too high because OLS assumes that $X$ is measured without error (i.e., is true or fixed).
 
 ## What If the Slopes/Coefficients Are Random?
 
@@ -296,13 +296,16 @@ dat <- tibble(Y_rand_slope=Y_rand_slope,X=X,group_id=group_id)
 lmer_fit <- lmer(Y ~ X + (0 + X | group_id), data = dat, REML = TRUE)
 lmer_sum <- summary(lmer_fit)
 
+se_pop <- sqrt(vcov(lmer_fit)["X","X"] +
+               as.numeric(VarCorr(lmer_fit)$group["X","X"]))
 
-print(paste0("lmer SE of Beta: ", lmer_sum$coefficients[2,'Std. Error']))
+
+print(paste0("lmer combined SE of Beta: ", se_pop))
 print(paste0("OLS SE of Beta: ", ols_rand_slope_ses$coefficients[2,'Std. Error']))
 print(paste0("True SE of Beta: ", sd(over_sims_rando_beta$beta)* sqrt(N/(N-2))))
 
 ```
 
-`lme4` estimate is noticeably larger than vanilla OLS 🙌, though still a bit low–which could be sampling error, or just the known fact that maximum-likelihood random effects slightly under-estimate the variance of the random effects–I'll let the reader explore that one on their own 😁. It would also be possible to adjust the OLS standard errors with clustering around `group_id`.
+`lme4` estimate is a bit bigger than the true value due to some differences in how `lme4` estimates random slopes–I'll let the reader explore that one on their own 😁. It would also be possible to adjust the OLS standard errors with clustering around `group_id` if we want to continue using vanilla OLS.
 
 In summary, though, you can't truly *know* the probability distribution of the outcome, $Y$. Residuals are a hint but nothing more. And, assuming $X$ has no measurement error is a fairly strong assumption. Often we can't do much about it... but sometimes we can. And if you're interested to learn more about measurement modeling, see my R package `idealstan`: <https://saudiwin.github.io/idealstan/vignettes/Package_Introduction.html>.
