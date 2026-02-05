@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Robert Kubinec">
+<meta name="dcterms.date" content="2026-02-02">
+<meta name="description" content="In all conventional regression models, the data are fixed–they don’t have a probability distribution. This means transforming your data with logs or other functions won’t change the probability distribution of your outcome.">
+
+<title>All Your Data R Fixed – Homepage</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b9099fb3f1246bdcc02181f33f45fe59.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BHP1PJ9LEX"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="All Your Data R Fixed – Homepage">
+<meta property="og:description" content="In all conventional regression models, the data are fixed–they don’t have a probability distribution. This means transforming your data with logs or other functions won’t change the probability distribution of your outcome.">
+<meta property="og:image" content="../../files/img/headers/data_image.png">
+<meta property="og:site_name" content="Homepage">
+</head>
+
+<body class="nav-sidebar docked nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Homepage</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/saudiwin"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://bsky.app/profile/rmkubinec.bsky.social"> 
+<span class="menu-text"><iconify-icon role="img" inline="" icon="simple-icons:bluesky" aria-label="Icon bluesky from simple-icons Iconify.design set." title="Icon bluesky from simple-icons Iconify.design set."></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../files/Robert_Kubinec_CV_full.pdf" aria-current="page"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">All Your Data R Fixed</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+  <div id="quarto-announcement" data-announcement-id="7010543ebe2e1973c23c1707ab1d37d5" class="alert alert-dark hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Read my latest on 5 lessons from political science to help rebuild Syria in <a href="https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203"><em>The Conversation</em></a>.</p>
+</div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">All Your Data R Fixed</h1>
+            <p class="subtitle lead">Transforming Your RHS Covariates Won’t Fix Your Outcome Distribution</p>
+                  <div>
+        <div class="description">
+          In all conventional regression models, the data are fixed–they don’t have a probability distribution. This means transforming your data with logs or other functions won’t change the probability distribution of your outcome.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Astrophysics</div>
+                <div class="quarto-category">Proportions</div>
+                <div class="quarto-category">Beta Regression</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Robert Kubinec </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 2, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../files/Robert_Kubinec_CV_full.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CV</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Blog</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../research/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../consulting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Consulting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://saudiwin.github.io/ordbetareg_pack/" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ordered Beta Regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://saudiwin.github.io/idealstan/" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><code>idealstan</code></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="https://coronanet-project.org/" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CoronaNet</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>I posted today about something that people often get confused when implementing regression models:</p>
+<div style="text-align: center;">
+<p></p><blockquote class="bluesky-embed blockquote" data-bluesky-uri="at://did:plc:u57ugmveenw2uu3ns7pbcj4d/app.bsky.feed.post/3me2jf73y722u" data-bluesky-cid="bafyreicttxa33j5m4zjgzjoy4tbvzb4vnf2wejowg4ecgvnv32qlhfkwyy"><p lang="en">One area of statistical modeling I wish people knew more about:
+
+*The distribution of your right-hand side (independent) variables does not matter.*
+
+It's the distribution of your outcome/response that matters. Your data are fixed. They do not have a distribution.*
+
+So no need to do log GDP/income!</p>— <a href="https://bsky.app/profile/did:plc:u57ugmveenw2uu3ns7pbcj4d?ref_src=embed">Robert (Bob) Kubinec (@rmkubinec.bsky.social)</a> <a href="https://bsky.app/profile/did:plc:u57ugmveenw2uu3ns7pbcj4d/post/3me2jf73y722u?ref_src=embed">2026-02-04T18:36:41.252Z</a></blockquote><script async="" src="https://embed.bsky.app/static/embed.js" charset="utf-8"></script><p></p>
+</div>
+<p>As I expected, I got a lot of questions, so I thought I would expand on this important yet poorly-understood point about statistical models. In this post, I use simulations to show how OLS (and most other modeling frameworks like GLMs, etc.) assume that the data are fixed–only the outcome/response has a probability distribution. As a result, while the distribution of your data is important for inference and interpretability–you want your regression model to estimate the effect you care about–whatever transformations you put your covariates through won’t change whether your outcome is <em>actually</em> Normal, Exponential, Poisson, or whatever.</p>
+<p>The distribution of your outcome–whether to use OLS or something else–is a separate question that requires you to think through what kind of process your outcome represents, and whether the probability distribution matches that process. There’s no “smoking gun” that can answer that for you without requiring critical reflection. As a result, the oft-used tests for Normality can be easily fooled–like the very common residual histograms and Q-Q plots, as I’ll show in this post.</p>
+<section id="a-bit-of-background-dont-worry-its-short" class="level2">
+<h2 class="anchored" data-anchor-id="a-bit-of-background-dont-worry-its-short">A Bit of Background (Don’t Worry, It’s Short)</h2>
+<p>When we do inference with statistics, 99% of the time we are examining a conditional probability distribution. That means we have some outcome we want to study, call it <span class="math inline">\(Y\)</span>, which we believe has uncertainty. We also have some explanatory factor (causal or otherwise), which we’ll call <span class="math inline">\(X\)</span>. Then we can compare the <em>conditional</em> distribution of <span class="math inline">\(Y\)</span> for different values of <span class="math inline">\(X\)</span>.</p>
+<p>To make it really simple, suppose <span class="math inline">\(X\)</span> has only two values, 0 and 1–like most RCTs in which we have a treatment and a control group. We’ll also say we want to explain <span class="math inline">\(Y=1\)</span>, which we’ll call recovery from sickness. Then we would say the treatment <span class="math inline">\(X=1\)</span> is effective <em>if</em> Pr(Y=1|X=1) &gt; Pr(Y=1|X=0). We can read that as the probability of recovery <span class="math inline">\(Y=1\)</span> if <span class="math inline">\(X=1\)</span> (treatment) is greater than the probability of recovery <span class="math inline">\(Pr(Y=1)\)</span> if <span class="math inline">\(X=0\)</span> (control).</p>
+<p>While this simple example only has one <span class="math inline">\(X\)</span> value, we could have many covariates, such as in multiple regression models. In that case, we often want to know about the conditional probability distribution of <span class="math inline">\(Y\)</span> given multiple <span class="math inline">\(X\)</span>s, as in <span class="math inline">\(Pr(Y|X_1, X_2, ... X_N)\)</span>. What is important about these formulas is that we are <em>only</em> discussing the probability of <span class="math inline">\(Y\)</span>. There’s nothing about a conditional probability distribution that says anything about what is “given”, or on the right-hand side of the bar. <span class="math inline">\(X\)</span> just comes down like manna from heaven.</p>
+<div style="text-align: center;">
+<p><img src="../../files/img/headers/data_image.png" class="img-fluid" width="400"></p>
+</div>
+<p>Our standard linear models don’t ask questions about whether the values for <span class="math inline">\(X\)</span> makes sense or not. We simply calculate the probability of the outcome conditional on whatever data we have. To paraphrase Otto von Bismarck, regression models are a bit like sausages; it’s best not see them being made. 😬</p>
+</section>
+<section id="let-us-now-regress" class="level2">
+<h2 class="anchored" data-anchor-id="let-us-now-regress">Let Us Now Regress</h2>
+<p>When we start doing ordinary least squares (OLS) regression, or the default workhouse for many scientists, we add in some parameters (coefficients) to the conditional probability distribution like so:</p>
+<p><span class="math display">\[
+Pr(Y|\alpha + \beta X)
+\]</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is our intercept and <span class="math inline">\(\beta\)</span> is the slope or “effect” of <span class="math inline">\(X\)</span> on <span class="math inline">\(Y\)</span>. Now, the parameters are not like <span class="math inline">\(X\)</span>–they are <em>not</em> fixed or known a priori. We have to estimate them, and in particular we want to find the <em>most likely</em> values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> given what we know of <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>. For OLS, we’ll figure out what the <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are that minimize the squared differences, or residuals, between the estimated mean of <span class="math inline">\(Y\)</span>, which is <span class="math inline">\(\alpha + \beta X\)</span>, and the actual observed values for <span class="math inline">\(Y\)</span>.</p>
+<p>We can also write the same distribution in the following very familiar form for OLS:</p>
+<p><span class="math display">\[
+Y = \alpha + \beta X + \epsilon
+\]</span></p>
+<p>where <span class="math inline">\(\epsilon\)</span> are the residuals and, we assume, are Normally distributed. That’s why people often want to check the residuals to see if they look Normal (personally, I don’t think this is very useful, but not the issue at the moment).</p>
+<p>So what if we do something to <span class="math inline">\(X\)</span>? Say we take a logarithm of <span class="math inline">\(X\)</span> as so:</p>
+<p><span class="math display">\[
+Y = \alpha + \beta \text{ log } X + \epsilon
+\]</span></p>
+<p>Does this change the probability distribution/uncertainty of <span class="math inline">\(Y\)</span>? No.&nbsp;It changes how we interpret our coefficient <span class="math inline">\(\beta\)</span> because we changed how <span class="math inline">\(X\)</span> is <em>measured</em>; it is now measures in log units (base <span class="math inline">\(e\)</span>). But <span class="math inline">\(Y\)</span> is just as Normally-distributed as it was before we did that. Why is this the case? Because our model involves calculating the conditional probability (distribution) of <span class="math inline">\(Y\)</span> for each value of <span class="math inline">\(X\)</span>. What values of <span class="math inline">\(X\)</span> we have to decide when we make our data. Then we calculate <span class="math inline">\(Y\)</span> <em>conditional</em> on <span class="math inline">\(X\)</span>.</p>
+</section>
+<section id="seeing-is-believing" class="level2">
+<h2 class="anchored" data-anchor-id="seeing-is-believing">Seeing is Believing</h2>
+<p>I’ll demonstrate this by simulating a Normally-distributed <span class="math inline">\(Y\)</span> and a covariate <span class="math inline">\(X\)</span> to see how the uncertainty is calculated for <span class="math inline">\(Y\)</span> and the regression coefficients <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6633771</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># generate X as a random Normal bunch of numbers (meaningless)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># parameters</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.5</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">3.2</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># generate Y conditional on X and parameters</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> alpha <span class="sc">+</span> beta <span class="sc">*</span> X, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X,Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The plot shows the bivariate relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. We can calculate the estimated regression coefficients with OLS with the <code>lm</code> command:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>y_reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(y_reg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.6751 -0.6777 -0.0177  0.7298  3.2442 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.53014    0.03181  -16.66   &lt;2e-16 ***
+X            3.13281    0.03110  100.72   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.005 on 998 degrees of freedom
+Multiple R-squared:  0.9104,    Adjusted R-squared:  0.9103 
+F-statistic: 1.014e+04 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Our intercept is quite close to “true” <span class="math inline">\(\alpha\)</span> of -0.5 and our coefficient for <span class="math inline">\(\beta\)</span> is quite close to the true value as well (+3.2). Next we can examine the residuals, that is, the difference between actual <span class="math inline">\(Y\)</span> and our model’s prediction of <span class="math inline">\(Y\)</span> conditional on the estimated values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Y_pred1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(y_reg)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Y_pred1 <span class="sc">-</span> Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Do those look pretty Normal? Yep.</p>
+<p>Ok, now let’s exponentiate <span class="math inline">\(X\)</span> and see if it changes those residuals:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>y_reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> <span class="fu">I</span>(<span class="fu">exp</span>(X)))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(y_reg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ I(exp(X)))
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-12.5372  -1.0818   0.4257   1.5209   4.1626 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -2.3968     0.0897  -26.72   &lt;2e-16 ***
+I(exp(X))     1.1440     0.0320   35.75   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.224 on 998 degrees of freedom
+Multiple R-squared:  0.5615,    Adjusted R-squared:  0.561 
+F-statistic:  1278 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Did the <span class="math inline">\(\beta\)</span> coefficient change? Sure did. That’s because we transformed <span class="math inline">\(X\)</span>. Does that change the residuals? Is <span class="math inline">\(Y\)</span> any more or less Normal?</p>
+<p>Let’s check:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Y_pred2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(y_reg2)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Y_pred2 <span class="sc">-</span> Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Oh no! Now my residuals are skewed! Is <span class="math inline">\(Y\)</span> no longer Normal? 😱</p>
+<p>Hold on a second – <span class="math inline">\(Y\)</span> is Normally-distributed <strong>because I just sampled Y from a Normal distribution</strong>. Of course it’s still distributed as Normal. What changed is that my model is mis-specified–that is, I simulated <span class="math inline">\(Y\)</span> conditional on a linear function of <span class="math inline">\(X\)</span>, and then I added a non-linear function of <span class="math inline">\(X\)</span> that wasn’t part of the simulation (i.e., the true data-generating process). That bias ends up being absorbed in the residuals, making <span class="math inline">\(Y\)</span> look non-Normal (when it actually is). In other words, the residuals of <span class="math inline">\(Y\)</span> are only Normally-distributed <em>if</em> the mean of <span class="math inline">\(Y\)</span>, the linear model, is correctly specified 🤦‍♂️.</p>
+<p>So anyways… residual plots are <em>not</em> perfect evidence of Normality! They can be evidence of all kinds of things. All models are <em>assumptions</em>, and we cannot test them directly. We have to reason about them using our knowledge of the <em>data-generating process</em> that led to <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span> and whether the Normal distribution is an appropriate representation of that process (thankfully, it is a good representation for a wide array of continuous outcomes!).</p>
+<p>If you want another take on this, see this excellent StackOverflow post: <a href="https://stats.stackexchange.com/questions/12262/what-if-residuals-are-normally-distributed-but-y-is-not/33320#33320" class="uri">https://stats.stackexchange.com/questions/12262/what-if-residuals-are-normally-distributed-but-y-is-not/33320#33320</a>. It shows that, in fact, you can have Normally-distributed residuals <em>even when Y is not Normally-distributed</em> 🤯. So be careful with inferring Normality from residuals!</p>
+</section>
+<section id="but-what-about-the-regression-coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="but-what-about-the-regression-coefficients">But What About the Regression Coefficients?</h2>
+<p>You might be thinking, though, OK, fine, <span class="math inline">\(X\)</span> is fixed, but the regression coefficients aren’t. They’re uncertain!</p>
+<p>Very true. BUT, that uncertainty <em>does not</em> come from uncertainty in <span class="math inline">\(X\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It comes from random variation in <span class="math inline">\(Y\)</span>.</p>
+<p>Don’t believe me? We can test that in an experiment by simulating 1,000 regressions in which we keep drawing a new value for <span class="math inline">\(Y\)</span> but keeping <span class="math inline">\(X\)</span> the same in each simulation. Then we’ll fit the regression and save the estimated value of <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\alpha\)</span> to see what the “true” uncertainty is and whether that matches the standard errors for the coefficients that we estimated above with OLS.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>over_sims <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># X, alpha and beta stay the same, just make a new Y</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    this_y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> alpha <span class="sc">+</span> beta <span class="sc">*</span> X, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    this_y_reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(this_y <span class="sc">~</span> X)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">alpha=</span><span class="fu">coef</span>(this_y_reg)[<span class="st">'(Intercept)'</span>],</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">beta=</span><span class="fu">coef</span>(this_y_reg)[<span class="st">'X'</span>])</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># note: to make them match, I need to do a degrees of freedom correction for</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 parameters (alpha and beta)</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of the Intercept: "</span>, <span class="fu">sd</span>(over_sims<span class="sc">$</span>alpha)<span class="sc">*</span> <span class="fu">sqrt</span>(N<span class="sc">/</span>(N<span class="dv">-2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "True SE of the Intercept: 0.0314630304165492"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of Beta: "</span>, <span class="fu">sd</span>(over_sims<span class="sc">$</span>beta)<span class="sc">*</span> <span class="fu">sqrt</span>(N<span class="sc">/</span>(N<span class="dv">-2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "True SE of Beta: 0.0306822342074311"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now get it from the OLS model</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ols_ses <span class="ot">&lt;-</span> <span class="fu">summary</span>(y_reg)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of the Intercept: "</span>, ols_ses<span class="sc">$</span>coefficients[<span class="dv">1</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "OLS SE of the Intercept: 0.0318141439275897"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of Beta: "</span>, ols_ses<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "OLS SE of Beta: 0.0311041768336286"</code></pre>
+</div>
+</div>
+<p>You can see that the true SE of the parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, which we estimated with simulations, are pretty close to the estimated SEs using OLS. Pretty cool! Note, though, that in the simulation we <em>only</em> simulated <span class="math inline">\(Y\)</span> using the Normal distribution (<code>rnorm</code>). <strong>We did not change</strong> <span class="math inline">\(X\)</span><strong>,</strong> <span class="math inline">\(\alpha\)</span><strong>, or</strong> <span class="math inline">\(\beta\)</span><strong>.</strong> As a result, <em>all</em> of the uncertainty in our estimates for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> came from uncertainty in <span class="math inline">\(Y\)</span>, <strong>not</strong> <span class="math inline">\(X\)</span>.</p>
+<p>What if <span class="math inline">\(X\)</span> also had random noise such that our data have measurement error? What if every simulation draw, we only had one possible dataset <span class="math inline">\(\hat{X}\)</span> with some unobservable measurement error <span class="math inline">\(\sigma_X\)</span> instead of the true data <span class="math inline">\(X\)</span>?</p>
+<p>Well let’s change our simulation to do just that:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># amount of noise we'll add to X</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># assume measurement error is also Normal</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>sigma_x <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># we'll draw and re-fit our vanilla OLS model to make it comparable to the new simulation</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>new_X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>X, <span class="at">sd =</span> sigma_x)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>Y_meas_err <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> alpha <span class="sc">+</span> beta <span class="sc">*</span> X, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>y_reg_meas_err <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y_meas_err <span class="sc">~</span> new_X)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>over_sims_rando_X <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># draw a new random X = measurement error from true X</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    new_X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>X, <span class="at">sd =</span> sigma_x)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># alpha and beta, true X stay the same</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    this_y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> alpha <span class="sc">+</span> beta <span class="sc">*</span> X, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># measurement error in X vs true X</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    this_y_reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(this_y <span class="sc">~</span> new_X)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">alpha=</span><span class="fu">coef</span>(this_y_reg)[<span class="st">'(Intercept)'</span>],</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">beta=</span><span class="fu">coef</span>(this_y_reg)[<span class="st">'new_X'</span>])</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>()</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of the Intercept: "</span>, <span class="fu">sd</span>(over_sims_rando_X<span class="sc">$</span>alpha)<span class="sc">*</span> <span class="fu">sqrt</span>(N<span class="sc">/</span>(N<span class="dv">-2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "True SE of the Intercept: 0.0527043263598513"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of Beta: "</span>, <span class="fu">sd</span>(over_sims_rando_X<span class="sc">$</span>beta)<span class="sc">*</span> <span class="fu">sqrt</span>(N<span class="sc">/</span>(N<span class="dv">-2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "True SE of Beta: 0.0437944272599339"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now get it from the OLS model</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>ols_meas_err_ses <span class="ot">&lt;-</span> <span class="fu">summary</span>(y_reg_meas_err)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of the Intercept: "</span>, ols_meas_err_ses<span class="sc">$</span>coefficients[<span class="dv">1</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "OLS SE of the Intercept: 0.0543524887148683"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of Beta: "</span>, ols_meas_err_ses<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "OLS SE of Beta: 0.0473542014008247"</code></pre>
+</div>
+</div>
+<p>You can see that the standard error of the <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> parameters for OLS has increased relative to the true SEs for the parameters. Why? Because now each simulation draw we are adding in some Normally-distributed measurement noise, <code>sigma_X</code>, to our “true” data <span class="math inline">\(X\)</span>. That is, our data will vary for each draw (<code>X_new</code>) along with the outcome <span class="math inline">\(Y\)</span>. In this case, the standard OLS estimate of the SE of the parameters will be too low because OLS assumes that <span class="math inline">\(X\)</span> is measured without error (i.e., is true or fixed).</p>
+</section>
+<section id="what-if-the-slopescoefficients-are-random" class="level2">
+<h2 class="anchored" data-anchor-id="what-if-the-slopescoefficients-are-random">What If the Slopes/Coefficients Are Random?</h2>
+<p>Another important point about this presentation is that OLS (and other standard statistical models) also assume that <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are fixed: they don’t vary as <span class="math inline">\(Y\)</span> is repeatedly sampled. If we also make the coefficients, such as <span class="math inline">\(\beta\)</span>, random, we will get the right average (expected) value of the coefficient, but the SEs will again be off vs.&nbsp;vanilla OLS:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># noise around beta</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>sigma_beta <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># number of groups for beta</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>n_group <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># group ID</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>group_id <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>n_group, <span class="at">each=</span>N<span class="sc">/</span>n_group)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># we'll draw and re-fit our vanilla OLS model to make it comparable to the new simulation</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>beta_new <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_group, <span class="at">mean=</span>beta, <span class="at">sd =</span> sigma_beta)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>Y_rand_slope <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> alpha <span class="sc">+</span> (beta_new[group_id]) <span class="sc">*</span> X, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>y_reg_rand_slope <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y_rand_slope <span class="sc">~</span> X)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>over_sims_rando_beta <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># fixed X, draw beta from a Normal distribution around true beta</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for number of groups in data</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    beta_new <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_group, <span class="at">mean=</span>beta, <span class="at">sd =</span> sigma_beta)</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># alpha and beta, true X stay the same</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    this_y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="at">mean =</span> alpha <span class="sc">+</span> (beta_new[group_id]) <span class="sc">*</span> X, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># measurement error in X vs true X</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    this_y_reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(this_y <span class="sc">~</span> X)</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">alpha=</span><span class="fu">coef</span>(this_y_reg)[<span class="st">'(Intercept)'</span>],</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>          <span class="at">beta=</span><span class="fu">coef</span>(this_y_reg)[<span class="st">'X'</span>])</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>()</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of the Intercept: "</span>, <span class="fu">sd</span>(over_sims_rando_beta<span class="sc">$</span>alpha)<span class="sc">*</span> <span class="fu">sqrt</span>(N<span class="sc">/</span>(N<span class="dv">-2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "True SE of the Intercept: 0.0321117764806149"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of Beta: "</span>, <span class="fu">sd</span>(over_sims_rando_beta<span class="sc">$</span>beta)<span class="sc">*</span> <span class="fu">sqrt</span>(N<span class="sc">/</span>(N<span class="dv">-2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "True SE of Beta: 0.0630173544464951"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now get it from the OLS model</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>ols_rand_slope_ses <span class="ot">&lt;-</span> <span class="fu">summary</span>(y_reg_rand_slope)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of the Intercept: "</span>, ols_rand_slope_ses<span class="sc">$</span>coefficients[<span class="dv">1</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "OLS SE of the Intercept: 0.0314816825765908"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of Beta: "</span>, ols_rand_slope_ses<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "OLS SE of Beta: 0.0307791347179157"</code></pre>
+</div>
+</div>
+<p>In this case, OLS <em>underestimates</em> the uncertainty in <span class="math inline">\(\beta\)</span> by assuming <span class="math inline">\(\beta\)</span> is fixed with respect to <span class="math inline">\(Y\)</span>. This additional source of uncertainty is un-modeled because the slope <span class="math inline">\(\beta\)</span> is varying across different groups in the data (even though on average the OLS estimate of <span class="math inline">\(\beta\)</span> is un-biased, or equal to the true value). However, we can use a linear mixed model via the R package <code>lme4</code> with random slopes to capture that uncertainty in <span class="math inline">\(\beta\)</span> a bit better:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'Matrix'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:tidyr':
+
+    expand, pack, unpack</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now get it from the lmer model</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Y_rand_slope=</span>Y_rand_slope,<span class="at">X=</span>X,<span class="at">group_id=</span>group_id)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>lmer_fit <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Y <span class="sc">~</span> X <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> X <span class="sc">|</span> group_id), <span class="at">data =</span> dat, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>lmer_sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(lmer_fit)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"lmer SE of Beta: "</span>, lmer_sum<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "lmer SE of Beta: 0.0357215526614292"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of Beta: "</span>, ols_rand_slope_ses<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "OLS SE of Beta: 0.0307791347179157"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of Beta: "</span>, <span class="fu">sd</span>(over_sims_rando_beta<span class="sc">$</span>beta)<span class="sc">*</span> <span class="fu">sqrt</span>(N<span class="sc">/</span>(N<span class="dv">-2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "True SE of Beta: 0.0630173544464952"</code></pre>
+</div>
+</div>
+<p><code>lme4</code> estimate is noticeably larger than vanilla OLS 🙌, though still a bit low–which could be sampling error, or just the known fact that maximum-likelihood random effects slightly under-estimate the variance of the random effects–I’ll let the reader explore that one on their own 😁. It would also be possible to adjust the OLS standard errors with clustering around <code>group_id</code>.</p>
+<p>In summary, though, you can’t truly <em>know</em> the probability distribution of the outcome, <span class="math inline">\(Y\)</span>. Residuals are a hint but nothing more. And, assuming <span class="math inline">\(X\)</span> has no measurement error is a fairly strong assumption. Often we can’t do much about it… but sometimes we can. And if you’re interested to learn more about measurement modeling, see my R package <code>idealstan</code>: <a href="https://saudiwin.github.io/idealstan/vignettes/Package_Introduction.html" class="uri">https://saudiwin.github.io/idealstan/vignettes/Package_Introduction.html</a>.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>It’s important to note here that if I add more variance to the data while keeping <span class="math inline">\(\beta\)</span> fixed, I will “explain” more of <span class="math inline">\(Y\)</span> because I have more information in the data with which to model <span class="math inline">\(Y\)</span>. Consequently the standard errors of regression coefficients will go down. But that has nothing to do with <em>sampling</em> uncertainty in <span class="math inline">\(X\)</span>. Where the data come from, the model does not say.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="saudiwin/saudiwin.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnk3MTIzOTI2Ng==" data-category="Announcements" data-category-id="DIC_kwDOBD8GYs4C0biv" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+</div> <!-- /content -->
+
+
+
+
+</body></html>
