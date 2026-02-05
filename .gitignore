@@ -7,3 +7,5 @@ U.S._State_and*
 *.synctex.gz
 /.quarto/
 *DS_Store
+data
+_freeze
