@@ -52,7 +52,7 @@ $$
 Pr(Y|\alpha + \beta X)
 $$
 
-where $\alpha$ is our intercept and $\beta$ is the slope or "effect" of $X$ on $Y$. Now, the parameters are not like $X$--they are *not* fixed or known a priori. We have to estimate them, and in particular we want to find the *most likely* values of $\alpha$ and $\beta$ given what we know of $Y$ and $X$. For OLS, we'll figure out what the $\alpha$ and $\beta$ are that minimize the squared differences, or residuals, between the estimated mean of $Y$, which is $\alpha + \beta X$, and the actual observed values for $Y$.
+where $\alpha$ is our intercept and $\beta$ is the slope or "effect" of $X$ on $Y$. Now, the parameters are not like $X$--they are *not* known a priori. We have to estimate them, and in particular we want to find the *most likely* values of $\alpha$ and $\beta$ given what we know of $Y$ and $X$. For OLS, we'll figure out what the $\alpha$ and $\beta$ are that minimize the squared differences, or residuals, between the estimated mean of $Y$, which is $\alpha + \beta X$, and the actual observed values for $Y$.
 
 We can also write the same distribution in the following very familiar form for OLS:
 
