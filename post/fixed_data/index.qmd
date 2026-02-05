@@ -7,7 +7,7 @@ image: "../../files/img/headers/data_image.png"
 categories: ["R", "Astrophysics" ,"Proportions","Beta Regression"]
 description: "In all conventional regression models, the data are fixed--they don't have a probability distribution. This means transforming your data with logs or other functions won't change the probability distribution of your outcome."
 execute:
-  cache: true
+  cache: false
 format:
   html:
     code-fold: show

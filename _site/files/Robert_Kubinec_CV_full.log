@@ -1,57 +1,56 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2025.2.4)  9 APR 2025 13:18
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.8.12)  20 AUG 2025 14:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **/Users/r.kubinec/website/files/Robert_Kubinec_CV_full.tex
 (/Users/r.kubinec/website/files/Robert_Kubinec_CV_full.tex
-LaTeX2e <2024-11-01> patch level 2
-L3 programming layer <2025-01-18>
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-07-20>
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/base/size11.clo
-File: size11.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count192
-\c@section=\count193
-\c@subsection=\count194
-\c@subsubsection=\count195
-\c@paragraph=\count196
-\c@subparagraph=\count197
-\c@figure=\count198
-\c@table=\count199
+\c@part=\count271
+\c@section=\count272
+\c@subsection=\count273
+\c@subsubsection=\count274
+\c@paragraph=\count275
+\c@subparagraph=\count276
+\c@figure=\count277
+\c@table=\count278
 \abovecaptionskip=\skip49
 \belowcaptionskip=\skip50
-\bibindent=\dimen141
+\bibindent=\dimen148
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2025-01-18 L3 programming layer (loader) 
+Package: expl3 2025-07-20 L3 programming layer (loader) 
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
-File: l3backend-xetex.def 2024-05-08 L3 backend support: XeTeX
-\g__graphics_track_int=\count266
-\l__pdf_internal_box=\box52
-\g__pdf_backend_annotation_int=\count267
-\g__pdf_backend_link_int=\count268
+File: l3backend-xetex.def 2025-06-09 L3 backend support: XeTeX
+\g__graphics_track_int=\count279
+\g__pdfannot_backend_int=\count280
+\g__pdfannot_backend_link_int=\count281
 ))
 Package: xparse 2024-08-16 L3 Experimental document command parser
 )
 Package: fontspec 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
 Package: fontspec-xetex 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
-\l__fontspec_script_int=\count269
-\l__fontspec_language_int=\count270
-\l__fontspec_strnum_int=\count271
-\l__fontspec_tmp_int=\count272
-\l__fontspec_tmpa_int=\count273
-\l__fontspec_tmpb_int=\count274
-\l__fontspec_tmpc_int=\count275
-\l__fontspec_em_int=\count276
-\l__fontspec_emdef_int=\count277
-\l__fontspec_strong_int=\count278
-\l__fontspec_strongdef_int=\count279
-\l__fontspec_tmpa_dim=\dimen142
-\l__fontspec_tmpb_dim=\dimen143
-\l__fontspec_tmpc_dim=\dimen144
+\l__fontspec_script_int=\count282
+\l__fontspec_language_int=\count283
+\l__fontspec_strnum_int=\count284
+\l__fontspec_tmp_int=\count285
+\l__fontspec_tmpa_int=\count286
+\l__fontspec_tmpb_int=\count287
+\l__fontspec_tmpc_int=\count288
+\l__fontspec_em_int=\count289
+\l__fontspec_emdef_int=\count290
+\l__fontspec_strong_int=\count291
+\l__fontspec_strongdef_int=\count292
+\l__fontspec_tmpa_dim=\dimen149
+\l__fontspec_tmpb_dim=\dimen150
+\l__fontspec_tmpc_dim=\dimen151
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
@@ -62,28 +61,32 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
-\Gm@cnth=\count280
-\Gm@cntv=\count281
-\c@Gm@tempcnt=\count282
-\Gm@bindingoffset=\dimen145
-\Gm@wd@mp=\dimen146
-\Gm@odd@mp=\dimen147
-\Gm@even@mp=\dimen148
-\Gm@layoutwidth=\dimen149
-\Gm@layoutheight=\dimen150
-\Gm@layouthoffset=\dimen151
-\Gm@layoutvoffset=\dimen152
+\Gm@cnth=\count293
+\Gm@cntv=\count294
+\c@Gm@tempcnt=\count295
+\Gm@bindingoffset=\dimen152
+\Gm@wd@mp=\dimen153
+\Gm@odd@mp=\dimen154
+\Gm@even@mp=\dimen155
+\Gm@layoutwidth=\dimen156
+\Gm@layoutheight=\dimen157
+\Gm@layouthoffset=\dimen158
+\Gm@layoutvoffset=\dimen159
 \Gm@dimlist=\toks18
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/xelatex/xunicode/xunicode.sty
 File: xunicode.sty 2011/09/09 v0.981 provides access to latin accents and many other characters in Unicode lower plane
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/tipa/t3enc.def
 File: t3enc.def 2001/12/31 T3 encoding
 )
-\tipaTiiicode=\count283
+\tipaTiiicode=\count296
 \tipasavetokens=\toks19
 \tipachecktokens=\toks20
+LaTeX Encoding Info:    Redeclaring text command \nobreakspace (encoding TU) on input line 1725.
+LaTeX Encoding Info:    Redeclaring text command \copyright (encoding TU) on input line 1739.
+LaTeX Encoding Info:    Redeclaring text command \AA (encoding TU) on input line 1785.
+LaTeX Encoding Info:    Redeclaring text command \aa (encoding TU) on input line 1842.
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
@@ -95,9 +98,13 @@ Package graphics Info: Driver file: xetex.def on input line 106.
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def
 File: xetex.def 2022/09/22 v5.0n Graphics/color driver for xetex
 ))
-\Gin@req@height=\dimen153
-\Gin@req@width=\dimen154
-)) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/xelatex/xltxtra/xltxtra.sty
+\Gin@req@height=\dimen160
+\Gin@req@width=\dimen161
+)
+LaTeX Encoding Info:    Redeclaring text command \textrhookopeno (encoding TU) on input line 3119.
+LaTeX Encoding Info:    Redeclaring text command \hbar (encoding TU) on input line 3636.
+LaTeX Encoding Info:    Redeclaring text command \textaolig (encoding TU) on input line 3729.
+) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/xelatex/xltxtra/xltxtra.sty
 Package: xltxtra 2018/12/31 v0.7 Improvements for the "XeLaTeX" format
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifluatex.sty
 Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
@@ -105,7 +112,7 @@ Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/realscripts/realscripts.sty
 Package: realscripts 2016/02/13 v0.3d Access OpenType subscripts and superscripts
-\subsupersep=\dimen155
+\subsupersep=\dimen162
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/metalogo/metalogo.sty
 Package: metalogo 2010/05/29 v0.12 Extended TeX logo macros
 \xl@everylogo=\toks21
@@ -176,7 +183,7 @@ Package fontspec Info:
 
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/marginnote/marginnote.sty
 Package: marginnote 2018/08/09 1.4b non floating margin notes for LaTeX
-\c@mn@abspage=\count284
+\c@mn@abspage=\count297
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/sectsty/sectsty.sty
 Package: sectsty 2002/02/25 v2.0.2 Commands to change all sectional heading styles
 
@@ -192,14 +199,14 @@ LaTeX Warning: Command \underline  has changed.
 \UL@hyphenbox=\box58
 \UL@skip=\skip51
 \UL@hook=\toks23
-\UL@height=\dimen156
-\UL@pe=\count285
-\UL@pixel=\dimen157
+\UL@height=\dimen163
+\UL@pe=\count298
+\UL@pixel=\dimen164
 \ULC@box=\box59
 Package: ulem 2019/11/18
-\ULdepth=\dimen158
+\ULdepth=\dimen165
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2024-11-05 v7.01l Hypertext links for LaTeX
+Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
@@ -219,7 +226,7 @@ Package pdftexcmds Info: \pdfdraftmode not found.
 )) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+Package: nameref 2025-06-21 v2.57 Cross-referencing by name of section
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
@@ -227,86 +234,83 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count286
+\c@section@level=\count299
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count287
+Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count300
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
-\@linkdim=\dimen159
-\Hy@linkcounter=\count288
-\Hy@pagecounter=\count289
+\@linkdim=\dimen166
+\Hy@linkcounter=\count301
+\Hy@pagecounter=\count302
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2024-11-05 v7.01l Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count290
+\Hy@SavedSpaceFactor=\count303
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2024-11-05 v7.01l Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
 (./puenc-greek.def
 File: puenc-greek.def 2023/03/08 2.2.1 Greek LICRs for PDF strings
 (./greek-fontenc.def
 File: greek-fontenc.def 2023-06-01 2.3 Common Greek font encoding definitions
-)))
-Package hyperref Info: Option `bookmarks' set `true' on input line 4040.
-Package hyperref Info: Option `colorlinks' set `true' on input line 4040.
-Package hyperref Info: Option `breaklinks' set `true' on input line 4040.
-Package hyperref Info: Hyper figures OFF on input line 4157.
-Package hyperref Info: Link nesting OFF on input line 4162.
-Package hyperref Info: Hyper index ON on input line 4165.
-Package hyperref Info: Plain pages OFF on input line 4172.
-Package hyperref Info: Backreferencing OFF on input line 4177.
+)
+LaTeX Encoding Info:    Redeclaring text command \textmu (encoding PU) on input line 176.
+)
+LaTeX Encoding Info:    Redeclaring text command \textohm (encoding PU) on input line 1176.
+)
+Package hyperref Info: Option `bookmarks' set `true' on input line 4066.
+Package hyperref Info: Option `colorlinks' set `true' on input line 4066.
+Package hyperref Info: Option `breaklinks' set `true' on input line 4066.
+Package hyperref Info: Hyper figures OFF on input line 4195.
+Package hyperref Info: Link nesting OFF on input line 4200.
+Package hyperref Info: Hyper index ON on input line 4203.
+Package hyperref Info: Plain pages OFF on input line 4210.
+Package hyperref Info: Backreferencing OFF on input line 4215.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4424.
-\c@Hy@tempcnt=\count291
+Package hyperref Info: Bookmarks ON on input line 4462.
+\c@Hy@tempcnt=\count304
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4763.
-\XeTeXLinkMargin=\dimen160
+LaTeX Info: Redefining \url on input line 4801.
+\XeTeXLinkMargin=\dimen167
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count292
-\Field@Width=\dimen161
-\Fld@charsize=\dimen162
-Package hyperref Info: Hyper figures OFF on input line 6042.
-Package hyperref Info: Link nesting OFF on input line 6047.
-Package hyperref Info: Hyper index ON on input line 6050.
-Package hyperref Info: backreferencing OFF on input line 6057.
-Package hyperref Info: Link coloring ON on input line 6060.
-Package hyperref Info: Link coloring with OCG OFF on input line 6067.
-Package hyperref Info: PDF/A mode OFF on input line 6072.
-(/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
-Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
-package with kernel methods
-)
-\Hy@abspage=\count293
-\c@Item=\count294
-\c@Hfootnote=\count295
+\Fld@menulength=\count305
+\Field@Width=\dimen168
+\Fld@charsize=\dimen169
+Package hyperref Info: Hyper figures OFF on input line 6078.
+Package hyperref Info: Link nesting OFF on input line 6083.
+Package hyperref Info: Hyper index ON on input line 6086.
+Package hyperref Info: backreferencing OFF on input line 6093.
+Package hyperref Info: Link coloring ON on input line 6096.
+Package hyperref Info: Link coloring with OCG OFF on input line 6103.
+Package hyperref Info: PDF/A mode OFF on input line 6108.
+\Hy@abspage=\count306
+\c@Item=\count307
+\c@Hfootnote=\count308
 )
 Package hyperref Info: Driver (autodetected): hxetex.
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def
-File: hxetex.def 2024-11-05 v7.01l Hyperref driver for XeTeX
+File: hxetex.def 2025-07-12 v7.01o Hyperref driver for XeTeX
 \pdfm@box=\box60
-\c@Hy@AnnotLevel=\count296
-\HyField@AnnotCount=\count297
-\Fld@listcount=\count298
-\c@bookmark@seq@number=\count299
+\c@Hy@AnnotLevel=\count309
+\HyField@AnnotCount=\count310
+\Fld@listcount=\count311
+\c@bookmark@seq@number=\count312
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
-Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
-(/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
-Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
-with kernel methods
-) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+(/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
 )
 \Hy@SectionHShift=\skip52
 ) (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/doi/doi.sty
@@ -433,7 +437,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/graphics/color.sty
-Package: color 2024/06/23 v1.3e Standard LaTeX Color (DPC)
+Package: color 2025/01/14 v1.3e Standard LaTeX Color (DPC)
 (/Users/r.kubinec/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
@@ -481,287 +485,257 @@ Package marginnote Info: xpos seems to be 100.01144pt on input line 74.
 Package marginnote Info: Margin note 1.6 is on absolute page 1 on input line 75.
 Package marginnote Info: right page because not two side mode on input line 75.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 75.
-Package marginnote Info: Margin note 1.7 is on absolute page 1 on input line 81.
-Package marginnote Info: right page because not two side mode on input line 81.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 81.
+Package marginnote Info: Margin note 1.7 is on absolute page 1 on input line 85.
+Package marginnote Info: right page because not two side mode on input line 85.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 85.
 
 
 [1
 
 ]
-Package marginnote Info: Margin note 2.1 is on absolute page 2 on input line 92.
-Package marginnote Info: right page because not two side mode on input line 92.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 92.
+Package marginnote Info: Margin note 2.1 is on absolute page 2 on input line 95.
+Package marginnote Info: right page because not two side mode on input line 95.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 95.
 LaTeX Font Info:    Font shape `TU/Monaco(0)/m/n' will be
-(Font)              scaled to size 8.76003pt on input line 92.
+(Font)              scaled to size 8.76003pt on input line 95.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 92.
+(Font)              <10.95> on input line 95.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 92.
+(Font)              <8> on input line 95.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 92.
+(Font)              <6> on input line 95.
 
-Underfull \hbox (badness 10000) in paragraph at lines 92--93
+Overfull \hbox (0.17776pt too wide) in paragraph at lines 95--96
+\TU/GentiumBasic(0)/m/it/10.95 Political Science Research and Methods\TU/GentiumBasic(0)/m/sc/10.95 . [][]$[][][][][] [] [] [] [][][][][][][][][][][][][] [] [][][][][][][][][] [] [][][] [] [][][][][][][][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--96
 
  []
 
-Package marginnote Info: Margin note 2.2 is on absolute page 2 on input line 94.
-Package marginnote Info: right page because not two side mode on input line 94.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 94.
+Package marginnote Info: Margin note 2.2 is on absolute page 2 on input line 97.
+Package marginnote Info: right page because not two side mode on input line 97.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 97.
 
-Underfull \hbox (badness 10000) in paragraph at lines 94--95
-
- []
-
-Package marginnote Info: Margin note 2.3 is on absolute page 2 on input line 96.
-Package marginnote Info: right page because not two side mode on input line 96.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 96.
-
-Underfull \hbox (badness 10000) in paragraph at lines 96--97
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
 
  []
 
-Package marginnote Info: Margin note 2.4 is on absolute page 2 on input line 98.
-Package marginnote Info: right page because not two side mode on input line 98.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 98.
+Package marginnote Info: Margin note 2.3 is on absolute page 2 on input line 99.
+Package marginnote Info: right page because not two side mode on input line 99.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 99.
 
-Overfull \hbox (1.60983pt too wide) in paragraph at lines 98--99
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
+
+ []
+
+Package marginnote Info: Margin note 2.4 is on absolute page 2 on input line 101.
+Package marginnote Info: right page because not two side mode on input line 101.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 101.
+
+Overfull \hbox (1.60983pt too wide) in paragraph at lines 101--102
 \TU/GentiumBasic(0)/m/sc/10.95 Caress; Cheng, Cindy; Hale, Thomas; Spencer Hartnett; Allison, Messerschmidt, Luca; Peth-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 98--99
+Overfull \hbox (12.4782pt too wide) in paragraph at lines 101--102
+\TU/GentiumBasic(0)/m/sc/10.95 of COVID-19 Public Health Policies.” Forthcoming at the \TU/GentiumBasic(0)/m/it/10.95 Journal of Politics\TU/GentiumBasic(0)/m/sc/10.95 . doi:[][]10.1086/734241[][]. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--102
 
  []
 
-Package marginnote Info: Margin note 2.5 is on absolute page 2 on input line 100.
-Package marginnote Info: right page because not two side mode on input line 100.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 100.
+Package marginnote Info: Margin note 2.5 is on absolute page 2 on input line 103.
+Package marginnote Info: right page because not two side mode on input line 103.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 103.
 
-Underfull \hbox (badness 10000) in paragraph at lines 100--101
-
- []
-
-Package marginnote Info: Margin note 2.6 is on absolute page 2 on input line 102.
-Package marginnote Info: right page because not two side mode on input line 102.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 102.
-
-Underfull \hbox (badness 10000) in paragraph at lines 102--103
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
 
  []
 
-Package marginnote Info: Margin note 2.7 is on absolute page 2 on input line 104.
-Package marginnote Info: right page because not two side mode on input line 104.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 104.
+Package marginnote Info: Margin note 2.6 is on absolute page 2 on input line 105.
+Package marginnote Info: right page because not two side mode on input line 105.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 105.
 
-Overfull \hbox (9.17749pt too wide) in paragraph at lines 104--105
+Underfull \hbox (badness 10000) in paragraph at lines 105--106
+
+ []
+
+Package marginnote Info: Margin note 2.7 is on absolute page 2 on input line 107.
+Package marginnote Info: right page because not two side mode on input line 107.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 107.
+
+Overfull \hbox (9.17749pt too wide) in paragraph at lines 107--108
 \TU/GentiumBasic(0)/m/sc/10.95 Test of the Rentier State during Algeria’s Hirak.” \TU/GentiumBasic(0)/m/it/10.95 World Politics\TU/GentiumBasic(0)/m/sc/10.95 . doi:[][]10.1353/wp.2024.a924508[][]. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 104--105
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
 
  []
 
-Package marginnote Info: Margin note 2.8 is on absolute page 2 on input line 106.
-Package marginnote Info: right page because not two side mode on input line 106.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 106.
+Package marginnote Info: Margin note 2.8 is on absolute page 2 on input line 109.
+Package marginnote Info: right page because not two side mode on input line 109.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 109.
 
-Overfull \hbox (20.65202pt too wide) in paragraph at lines 106--107
+Overfull \hbox (20.65202pt too wide) in paragraph at lines 109--110
 \TU/GentiumBasic(0)/m/sc/10.95 nections Can Impede Investment.” \TU/GentiumBasic(0)/m/it/10.95 Comparative Political Studies \TU/GentiumBasic(0)/m/sc/10.95 doi:[][]10.1177/00104140231204227[][]. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--107
+Underfull \hbox (badness 10000) in paragraph at lines 109--110
 
  []
 
-Package marginnote Info: Margin note 2.9 is on absolute page 2 on input line 108.
-Package marginnote Info: right page because not two side mode on input line 108.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 108.
+Package marginnote Info: Margin note 2.9 is on absolute page 2 on input line 111.
+Package marginnote Info: right page because not two side mode on input line 111.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 111.
 
-Overfull \hbox (88.6903pt too wide) in paragraph at lines 108--109
+Overfull \hbox (88.6903pt too wide) in paragraph at lines 111--112
 \TU/GentiumBasic(0)/m/sc/10.95 Legacies of Violence Shaped Algeria’s Hirak Protests.” \TU/GentiumBasic(0)/m/it/10.95 Journal of Peace Research \TU/GentiumBasic(0)/m/sc/10.95 doi:[][]10.1177/00223433221137613[][]. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 108--109
+Underfull \hbox (badness 10000) in paragraph at lines 111--112
 
  []
 
-Package marginnote Info: Margin note 2.10 is on absolute page 2 on input line 110.
-Package marginnote Info: right page because not two side mode on input line 110.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 110.
+Package marginnote Info: Margin note 2.10 is on absolute page 2 on input line 113.
+Package marginnote Info: right page because not two side mode on input line 113.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 113.
 
-Underfull \hbox (badness 10000) in paragraph at lines 110--111
-
- []
-
-Package marginnote Info: Margin note 2.11 is on absolute page 2 on input line 112.
-Package marginnote Info: right page because not two side mode on input line 112.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 112.
-
-Underfull \hbox (badness 10000) in paragraph at lines 112--113
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
 
  []
 
-Package marginnote Info: Margin note 2.12 is on absolute page 3 on input line 114.
-Package marginnote Info: right page because not two side mode on input line 114.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 114.
+Package marginnote Info: Margin note 2.11 is on absolute page 2 on input line 115.
+Package marginnote Info: right page because not two side mode on input line 115.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 115.
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
+
+ []
+
+Package marginnote Info: Margin note 2.12 is on absolute page 3 on input line 117.
+Package marginnote Info: right page because not two side mode on input line 117.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 117.
 
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 114--115
+Underfull \hbox (badness 10000) in paragraph at lines 117--118
 
  []
 
-Package marginnote Info: Margin note 3.1 is on absolute page 3 on input line 116.
-Package marginnote Info: right page because not two side mode on input line 116.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 116.
+Package marginnote Info: Margin note 3.1 is on absolute page 3 on input line 119.
+Package marginnote Info: right page because not two side mode on input line 119.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 119.
 
-Overfull \hbox (0.68579pt too wide) in paragraph at lines 116--117
+Overfull \hbox (0.68579pt too wide) in paragraph at lines 119--120
 \TU/GentiumBasic(0)/m/sc/10.95 larization with Twitter from the Arab Uprisings.” \TU/GentiumBasic(0)/m/it/10.95 Political Analysis \TU/GentiumBasic(0)/m/sc/10.95 doi:[][]10.1017/pan.2020.46[][]. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 116--117
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
 
  []
 
-Package marginnote Info: Margin note 3.2 is on absolute page 3 on input line 118.
-Package marginnote Info: right page because not two side mode on input line 118.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 118.
+Package marginnote Info: Margin note 3.2 is on absolute page 3 on input line 121.
+Package marginnote Info: right page because not two side mode on input line 121.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 121.
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--119
-
- []
-
-Package marginnote Info: Margin note 3.3 is on absolute page 3 on input line 120.
-Package marginnote Info: right page because not two side mode on input line 120.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 120.
-Package marginnote Info: Margin note 3.4 is on absolute page 3 on input line 125.
-Package marginnote Info: right page because not two side mode on input line 125.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 125.
-
-Underfull \hbox (badness 10000) in paragraph at lines 125--126
+Underfull \hbox (badness 10000) in paragraph at lines 121--122
 
  []
 
-Package marginnote Info: Margin note 3.5 is on absolute page 3 on input line 131.
-Package marginnote Info: right page because not two side mode on input line 131.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 131.
+Package marginnote Info: Margin note 3.3 is on absolute page 3 on input line 123.
+Package marginnote Info: right page because not two side mode on input line 123.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 123.
+Package marginnote Info: Margin note 3.4 is on absolute page 3 on input line 128.
+Package marginnote Info: right page because not two side mode on input line 128.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 128.
 
-Overfull \hbox (49.64651pt too wide) in paragraph at lines 131--132
+Overfull \hbox (73.32156pt too wide) in paragraph at lines 128--129
+\TU/GentiumBasic(0)/m/sc/10.95 rial For Using Beta Regression in Psychological Research.” \TU/GentiumBasic(0)/m/it/10.95 PsyArchiv Preprint\TU/GentiumBasic(0)/m/sc/10.95 . doi:[][]10.31234/osf.io/d6v5t_v1[][]. 
+ []
+
+Package marginnote Info: Margin note 3.5 is on absolute page 3 on input line 134.
+Package marginnote Info: right page because not two side mode on input line 134.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 134.
+
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
+
+ []
+
+Package marginnote Info: Margin note 3.6 is on absolute page 3 on input line 141.
+Package marginnote Info: right page because not two side mode on input line 141.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 141.
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
+
+ []
+
+Package marginnote Info: Margin note 3.7 is on absolute page 3 on input line 147.
+Package marginnote Info: right page because not two side mode on input line 147.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 147.
+
+Overfull \hbox (49.64651pt too wide) in paragraph at lines 147--148
 \TU/GentiumBasic(0)/m/sc/10.95 Study Design and Preregistration in the Social Sciences.” \TU/GentiumBasic(0)/m/it/10.95 SocArchiv Preprint\TU/GentiumBasic(0)/m/sc/10.95 . doi:[][]10.31235/osf.io/a492b[][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 131--132
+Underfull \hbox (badness 10000) in paragraph at lines 147--148
 
  []
 
-Package marginnote Info: Margin note 3.6 is on absolute page 3 on input line 137.
-Package marginnote Info: right page because not two side mode on input line 137.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 137.
+Package marginnote Info: Margin note 3.8 is on absolute page 3 on input line 153.
+Package marginnote Info: right page because not two side mode on input line 153.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 153.
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--138
+Underfull \hbox (badness 10000) in paragraph at lines 153--154
 
  []
 
-Package marginnote Info: Margin note 3.7 is on absolute page 3 on input line 143.
-Package marginnote Info: right page because not two side mode on input line 143.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 143.
+Package marginnote Info: Margin note 3.9 is on absolute page 4 on input line 159.
+Package marginnote Info: right page because not two side mode on input line 159.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 159.
 
-Underfull \hbox (badness 10000) in paragraph at lines 143--144
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
 
  []
 
 
 
 [3]
-Package marginnote Info: Margin note 4.1 is on absolute page 4 on input line 151.
-Package marginnote Info: right page because not two side mode on input line 151.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 151.
+Package marginnote Info: Margin note 4.1 is on absolute page 4 on input line 165.
+Package marginnote Info: right page because not two side mode on input line 165.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 165.
 
-Overfull \hbox (40.33063pt too wide) in paragraph at lines 151--152
+Overfull \hbox (40.33063pt too wide) in paragraph at lines 165--166
 \TU/GentiumBasic(0)/m/sc/10.95 tional, United, nor Governments: The Case of Tunisia.” \TU/GentiumBasic(0)/m/it/10.95 SocArchiv Preprint\TU/GentiumBasic(0)/m/sc/10.95 . doi:[][]10.31235/osf.io/6z74r[][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 151--152
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
 
  []
 
-Package marginnote Info: Margin note 4.2 is on absolute page 4 on input line 153.
-Package marginnote Info: right page because not two side mode on input line 153.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 153.
+Package marginnote Info: Margin note 4.2 is on absolute page 4 on input line 167.
+Package marginnote Info: right page because not two side mode on input line 167.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 167.
 
-Overfull \hbox (430.72096pt too wide) in paragraph at lines 153--154
+Overfull \hbox (430.72096pt too wide) in paragraph at lines 167--168
 \TU/GentiumBasic(0)/m/it/10.95 ries\TU/GentiumBasic(0)/m/sc/10.95 . No. 1280. [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] [][][][][][][][][][][][] [] [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]$[][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 153--154
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
 
  []
 
-Package marginnote Info: Margin note 4.3 is on absolute page 4 on input line 158.
-Package marginnote Info: right page because not two side mode on input line 158.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 158.
-
-Underfull \hbox (badness 10000) in paragraph at lines 158--159
-
- []
-
-Package marginnote Info: Margin note 4.4 is on absolute page 4 on input line 160.
-Package marginnote Info: right page because not two side mode on input line 160.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 160.
-
-Underfull \hbox (badness 10000) in paragraph at lines 160--161
-
- []
-
-Package marginnote Info: Margin note 4.5 is on absolute page 4 on input line 162.
-Package marginnote Info: right page because not two side mode on input line 162.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 162.
-
-Underfull \hbox (badness 10000) in paragraph at lines 162--163
-
- []
-
-Package marginnote Info: Margin note 4.6 is on absolute page 4 on input line 164.
-Package marginnote Info: right page because not two side mode on input line 164.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 164.
-
-Underfull \hbox (badness 10000) in paragraph at lines 164--165
-
- []
-
-Package marginnote Info: Margin note 4.7 is on absolute page 4 on input line 166.
-Package marginnote Info: right page because not two side mode on input line 166.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 166.
-
-Underfull \hbox (badness 10000) in paragraph at lines 166--167
-
- []
-
-Package marginnote Info: Margin note 4.8 is on absolute page 4 on input line 168.
-Package marginnote Info: right page because not two side mode on input line 168.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 168.
-
-Underfull \hbox (badness 10000) in paragraph at lines 168--169
-
- []
-
-Package marginnote Info: Margin note 4.9 is on absolute page 4 on input line 170.
-Package marginnote Info: right page because not two side mode on input line 170.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 170.
-
-Underfull \hbox (badness 10000) in paragraph at lines 170--171
-
- []
-
-Package marginnote Info: Margin note 4.10 is on absolute page 4 on input line 172.
+Package marginnote Info: Margin note 4.3 is on absolute page 4 on input line 172.
 Package marginnote Info: right page because not two side mode on input line 172.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 172.
 
@@ -769,7 +743,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 172--173
 
  []
 
-Package marginnote Info: Margin note 4.11 is on absolute page 4 on input line 174.
+Package marginnote Info: Margin note 4.4 is on absolute page 4 on input line 174.
 Package marginnote Info: right page because not two side mode on input line 174.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 174.
 
@@ -777,7 +751,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 174--175
 
  []
 
-Package marginnote Info: Margin note 4.12 is on absolute page 4 on input line 176.
+Package marginnote Info: Margin note 4.5 is on absolute page 4 on input line 176.
 Package marginnote Info: right page because not two side mode on input line 176.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 176.
 
@@ -785,7 +759,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 176--177
 
  []
 
-Package marginnote Info: Margin note 4.13 is on absolute page 4 on input line 178.
+Package marginnote Info: Margin note 4.6 is on absolute page 4 on input line 178.
 Package marginnote Info: right page because not two side mode on input line 178.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 178.
 
@@ -793,7 +767,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 178--179
 
  []
 
-Package marginnote Info: Margin note 4.14 is on absolute page 4 on input line 180.
+Package marginnote Info: Margin note 4.7 is on absolute page 4 on input line 180.
 Package marginnote Info: right page because not two side mode on input line 180.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 180.
 
@@ -801,17 +775,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 180--181
 
  []
 
-Package marginnote Info: Margin note 4.15 is on absolute page 5 on input line 184.
+Package marginnote Info: Margin note 4.8 is on absolute page 4 on input line 182.
+Package marginnote Info: right page because not two side mode on input line 182.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 182.
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--183
+
+ []
+
+Package marginnote Info: Margin note 4.9 is on absolute page 4 on input line 184.
 Package marginnote Info: right page because not two side mode on input line 184.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 184.
 
-
-[4]
 Underfull \hbox (badness 10000) in paragraph at lines 184--185
 
  []
 
-Package marginnote Info: Margin note 5.1 is on absolute page 5 on input line 186.
+Package marginnote Info: Margin note 4.10 is on absolute page 4 on input line 186.
 Package marginnote Info: right page because not two side mode on input line 186.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 186.
 
@@ -819,7 +799,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 186--187
 
  []
 
-Package marginnote Info: Margin note 5.2 is on absolute page 5 on input line 188.
+Package marginnote Info: Margin note 4.11 is on absolute page 4 on input line 188.
 Package marginnote Info: right page because not two side mode on input line 188.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 188.
 
@@ -827,129 +807,186 @@ Underfull \hbox (badness 10000) in paragraph at lines 188--189
 
  []
 
-Package marginnote Info: Margin note 5.3 is on absolute page 5 on input line 194.
+
+
+[4]
+Package marginnote Info: Margin note 5.1 is on absolute page 5 on input line 192.
+Package marginnote Info: right page because not two side mode on input line 192.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 192.
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
+
+ []
+
+Package marginnote Info: Margin note 5.2 is on absolute page 5 on input line 194.
 Package marginnote Info: right page because not two side mode on input line 194.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 194.
-Package marginnote Info: Margin note 5.4 is on absolute page 5 on input line 195.
-Package marginnote Info: right page because not two side mode on input line 195.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 195.
-Package marginnote Info: Margin note 5.5 is on absolute page 5 on input line 196.
-Package marginnote Info: right page because not two side mode on input line 196.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 196.
-Package marginnote Info: Margin note 5.6 is on absolute page 5 on input line 197.
-Package marginnote Info: right page because not two side mode on input line 197.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 197.
-Package marginnote Info: Margin note 5.7 is on absolute page 5 on input line 198.
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
+
+ []
+
+Package marginnote Info: Margin note 5.3 is on absolute page 5 on input line 198.
 Package marginnote Info: right page because not two side mode on input line 198.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 198.
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--199
+Underfull \hbox (badness 10000) in paragraph at lines 198--199
 
  []
 
-Package marginnote Info: Margin note 5.8 is on absolute page 5 on input line 202.
+Package marginnote Info: Margin note 5.4 is on absolute page 5 on input line 200.
+Package marginnote Info: right page because not two side mode on input line 200.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 200.
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--201
+
+ []
+
+Package marginnote Info: Margin note 5.5 is on absolute page 5 on input line 202.
 Package marginnote Info: right page because not two side mode on input line 202.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 202.
-Package marginnote Info: Margin note 5.9 is on absolute page 5 on input line 203.
-Package marginnote Info: right page because not two side mode on input line 203.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 203.
-Package marginnote Info: Margin note 5.10 is on absolute page 5 on input line 204.
-Package marginnote Info: right page because not two side mode on input line 204.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 204.
-Package marginnote Info: Margin note 5.11 is on absolute page 5 on input line 205.
-Package marginnote Info: right page because not two side mode on input line 205.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 205.
-Package marginnote Info: Margin note 5.12 is on absolute page 5 on input line 206.
-Package marginnote Info: right page because not two side mode on input line 206.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 206.
-Package marginnote Info: Margin note 5.13 is on absolute page 5 on input line 207.
-Package marginnote Info: right page because not two side mode on input line 207.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 207.
-Package marginnote Info: Margin note 5.14 is on absolute page 5 on input line 208.
+
+Underfull \hbox (badness 10000) in paragraph at lines 202--203
+
+ []
+
+Package marginnote Info: Margin note 5.6 is on absolute page 5 on input line 208.
 Package marginnote Info: right page because not two side mode on input line 208.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 208.
-Package marginnote Info: Margin note 5.15 is on absolute page 5 on input line 209.
+Package marginnote Info: Margin note 5.7 is on absolute page 5 on input line 209.
 Package marginnote Info: right page because not two side mode on input line 209.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 209.
-Package marginnote Info: Margin note 5.16 is on absolute page 5 on input line 210.
+Package marginnote Info: Margin note 5.8 is on absolute page 5 on input line 210.
 Package marginnote Info: right page because not two side mode on input line 210.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 210.
+Package marginnote Info: Margin note 5.9 is on absolute page 5 on input line 211.
+Package marginnote Info: right page because not two side mode on input line 211.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 211.
+Package marginnote Info: Margin note 5.10 is on absolute page 5 on input line 212.
+Package marginnote Info: right page because not two side mode on input line 212.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 212.
 
-Underfull \hbox (badness 10000) in paragraph at lines 201--211
+Underfull \hbox (badness 10000) in paragraph at lines 207--213
 
  []
 
-Package marginnote Info: Margin note 5.17 is on absolute page 5 on input line 213.
-Package marginnote Info: right page because not two side mode on input line 213.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 213.
-Package marginnote Info: Margin note 5.18 is on absolute page 5 on input line 214.
-Package marginnote Info: right page because not two side mode on input line 214.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 214.
-Package marginnote Info: Margin note 5.19 is on absolute page 5 on input line 215.
-Package marginnote Info: right page because not two side mode on input line 215.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 215.
-Package marginnote Info: Margin note 5.20 is on absolute page 5 on input line 216.
+Package marginnote Info: Margin note 5.11 is on absolute page 5 on input line 216.
 Package marginnote Info: right page because not two side mode on input line 216.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 216.
-Package marginnote Info: Margin note 5.21 is on absolute page 5 on input line 217.
+Package marginnote Info: Margin note 5.12 is on absolute page 5 on input line 217.
 Package marginnote Info: right page because not two side mode on input line 217.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 217.
-Package marginnote Info: Margin note 5.22 is on absolute page 5 on input line 218.
+Package marginnote Info: Margin note 5.13 is on absolute page 5 on input line 218.
 Package marginnote Info: right page because not two side mode on input line 218.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 218.
-Package marginnote Info: Margin note 5.23 is on absolute page 5 on input line 219.
+Package marginnote Info: Margin note 5.14 is on absolute page 5 on input line 219.
 Package marginnote Info: right page because not two side mode on input line 219.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 219.
-Package marginnote Info: Margin note 5.24 is on absolute page 6 on input line 220.
+Package marginnote Info: Margin note 5.15 is on absolute page 5 on input line 220.
 Package marginnote Info: right page because not two side mode on input line 220.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 220.
+Package marginnote Info: Margin note 5.16 is on absolute page 5 on input line 221.
+Package marginnote Info: right page because not two side mode on input line 221.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 221.
+Package marginnote Info: Margin note 5.17 is on absolute page 5 on input line 222.
+Package marginnote Info: right page because not two side mode on input line 222.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 222.
+Package marginnote Info: Margin note 5.18 is on absolute page 5 on input line 223.
+Package marginnote Info: right page because not two side mode on input line 223.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 223.
+Package marginnote Info: Margin note 5.19 is on absolute page 5 on input line 224.
+Package marginnote Info: right page because not two side mode on input line 224.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 224.
 
-Underfull \hbox (badness 10000) in paragraph at lines 213--221
+Underfull \hbox (badness 10000) in paragraph at lines 215--225
 
  []
 
-
-
-[5]
-Package marginnote Info: Margin note 6.1 is on absolute page 6 on input line 226.
-Package marginnote Info: right page because not two side mode on input line 226.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 226.
-Package marginnote Info: Margin note 6.2 is on absolute page 6 on input line 227.
+Package marginnote Info: Margin note 5.20 is on absolute page 6 on input line 227.
 Package marginnote Info: right page because not two side mode on input line 227.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 227.
 
-Underfull \hbox (badness 10000) in paragraph at lines 231--232
+
+[5]
+Package marginnote Info: Margin note 6.1 is on absolute page 6 on input line 228.
+Package marginnote Info: right page because not two side mode on input line 228.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 228.
+Package marginnote Info: Margin note 6.2 is on absolute page 6 on input line 229.
+Package marginnote Info: right page because not two side mode on input line 229.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 229.
+Package marginnote Info: Margin note 6.3 is on absolute page 6 on input line 230.
+Package marginnote Info: right page because not two side mode on input line 230.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 230.
+Package marginnote Info: Margin note 6.4 is on absolute page 6 on input line 231.
+Package marginnote Info: right page because not two side mode on input line 231.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 231.
+Package marginnote Info: Margin note 6.5 is on absolute page 6 on input line 232.
+Package marginnote Info: right page because not two side mode on input line 232.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 232.
+Package marginnote Info: Margin note 6.6 is on absolute page 6 on input line 233.
+Package marginnote Info: right page because not two side mode on input line 233.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 233.
+Package marginnote Info: Margin note 6.7 is on absolute page 6 on input line 234.
+Package marginnote Info: right page because not two side mode on input line 234.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 234.
+
+Underfull \hbox (badness 10000) in paragraph at lines 227--235
 
  []
 
-Package marginnote Info: Margin note 6.3 is on absolute page 6 on input line 235.
-Package marginnote Info: right page because not two side mode on input line 235.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 235.
-Package marginnote Info: Margin note 6.4 is on absolute page 6 on input line 239.
-Package marginnote Info: right page because not two side mode on input line 239.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 239.
+Package marginnote Info: Margin note 6.8 is on absolute page 6 on input line 240.
+Package marginnote Info: right page because not two side mode on input line 240.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 240.
+Package marginnote Info: Margin note 6.9 is on absolute page 6 on input line 241.
+Package marginnote Info: right page because not two side mode on input line 241.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 241.
 
-Overfull \hbox (13.9574pt too wide) in paragraph at lines 239--240
+Underfull \hbox (badness 10000) in paragraph at lines 245--246
+
+ []
+
+Package marginnote Info: Margin note 6.10 is on absolute page 6 on input line 249.
+Package marginnote Info: right page because not two side mode on input line 249.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 249.
+Package marginnote Info: Margin note 6.11 is on absolute page 6 on input line 253.
+Package marginnote Info: right page because not two side mode on input line 253.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 253.
+
+Underfull \hbox (badness 10000) in paragraph at lines 253--254
+
+ []
+
+Package marginnote Info: Margin note 6.12 is on absolute page 6 on input line 255.
+Package marginnote Info: right page because not two side mode on input line 255.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 255.
+
+Overfull \hbox (13.9574pt too wide) in paragraph at lines 255--256
 \TU/GentiumBasic(0)/m/sc/10.95 Unconditional Cash Transfer Amounts in the US.” \TU/GentiumBasic(0)/m/it/10.95 Unjournal\TU/GentiumBasic(0)/m/sc/10.95 . doi:[][]10.21428/d28e8e57.8a1cac7b[][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 239--240
+Underfull \hbox (badness 10000) in paragraph at lines 255--256
 
  []
 
-Package marginnote Info: Margin note 6.5 is on absolute page 6 on input line 241.
-Package marginnote Info: right page because not two side mode on input line 241.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 241.
-Package marginnote Info: Margin note 6.6 is on absolute page 6 on input line 256.
-Package marginnote Info: right page because not two side mode on input line 256.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 256.
-Package marginnote Info: Margin note 6.7 is on absolute page 6 on input line 257.
+Package marginnote Info: Margin note 6.13 is on absolute page 6 on input line 257.
 Package marginnote Info: right page because not two side mode on input line 257.
 Package marginnote Info: xpos seems to be 100.01144pt on input line 257.
-Package marginnote Info: Margin note 6.8 is on absolute page 6 on input line 258.
-Package marginnote Info: right page because not two side mode on input line 258.
-Package marginnote Info: xpos seems to be 100.01144pt on input line 258.
+Package marginnote Info: Margin note 6.14 is on absolute page 7 on input line 272.
+Package marginnote Info: right page because not two side mode on input line 272.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 272.
+Package marginnote Info: Margin note 6.15 is on absolute page 7 on input line 273.
+Package marginnote Info: right page because not two side mode on input line 273.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 273.
+Package marginnote Info: Margin note 6.16 is on absolute page 7 on input line 274.
+Package marginnote Info: right page because not two side mode on input line 274.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 274.
+Package marginnote Info: Margin note 6.17 is on absolute page 7 on input line 275.
+Package marginnote Info: right page because not two side mode on input line 275.
+Package marginnote Info: xpos seems to be 100.01144pt on input line 275.
+
+
+[6]
 
 Package fontspec Info: 
 (fontspec)             Font family 'TimesNewRoman(0)' created for font 'Times
@@ -969,10 +1006,10 @@ Package fontspec Info:
 
 
 
-[6] (./Robert_Kubinec_CV_full.aux)
+[7] (./Robert_Kubinec_CV_full.aux)
  ***********
-LaTeX2e <2024-11-01> patch level 2
-L3 programming layer <2025-01-18>
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-07-20>
  ***********
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -981,12 +1018,12 @@ Package rerunfilecheck Info: File `Robert_Kubinec_CV_full.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 15321 strings out of 475803
- 293898 string characters out of 5772496
- 707229 words of memory out of 5000000
- 38066 multiletter control sequences out of 15000+600000
- 562346 words of font info for 85 fonts, out of 8000000 for 9000
+ 15273 strings out of 470415
+ 292314 string characters out of 5488810
+ 716363 words of memory out of 5000000
+ 43412 multiletter control sequences out of 15000+600000
+ 630334 words of font info for 89 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 79i,9n,106p,766b,403s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,9n,106p,766b,407s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Robert_Kubinec_CV_full.pdf (6 pages).
+Output written on Robert_Kubinec_CV_full.pdf (7 pages).
