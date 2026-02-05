@@ -350,7 +350,7 @@ Y = \alpha + \beta \text{ log } X + \epsilon
 <section id="seeing-is-believing" class="level2">
 <h2 class="anchored" data-anchor-id="seeing-is-believing">Seeing is Believing</h2>
 <p>I’ll demonstrate this by simulating a Normally-distributed <span class="math inline">\(Y\)</span> and a covariate <span class="math inline">\(X\)</span> to see how the uncertainty is calculated for <span class="math inline">\(Y\)</span> and the regression coefficients <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6633771</span>)</span>
@@ -375,15 +375,15 @@ Y = \alpha + \beta \text{ log } X + \epsilon
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X,Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The plot shows the bivariate relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. We can calculate the estimated regression coefficients with OLS with the <code>lm</code> command:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>y_reg <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X)</span>
@@ -412,7 +412,7 @@ F-statistic: 1.014e+04 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Our intercept is quite close to “true” <span class="math inline">\(\alpha\)</span> of -0.5 and our coefficient for <span class="math inline">\(\beta\)</span> is quite close to the true value as well (+3.2). Next we can examine the residuals, that is, the difference between actual <span class="math inline">\(Y\)</span> and our model’s prediction of <span class="math inline">\(Y\)</span> conditional on the estimated values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Y_pred1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(y_reg)</span>
@@ -420,16 +420,16 @@ F-statistic: 1.014e+04 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Y_pred1 <span class="sc">-</span> Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Do those look pretty Normal? Yep.</p>
 <p>Ok, now let’s exponentiate <span class="math inline">\(X\)</span> and see if it changes those residuals:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>y_reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> <span class="fu">I</span>(<span class="fu">exp</span>(X)))</span>
@@ -459,7 +459,7 @@ F-statistic:  1278 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Did the <span class="math inline">\(\beta\)</span> coefficient change? Sure did. That’s because we transformed <span class="math inline">\(X\)</span>. Does that change the residuals? Is <span class="math inline">\(Y\)</span> any more or less Normal?</p>
 <p>Let’s check:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Y_pred2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(y_reg2)</span>
@@ -467,9 +467,9 @@ F-statistic:  1278 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Y_pred2 <span class="sc">-</span> Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -484,7 +484,7 @@ F-statistic:  1278 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>You might be thinking, though, OK, fine, <span class="math inline">\(X\)</span> is fixed, but the regression coefficients aren’t. They’re uncertain!</p>
 <p>Very true. BUT, that uncertainty <em>does not</em> come from uncertainty in <span class="math inline">\(X\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It comes from random variation in <span class="math inline">\(Y\)</span>.</p>
 <p>Don’t believe me? We can test that in an experiment by simulating 1,000 regressions in which we keep drawing a new value for <span class="math inline">\(Y\)</span> but keeping <span class="math inline">\(X\)</span> the same in each simulation. Then we’ll fit the regression and save the estimated value of <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\alpha\)</span> to see what the “true” uncertainty is and whether that matches the standard errors for the coefficients that we estimated above with OLS.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>over_sims <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="cf">function</span>(i) {</span>
@@ -534,7 +534,7 @@ F-statistic:  1278 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>You can see that the true SE of the parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, which we estimated with simulations, are pretty close to the estimated SEs using OLS. Pretty cool! Note, though, that in the simulation we <em>only</em> simulated <span class="math inline">\(Y\)</span> using the Normal distribution (<code>rnorm</code>). <strong>We did not change</strong> <span class="math inline">\(X\)</span><strong>,</strong> <span class="math inline">\(\alpha\)</span><strong>, or</strong> <span class="math inline">\(\beta\)</span><strong>.</strong> As a result, <em>all</em> of the uncertainty in our estimates for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> came from uncertainty in <span class="math inline">\(Y\)</span>, <strong>not</strong> <span class="math inline">\(X\)</span>.</p>
 <p>What if <span class="math inline">\(X\)</span> also had random noise such that our data have measurement error? What if every simulation draw, we only had one possible dataset <span class="math inline">\(\hat{X}\)</span> with some unobservable measurement error <span class="math inline">\(\sigma_X\)</span> instead of the true data <span class="math inline">\(X\)</span>?</p>
 <p>Well let’s change our simulation to do just that:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># amount of noise we'll add to X</span></span>
@@ -595,12 +595,12 @@ F-statistic:  1278 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre><code>[1] "OLS SE of Beta: 0.0473542014008247"</code></pre>
 </div>
 </div>
-<p>You can see that the standard error of the <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> parameters for OLS has increased relative to the true SEs for the parameters. Why? Because now each simulation draw we are adding in some Normally-distributed measurement noise, <code>sigma_X</code>, to our “true” data <span class="math inline">\(X\)</span>. That is, our data will vary for each draw (<code>X_new</code>) along with the outcome <span class="math inline">\(Y\)</span>. In this case, the standard OLS estimate of the SE of the parameters will be too low because OLS assumes that <span class="math inline">\(X\)</span> is measured without error (i.e., is true or fixed).</p>
+<p>You can see that the standard error of the <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> parameters for OLS has increased relative to the true SEs for the parameters. Why? Because now each simulation draw we are adding in some Normally-distributed measurement noise, <code>sigma_X</code>, to our “true” data <span class="math inline">\(X\)</span>. That is, our data will vary for each draw (<code>X_new</code>) along with the outcome <span class="math inline">\(Y\)</span>. In this case, the standard OLS estimate of the SE of the parameters will be too high because OLS assumes that <span class="math inline">\(X\)</span> is measured without error (i.e., is true or fixed).</p>
 </section>
 <section id="what-if-the-slopescoefficients-are-random" class="level2">
 <h2 class="anchored" data-anchor-id="what-if-the-slopescoefficients-are-random">What If the Slopes/Coefficients Are Random?</h2>
 <p>Another important point about this presentation is that OLS (and other standard statistical models) also assume that <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are fixed: they don’t vary as <span class="math inline">\(Y\)</span> is repeatedly sampled. If we also make the coefficients, such as <span class="math inline">\(\beta\)</span>, random, we will get the right average (expected) value of the coefficient, but the SEs will again be off vs.&nbsp;vanilla OLS:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># noise around beta</span></span>
@@ -665,52 +665,41 @@ F-statistic:  1278 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>In this case, OLS <em>underestimates</em> the uncertainty in <span class="math inline">\(\beta\)</span> by assuming <span class="math inline">\(\beta\)</span> is fixed with respect to <span class="math inline">\(Y\)</span>. This additional source of uncertainty is un-modeled because the slope <span class="math inline">\(\beta\)</span> is varying across different groups in the data (even though on average the OLS estimate of <span class="math inline">\(\beta\)</span> is un-biased, or equal to the true value). However, we can use a linear mixed model via the R package <code>lme4</code> with random slopes to capture that uncertainty in <span class="math inline">\(\beta\)</span> a bit better:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: Matrix</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'Matrix'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:tidyr':
-
-    expand, pack, unpack</code></pre>
-</div>
-<details open="" class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now get it from the lmer model</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Y_rand_slope=</span>Y_rand_slope,<span class="at">X=</span>X,<span class="at">group_id=</span>group_id)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>lmer_fit <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Y <span class="sc">~</span> X <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> X <span class="sc">|</span> group_id), <span class="at">data =</span> dat, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>lmer_sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(lmer_fit)</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"lmer SE of Beta: "</span>, lmer_sum<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># now get it from the lmer model</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Y_rand_slope=</span>Y_rand_slope,<span class="at">X=</span>X,<span class="at">group_id=</span>group_id)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>lmer_fit <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Y <span class="sc">~</span> X <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> X <span class="sc">|</span> group_id), <span class="at">data =</span> dat, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>lmer_sum <span class="ot">&lt;-</span> <span class="fu">summary</span>(lmer_fit)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>se_pop <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">vcov</span>(lmer_fit)[<span class="st">"X"</span>,<span class="st">"X"</span>] <span class="sc">+</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>               <span class="fu">as.numeric</span>(<span class="fu">VarCorr</span>(lmer_fit)<span class="sc">$</span>group[<span class="st">"X"</span>,<span class="st">"X"</span>]))</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"lmer combined SE of Beta: "</span>, se_pop))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "lmer SE of Beta: 0.0357215526614292"</code></pre>
+<pre><code>[1] "lmer combined SE of Beta: 0.0862936408790636"</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of Beta: "</span>, ols_rand_slope_ses<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"OLS SE of Beta: "</span>, ols_rand_slope_ses<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="st">'Std. Error'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "OLS SE of Beta: 0.0307791347179157"</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of Beta: "</span>, <span class="fu">sd</span>(over_sims_rando_beta<span class="sc">$</span>beta)<span class="sc">*</span> <span class="fu">sqrt</span>(N<span class="sc">/</span>(N<span class="dv">-2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"True SE of Beta: "</span>, <span class="fu">sd</span>(over_sims_rando_beta<span class="sc">$</span>beta)<span class="sc">*</span> <span class="fu">sqrt</span>(N<span class="sc">/</span>(N<span class="dv">-2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "True SE of Beta: 0.0630173544464952"</code></pre>
+<pre><code>[1] "True SE of Beta: 0.0630173544464951"</code></pre>
 </div>
 </div>
-<p><code>lme4</code> estimate is noticeably larger than vanilla OLS 🙌, though still a bit low–which could be sampling error, or just the known fact that maximum-likelihood random effects slightly under-estimate the variance of the random effects–I’ll let the reader explore that one on their own 😁. It would also be possible to adjust the OLS standard errors with clustering around <code>group_id</code>.</p>
+<p><code>lme4</code> estimate is a bit bigger than the true value due to some differences in how <code>lme4</code> estimates random slopes–I’ll let the reader explore that one on their own 😁. It would also be possible to adjust the OLS standard errors with clustering around <code>group_id</code> if we want to continue using vanilla OLS.</p>
 <p>In summary, though, you can’t truly <em>know</em> the probability distribution of the outcome, <span class="math inline">\(Y\)</span>. Residuals are a hint but nothing more. And, assuming <span class="math inline">\(X\)</span> has no measurement error is a fairly strong assumption. Often we can’t do much about it… but sometimes we can. And if you’re interested to learn more about measurement modeling, see my R package <code>idealstan</code>: <a href="https://saudiwin.github.io/idealstan/vignettes/Package_Introduction.html" class="uri">https://saudiwin.github.io/idealstan/vignettes/Package_Introduction.html</a>.</p>
 
 
