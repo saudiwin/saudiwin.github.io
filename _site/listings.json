@@ -1,5 +1,29 @@
 [
   {
+    "listing": "/index.html",
+    "items": [
+      "/post/fixed_data/index.html",
+      "/post/notion/index.html",
+      "/post/did_dnd/index.html",
+      "/post/nasa_beta/index.html",
+      "/post/flat_earth/index.html",
+      "/post/tunisia_imf/index.html",
+      "/post/kais_saied_results/index.html",
+      "/post/frac_logit/index.html",
+      "/post/logs/index.html",
+      "/post/tunisia_polls/index.html",
+      "/post/limited_dvs/index.html",
+      "/post/energy_nationalism/index.html",
+      "/post/panel_dag_new/index.html",
+      "/post/astrazeneca/index.html",
+      "/post/vaccinepval/index.html",
+      "/post/maternity21/index.html",
+      "/post/fixed_effects/index.html",
+      "/post/kubinec_model_draft/index.html",
+      "/post/conjoint/conjoint.html"
+    ]
+  },
+  {
     "listing": "/research/index.html",
     "items": [
       "/research/books/kubinec-2023/index.html",
