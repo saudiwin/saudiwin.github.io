@@ -19,3 +19,5 @@ test_hist.py
 esa_risk*
 _site/files/.DS_Store
 _site/files/.DS_Store
+
+**/*.quarto_ipynb

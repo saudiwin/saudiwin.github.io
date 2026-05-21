@@ -138,6 +138,35 @@ gtag('js', new Date());
 gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="When Using OLS Hurts – Homepage">
@@ -308,7 +337,7 @@ gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
 <li>We are measuring a continuous outcome that we want to standardize for comparability (i.e., measure it relative to a total).</li>
 <li>We are using a measurement device like a slider that has physical bounds (such as the oft-used feeling thermometer/visual analog scale).</li>
 </ol>
-<p>For this post, I will examine an empirical paper that had an outcome meeting the first condition. <span class="citation" data-cites="masters-waage2024">Masters-Waage et al. (<a href="#ref-masters-waage2024" role="doc-biblioref">2024</a>)</span> analyzed tenure decisions in a major research university, amounting to over a thousand tenure votes at the department and college level. Measuring this outcome as a proportion is natural by dividing the total votes for a given tenure candidate by the size of the voting members (i.e.&nbsp;the department or collegiate tenure committee). In fact, it is so natural that it might not even have occurred to you that it could be modeled differently, but it would be possible to also model the raw number of votes with the Poisson distribution.</p>
+<p>For this post, I will examine an empirical paper that had an outcome meeting the first condition. <span class="citation" data-cites="masters-waage2024">Masters-Waage et al. (<a href="#ref-masters-waage2024" role="doc-biblioref">2024</a>)</span> analyzed tenure decisions from a consortium of five major research universities, amounting to over a thousand tenure votes at the department and college level. Measuring this outcome as a proportion is natural by dividing the total votes for a given tenure candidate by the size of the voting members (i.e.&nbsp;the department or collegiate tenure committee). In fact, it is so natural that it might not even have occurred to you that it could be modeled differently, but it would be possible to also model the raw number of votes with the Poisson distribution.</p>
 <p>We could also model the vote distributions with the Binomial model, though in this case that might be unwise as the Binomial model will put more weight on votes with a higher total of voting members. For tenure, though, the collegiate committee may be smaller in size than the department tenure vote, so we want to standardize that issue away by simply using the proportion who voted for a candidate.</p>
 <p>Probably more information than you wanted to think about, but hey, I’m an academic. <em>It’s literally my job to think too much</em>.</p>
 <p><span class="citation" data-cites="masters-waage2024">Masters-Waage et al. (<a href="#ref-masters-waage2024" role="doc-biblioref">2024</a>)</span> use OLS for all of their tenure proportion outcomes. I don’t fault them for it; my R package <code>ordbetareg</code> did not appear until they had largely completed their research. Indeed, my aim is not “take on” anyone; rather, I want to show a concrete example where effects that were reported as non-significant by OLS in fact become more precise and meaningful with ordered beta regression.</p>
@@ -363,17 +392,17 @@ gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
 </section>
 <section id="replication" class="level2">
 <h2 class="anchored" data-anchor-id="replication">Replication</h2>
-<p>In this section, I replicate some of the main findings in the paper, comparing OLS to ordered beta regression side-by-side. The main research question in this paper is fascinating and important: are minority faculty disadvantaged in tenure decisions? The authors account for differences in faculty productivity (the <em>h</em>-index) and, intriguingly, the general tone of external letters.</p>
+<p>In this section, I replicate some of the main findings in the paper for the proportion of department-level negative votes on tenure, comparing OLS to ordered beta regression side-by-side. The main research question in this paper is fascinating and important: are minority faculty disadvantaged in tenure decisions? The authors account for differences in faculty productivity (the <em>h</em>-index) and, intriguingly, the general tone of external letters. While the authors also look at college-level tenure committee decisions, for the purposes of exposition I will focus on the initial department vote.</p>
 <p>My main goal here is not to evaluate the research design, but it is important to note that it is <em>very</em> difficult to infer causality with observational data when the outcome is tenure. There are lots of factors that differ across racial groups, fields, and as I noted earlier, lots of strategic behavior where people withdraw their cases if the outcome doesn’t look good. Given those caveats, though, this study has some excellent data and the authors should be commended for making it <em>very</em> easy to replicate their findings. That’s how science improves! 🙌</p>
 </section>
-<section id="main-findings-are-minority-faculty-disadvantaged-in-tenure-decisions" class="level2">
-<h2 class="anchored" data-anchor-id="main-findings-are-minority-faculty-disadvantaged-in-tenure-decisions">Main Findings: Are Minority Faculty Disadvantaged in Tenure Decisions?</h2>
-<p>I’ll first reproduce their unadjusted model which examines whether what they call under-represented minority (URM) status, which is a binary indicator, is associated with higher or lower negative department vote proportions for tenure (Model 1 in Table 1 in their paper) along with the ordered beta regression version. To make the ordered beta regression estimates comparable to the OLS estimates, I’ll use the <code>avg_slopes</code> function in the <code>marginal_effects</code> package to get estimates in the scale of the outcome, i.e., as a fraction of department vote:</p>
+<section id="main-findings-are-minority-faculty-disadvantaged-in-promotion-and-tenure-decisions" class="level2">
+<h2 class="anchored" data-anchor-id="main-findings-are-minority-faculty-disadvantaged-in-promotion-and-tenure-decisions">Main Findings: Are Minority Faculty Disadvantaged in Promotion and Tenure Decisions?</h2>
+<p>I’ll first reproduce their unadjusted model which examines whether what they call under-represented minority (URM) status, which is a binary indicator, is associated with higher or lower negative department vote proportions for all promortions (i.e., promotion to associate professor or full professor, Model 1 in Table 1 in their paper) along with the ordered beta regression version. To make the ordered beta regression estimates comparable to the OLS estimates, I’ll use the <code>avg_slopes</code> function in the <code>marginal_effects</code> package to get estimates in the scale of the outcome, i.e., as a fraction of department vote:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  scaled_department_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> candidates</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -382,70 +411,30 @@ gtag('config', 'G-BHP1PJ9LEX', { 'anonymize_ip': true});
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> candidates,</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span>, <span class="at">refresh =</span> <span class="dv">0</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 sequential chains...
 
-Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 1 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 1 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 1 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 1 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 1 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 1 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 1 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 1 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 1 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 1 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 1 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 1 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 1 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 1 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 1 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 1 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 3.0 seconds.
-Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 2 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 2 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 2 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 2 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 2 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 2 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 2 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 2 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 2 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 2 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 2 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 2 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 2 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 2 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 2 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 2 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 2 finished in 2.9 seconds.
+Chain 1 finished in 3.1 seconds.
+Chain 2 finished in 3.2 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 2.9 seconds.
-Total execution time: 6.1 seconds.</code></pre>
+Mean chain execution time: 3.1 seconds.
+Total execution time: 6.5 seconds.</code></pre>
 </div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>avg_ord1 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a nice table with modelsummary and relabel everything</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ms_compare</span>(lm1, ord1, <span class="st">"URM → dept. negative vote % — no controls, full sample"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a nice table with modelsummary and relabel everything</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ms_compare</span>(lm1, avg_ord1, <span class="st">"URM → dept. negative vote % — no controls, full sample"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <!-- preamble start -->
@@ -454,25 +443,25 @@ Total execution time: 6.1 seconds.</code></pre>
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_c0h1ej75i3yg9pwua0g8 = TinyTable.createTableFunctions("tinytable_c0h1ej75i3yg9pwua0g8");
+      const tableFns_mzfp40kg1qgw2l22mgwc = TinyTable.createTableFunctions("tinytable_mzfp40kg1qgw2l22mgwc");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '14', j: 2 }, { i: '14', j: 3 } ], css_id: 'tinytable_css_kt26jnzqm879pctp3nqj',}, 
-          { positions: [ { i: '2', j: 2 }, { i: '2', j: 3 } ], css_id: 'tinytable_css_alhyfztumel3skgmf7ib',}, 
-          { positions: [ { i: '1', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '8', j: 2 }, { i: '9', j: 2 }, { i: '10', j: 2 }, { i: '11', j: 2 }, { i: '12', j: 2 }, { i: '13', j: 2 }, { i: '1', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 }, { i: '8', j: 3 }, { i: '9', j: 3 }, { i: '10', j: 3 }, { i: '11', j: 3 }, { i: '12', j: 3 }, { i: '13', j: 3 } ], css_id: 'tinytable_css_ww0mzhw1mo0dhfqakcy6',}, 
-          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_swon8z1feggc5ywjvqao',}, 
-          { positions: [ { i: '14', j: 1 } ], css_id: 'tinytable_css_fsl4lq7um6m7z61y4lzz',}, 
-          { positions: [ { i: '2', j: 1 } ], css_id: 'tinytable_css_m20summkdtxi25emoaz6',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '8', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '12', j: 1 }, { i: '13', j: 1 } ], css_id: 'tinytable_css_yws4sy5tyhrk2vbcyy01',}, 
-          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_apnb2np7mzyojyogs5gt',}, 
+          { positions: [ { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_yquizmj00b4p0kkaifev',}, 
+          { positions: [ { i: '2', j: 2 }, { i: '2', j: 3 } ], css_id: 'tinytable_css_xpmpjcsu6imb2oocmmav',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '1', j: 3 } ], css_id: 'tinytable_css_a3jrj5rk0wdd3s4vhlac',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_u7kv2lcwz6za12hjcvff',}, 
+          { positions: [ { i: '3', j: 1 } ], css_id: 'tinytable_css_oyhaba10xc8qjf0f6ko4',}, 
+          { positions: [ { i: '2', j: 1 } ], css_id: 'tinytable_css_8r2srzz93d3x1sjuu23z',}, 
+          { positions: [ { i: '1', j: 1 } ], css_id: 'tinytable_css_f6e050bwnfmf5c3tbd8e',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_wdud0mbebi9d84w9us8y',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_c0h1ej75i3yg9pwua0g8.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_mzfp40kg1qgw2l22mgwc.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -481,17 +470,17 @@ Total execution time: 6.1 seconds.</code></pre>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_c0h1ej75i3yg9pwua0g8 td.tinytable_css_kt26jnzqm879pctp3nqj, #tinytable_c0h1ej75i3yg9pwua0g8 th.tinytable_css_kt26jnzqm879pctp3nqj {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_c0h1ej75i3yg9pwua0g8 td.tinytable_css_alhyfztumel3skgmf7ib, #tinytable_c0h1ej75i3yg9pwua0g8 th.tinytable_css_alhyfztumel3skgmf7ib {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_c0h1ej75i3yg9pwua0g8 td.tinytable_css_ww0mzhw1mo0dhfqakcy6, #tinytable_c0h1ej75i3yg9pwua0g8 th.tinytable_css_ww0mzhw1mo0dhfqakcy6 { text-align: center }
-    #tinytable_c0h1ej75i3yg9pwua0g8 td.tinytable_css_swon8z1feggc5ywjvqao, #tinytable_c0h1ej75i3yg9pwua0g8 th.tinytable_css_swon8z1feggc5ywjvqao {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
-    #tinytable_c0h1ej75i3yg9pwua0g8 td.tinytable_css_fsl4lq7um6m7z61y4lzz, #tinytable_c0h1ej75i3yg9pwua0g8 th.tinytable_css_fsl4lq7um6m7z61y4lzz {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_c0h1ej75i3yg9pwua0g8 td.tinytable_css_m20summkdtxi25emoaz6, #tinytable_c0h1ej75i3yg9pwua0g8 th.tinytable_css_m20summkdtxi25emoaz6 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_c0h1ej75i3yg9pwua0g8 td.tinytable_css_yws4sy5tyhrk2vbcyy01, #tinytable_c0h1ej75i3yg9pwua0g8 th.tinytable_css_yws4sy5tyhrk2vbcyy01 { text-align: left }
-    #tinytable_c0h1ej75i3yg9pwua0g8 td.tinytable_css_apnb2np7mzyojyogs5gt, #tinytable_c0h1ej75i3yg9pwua0g8 th.tinytable_css_apnb2np7mzyojyogs5gt {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_mzfp40kg1qgw2l22mgwc td.tinytable_css_yquizmj00b4p0kkaifev, #tinytable_mzfp40kg1qgw2l22mgwc th.tinytable_css_yquizmj00b4p0kkaifev {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_mzfp40kg1qgw2l22mgwc td.tinytable_css_xpmpjcsu6imb2oocmmav, #tinytable_mzfp40kg1qgw2l22mgwc th.tinytable_css_xpmpjcsu6imb2oocmmav {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_mzfp40kg1qgw2l22mgwc td.tinytable_css_a3jrj5rk0wdd3s4vhlac, #tinytable_mzfp40kg1qgw2l22mgwc th.tinytable_css_a3jrj5rk0wdd3s4vhlac { text-align: center }
+    #tinytable_mzfp40kg1qgw2l22mgwc td.tinytable_css_u7kv2lcwz6za12hjcvff, #tinytable_mzfp40kg1qgw2l22mgwc th.tinytable_css_u7kv2lcwz6za12hjcvff {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_mzfp40kg1qgw2l22mgwc td.tinytable_css_oyhaba10xc8qjf0f6ko4, #tinytable_mzfp40kg1qgw2l22mgwc th.tinytable_css_oyhaba10xc8qjf0f6ko4 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_mzfp40kg1qgw2l22mgwc td.tinytable_css_8r2srzz93d3x1sjuu23z, #tinytable_mzfp40kg1qgw2l22mgwc th.tinytable_css_8r2srzz93d3x1sjuu23z {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_mzfp40kg1qgw2l22mgwc td.tinytable_css_f6e050bwnfmf5c3tbd8e, #tinytable_mzfp40kg1qgw2l22mgwc th.tinytable_css_f6e050bwnfmf5c3tbd8e { text-align: left }
+    #tinytable_mzfp40kg1qgw2l22mgwc td.tinytable_css_wdud0mbebi9d84w9us8y, #tinytable_mzfp40kg1qgw2l22mgwc th.tinytable_css_wdud0mbebi9d84w9us8y {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_c0h1ej75i3yg9pwua0g8" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_mzfp40kg1qgw2l22mgwc" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <caption>URM → dept. negative vote % — no controls, full sample</caption>
         <thead>
               <tr>
@@ -500,80 +489,23 @@ Total execution time: 6.1 seconds.</code></pre>
                 <th scope="col" data-row="0" data-col="3">Ordbetareg (new)</th>
               </tr>
         </thead>
-        <tfoot><tr><td colspan="3">LM outcome: z-scored dept. negative vote %; coefficients in SD units.</td></tr>
-<tr><td colspan="3">Ordbetareg outcome: raw proportion [0, 1]; coefficients on log-odds scale.</td></tr>
-<tr><td colspan="3">Discipline and school fixed effects included but omitted from display.</td></tr>
-<tr><td colspan="3">95% frequentist CI (LM) and 95% posterior CrI (Ordbetareg) shown.</td></tr></tfoot>
+        <tfoot><tr><td colspan="3">Outcome: proportion of votes [0, 1]. Coefficients equal changes in proportions.</td></tr>
+<tr><td colspan="3">95% frequentist CI (R lm) and 95% posterior CrI (Ordbetareg) shown.</td></tr></tfoot>
         <tbody>
                 <tr>
                   <td data-row="1" data-col="1">URM candidate</td>
-                  <td data-row="1" data-col="2">0.154</td>
-                  <td data-row="1" data-col="3">0.305</td>
+                  <td data-row="1" data-col="2">0.030</td>
+                  <td data-row="1" data-col="3">0.038</td>
                 </tr>
                 <tr>
                   <td data-row="2" data-col="1"></td>
-                  <td data-row="2" data-col="2">[-0.027, 0.336]</td>
-                  <td data-row="2" data-col="3">[0.035, 0.542]</td>
+                  <td data-row="2" data-col="2">[-0.005, 0.065]</td>
+                  <td data-row="2" data-col="3">[0.004, 0.076]</td>
                 </tr>
                 <tr>
                   <td data-row="3" data-col="1">Num.Obs.</td>
                   <td data-row="3" data-col="2">1422</td>
                   <td data-row="3" data-col="3">1422</td>
-                </tr>
-                <tr>
-                  <td data-row="4" data-col="1">R2</td>
-                  <td data-row="4" data-col="2">0.002</td>
-                  <td data-row="4" data-col="3">0.003</td>
-                </tr>
-                <tr>
-                  <td data-row="5" data-col="1">R2 Adj.</td>
-                  <td data-row="5" data-col="2">0.001</td>
-                  <td data-row="5" data-col="3"></td>
-                </tr>
-                <tr>
-                  <td data-row="6" data-col="1">AIC</td>
-                  <td data-row="6" data-col="2">4037.2</td>
-                  <td data-row="6" data-col="3"></td>
-                </tr>
-                <tr>
-                  <td data-row="7" data-col="1">BIC</td>
-                  <td data-row="7" data-col="2">4053.0</td>
-                  <td data-row="7" data-col="3"></td>
-                </tr>
-                <tr>
-                  <td data-row="8" data-col="1">Log.Lik.</td>
-                  <td data-row="8" data-col="2">-2015.600</td>
-                  <td data-row="8" data-col="3"></td>
-                </tr>
-                <tr>
-                  <td data-row="9" data-col="1">ELPD</td>
-                  <td data-row="9" data-col="2"></td>
-                  <td data-row="9" data-col="3">-764.5</td>
-                </tr>
-                <tr>
-                  <td data-row="10" data-col="1">ELPD s.e.</td>
-                  <td data-row="10" data-col="2"></td>
-                  <td data-row="10" data-col="3">25.5</td>
-                </tr>
-                <tr>
-                  <td data-row="11" data-col="1">LOOIC</td>
-                  <td data-row="11" data-col="2"></td>
-                  <td data-row="11" data-col="3">1529.0</td>
-                </tr>
-                <tr>
-                  <td data-row="12" data-col="1">LOOIC s.e.</td>
-                  <td data-row="12" data-col="2"></td>
-                  <td data-row="12" data-col="3">50.9</td>
-                </tr>
-                <tr>
-                  <td data-row="13" data-col="1">WAIC</td>
-                  <td data-row="13" data-col="2"></td>
-                  <td data-row="13" data-col="3">1528.9</td>
-                </tr>
-                <tr>
-                  <td data-row="14" data-col="1">RMSE</td>
-                  <td data-row="14" data-col="2">1.00</td>
-                  <td data-row="14" data-col="3">0.19</td>
                 </tr>
         </tbody>
       </table>
@@ -581,542 +513,279 @@ Total execution time: 6.1 seconds.</code></pre>
 <!-- hack to avoid NA insertion in last line -->
 </div>
 </div>
-<p>As can be seen, the OLS (LM) model shows an association between URM status and negative tenure votes that is <em>one-half</em> the siza of the ordered beta regression model. OLS shows that URM candidates receive 15% more negative votes while ordered beta regression shows that URM candidates receive 31% more votes. This is an unadjusted, straightforward comparison with a binary variable, so it is a particularly stunning difference considering the simplicity of the underlying comparison. What is likely happening is that OLS is pulling the differences toward the mode at 0, while ordered beta regression is taking into account differences in the full distribution, including the small but quite important votes where all faculty voted against a candidate (!!). Again, very few if any statisticians will argue that OLS is the <em>right</em> model for a distribution like the one show above… so this is an easy win! 🙌</p>
-<p>I also want to give some props to the authors again for releasing their data and code <em>and</em> for reporting “null” results (the OLS estimate is not significant at conventional levels). If they hadn’t done that, I might have never run the data with ordered beta and discovered this quite big discrepancy.</p>
-<p>The authors fit quite a large number of further models with a variety of adjustments with covariates. I won’t walk through all of them but rather summarize them in a plot showing OLS vs.&nbsp;ordered beta regression estimates.</p>
+<p>As can be seen, the OLS (LM) model shows an association between URM status and negative tenure votes that is 22.2% smaller than the size of the ordered beta regression model. OLS shows that URM candidates receive 3% more negative votes while ordered beta regression shows that URM candidates receive 3.8% more votes. This is an unadjusted, straightforward comparison with a binary covariate, so it is a particularly notable difference considering that both models are quite similar in form (i.e., neither is a fancy ML-style model). What is likely happening is that OLS is pulling the differences toward the mode at 0, while ordered beta regression is taking into account differences in the full distribution, including the small but quite important votes where all faculty voted against a candidate (!!). Again, very few if any statisticians will argue that OLS is the <em>right</em> model for a distribution like the one show above… so this is an easy win! 🙌</p>
+<p>Sure, 22.2% isn’t earth-shattering–but remember, all we are doing here is switching the statistical distribution for the outcome. This improvement is free, in other words–and rests on a better statistical foundation regardless. If it didn’t, we might consider this a form of <span class="math inline">\(p\)</span>-hacking, but one of the best ways to avoid the temptation to <span class="math inline">\(p\)</span>-hack is to <em>start</em> with the best model for the outcome.</p>
+<p>I also want to give some props to the authors again for releasing their data and code <em>and</em> for reporting “null” results (the OLS estimate is not significant at conventional levels). If they hadn’t done that, I might have never run the data with ordered beta and discovered this fairly noticeable discrepancy.</p>
+<p>The authors fit quite a large number of further models with a variety of adjustments with covariates. I won’t walk through all of them but rather summarize them in a plot showing OLS vs.&nbsp;ordered beta regression estimates. These include models that subset by whether the department votes on promotion to associate or full professor.</p>
 <p>The code block shows the details for all the models run:</p>
 <div class="cell" data-show="false">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  scaled_department_negative_vote_percentage <span class="sc">~</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> promotion_to_full_professor <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    scaled_years_in_present_rank <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> candidates</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>ord2 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> promotion_to_full_professor <span class="sc">+</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    scaled_years_in_present_rank <span class="sc">+</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> candidates,</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> promotion_to_full_professor <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> candidates</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ord2 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> promotion_to_full_professor <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code, <span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> candidates,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 sequential chains...
 
-Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 1 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 1 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 1 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 1 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 1 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 1 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 1 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 1 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 1 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 1 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 1 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 1 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 1 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 1 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 1 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 1 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 35.4 seconds.
-Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 2 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 2 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 2 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 2 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 2 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 2 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 2 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 2 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 2 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 2 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 2 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 2 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 2 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 2 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 2 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 2 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 2 finished in 37.2 seconds.
+Chain 1 finished in 21.6 seconds.
+Chain 2 finished in 24.7 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 36.3 seconds.
-Total execution time: 72.8 seconds.</code></pre>
+Mean chain execution time: 23.2 seconds.
+Total execution time: 46.6 seconds.</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  scaled_department_negative_vote_percentage <span class="sc">~</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    promotion_to_full_professor <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> candidates</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>ord3 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    promotion_to_full_professor <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> candidates,</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    promotion_to_full_professor <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> candidates</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>ord3 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    promotion_to_full_professor <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,<span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> candidates,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 sequential chains...
 
-Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 1 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 1 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 1 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 1 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 1 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 1 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 1 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 1 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 1 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 1 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 1 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 1 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 1 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 1 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 1 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 1 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 465.4 seconds.
-Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 2 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 2 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 2 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 2 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 2 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 2 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 2 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 2 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 2 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 2 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 2 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 2 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 2 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 2 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 2 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 2 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 2 finished in 48.4 seconds.
+Chain 1 finished in 22.1 seconds.
+Chain 2 finished in 22.8 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 256.9 seconds.
-Total execution time: 514.1 seconds.</code></pre>
+Mean chain execution time: 22.5 seconds.
+Total execution time: 45.1 seconds.</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lm4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  scaled_department_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> promotion_to_associate_professor_candidates_distinct</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ord4 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> promotion_to_associate_professor_candidates_distinct,</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lm4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> promotion_to_associate_professor_candidates_distinct</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>ord4 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> promotion_to_associate_professor_candidates_distinct,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,<span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 sequential chains...
 
-Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 1 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 1 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 1 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 1 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 1 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 1 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 1 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 1 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 1 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 1 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 1 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 1 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 1 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 1 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 1 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 1 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 2.5 seconds.
-Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 2 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 2 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 2 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 2 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 2 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 2 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 2 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 2 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 2 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 2 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 2 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 2 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 2 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 2 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 2 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 2 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 2 finished in 2.5 seconds.
+Chain 1 finished in 1.4 seconds.
+Chain 2 finished in 1.5 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 2.5 seconds.
-Total execution time: 5.3 seconds.</code></pre>
+Mean chain execution time: 1.5 seconds.
+Total execution time: 3.2 seconds.</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lm5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  scaled_department_negative_vote_percentage <span class="sc">~</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> promotion_to_associate_professor_candidates_distinct</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>ord5 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> promotion_to_associate_professor_candidates_distinct,</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lm5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> promotion_to_associate_professor_candidates_distinct</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>ord5 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,<span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> promotion_to_associate_professor_candidates_distinct,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 sequential chains...
 
-Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 1 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 1 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 1 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 1 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 1 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 1 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 1 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 1 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 1 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 1 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 1 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 1 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 1 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 1 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 1 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 1 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 14.3 seconds.
-Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 2 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 2 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 2 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 2 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 2 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 2 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 2 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 2 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 2 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 2 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 2 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 2 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 2 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 2 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 2 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 2 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 2 finished in 13.9 seconds.
+Chain 1 finished in 7.5 seconds.
+Chain 2 finished in 8.4 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 14.1 seconds.
-Total execution time: 28.4 seconds.</code></pre>
+Mean chain execution time: 8.0 seconds.
+Total execution time: 16.1 seconds.</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>lm6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  scaled_department_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> promotion_to_full_professor_candidates_distinct</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>ord6 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> promotion_to_full_professor_candidates_distinct,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lm6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> promotion_to_full_professor_candidates_distinct</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>ord6 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> promotion_to_full_professor_candidates_distinct,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,<span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 sequential chains...
 
-Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 1 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 1 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 1 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 1 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 1 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 1 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 1 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 1 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 1 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 1 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 1 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 1 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 1 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 1 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 1 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 1 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 2.4 seconds.
-Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 2 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 2 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 2 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 2 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 2 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 2 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 2 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 2 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 2 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 2 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 2 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 2 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 2 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 2 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 2 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 2 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 2 finished in 2.6 seconds.
+Chain 1 finished in 1.8 seconds.
+Chain 2 finished in 1.6 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 2.5 seconds.
-Total execution time: 5.1 seconds.</code></pre>
+Mean chain execution time: 1.7 seconds.
+Total execution time: 3.6 seconds.</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lm7 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  scaled_department_negative_vote_percentage <span class="sc">~</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> promotion_to_full_professor_candidates_distinct</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>ord7 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> promotion_to_full_professor_candidates_distinct,</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lm7 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> promotion_to_full_professor_candidates_distinct</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>ord7 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  department_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,<span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> promotion_to_full_professor_candidates_distinct,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Running MCMC with 2 sequential chains...
 
-Chain 1 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 1 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 1 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 1 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 1 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 1 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 1 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 1 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 1 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 1 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 1 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 1 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 1 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 1 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 1 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 1 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 1 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 1 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 1 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 1 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 1 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 1 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 1 finished in 16.7 seconds.
-Chain 2 Iteration:    1 / 2000 [  0%]  (Warmup) 
-Chain 2 Iteration:  100 / 2000 [  5%]  (Warmup) 
-Chain 2 Iteration:  200 / 2000 [ 10%]  (Warmup) 
-Chain 2 Iteration:  300 / 2000 [ 15%]  (Warmup) 
-Chain 2 Iteration:  400 / 2000 [ 20%]  (Warmup) 
-Chain 2 Iteration:  500 / 2000 [ 25%]  (Warmup) 
-Chain 2 Iteration:  600 / 2000 [ 30%]  (Warmup) 
-Chain 2 Iteration:  700 / 2000 [ 35%]  (Warmup) 
-Chain 2 Iteration:  800 / 2000 [ 40%]  (Warmup) 
-Chain 2 Iteration:  900 / 2000 [ 45%]  (Warmup) 
-Chain 2 Iteration: 1000 / 2000 [ 50%]  (Warmup) 
-Chain 2 Iteration: 1001 / 2000 [ 50%]  (Sampling) 
-Chain 2 Iteration: 1100 / 2000 [ 55%]  (Sampling) 
-Chain 2 Iteration: 1200 / 2000 [ 60%]  (Sampling) 
-Chain 2 Iteration: 1300 / 2000 [ 65%]  (Sampling) 
-Chain 2 Iteration: 1400 / 2000 [ 70%]  (Sampling) 
-Chain 2 Iteration: 1500 / 2000 [ 75%]  (Sampling) 
-Chain 2 Iteration: 1600 / 2000 [ 80%]  (Sampling) 
-Chain 2 Iteration: 1700 / 2000 [ 85%]  (Sampling) 
-Chain 2 Iteration: 1800 / 2000 [ 90%]  (Sampling) 
-Chain 2 Iteration: 1900 / 2000 [ 95%]  (Sampling) 
-Chain 2 Iteration: 2000 / 2000 [100%]  (Sampling) 
-Chain 2 finished in 16.9 seconds.
+Chain 1 finished in 10.2 seconds.
+Chain 2 finished in 10.1 seconds.
 
 Both chains finished successfully.
-Mean chain execution time: 16.8 seconds.
-Total execution time: 33.8 seconds.</code></pre>
+Mean chain execution time: 10.2 seconds.
+Total execution time: 20.6 seconds.</code></pre>
 </div>
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Average marginal effects for candidate_urm_num from each ordbetareg model.</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># These are on the proportion scale (same units as the raw outcome), making</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># them directly comparable to LM coefficients back-transformed by × SD.</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ame1 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord1, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>ame2 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord2, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>ame3 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord3, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>ame4 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord4, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>ame5 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord5, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>ame6 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord6, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>ame7 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord7, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Average marginal effects for candidate_urm_num from each ordbetareg model.</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># These are on the proportion scale (same units as the raw outcome), making</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># them directly comparable to LM coefficients back-transformed by × SD.</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>ame1 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord1, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>ame2 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord2, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>ame3 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord3, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>ame4 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord4, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>ame5 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord5, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>ame6 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord6, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>ame7 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(ord7, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>and below is the marginal effects plot:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>extract_urm <span class="ot">&lt;-</span> <span class="cf">function</span>(lm_mod, ame_df, label, lm_sd) {</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  lm_row <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">summary</span>(lm_mod))[<span class="st">"candidate_urm_num"</span>, ]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  ame_row <span class="ot">&lt;-</span> ame_df[ame_df<span class="sc">$</span>term <span class="sc">==</span> <span class="st">"candidate_urm_num"</span>, ]</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">analysis    =</span> label,</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">lm_est      =</span> lm_row[[<span class="st">"Estimate"</span>]],</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">lm_lo       =</span> (lm_row[[<span class="st">"Estimate"</span>]] <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> lm_row[[<span class="st">"Std. Error"</span>]]) <span class="sc">*</span> lm_sd,</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">lm_hi       =</span> (lm_row[[<span class="st">"Estimate"</span>]] <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> lm_row[[<span class="st">"Std. Error"</span>]]) <span class="sc">*</span> lm_sd,</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">lm_p        =</span> lm_row[[<span class="st">"Pr(&gt;|t|)"</span>]],</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ame_est     =</span> ame_row<span class="sc">$</span>estimate,</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">ame_lo      =</span> ame_row<span class="sc">$</span>conf.low,</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ame_hi      =</span> ame_row<span class="sc">$</span>conf.high,</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">lm_sig      =</span> lm_row[[<span class="st">"Pr(&gt;|t|)"</span>]] <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">ame_sig     =</span> ame_row<span class="sc">$</span>conf.low <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> ame_row<span class="sc">$</span>conf.high <span class="sc">&lt;</span> <span class="dv">0</span>,</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">same_sign   =</span> <span class="fu">sign</span>(lm_row[[<span class="st">"Estimate"</span>]]) <span class="sc">==</span> <span class="fu">sign</span>(ame_row<span class="sc">$</span>estimate)</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm1, ame1, <span class="st">"1. Full sample – no controls"</span>,        dnvp_sd),</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm2, ame2, <span class="st">"2. Full sample – full controls"</span>,      dnvp_sd),</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm3, ame3, <span class="st">"3. Full sample – no STEM control"</span>,    dnvp_sd),</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm4, ame4, <span class="st">"4. Associate subset – no controls"</span>,   dnvp_sd_assoc),</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm5, ame5, <span class="st">"5. Associate subset – with controls"</span>, dnvp_sd_assoc),</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm6, ame6, <span class="st">"6. Full-prof subset – no controls"</span>,   dnvp_sd_full),</span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm7, ame7, <span class="st">"7. Full-prof subset – with controls"</span>, dnvp_sd_full)</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Long format: one row per model × estimator</span></span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>  results <span class="sc">|&gt;</span> <span class="fu">transmute</span>(</span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    analysis,</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimator =</span> <span class="st">"LM (coef × SD)"</span>,</span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">est =</span> lm_est, <span class="at">lo =</span> lm_lo, <span class="at">hi =</span> lm_hi,</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">sig =</span> lm_sig</span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>  results <span class="sc">|&gt;</span> <span class="fu">transmute</span>(</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    analysis,</span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimator =</span> <span class="st">"Ordbetareg AME"</span>,</span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">est =</span> ame_est, <span class="at">lo =</span> ame_lo, <span class="at">hi =</span> ame_hi,</span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">sig =</span> ame_sig</span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">analysis  =</span> <span class="fu">fct_rev</span>(<span class="fu">factor</span>(analysis)),</span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimator =</span> <span class="fu">factor</span>(estimator, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"LM (coef × SD)"</span>, <span class="st">"Ordbetareg AME"</span>))</span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data,</span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> est, <span class="at">xmin =</span> lo, <span class="at">xmax =</span> hi, <span class="at">y =</span> analysis,</span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> estimator, <span class="at">shape =</span> estimator)) <span class="sc">+</span></span>
-<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(</span>
-<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>),</span>
-<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.7</span>, <span class="at">linewidth =</span> <span class="dv">1</span></span>
-<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
-<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"LM (coef)"</span> <span class="ot">=</span> <span class="st">"#0072B2"</span>,</span>
-<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Ordbetareg AME"</span> <span class="ot">=</span> <span class="st">"#D55E00"</span>)) <span class="sc">+</span></span>
-<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"LM (coef)"</span> <span class="ot">=</span> <span class="dv">16</span>,</span>
-<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Ordbetareg AME"</span> <span class="ot">=</span> <span class="dv">17</span>)) <span class="sc">+</span></span>
-<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"URM Effect on Department Negative Vote Percentage"</span>,</span>
-<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Both estimators on the proportion scale: LM coef × SD(raw outcome) vs. ordbetareg AME"</span>,</span>
-<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"Expected change in dept. negative vote proportion"</span>,</span>
-<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="cn">NULL</span>,</span>
-<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">color    =</span> <span class="cn">NULL</span>, <span class="at">shape =</span> <span class="cn">NULL</span></span>
-<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
-<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position  =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>extract_urm <span class="ot">&lt;-</span> <span class="cf">function</span>(lm_mod, ame_df, label) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  lm_row <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">summary</span>(lm_mod))[<span class="st">"candidate_urm_num"</span>, ]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  ame_row <span class="ot">&lt;-</span> ame_df[ame_df<span class="sc">$</span>term <span class="sc">==</span> <span class="st">"candidate_urm_num"</span>, ]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">analysis    =</span> label,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">lm_est      =</span> lm_row[[<span class="st">"Estimate"</span>]],</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">lm_lo       =</span> (lm_row[[<span class="st">"Estimate"</span>]] <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> lm_row[[<span class="st">"Std. Error"</span>]]),</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">lm_hi       =</span> (lm_row[[<span class="st">"Estimate"</span>]] <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> lm_row[[<span class="st">"Std. Error"</span>]]),</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">lm_p        =</span> lm_row[[<span class="st">"Pr(&gt;|t|)"</span>]],</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ame_est     =</span> ame_row<span class="sc">$</span>estimate,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">ame_lo      =</span> ame_row<span class="sc">$</span>conf.low,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ame_hi      =</span> ame_row<span class="sc">$</span>conf.high,</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">lm_sig      =</span> lm_row[[<span class="st">"Pr(&gt;|t|)"</span>]] <span class="sc">&lt;</span> <span class="fl">0.05</span>,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">ame_sig     =</span> ame_row<span class="sc">$</span>conf.low <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> ame_row<span class="sc">$</span>conf.high <span class="sc">&lt;</span> <span class="dv">0</span>,</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">same_sign   =</span> <span class="fu">sign</span>(lm_row[[<span class="st">"Estimate"</span>]]) <span class="sc">==</span> <span class="fu">sign</span>(ame_row<span class="sc">$</span>estimate)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm1, ame1, <span class="st">"1. Full sample – no controls"</span>),</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm2, ame2, <span class="st">"2. Full sample – full controls"</span>),</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm3, ame3, <span class="st">"3. Full sample – no STEM control"</span>),</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm4, ame4, <span class="st">"4. Associate subset – no controls"</span>),</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm5, ame5, <span class="st">"5. Associate subset – with controls"</span>),</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm6, ame6, <span class="st">"6. Full-prof subset – no controls"</span>),</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(lm7, ame7, <span class="st">"7. Full-prof subset – with controls"</span>)</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Long format: one row per model × estimator</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  results <span class="sc">|&gt;</span> <span class="fu">transmute</span>(</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    analysis,</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimator =</span> <span class="st">"OLS"</span>,</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">est =</span> lm_est, <span class="at">lo =</span> lm_lo, <span class="at">hi =</span> lm_hi,</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">sig =</span> lm_sig</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>  results <span class="sc">|&gt;</span> <span class="fu">transmute</span>(</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    analysis,</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimator =</span> <span class="st">"Ordbetareg AME"</span>,</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">est =</span> ame_est, <span class="at">lo =</span> ame_lo, <span class="at">hi =</span> ame_hi,</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">sig =</span> ame_sig</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">analysis  =</span> <span class="fu">fct_rev</span>(<span class="fu">factor</span>(analysis)),</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimator =</span> <span class="fu">factor</span>(estimator, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"OLS"</span>, <span class="st">"Ordbetareg AME"</span>))</span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data,</span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> est, <span class="at">xmin =</span> lo, <span class="at">xmax =</span> hi, <span class="at">y =</span> analysis,</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> estimator, <span class="at">shape =</span> estimator)) <span class="sc">+</span></span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>),</span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.7</span>, <span class="at">linewidth =</span> <span class="dv">1</span></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"OLS"</span> <span class="ot">=</span> <span class="st">"#0072B2"</span>,</span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Ordbetareg AME"</span> <span class="ot">=</span> <span class="st">"#D55E00"</span>)) <span class="sc">+</span></span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"OLS"</span> <span class="ot">=</span> <span class="dv">16</span>,</span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Ordbetareg AME"</span> <span class="ot">=</span> <span class="dv">17</span>)) <span class="sc">+</span></span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"URM Effect on Department Negative Vote Percentage"</span>,</span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Both estimators on the proportion scale"</span>,</span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"Expected change in negative vote proportion"</span>,</span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="cn">NULL</span>,</span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">color    =</span> <span class="cn">NULL</span>, <span class="at">shape =</span> <span class="cn">NULL</span></span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position  =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -1126,9 +795,9 @@ Total execution time: 33.8 seconds.</code></pre>
 </div>
 </div>
 </div>
-<p>The ordered beta regression estimate of URM status isn’t always statistically significant at the 5% - 95% level (to the extent that comparison works with a Bayesian model), but the coefficient is <em>always</em> bigger, sometimes by a significant fraction. I take this as strong support for the authors’ findings; given the limited size of the dataset, it isn’t surprising that the models with controls are a bit less powered, and the coefficients remain large. For sure, having more power would be more helpful, but collecting this type of data is <em>hard</em>. I think we can safely conclude here that URM status does seem to be associated with more negative department tenure votes.</p>
-<p>To conclude, this seems like a situation where ordered beta regression is the preferred model. However, to be a valid research practice, ordered beta regression should be preferred because it is a <em>better model</em>, not because it gives results in the authors’ expected direction. By making ordered beta regression the default specification, rather than OLS, scholars can get better, often more precise estimates, while also employing a model that has clear statistical foundations.</p>
-<p>OLS can buy you a lot of things… but not happiness. Only ordered beta can do that.😎</p>
+<p>The ordered beta regression estimate of URM status isn’t always statistically significant at the 5% - 95% level (to the extent that comparison works with a Bayesian model), but the coefficient is <em>always</em> bigger, sometimes by a larger fraction than for the unadjusted model. I take this as additional support for the authors’ findings; given the limited size of the dataset, it isn’t surprising that the models with controls are a bit less powered, and the coefficients remain large. For sure, having more power would be more helpful, but collecting this type of data is <em>hard</em>. I think we can safely conclude here that URM status has an association with more negative department tenure votes even if there is residual uncertainty–which probably requires more data collection to provide additional confirmation.</p>
+<p>To conclude, this seems like a situation where ordered beta regression is the preferred model. However, to be a valid research practice, ordered beta regression should be preferred because it is a <em>better model</em>, not just because it gives results in the authors’ expected direction. By making ordered beta regression the default specification, rather than OLS, scholars can get better, usually more precise estimates, while also employing a model that has clear statistical foundations.</p>
+<p>OLS can buy you a lot of things… but not happiness. Only ordered beta can do that. 😎</p>
 
 
 
