@@ -226,8 +226,8 @@ window.Quarto = {
         </a>
     </div>
   </nav>
-  <div id="quarto-announcement" data-announcement-id="7010543ebe2e1973c23c1707ab1d37d5" class="alert alert-dark hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
-<p>Read my latest on 5 lessons from political science to help rebuild Syria in <a href="https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203"><em>The Conversation</em></a>.</p>
+  <div id="quarto-announcement" data-announcement-id="0f9f4af85665c42a2a102aec77da6661" class="alert alert-dark hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Read my latest on Saudi’s views toward the Iran War in <a href="https://theconversation.com/how-are-saudis-viewing-the-us-iran-war-our-polling-suggests-gulf-kingdom-is-split-on-key-issues-284135"><em>The Conversation</em></a>.</p>
 </div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
@@ -337,15 +337,15 @@ window.Quarto = {
 <li>We are measuring a continuous outcome that we want to standardize for comparability (i.e., measure it relative to a total).</li>
 <li>We are using a measurement device like a slider that has physical bounds (such as the oft-used feeling thermometer/visual analog scale).</li>
 </ol>
-<p>For this post, I will examine an empirical paper that had an outcome meeting the first condition. <span class="citation" data-cites="masters-waage2024">Masters-Waage et al. (<a href="#ref-masters-waage2024" role="doc-biblioref">2024</a>)</span> analyzed tenure decisions from a consortium of five major research universities, amounting to over a thousand tenure votes at the department and college level. Measuring this outcome as a proportion is natural by dividing the total votes for a given tenure candidate by the size of the voting members (i.e.&nbsp;the department or collegiate tenure committee). In fact, it is so natural that it might not even have occurred to you that it could be modeled differently, but it would be possible to also model the raw number of votes with the Poisson distribution.</p>
-<p>We could also model the vote distributions with the Binomial model, though in this case that might be unwise as the Binomial model will put more weight on votes with a higher total of voting members. For tenure, though, the collegiate committee may be smaller in size than the department tenure vote, so we want to standardize that issue away by simply using the proportion who voted for a candidate.</p>
+<p>For this post, I will examine an empirical paper that had an outcome meeting the first condition. <span class="citation" data-cites="masters-waage2024">Masters-Waage et al. (<a href="#ref-masters-waage2024" role="doc-biblioref">2024</a>)</span> analyzed tenure decisions from a consortium of five major research universities, amounting to over a thousand tenure votes at the department and college level. Measuring this outcome as a proportion comes naturally by dividing the total votes by the size of the voting members (i.e.&nbsp;the department or collegiate tenure committee). In fact, it is so natural that it might not even have occurred to you that it could be modeled differently, but it would be possible to also model the raw number of votes with the Poisson or Negative Binomial distributions.</p>
+<p>Alternatively, we could model the total vote numbers with the Binomial distribution, though in this case that might be unwise as the Binomial model will put more weight on votes with a higher total of voting members. For tenure, though, the collegiate committee may be smaller in size than the department tenure vote, so we want to standardize that issue away by simply using the proportion who voted for a candidate.</p>
 <p>Probably more information than you wanted to think about, but hey, I’m an academic. <em>It’s literally my job to think too much</em>.</p>
-<p><span class="citation" data-cites="masters-waage2024">Masters-Waage et al. (<a href="#ref-masters-waage2024" role="doc-biblioref">2024</a>)</span> use OLS for all of their tenure proportion outcomes. I don’t fault them for it; my R package <code>ordbetareg</code> did not appear until they had largely completed their research. Indeed, my aim is not “take on” anyone; rather, I want to show a concrete example where effects that were reported as non-significant by OLS in fact become more precise and meaningful with ordered beta regression.</p>
+<p><span class="citation" data-cites="masters-waage2024">Masters-Waage et al. (<a href="#ref-masters-waage2024" role="doc-biblioref">2024</a>)</span> use OLS for all of their tenure proportion outcomes. I don’t fault them for it; my R package <code>ordbetareg</code> did not appear until they had largely completed their research. Indeed, my aim is not to “take on” anyone; rather, I want to show a concrete example where effects that were reported as non-significant by OLS in fact become more precise and meaningful with ordered beta regression.</p>
 <section id="why-ordered-beta" class="level2">
 <h2 class="anchored" data-anchor-id="why-ordered-beta">Why Ordered Beta?</h2>
 <p>The ordered beta regression model is admittedly more complicated than OLS and requires more computational oomph. At the same time, with modern computers and software packages, the difference is fairly trivial, especially with a dataset of 1,000 cases. But OLS is a tough competitor–the model does a great job with the conditional mean of the distribution. The problem is that OLS is based on the Normal distribution, i.e.&nbsp;the classic bell-curve shape, which is uni-modal and symmetric. As a consequence, OLS <em>cannot</em> respect boundaries such as a lower limit of 0% and 100% of tenure votes. To OLS, each number is the same as another number, which is why it is considered the classic <em>linear model</em>. Pure linearity works well in many cases–just not all cases.</p>
-<p>Indeed, it’s possible to use OLS and have it return a very similar estimate to ordered beta regression even though OLS isn’t made for proportions. But the difference <em>can</em> be significant, and importantly, it’s very unwise to choose a model based on the results you get. I.e., given issues with researcher discretion, you should always choose the <em>best</em> model for your research design. That way, if the results don’t go way (or they do), you can defend your results.</p>
-<p>For the <span class="citation" data-cites="masters-waage2024">Masters-Waage et al. (<a href="#ref-masters-waage2024" role="doc-biblioref">2024</a>)</span> study, the issue arises because there are a lot of tenure votes that are unanimous. Academics tend to like people in their own department, and oftentimes people who aren’t doing well in the tenure track will withdraw before submitting their files. As a consequence, split votes are relatively rare. The histograms below show what these distributions look like for department-level and college-level tenure votes:</p>
+<p>Indeed, it’s possible to use OLS and have it return a very similar estimate to ordered beta regression even though OLS isn’t made for proportions. But the difference <em>can</em> be significant, and importantly, it’s very unwise to choose a model based on the results you get. Given issues with researcher discretion (the so-called garden of forking paths), you should always choose the <em>best</em> model for your research design. That way, if the results don’t go way (or they do), you can defend your results regardless.</p>
+<p>For the <span class="citation" data-cites="masters-waage2024">Masters-Waage et al. (<a href="#ref-masters-waage2024" role="doc-biblioref">2024</a>)</span> study, the issue of non-linearity arises because there are a lot of tenure votes that are unanimous. Academics tend to like people in their own department, and oftentimes people who aren’t doing well in the tenure track will withdraw before submitting their files. As a consequence, split votes are relatively rare. The histograms below show what these distributions look like for department-level and college-level tenure votes:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
@@ -388,16 +388,16 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The authors reversed the scale so that 0% means everyone voted for the candidate. As can be seen, for both departments and college-level votes, most votes are unanimous. Unfortunately, while OLS can still model the <em>average</em> of this distribution, the variance (error term) will be way off. An OLS model will likely predict that the department negative vote is below 0%, which of course is non-sense.</p>
+<p>The authors reversed the scale so that 0% means everyone voted for the candidate. As can be seen, for both departments and college-level votes, most votes are unanimous. Unfortunately, while OLS can still model the <em>average</em> of this distribution, the variance (error term) will be way off. An OLS model will likely predict that the department negative vote is below 0%, which of course is nonsense.</p>
 </section>
 <section id="replication" class="level2">
 <h2 class="anchored" data-anchor-id="replication">Replication</h2>
-<p>In this section, I replicate some of the main findings in the paper for the proportion of department-level negative votes on tenure, comparing OLS to ordered beta regression side-by-side. The main research question in this paper is fascinating and important: are minority faculty disadvantaged in tenure decisions? The authors account for differences in faculty productivity (the <em>h</em>-index) and, intriguingly, the general tone of external letters. While the authors also look at college-level tenure committee decisions, for the purposes of exposition I will focus on the initial department vote.</p>
+<p>In this section, I replicate some of the main findings in the paper for the proportion of department-level negative votes on tenure, comparing OLS to ordered beta regression side-by-side. The main research question in this paper is fascinating and important: are minority faculty disadvantaged in tenure decisions? The authors account for differences in faculty productivity (the <em>h</em>-index) and, intriguingly, the general tone of external letters. At the end of this blog post, I also look at the college-level outcomes.</p>
 <p>My main goal here is not to evaluate the research design, but it is important to note that it is <em>very</em> difficult to infer causality with observational data when the outcome is tenure. There are lots of factors that differ across racial groups, fields, and as I noted earlier, lots of strategic behavior where people withdraw their cases if the outcome doesn’t look good. Given those caveats, though, this study has some excellent data and the authors should be commended for making it <em>very</em> easy to replicate their findings. That’s how science improves! 🙌</p>
 </section>
 <section id="main-findings-are-minority-faculty-disadvantaged-in-promotion-and-tenure-decisions" class="level2">
 <h2 class="anchored" data-anchor-id="main-findings-are-minority-faculty-disadvantaged-in-promotion-and-tenure-decisions">Main Findings: Are Minority Faculty Disadvantaged in Promotion and Tenure Decisions?</h2>
-<p>I’ll first reproduce their unadjusted model which examines whether what they call under-represented minority (URM) status, which is a binary indicator, is associated with higher or lower negative department vote proportions for all promortions (i.e., promotion to associate professor or full professor, Model 1 in Table 1 in their paper) along with the ordered beta regression version. To make the ordered beta regression estimates comparable to the OLS estimates, I’ll use the <code>avg_slopes</code> function in the <code>marginal_effects</code> package to get estimates in the scale of the outcome, i.e., as a fraction of department vote:</p>
+<p>I’ll first reproduce their unadjusted model that examines whether what they call under-represented minority (URM) status, a binary indicator, is associated with higher or lower negative department vote proportions for all promortions (i.e., promotion to associate professor or full professor, Model 1 in Table 1 in their paper) along with the ordered beta regression version. To make the ordered beta regression estimates comparable to the OLS estimates, I’ll use the <code>avg_slopes</code> function in the <code>marginal_effects</code> package to get estimates in the scale of the outcome, i.e., as a fraction of department vote:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Show the code</summary>
@@ -797,6 +797,386 @@ Total execution time: 20.6 seconds.</code></pre>
 </div>
 <p>The ordered beta regression estimate of URM status isn’t always statistically significant at the 5% - 95% level (to the extent that comparison works with a Bayesian model), but the coefficient is <em>always</em> bigger, sometimes by a larger fraction than for the unadjusted model. I take this as additional support for the authors’ findings; given the limited size of the dataset, it isn’t surprising that the models with controls are a bit less powered, and the coefficients remain large. For sure, having more power would be more helpful, but collecting this type of data is <em>hard</em>. I think we can safely conclude here that URM status has an association with more negative department tenure votes even if there is residual uncertainty–which probably requires more data collection to provide additional confirmation.</p>
 <p>To conclude, this seems like a situation where ordered beta regression is the preferred model. However, to be a valid research practice, ordered beta regression should be preferred because it is a <em>better model</em>, not just because it gives results in the authors’ expected direction. By making ordered beta regression the default specification, rather than OLS, scholars can get better, usually more precise estimates, while also employing a model that has clear statistical foundations.</p>
+</section>
+<section id="extending-the-analysis-to-college-level-votes" class="level2">
+<h2 class="anchored" data-anchor-id="extending-the-analysis-to-college-level-votes">Extending the Analysis to College-Level Votes</h2>
+<p>In this section, I’ll repeat the same analysis (switching out OLS for <code>ordbetareg</code>), but the outcome is now <code>college_committee_negative_vote_percentage</code>, that is, how do the college-level committees vote on URM candidate tenure files? As noted above, these distributions are also highly skewed and contain a significant share of zeroes (unanimous votes).</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>clm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> candidates</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>cord1 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> candidates,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span>, <span class="at">refresh =</span> <span class="dv">0</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running MCMC with 2 sequential chains...
+
+Chain 1 finished in 5.6 seconds.
+Chain 2 finished in 6.0 seconds.
+
+Both chains finished successfully.
+Mean chain execution time: 5.8 seconds.
+Total execution time: 11.8 seconds.</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>avg_cord1 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(cord1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ms_compare</span>(clm1, avg_cord1, <span class="st">"URM → college negative vote % — no controls, full sample"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
+    <script>
+      // Create table-specific functions using external factory
+      const tableFns_71r9gtr5qqxiakfovjos = TinyTable.createTableFunctions("tinytable_71r9gtr5qqxiakfovjos");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '3', j: 2 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_cojusty7wlt6lh12nkzj',}, 
+          { positions: [ { i: '2', j: 2 }, { i: '2', j: 3 } ], css_id: 'tinytable_css_3g5xsie09v401l8xj7xr',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '1', j: 3 } ], css_id: 'tinytable_css_ik3khk4wnthiarop0vx6',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_4f6d0cmawmjfltsj07py',}, 
+          { positions: [ { i: '3', j: 1 } ], css_id: 'tinytable_css_n3pro17n7ka9ezkpe9y4',}, 
+          { positions: [ { i: '2', j: 1 } ], css_id: 'tinytable_css_kf9vex97dw9erld9j5no',}, 
+          { positions: [ { i: '1', j: 1 } ], css_id: 'tinytable_css_s26ggat7orei47eil53j',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_t6bky2vyzzdh06b4nsd9',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_71r9gtr5qqxiakfovjos.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+    <style>
+    /* tinytable css entries after */
+    #tinytable_71r9gtr5qqxiakfovjos td.tinytable_css_cojusty7wlt6lh12nkzj, #tinytable_71r9gtr5qqxiakfovjos th.tinytable_css_cojusty7wlt6lh12nkzj {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_71r9gtr5qqxiakfovjos td.tinytable_css_3g5xsie09v401l8xj7xr, #tinytable_71r9gtr5qqxiakfovjos th.tinytable_css_3g5xsie09v401l8xj7xr {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_71r9gtr5qqxiakfovjos td.tinytable_css_ik3khk4wnthiarop0vx6, #tinytable_71r9gtr5qqxiakfovjos th.tinytable_css_ik3khk4wnthiarop0vx6 { text-align: center }
+    #tinytable_71r9gtr5qqxiakfovjos td.tinytable_css_4f6d0cmawmjfltsj07py, #tinytable_71r9gtr5qqxiakfovjos th.tinytable_css_4f6d0cmawmjfltsj07py {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_71r9gtr5qqxiakfovjos td.tinytable_css_n3pro17n7ka9ezkpe9y4, #tinytable_71r9gtr5qqxiakfovjos th.tinytable_css_n3pro17n7ka9ezkpe9y4 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_71r9gtr5qqxiakfovjos td.tinytable_css_kf9vex97dw9erld9j5no, #tinytable_71r9gtr5qqxiakfovjos th.tinytable_css_kf9vex97dw9erld9j5no {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_71r9gtr5qqxiakfovjos td.tinytable_css_s26ggat7orei47eil53j, #tinytable_71r9gtr5qqxiakfovjos th.tinytable_css_s26ggat7orei47eil53j { text-align: left }
+    #tinytable_71r9gtr5qqxiakfovjos td.tinytable_css_t6bky2vyzzdh06b4nsd9, #tinytable_71r9gtr5qqxiakfovjos th.tinytable_css_t6bky2vyzzdh06b4nsd9 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    </style>
+    <div class="container">
+      <table class="tinytable" id="tinytable_71r9gtr5qqxiakfovjos" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <caption>URM → college negative vote % — no controls, full sample</caption>
+        <thead>
+              <tr>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">LM (original)</th>
+                <th scope="col" data-row="0" data-col="3">Ordbetareg (new)</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="3">Outcome: proportion of votes [0, 1]. Coefficients equal changes in proportions.</td></tr>
+<tr><td colspan="3">95% frequentist CI (R lm) and 95% posterior CrI (Ordbetareg) shown.</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="1">URM candidate</td>
+                  <td data-row="1" data-col="2">0.077</td>
+                  <td data-row="1" data-col="3">0.069</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="1"></td>
+                  <td data-row="2" data-col="2">[0.035, 0.118]</td>
+                  <td data-row="2" data-col="3">[0.028, 0.118]</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="1">Num.Obs.</td>
+                  <td data-row="3" data-col="2">1457</td>
+                  <td data-row="3" data-col="3">1457</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<p>What the table above shows is that with these outcomes, the <code>ordbetareg</code> model is slightly <em>smaller</em> the OLS: estimate of the URM effect is -11.8% smaller. OLS implies URM candidates receive 7.7% more negative college votes, while ordered beta regression puts that figure at 6.9%.</p>
+<p>These results show that (of course) <code>ordbetareg</code> does not always inflate OLS results. If it did, there would be something very wrong with the distribution (i.e., it would be equal to OLS plus some constant). Why the estimate is slightly deflated can be difficult to determine, but again, this only serves to highlight how the model should be chosen for <em>principled</em> reasons, not because it gives a favored or dis-favored outcome.</p>
+<p>In the plot below I compare OLS and <code>ordbetareg</code> for the full range of college-level outcome votes:</p>
+<div class="cell" data-show="false">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>clm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> promotion_to_full_professor <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> candidates</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>cord2 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> promotion_to_full_professor <span class="sc">+</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code, <span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> candidates,</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running MCMC with 2 sequential chains...
+
+Chain 1 finished in 29.7 seconds.
+Chain 2 finished in 30.9 seconds.
+
+Both chains finished successfully.
+Mean chain execution time: 30.3 seconds.
+Total execution time: 60.8 seconds.</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>clm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    promotion_to_full_professor <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> candidates</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>cord3 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    promotion_to_full_professor <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code, <span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> candidates,</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running MCMC with 2 sequential chains...
+
+Chain 1 finished in 29.1 seconds.
+Chain 2 finished in 35.6 seconds.
+
+Both chains finished successfully.
+Mean chain execution time: 32.3 seconds.
+Total execution time: 64.9 seconds.</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>clm4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> promotion_to_associate_professor_candidates_distinct</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>cord4 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> promotion_to_associate_professor_candidates_distinct,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>, <span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running MCMC with 2 sequential chains...
+
+Chain 1 finished in 2.4 seconds.
+Chain 2 finished in 2.5 seconds.
+
+Both chains finished successfully.
+Mean chain execution time: 2.4 seconds.
+Total execution time: 5.0 seconds.</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>clm5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> promotion_to_associate_professor_candidates_distinct</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>cord5 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code, <span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> promotion_to_associate_professor_candidates_distinct,</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running MCMC with 2 sequential chains...
+
+Chain 1 finished in 12.4 seconds.
+Chain 2 finished in 12.0 seconds.
+
+Both chains finished successfully.
+Mean chain execution time: 12.2 seconds.
+Total execution time: 24.6 seconds.</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>clm6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> promotion_to_full_professor_candidates_distinct</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>cord6 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span> candidate_urm_num,</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> promotion_to_full_professor_candidates_distinct,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>, <span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running MCMC with 2 sequential chains...
+
+Chain 1 finished in 2.7 seconds.
+Chain 2 finished in 2.5 seconds.
+
+Both chains finished successfully.
+Mean chain execution time: 2.6 seconds.
+Total execution time: 5.3 seconds.</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>clm7 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> promotion_to_full_professor_candidates_distinct</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>cord7 <span class="ot">&lt;-</span> <span class="fu">ordbetareg</span>(</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  college_committee_negative_vote_percentage <span class="sc">~</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    candidate_urm_num <span class="sc">+</span> candidate_gender_num <span class="sc">+</span> scaled_pi_grants <span class="sc">+</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_stem_status_sbs_included <span class="sc">+</span> scaled_years_in_present_rank <span class="sc">+</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    candidate_discipline_cip_category_as_numeric <span class="sc">+</span> school_code, <span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> promotion_to_full_professor_candidates_distinct,</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span>,</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains  =</span> <span class="dv">2</span>,</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed    =</span> <span class="dv">42</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Running MCMC with 2 sequential chains...
+
+Chain 1 finished in 16.2 seconds.
+Chain 2 finished in 17.3 seconds.
+
+Both chains finished successfully.
+Mean chain execution time: 16.8 seconds.
+Total execution time: 33.7 seconds.</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Average marginal effects for candidate_urm_num from each college-level model,</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># on the proportion scale so they are comparable to the LM coefficients.</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>came1 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(cord1, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>came2 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(cord2, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>came3 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(cord3, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>came4 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(cord4, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>came5 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(cord5, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>came6 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(cord6, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>came7 <span class="ot">&lt;-</span> <span class="fu">avg_slopes</span>(cord7, <span class="at">variables =</span> <span class="st">"candidate_urm_num"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>college_results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(clm1, came1, <span class="st">"1. Full sample – no controls"</span>),</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(clm2, came2, <span class="st">"2. Full sample – full controls"</span>),</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(clm3, came3, <span class="st">"3. Full sample – no STEM control"</span>),</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(clm4, came4, <span class="st">"4. Associate subset – no controls"</span>),</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(clm5, came5, <span class="st">"5. Associate subset – with controls"</span>),</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(clm6, came6, <span class="st">"6. Full-prof subset – no controls"</span>),</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_urm</span>(clm7, came7, <span class="st">"7. Full-prof subset – with controls"</span>)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>college_plot_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  college_results <span class="sc">|&gt;</span> <span class="fu">transmute</span>(</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    analysis,</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimator =</span> <span class="st">"OLS"</span>,</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">est =</span> lm_est, <span class="at">lo =</span> lm_lo, <span class="at">hi =</span> lm_hi,</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">sig =</span> lm_sig</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>  college_results <span class="sc">|&gt;</span> <span class="fu">transmute</span>(</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>    analysis,</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimator =</span> <span class="st">"Ordbetareg AME"</span>,</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">est =</span> ame_est, <span class="at">lo =</span> ame_lo, <span class="at">hi =</span> ame_hi,</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">sig =</span> ame_sig</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">analysis  =</span> <span class="fu">fct_rev</span>(<span class="fu">factor</span>(analysis)),</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimator =</span> <span class="fu">factor</span>(estimator, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"OLS"</span>, <span class="st">"Ordbetareg AME"</span>))</span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(college_plot_data,</span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> est, <span class="at">xmin =</span> lo, <span class="at">xmax =</span> hi, <span class="at">y =</span> analysis,</span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> estimator, <span class="at">shape =</span> estimator)) <span class="sc">+</span></span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(</span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>),</span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.7</span>, <span class="at">linewidth =</span> <span class="dv">1</span></span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"OLS"</span> <span class="ot">=</span> <span class="st">"#0072B2"</span>,</span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Ordbetareg AME"</span> <span class="ot">=</span> <span class="st">"#D55E00"</span>)) <span class="sc">+</span></span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"OLS"</span> <span class="ot">=</span> <span class="dv">16</span>,</span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Ordbetareg AME"</span> <span class="ot">=</span> <span class="dv">17</span>)) <span class="sc">+</span></span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"URM Effect on College Negative Vote Percentage"</span>,</span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Both estimators on the proportion scale"</span>,</span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"Expected change in negative vote proportion"</span>,</span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="cn">NULL</span>,</span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">color    =</span> <span class="cn">NULL</span>, <span class="at">shape =</span> <span class="cn">NULL</span></span>
+<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb38-49"><a href="#cb38-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position  =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb38-53"><a href="#cb38-53" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/consolidated-college-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Again, most of the <code>ordbetareg</code> models are slightly deflated relative to OLS. That may be confusing given that the department-level votes were inflated, but it’s important to note that these are <em>two different statistical distributions.</em> There is no easy 1:1 correspondence between them.</p>
+<p>It is important to flag the one big outlier, which is the associate professor model with controls in the figure above. In this case, the <code>ordbetareg</code> estimate is <em>much</em> smaller than OLS. Why did this discrepancy occur? Adding controls to a model can sharpen the disagreements between models because it induces correlation in the conditional average (expectation). The histograms that are plotted above show skewness for the distribution as a whole, but subsets of the population, such as associate professors with high productivity, could have far sharper non-linearities. As a consequence, statistical distributions can have outsize impacts as the model specification becomes more complex–and again, this is yet another reason to start with a statistical distribution you have some confidence in.</p>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>OLS can buy you a lot of things… but not happiness. Only ordered beta can do that. 😎</p>
 
 
