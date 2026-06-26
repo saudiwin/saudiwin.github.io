@@ -20,7 +20,7 @@ website:
   announcement: 
     icon: info-circle
     dismissable: true
-    content: "Read my latest on Saudi's views toward the Iran War in [*The Conversation*](https://theconversation.com/how-are-saudis-viewing-the-us-iran-war-our-polling-suggests-gulf-kingdom-is-split-on-key-issues-284135)."
+    content: "Read my latest on Saudi public opinion toward the Iran War in [*The Conversation*](https://theconversation.com/how-are-saudis-viewing-the-us-iran-war-our-polling-suggests-gulf-kingdom-is-split-on-key-issues-284135)."
     type: dark
     position: below-navbar
   sidebar:
