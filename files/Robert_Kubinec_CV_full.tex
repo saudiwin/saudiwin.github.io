@@ -31,7 +31,14 @@
 \newcommand{\amper}{{\fontspec[Scale=.95]{Gentium Basic Italic}\selectfont\itshape\&}}
 % ---- MARGIN YEARS
 \usepackage{marginnote}
-\newcommand{\years}[1]{\marginnote{\scriptsize #1}}
+\usepackage{needspace}
+% A margin year set in vertical mode (an entry that starts its own paragraph) is
+% dropped in as standalone vertical material, so a page break can strand it at the
+% bottom of the page while its entry moves to the next one. Reserve a few lines to
+% keep the two together. Entries joined by \\ are mid-paragraph (horizontal mode);
+% there marginnote rides along with its line via \vadjust and needs no guard --
+% and \needspace's \vskip would be invalid there anyway.
+\newcommand{\years}[1]{\ifvmode\needspace{3\baselineskip}\fi\marginnote{\scriptsize #1}}
 \renewcommand*{\raggedleftmarginnote}{}
 \setlength{\marginparsep}{7pt}
 \reversemarginpar
@@ -42,6 +49,15 @@
 \sectionfont{\rmfamily\mdseries\upshape\Large}
 \subsectionfont{\rmfamily\bfseries\upshape\normalsize}
 \subsubsectionfont{\rmfamily\mdseries\upshape\normalsize}
+% The margin year of the first entry under a heading is vertical material, which
+% breaks LaTeX's usual no-break-after-heading protection. Reserve room for the
+% heading plus the opening lines of that entry so the two cannot be separated.
+\usepackage{etoolbox}
+% \section is larger and is often followed straight by a \subsection, so it has to
+% reserve room for both headings plus the opening lines of the first entry.
+\pretocmd{\section}{\needspace{12\baselineskip}}{}{}
+\pretocmd{\subsection}{\needspace{6\baselineskip}}{}{}
+\pretocmd{\subsubsection}{\needspace{6\baselineskip}}{}{}
 
 % PDF SETUP
 % ---- FILL IN HERE THE DOC TITLE AND AUTHOR
@@ -196,6 +212,8 @@ English (native), French, Arabic, Slovak
 \subsection*{Reports and Op-eds}
 \noindent
 
+\years{2026}\href{https://theconversation.com/how-are-saudis-viewing-the-us-iran-war-our-polling-suggests-gulf-kingdom-is-split-on-key-issues-284135}{Kubinec, Robert, and Montambault-Trudelle, Alexis; ``How are Saudis viewing the US‑Iran war? Our polling suggests Gulf kingdom is split on key issues", \emph{The Conversation}}\\
+
 \years{2025}\href{https://theconversation.com/as-syria-ponders-a-democratic-future-5-lessons-from-the-arab-spring-246203}{Kubinec, Robert, ``As Syria ponders a democratic future: 5 lessons from the Arab Spring.", \emph{The Conversation}}\\
 
 \years{2024}\href{https://www.thebulwark.com/p/aleppo-fell-the-rest-of-the-middle-east-is-wobbling/}{Kubinec, Robert, ``Aleppo Fell. The Rest of the Middle East Is Wobbling.", \emph{The Bulwark}}\\
@@ -204,9 +222,7 @@ English (native), French, Arabic, Slovak
 
 \years{2023}\href{https://www.cambridgeblog.org/2023/07/arabs-want-democracy-but-not-with-corruption/}{Kubinec, Robert, ``Arabs Want Democracy--But Not With Corruption", \emph{Cambridge University Press 518 Blog}}\\
 
-\years{2022}Kubinec, Robert and Mighri, Hamza, "Tunisia Faces the Specter of Government Failure", \emph{Carnegie Endowment for International Peace}
-
-\newpage
+\years{2022}Kubinec, Robert and Mighri, Hamza, "Tunisia Faces the Specter of Government Failure", \emph{Carnegie Endowment for International Peace}\\
 
 \years{2022}Kubinec, Robert, "COVID-19 Responses in the Middle East and North Africa in Global Perspective", \emph{Project on Middle East Political Science}\\
 
